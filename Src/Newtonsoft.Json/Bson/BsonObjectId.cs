@@ -33,7 +33,8 @@ namespace Newtonsoft.Json.Bson
     /// <summary>
     /// Represents a BSON Oid (object id).
     /// </summary>
-    [Obsolete("BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+    [Obsolete(
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
     public class BsonObjectId
     {
         /// <summary>
@@ -51,7 +52,10 @@ namespace Newtonsoft.Json.Bson
             ValidationUtils.ArgumentNotNull(value, nameof(value));
             if (value.Length != 12)
             {
-                throw new ArgumentException("An ObjectId must be 12 bytes", nameof(value));
+                throw new ArgumentException(
+                    "An ObjectId must be 12 bytes",
+                    nameof(value)
+                );
             }
 
             Value = value;

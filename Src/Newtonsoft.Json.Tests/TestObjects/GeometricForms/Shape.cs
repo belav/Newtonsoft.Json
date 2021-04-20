@@ -31,11 +31,18 @@ using Microsoft.FSharp.Core;
 
 namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
 {
-    [Serializable, DebuggerDisplay("{__DebugDisplay(),nq}"), CompilationMapping(SourceConstructFlags.SumType)]
+    [
+        Serializable,
+        DebuggerDisplay("{__DebugDisplay(),nq}"),
+        CompilationMapping(SourceConstructFlags.SumType)
+    ]
     public class Shape
     {
         // Fields
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
+        [
+            DebuggerBrowsable(DebuggerBrowsableState.Never),
+            CompilerGenerated
+        ]
         internal readonly int _tag;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
@@ -59,8 +66,11 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
         }
 
         [CompilationMapping(SourceConstructFlags.UnionCase, 2)]
-        public static Shape NewPrism(double _width, double item2, double _height)
-        {
+        public static Shape NewPrism(
+            double _width,
+            double item2,
+            double _height
+        ) {
             return new Prism(_width, item2, _height);
         }
 
@@ -116,18 +126,29 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
         public class Circle : Shape
         {
             // Fields
-            [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
+            [
+                DebuggerBrowsable(DebuggerBrowsableState.Never),
+                CompilerGenerated
+            ]
             internal readonly double _radius;
 
             // Methods
-            [CompilerGenerated, DebuggerNonUserCode]
-            internal Circle(double _radius) : base(1)
+            [
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
+            internal Circle(double _radius)
+                : base(1)
             {
                 this._radius = _radius;
             }
 
             // Properties
-            [CompilationMapping(SourceConstructFlags.Field, 1, 0), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 1, 0),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double radius
             {
                 [CompilerGenerated, DebuggerNonUserCode]
@@ -148,28 +169,41 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             internal readonly double item2;
 
             [CompilerGenerated, DebuggerNonUserCode]
-            internal Prism(double _width, double item2, double _height) : base(2)
+            internal Prism(double _width, double item2, double _height)
+                : base(2)
             {
                 this._width = _width;
                 this.item2 = item2;
                 this._height = _height;
             }
 
-            [CompilationMapping(SourceConstructFlags.Field, 2, 2), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 2, 2),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double height
             {
                 [CompilerGenerated, DebuggerNonUserCode]
                 get { return this._height; }
             }
 
-            [CompilationMapping(SourceConstructFlags.Field, 2, 1), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 2, 1),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double Item2
             {
                 [CompilerGenerated, DebuggerNonUserCode]
                 get { return this.item2; }
             }
 
-            [CompilationMapping(SourceConstructFlags.Field, 2, 0), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 2, 0),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double width
             {
                 [CompilerGenerated, DebuggerNonUserCode]
@@ -187,20 +221,29 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             internal readonly double _width;
 
             [CompilerGenerated, DebuggerNonUserCode]
-            internal Rectangle(double _width, double _length) : base(0)
+            internal Rectangle(double _width, double _length)
+                : base(0)
             {
                 this._width = _width;
                 this._length = _length;
             }
 
-            [CompilationMapping(SourceConstructFlags.Field, 0, 1), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 0, 1),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double length
             {
                 [CompilerGenerated, DebuggerNonUserCode]
                 get { return this._length; }
             }
 
-            [CompilationMapping(SourceConstructFlags.Field, 0, 0), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 0, 0),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double width
             {
                 [CompilerGenerated, DebuggerNonUserCode]

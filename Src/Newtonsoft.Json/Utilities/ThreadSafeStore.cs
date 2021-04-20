@@ -76,7 +76,6 @@ namespace Newtonsoft.Json.Utilities
         private TValue AddValue(TKey key)
         {
             TValue value = _creator(key);
-
             lock (_lock)
             {
                 if (_store == null)
@@ -92,7 +91,10 @@ namespace Newtonsoft.Json.Utilities
                         return checkValue;
                     }
 
-                    Dictionary<TKey, TValue> newStore = new Dictionary<TKey, TValue>(_store);
+                    Dictionary<TKey, TValue> newStore = new Dictionary<TKey,
+                        TValue>(
+                        _store
+                    );
                     newStore[key] = value;
 
 #if HAVE_MEMORY_BARRIER

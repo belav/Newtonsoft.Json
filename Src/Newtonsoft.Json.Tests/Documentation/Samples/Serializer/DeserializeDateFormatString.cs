@@ -46,16 +46,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               '7 December, 2009',
               '1 January, 2010',
               '10 February, 2010'
             ]";
 
-            IList<DateTime> dateList = JsonConvert.DeserializeObject<IList<DateTime>>(json, new JsonSerializerSettings
-            {
-                DateFormatString = "d MMMM, yyyy"
-            });
+            IList<DateTime> dateList = JsonConvert.DeserializeObject<IList<DateTime>>(
+                json,
+                new JsonSerializerSettings { DateFormatString = "d MMMM, yyyy" }
+            );
 
             foreach (DateTime dateTime in dateList)
             {
@@ -66,9 +67,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // Wednesday, 10 February 2010
             #endregion
 
-            Assert.AreEqual(new DateTime(2009, 12, 7, 0, 0, 0, DateTimeKind.Utc), dateList[0]);
-            Assert.AreEqual(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc), dateList[1]);
-            Assert.AreEqual(new DateTime(2010, 2, 10, 0, 0, 0, DateTimeKind.Utc), dateList[2]);
+            Assert.AreEqual(
+                new DateTime(2009, 12, 7, 0, 0, 0, DateTimeKind.Utc),
+                dateList[0]
+            );
+            Assert.AreEqual(
+                new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                dateList[1]
+            );
+            Assert.AreEqual(
+                new DateTime(2010, 2, 10, 0, 0, 0, DateTimeKind.Utc),
+                dateList[2]
+            );
         }
     }
 }

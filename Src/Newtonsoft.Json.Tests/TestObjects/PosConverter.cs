@@ -29,13 +29,18 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class PosConverter : JsonConverter
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) {
             Pos p = (Pos)value;
 
             if (p != null)
             {
-                writer.WriteRawValue(String.Format("new Pos({0},{1})", p.X, p.Y));
+                writer.WriteRawValue(
+                    String.Format("new Pos({0},{1})", p.X, p.Y)
+                );
             }
             else
             {
@@ -43,8 +48,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             throw new NotImplementedException();
         }
 

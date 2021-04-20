@@ -31,8 +31,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private readonly int _value;
 
-        public PublicParameterizedConstructorWithPropertyNameConflict(string name)
-        {
+        public PublicParameterizedConstructorWithPropertyNameConflict(
+            string name
+        ) {
             _value = Convert.ToInt32(name);
         }
 

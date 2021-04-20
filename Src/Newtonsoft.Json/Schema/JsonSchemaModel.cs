@@ -32,7 +32,8 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     internal class JsonSchemaModel
     {
         public bool Required { get; set; }
@@ -49,7 +50,8 @@ namespace Newtonsoft.Json.Schema
         public IList<string> Patterns { get; set; }
         public IList<JsonSchemaModel> Items { get; set; }
         public IDictionary<string, JsonSchemaModel> Properties { get; set; }
-        public IDictionary<string, JsonSchemaModel> PatternProperties { get; set; }
+        public IDictionary<string,
+            JsonSchemaModel> PatternProperties { get; set; }
         public JsonSchemaModel AdditionalProperties { get; set; }
         public JsonSchemaModel AdditionalItems { get; set; }
         public bool PositionalItemsValidation { get; set; }
@@ -85,22 +87,42 @@ namespace Newtonsoft.Json.Schema
             model.Required = model.Required || (schema.Required ?? false);
             model.Type = model.Type & (schema.Type ?? JsonSchemaType.Any);
 
-            model.MinimumLength = MathUtils.Max(model.MinimumLength, schema.MinimumLength);
-            model.MaximumLength = MathUtils.Min(model.MaximumLength, schema.MaximumLength);
+            model.MinimumLength = MathUtils.Max(
+                model.MinimumLength,
+                schema.MinimumLength
+            );
+            model.MaximumLength = MathUtils.Min(
+                model.MaximumLength,
+                schema.MaximumLength
+            );
 
             // not sure what is the best way to combine divisibleBy
-            model.DivisibleBy = MathUtils.Max(model.DivisibleBy, schema.DivisibleBy);
+            model.DivisibleBy = MathUtils.Max(
+                model.DivisibleBy,
+                schema.DivisibleBy
+            );
 
             model.Minimum = MathUtils.Max(model.Minimum, schema.Minimum);
             model.Maximum = MathUtils.Max(model.Maximum, schema.Maximum);
-            model.ExclusiveMinimum = model.ExclusiveMinimum || (schema.ExclusiveMinimum ?? false);
-            model.ExclusiveMaximum = model.ExclusiveMaximum || (schema.ExclusiveMaximum ?? false);
+            model.ExclusiveMinimum = model.ExclusiveMinimum ||
+            (schema.ExclusiveMinimum ?? false);
+            model.ExclusiveMaximum = model.ExclusiveMaximum ||
+            (schema.ExclusiveMaximum ?? false);
 
-            model.MinimumItems = MathUtils.Max(model.MinimumItems, schema.MinimumItems);
-            model.MaximumItems = MathUtils.Min(model.MaximumItems, schema.MaximumItems);
-            model.PositionalItemsValidation = model.PositionalItemsValidation || schema.PositionalItemsValidation;
-            model.AllowAdditionalProperties = model.AllowAdditionalProperties && schema.AllowAdditionalProperties;
-            model.AllowAdditionalItems = model.AllowAdditionalItems && schema.AllowAdditionalItems;
+            model.MinimumItems = MathUtils.Max(
+                model.MinimumItems,
+                schema.MinimumItems
+            );
+            model.MaximumItems = MathUtils.Min(
+                model.MaximumItems,
+                schema.MaximumItems
+            );
+            model.PositionalItemsValidation = model.PositionalItemsValidation ||
+            schema.PositionalItemsValidation;
+            model.AllowAdditionalProperties = model.AllowAdditionalProperties &&
+            schema.AllowAdditionalProperties;
+            model.AllowAdditionalItems = model.AllowAdditionalItems &&
+            schema.AllowAdditionalItems;
             model.UniqueItems = model.UniqueItems || schema.UniqueItems;
             if (schema.Enum != null)
             {
@@ -109,9 +131,13 @@ namespace Newtonsoft.Json.Schema
                     model.Enum = new List<JToken>();
                 }
 
-                model.Enum.AddRangeDistinct(schema.Enum, JToken.EqualityComparer);
+                model.Enum.AddRangeDistinct(
+                    schema.Enum,
+                    JToken.EqualityComparer
+                );
             }
-            model.Disallow = model.Disallow | (schema.Disallow ?? JsonSchemaType.None);
+            model.Disallow = model.Disallow |
+            (schema.Disallow ?? JsonSchemaType.None);
 
             if (schema.Pattern != null)
             {

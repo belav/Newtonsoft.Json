@@ -232,10 +232,13 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteEndArrayAsync();
 
             // this is a bug. See non-async equivalent test.
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -259,14 +262,17 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Console.WriteLine(writer.Token.ToString());
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""prop1"": [
       1
     ],
     ""prop2"": 1
   }
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -285,9 +291,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Prop1"": 1
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -315,9 +324,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject();
             JsonReader reader = o.CreateReader();
-            while (reader.Read())
-            {   
-            }
+            while (reader.Read()) { }
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -342,10 +349,13 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteRawValueAsync("fail");
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -365,9 +375,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""prop1"": []
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -378,12 +391,17 @@ namespace Newtonsoft.Json.Tests.Linq
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc
             };
 
-            await writer.WriteValueAsync(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
+            await writer.WriteValueAsync(
+                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
+            );
 
             JValue value = (JValue)writer.Token;
             DateTime dt = (DateTime)value.Value;
 
-            Assert.AreEqual(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc), dt);
+            Assert.AreEqual(
+                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc),
+                dt
+            );
         }
     }
 }

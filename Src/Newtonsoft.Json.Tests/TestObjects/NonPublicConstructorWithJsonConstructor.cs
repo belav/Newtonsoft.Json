@@ -27,8 +27,16 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class NonPublicConstructorWithJsonConstructor
     {
-        public string Value { get; private set; }
-        public string Constructor { get; private set; }
+        public string Value
+        {
+            get;
+            private set;
+        }
+        public string Constructor
+        {
+            get;
+            private set;
+        }
 
         [JsonConstructor]
         private NonPublicConstructorWithJsonConstructor()

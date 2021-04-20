@@ -38,13 +38,14 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
-    internal interface IWrappedDictionary
-        : IDictionary
+    internal interface IWrappedDictionary : IDictionary
     {
         object UnderlyingDictionary { get; }
     }
 
-    internal class DictionaryWrapper<TKey, TValue> : IDictionary<TKey, TValue>, IWrappedDictionary
+    internal class DictionaryWrapper<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IWrappedDictionary
     {
         private readonly IDictionary? _dictionary;
         private readonly IDictionary<TKey, TValue>? _genericDictionary;
@@ -321,9 +322,13 @@ namespace Newtonsoft.Json.Utilities
                     while (e.MoveNext())
                     {
                         DictionaryEntry entry = e.Entry;
-                        array[arrayIndex++] = new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value);
+                        array[arrayIndex++] = new KeyValuePair<TKey, TValue>(
+                            (TKey)entry.Key,
+                            (TValue)entry.Value
+                        );
                     }
                 }
+
                 finally
                 {
                     (e as IDisposable)?.Dispose();
@@ -422,7 +427,15 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_dictionary != null)
             {
-                return _dictionary.Cast<DictionaryEntry>().Select(de => new KeyValuePair<TKey, TValue>((TKey)de.Key, (TValue)de.Value)).GetEnumerator();
+                return _dictionary.Cast<DictionaryEntry>()
+                    .Select(
+                        de =>
+                            new KeyValuePair<TKey, TValue>(
+                                (TKey)de.Key,
+                                (TValue)de.Value
+                            )
+                    )
+                    .GetEnumerator();
             }
 #if HAVE_READ_ONLY_COLLECTIONS
             else if (_readOnlyDictionary != null)
@@ -503,12 +516,17 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private readonly struct DictionaryEnumerator<TEnumeratorKey, TEnumeratorValue> : IDictionaryEnumerator
+        private readonly struct DictionaryEnumerator<
+            TEnumeratorKey,
+            TEnumeratorValue
+        > : IDictionaryEnumerator
         {
-            private readonly IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> _e;
+            private readonly IEnumerator<KeyValuePair<TEnumeratorKey,
+                    TEnumeratorValue>> _e;
 
-            public DictionaryEnumerator(IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e)
-            {
+            public DictionaryEnumerator(
+                IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e
+            ) {
                 ValidationUtils.ArgumentNotNull(e, nameof(e));
                 _e = e;
             }
@@ -519,7 +537,8 @@ namespace Newtonsoft.Json.Utilities
 
             public object Value => Entry.Value;
 
-            public object Current => new DictionaryEntry(_e.Current.Key, _e.Current.Value);
+            public object Current =>
+                new DictionaryEntry(_e.Current.Key, _e.Current.Value);
 
             public bool MoveNext()
             {
@@ -546,7 +565,9 @@ namespace Newtonsoft.Json.Utilities
 #endif
             else
             {
-                return new DictionaryEnumerator<TKey, TValue>(GenericDictionary.GetEnumerator());
+                return new DictionaryEnumerator<TKey, TValue>(
+                    GenericDictionary.GetEnumerator()
+                );
             }
         }
 
@@ -663,7 +684,10 @@ namespace Newtonsoft.Json.Utilities
 #endif
             else
             {
-                GenericDictionary.CopyTo((KeyValuePair<TKey, TValue>[])array, index);
+                GenericDictionary.CopyTo(
+                    (KeyValuePair<TKey, TValue>[])array,
+                    index
+                );
             }
         }
 
@@ -688,7 +712,11 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (_syncRoot == null)
                 {
-                    Interlocked.CompareExchange(ref _syncRoot, new object(), null);
+                    Interlocked.CompareExchange(
+                        ref _syncRoot,
+                        new object(),
+                        null
+                    );
                 }
 
                 return _syncRoot;

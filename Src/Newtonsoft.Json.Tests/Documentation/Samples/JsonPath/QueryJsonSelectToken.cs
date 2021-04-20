@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -79,19 +80,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
             string name = (string)o.SelectToken("Manufacturers[0].Name");
 
             Console.WriteLine(name);
             // Acme Co
 
-            decimal productPrice = (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
+            decimal productPrice =
+                (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
 
             Console.WriteLine(productPrice);
             // 50
 
-            string productName = (string)o.SelectToken("Manufacturers[1].Products[0].Name");
+            string productName =
+                (string)o.SelectToken("Manufacturers[1].Products[0].Name");
 
             Console.WriteLine(productName);
             // Elbow Grease

@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Schema
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
     [Serializable]
 #endif
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     public class JsonSchemaException : JsonException
     {
         /// <summary>
@@ -65,9 +66,7 @@ namespace Newtonsoft.Json.Schema
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class.
         /// </summary>
-        public JsonSchemaException()
-        {
-        }
+        public JsonSchemaException() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
@@ -75,9 +74,7 @@ namespace Newtonsoft.Json.Schema
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public JsonSchemaException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
@@ -86,9 +83,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
         public JsonSchemaException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
         /// <summary>
@@ -104,9 +99,14 @@ namespace Newtonsoft.Json.Schema
         }
 #endif
 
-        internal JsonSchemaException(string message, Exception innerException, string path, int lineNumber, int linePosition)
-            : base(message, innerException)
-        {
+        internal JsonSchemaException(
+            string message,
+            Exception innerException,
+            string path,
+            int lineNumber,
+            int linePosition
+        )
+            : base(message, innerException) {
             Path = path;
             LineNumber = lineNumber;
             LinePosition = linePosition;

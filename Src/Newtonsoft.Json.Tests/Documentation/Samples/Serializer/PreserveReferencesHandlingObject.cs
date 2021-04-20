@@ -60,9 +60,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             #region Usage
             Directory root = new Directory { Name = "Root" };
-            Directory documents = new Directory { Name = "My Documents", Parent = root };
+            Directory documents = new Directory
+            {
+                Name = "My Documents",
+                Parent = root
+            };
 
-            File file = new File { Name = "ImportantLegalDocument.docx", Parent = documents };
+            File file = new File
+            {
+                Name = "ImportantLegalDocument.docx",
+                Parent = documents
+            };
 
             documents.Files = new List<File> { file };
 
@@ -76,10 +84,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // 'Newtonsoft.Json.Tests.Documentation.Examples.ReferenceLoopHandlingObject+Directory'. Path 'Files[0]'.
             }
 
-            string preserveReferenacesAll = JsonConvert.SerializeObject(documents, Formatting.Indented, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.All
-            });
+            string preserveReferenacesAll = JsonConvert.SerializeObject(
+                documents,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
             Console.WriteLine(preserveReferenacesAll);
             // {
@@ -105,10 +117,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   }
             // }
 
-            string preserveReferenacesObjects = JsonConvert.SerializeObject(documents, Formatting.Indented, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
+            string preserveReferenacesObjects = JsonConvert.SerializeObject(
+                documents,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
 
             Console.WriteLine(preserveReferenacesObjects);
             // {
@@ -132,7 +148,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""Name"": ""My Documents"",
   ""Parent"": {
@@ -150,7 +167,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
       }
     }
   ]
-}", preserveReferenacesObjects);
+}",
+                preserveReferenacesObjects
+            );
         }
     }
 }

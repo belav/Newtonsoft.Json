@@ -77,7 +77,15 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 new Product
                 {
-                    ExpiryDate = new DateTime(2000, 12, 3, 0, 0, 0, DateTimeKind.Utc),
+                    ExpiryDate = new DateTime(
+                        2000,
+                        12,
+                        3,
+                        0,
+                        0,
+                        0,
+                        DateTimeKind.Utc
+                    ),
                     Name = "ProductName!",
                     Price = 9.9m
                 }
@@ -85,7 +93,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             s.Width = 99.99d;
             s.Mottos = new List<string> { "Can do!", "We deliver!" };
 
-            string json = @"{
+            string json =
+                @"{
   ""Color"": 2,
   ""Establised"": ""\/Date(1264122061000+0000)\/"",
   ""Width"": 99.99,
@@ -118,15 +127,18 @@ namespace Newtonsoft.Json.Tests.Serialization
   ]
 }";
 
-            JsonConvert.PopulateObject(json, s, new JsonSerializerSettings
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace
-            });
+            JsonConvert.PopulateObject(
+                json,
+                s,
+                new JsonSerializerSettings
+                {
+                    ObjectCreationHandling = ObjectCreationHandling.Replace
+                }
+            );
 
             Assert.AreEqual(1, s.Mottos.Count);
             Assert.AreEqual("Fail whale", s.Mottos[0]);
             Assert.AreEqual(1, s.product.Count);
-
             //Assert.AreEqual("James", p.Name);
         }
 
@@ -136,7 +148,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             List<Person> p = new List<Person>();
 
             JsonSerializer serializer = new JsonSerializer();
-            serializer.Populate(new StringReader(@"[{""Name"":""James""},{""Name"":""Jim""}]"), p);
+            serializer.Populate(
+                new StringReader(@"[{""Name"":""James""},{""Name"":""Jim""}]"),
+                p
+            );
 
             Assert.AreEqual(2, p.Count);
             Assert.AreEqual("James", p[0].Name);
@@ -158,7 +173,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PopulateWithBadJson()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.PopulateObject("1", new Person()); }, "Unexpected initial token 'Integer' when populating object. Expected JSON object or array. Path '', line 1, position 1.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.PopulateObject("1", new Person());
+                },
+                "Unexpected initial token 'Integer' when populating object. Expected JSON object or array. Path '', line 1, position 1."
+            );
         }
     }
 }

@@ -33,16 +33,27 @@ namespace Newtonsoft.Json.Tests.TestObjects
 #if !(DNXCORE50)
     public class MetroColorConverter : JsonConverter
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) {
             Color color = (Color)value;
-            Color fixedColor = (color == Color.White || color == Color.Black) ? color : Color.Gray;
+            Color fixedColor = (color == Color.White || color == Color.Black)
+                ? color
+                : Color.Gray;
 
-            writer.WriteValue(":::" + fixedColor.ToKnownColor().ToString().ToUpper() + ":::");
+            writer.WriteValue(
+                ":::" + fixedColor.ToKnownColor().ToString().ToUpper() + ":::"
+            );
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             return Enum.Parse(typeof(Color), reader.Value.ToString());
         }
 

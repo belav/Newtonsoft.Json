@@ -55,15 +55,24 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             byte[] data = Encoding.UTF8.GetBytes("Hello world");
 
-            string json = @"['" + Convert.ToBase64String(data) + "' '" + Convert.ToBase64String(data) + @"']";
+            string json =
+                @"['" +
+                Convert.ToBase64String(data) +
+                "' '" +
+                Convert.ToBase64String(data) +
+                @"']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            CollectionAssert.AreEquivalent(data, await reader.ReadAsBytesAsync());
+            CollectionAssert.AreEquivalent(
+                data,
+                await reader.ReadAsBytesAsync()
+            );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsBytesAsync(),
-                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 20.");
+                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 20."
+            );
         }
 
         [Test]
@@ -77,7 +86,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsInt32Async(),
-                "After parsing a value an unexpected character was encountered: 1. Path '[0]', line 1, position 3.");
+                "After parsing a value an unexpected character was encountered: 1. Path '[0]', line 1, position 3."
+            );
         }
 
         [Test]
@@ -91,51 +101,67 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsBooleanAsync(),
-                "After parsing a value an unexpected character was encountered: f. Path '[0]', line 1, position 6.");
+                "After parsing a value an unexpected character was encountered: f. Path '[0]', line 1, position 6."
+            );
         }
 
         [Test]
         public async Task ReadAsDateTime_MissingCommaAsync()
         {
-            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json =
+                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTime(2017, 2, 4, 0, 0, 0, DateTimeKind.Utc), (DateTime)await reader.ReadAsDateTimeAsync());
+            Assert.AreEqual(
+                new DateTime(2017, 2, 4, 0, 0, 0, DateTimeKind.Utc),
+                (DateTime)await reader.ReadAsDateTimeAsync()
+            );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsDateTimeAsync(),
-                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24.");
+                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24."
+            );
         }
 
 #if !NET20
         [Test]
         public async Task ReadAsDateTimeOffset_MissingCommaAsync()
         {
-            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json =
+                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTimeOffset(2017, 2, 4, 0, 0, 0, TimeSpan.Zero), (DateTimeOffset)await reader.ReadAsDateTimeOffsetAsync());
+            Assert.AreEqual(
+                new DateTimeOffset(2017, 2, 4, 0, 0, 0, TimeSpan.Zero),
+                (DateTimeOffset)await reader.ReadAsDateTimeOffsetAsync()
+            );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsDateTimeOffsetAsync(),
-                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24.");
+                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24."
+            );
         }
 #endif
 
         [Test]
         public async Task ReadAsString_MissingCommaAsync()
         {
-            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json =
+                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual("2017-02-04T00:00:00Z", await reader.ReadAsStringAsync());
+            Assert.AreEqual(
+                "2017-02-04T00:00:00Z",
+                await reader.ReadAsStringAsync()
+            );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsStringAsync(),
-                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24.");
+                "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24."
+            );
         }
 
         [Test]
@@ -149,36 +175,54 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsync(),
-                "After parsing a value an unexpected character was encountered: 1. Path '[0]', line 1, position 3.");
+                "After parsing a value an unexpected character was encountered: 1. Path '[0]', line 1, position 3."
+            );
         }
 
         [Test]
         public async Task UnexpectedEndAfterReadingNAsync()
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("n"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Unexpected end when reading JSON. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Unexpected end when reading JSON. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task UnexpectedEndAfterReadingNuAsync()
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("nu"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Unexpected end when reading JSON. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Unexpected end when reading JSON. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task UnexpectedEndAfterReadingNeAsync()
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("ne"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Unexpected end when reading JSON. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Unexpected end when reading JSON. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task UnexpectedEndOfHexAsync()
         {
-            JsonReader reader = new JsonTextReader(new StringReader(@"'h\u123"));
+            JsonReader reader = new JsonTextReader(
+                new StringReader(@"'h\u123")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end while parsing Unicode escape sequence. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end while parsing Unicode escape sequence. Path '', line 1, position 4."
+            );
         }
 
         [Test]
@@ -186,7 +230,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonReader reader = new JsonTextReader(new StringReader(@"'h\"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unterminated string. Expected delimiter: '. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unterminated string. Expected delimiter: '. Path '', line 1, position 3."
+            );
         }
 
         [Test]
@@ -196,21 +246,40 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected character encountered while parsing number: q. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected character encountered while parsing number: q. Path '', line 1, position 2."
+            );
 
             reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDecimalAsync(); }, "Unexpected character encountered while parsing number: q. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDecimalAsync();
+                },
+                "Unexpected character encountered while parsing number: q. Path '', line 1, position 2."
+            );
 
             reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsInt32Async(); }, "Unexpected character encountered while parsing number: q. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsInt32Async();
+                },
+                "Unexpected character encountered while parsing number: q. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ThrowErrorWhenParsingUnquoteStringThatStartsWithNEAsync()
         {
-            const string json = @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
+            const string json =
+                @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -226,7 +295,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected content while parsing JSON. Path 'u', line 1, position 29.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected content while parsing JSON. Path 'u', line 1, position 29."
+            );
         }
 
         [Test]
@@ -234,7 +309,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonReader reader = new JsonTextReader(new StringReader("'hi"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unterminated string. Expected delimiter: '. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unterminated string. Expected delimiter: '. Path '', line 1, position 3."
+            );
         }
 
         [Test]
@@ -244,21 +325,37 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Additional text encountered after finished reading JSON content: }. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Additional text encountered after finished reading JSON content: }. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ResetJsonTextReaderErrorCountAsync()
         {
-            ToggleReaderError toggleReaderError = new ToggleReaderError(new StringReader("{'first':1,'second':2,'third':3}"));
-            JsonTextReader jsonTextReader = new JsonTextReader(toggleReaderError);
+            ToggleReaderError toggleReaderError = new ToggleReaderError(
+                new StringReader("{'first':1,'second':2,'third':3}")
+            );
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                toggleReaderError
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
 
             toggleReaderError.Error = true;
 
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
 
             toggleReaderError.Error = false;
 
@@ -267,7 +364,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             toggleReaderError.Error = true;
 
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
 
             toggleReaderError.Error = false;
 
@@ -276,9 +376,18 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             toggleReaderError.Error = true;
 
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
-            await ExceptionAssert.ThrowsAsync<Exception>(async () => await jsonTextReader.ReadAsync(), "Read error");
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
+            await ExceptionAssert.ThrowsAsync<Exception>(
+                async () => await jsonTextReader.ReadAsync(),
+                "Read error"
+            );
 
             toggleReaderError.Error = false;
         }
@@ -286,41 +395,81 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task MatchWithInsufficentCharactersAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"nul"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"nul")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end when reading JSON. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end when reading JSON. Path '', line 1, position 3."
+            );
         }
 
         [Test]
         public async Task MatchWithWrongCharactersAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"nulz"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"nulz")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Error parsing null value. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Error parsing null value. Path '', line 1, position 3."
+            );
         }
 
         [Test]
         public async Task MatchWithNoTrailingSeparatorAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"nullz"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"nullz")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Error parsing null value. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Error parsing null value. Path '', line 1, position 4."
+            );
         }
 
         [Test]
         public async Task UnclosedCommentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"/* sdf"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"/* sdf")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end while parsing comment. Path '', line 1, position 6.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end while parsing comment. Path '', line 1, position 6."
+            );
         }
 
         [Test]
         public async Task BadCommentStartAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"/sdf"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"/sdf")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Error parsing comment. Expected: *, got s. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Error parsing comment. Expected: *, got s. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -341,7 +490,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             await reader.ReadAsync();
             Assert.AreEqual(JsonToken.Boolean, reader.TokenType);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, @"Invalid character after parsing property name. Expected ':' but got: "". Path 'A', line 3, position 8.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                @"Invalid character after parsing property name. Expected ':' but got: "". Path 'A', line 3, position 8."
+            );
         }
 
         [Test]
@@ -350,7 +505,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json = "new Date,()";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { Assert.IsTrue(await reader.ReadAsync()); }, "Unexpected character while parsing constructor: ,. Path '', line 1, position 8.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    Assert.IsTrue(await reader.ReadAsync());
+                },
+                "Unexpected character while parsing constructor: ,. Path '', line 1, position 8."
+            );
         }
 
         [Test]
@@ -359,7 +520,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json = "new Dat";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end while parsing constructor. Path '', line 1, position 7.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end while parsing constructor. Path '', line 1, position 7."
+            );
         }
 
         [Test]
@@ -368,7 +535,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json = "new Date !";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected character while parsing constructor: !. Path '', line 1, position 9.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected character while parsing constructor: !. Path '', line 1, position 9."
+            );
         }
 
         [Test]
@@ -382,12 +555,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                while (await reader.ReadAsync())
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
                 {
-                }
-            }, "Additional text encountered after finished reading JSON content: ,. Path '', line 5, position 1.");
+                    while (await reader.ReadAsync()) { }
+                },
+                "Additional text encountered after finished reading JSON content: ,. Path '', line 5, position 1."
+            );
         }
 
         [Test]
@@ -419,7 +593,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             await reader.ReadAsync();
             Assert.AreEqual(5, reader.LineNumber);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Additional text encountered after finished reading JSON content: c. Path '', line 5, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Additional text encountered after finished reading JSON content: c. Path '', line 5, position 1."
+            );
         }
 
         [Test]
@@ -429,20 +609,29 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                while (await reader.ReadAsync())
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
                 {
-                }
-            }, "Additional text encountered after finished reading JSON content: a. Path '', line 1, position 5.");
+                    while (await reader.ReadAsync()) { }
+                },
+                "Additional text encountered after finished reading JSON content: a. Path '', line 1, position 5."
+            );
         }
 
         [Test]
         public async Task ParseIncompleteCommentSeparatorAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("true/"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("true/")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Error parsing boolean value. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Error parsing boolean value. Path '', line 1, position 4."
+            );
         }
 
         [Test]
@@ -452,7 +641,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected character encountered while parsing value: }. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected character encountered while parsing value: }. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -460,7 +655,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonTextReader reader = new JsonTextReader(new StringReader(@"{"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected end when reading JSON. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected end when reading JSON. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -468,17 +669,26 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonTextReader reader = new JsonTextReader(new StringReader(@"{}"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Error reading bytes. Unexpected token: StartObject. Path '', line 1, position 2." );
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Error reading bytes. Unexpected token: StartObject. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ReadIntegerWithErrorAsync()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: 333333333333333333333333333333333333333
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                new StringReader(json)
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -486,7 +696,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.PropertyName, jsonTextReader.TokenType);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await jsonTextReader.ReadAsInt32Async(), "JSON integer 333333333333333333333333333333333333333 is too large or small for an Int32. Path 'ChildId', line 2, position 52.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await jsonTextReader.ReadAsInt32Async(),
+                "JSON integer 333333333333333333333333333333333333333 is too large or small for an Int32. Path 'ChildId', line 2, position 52."
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.EndObject, jsonTextReader.TokenType);
@@ -497,25 +710,40 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadIntegerWithErrorInArrayAsync()
         {
-            string json = @"[
+            string json =
+                @"[
   333333333333333333333333333333333333333,
   3.3,
   ,
   0f
 ]";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                new StringReader(json)
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartArray, jsonTextReader.TokenType);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await jsonTextReader.ReadAsInt32Async(), "JSON integer 333333333333333333333333333333333333333 is too large or small for an Int32. Path '[0]', line 2, position 41.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await jsonTextReader.ReadAsInt32Async(),
+                "JSON integer 333333333333333333333333333333333333333 is too large or small for an Int32. Path '[0]', line 2, position 41."
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await jsonTextReader.ReadAsInt32Async(), "Input string '3.3' is not a valid integer. Path '[1]', line 3, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await jsonTextReader.ReadAsInt32Async(),
+                "Input string '3.3' is not a valid integer. Path '[1]', line 3, position 5."
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await jsonTextReader.ReadAsInt32Async(), "Unexpected character encountered while parsing value: ,. Path '[2]', line 4, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await jsonTextReader.ReadAsInt32Async(),
+                "Unexpected character encountered while parsing value: ,. Path '[2]', line 4, position 3."
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await jsonTextReader.ReadAsInt32Async(), "Input string '0f' is not a valid integer. Path '[3]', line 5, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await jsonTextReader.ReadAsInt32Async(),
+                "Input string '0f' is not a valid integer. Path '[3]', line 5, position 4."
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.EndArray, jsonTextReader.TokenType);
@@ -530,7 +758,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
     ChildId: '123'
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                new StringReader(json)
+            );
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -542,9 +772,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             {
                 await jsonTextReader.ReadAsBytesAsync();
             }
-            catch (FormatException)
-            {
-            }
+            catch (FormatException) { }
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.EndObject, jsonTextReader.TokenType);
@@ -557,18 +785,29 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             long i = int.MaxValue;
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(i.ToString(CultureInfo.InvariantCulture)));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(i.ToString(CultureInfo.InvariantCulture))
+            );
             await reader.ReadAsync();
             Assert.AreEqual(typeof(long), reader.ValueType);
 
             for (int j = 1; j < 1000; j++)
             {
                 long total = j + i;
-                await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-                {
-                    reader = new JsonTextReader(new StringReader(total.ToString(CultureInfo.InvariantCulture)));
-                    await reader.ReadAsInt32Async();
-                }, "JSON integer " + total + " is too large or small for an Int32. Path '', line 1, position 10.");
+                await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                    async () =>
+                    {
+                        reader = new JsonTextReader(
+                            new StringReader(
+                                total.ToString(CultureInfo.InvariantCulture)
+                            )
+                        );
+                        await reader.ReadAsInt32Async();
+                    },
+                    "JSON integer " +
+                    total +
+                    " is too large or small for an Int32. Path '', line 1, position 10."
+                );
             }
         }
 
@@ -577,7 +816,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             long i = int.MinValue;
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(i.ToString(CultureInfo.InvariantCulture)));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(i.ToString(CultureInfo.InvariantCulture))
+            );
             await reader.ReadAsync();
             Assert.AreEqual(typeof(long), reader.ValueType);
             Assert.AreEqual(i, reader.Value);
@@ -585,11 +826,20 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             for (int j = 1; j < 1000; j++)
             {
                 long total = -j + i;
-                await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-                {
-                    reader = new JsonTextReader(new StringReader(total.ToString(CultureInfo.InvariantCulture)));
-                    await reader.ReadAsInt32Async();
-                }, "JSON integer " + total + " is too large or small for an Int32. Path '', line 1, position 11.");
+                await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                    async () =>
+                    {
+                        reader = new JsonTextReader(
+                            new StringReader(
+                                total.ToString(CultureInfo.InvariantCulture)
+                            )
+                        );
+                        await reader.ReadAsInt32Async();
+                    },
+                    "JSON integer " +
+                    total +
+                    " is too large or small for an Int32. Path '', line 1, position 11."
+                );
             }
         }
 
@@ -599,7 +849,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             BigInteger i = new BigInteger(long.MaxValue);
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(i.ToString(CultureInfo.InvariantCulture)));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(i.ToString(CultureInfo.InvariantCulture))
+            );
             await reader.ReadAsync();
             Assert.AreEqual(typeof(long), reader.ValueType);
 
@@ -607,7 +859,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             {
                 BigInteger total = i + j;
 
-                reader = new JsonTextReader(new StringReader(total.ToString(CultureInfo.InvariantCulture)));
+                reader = new JsonTextReader(
+                    new StringReader(
+                        total.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
                 await reader.ReadAsync();
 
                 Assert.AreEqual(typeof(BigInteger), reader.ValueType);
@@ -619,7 +875,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             BigInteger i = new BigInteger(long.MinValue);
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(i.ToString(CultureInfo.InvariantCulture)));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(i.ToString(CultureInfo.InvariantCulture))
+            );
             await reader.ReadAsync();
             Assert.AreEqual(typeof(long), reader.ValueType);
 
@@ -627,7 +885,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             {
                 BigInteger total = i + -j;
 
-                reader = new JsonTextReader(new StringReader(total.ToString(CultureInfo.InvariantCulture)));
+                reader = new JsonTextReader(
+                    new StringReader(
+                        total.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
                 await reader.ReadAsync();
 
                 Assert.AreEqual(typeof(BigInteger), reader.ValueType);
@@ -642,7 +904,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsStringAsync(); }, "Error parsing null value. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Error parsing null value. Path '', line 1, position 4."
+            );
         }
 
         [Test]
@@ -652,7 +920,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBooleanAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 1, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBooleanAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 1, position 5."
+            );
         }
 
         [Test]
@@ -662,7 +936,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsStringAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 1, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 1, position 5."
+            );
         }
 
         [Test]
@@ -672,7 +952,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBooleanAsync(); }, "Unexpected end when reading JSON. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBooleanAsync();
+                },
+                "Unexpected end when reading JSON. Path '', line 1, position 3."
+            );
         }
 
         [Test]
@@ -682,7 +968,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBooleanAsync(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBooleanAsync();
+                },
+                "Unexpected character encountered while parsing value: p. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -692,7 +984,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsStringAsync(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected character encountered while parsing value: p. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -702,7 +1000,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDoubleAsync(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDoubleAsync();
+                },
+                "Unexpected character encountered while parsing value: p. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -712,7 +1016,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDoubleAsync(); }, "Unexpected character encountered while parsing value: t. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDoubleAsync();
+                },
+                "Unexpected character encountered while parsing value: t. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -722,7 +1032,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: p. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -730,37 +1046,67 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonTextReader reader = new JsonTextReader(new StringReader(@"[1"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected end when reading bytes. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected end when reading bytes. Path '[0]', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ReadAsBytesArrayWithBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"[1.0]"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"[1.0]")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected token when reading bytes: Float. Path '[0]', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected token when reading bytes: Float. Path '[0]', line 1, position 4."
+            );
         }
 
         [Test]
         public async Task ReadAsBytesBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"new Date()")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ReadAsBytes_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("[,'']")
+            );
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsBytesAsync();
-            }, "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2."
+            );
 
-            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
+            CollectionAssert.AreEquivalent(
+                new byte[0],
+                await reader.ReadAsBytesAsync()
+            );
             Assert.IsTrue(await reader.ReadAsync());
         }
 
@@ -769,25 +1115,39 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("]"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsBytesAsync();
-            }, "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task ReadAsBytes_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("['',,'']")
+            );
             await reader.ReadAsync();
-            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
+            CollectionAssert.AreEquivalent(
+                new byte[0],
+                await reader.ReadAsBytesAsync()
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsBytesAsync();
-            }, "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 5."
+            );
 
-            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
+            CollectionAssert.AreEquivalent(
+                new byte[0],
+                await reader.ReadAsBytesAsync()
+            );
             Assert.IsTrue(await reader.ReadAsync());
         }
 
@@ -796,7 +1156,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             JsonReader reader = new JsonTextReader(new StringReader(@"true"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unexpected character encountered while parsing value: t. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unexpected character encountered while parsing value: t. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -805,9 +1171,17 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string helloWorld = "Hello world!";
             byte[] helloWorldData = Encoding.UTF8.GetBytes(helloWorld);
 
-            JsonReader reader = new JsonTextReader(new StringReader(@"'" + Convert.ToBase64String(helloWorldData)));
+            JsonReader reader = new JsonTextReader(
+                new StringReader(@"'" + Convert.ToBase64String(helloWorldData))
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsBytesAsync(); }, "Unterminated string. Expected delimiter: '. Path '', line 1, position 17.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsBytesAsync();
+                },
+                "Unterminated string. Expected delimiter: '. Path '', line 1, position 17."
+            );
         }
 
         [Test]
@@ -817,7 +1191,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDateTimeAsync(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: p. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -827,34 +1207,64 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDateTimeAsync(); }, "Unexpected character encountered while parsing value: t. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: t. Path '', line 1, position 1."
+            );
         }
 
 #if !NET20
         [Test]
         public async Task ReadAsDateTimeOffsetBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"new Date()")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDateTimeOffsetAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeOffsetAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 1, position 2."
+            );
         }
 #endif
 
         [Test]
         public async Task ReadAsDecimalBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"new Date()")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDecimalAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDecimalAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 1, position 2."
+            );
         }
 
         [Test]
         public async Task ReadAsDecimalBadContent_SecondLineAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"
-new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"
+new Date()")
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsDecimalAsync(); }, "Unexpected character encountered while parsing value: e. Path '', line 2, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDecimalAsync();
+                },
+                "Unexpected character encountered while parsing value: e. Path '', line 2, position 2."
+            );
         }
 
         [Test]
@@ -862,19 +1272,30 @@ new Date()"));
         {
             JsonReader reader = new JsonTextReader(new StringReader(@"true"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsInt32Async(); }, "Unexpected character encountered while parsing value: t. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsInt32Async();
+                },
+                "Unexpected character encountered while parsing value: t. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task ReadNumberValue_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("[,1]"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("[,1]")
+            );
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsInt32Async();
-            }, "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsInt32Async();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2."
+            );
 
             Assert.AreEqual(1, await reader.ReadAsInt32Async());
             Assert.IsTrue(await reader.ReadAsync());
@@ -885,23 +1306,31 @@ new Date()"));
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("]"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsInt32Async();
-            }, "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsInt32Async();
+                },
+                "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task ReadNumberValue_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("[1,,1]"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("[1,,1]")
+            );
             await reader.ReadAsync();
             await reader.ReadAsInt32Async();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsInt32Async();
-            }, "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsInt32Async();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 4."
+            );
 
             Assert.AreEqual(1, await reader.ReadAsInt32Async());
             Assert.IsTrue(await reader.ReadAsync());
@@ -914,7 +1343,13 @@ new Date()"));
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsStringAsync(); }, "Unexpected end when reading JSON. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected end when reading JSON. Path '', line 1, position 3."
+            );
         }
 
         [Test]
@@ -924,7 +1359,13 @@ new Date()"));
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsStringAsync(); }, "Unexpected end when reading JSON. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected end when reading JSON. Path '', line 1, position 3."
+            );
         }
 
         [Test]
@@ -932,22 +1373,30 @@ new Date()"));
         {
             JsonTextReader reader = new JsonTextReader(new StringReader("]"));
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsDateTimeAsync();
-            }, "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: ]. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task ReadStringValue_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("[,'']")
+            );
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsStringAsync();
-            }, "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2."
+            );
 
             Assert.AreEqual(string.Empty, await reader.ReadAsStringAsync());
             Assert.IsTrue(await reader.ReadAsync());
@@ -956,14 +1405,19 @@ new Date()"));
         [Test]
         public async Task ReadStringValue_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("['',,'']")
+            );
             await reader.ReadAsync();
             await reader.ReadAsInt32Async();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsStringAsync();
-            }, "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsStringAsync();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 5."
+            );
 
             Assert.AreEqual(string.Empty, await reader.ReadAsStringAsync());
             Assert.IsTrue(await reader.ReadAsync());
@@ -972,23 +1426,34 @@ new Date()"));
         [Test]
         public async Task ReadStringValue_Numbers_NotStringAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader("[56,56]"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader("[56,56]")
+            );
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsDateTimeAsync();
-            }, "Unexpected character encountered while parsing value: 5. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: 5. Path '', line 1, position 2."
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsDateTimeAsync();
-            }, "Unexpected character encountered while parsing value: 6. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: 6. Path '', line 1, position 3."
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                await reader.ReadAsDateTimeAsync();
-            }, "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsDateTimeAsync();
+                },
+                "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 4."
+            );
 
             Assert.AreEqual(56, await reader.ReadAsInt32Async());
             Assert.IsTrue(await reader.ReadAsync());
@@ -999,15 +1464,26 @@ new Date()"));
         {
             string json = @"/";
 
-            JsonTextReader reader = new JsonTextReader(new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1)));
+            JsonTextReader reader = new JsonTextReader(
+                new StreamReader(
+                    new SlowStream(json, new UTF8Encoding(false), 1)
+                )
+            );
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end while parsing comment. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end while parsing comment. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public async Task EscapedPathInExceptionMessageAsync()
         {
-            string json = @"{
+            string json =
+                @"{
   ""frameworks"": {
     ""dnxcore50"": {
       ""dependencies"": {
@@ -1022,12 +1498,13 @@ new Date()"));
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
                 {
-                    JsonTextReader reader = new JsonTextReader(new StringReader(json));
-                    while (await reader.ReadAsync())
-                    {
-                    }
+                    JsonTextReader reader = new JsonTextReader(
+                        new StringReader(json)
+                    );
+                    while (await reader.ReadAsync()) { }
                 },
-                "Unexpected character encountered while parsing value: !. Path 'frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source', line 6, position 20.");
+                "Unexpected character encountered while parsing value: !. Path 'frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source', line 6, position 20."
+            );
         }
 
         [Test]
@@ -1035,14 +1512,22 @@ new Date()"));
         {
             string json = "[[]]";
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(json))
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(json)
+            )
             {
                 MaxDepth = 1
             };
 
             Assert.IsTrue(await reader.ReadAsync());
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { Assert.IsTrue(await reader.ReadAsync()); }, "The reader's MaxDepth of 1 has been exceeded. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    Assert.IsTrue(await reader.ReadAsync());
+                },
+                "The reader's MaxDepth of 1 has been exceeded. Path '[0]', line 1, position 2."
+            );
         }
 
         [Test]
@@ -1050,7 +1535,9 @@ new Date()"));
         {
             string json = "[[[[]]],[[]]]";
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(json))
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(json)
+            )
             {
                 MaxDepth = 1
             };
@@ -1058,7 +1545,13 @@ new Date()"));
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(0, reader.Depth);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { Assert.IsTrue(await reader.ReadAsync()); }, "The reader's MaxDepth of 1 has been exceeded. Path '[0]', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    Assert.IsTrue(await reader.ReadAsync());
+                },
+                "The reader's MaxDepth of 1 has been exceeded. Path '[0]', line 1, position 2."
+            );
             Assert.AreEqual(1, reader.Depth);
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -1076,7 +1569,13 @@ new Date()"));
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(1, reader.Depth);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { Assert.IsTrue(await reader.ReadAsync()); }, "The reader's MaxDepth of 1 has been exceeded. Path '[1]', line 1, position 9.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    Assert.IsTrue(await reader.ReadAsync());
+                },
+                "The reader's MaxDepth of 1 has been exceeded. Path '[1]', line 1, position 9."
+            );
             Assert.AreEqual(1, reader.Depth);
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -1100,7 +1599,13 @@ new Date()"));
             JsonReader reader = new JsonTextReader(new StringReader(@"{aww"));
             Assert.IsTrue(await reader.ReadAsync());
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => { await reader.ReadAsync(); }, "Unexpected end while parsing unquoted property name. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    await reader.ReadAsync();
+                },
+                "Unexpected end while parsing unquoted property name. Path '', line 1, position 4."
+            );
         }
     }
 }

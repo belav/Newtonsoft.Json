@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -92,9 +93,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             //Json.NET 1.3 + New license + Now on CodePlex
 
             var categories =
-                from c in rss["channel"]["item"].Children()["category"].Values<string>()
-                group c by c
-                into g
+                from c in rss["channel"]["item"].Children()[
+                    "category"
+                ].Values<string>()
+                group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };
 

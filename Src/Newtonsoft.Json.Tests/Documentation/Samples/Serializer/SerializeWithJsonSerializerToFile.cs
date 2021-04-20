@@ -53,14 +53,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Movie movie = new Movie
-            {
-                Name = "Bad Boys",
-                Year = 1995
-            };
+            Movie movie = new Movie { Name = "Bad Boys", Year = 1995 };
 
             // serialize JSON to a string and then write string to a file
-            File.WriteAllText(@"c:\movie.json", JsonConvert.SerializeObject(movie));
+            File.WriteAllText(
+                @"c:\movie.json",
+                JsonConvert.SerializeObject(movie)
+            );
 
             // serialize JSON directly to a file
             using (StreamWriter file = File.CreateText(@"c:\movie.json"))
@@ -78,9 +77,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 return new StreamWriter(new MemoryStream());
             }
 
-            public static void WriteAllText(string s1, string s2)
-            {
-            }
+            public static void WriteAllText(string s1, string s2) { }
         }
     }
 }

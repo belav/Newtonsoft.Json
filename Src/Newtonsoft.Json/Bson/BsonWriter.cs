@@ -42,7 +42,8 @@ namespace Newtonsoft.Json.Bson
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating BSON data.
     /// </summary>
-    [Obsolete("BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+    [Obsolete(
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
     public class BsonWriter : JsonWriter
     {
         private readonly BsonBinaryWriter _writer;
@@ -111,7 +112,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="text">Text to place inside the comment.</param>
         public override void WriteComment(string text)
         {
-            throw JsonWriterException.Create(this, "Cannot write JSON comment as BSON.", null);
+            throw JsonWriterException.Create(
+                this,
+                "Cannot write JSON comment as BSON.",
+                null
+            );
         }
 
         /// <summary>
@@ -120,7 +125,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="name">The name of the constructor.</param>
         public override void WriteStartConstructor(string name)
         {
-            throw JsonWriterException.Create(this, "Cannot write JSON constructor as BSON.", null);
+            throw JsonWriterException.Create(
+                this,
+                "Cannot write JSON constructor as BSON.",
+                null
+            );
         }
 
         /// <summary>
@@ -129,7 +138,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="json">The raw JSON to write.</param>
         public override void WriteRaw(string json)
         {
-            throw JsonWriterException.Create(this, "Cannot write raw JSON as BSON.", null);
+            throw JsonWriterException.Create(
+                this,
+                "Cannot write raw JSON as BSON.",
+                null
+            );
         }
 
         /// <summary>
@@ -138,7 +151,11 @@ namespace Newtonsoft.Json.Bson
         /// <param name="json">The raw JSON to write.</param>
         public override void WriteRawValue(string json)
         {
-            throw JsonWriterException.Create(this, "Cannot write raw JSON as BSON.", null);
+            throw JsonWriterException.Create(
+                this,
+                "Cannot write raw JSON as BSON.",
+                null
+            );
         }
 
         /// <summary>
@@ -219,9 +236,18 @@ namespace Newtonsoft.Json.Bson
             }
             else
             {
-                if (token.Type != BsonType.Object && token.Type != BsonType.Array)
-                {
-                    throw JsonWriterException.Create(this, "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(CultureInfo.InvariantCulture, token.Type), null);
+                if (
+                    token.Type != BsonType.Object &&
+                    token.Type != BsonType.Array
+                ) {
+                    throw JsonWriterException.Create(
+                        this,
+                        "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.Type
+                        ),
+                        null
+                    );
                 }
 
                 _parent = token;
@@ -237,6 +263,7 @@ namespace Newtonsoft.Json.Bson
         /// <param name="value">The <see cref="Object"/> value to write.</param>
         public override void WriteValue(object value)
         {
+
 #if HAVE_BIG_INTEGER
             if (value is BigInteger i)
             {
@@ -275,7 +302,9 @@ namespace Newtonsoft.Json.Bson
         public override void WriteValue(string value)
         {
             base.WriteValue(value);
-            AddToken(value == null ? BsonEmpty.Null : new BsonString(value, true));
+            AddToken(
+                value == null ? BsonEmpty.Null : new BsonString(value, true)
+            );
         }
 
         /// <summary>
@@ -297,7 +326,11 @@ namespace Newtonsoft.Json.Bson
         {
             if (value > int.MaxValue)
             {
-                throw JsonWriterException.Create(this, "Value is too large to fit in a signed 32 bit integer. BSON does not support unsigned values.", null);
+                throw JsonWriterException.Create(
+                    this,
+                    "Value is too large to fit in a signed 32 bit integer. BSON does not support unsigned values.",
+                    null
+                );
             }
 
             base.WriteValue(value);
@@ -323,7 +356,11 @@ namespace Newtonsoft.Json.Bson
         {
             if (value > long.MaxValue)
             {
-                throw JsonWriterException.Create(this, "Value is too large to fit in a signed 64 bit integer. BSON does not support unsigned values.", null);
+                throw JsonWriterException.Create(
+                    this,
+                    "Value is too large to fit in a signed 64 bit integer. BSON does not support unsigned values.",
+                    null
+                );
             }
 
             base.WriteValue(value);
@@ -514,7 +551,11 @@ namespace Newtonsoft.Json.Bson
 
             if (value.Length != 12)
             {
-                throw JsonWriterException.Create(this, "An object id must be 12 bytes", null);
+                throw JsonWriterException.Create(
+                    this,
+                    "An object id must be 12 bytes",
+                    null
+                );
             }
 
             // hack to update the writer state

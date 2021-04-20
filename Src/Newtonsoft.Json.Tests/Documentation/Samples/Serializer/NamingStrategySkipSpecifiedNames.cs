@@ -70,11 +70,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 }
             };
 
-            string json = JsonConvert.SerializeObject(user, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver,
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                user,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver,
+                    Formatting = Formatting.Indented
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -84,11 +87,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""John"",
   ""lastName"": ""Smith"",
   ""UPN"": ""john.smith@acme.com""
-}", json);
+}",
+                json
+            );
         }
     }
 }

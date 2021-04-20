@@ -27,8 +27,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class PrivateMembersClass
     {
-        public PrivateMembersClass(string privateString, string internalString)
-        {
+        public PrivateMembersClass(
+            string privateString,
+            string internalString
+        ) {
             _privateString = privateString;
             _internalString = internalString;
         }

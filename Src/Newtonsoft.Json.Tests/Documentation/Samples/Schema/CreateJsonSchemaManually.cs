@@ -42,11 +42,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
             schema.Properties = new Dictionary<string, JsonSchema>
             {
                 { "name", new JsonSchema { Type = JsonSchemaType.String } },
+
                 {
-                    "hobbies", new JsonSchema
+                    "hobbies",
+                    new JsonSchema
                     {
                         Type = JsonSchemaType.Array,
-                        Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } }
+                        Items = new List<JsonSchema>
+                        {
+                            new JsonSchema { Type = JsonSchemaType.String }
+                        }
                     }
                 },
             };
@@ -69,10 +74,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
             //   }
             // }
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': 'James',
               'hobbies': ['.NET', 'Blogging', 'Reading', 'Xbox', 'LOLCATS']
-            }");
+            }"
+            );
 
             bool valid = person.IsValid(schema);
 

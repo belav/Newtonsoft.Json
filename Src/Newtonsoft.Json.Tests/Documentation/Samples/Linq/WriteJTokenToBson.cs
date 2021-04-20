@@ -66,7 +66,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=
             #endregion
 
-            Assert.AreEqual("KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=", data);
+            Assert.AreEqual(
+                "KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=",
+                data
+            );
         }
 #pragma warning restore 618
     }

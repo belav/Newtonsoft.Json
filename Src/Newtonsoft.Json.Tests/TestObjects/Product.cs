@@ -30,7 +30,15 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class Product
     {
         public string Name;
-        public DateTime ExpiryDate = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public DateTime ExpiryDate = new DateTime(
+            2000,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        );
         public decimal Price;
         public string[] Sizes;
 
@@ -40,7 +48,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
             {
                 Product p = (Product)obj;
 
-                return (p.Name == Name && p.ExpiryDate == ExpiryDate && p.Price == Price);
+                return (p.Name == Name &&
+                p.ExpiryDate == ExpiryDate &&
+                p.Price == Price);
             }
 
             return base.Equals(obj);

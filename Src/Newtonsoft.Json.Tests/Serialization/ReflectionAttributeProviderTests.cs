@@ -57,8 +57,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             public int TestField;
 
             public ReflectionTestObject(
-                [DefaultValue("1")] [JsonProperty] int testParameter)
-            {
+                [DefaultValue("1")]
+                [JsonProperty]int testParameter
+            ) {
                 TestProperty = testParameter;
                 TestField = testParameter;
             }
@@ -74,9 +75,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             property = typeof(ReflectionTestObject).GetProperty("TestProperty");
 #endif
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(property);
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
+                property
+            );
 
-            IList<Attribute> attributes = provider.GetAttributes(typeof(DefaultValueAttribute), false);
+            IList<Attribute> attributes = provider.GetAttributes(
+                typeof(DefaultValueAttribute),
+                false
+            );
             Assert.AreEqual(1, attributes.Count);
 
             attributes = provider.GetAttributes(false);
@@ -93,9 +99,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             field = typeof(ReflectionTestObject).GetField("TestField");
 #endif
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(field);
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
+                field
+            );
 
-            IList<Attribute> attributes = provider.GetAttributes(typeof(DefaultValueAttribute), false);
+            IList<Attribute> attributes = provider.GetAttributes(
+                typeof(DefaultValueAttribute),
+                false
+            );
             Assert.AreEqual(1, attributes.Count);
 
             attributes = provider.GetAttributes(false);
@@ -105,13 +116,21 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void GetAttributes_Parameter()
         {
-            ParameterInfo[] parameters = typeof(ReflectionTestObject).GetConstructor(new[] { typeof(int) }).GetParameters();
+            ParameterInfo[] parameters = typeof(ReflectionTestObject).GetConstructor(
+                    new[] { typeof(int) }
+                )
+                .GetParameters();
 
             ParameterInfo parameter = parameters[0];
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(parameter);
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
+                parameter
+            );
 
-            IList<Attribute> attributes = provider.GetAttributes(typeof(DefaultValueAttribute), false);
+            IList<Attribute> attributes = provider.GetAttributes(
+                typeof(DefaultValueAttribute),
+                false
+            );
             Assert.AreEqual(1, attributes.Count);
 
             attributes = provider.GetAttributes(false);

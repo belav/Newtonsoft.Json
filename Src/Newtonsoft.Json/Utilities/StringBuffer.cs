@@ -43,9 +43,8 @@ namespace Newtonsoft.Json.Utilities
 
         public bool IsEmpty => _buffer == null;
 
-        public StringBuffer(IArrayPool<char>? bufferPool, int initalSize) : this(BufferUtils.RentBuffer(bufferPool, initalSize))
-        {
-        }
+        public StringBuffer(IArrayPool<char>? bufferPool, int initalSize)
+            : this(BufferUtils.RentBuffer(bufferPool, initalSize)) { }
 
         private StringBuffer(char[] buffer)
         {
@@ -65,8 +64,12 @@ namespace Newtonsoft.Json.Utilities
             _buffer![_position++] = value;
         }
 
-        public void Append(IArrayPool<char>? bufferPool, char[] buffer, int startIndex, int count)
-        {
+        public void Append(
+            IArrayPool<char>? bufferPool,
+            char[] buffer,
+            int startIndex,
+            int count
+        ) {
             if (_position + count >= _buffer!.Length)
             {
                 EnsureSize(bufferPool, count);
@@ -87,9 +90,14 @@ namespace Newtonsoft.Json.Utilities
             _position = 0;
         }
 
-        private void EnsureSize(IArrayPool<char>? bufferPool, int appendLength)
-        {
-            char[] newBuffer = BufferUtils.RentBuffer(bufferPool, (_position + appendLength) * 2);
+        private void EnsureSize(
+            IArrayPool<char>? bufferPool,
+            int appendLength
+        ) {
+            char[] newBuffer = BufferUtils.RentBuffer(
+                bufferPool,
+                (_position + appendLength) * 2
+            );
 
             if (_buffer != null)
             {

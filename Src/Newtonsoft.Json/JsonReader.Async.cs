@@ -242,5 +242,4 @@ namespace Newtonsoft.Json
         }
     }
 }
-
 #endif

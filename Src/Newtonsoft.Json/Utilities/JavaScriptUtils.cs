@@ -43,8 +43,10 @@ namespace Newtonsoft.Json.Utilities
 {
     internal static class BufferUtils
     {
-        public static char[] RentBuffer(IArrayPool<char>? bufferPool, int minSize)
-        {
+        public static char[] RentBuffer(
+            IArrayPool<char>? bufferPool,
+            int minSize
+        ) {
             if (bufferPool == null)
             {
                 return new char[minSize];
@@ -54,13 +56,18 @@ namespace Newtonsoft.Json.Utilities
             return buffer;
         }
 
-        public static void ReturnBuffer(IArrayPool<char>? bufferPool, char[]? buffer)
-        {
+        public static void ReturnBuffer(
+            IArrayPool<char>? bufferPool,
+            char[]? buffer
+        ) {
             bufferPool?.Return(buffer);
         }
 
-        public static char[] EnsureBufferSize(IArrayPool<char>? bufferPool, int size, char[]? buffer)
-        {
+        public static char[] EnsureBufferSize(
+            IArrayPool<char>? bufferPool,
+            int size,
+            char[]? buffer
+        ) {
             if (bufferPool == null)
             {
                 return new char[size];
@@ -77,8 +84,10 @@ namespace Newtonsoft.Json.Utilities
 
     internal static class JavaScriptUtils
     {
-        internal static readonly bool[] SingleQuoteCharEscapeFlags = new bool[128];
-        internal static readonly bool[] DoubleQuoteCharEscapeFlags = new bool[128];
+        internal static readonly bool[] SingleQuoteCharEscapeFlags =
+            new bool[128];
+        internal static readonly bool[] DoubleQuoteCharEscapeFlags =
+            new bool[128];
         internal static readonly bool[] HtmlCharEscapeFlags = new bool[128];
 
         private const int UnicodeTextLength = 6;
@@ -87,7 +96,12 @@ namespace Newtonsoft.Json.Utilities
         {
             IList<char> escapeChars = new List<char>
             {
-                '\n', '\r', '\t', '\\', '\f', '\b',
+                '\n',
+                '\r',
+                '\t',
+                '\\',
+                '\f',
+                '\b',
             };
             for (int i = 0; i < ' '; i++)
             {
@@ -102,16 +116,21 @@ namespace Newtonsoft.Json.Utilities
             {
                 DoubleQuoteCharEscapeFlags[escapeChar] = true;
             }
-            foreach (char escapeChar in escapeChars.Union(new[] { '"', '\'', '<', '>', '&' }))
-            {
+            foreach (
+                char escapeChar in escapeChars.Union(
+                    new[] { '"', '\'', '<', '>', '&' }
+                )
+            ) {
                 HtmlCharEscapeFlags[escapeChar] = true;
             }
         }
 
         private const string EscapedUnicodeText = "!";
 
-        public static bool[] GetCharEscapeFlags(StringEscapeHandling stringEscapeHandling, char quoteChar)
-        {
+        public static bool[] GetCharEscapeFlags(
+            StringEscapeHandling stringEscapeHandling,
+            char quoteChar
+        ) {
             if (stringEscapeHandling == StringEscapeHandling.EscapeHtml)
             {
                 return HtmlCharEscapeFlags;
@@ -125,8 +144,10 @@ namespace Newtonsoft.Json.Utilities
             return SingleQuoteCharEscapeFlags;
         }
 
-        public static bool ShouldEscapeJavaScriptString(string? s, bool[] charEscapeFlags)
-        {
+        public static bool ShouldEscapeJavaScriptString(
+            string? s,
+            bool[] charEscapeFlags
+        ) {
             if (s == null)
             {
                 return false;
@@ -144,9 +165,16 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public static void WriteEscapedJavaScriptString(TextWriter writer, string? s, char delimiter, bool appendDelimiters,
-            bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling, IArrayPool<char>? bufferPool, ref char[]? writeBuffer)
-        {
+        public static void WriteEscapedJavaScriptString(
+            TextWriter writer,
+            string? s,
+            char delimiter,
+            bool appendDelimiters,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            IArrayPool<char>? bufferPool,
+            ref char[]? writeBuffer
+        ) {
             // leading delimiter
             if (appendDelimiters)
             {
@@ -155,7 +183,11 @@ namespace Newtonsoft.Json.Utilities
 
             if (!StringUtils.IsNullOrEmpty(s))
             {
-                int lastWritePosition = FirstCharToEscape(s, charEscapeFlags, stringEscapeHandling);
+                int lastWritePosition = FirstCharToEscape(
+                    s,
+                    charEscapeFlags,
+                    stringEscapeHandling
+                );
                 if (lastWritePosition == -1)
                 {
                     writer.Write(s);
@@ -164,9 +196,15 @@ namespace Newtonsoft.Json.Utilities
                 {
                     if (lastWritePosition != 0)
                     {
-                        if (writeBuffer == null || writeBuffer.Length < lastWritePosition)
-                        {
-                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, lastWritePosition, writeBuffer);
+                        if (
+                            writeBuffer == null ||
+                            writeBuffer.Length < lastWritePosition
+                        ) {
+                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                bufferPool,
+                                lastWritePosition,
+                                writeBuffer
+                            );
                         }
 
                         // write unchanged chars at start of text.
@@ -216,24 +254,43 @@ namespace Newtonsoft.Json.Utilities
                                 escapedValue = @"\u2029";
                                 break;
                             default:
-                                if (c < charEscapeFlags.Length || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii)
-                                {
-                                    if (c == '\'' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                                    {
+                                if (
+                                    c < charEscapeFlags.Length ||
+                                    stringEscapeHandling ==
+                                    StringEscapeHandling.EscapeNonAscii
+                                ) {
+                                    if (
+                                        c == '\'' &&
+                                        stringEscapeHandling !=
+                                        StringEscapeHandling.EscapeHtml
+                                    ) {
                                         escapedValue = @"\'";
                                     }
-                                    else if (c == '"' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                                    {
+                                    else if (
+                                        c == '"' &&
+                                        stringEscapeHandling !=
+                                        StringEscapeHandling.EscapeHtml
+                                    ) {
                                         escapedValue = @"\""";
                                     }
                                     else
                                     {
-                                        if (writeBuffer == null || writeBuffer.Length < UnicodeTextLength)
-                                        {
-                                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, UnicodeTextLength, writeBuffer);
+                                        if (
+                                            writeBuffer == null ||
+                                            writeBuffer.Length <
+                                            UnicodeTextLength
+                                        ) {
+                                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                                bufferPool,
+                                                UnicodeTextLength,
+                                                writeBuffer
+                                            );
                                         }
 
-                                        StringUtils.ToCharAsUnicode(c, writeBuffer!);
+                                        StringUtils.ToCharAsUnicode(
+                                            c,
+                                            writeBuffer!
+                                        );
 
                                         // slightly hacky but it saves multiple conditions in if test
                                         escapedValue = EscapedUnicodeText;
@@ -251,32 +308,60 @@ namespace Newtonsoft.Json.Utilities
                             continue;
                         }
 
-                        bool isEscapedUnicodeText = string.Equals(escapedValue, EscapedUnicodeText, StringComparison.Ordinal);
+                        bool isEscapedUnicodeText = string.Equals(
+                            escapedValue,
+                            EscapedUnicodeText,
+                            StringComparison.Ordinal
+                        );
 
                         if (i > lastWritePosition)
                         {
-                            length = i - lastWritePosition + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
-                            int start = (isEscapedUnicodeText) ? UnicodeTextLength : 0;
+                            length = i -
+                            lastWritePosition +
+                            ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
+                            int start = (isEscapedUnicodeText)
+                                ? UnicodeTextLength
+                                : 0;
 
-                            if (writeBuffer == null || writeBuffer.Length < length)
-                            {
-                                char[] newBuffer = BufferUtils.RentBuffer(bufferPool, length);
+                            if (
+                                writeBuffer == null ||
+                                writeBuffer.Length < length
+                            ) {
+                                char[] newBuffer = BufferUtils.RentBuffer(
+                                    bufferPool,
+                                    length
+                                );
 
                                 // the unicode text is already in the buffer
                                 // copy it over when creating new buffer
                                 if (isEscapedUnicodeText)
                                 {
-                                    MiscellaneousUtils.Assert(writeBuffer != null, "Write buffer should never be null because it is set when the escaped unicode text is encountered.");
+                                    MiscellaneousUtils.Assert(
+                                        writeBuffer != null,
+                                        "Write buffer should never be null because it is set when the escaped unicode text is encountered."
+                                    );
 
-                                    Array.Copy(writeBuffer, newBuffer, UnicodeTextLength);
+                                    Array.Copy(
+                                        writeBuffer,
+                                        newBuffer,
+                                        UnicodeTextLength
+                                    );
                                 }
 
-                                BufferUtils.ReturnBuffer(bufferPool, writeBuffer);
+                                BufferUtils.ReturnBuffer(
+                                    bufferPool,
+                                    writeBuffer
+                                );
 
                                 writeBuffer = newBuffer;
                             }
 
-                            s.CopyTo(lastWritePosition, writeBuffer, start, length - start);
+                            s.CopyTo(
+                                lastWritePosition,
+                                writeBuffer,
+                                start,
+                                length - start
+                            );
 
                             // write unchanged chars before writing escaped text
                             writer.Write(writeBuffer, start, length - start);
@@ -297,9 +382,14 @@ namespace Newtonsoft.Json.Utilities
                     length = s.Length - lastWritePosition;
                     if (length > 0)
                     {
-                        if (writeBuffer == null || writeBuffer.Length < length)
-                        {
-                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, length, writeBuffer);
+                        if (
+                            writeBuffer == null || writeBuffer.Length < length
+                        ) {
+                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                bufferPool,
+                                length,
+                                writeBuffer
+                            );
                         }
 
                         s.CopyTo(lastWritePosition, writeBuffer, 0, length);
@@ -317,20 +407,42 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        public static string ToEscapedJavaScriptString(string? value, char delimiter, bool appendDelimiters, StringEscapeHandling stringEscapeHandling)
-        {
-            bool[] charEscapeFlags = GetCharEscapeFlags(stringEscapeHandling, delimiter);
+        public static string ToEscapedJavaScriptString(
+            string? value,
+            char delimiter,
+            bool appendDelimiters,
+            StringEscapeHandling stringEscapeHandling
+        ) {
+            bool[] charEscapeFlags = GetCharEscapeFlags(
+                stringEscapeHandling,
+                delimiter
+            );
 
-            using (StringWriter w = StringUtils.CreateStringWriter(value?.Length ?? 16))
-            {
+            using (
+                StringWriter w = StringUtils.CreateStringWriter(
+                    value?.Length ?? 16
+                )
+            ) {
                 char[]? buffer = null;
-                WriteEscapedJavaScriptString(w, value, delimiter, appendDelimiters, charEscapeFlags, stringEscapeHandling, null, ref buffer);
+                WriteEscapedJavaScriptString(
+                    w,
+                    value,
+                    delimiter,
+                    appendDelimiters,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    null,
+                    ref buffer
+                );
                 return w.ToString();
             }
         }
-        
-        private static int FirstCharToEscape(string s, bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling)
-        {
+
+        private static int FirstCharToEscape(
+            string s,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling
+        ) {
             for (int i = 0; i != s.Length; i++)
             {
                 char c = s[i];
@@ -342,8 +454,9 @@ namespace Newtonsoft.Json.Utilities
                         return i;
                     }
                 }
-                else if (stringEscapeHandling == StringEscapeHandling.EscapeNonAscii)
-                {
+                else if (
+                    stringEscapeHandling == StringEscapeHandling.EscapeNonAscii
+                ) {
                     return i;
                 }
                 else
@@ -568,32 +681,48 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        public static bool TryGetDateFromConstructorJson(JsonReader reader, out DateTime dateTime, [NotNullWhen(false)]out string? errorMessage)
-        {
+        public static bool TryGetDateFromConstructorJson(
+            JsonReader reader,
+            out DateTime dateTime,
+            [NotNullWhen(false)]out string? errorMessage
+        ) {
             dateTime = default;
             errorMessage = null;
 
-            if (!TryGetDateConstructorValue(reader, out long? t1, out errorMessage) || t1 == null)
-            {
-                errorMessage = errorMessage ?? "Date constructor has no arguments.";
+            if (
+                !TryGetDateConstructorValue(
+                    reader,
+                    out long? t1,
+                    out errorMessage
+                ) ||
+                t1 == null
+            ) {
+                errorMessage = errorMessage ??
+                "Date constructor has no arguments.";
                 return false;
             }
-            if (!TryGetDateConstructorValue(reader, out long? t2, out errorMessage))
-            {
+            if (
+                !TryGetDateConstructorValue(
+                    reader,
+                    out long? t2,
+                    out errorMessage
+                )
+            ) {
                 return false;
             }
             else if (t2 != null)
             {
                 // Only create a list when there is more than one argument
-                List<long> dateArgs = new List<long>
-                {
-                    t1.Value,
-                    t2.Value
-                };
+                List<long> dateArgs = new List<long> { t1.Value, t2.Value };
                 while (true)
                 {
-                    if (!TryGetDateConstructorValue(reader, out long? integer, out errorMessage))
-                    {
+                    if (
+                        !TryGetDateConstructorValue(
+                            reader,
+                            out long? integer,
+                            out errorMessage
+                        )
+                    ) {
                         return false;
                     }
                     else if (integer != null)
@@ -618,19 +747,31 @@ namespace Newtonsoft.Json.Utilities
                     dateArgs.Add(0);
                 }
 
-                dateTime = new DateTime((int)dateArgs[0], (int)dateArgs[1] + 1, dateArgs[2] == 0 ? 1 : (int)dateArgs[2],
-                    (int)dateArgs[3], (int)dateArgs[4], (int)dateArgs[5], (int)dateArgs[6]);
+                dateTime = new DateTime(
+                    (int)dateArgs[0],
+                    (int)dateArgs[1] + 1,
+                    dateArgs[2] == 0 ? 1 : (int)dateArgs[2],
+                    (int)dateArgs[3],
+                    (int)dateArgs[4],
+                    (int)dateArgs[5],
+                    (int)dateArgs[6]
+                );
             }
             else
             {
-                dateTime = DateTimeUtils.ConvertJavaScriptTicksToDateTime(t1.Value);
+                dateTime = DateTimeUtils.ConvertJavaScriptTicksToDateTime(
+                    t1.Value
+                );
             }
 
             return true;
         }
 
-        private static bool TryGetDateConstructorValue(JsonReader reader, out long? integer, [NotNullWhen(false)] out string? errorMessage)
-        {
+        private static bool TryGetDateConstructorValue(
+            JsonReader reader,
+            out long? integer,
+            [NotNullWhen(false)]out string? errorMessage
+        ) {
             integer = null;
             errorMessage = null;
 
@@ -645,7 +786,8 @@ namespace Newtonsoft.Json.Utilities
             }
             if (reader.TokenType != JsonToken.Integer)
             {
-                errorMessage = "Unexpected token when reading date constructor. Expected Integer, got " + reader.TokenType;
+                errorMessage = "Unexpected token when reading date constructor. Expected Integer, got " +
+                reader.TokenType;
                 return false;
             }
 

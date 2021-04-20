@@ -31,12 +31,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [DataContract]
     public class DataContractPrivateMembers
     {
-        public DataContractPrivateMembers()
-        {
-        }
+        public DataContractPrivateMembers() { }
 
-        public DataContractPrivateMembers(string name, int age, int rank, string title)
-        {
+        public DataContractPrivateMembers(
+            string name,
+            int age,
+            int rank,
+            string title
+        ) {
             _name = name;
             Age = age;
             Rank = rank;
@@ -60,7 +62,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public override string ToString()
         {
-            return "_name: " + _name + ", _age: " + Age + ", Rank: " + Rank + ", JsonTitle: " + Title;
+            return "_name: " +
+            _name +
+            ", _age: " +
+            Age +
+            ", Rank: " +
+            Rank +
+            ", JsonTitle: " +
+            Title;
         }
     }
 }

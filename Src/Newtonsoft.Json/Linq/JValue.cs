@@ -43,7 +43,12 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Represents a value in JSON (string, integer, date, etc).
     /// </summary>
-    public partial class JValue : JToken, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>
+    public partial class JValue
+        : JToken,
+            IEquatable<JValue>,
+            IFormattable,
+            IComparable,
+            IComparable<JValue>
 #if HAVE_ICONVERTIBLE
         , IConvertible
 #endif
@@ -72,27 +77,21 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(long value)
-            : this(value, JTokenType.Integer)
-        {
-        }
+            : this(value, JTokenType.Integer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(decimal value)
-            : this(value, JTokenType.Float)
-        {
-        }
+            : this(value, JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(char value)
-            : this(value, JTokenType.String)
-        {
-        }
+            : this(value, JTokenType.String) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
@@ -100,36 +99,28 @@ namespace Newtonsoft.Json.Linq
         /// <param name="value">The value.</param>
         [CLSCompliant(false)]
         public JValue(ulong value)
-            : this(value, JTokenType.Integer)
-        {
-        }
+            : this(value, JTokenType.Integer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(double value)
-            : this(value, JTokenType.Float)
-        {
-        }
+            : this(value, JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(float value)
-            : this(value, JTokenType.Float)
-        {
-        }
+            : this(value, JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(DateTime value)
-            : this(value, JTokenType.Date)
-        {
-        }
+            : this(value, JTokenType.Date) { }
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
@@ -147,27 +138,21 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(bool value)
-            : this(value, JTokenType.Boolean)
-        {
-        }
+            : this(value, JTokenType.Boolean) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(string? value)
-            : this(value, JTokenType.String)
-        {
-        }
+            : this(value, JTokenType.String) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(Guid value)
-            : this(value, JTokenType.Guid)
-        {
-        }
+            : this(value, JTokenType.Guid) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
@@ -175,26 +160,21 @@ namespace Newtonsoft.Json.Linq
         /// <param name="value">The value.</param>
         public JValue(Uri? value)
             : this(value, (value != null) ? JTokenType.Uri : JTokenType.Null)
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(TimeSpan value)
-            : this(value, JTokenType.TimeSpan)
-        {
-        }
+            : this(value, JTokenType.TimeSpan) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(object? value)
-            : this(value, GetValueType(null, value))
-        {
-        }
+            : this(value, GetValueType(null, value)) { }
 
         internal override bool DeepEquals(JToken node)
         {
@@ -244,8 +224,11 @@ namespace Newtonsoft.Json.Linq
         }
 #endif
 
-        internal static int Compare(JTokenType valueType, object? objA, object? objB)
-        {
+        internal static int Compare(
+            JTokenType valueType,
+            object? objA,
+            object? objB
+        ) {
             if (objA == objB)
             {
                 return 0;
@@ -273,17 +256,43 @@ namespace Newtonsoft.Json.Linq
                             return -CompareBigInteger(integerB, objA);
                         }
 #endif
-                    if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
-                    {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
+                    if (
+                        objA is ulong ||
+                        objB is ulong ||
+                        objA is decimal ||
+                        objB is decimal
+                    ) {
+                        return Convert.ToDecimal(
+                                objA,
+                                CultureInfo.InvariantCulture
+                            )
+                            .CompareTo(
+                                Convert.ToDecimal(
+                                    objB,
+                                    CultureInfo.InvariantCulture
+                                )
+                            );
                     }
-                    else if (objA is float || objB is float || objA is double || objB is double)
-                    {
+                    else if (
+                        objA is float ||
+                        objB is float ||
+                        objA is double ||
+                        objB is double
+                    ) {
                         return CompareFloat(objA, objB);
                     }
                     else
                     {
-                        return Convert.ToInt64(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToInt64(objB, CultureInfo.InvariantCulture));
+                        return Convert.ToInt64(
+                                objA,
+                                CultureInfo.InvariantCulture
+                            )
+                            .CompareTo(
+                                Convert.ToInt64(
+                                    objB,
+                                    CultureInfo.InvariantCulture
+                                )
+                            );
                     }
                 }
                 case JTokenType.Float:
@@ -298,22 +307,47 @@ namespace Newtonsoft.Json.Linq
                         return -CompareBigInteger(integerB, objA);
                     }
 #endif
-                    if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
-                    {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
+                    if (
+                        objA is ulong ||
+                        objB is ulong ||
+                        objA is decimal ||
+                        objB is decimal
+                    ) {
+                        return Convert.ToDecimal(
+                                objA,
+                                CultureInfo.InvariantCulture
+                            )
+                            .CompareTo(
+                                Convert.ToDecimal(
+                                    objB,
+                                    CultureInfo.InvariantCulture
+                                )
+                            );
                     }
                     return CompareFloat(objA, objB);
-                    }
+                }
                 case JTokenType.Comment:
                 case JTokenType.String:
                 case JTokenType.Raw:
-                    string s1 = Convert.ToString(objA, CultureInfo.InvariantCulture);
-                    string s2 = Convert.ToString(objB, CultureInfo.InvariantCulture);
+                    string s1 = Convert.ToString(
+                        objA,
+                        CultureInfo.InvariantCulture
+                    );
+                    string s2 = Convert.ToString(
+                        objB,
+                        CultureInfo.InvariantCulture
+                    );
 
                     return string.CompareOrdinal(s1, s2);
                 case JTokenType.Boolean:
-                    bool b1 = Convert.ToBoolean(objA, CultureInfo.InvariantCulture);
-                    bool b2 = Convert.ToBoolean(objB, CultureInfo.InvariantCulture);
+                    bool b1 = Convert.ToBoolean(
+                        objA,
+                        CultureInfo.InvariantCulture
+                    );
+                    bool b2 = Convert.ToBoolean(
+                        objB,
+                        CultureInfo.InvariantCulture
+                    );
 
                     return b1.CompareTo(b2);
                 case JTokenType.Date:
@@ -321,9 +355,9 @@ namespace Newtonsoft.Json.Linq
                     if (objA is DateTime dateA)
                     {
 #else
-                        DateTime dateA = (DateTime)objA;
+                    DateTime dateA = (DateTime)objA;
 #endif
-                        DateTime dateB;
+                    DateTime dateB;
 
 #if HAVE_DATE_TIME_OFFSET
                         if (objB is DateTimeOffset offsetB)
@@ -332,11 +366,14 @@ namespace Newtonsoft.Json.Linq
                         }
                         else
 #endif
-                        {
-                            dateB = Convert.ToDateTime(objB, CultureInfo.InvariantCulture);
-                        }
+                    {
+                        dateB = Convert.ToDateTime(
+                            objB,
+                            CultureInfo.InvariantCulture
+                        );
+                    }
 
-                        return dateA.CompareTo(dateB);
+                    return dateA.CompareTo(dateB);
 #if HAVE_DATE_TIME_OFFSET
                     }
                     else
@@ -353,7 +390,9 @@ namespace Newtonsoft.Json.Linq
                 case JTokenType.Bytes:
                     if (!(objB is byte[] bytesB))
                     {
-                        throw new ArgumentException("Object must be of type byte[].");
+                        throw new ArgumentException(
+                            "Object must be of type byte[]."
+                        );
                     }
 
                     byte[]? bytesA = objA as byte[];
@@ -363,7 +402,9 @@ namespace Newtonsoft.Json.Linq
                 case JTokenType.Guid:
                     if (!(objB is Guid))
                     {
-                        throw new ArgumentException("Object must be of type Guid.");
+                        throw new ArgumentException(
+                            "Object must be of type Guid."
+                        );
                     }
 
                     Guid guid1 = (Guid)objA;
@@ -374,16 +415,23 @@ namespace Newtonsoft.Json.Linq
                     Uri? uri2 = objB as Uri;
                     if (uri2 == null)
                     {
-                        throw new ArgumentException("Object must be of type Uri.");
+                        throw new ArgumentException(
+                            "Object must be of type Uri."
+                        );
                     }
 
                     Uri uri1 = (Uri)objA;
 
-                    return Comparer<string>.Default.Compare(uri1.ToString(), uri2.ToString());
+                    return Comparer<string>.Default.Compare(
+                        uri1.ToString(),
+                        uri2.ToString()
+                    );
                 case JTokenType.TimeSpan:
                     if (!(objB is TimeSpan))
                     {
-                        throw new ArgumentException("Object must be of type TimeSpan.");
+                        throw new ArgumentException(
+                            "Object must be of type TimeSpan."
+                        );
                     }
 
                     TimeSpan ts1 = (TimeSpan)objA;
@@ -391,7 +439,14 @@ namespace Newtonsoft.Json.Linq
 
                     return ts1.CompareTo(ts2);
                 default:
-                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(valueType), valueType, "Unexpected value type: {0}".FormatWith(CultureInfo.InvariantCulture, valueType));
+                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
+                        nameof(valueType),
+                        valueType,
+                        "Unexpected value type: {0}".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            valueType
+                        )
+                    );
             }
         }
 
@@ -420,7 +475,6 @@ namespace Newtonsoft.Json.Linq
                     return true;
                 }
             }
-
 #if HAVE_BIG_INTEGER
             if (objA is BigInteger || objB is BigInteger)
             {
@@ -600,8 +654,10 @@ namespace Newtonsoft.Json.Linq
             return new JValue(null, JTokenType.Undefined);
         }
 
-        private static JTokenType GetValueType(JTokenType? current, object? value)
-        {
+        private static JTokenType GetValueType(
+            JTokenType? current,
+            object? value
+        ) {
             if (value == null)
             {
                 return JTokenType.Null;
@@ -616,9 +672,16 @@ namespace Newtonsoft.Json.Linq
             {
                 return GetStringValueType(current);
             }
-            else if (value is long || value is int || value is short || value is sbyte
-                     || value is ulong || value is uint || value is ushort || value is byte)
-            {
+            else if (
+                value is long ||
+                value is int ||
+                value is short ||
+                value is sbyte ||
+                value is ulong ||
+                value is uint ||
+                value is ushort ||
+                value is byte
+            ) {
                 return JTokenType.Integer;
             }
             else if (value is Enum)
@@ -666,7 +729,12 @@ namespace Newtonsoft.Json.Linq
                 return JTokenType.TimeSpan;
             }
 
-            throw new ArgumentException("Could not determine JSON object type for type {0}.".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
+            throw new ArgumentException(
+                "Could not determine JSON object type for type {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    value.GetType()
+                )
+            );
         }
 
         private static JTokenType GetStringValueType(JTokenType? current)
@@ -719,14 +787,23 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
-        public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
-        {
+        public override void WriteTo(
+            JsonWriter writer,
+            params JsonConverter[] converters
+        ) {
             if (converters != null && converters.Length > 0 && _value != null)
             {
-                JsonConverter? matchingConverter = JsonSerializer.GetMatchingConverter(converters, _value.GetType());
+                JsonConverter? matchingConverter = JsonSerializer.GetMatchingConverter(
+                    converters,
+                    _value.GetType()
+                );
                 if (matchingConverter != null && matchingConverter.CanWrite)
                 {
-                    matchingConverter.WriteJson(writer, _value, JsonSerializer.CreateDefault());
+                    matchingConverter.WriteJson(
+                        writer,
+                        _value,
+                        JsonSerializer.CreateDefault()
+                    );
                     return;
                 }
             }
@@ -766,7 +843,12 @@ namespace Newtonsoft.Json.Linq
 #endif
                     else
                     {
-                        writer.WriteValue(Convert.ToInt64(_value, CultureInfo.InvariantCulture));
+                        writer.WriteValue(
+                            Convert.ToInt64(
+                                _value,
+                                CultureInfo.InvariantCulture
+                            )
+                        );
                     }
                     return;
                 case JTokenType.Float:
@@ -784,16 +866,24 @@ namespace Newtonsoft.Json.Linq
                     }
                     else
                     {
-                        writer.WriteValue(Convert.ToDouble(_value, CultureInfo.InvariantCulture));
+                        writer.WriteValue(
+                            Convert.ToDouble(
+                                _value,
+                                CultureInfo.InvariantCulture
+                            )
+                        );
                     }
                     return;
                 case JTokenType.String:
                     writer.WriteValue(_value?.ToString());
                     return;
                 case JTokenType.Boolean:
-                    writer.WriteValue(Convert.ToBoolean(_value, CultureInfo.InvariantCulture));
+                    writer.WriteValue(
+                        Convert.ToBoolean(_value, CultureInfo.InvariantCulture)
+                    );
                     return;
                 case JTokenType.Date:
+
 #if HAVE_DATE_TIME_OFFSET
                     if (_value is DateTimeOffset offset)
                     {
@@ -802,7 +892,12 @@ namespace Newtonsoft.Json.Linq
                     else
 #endif
                     {
-                        writer.WriteValue(Convert.ToDateTime(_value, CultureInfo.InvariantCulture));
+                        writer.WriteValue(
+                            Convert.ToDateTime(
+                                _value,
+                                CultureInfo.InvariantCulture
+                            )
+                        );
                     }
                     return;
                 case JTokenType.Bytes:
@@ -812,14 +907,20 @@ namespace Newtonsoft.Json.Linq
                     writer.WriteValue((_value != null) ? (Guid?)_value : null);
                     return;
                 case JTokenType.TimeSpan:
-                    writer.WriteValue((_value != null) ? (TimeSpan?)_value : null);
+                    writer.WriteValue(
+                        (_value != null) ? (TimeSpan?)_value : null
+                    );
                     return;
                 case JTokenType.Uri:
                     writer.WriteValue((Uri?)_value);
                     return;
             }
 
-            throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(Type), _valueType, "Unexpected token type.");
+            throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
+                nameof(Type),
+                _valueType,
+                "Unexpected token type."
+            );
         }
 
         internal override int GetDeepHashCode()
@@ -832,7 +933,9 @@ namespace Newtonsoft.Json.Linq
 
         private static bool ValuesEquals(JValue v1, JValue v2)
         {
-            return (v1 == v2 || (v1._valueType == v2._valueType && Compare(v1._valueType, v1._value, v2._value) == 0));
+            return (v1 == v2 ||
+            (v1._valueType == v2._valueType &&
+            Compare(v1._valueType, v1._value, v2._value) == 0));
         }
 
         /// <summary>
@@ -1047,7 +1150,8 @@ namespace Newtonsoft.Json.Linq
             if (obj is JValue value)
             {
                 otherValue = value.Value;
-                comparisonType = (_valueType == JTokenType.String && _valueType != value._valueType)
+                comparisonType = (_valueType == JTokenType.String &&
+                    _valueType != value._valueType)
                     ? value._valueType
                     : _valueType;
             }
@@ -1085,13 +1189,13 @@ namespace Newtonsoft.Json.Linq
                 return 1;
             }
 
-            JTokenType comparisonType = (_valueType == JTokenType.String && _valueType != obj._valueType)
+            JTokenType comparisonType = (_valueType == JTokenType.String &&
+                _valueType != obj._valueType)
                 ? obj._valueType
                 : _valueType;
 
             return Compare(comparisonType, _value, obj._value);
         }
-
 #if HAVE_ICONVERTIBLE
         TypeCode IConvertible.GetTypeCode()
         {

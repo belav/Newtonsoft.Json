@@ -68,7 +68,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Status = UserStatus.Deleted
             };
 
-            string json = JsonConvert.SerializeObject(user, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                user,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -77,10 +80,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""UserName"": ""domain\\username"",
   ""Status"": ""Deleted""
-}", json);
+}",
+                json
+            );
         }
     }
 }

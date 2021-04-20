@@ -45,12 +45,19 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task LoadAsync()
         {
-            JsonReader reader = new JsonTextReader(new StringReader("new Date(123)"));
+            JsonReader reader = new JsonTextReader(
+                new StringReader("new Date(123)")
+            );
             await reader.ReadAsync();
 
             JConstructor constructor = await JConstructor.LoadAsync(reader);
             Assert.AreEqual("Date", constructor.Name);
-            Assert.IsTrue(JToken.DeepEquals(new JValue(123), constructor.Values().ElementAt(0)));
+            Assert.IsTrue(
+                JToken.DeepEquals(
+                    new JValue(123),
+                    constructor.Values().ElementAt(0)
+                )
+            );
         }
     }
 }

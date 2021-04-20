@@ -30,14 +30,14 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 #nullable disable
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     internal class JsonSchemaNode
     {
         public string Id { get; }
@@ -60,9 +60,15 @@ namespace Newtonsoft.Json.Schema
 
         private JsonSchemaNode(JsonSchemaNode source, JsonSchema schema)
         {
-            Schemas = new ReadOnlyCollection<JsonSchema>(source.Schemas.Union(new[] { schema }).ToList());
-            Properties = new Dictionary<string, JsonSchemaNode>(source.Properties);
-            PatternProperties = new Dictionary<string, JsonSchemaNode>(source.PatternProperties);
+            Schemas = new ReadOnlyCollection<JsonSchema>(
+                source.Schemas.Union(new[] { schema }).ToList()
+            );
+            Properties = new Dictionary<string, JsonSchemaNode>(
+                source.Properties
+            );
+            PatternProperties = new Dictionary<string, JsonSchemaNode>(
+                source.PatternProperties
+            );
             Items = new List<JsonSchemaNode>(source.Items);
             AdditionalProperties = source.AdditionalProperties;
             AdditionalItems = source.AdditionalItems;
@@ -77,11 +83,14 @@ namespace Newtonsoft.Json.Schema
 
         public static string GetId(IEnumerable<JsonSchema> schemata)
         {
-            return string.Join("-", schemata.Select(s => s.InternalId).OrderBy(id => id, StringComparer.Ordinal)
+            return string.Join(
+                "-",
+                schemata.Select(s => s.InternalId)
+                    .OrderBy(id => id, StringComparer.Ordinal)
 #if !HAVE_STRING_JOIN_WITH_ENUMERABLE
                     .ToArray()
 #endif
-                );
+            );
         }
     }
 }

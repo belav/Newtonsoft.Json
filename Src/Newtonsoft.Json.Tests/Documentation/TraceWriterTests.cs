@@ -71,9 +71,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class Logger
     {
-        public void Log(LogEventInfo logEvent)
-        {
-        }
+        public void Log(LogEventInfo logEvent) { }
     }
 
     public static class LogManager
@@ -90,7 +88,9 @@ namespace Newtonsoft.Json.Tests.Documentation
         #region CustomTraceWriterExample
         public class NLogTraceWriter : ITraceWriter
         {
-            private static readonly Logger Logger = LogManager.GetLogger("NLogTraceWriter");
+            private static readonly Logger Logger = LogManager.GetLogger(
+                "NLogTraceWriter"
+            );
 
             public TraceLevel LevelFilter
             {
@@ -137,13 +137,26 @@ namespace Newtonsoft.Json.Tests.Documentation
             Staff staff = new Staff();
             staff.Name = "Arnie Admin";
             staff.Roles = new List<string> { "Administrator" };
-            staff.StartDate = new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc);
+            staff.StartDate = new DateTime(
+                2000,
+                12,
+                12,
+                12,
+                12,
+                12,
+                DateTimeKind.Utc
+            );
 
             ITraceWriter traceWriter = new MemoryTraceWriter();
 
             JsonConvert.SerializeObject(
                 staff,
-                new JsonSerializerSettings { TraceWriter = traceWriter, Converters = { new JavaScriptDateTimeConverter() } });
+                new JsonSerializerSettings
+                {
+                    TraceWriter = traceWriter,
+                    Converters =  { new JavaScriptDateTimeConverter() }
+                }
+            );
 
             Console.WriteLine(traceWriter);
             // 2012-11-11T12:08:42.761 Info Started serializing Newtonsoft.Json.Tests.Serialization.Staff. Path ''.
@@ -152,7 +165,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // 2012-11-11T12:08:42.797 Info Started serializing System.Collections.Generic.List`1[System.String]. Path 'Roles'.
             // 2012-11-11T12:08:42.798 Info Finished serializing System.Collections.Generic.List`1[System.String]. Path 'Roles'.
             // 2012-11-11T12:08:42.799 Info Finished serializing Newtonsoft.Json.Tests.Serialization.Staff. Path ''.
-            // 2013-05-18T21:38:11.255 Verbose Serialized JSON: 
+            // 2013-05-18T21:38:11.255 Verbose Serialized JSON:
             // {
             //   "Name": "Arnie Admin",
             //   "StartDate": new Date(
@@ -164,7 +177,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             // }
             #endregion
 
-            MemoryTraceWriter memoryTraceWriter = (MemoryTraceWriter)traceWriter;
+            MemoryTraceWriter memoryTraceWriter =
+                (MemoryTraceWriter)traceWriter;
 
             Assert.AreEqual(916, memoryTraceWriter.ToString().Length);
             Assert.AreEqual(7, memoryTraceWriter.GetTraceMessages().Count());

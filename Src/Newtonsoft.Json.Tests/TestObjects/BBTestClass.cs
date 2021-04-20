@@ -36,25 +36,47 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public int BB_property1 { get; set; }
 
         [JsonProperty]
-        public int BB_property2 { get; private set; }
+        public int BB_property2
+        {
+            get;
+            private set;
+        }
 
         [JsonProperty]
-        public int BB_property3 { private get; set; }
+        public int BB_property3
+        {
+            private get;
+            set;
+        }
 
         [JsonProperty]
         private int BB_property4 { get; set; }
 
-        public int BB_property5 { get; private set; }
-        public int BB_property6 { private get; set; }
+        public int BB_property5
+        {
+            get;
+            private set;
+        }
+        public int BB_property6
+        {
+            private get;
+            set;
+        }
 
         [JsonProperty]
-        public int BB_property7 { protected get; set; }
-
-        public int BB_property8 { protected get; set; }
-
-        public BBTestClass()
+        public int BB_property7
         {
+            protected get;
+            set;
         }
+
+        public int BB_property8
+        {
+            protected get;
+            set;
+        }
+
+        public BBTestClass() { }
 
         public BBTestClass(int f, int g)
             : base(f)

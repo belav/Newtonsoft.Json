@@ -63,11 +63,7 @@ namespace Newtonsoft.Json.Tests.Issues
                             MyProperty2 = "Test2",
                         }
                     },
-                    Prop2 = new List<string>
-                    {
-                        "Test1",
-                        "Test1"
-                    },
+                    Prop2 = new List<string> { "Test1", "Test1" },
                     Prop3 = new HashSet<TestClass2>
                     {
                         new TestClass2
@@ -79,16 +75,22 @@ namespace Newtonsoft.Json.Tests.Issues
                 }
             };
 
-            string serializedData = JsonConvert.SerializeObject(objects, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
-            });
+            string serializedData = JsonConvert.SerializeObject(
+                objects,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                    Formatting = Formatting.Indented
+                }
+            );
 
-            IEnumerable<TestClass1> a = JsonConvert.DeserializeObject<IEnumerable<TestClass1>>(serializedData, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            });
+            IEnumerable<TestClass1> a = JsonConvert.DeserializeObject<IEnumerable<TestClass1>>(
+                serializedData,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                }
+            );
 
             TestClass1 o = a.First();
 
@@ -101,21 +103,24 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_Collection()
         {
             TestClass3 c = new TestClass3();
-            c.Prop1 = new Dictionary<string, string>
-            {
-                ["key"] = "value"
-            };
+            c.Prop1 = new Dictionary<string, string> { ["key"] = "value" };
 
-            string serializedData = JsonConvert.SerializeObject(c, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
-            });
+            string serializedData = JsonConvert.SerializeObject(
+                c,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                    Formatting = Formatting.Indented
+                }
+            );
 
-            TestClass3 a = JsonConvert.DeserializeObject<TestClass3>(serializedData, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            });
+            TestClass3 a = JsonConvert.DeserializeObject<TestClass3>(
+                serializedData,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                }
+            );
 
             Assert.AreEqual(1, a.Prop1.Count);
         }
@@ -140,7 +145,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
         abstract class AbstactClass
         {
-            public ICollection<TestClass2> Prop3 { get; set; } = new List<TestClass2>();
+            public ICollection<TestClass2> Prop3 { get; set; } =
+                new List<TestClass2>();
         }
 
         class TestClass3

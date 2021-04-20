@@ -43,7 +43,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
-
 #endif
 
 namespace Newtonsoft.Json.Utilities
@@ -116,56 +115,65 @@ namespace Newtonsoft.Json.Utilities
 
     internal static class ConvertUtils
     {
-        private static readonly Dictionary<Type, PrimitiveTypeCode> TypeCodeMap =
-            new Dictionary<Type, PrimitiveTypeCode>
-            {
-                { typeof(char), PrimitiveTypeCode.Char },
-                { typeof(char?), PrimitiveTypeCode.CharNullable },
-                { typeof(bool), PrimitiveTypeCode.Boolean },
-                { typeof(bool?), PrimitiveTypeCode.BooleanNullable },
-                { typeof(sbyte), PrimitiveTypeCode.SByte },
-                { typeof(sbyte?), PrimitiveTypeCode.SByteNullable },
-                { typeof(short), PrimitiveTypeCode.Int16 },
-                { typeof(short?), PrimitiveTypeCode.Int16Nullable },
-                { typeof(ushort), PrimitiveTypeCode.UInt16 },
-                { typeof(ushort?), PrimitiveTypeCode.UInt16Nullable },
-                { typeof(int), PrimitiveTypeCode.Int32 },
-                { typeof(int?), PrimitiveTypeCode.Int32Nullable },
-                { typeof(byte), PrimitiveTypeCode.Byte },
-                { typeof(byte?), PrimitiveTypeCode.ByteNullable },
-                { typeof(uint), PrimitiveTypeCode.UInt32 },
-                { typeof(uint?), PrimitiveTypeCode.UInt32Nullable },
-                { typeof(long), PrimitiveTypeCode.Int64 },
-                { typeof(long?), PrimitiveTypeCode.Int64Nullable },
-                { typeof(ulong), PrimitiveTypeCode.UInt64 },
-                { typeof(ulong?), PrimitiveTypeCode.UInt64Nullable },
-                { typeof(float), PrimitiveTypeCode.Single },
-                { typeof(float?), PrimitiveTypeCode.SingleNullable },
-                { typeof(double), PrimitiveTypeCode.Double },
-                { typeof(double?), PrimitiveTypeCode.DoubleNullable },
-                { typeof(DateTime), PrimitiveTypeCode.DateTime },
-                { typeof(DateTime?), PrimitiveTypeCode.DateTimeNullable },
+        private static readonly Dictionary<Type,
+            PrimitiveTypeCode> TypeCodeMap = new Dictionary<Type,
+            PrimitiveTypeCode>
+        {
+            { typeof(char), PrimitiveTypeCode.Char },
+            { typeof(char?), PrimitiveTypeCode.CharNullable },
+            { typeof(bool), PrimitiveTypeCode.Boolean },
+            { typeof(bool?), PrimitiveTypeCode.BooleanNullable },
+            { typeof(sbyte), PrimitiveTypeCode.SByte },
+            { typeof(sbyte?), PrimitiveTypeCode.SByteNullable },
+            { typeof(short), PrimitiveTypeCode.Int16 },
+            { typeof(short?), PrimitiveTypeCode.Int16Nullable },
+            { typeof(ushort), PrimitiveTypeCode.UInt16 },
+            { typeof(ushort?), PrimitiveTypeCode.UInt16Nullable },
+            { typeof(int), PrimitiveTypeCode.Int32 },
+            { typeof(int?), PrimitiveTypeCode.Int32Nullable },
+            { typeof(byte), PrimitiveTypeCode.Byte },
+            { typeof(byte?), PrimitiveTypeCode.ByteNullable },
+            { typeof(uint), PrimitiveTypeCode.UInt32 },
+            { typeof(uint?), PrimitiveTypeCode.UInt32Nullable },
+            { typeof(long), PrimitiveTypeCode.Int64 },
+            { typeof(long?), PrimitiveTypeCode.Int64Nullable },
+            { typeof(ulong), PrimitiveTypeCode.UInt64 },
+            { typeof(ulong?), PrimitiveTypeCode.UInt64Nullable },
+            { typeof(float), PrimitiveTypeCode.Single },
+            { typeof(float?), PrimitiveTypeCode.SingleNullable },
+            { typeof(double), PrimitiveTypeCode.Double },
+            { typeof(double?), PrimitiveTypeCode.DoubleNullable },
+            { typeof(DateTime), PrimitiveTypeCode.DateTime },
+            { typeof(DateTime?), PrimitiveTypeCode.DateTimeNullable },
+
 #if HAVE_DATE_TIME_OFFSET
                 { typeof(DateTimeOffset), PrimitiveTypeCode.DateTimeOffset },
                 { typeof(DateTimeOffset?), PrimitiveTypeCode.DateTimeOffsetNullable },
 #endif
-                { typeof(decimal), PrimitiveTypeCode.Decimal },
-                { typeof(decimal?), PrimitiveTypeCode.DecimalNullable },
-                { typeof(Guid), PrimitiveTypeCode.Guid },
-                { typeof(Guid?), PrimitiveTypeCode.GuidNullable },
-                { typeof(TimeSpan), PrimitiveTypeCode.TimeSpan },
-                { typeof(TimeSpan?), PrimitiveTypeCode.TimeSpanNullable },
+            {
+                typeof(decimal),
+                PrimitiveTypeCode.Decimal
+            },
+            { typeof(decimal?), PrimitiveTypeCode.DecimalNullable },
+            { typeof(Guid), PrimitiveTypeCode.Guid },
+            { typeof(Guid?), PrimitiveTypeCode.GuidNullable },
+            { typeof(TimeSpan), PrimitiveTypeCode.TimeSpan },
+            { typeof(TimeSpan?), PrimitiveTypeCode.TimeSpanNullable },
+
 #if HAVE_BIG_INTEGER
                 { typeof(BigInteger), PrimitiveTypeCode.BigInteger },
                 { typeof(BigInteger?), PrimitiveTypeCode.BigIntegerNullable },
 #endif
-                { typeof(Uri), PrimitiveTypeCode.Uri },
-                { typeof(string), PrimitiveTypeCode.String },
-                { typeof(byte[]), PrimitiveTypeCode.Bytes },
+            {
+                typeof(Uri),
+                PrimitiveTypeCode.Uri
+            },
+            { typeof(string), PrimitiveTypeCode.String },
+            { typeof(byte[]), PrimitiveTypeCode.Bytes },
 #if HAVE_ADO_NET
                 { typeof(DBNull), PrimitiveTypeCode.DBNull }
 #endif
-            };
+        };
 
 #if HAVE_ICONVERTIBLE
         private static readonly TypeInformation[] PrimitiveTypeCodes =
@@ -218,7 +226,9 @@ namespace Newtonsoft.Json.Utilities
                 Type nonNullable = Nullable.GetUnderlyingType(t);
                 if (nonNullable.IsEnum())
                 {
-                    Type nullableUnderlyingType = typeof(Nullable<>).MakeGenericType(Enum.GetUnderlyingType(nonNullable));
+                    Type nullableUnderlyingType = typeof(Nullable<>).MakeGenericType(
+                        Enum.GetUnderlyingType(nonNullable)
+                    );
                     isEnum = true;
                     return GetTypeCode(nullableUnderlyingType);
                 }
@@ -241,9 +251,22 @@ namespace Newtonsoft.Json.Utilities
 #if HAVE_ICONVERTIBLE
             return typeof(IConvertible).IsAssignableFrom(t);
 #else
-            return (
-                t == typeof(bool) || t == typeof(byte) || t == typeof(char) || t == typeof(DateTime) || t == typeof(decimal) || t == typeof(double) || t == typeof(short) || t == typeof(int) ||
-                t == typeof(long) || t == typeof(sbyte) || t == typeof(float) || t == typeof(string) || t == typeof(ushort) || t == typeof(uint) || t == typeof(ulong) || t.IsEnum());
+            return (t == typeof(bool) ||
+            t == typeof(byte) ||
+            t == typeof(char) ||
+            t == typeof(DateTime) ||
+            t == typeof(decimal) ||
+            t == typeof(double) ||
+            t == typeof(short) ||
+            t == typeof(int) ||
+            t == typeof(long) ||
+            t == typeof(sbyte) ||
+            t == typeof(float) ||
+            t == typeof(string) ||
+            t == typeof(ushort) ||
+            t == typeof(uint) ||
+            t == typeof(ulong) ||
+            t.IsEnum());
 #endif
         }
 
@@ -256,22 +279,32 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?> CastConverters =
-            new ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?>(CreateCastConverter);
+        private static readonly ThreadSafeStore<StructMultiKey<Type, Type>,
+            Func<object?,
+                object?>?> CastConverters = new ThreadSafeStore<StructMultiKey<Type,
+                Type>,
+            Func<object?, object?>?>(
+            CreateCastConverter
+        );
 
-        private static Func<object?, object?>? CreateCastConverter(StructMultiKey<Type, Type> t)
-        {
+        private static Func<object?, object?>? CreateCastConverter(
+            StructMultiKey<Type, Type> t
+        ) {
             Type initialType = t.Value1;
             Type targetType = t.Value2;
-            MethodInfo castMethodInfo = targetType.GetMethod("op_Implicit", new[] { initialType })
-                ?? targetType.GetMethod("op_Explicit", new[] { initialType });
+            MethodInfo castMethodInfo =
+                targetType.GetMethod("op_Implicit", new[] { initialType }) ??
+                targetType.GetMethod("op_Explicit", new[] { initialType });
 
             if (castMethodInfo == null)
             {
                 return null;
             }
 
-            MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
+            MethodCall<object?,
+                object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
+                castMethodInfo
+            );
 
             return o => call(null, o);
         }
@@ -369,29 +402,68 @@ namespace Newtonsoft.Json.Utilities
             NoValidConversion = 3
         }
 
-        public static object Convert(object initialValue, CultureInfo culture, Type targetType)
-        {
-            switch (TryConvertInternal(initialValue, culture, targetType, out object? value))
+        public static object Convert(
+            object initialValue,
+            CultureInfo culture,
+            Type targetType
+        ) {
+            switch (TryConvertInternal(
+                initialValue,
+                culture,
+                targetType,
+                out object? value
+            ))
             {
                 case ConvertResult.Success:
                     return value!;
                 case ConvertResult.CannotConvertNull:
-                    throw new Exception("Can not convert null {0} into non-nullable {1}.".FormatWith(CultureInfo.InvariantCulture, initialValue.GetType(), targetType));
+                    throw new Exception(
+                        "Can not convert null {0} into non-nullable {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            initialValue.GetType(),
+                            targetType
+                        )
+                    );
                 case ConvertResult.NotInstantiableType:
-                    throw new ArgumentException("Target type {0} is not a value type or a non-abstract class.".FormatWith(CultureInfo.InvariantCulture, targetType), nameof(targetType));
+                    throw new ArgumentException(
+                        "Target type {0} is not a value type or a non-abstract class.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            targetType
+                        ),
+                        nameof(targetType)
+                    );
                 case ConvertResult.NoValidConversion:
-                    throw new InvalidOperationException("Can not convert from {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, initialValue.GetType(), targetType));
+                    throw new InvalidOperationException(
+                        "Can not convert from {0} to {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            initialValue.GetType(),
+                            targetType
+                        )
+                    );
                 default:
-                    throw new InvalidOperationException("Unexpected conversion result.");
+                    throw new InvalidOperationException(
+                        "Unexpected conversion result."
+                    );
             }
         }
 
-        private static bool TryConvert(object? initialValue, CultureInfo culture, Type targetType, out object? value)
-        {
+        private static bool TryConvert(
+            object? initialValue,
+            CultureInfo culture,
+            Type targetType,
+            out object? value
+        ) {
             try
             {
-                if (TryConvertInternal(initialValue, culture, targetType, out value) == ConvertResult.Success)
-                {
+                if (
+                    TryConvertInternal(
+                        initialValue,
+                        culture,
+                        targetType,
+                        out value
+                    ) ==
+                    ConvertResult.Success
+                ) {
                     return true;
                 }
 
@@ -405,8 +477,12 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private static ConvertResult TryConvertInternal(object? initialValue, CultureInfo culture, Type targetType, out object? value)
-        {
+        private static ConvertResult TryConvertInternal(
+            object? initialValue,
+            CultureInfo culture,
+            Type targetType,
+            out object? value
+        ) {
             if (initialValue == null)
             {
                 throw new ArgumentNullException(nameof(initialValue));
@@ -426,13 +502,19 @@ namespace Newtonsoft.Json.Utilities
             }
 
             // use Convert.ChangeType if both types are IConvertible
-            if (IsConvertible(initialValue.GetType()) && IsConvertible(targetType))
-            {
+            if (
+                IsConvertible(initialValue.GetType()) &&
+                IsConvertible(targetType)
+            ) {
                 if (targetType.IsEnum())
                 {
                     if (initialValue is string)
                     {
-                        value = Enum.Parse(targetType, initialValue.ToString(), true);
+                        value = Enum.Parse(
+                            targetType,
+                            initialValue.ToString(),
+                            true
+                        );
                         return ConvertResult.Success;
                     }
                     else if (IsInteger(initialValue))
@@ -442,7 +524,11 @@ namespace Newtonsoft.Json.Utilities
                     }
                 }
 
-                value = System.Convert.ChangeType(initialValue, targetType, culture);
+                value = System.Convert.ChangeType(
+                    initialValue,
+                    targetType,
+                    culture
+                );
                 return ConvertResult.Success;
             }
 
@@ -552,8 +638,11 @@ namespace Newtonsoft.Json.Utilities
             }
 #endif
 
-            if (targetType.IsInterface() || targetType.IsGenericTypeDefinition() || targetType.IsAbstract())
-            {
+            if (
+                targetType.IsInterface() ||
+                targetType.IsGenericTypeDefinition() ||
+                targetType.IsAbstract()
+            ) {
                 value = null;
                 return ConvertResult.NotInstantiableType;
             }
@@ -575,29 +664,46 @@ namespace Newtonsoft.Json.Utilities
         /// The converted type. If conversion was unsuccessful, the initial value
         /// is returned if assignable to the target type.
         /// </returns>
-        public static object? ConvertOrCast(object? initialValue, CultureInfo culture, Type targetType)
-        {
+        public static object? ConvertOrCast(
+            object? initialValue,
+            CultureInfo culture,
+            Type targetType
+        ) {
             if (targetType == typeof(object))
             {
                 return initialValue;
             }
 
-            if (initialValue == null && ReflectionUtils.IsNullable(targetType))
-            {
+            if (
+                initialValue == null && ReflectionUtils.IsNullable(targetType)
+            ) {
                 return null;
             }
 
-            if (TryConvert(initialValue, culture, targetType, out object? convertedValue))
-            {
+            if (
+                TryConvert(
+                    initialValue,
+                    culture,
+                    targetType,
+                    out object? convertedValue
+                )
+            ) {
                 return convertedValue;
             }
 
-            return EnsureTypeAssignable(initialValue, ReflectionUtils.GetObjectType(initialValue)!, targetType);
+            return EnsureTypeAssignable(
+                initialValue,
+                ReflectionUtils.GetObjectType(initialValue)!,
+                targetType
+            );
         }
 #endregion
 
-        private static object? EnsureTypeAssignable(object? value, Type initialType, Type targetType)
-        {
+        private static object? EnsureTypeAssignable(
+            object? value,
+            Type initialType,
+            Type targetType
+        ) {
             if (value != null)
             {
                 Type valueType = value.GetType();
@@ -607,7 +713,9 @@ namespace Newtonsoft.Json.Utilities
                     return value;
                 }
 
-                Func<object?, object?>? castConverter = CastConverters.Get(new StructMultiKey<Type, Type>(valueType, targetType));
+                Func<object?, object?>? castConverter = CastConverters.Get(
+                    new StructMultiKey<Type, Type>(valueType, targetType)
+                );
                 if (castConverter != null)
                 {
                     return castConverter(value);
@@ -621,11 +729,19 @@ namespace Newtonsoft.Json.Utilities
                 }
             }
 
-            throw new ArgumentException("Could not cast or convert from {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, initialType?.ToString() ?? "{null}", targetType));
+            throw new ArgumentException(
+                "Could not cast or convert from {0} to {1}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    initialType?.ToString() ?? "{null}",
+                    targetType
+                )
+            );
         }
 
-        public static bool VersionTryParse(string input, [NotNullWhen(true)]out Version? result)
-        {
+        public static bool VersionTryParse(
+            string input,
+            [NotNullWhen(true)]out Version? result
+        ) {
 #if HAVE_VERSION_TRY_PARSE
             return Version.TryParse(input, out result);
 #else
@@ -661,8 +777,12 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        public static ParseResult Int32TryParse(char[] chars, int start, int length, out int value)
-        {
+        public static ParseResult Int32TryParse(
+            char[] chars,
+            int start,
+            int length,
+            out int value
+        ) {
             value = 0;
 
             if (length == 0)
@@ -755,8 +875,12 @@ namespace Newtonsoft.Json.Utilities
             return ParseResult.Success;
         }
 
-        public static ParseResult Int64TryParse(char[] chars, int start, int length, out long value)
-        {
+        public static ParseResult Int64TryParse(
+            char[] chars,
+            int start,
+            int length,
+            out long value
+        ) {
             value = 0;
 
             if (length == 0)
@@ -1276,8 +1400,12 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        public static ParseResult DecimalTryParse(char[] chars, int start, int length, out decimal value)
-        {
+        public static ParseResult DecimalTryParse(
+            char[] chars,
+            int start,
+            int length,
+            out decimal value
+        ) {
             value = 0M;
             const decimal decimalMaxValueHi28 = 7922816251426433759354395033M;
             const ulong decimalMaxValueHi19 = 7922816251426433759UL;
@@ -1344,7 +1472,7 @@ namespace Newtonsoft.Json.Utilities
                         }
                         if (i == numDecimalStart)
                         {
-                            // E follows decimal point		
+                            // E follows decimal point
                             return ParseResult.Invalid;
                         }
                         i++;
@@ -1371,7 +1499,7 @@ namespace Newtonsoft.Json.Utilities
                                 break;
                         }
 
-                        // parse 3 digit 
+                        // parse 3 digit
                         for (; i < end; i++)
                         {
                             c = chars[i];
@@ -1418,8 +1546,16 @@ namespace Newtonsoft.Json.Utilities
                             }
                         }
 
-                        if (mantissaDigits < 29 && (mantissaDigits != 28 || !(storeOnly28Digits ?? (storeOnly28Digits = (hi19 > decimalMaxValueHi19 || (hi19 == decimalMaxValueHi19 && (lo10 > decimalMaxValueLo9 || (lo10 == decimalMaxValueLo9 && c > decimalMaxValueLo1))))).GetValueOrDefault())))
-                        {
+                        if (
+                            mantissaDigits < 29 &&
+                            (mantissaDigits != 28 ||
+                            !(storeOnly28Digits ??
+                            (storeOnly28Digits = (hi19 > decimalMaxValueHi19 ||
+                            (hi19 == decimalMaxValueHi19 &&
+                            (lo10 > decimalMaxValueLo9 ||
+                            (lo10 == decimalMaxValueLo9 &&
+                            c > decimalMaxValueLo1))))).GetValueOrDefault()))
+                        ) {
                             if (mantissaDigits < 19)
                             {
                                 hi19 = (hi19 * 10UL) + (ulong)(c - '0');
@@ -1453,7 +1589,9 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                value = (hi19 / new decimal(1, 0, 0, false, (byte)(mantissaDigits - 19))) + lo10;
+                value = (hi19 /
+                new decimal(1, 0, 0, false, (byte)(mantissaDigits - 19))) +
+                lo10;
             }
 
             if (exponent > 0)
@@ -1467,14 +1605,22 @@ namespace Newtonsoft.Json.Utilities
                 {
                     if (exponent > 1)
                     {
-                        value /= new decimal(1, 0, 0, false, (byte)(exponent - 1));
+                        value /= new decimal(
+                            1,
+                            0,
+                            0,
+                            false,
+                            (byte)(exponent - 1)
+                        );
                         if (value > decimalMaxValueHi28)
                         {
                             return ParseResult.Overflow;
                         }
                     }
-                    else if (value == decimalMaxValueHi28 && digit29 > decimalMaxValueLo1)
-                    {
+                    else if (
+                        value == decimalMaxValueHi28 &&
+                        digit29 > decimalMaxValueLo1
+                    ) {
                         return ParseResult.Overflow;
                     }
                     value *= 10M;
@@ -1504,7 +1650,13 @@ namespace Newtonsoft.Json.Utilities
                     else
                     {
                         value /= 1e28M;
-                        value *= new decimal(1, 0, 0, false, (byte)(-exponent - 28));
+                        value *= new decimal(
+                            1,
+                            0,
+                            0,
+                            false,
+                            (byte)(-exponent - 28)
+                        );
                     }
                 }
             }
@@ -1526,7 +1678,9 @@ namespace Newtonsoft.Json.Utilities
                 throw new ArgumentNullException("s");
             }
 
-            Regex format = new Regex("^[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}$");
+            Regex format = new Regex(
+                "^[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}$"
+            );
             Match match = format.Match(s);
             if (match.Success)
             {
@@ -1541,8 +1695,12 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        public static bool TryHexTextToInt(char[] text, int start, int end, out int value)
-        {
+        public static bool TryHexTextToInt(
+            char[] text,
+            int start,
+            int end,
+            out int value
+        ) {
             value = 0;
 
             for (int i = start; i < end; i++)

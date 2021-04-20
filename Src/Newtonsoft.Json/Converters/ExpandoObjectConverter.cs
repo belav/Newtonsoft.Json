@@ -161,5 +161,4 @@ namespace Newtonsoft.Json.Converters
         public override bool CanWrite => false;
     }
 }
-
 #endif

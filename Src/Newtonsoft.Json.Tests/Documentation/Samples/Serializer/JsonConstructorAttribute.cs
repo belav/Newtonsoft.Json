@@ -44,12 +44,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         #region Types
         public class User
         {
-            public string UserName { get; private set; }
-            public bool Enabled { get; private set; }
-
-            public User()
+            public string UserName
             {
+                get;
+                private set;
             }
+            public bool Enabled
+            {
+                get;
+                private set;
+            }
+
+            public User() { }
 
             [JsonConstructor]
             public User(string userName, bool enabled)
@@ -64,7 +70,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               ""UserName"": ""domain\\username"",
               ""Enabled"": true
             }";

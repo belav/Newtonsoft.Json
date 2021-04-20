@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
                'CPU': 'Intel',
                'PSU': '500W',
                'Drives': [
@@ -61,14 +62,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             {
                 if (reader.Value != null)
                 {
-                    Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
+                    Console.WriteLine(
+                        "Token: {0}, Value: {1}",
+                        reader.TokenType,
+                        reader.Value
+                    );
                 }
                 else
                 {
                     Console.WriteLine("Token: {0}", reader.TokenType);
                 }
             }
-
             // Token: StartObject
             // Token: PropertyName, Value: CPU
             // Token: String, Value: Intel

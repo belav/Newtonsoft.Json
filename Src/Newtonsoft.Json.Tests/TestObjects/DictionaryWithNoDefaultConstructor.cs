@@ -29,8 +29,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class DictionaryWithNoDefaultConstructor : Dictionary<string, string>
     {
-        public DictionaryWithNoDefaultConstructor(IEnumerable<KeyValuePair<string, string>> initial)
-        {
+        public DictionaryWithNoDefaultConstructor(
+            IEnumerable<KeyValuePair<string, string>> initial
+        ) {
             foreach (KeyValuePair<string, string> pair in initial)
             {
                 Add(pair.Key, pair.Value);

@@ -83,7 +83,6 @@ namespace Newtonsoft.Json.Converters
         {
             return new XmlDeclarationWrapper(_document.CreateXmlDeclaration(version, encoding, standalone));
         }
-
 #if HAVE_XML_DOCUMENT_TYPE
         public IXmlNode CreateXmlDocumentType(string? name, string? publicId, string? systemId, string? internalSubset)
         {
@@ -185,7 +184,6 @@ namespace Newtonsoft.Json.Converters
             set => _declaration.Standalone = value;
         }
     }
-
 #if HAVE_XML_DOCUMENT_TYPE
     internal class XmlDocumentTypeWrapper : XmlNodeWrapper, IXmlDocumentType
     {
@@ -978,7 +976,6 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <value><c>true</c> if special characters are encoded; otherwise, <c>false</c>.</value>
         public bool EncodeSpecialCharacters { get; set; }
-
         #region Writing
         /// <summary>
         /// Writes the JSON representation of the object.
@@ -1493,7 +1490,6 @@ namespace Newtonsoft.Json.Converters
             XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
             IXmlDocument? document = null;
             IXmlNode? rootNode = null;
-
 #if HAVE_XLINQ
             if (typeof(XObject).IsAssignableFrom(objectType))
             {
@@ -1546,7 +1542,6 @@ namespace Newtonsoft.Json.Converters
                 reader.ReadAndAssert();
                 DeserializeNode(reader, document, manager, rootNode);
             }
-
 #if HAVE_XLINQ
             if (objectType == typeof(XElement))
             {
@@ -1777,7 +1772,6 @@ namespace Newtonsoft.Json.Converters
                     {
                         return XmlConvert.ToString(offset);
                     }
-
 #endif
                     DateTime d = Convert.ToDateTime(reader.Value, CultureInfo.InvariantCulture);
 #if !PORTABLE || NETSTANDARD1_3
@@ -1831,7 +1825,6 @@ namespace Newtonsoft.Json.Converters
         private void AddJsonArrayAttribute(IXmlElement element, IXmlDocument document)
         {
             element.SetAttributeNode(document.CreateAttribute("json:Array", JsonNamespaceUri, "true"));
-
 #if HAVE_XLINQ
             // linq to xml doesn't automatically include prefixes via the namespace manager
             if (element is XElementWrapper)
@@ -2017,7 +2010,6 @@ namespace Newtonsoft.Json.Converters
                 currentNode.AppendChild(instruction);
             }
         }
-
 #if HAVE_XML_DOCUMENT_TYPE
         private void CreateDocumentType(JsonReader reader, IXmlDocument document, IXmlNode currentNode)
         {
@@ -2200,7 +2192,6 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
-
 #if HAVE_XLINQ
         [MethodImpl(MethodImplOptions.NoInlining)]
         private bool IsXObject(Type valueType)
@@ -2218,5 +2209,4 @@ namespace Newtonsoft.Json.Converters
 #endif
     }
 }
-
 #endif

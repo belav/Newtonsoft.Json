@@ -59,7 +59,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 // SAMAccountName is not deserialized to any property
                 // and so it is added to the extension data dictionary
-                string samAccountName = (string)_additionalData["SAMAccountName"];
+                string samAccountName =
+                    (string)_additionalData["SAMAccountName"];
 
                 Domain = samAccountName.Split('\\')[0];
                 UserName = samAccountName.Split('\\')[1];
@@ -76,12 +77,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'DisplayName': 'John Smith',
               'SAMAccountName': 'contoso\\johns'
             }";
 
-            DirectoryAccount account = JsonConvert.DeserializeObject<DirectoryAccount>(json);
+            DirectoryAccount account = JsonConvert.DeserializeObject<DirectoryAccount>(
+                json
+            );
 
             Console.WriteLine(account.DisplayName);
             // John Smith

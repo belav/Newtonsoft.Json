@@ -30,10 +30,15 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class NonDefaultConstructorWithReadOnlyCollectionProperty
     {
         public string Title { get; set; }
-        public IList<string> Categories { get; private set; }
-
-        public NonDefaultConstructorWithReadOnlyCollectionProperty(string title)
+        public IList<string> Categories
         {
+            get;
+            private set;
+        }
+
+        public NonDefaultConstructorWithReadOnlyCollectionProperty(
+            string title
+        ) {
             Title = title;
             Categories = new List<string>();
         }

@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'channel': {
                 'title': 'Star Wars',
                 'link': 'http://www.starwars.com',
@@ -64,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             channel.Property("obsolete").Remove();
 
-            channel.Property("description").AddAfterSelf(new JProperty("new", "New value"));
+            channel.Property("description")
+                .AddAfterSelf(new JProperty("new", "New value"));
 
             JArray item = (JArray)channel["item"];
             item.Add("Item 1");
@@ -85,7 +87,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""channel"": {
     ""title"": ""STAR WARS"",
     ""link"": ""http://www.starwars.com"",
@@ -96,7 +99,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       ""Item 2""
     ]
   }
-}", rss.ToString());
+}",
+                rss.ToString()
+            );
         }
     }
 }

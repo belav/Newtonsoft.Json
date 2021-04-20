@@ -57,7 +57,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void SerializeXmlNode()
         {
             #region SerializeXmlNode
-            string xml = @"<?xml version='1.0' standalone='no'?>
+            string xml =
+                @"<?xml version='1.0' standalone='no'?>
             <root>
               <person id='1'>
                 <name>Alan</name>
@@ -100,7 +101,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void DeserializeXmlNode()
         {
             #region DeserializeXmlNode
-            string json = @"{
+            string json =
+                @"{
               '?xml': {
                 '@version': '1.0',
                 '@standalone': 'no'
@@ -140,7 +142,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void ForceJsonArray()
         {
             #region ForceJsonArray
-            string xml = @"<person id='1'>
+            string xml =
+                @"<person id='1'>
 			  <name>Alan</name>
 			  <url>http://www.google.com</url>
 			  <role>Admin1</role>

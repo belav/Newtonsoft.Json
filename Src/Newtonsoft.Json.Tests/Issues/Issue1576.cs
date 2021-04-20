@@ -51,7 +51,10 @@ namespace Newtonsoft.Json.Tests.Issues
                 ContractResolver = new CustomContractResolver()
             };
 
-            var result = JsonConvert.DeserializeObject<TestClass>("{ 'Items': '11' }", settings);
+            var result = JsonConvert.DeserializeObject<TestClass>(
+                "{ 'Items': '11' }",
+                settings
+            );
 
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Items.Count, 1);
@@ -61,7 +64,9 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_WithJsonConverterAttribute()
         {
-            var result = JsonConvert.DeserializeObject<TestClassWithJsonConverter>("{ 'Items': '11' }");
+            var result = JsonConvert.DeserializeObject<TestClassWithJsonConverter>(
+                "{ 'Items': '11' }"
+            );
 
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Items.Count, 1);
@@ -81,8 +86,10 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public class CustomContractResolver : DefaultContractResolver
         {
-            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-            {
+            protected override JsonProperty CreateProperty(
+                MemberInfo member,
+                MemberSerialization memberSerialization
+            ) {
                 var property = base.CreateProperty(member, memberSerialization);
 
                 if (member.Name == "Items")
@@ -98,13 +105,20 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             public override bool CanWrite => false;
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) {
                 throw new NotSupportedException();
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) {
                 var token = JToken.Load(reader);
                 if (token.Type == JTokenType.Array)
                 {
@@ -114,7 +128,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 var array = new JArray();
                 array.Add(token);
 
-                var list = array.ToObject(objectType, serializer) as IEnumerable;
+                var list =
+                    array.ToObject(objectType, serializer) as IEnumerable;
                 var existing = existingValue as IList;
 
                 if (list != null && existing != null)
@@ -133,6 +148,5 @@ namespace Newtonsoft.Json.Tests.Issues
                 return typeof(ICollection).IsAssignableFrom(objectType);
             }
         }
-
     }
 }

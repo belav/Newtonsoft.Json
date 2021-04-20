@@ -68,7 +68,6 @@ namespace Newtonsoft.Json.Serialization
                 {
                     _setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(_memberInfo);
                 }
-
 #if DEBUG
                 // dynamic method doesn't check whether the type is 'legal' to set
                 // add this check for unit tests
@@ -116,5 +115,4 @@ namespace Newtonsoft.Json.Serialization
         }
     }
 }
-
 #endif

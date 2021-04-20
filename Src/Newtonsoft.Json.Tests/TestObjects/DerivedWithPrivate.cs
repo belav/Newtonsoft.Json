@@ -28,6 +28,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class DerivedWithPrivate : BaseWithPrivate
     {
         [JsonProperty]
-        public string DerivedProperty { get; private set; }
+        public string DerivedProperty
+        {
+            get;
+            private set;
+        }
     }
 }

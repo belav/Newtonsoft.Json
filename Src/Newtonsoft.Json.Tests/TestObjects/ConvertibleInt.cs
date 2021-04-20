@@ -109,7 +109,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 return _value;
             }
 
-            throw new Exception("Type not supported: " + conversionType.FullName);
+            throw new Exception(
+                "Type not supported: " + conversionType.FullName
+            );
         }
 
         public ushort ToUInt16(IFormatProvider provider)

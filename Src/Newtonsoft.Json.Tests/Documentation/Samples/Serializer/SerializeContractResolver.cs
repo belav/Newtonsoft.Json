@@ -64,10 +64,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 LastName = "Security"
             };
 
-            string json = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            string json = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -77,11 +81,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Sarah"",
   ""lastName"": ""Security"",
   ""fullName"": ""Sarah Security""
-}", json);
+}",
+                json
+            );
         }
     }
 }

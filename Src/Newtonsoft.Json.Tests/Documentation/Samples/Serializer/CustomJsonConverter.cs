@@ -56,8 +56,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 _types = types;
             }
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) {
                 JToken t = JToken.FromObject(value);
 
                 if (t.Type != JTokenType.Object)
@@ -67,17 +70,27 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 else
                 {
                     JObject o = (JObject)t;
-                    IList<string> propertyNames = o.Properties().Select(p => p.Name).ToList();
+                    IList<string> propertyNames = o.Properties()
+                        .Select(p => p.Name)
+                        .ToList();
 
-                    o.AddFirst(new JProperty("Keys", new JArray(propertyNames)));
+                    o.AddFirst(
+                        new JProperty("Keys", new JArray(propertyNames))
+                    );
 
                     o.WriteTo(writer);
                 }
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                throw new NotImplementedException("Unnecessary because CanRead is false. The type will skip the converter.");
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) {
+                throw new NotImplementedException(
+                    "Unnecessary because CanRead is false. The type will skip the converter."
+                );
             }
 
             public override bool CanRead
@@ -107,13 +120,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 FirstName = "James",
                 LastName = "Newton-King",
-                Roles = new List<string>
-                {
-                    "Admin"
-                }
+                Roles = new List<string> { "Admin" }
             };
 
-            string json = JsonConvert.SerializeObject(employee, Formatting.Indented, new KeysJsonConverter(typeof(Employee)));
+            string json = JsonConvert.SerializeObject(
+                employee,
+                Formatting.Indented,
+                new KeysJsonConverter(typeof(Employee))
+            );
 
             Console.WriteLine(json);
             // {
@@ -129,7 +143,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   ]
             // }
 
-            Employee newEmployee = JsonConvert.DeserializeObject<Employee>(json, new KeysJsonConverter(typeof(Employee)));
+            Employee newEmployee = JsonConvert.DeserializeObject<Employee>(
+                json,
+                new KeysJsonConverter(typeof(Employee))
+            );
 
             Console.WriteLine(newEmployee.FirstName);
             // James

@@ -21,56 +21,78 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("DataServicesTestDatabaseModel", "FK_File_Folder", "Folder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Newtonsoft.Json.Tests.Folder), "File", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Newtonsoft.Json.Tests.File))]
-[assembly: EdmRelationshipAttribute("DataServicesTestDatabaseModel", "FK_Folder_Folder", "Folder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Newtonsoft.Json.Tests.Folder), "Folder1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Newtonsoft.Json.Tests.Folder))]
+[assembly: EdmRelationshipAttribute(
+    "DataServicesTestDatabaseModel",
+    "FK_File_Folder",
+    "Folder",
+    System.Data.Metadata.Edm.RelationshipMultiplicity.One,
+    typeof(Newtonsoft.Json.Tests.Folder),
+    "File",
+    System.Data.Metadata.Edm.RelationshipMultiplicity.Many,
+    typeof(Newtonsoft.Json.Tests.File))]
+[assembly: EdmRelationshipAttribute(
+    "DataServicesTestDatabaseModel",
+    "FK_Folder_Folder",
+    "Folder",
+    System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne,
+    typeof(Newtonsoft.Json.Tests.Folder),
+    "Folder1",
+    System.Data.Metadata.Edm.RelationshipMultiplicity.Many,
+    typeof(Newtonsoft.Json.Tests.Folder))]
 
 #endregion
 
 namespace Newtonsoft.Json.Tests
 {
     #region Contexts
-    
+
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
     public partial class DataServicesTestDatabaseEntities : ObjectContext
     {
         #region Constructors
-    
+
         /// <summary>
         /// Initializes a new DataServicesTestDatabaseEntities object using the connection string found in the 'DataServicesTestDatabaseEntities' section of the application configuration file.
         /// </summary>
-        public DataServicesTestDatabaseEntities() : base("name=DataServicesTestDatabaseEntities", "DataServicesTestDatabaseEntities")
+        public DataServicesTestDatabaseEntities()
+            : base(
+                "name=DataServicesTestDatabaseEntities",
+                "DataServicesTestDatabaseEntities"
+            )
         {
             OnContextCreated();
         }
-    
+
         /// <summary>
         /// Initialize a new DataServicesTestDatabaseEntities object.
         /// </summary>
-        public DataServicesTestDatabaseEntities(string connectionString) : base(connectionString, "DataServicesTestDatabaseEntities")
+        public DataServicesTestDatabaseEntities(string connectionString)
+            : base(connectionString, "DataServicesTestDatabaseEntities")
         {
             OnContextCreated();
         }
-    
+
         /// <summary>
         /// Initialize a new DataServicesTestDatabaseEntities object.
         /// </summary>
-        public DataServicesTestDatabaseEntities(EntityConnection connection) : base(connection, "DataServicesTestDatabaseEntities")
+        public DataServicesTestDatabaseEntities(EntityConnection connection)
+            : base(connection, "DataServicesTestDatabaseEntities")
         {
             OnContextCreated();
         }
-    
+
         #endregion
-    
+
         #region Partial Methods
-    
+
         partial void OnContextCreated();
-    
+
         #endregion
-    
+
         #region ObjectSet Properties
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
@@ -86,7 +108,7 @@ namespace Newtonsoft.Json.Tests
             }
         }
         private ObjectSet<File> _File;
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
@@ -106,7 +128,7 @@ namespace Newtonsoft.Json.Tests
         #endregion
 
         #region AddTo Methods
-    
+
         /// <summary>
         /// Deprecated Method for adding a new object to the File EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
@@ -114,7 +136,7 @@ namespace Newtonsoft.Json.Tests
         {
             base.AddObject("File", file);
         }
-    
+
         /// <summary>
         /// Deprecated Method for adding a new object to the Folder EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
@@ -122,7 +144,6 @@ namespace Newtonsoft.Json.Tests
         {
             base.AddObject("Folder", folder);
         }
-
         #endregion
 
     }
@@ -130,17 +151,19 @@ namespace Newtonsoft.Json.Tests
     #endregion
 
     #region Entities
-    
+
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataServicesTestDatabaseModel", Name="File")]
+    [EdmEntityTypeAttribute(
+        NamespaceName = "DataServicesTestDatabaseModel",
+        Name = "File")]
     [Serializable()]
-    [DataContractAttribute(IsReference=true)]
+    [DataContractAttribute(IsReference = true)]
     public partial class File : EntityObject
     {
         #region Factory Method
-    
+
         /// <summary>
         /// Create a new File object.
         /// </summary>
@@ -148,8 +171,12 @@ namespace Newtonsoft.Json.Tests
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static File CreateFile(global::System.Guid fileId, global::System.String name, global::System.String description, global::System.DateTime createdDate)
-        {
+        public static File CreateFile(
+            global::System.Guid fileId,
+            global::System.String name,
+            global::System.String description,
+            global::System.DateTime createdDate
+        ) {
             File file = new File();
             file.FileId = fileId;
             file.Name = name;
@@ -161,18 +188,17 @@ namespace Newtonsoft.Json.Tests
         #endregion
 
         #region Primitive Properties
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = true,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.Guid FileId
         {
-            get
-            {
-                return _FileId;
-            }
+            get { return _FileId; }
             set
             {
                 if (_FileId != value)
@@ -188,18 +214,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.Guid _FileId;
         partial void OnFileIdChanging(global::System.Guid value);
         partial void OnFileIdChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.String Name
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
             set
             {
                 OnNameChanging(value);
@@ -212,18 +237,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
                 OnDescriptionChanging(value);
@@ -236,18 +260,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.DateTime CreatedDate
         {
-            get
-            {
-                return _CreatedDate;
-            }
+            get { return _CreatedDate; }
             set
             {
                 OnCreatedDateChanging(value);
@@ -263,25 +286,34 @@ namespace Newtonsoft.Json.Tests
 
         #endregion
 
-    
+
         #region Navigation Properties
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataServicesTestDatabaseModel", "FK_File_Folder", "Folder")]
+        [EdmRelationshipNavigationPropertyAttribute(
+            "DataServicesTestDatabaseModel",
+            "FK_File_Folder",
+            "Folder")]
         public Folder Folder
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_File_Folder", "Folder").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_File_Folder",
+                    "Folder"
+                ).Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_File_Folder", "Folder").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_File_Folder",
+                    "Folder"
+                ).Value = value;
             }
         }
         /// <summary>
@@ -293,31 +325,39 @@ namespace Newtonsoft.Json.Tests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_File_Folder", "Folder");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_File_Folder",
+                    "Folder"
+                );
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_File_Folder", "Folder", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Folder>(
+                        "DataServicesTestDatabaseModel.FK_File_Folder",
+                        "Folder",
+                        value
+                    );
                 }
             }
         }
-
         #endregion
 
     }
-    
+
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataServicesTestDatabaseModel", Name="Folder")]
+    [EdmEntityTypeAttribute(
+        NamespaceName = "DataServicesTestDatabaseModel",
+        Name = "Folder")]
     [Serializable()]
-    [DataContractAttribute(IsReference=true)]
+    [DataContractAttribute(IsReference = true)]
     public partial class Folder : EntityObject
     {
         #region Factory Method
-    
+
         /// <summary>
         /// Create a new Folder object.
         /// </summary>
@@ -325,8 +365,12 @@ namespace Newtonsoft.Json.Tests
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static Folder CreateFolder(global::System.Guid folderId, global::System.String name, global::System.String description, global::System.DateTime createdDate)
-        {
+        public static Folder CreateFolder(
+            global::System.Guid folderId,
+            global::System.String name,
+            global::System.String description,
+            global::System.DateTime createdDate
+        ) {
             Folder folder = new Folder();
             folder.FolderId = folderId;
             folder.Name = name;
@@ -338,18 +382,17 @@ namespace Newtonsoft.Json.Tests
         #endregion
 
         #region Primitive Properties
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = true,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.Guid FolderId
         {
-            get
-            {
-                return _FolderId;
-            }
+            get { return _FolderId; }
             set
             {
                 if (_FolderId != value)
@@ -365,18 +408,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.Guid _FolderId;
         partial void OnFolderIdChanging(global::System.Guid value);
         partial void OnFolderIdChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.String Name
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
             set
             {
                 OnNameChanging(value);
@@ -389,18 +431,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
                 OnDescriptionChanging(value);
@@ -413,18 +454,17 @@ namespace Newtonsoft.Json.Tests
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(
+            EntityKeyProperty = false,
+            IsNullable = false)]
         [DataMemberAttribute()]
         public global::System.DateTime CreatedDate
         {
-            get
-            {
-                return _CreatedDate;
-            }
+            get { return _CreatedDate; }
             set
             {
                 OnCreatedDateChanging(value);
@@ -440,69 +480,98 @@ namespace Newtonsoft.Json.Tests
 
         #endregion
 
-    
+
         #region Navigation Properties
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataServicesTestDatabaseModel", "FK_File_Folder", "File")]
+        [EdmRelationshipNavigationPropertyAttribute(
+            "DataServicesTestDatabaseModel",
+            "FK_File_Folder",
+            "File")]
         public EntityCollection<File> Files
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<File>("DataServicesTestDatabaseModel.FK_File_Folder", "File");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<File>(
+                    "DataServicesTestDatabaseModel.FK_File_Folder",
+                    "File"
+                );
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<File>("DataServicesTestDatabaseModel.FK_File_Folder", "File", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<File>(
+                        "DataServicesTestDatabaseModel.FK_File_Folder",
+                        "File",
+                        value
+                    );
                 }
             }
         }
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataServicesTestDatabaseModel", "FK_Folder_Folder", "Folder1")]
+        [EdmRelationshipNavigationPropertyAttribute(
+            "DataServicesTestDatabaseModel",
+            "FK_Folder_Folder",
+            "Folder1")]
         public EntityCollection<Folder> ChildFolders
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Folder>(
+                    "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                    "Folder1"
+                );
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Folder>(
+                        "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                        "Folder1",
+                        value
+                    );
                 }
             }
         }
-    
+
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataServicesTestDatabaseModel", "FK_Folder_Folder", "Folder")]
+        [EdmRelationshipNavigationPropertyAttribute(
+            "DataServicesTestDatabaseModel",
+            "FK_Folder_Folder",
+            "Folder")]
         public Folder ParentFolder
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                    "Folder"
+                ).Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                    "Folder"
+                ).Value = value;
             }
         }
         /// <summary>
@@ -514,24 +583,29 @@ namespace Newtonsoft.Json.Tests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Folder>(
+                    "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                    "Folder"
+                );
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Folder>("DataServicesTestDatabaseModel.FK_Folder_Folder", "Folder", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Folder>(
+                        "DataServicesTestDatabaseModel.FK_Folder_Folder",
+                        "Folder",
+                        value
+                    );
                 }
             }
         }
-
         #endregion
 
     }
-
     #endregion
 
-    
+
 }
 
 #endif

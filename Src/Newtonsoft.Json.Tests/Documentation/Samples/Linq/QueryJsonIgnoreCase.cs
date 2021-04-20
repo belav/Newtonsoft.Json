@@ -49,14 +49,19 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'name': 'James Newton-King',
               'blog': 'http://james.newtonking.com'
             }";
 
             JObject profile = JObject.Parse(json);
 
-            string name = (string)profile.GetValue("Name", StringComparison.OrdinalIgnoreCase);
+            string name =
+                (string)profile.GetValue(
+                    "Name",
+                    StringComparison.OrdinalIgnoreCase
+                );
             Console.WriteLine(name);
             #endregion
 

@@ -159,8 +159,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             _container = container;
         }
 
-        protected override JsonObjectContract CreateObjectContract(Type objectType)
-        {
+        protected override JsonObjectContract CreateObjectContract(
+            Type objectType
+        ) {
             // use Autofac to create types that have been registered with it
             if (_container.IsRegistered(objectType))
             {
@@ -177,9 +178,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             // attempt to create the contact from the resolved type
             IComponentRegistration registration;
-            if (_container.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out registration))
-            {
-                Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
+            if (
+                _container.ComponentRegistry.TryGetRegistration(
+                    new TypedService(objectType),
+                    out registration
+                )
+            ) {
+                Type viewType =
+                    (registration.Activator as ReflectionActivator)?.LimitType;
                 if (viewType != null)
                 {
                     return base.CreateObjectContract(viewType);
@@ -201,12 +207,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             builder.RegisterType<Company>().As<ICompany>();
             IContainer container = builder.Build();
 
-            AutofacContractResolver resolver = new AutofacContractResolver(container);
+            AutofacContractResolver resolver = new AutofacContractResolver(
+                container
+            );
 
-            User user = JsonConvert.DeserializeObject<User>("{'company':{'company_name':'Company name!'}}", new JsonSerializerSettings
-            {
-                ContractResolver = resolver
-            });
+            User user = JsonConvert.DeserializeObject<User>(
+                "{'company':{'company_name':'Company name!'}}",
+                new JsonSerializerSettings { ContractResolver = resolver }
+            );
 
             Assert.AreEqual("Company name!", user.Company.CompanyName);
         }
@@ -219,31 +227,42 @@ namespace Newtonsoft.Json.Tests.Serialization
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
-            builder.Register(c =>
-            {
-                count++;
-                return new LogManager(new DateTime(2000, 12, 12));
-            }).As<ILogger>();
+            builder.Register(
+                    c =>
+                    {
+                        count++;
+                        return new LogManager(new DateTime(2000, 12, 12));
+                    }
+                )
+                .As<ILogger>();
 
             IContainer container = builder.Build();
 
-            AutofacContractResolver contractResolver = new AutofacContractResolver(container);
+            AutofacContractResolver contractResolver = new AutofacContractResolver(
+                container
+            );
 
-            TaskController controller = JsonConvert.DeserializeObject<TaskController>(@"{
+            TaskController controller = JsonConvert.DeserializeObject<TaskController>(
+                @"{
                 'Logger': {
                     'Level':'Debug'
                 }
-            }", new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            }",
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver
+                }
+            );
 
             Assert.IsNotNull(controller);
             Assert.IsNotNull(controller.Logger);
 
             Assert.AreEqual(1, count);
 
-            Assert.AreEqual(new DateTime(2000, 12, 12), controller.Logger.DateTime);
+            Assert.AreEqual(
+                new DateTime(2000, 12, 12),
+                controller.Logger.DateTime
+            );
             Assert.AreEqual("Debug", controller.Logger.Level);
         }
 
@@ -253,23 +272,32 @@ namespace Newtonsoft.Json.Tests.Serialization
             int count = 0;
 
             ContainerBuilder builder = new ContainerBuilder();
-            builder.Register(c =>
-            {
-                count++;
-                return new TaskRepository();
-            }).As<ITaskRepository>();
+            builder.Register(
+                    c =>
+                    {
+                        count++;
+                        return new TaskRepository();
+                    }
+                )
+                .As<ITaskRepository>();
             builder.RegisterType<HasSettableProperty>();
-            builder.Register(c =>
-            {
-                count++;
-                return new LogManager(new DateTime(2000, 12, 12));
-            }).As<ILogger>();
+            builder.Register(
+                    c =>
+                    {
+                        count++;
+                        return new LogManager(new DateTime(2000, 12, 12));
+                    }
+                )
+                .As<ILogger>();
 
             IContainer container = builder.Build();
 
-            AutofacContractResolver contractResolver = new AutofacContractResolver(container);
+            AutofacContractResolver contractResolver = new AutofacContractResolver(
+                container
+            );
 
-            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(@"{
+            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(
+                @"{
                 'Logger': {
                     'Level': 'Debug'
                 },
@@ -288,15 +316,20 @@ namespace Newtonsoft.Json.Tests.Serialization
                 'Person': {
                     'Name': 'Name3!'
                 }
-            }", new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            }",
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver
+                }
+            );
 
             Assert.IsNotNull(o);
             Assert.IsNotNull(o.Logger);
             Assert.IsNotNull(o.Repository);
-            Assert.AreEqual(o.Repository.CreatedOn, DateTime.Parse("2015-04-01 20:00"));
+            Assert.AreEqual(
+                o.Repository.CreatedOn,
+                DateTime.Parse("2015-04-01 20:00")
+            );
 
             Assert.AreEqual(2, count);
 

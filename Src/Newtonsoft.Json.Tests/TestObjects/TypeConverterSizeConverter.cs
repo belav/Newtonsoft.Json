@@ -31,18 +31,26 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class TypeConverterSizeConverter : TypeConverter
     {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return ((sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType));
+        public override bool CanConvertFrom(
+            ITypeDescriptorContext context,
+            Type sourceType
+        ) {
+            return ((sourceType == typeof(string)) ||
+            base.CanConvertFrom(context, sourceType));
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
+        public override bool CanConvertTo(
+            ITypeDescriptorContext context,
+            Type destinationType
+        ) {
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             string str = value as string;
             if (str == null)
             {
@@ -62,7 +70,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(int));
             for (int i = 0; i < numArray.Length; i++)
             {
-                numArray[i] = (int)converter.ConvertFromString(context, culture, strArray[i]);
+                numArray[i] = (int)converter.ConvertFromString(
+                    context,
+                    culture,
+                    strArray[i]
+                );
             }
             if (numArray.Length == 2)
             {
@@ -72,8 +84,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             throw new ArgumentException("Bad format.");
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == null)
             {
                 throw new ArgumentNullException("destinationType");
@@ -87,11 +103,21 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     {
                         culture = CultureInfo.CurrentCulture;
                     }
-                    TypeConverter converter = TypeDescriptor.GetConverter(typeof(int));
+                    TypeConverter converter = TypeDescriptor.GetConverter(
+                        typeof(int)
+                    );
                     string[] strArray = new string[2];
                     int num = 0;
-                    strArray[num++] = converter.ConvertToString(context, culture, size.Width);
-                    strArray[num++] = converter.ConvertToString(context, culture, size.Height);
+                    strArray[num++] = converter.ConvertToString(
+                        context,
+                        culture,
+                        size.Width
+                    );
+                    strArray[num++] = converter.ConvertToString(
+                        context,
+                        culture,
+                        size.Height
+                    );
                     return string.Join(", ", strArray);
                 }
             }

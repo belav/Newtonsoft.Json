@@ -75,7 +75,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XmlNode()
         {
-            string json = @"{
+            string json =
+                @"{
   ""TestXml"": {
     ""orders"": {
       ""order"": {
@@ -91,7 +92,10 @@ namespace Newtonsoft.Json.Tests.Issues
             var p = JsonConvert.DeserializeObject<PersonWithXmlNode>(json);
 
             Assert.AreEqual("Kumar", p.Name);
-            Assert.AreEqual("vinoth", p.TestXml.SelectSingleNode("//name").InnerText);
+            Assert.AreEqual(
+                "vinoth",
+                p.TestXml.SelectSingleNode("//name").InnerText
+            );
         }
 #endif
 
@@ -99,7 +103,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XObject()
         {
-            string json = @"{
+            string json =
+                @"{
   ""TestXml1"": {
     ""orders"": {
       ""order"": {
@@ -131,9 +136,21 @@ namespace Newtonsoft.Json.Tests.Issues
             var p = JsonConvert.DeserializeObject<PersonWithXObject>(json);
 
             Assert.AreEqual("Kumar", p.Name);
-            Assert.AreEqual("vinoth", (string)((XDocument)p.TestXml1).Root.Element("order").Element("name"));
-            Assert.AreEqual("vinoth", (string)((XDocument)p.TestXml2).Root.Element("order").Element("name"));
-            Assert.AreEqual("vinoth", (string)((XDocument)p.TestXml3).Root.Element("order").Element("name"));
+            Assert.AreEqual(
+                "vinoth",
+                (string)((XDocument)p.TestXml1).Root.Element("order")
+                    .Element("name")
+            );
+            Assert.AreEqual(
+                "vinoth",
+                (string)((XDocument)p.TestXml2).Root.Element("order")
+                    .Element("name")
+            );
+            Assert.AreEqual(
+                "vinoth",
+                (string)((XDocument)p.TestXml3).Root.Element("order")
+                    .Element("name")
+            );
         }
 #endif
     }

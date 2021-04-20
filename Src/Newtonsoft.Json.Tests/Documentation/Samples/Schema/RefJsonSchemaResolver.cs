@@ -63,7 +63,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonSchema employeeSchema = JsonSchema.Parse(schemaJson, resolver);
 
-            string json = @"{
+            string json =
+                @"{
               'name': 'James',
               'age': 29,
               'salary': 9000.01,

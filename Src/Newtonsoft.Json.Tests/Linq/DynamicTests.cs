@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AccessPropertyValue()
         {
-            string rawJson = @"{
+            string rawJson =
+                @"{
   ""task"": {
     ""dueDate"": ""2012-12-03T00:00:00""
   }
@@ -61,7 +62,10 @@ namespace Newtonsoft.Json.Tests.Linq
             dynamic dyn = JsonConvert.DeserializeObject<dynamic>(rawJson);
             DateTime dueDate = dyn.task.dueDate.Value;
 
-            Assert.AreEqual(new DateTime(2012, 12, 3, 0, 0, 0, DateTimeKind.Unspecified), dueDate);
+            Assert.AreEqual(
+                new DateTime(2012, 12, 3, 0, 0, 0, DateTimeKind.Unspecified),
+                dueDate
+            );
         }
 
         [Test]
@@ -77,9 +81,11 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.Pass();
             }
         }
-        
-        private void UpdateValueCount(IDictionary<string, int> counts, dynamic d)
-        {
+
+        private void UpdateValueCount(
+            IDictionary<string, int> counts,
+            dynamic d
+        ) {
             string s = d.ToString();
 
             int c;
@@ -97,9 +103,14 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             dynamic d;
 
-            using (var jsonFile = System.IO.File.OpenText(ResolvePath("large.json")))
-            using (JsonTextReader jsonTextReader = new JsonTextReader(jsonFile))
-            {
+            using (
+                var jsonFile = System.IO.File.OpenText(
+                    ResolvePath("large.json")
+                )
+            )
+            using (
+                JsonTextReader jsonTextReader = new JsonTextReader(jsonFile)
+            ) {
                 JsonSerializer serializer = new JsonSerializer();
                 d = serializer.Deserialize(jsonTextReader);
             }
@@ -120,7 +131,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 foreach (dynamic friend in o.friends)
                 {
                     UpdateValueCount(counts, friend.id);
-                    UpdateValueCount(counts, ((string)friend.name).Split(' ')[0]);
+                    UpdateValueCount(
+                        counts,
+                        ((string)friend.name).Split(' ')[0]
+                    );
                 }
 
                 count++;
@@ -132,8 +146,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNames()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -179,8 +192,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectEnumerator()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -200,8 +212,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNameWithJArray()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -214,19 +225,21 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNameWithNonToken()
         {
-            ExceptionAssert.Throws<ArgumentException>(() =>
-            {
-                dynamic d = new JObject();
+            ExceptionAssert.Throws<ArgumentException>(
+                () =>
+                {
+                    dynamic d = new JObject();
 
-                d.First = new[] { "One", "II", "3" };
-            }, "Could not determine JSON object type for type System.String[].");
+                    d.First = new[] { "One", "II", "3" };
+                },
+                "Could not determine JSON object type for type System.String[]."
+            );
         }
 
         [Test]
         public void JObjectMethods()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -250,17 +263,29 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1d)),
                 new JProperty("Decimal", new JValue(1.1m)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(
+                        new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc)
+                    )
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
-                new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
+                new JProperty(
+                    "Bytes",
+                    new JValue(Encoding.UTF8.GetBytes("A string lol!"))
+                ),
                 new JProperty("Uri", new Uri("http://json.codeplex.com/")),
-                new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
+                new JProperty(
+                    "Guid",
+                    new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")
+                ),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-                , new JProperty("BigInteger", BigInteger.Parse("1"))
+                ,
+                new JProperty("BigInteger", BigInteger.Parse("1"))
 #endif
-                );
+            );
 
             dynamic d = o;
 
@@ -327,7 +352,9 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.IsTrue(d.Bytes == d.Bytes);
             Assert.IsTrue(d.Bytes == Encoding.UTF8.GetBytes("A string lol!"));
-            Assert.IsTrue(d.Bytes == new JValue(Encoding.UTF8.GetBytes("A string lol!")));
+            Assert.IsTrue(
+                d.Bytes == new JValue(Encoding.UTF8.GetBytes("A string lol!"))
+            );
 
             Assert.IsTrue(d.Uri == d.Uri);
             Assert.IsTrue(d.Uri == new Uri("http://json.codeplex.com/"));
@@ -337,9 +364,15 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(d.Uri >= null);
 
             Assert.IsTrue(d.Guid == d.Guid);
-            Assert.IsTrue(d.Guid == new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF"));
-            Assert.IsTrue(d.Guid > new Guid("AAAAAAAA-0D80-44F2-BF34-4654156FA7AF"));
-            Assert.IsTrue(d.Guid >= new Guid("AAAAAAAA-0D80-44F2-BF34-4654156FA7AF"));
+            Assert.IsTrue(
+                d.Guid == new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")
+            );
+            Assert.IsTrue(
+                d.Guid > new Guid("AAAAAAAA-0D80-44F2-BF34-4654156FA7AF")
+            );
+            Assert.IsTrue(
+                d.Guid >= new Guid("AAAAAAAA-0D80-44F2-BF34-4654156FA7AF")
+            );
             Assert.IsTrue(d.Guid > null);
             Assert.IsTrue(d.Guid >= null);
 
@@ -359,17 +392,29 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1d)),
                 new JProperty("Decimal", new JValue(1.1m)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(
+                        new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc)
+                    )
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
-                new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
+                new JProperty(
+                    "Bytes",
+                    new JValue(Encoding.UTF8.GetBytes("A string lol!"))
+                ),
                 new JProperty("Uri", new Uri("http://json.codeplex.com/")),
-                new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
+                new JProperty(
+                    "Guid",
+                    new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")
+                ),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-                , new JProperty("BigInteger", new BigInteger(100))
+                ,
+                new JProperty("BigInteger", new BigInteger(100))
 #endif
-                );
+            );
 
             dynamic d = o;
             dynamic r;
@@ -693,29 +738,50 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Null", JValue.CreateNull()),
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(
+                        new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc)
+                    )
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
-                new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
+                new JProperty(
+                    "Bytes",
+                    new JValue(Encoding.UTF8.GetBytes("A string lol!"))
+                ),
                 new JProperty("Uri", new Uri("http://json.codeplex.com/")),
-                new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
+                new JProperty(
+                    "Guid",
+                    new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")
+                ),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-                , new JProperty("BigInteger", new BigInteger(100))
+                ,
+                new JProperty("BigInteger", new BigInteger(100))
 #endif
-                );
+            );
 
             dynamic d = o;
 
             Assert.AreEqual("", d.Null.ToString());
             Assert.AreEqual("1", d.Integer.ToString());
-            Assert.AreEqual("1.1", d.Float.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual("12/29/2000 23:51:10", d.DateTime.ToString(null, CultureInfo.InvariantCulture));
+            Assert.AreEqual(
+                "1.1",
+                d.Float.ToString(CultureInfo.InvariantCulture)
+            );
+            Assert.AreEqual(
+                "12/29/2000 23:51:10",
+                d.DateTime.ToString(null, CultureInfo.InvariantCulture)
+            );
             Assert.AreEqual("True", d.Boolean.ToString());
             Assert.AreEqual("A string lol!", d.String.ToString());
             Assert.AreEqual("System.Byte[]", d.Bytes.ToString());
             Assert.AreEqual("http://json.codeplex.com/", d.Uri.ToString());
-            Assert.AreEqual("ea27fe1d-0d80-44f2-bf34-4654156fa7af", d.Guid.ToString());
+            Assert.AreEqual(
+                "ea27fe1d-0d80-44f2-bf34-4654156fa7af",
+                d.Guid.ToString()
+            );
             Assert.AreEqual("1.00:00:00", d.TimeSpan.ToString());
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             Assert.AreEqual("100", d.BigInteger.ToString());
@@ -727,7 +793,8 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject(
                 new JProperty("ChildValue", "blah blah"),
-                new JProperty("Hello Joe", null));
+                new JProperty("Hello Joe", null)
+            );
 
             dynamic d = o;
 
@@ -739,7 +806,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             o = new JObject(
                 new JProperty("ChildValue1", "blah blah"),
-                new JProperty("Hello Joe1", null));
+                new JProperty("Hello Joe1", null)
+            );
 
             d = o;
 
@@ -760,11 +828,35 @@ namespace Newtonsoft.Json.Tests.Linq
             AssertValueConverted<bool?>("true", true);
             AssertValueConverted<byte[]>(null);
             AssertValueConverted<byte[]>(Encoding.UTF8.GetBytes("blah"));
-            AssertValueConverted<DateTime>(new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc));
-            AssertValueConverted<DateTime?>(new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc));
+            AssertValueConverted<DateTime>(
+                new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc)
+            );
+            AssertValueConverted<DateTime?>(
+                new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc)
+            );
             AssertValueConverted<DateTime?>(null);
-            AssertValueConverted<DateTimeOffset>(new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1)));
-            AssertValueConverted<DateTimeOffset?>(new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1)));
+            AssertValueConverted<DateTimeOffset>(
+                new DateTimeOffset(
+                    2000,
+                    12,
+                    20,
+                    23,
+                    59,
+                    2,
+                    TimeSpan.FromHours(1)
+                )
+            );
+            AssertValueConverted<DateTimeOffset?>(
+                new DateTimeOffset(
+                    2000,
+                    12,
+                    20,
+                    23,
+                    59,
+                    2,
+                    TimeSpan.FromHours(1)
+                )
+            );
             AssertValueConverted<DateTimeOffset?>(null);
             AssertValueConverted<decimal>(99.9m);
             AssertValueConverted<decimal?>(99.9m);
@@ -796,8 +888,12 @@ namespace Newtonsoft.Json.Tests.Linq
             AssertValueConverted<TimeSpan>(TimeSpan.FromDays(1));
             AssertValueConverted<TimeSpan?>(TimeSpan.FromDays(1));
             AssertValueConverted<TimeSpan?>(null);
-            AssertValueConverted<Guid>(new Guid("60304274-CD13-4060-B38C-057C8557AB54"));
-            AssertValueConverted<Guid?>(new Guid("60304274-CD13-4060-B38C-057C8557AB54"));
+            AssertValueConverted<Guid>(
+                new Guid("60304274-CD13-4060-B38C-057C8557AB54")
+            );
+            AssertValueConverted<Guid?>(
+                new Guid("60304274-CD13-4060-B38C-057C8557AB54")
+            );
             AssertValueConverted<Guid?>(null);
             AssertValueConverted<Uri>(new Uri("http://json.codeplex.com/"));
             AssertValueConverted<Uri>(null);
@@ -812,8 +908,10 @@ namespace Newtonsoft.Json.Tests.Linq
             AssertValueConverted<T>(value, value);
         }
 
-        private static void AssertValueConverted<T>(object value, object expected)
-        {
+        private static void AssertValueConverted<T>(
+            object value,
+            object expected
+        ) {
             JValue v = new JValue(value);
             dynamic d = v;
 
@@ -830,7 +928,10 @@ namespace Newtonsoft.Json.Tests.Linq
             value.Enabled = true;
             value.Roles = new[] { "Admin", "User" };
 
-            string json = JsonConvert.SerializeObject(value, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                value,
+                Formatting.Indented
+            );
             // {
             //   "Name": "Arine Admin",
             //   "Enabled": true,
@@ -840,7 +941,9 @@ namespace Newtonsoft.Json.Tests.Linq
             //   ]
             // }
 
-            dynamic newValue = JsonConvert.DeserializeObject<DynamicDictionary>(json);
+            dynamic newValue = JsonConvert.DeserializeObject<DynamicDictionary>(
+                json
+            );
 
             string role = newValue.Roles[0];
             // Admin
@@ -895,13 +998,16 @@ namespace Newtonsoft.Json.Tests.Linq
             //   "StockValue": 22050.00
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""ProductName"": ""Elbow Grease (SALE)"",
   ""Enabled"": true,
   ""Price"": 2.45,
   ""StockCount"": 9000,
   ""StockValue"": 22050.00
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -951,28 +1057,37 @@ namespace Newtonsoft.Json.Tests.Linq
             dynamic json = JObject.FromObject(new { uid = g });
 
             ExceptionAssert.Throws<InvalidOperationException>(
-                () => { JObject token = json.uid; },
-                "Can not convert from System.Guid to Newtonsoft.Json.Linq.JObject.");
+                () =>
+                {
+                    JObject token = json.uid;
+                },
+                "Can not convert from System.Guid to Newtonsoft.Json.Linq.JObject."
+            );
         }
     }
 
     public class DynamicDictionary : DynamicObject
     {
-        private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
+        private readonly IDictionary<string,
+            object> _values = new Dictionary<string, object>();
 
         public override IEnumerable<string> GetDynamicMemberNames()
         {
             return _values.Keys;
         }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
+        public override bool TryGetMember(
+            GetMemberBinder binder,
+            out object result
+        ) {
             result = _values[binder.Name];
             return true;
         }
 
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
+        public override bool TrySetMember(
+            SetMemberBinder binder,
+            object value
+        ) {
             _values[binder.Name] = value;
             return true;
         }

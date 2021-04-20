@@ -62,10 +62,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Employee manager = new Employee
-            {
-                Name = "George-Michael"
-            };
+            Employee manager = new Employee { Name = "George-Michael" };
             Employee worker = new Employee
             {
                 Name = "Maeby",
@@ -75,14 +72,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Business business = new Business
             {
                 Name = "Acme Ltd.",
-                Employees = new List<Employee>
-                {
-                    manager,
-                    worker
-                }
+                Employees = new List<Employee> { manager, worker }
             };
 
-            string json = JsonConvert.SerializeObject(business, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                business,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -104,7 +100,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Acme Ltd."",
   ""Employees"": [
     {
@@ -120,7 +117,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
       }
     }
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

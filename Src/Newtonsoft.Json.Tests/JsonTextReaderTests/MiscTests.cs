@@ -65,7 +65,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadWithSupportMultipleContentCommaDelimited()
         {
-            string json = @"{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string'";
+            string json =
+                @"{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string'";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.SupportMultipleContent = true;
@@ -120,7 +121,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             string json = "{}";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
+            JsonTextReader jsonTextReader = new JsonTextReader(
+                new StringReader(json)
+            );
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -195,7 +198,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void UnescapeDoubleQuotes()
         {
-            string json = @"{""recipe_id"":""12"",""recipe_name"":""Apocalypse Leather Armors"",""recipe_text"":""#C16------------------------------\r\n#C12Ingredients #C20\r\n#C16------------------------------\r\n\r\na piece of Leather Armor\r\n( ie #L \""Enhanced Leather Armor Boots\"" \""85644\"" )\r\n<img src=rdb:\/\/13264>\r\n\r\n#L \""Hacker Tool\"" \""87814\""\r\n<img src=rdb:\/\/99282>\r\n\r\n#L \""Clanalizer\"" \""208313\""\r\n<img src=rdb:\/\/156479>\r\n\r\n#C16------------------------------\r\n#C12Recipe #C16\r\n#C16------------------------------#C20\r\n\r\nHacker Tool\r\n#C15+#C20\r\na piece of Leather Armor\r\n#C15=#C20\r\n<img src=rdb:\/\/13264>\r\na piece of Hacked Leather Armor\r\n( ie : #L \""Hacked Leather Armor Boots\"" \""245979\"" )\r\n#C16Skills: |  BE  |#C20\r\n\r\n#C14------------------------------#C20\r\n\r\nClanalizer\r\n#C15+#C20\r\na piece of Hacked Leather Armor\r\n#C15=#C20\r\n<img src=rdb:\/\/13264>\r\na piece of Apocalypse Leather Armor\r\n( ie : #L \""Apocalypse Leather Armor Boots\"" \""245966\"" )\r\n#C16Skills: |  ??  |#C20\r\n\r\n#C16------------------------------\r\n#C12Details#C16\r\n#C16------------------------------#C20\r\n\r\n#L \""Apocalypse Leather Armor Boots\"" \""245967\""\r\n#L \""Apocalypse Leather Armor Gloves\"" \""245969\""\r\n#L \""Apocalypse Leather Armor Helmet\"" \""245975\""\r\n#L \""Apocalypse Leather Armor Pants\"" \""245971\""\r\n#L \""Apocalypse Leather Armor Sleeves\"" \""245973\""\r\n#L \""Apocalypse Leather Body Armor\"" \""245965\""\r\n\r\n#C16------------------------------\r\n#C12Comments#C16\r\n#C16------------------------------#C20\r\n\r\nNice froob armor.. but ugleh!\r\n\r\n"",""recipe_author"":null}";
+            string json =
+                @"{""recipe_id"":""12"",""recipe_name"":""Apocalypse Leather Armors"",""recipe_text"":""#C16------------------------------\r\n#C12Ingredients #C20\r\n#C16------------------------------\r\n\r\na piece of Leather Armor\r\n( ie #L \""Enhanced Leather Armor Boots\"" \""85644\"" )\r\n<img src=rdb:\/\/13264>\r\n\r\n#L \""Hacker Tool\"" \""87814\""\r\n<img src=rdb:\/\/99282>\r\n\r\n#L \""Clanalizer\"" \""208313\""\r\n<img src=rdb:\/\/156479>\r\n\r\n#C16------------------------------\r\n#C12Recipe #C16\r\n#C16------------------------------#C20\r\n\r\nHacker Tool\r\n#C15+#C20\r\na piece of Leather Armor\r\n#C15=#C20\r\n<img src=rdb:\/\/13264>\r\na piece of Hacked Leather Armor\r\n( ie : #L \""Hacked Leather Armor Boots\"" \""245979\"" )\r\n#C16Skills: |  BE  |#C20\r\n\r\n#C14------------------------------#C20\r\n\r\nClanalizer\r\n#C15+#C20\r\na piece of Hacked Leather Armor\r\n#C15=#C20\r\n<img src=rdb:\/\/13264>\r\na piece of Apocalypse Leather Armor\r\n( ie : #L \""Apocalypse Leather Armor Boots\"" \""245966\"" )\r\n#C16Skills: |  ??  |#C20\r\n\r\n#C16------------------------------\r\n#C12Details#C16\r\n#C16------------------------------#C20\r\n\r\n#L \""Apocalypse Leather Armor Boots\"" \""245967\""\r\n#L \""Apocalypse Leather Armor Gloves\"" \""245969\""\r\n#L \""Apocalypse Leather Armor Helmet\"" \""245975\""\r\n#L \""Apocalypse Leather Armor Pants\"" \""245971\""\r\n#L \""Apocalypse Leather Armor Sleeves\"" \""245973\""\r\n#L \""Apocalypse Leather Body Armor\"" \""245965\""\r\n\r\n#C16------------------------------\r\n#C12Comments#C16\r\n#C16------------------------------#C20\r\n\r\nNice froob armor.. but ugleh!\r\n\r\n"",""recipe_author"":null}";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -221,13 +225,17 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
 
-            Assert.AreEqual("#C16------------------------------\r\n#C12Ingredients #C20\r\n#C16------------------------------\r\n\r\na piece of Leather Armor\r\n( ie #L \"Enhanced Leather Armor Boots\" \"85644\" )\r\n<img src=rdb://13264>\r\n\r\n#L \"Hacker Tool\" \"87814\"\r\n<img src=rdb://99282>\r\n\r\n#L \"Clanalizer\" \"208313\"\r\n<img src=rdb://156479>\r\n\r\n#C16------------------------------\r\n#C12Recipe #C16\r\n#C16------------------------------#C20\r\n\r\nHacker Tool\r\n#C15+#C20\r\na piece of Leather Armor\r\n#C15=#C20\r\n<img src=rdb://13264>\r\na piece of Hacked Leather Armor\r\n( ie : #L \"Hacked Leather Armor Boots\" \"245979\" )\r\n#C16Skills: |  BE  |#C20\r\n\r\n#C14------------------------------#C20\r\n\r\nClanalizer\r\n#C15+#C20\r\na piece of Hacked Leather Armor\r\n#C15=#C20\r\n<img src=rdb://13264>\r\na piece of Apocalypse Leather Armor\r\n( ie : #L \"Apocalypse Leather Armor Boots\" \"245966\" )\r\n#C16Skills: |  ??  |#C20\r\n\r\n#C16------------------------------\r\n#C12Details#C16\r\n#C16------------------------------#C20\r\n\r\n#L \"Apocalypse Leather Armor Boots\" \"245967\"\r\n#L \"Apocalypse Leather Armor Gloves\" \"245969\"\r\n#L \"Apocalypse Leather Armor Helmet\" \"245975\"\r\n#L \"Apocalypse Leather Armor Pants\" \"245971\"\r\n#L \"Apocalypse Leather Armor Sleeves\" \"245973\"\r\n#L \"Apocalypse Leather Body Armor\" \"245965\"\r\n\r\n#C16------------------------------\r\n#C12Comments#C16\r\n#C16------------------------------#C20\r\n\r\nNice froob armor.. but ugleh!\r\n\r\n", reader.Value);
+            Assert.AreEqual(
+                "#C16------------------------------\r\n#C12Ingredients #C20\r\n#C16------------------------------\r\n\r\na piece of Leather Armor\r\n( ie #L \"Enhanced Leather Armor Boots\" \"85644\" )\r\n<img src=rdb://13264>\r\n\r\n#L \"Hacker Tool\" \"87814\"\r\n<img src=rdb://99282>\r\n\r\n#L \"Clanalizer\" \"208313\"\r\n<img src=rdb://156479>\r\n\r\n#C16------------------------------\r\n#C12Recipe #C16\r\n#C16------------------------------#C20\r\n\r\nHacker Tool\r\n#C15+#C20\r\na piece of Leather Armor\r\n#C15=#C20\r\n<img src=rdb://13264>\r\na piece of Hacked Leather Armor\r\n( ie : #L \"Hacked Leather Armor Boots\" \"245979\" )\r\n#C16Skills: |  BE  |#C20\r\n\r\n#C14------------------------------#C20\r\n\r\nClanalizer\r\n#C15+#C20\r\na piece of Hacked Leather Armor\r\n#C15=#C20\r\n<img src=rdb://13264>\r\na piece of Apocalypse Leather Armor\r\n( ie : #L \"Apocalypse Leather Armor Boots\" \"245966\" )\r\n#C16Skills: |  ??  |#C20\r\n\r\n#C16------------------------------\r\n#C12Details#C16\r\n#C16------------------------------#C20\r\n\r\n#L \"Apocalypse Leather Armor Boots\" \"245967\"\r\n#L \"Apocalypse Leather Armor Gloves\" \"245969\"\r\n#L \"Apocalypse Leather Armor Helmet\" \"245975\"\r\n#L \"Apocalypse Leather Armor Pants\" \"245971\"\r\n#L \"Apocalypse Leather Armor Sleeves\" \"245973\"\r\n#L \"Apocalypse Leather Body Armor\" \"245965\"\r\n\r\n#C16------------------------------\r\n#C12Comments#C16\r\n#C16------------------------------#C20\r\n\r\nNice froob armor.. but ugleh!\r\n\r\n",
+                reader.Value
+            );
         }
 
         [Test]
         public void SurrogatePairValid()
         {
-            string json = @"{ ""MATHEMATICAL ITALIC CAPITAL ALPHA"": ""\uD835\uDEE2"" }";
+            string json =
+                @"{ ""MATHEMATICAL ITALIC CAPITAL ALPHA"": ""\uD835\uDEE2"" }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -248,19 +256,34 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         public void SurrogatePairReplacement()
         {
             // existing good surrogate pair
-            Assert.AreEqual("ABC \ud800\udc00 DEF", ReadString("ABC \\ud800\\udc00 DEF"));
+            Assert.AreEqual(
+                "ABC \ud800\udc00 DEF",
+                ReadString("ABC \\ud800\\udc00 DEF")
+            );
 
             // invalid surrogates (two high back-to-back)
-            Assert.AreEqual("ABC \ufffd\ufffd DEF", ReadString("ABC \\ud800\\ud800 DEF"));
+            Assert.AreEqual(
+                "ABC \ufffd\ufffd DEF",
+                ReadString("ABC \\ud800\\ud800 DEF")
+            );
 
             // invalid surrogates (two high back-to-back)
-            Assert.AreEqual("ABC \ufffd\ufffd\u1234 DEF", ReadString("ABC \\ud800\\ud800\\u1234 DEF"));
+            Assert.AreEqual(
+                "ABC \ufffd\ufffd\u1234 DEF",
+                ReadString("ABC \\ud800\\ud800\\u1234 DEF")
+            );
 
             // invalid surrogates (three high back-to-back)
-            Assert.AreEqual("ABC \ufffd\ufffd\ufffd DEF", ReadString("ABC \\ud800\\ud800\\ud800 DEF"));
+            Assert.AreEqual(
+                "ABC \ufffd\ufffd\ufffd DEF",
+                ReadString("ABC \\ud800\\ud800\\ud800 DEF")
+            );
 
             // invalid surrogates (high followed by a good surrogate pair)
-            Assert.AreEqual("ABC \ufffd\ud800\udc00 DEF", ReadString("ABC \\ud800\\ud800\\udc00 DEF"));
+            Assert.AreEqual(
+                "ABC \ufffd\ud800\udc00 DEF",
+                ReadString("ABC \\ud800\\ud800\\udc00 DEF")
+            );
 
             // invalid high surrogate at end of string
             Assert.AreEqual("ABC \ufffd", ReadString("ABC \\ud800"));
@@ -269,10 +292,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual("ABC \ufffd DEF", ReadString("ABC \\ud800 DEF"));
 
             // low surrogate not preceded by high surrogate
-            Assert.AreEqual("ABC \ufffd\ufffd DEF", ReadString("ABC \\udc00\\ud800 DEF"));
+            Assert.AreEqual(
+                "ABC \ufffd\ufffd DEF",
+                ReadString("ABC \\udc00\\ud800 DEF")
+            );
 
             // make sure unencoded invalid surrogate characters don't make it through
-            Assert.AreEqual("\ufffd\ufffd\ufffd", ReadString("\udc00\ud800\ud800"));
+            Assert.AreEqual(
+                "\ufffd\ufffd\ufffd",
+                ReadString("\udc00\ud800\ud800")
+            );
 
             Assert.AreEqual("ABC \ufffd\b", ReadString("ABC \\ud800\\b"));
             Assert.AreEqual("ABC \ufffd ", ReadString("ABC \\ud800 "));
@@ -281,7 +310,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
         private string ReadString(string input)
         {
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(@"""" + input + @""""));
+            MemoryStream ms = new MemoryStream(
+                Encoding.UTF8.GetBytes(@"""" + input + @"""")
+            );
 
             JsonTextReader reader = new JsonTextReader(new StreamReader(ms));
             reader.Read();
@@ -302,7 +333,12 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsFalse(ms.CanRead);
 
             ms = new MemoryStream();
-            reader = new JsonTextReader(new StreamReader(ms)) { CloseInput = false };
+            reader = new JsonTextReader(
+                new StreamReader(ms)
+            )
+            {
+                CloseInput = false
+            };
 
             Assert.IsTrue(ms.CanRead);
             reader.Close();
@@ -312,7 +348,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void YahooFinance()
         {
-            string input = @"{
+            string input =
+                @"{
 ""matches"" : [
 {""t"":""C"", ""n"":""Citigroup Inc."", ""e"":""NYSE"", ""id"":""662713""}
 ,{""t"":""CHL"", ""n"":""China Mobile Ltd. (ADR)"", ""e"":""NYSE"", ""id"":""660998""}
@@ -333,18 +370,20 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 }
 ";
 
-            using (JsonReader jsonReader = new JsonTextReader(new StringReader(input)))
-            {
-                while (jsonReader.Read())
-                {
-                }
+            using (
+                JsonReader jsonReader = new JsonTextReader(
+                    new StringReader(input)
+                )
+            ) {
+                while (jsonReader.Read()) { }
             }
         }
 
         [Test]
         public void Depth()
         {
-            string input = @"{
+            string input =
+                @"{
   value:'Purple',
   array:[1,2,new Date(1)],
   subobject:{prop:1,proparray:[1]}
@@ -473,7 +512,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void AppendCharsWhileReadingNull()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""$id"": ""1"",
     ""Name"": ""e1"",
@@ -509,7 +549,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void AppendCharsWhileReadingNewLine()
         {
-            string json = @"
+            string json =
+                @"
 {
   ""description"": ""A person"",
   ""type"": ""object"",
@@ -542,13 +583,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void BufferTest()
         {
-            string json = @"{
+            string json =
+                @"{
               ""CPU"": ""Intel"",
               ""Description"": ""Amazing!\nBuy now!"",
               ""Drives"": [
                 ""DVD read/writer"",
                 ""500 gigabyte hard drive"",
-                ""Amazing Drive" + new string('!', 9000) + @"""
+                ""Amazing Drive" +
+                new string('!', 9000) +
+                @"""
               ]
             }";
 
@@ -556,18 +600,21 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             for (int i = 0; i < 1000; i++)
             {
-                using (JsonTextReader reader = new JsonTextReader(new StringReader(json)))
-                {
+                using (
+                    JsonTextReader reader = new JsonTextReader(
+                        new StringReader(json)
+                    )
+                ) {
                     reader.ArrayPool = arrayPool;
 
-                    while (reader.Read())
-                    {
-                    }
+                    while (reader.Read()) { }
                 }
 
                 if ((i + 1) % 100 == 0)
                 {
-                    Console.WriteLine("Allocated buffers: " + arrayPool.FreeArrays.Count);
+                    Console.WriteLine(
+                        "Allocated buffers: " + arrayPool.FreeArrays.Count
+                    );
                 }
             }
 
@@ -578,7 +625,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void BufferTest_WithError()
         {
-            string json = @"{
+            string json =
+                @"{
               ""CPU"": ""Intel?\nYes"",
               ""Description"": ""Amazin";
 
@@ -587,20 +635,19 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             try
             {
                 // dispose will free used buffers
-                using (JsonTextReader reader = new JsonTextReader(new StringReader(json)))
-                {
+                using (
+                    JsonTextReader reader = new JsonTextReader(
+                        new StringReader(json)
+                    )
+                ) {
                     reader.ArrayPool = arrayPool;
 
-                    while (reader.Read())
-                    {
-                    }
+                    while (reader.Read()) { }
                 }
 
                 Assert.Fail();
             }
-            catch
-            {
-            }
+            catch { }
 
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(2, arrayPool.FreeArrays.Count);
@@ -612,11 +659,14 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
-            using (JsonWriter jsonWriter = new JsonTextWriter(sw)
-            {
-                Formatting = Formatting.Indented
-            })
-            {
+            using (
+                JsonWriter jsonWriter = new JsonTextWriter(
+                    sw
+                )
+                {
+                    Formatting = Formatting.Indented
+                }
+            ) {
                 jsonWriter.WriteStartArray();
                 jsonWriter.WriteValue(true);
 
@@ -653,16 +703,21 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonSerializer serializer = new JsonSerializer();
 
-            object jsonObject = serializer.Deserialize(new JsonTextReader(new StringReader(json)));
+            object jsonObject = serializer.Deserialize(
+                new JsonTextReader(new StringReader(json))
+            );
 
             sb = new StringBuilder();
             sw = new StringWriter(sb);
 
-            using (JsonWriter jsonWriter = new JsonTextWriter(sw)
-            {
-                Formatting = Formatting.Indented
-            })
-            {
+            using (
+                JsonWriter jsonWriter = new JsonTextWriter(
+                    sw
+                )
+                {
+                    Formatting = Formatting.Indented
+                }
+            ) {
                 serializer.Serialize(jsonWriter, jsonObject);
             }
 
@@ -709,7 +764,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual("<", reader.Value);
 
             reader.Read();
-            Assert.AreEqual(24352, Convert.ToInt32(Convert.ToChar((string)reader.Value)));
+            Assert.AreEqual(
+                24352,
+                Convert.ToInt32(Convert.ToChar((string)reader.Value))
+            );
 
             reader.Read();
             Assert.AreEqual(JsonToken.EndArray, reader.TokenType);
@@ -718,7 +776,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void SupportMultipleContent()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"{'prop1':[1]} 1 2 ""name"" [][]null {}{} 1.1"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(
+                    @"{'prop1':[1]} 1 2 ""name"" [][]null {}{} 1.1"
+                )
+            );
             reader.SupportMultipleContent = true;
 
             Assert.IsTrue(reader.Read());
@@ -784,14 +846,19 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void SingleLineComments()
         {
-            string json = @"//comment*//*hi*/
+            string json =
+                @"//comment*//*hi*/
 {//comment
 Name://comment
-true//comment after true" + StringUtils.CarriageReturn +
-                          @",//comment after comma" + StringUtils.CarriageReturnLineFeed +
-                          @"""ExpiryDate""://comment" + StringUtils.LineFeed +
-                          @"new " + StringUtils.LineFeed +
-                          @"Date
+true//comment after true" +
+                StringUtils.CarriageReturn +
+                @",//comment after comma" +
+                StringUtils.CarriageReturnLineFeed +
+                @"""ExpiryDate""://comment" +
+                StringUtils.LineFeed +
+                @"new " +
+                StringUtils.LineFeed +
+                @"Date
 (//comment
 null//comment
 ),
@@ -804,7 +871,11 @@ null//comment
 }//comment 
 //comment 1 ";
 
-            JsonTextReader reader = new JsonTextReader(new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1)));
+            JsonTextReader reader = new JsonTextReader(
+                new StreamReader(
+                    new SlowStream(json, new UTF8Encoding(false), 1)
+                )
+            );
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Comment, reader.TokenType);
@@ -923,7 +994,11 @@ null//comment
         {
             string json = @"//comment";
 
-            JsonTextReader reader = new JsonTextReader(new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1)));
+            JsonTextReader reader = new JsonTextReader(
+                new StreamReader(
+                    new SlowStream(json, new UTF8Encoding(false), 1)
+                )
+            );
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Comment, reader.TokenType);
@@ -939,8 +1014,16 @@ null//comment
 
             d = Convert.ToDouble("6.0221418e23", CultureInfo.InvariantCulture);
 
-            Assert.AreEqual("6,0221418E+23", d.ToString(new CultureInfo("fr-FR")));
-            Assert.AreEqual("602214180000000000000000", d.ToString("0.#############################################################################"));
+            Assert.AreEqual(
+                "6,0221418E+23",
+                d.ToString(new CultureInfo("fr-FR"))
+            );
+            Assert.AreEqual(
+                "602214180000000000000000",
+                d.ToString(
+                    "0.#############################################################################"
+                )
+            );
 
             string json = @"[0e-10,0E-10,0.25e-5,0.3e10,6.0221418e23]";
 
@@ -1093,7 +1176,13 @@ null//comment
             Assert.IsTrue(r.Read());
             Assert.IsTrue(r.Read());
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { r.Read(); }, @"Invalid Unicode escape sequence: \u123!. Path 'prop', line 1, position 11.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    r.Read();
+                },
+                @"Invalid Unicode escape sequence: \u123!. Path 'prop', line 1, position 11."
+            );
         }
     }
 }

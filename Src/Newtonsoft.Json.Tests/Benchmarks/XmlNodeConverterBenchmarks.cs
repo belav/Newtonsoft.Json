@@ -65,5 +65,4 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         }
     }
 }
-
 #endif

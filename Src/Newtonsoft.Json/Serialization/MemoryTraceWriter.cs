@@ -44,14 +44,18 @@ namespace Newtonsoft.Json.Serialization
         public void Trace(TraceLevel level, string message, Exception? ex)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff", CultureInfo.InvariantCulture));
+            sb.Append(
+                DateTime.Now.ToString(
+                    "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff",
+                    CultureInfo.InvariantCulture
+                )
+            );
             sb.Append(" ");
             sb.Append(level.ToString("g"));
             sb.Append(" ");
             sb.Append(message);
 
             string s = sb.ToString();
-
             lock (_lock)
             {
                 if (_traceMessages.Count >= 1000)

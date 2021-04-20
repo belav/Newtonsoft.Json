@@ -161,5 +161,4 @@ namespace Newtonsoft.Json.Converters
         }
     }
 }
-
 #endif

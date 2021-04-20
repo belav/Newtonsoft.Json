@@ -39,28 +39,45 @@ namespace Newtonsoft.Json
     /// </summary>
     public class JsonSerializerSettings
     {
-        internal const ReferenceLoopHandling DefaultReferenceLoopHandling = ReferenceLoopHandling.Error;
-        internal const MissingMemberHandling DefaultMissingMemberHandling = MissingMemberHandling.Ignore;
-        internal const NullValueHandling DefaultNullValueHandling = NullValueHandling.Include;
-        internal const DefaultValueHandling DefaultDefaultValueHandling = DefaultValueHandling.Include;
-        internal const ObjectCreationHandling DefaultObjectCreationHandling = ObjectCreationHandling.Auto;
-        internal const PreserveReferencesHandling DefaultPreserveReferencesHandling = PreserveReferencesHandling.None;
-        internal const ConstructorHandling DefaultConstructorHandling = ConstructorHandling.Default;
-        internal const TypeNameHandling DefaultTypeNameHandling = TypeNameHandling.None;
-        internal const MetadataPropertyHandling DefaultMetadataPropertyHandling = MetadataPropertyHandling.Default;
+        internal const ReferenceLoopHandling DefaultReferenceLoopHandling =
+            ReferenceLoopHandling.Error;
+        internal const MissingMemberHandling DefaultMissingMemberHandling =
+            MissingMemberHandling.Ignore;
+        internal const NullValueHandling DefaultNullValueHandling =
+            NullValueHandling.Include;
+        internal const DefaultValueHandling DefaultDefaultValueHandling =
+            DefaultValueHandling.Include;
+        internal const ObjectCreationHandling DefaultObjectCreationHandling =
+            ObjectCreationHandling.Auto;
+        internal const PreserveReferencesHandling DefaultPreserveReferencesHandling =
+            PreserveReferencesHandling.None;
+        internal const ConstructorHandling DefaultConstructorHandling =
+            ConstructorHandling.Default;
+        internal const TypeNameHandling DefaultTypeNameHandling =
+            TypeNameHandling.None;
+        internal const MetadataPropertyHandling DefaultMetadataPropertyHandling =
+            MetadataPropertyHandling.Default;
         internal static readonly StreamingContext DefaultContext;
 
         internal const Formatting DefaultFormatting = Formatting.None;
-        internal const DateFormatHandling DefaultDateFormatHandling = DateFormatHandling.IsoDateFormat;
-        internal const DateTimeZoneHandling DefaultDateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
-        internal const DateParseHandling DefaultDateParseHandling = DateParseHandling.DateTime;
-        internal const FloatParseHandling DefaultFloatParseHandling = FloatParseHandling.Double;
-        internal const FloatFormatHandling DefaultFloatFormatHandling = FloatFormatHandling.String;
-        internal const StringEscapeHandling DefaultStringEscapeHandling = StringEscapeHandling.Default;
-        internal const TypeNameAssemblyFormatHandling DefaultTypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
+        internal const DateFormatHandling DefaultDateFormatHandling =
+            DateFormatHandling.IsoDateFormat;
+        internal const DateTimeZoneHandling DefaultDateTimeZoneHandling =
+            DateTimeZoneHandling.RoundtripKind;
+        internal const DateParseHandling DefaultDateParseHandling =
+            DateParseHandling.DateTime;
+        internal const FloatParseHandling DefaultFloatParseHandling =
+            FloatParseHandling.Double;
+        internal const FloatFormatHandling DefaultFloatFormatHandling =
+            FloatFormatHandling.String;
+        internal const StringEscapeHandling DefaultStringEscapeHandling =
+            StringEscapeHandling.Default;
+        internal const TypeNameAssemblyFormatHandling DefaultTypeNameAssemblyFormatHandling =
+            TypeNameAssemblyFormatHandling.Simple;
         internal static readonly CultureInfo DefaultCulture;
         internal const bool DefaultCheckAdditionalContent = false;
-        internal const string DefaultDateFormatString = @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+        internal const string DefaultDateFormatString =
+            @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
         internal const int DefaultMaxDepth = 64;
 
         internal Formatting? _formatting;
@@ -156,7 +173,9 @@ namespace Newtonsoft.Json
         /// <value>The preserve references handling.</value>
         public PreserveReferencesHandling PreserveReferencesHandling
         {
-            get => _preserveReferencesHandling ?? DefaultPreserveReferencesHandling;
+            get =>
+                _preserveReferencesHandling ??
+                DefaultPreserveReferencesHandling;
             set => _preserveReferencesHandling = value;
         }
 
@@ -192,11 +211,13 @@ namespace Newtonsoft.Json
         /// The default value is <see cref="FormatterAssemblyStyle.Simple" />.
         /// </summary>
         /// <value>The type name assembly format.</value>
-        [Obsolete("TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+        [Obsolete(
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
         public FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => (FormatterAssemblyStyle)TypeNameAssemblyFormatHandling;
-            set => TypeNameAssemblyFormatHandling = (TypeNameAssemblyFormatHandling)value;
+            set =>
+                TypeNameAssemblyFormatHandling = (TypeNameAssemblyFormatHandling)value;
         }
 
         /// <summary>
@@ -206,7 +227,9 @@ namespace Newtonsoft.Json
         /// <value>The type name assembly format.</value>
         public TypeNameAssemblyFormatHandling TypeNameAssemblyFormatHandling
         {
-            get => _typeNameAssemblyFormatHandling ?? DefaultTypeNameAssemblyFormatHandling;
+            get =>
+                _typeNameAssemblyFormatHandling ??
+                DefaultTypeNameAssemblyFormatHandling;
             set => _typeNameAssemblyFormatHandling = value;
         }
 
@@ -238,7 +261,8 @@ namespace Newtonsoft.Json
         /// Gets or sets the <see cref="IReferenceResolver"/> used by the serializer when resolving references.
         /// </summary>
         /// <value>The reference resolver.</value>
-        [Obsolete("ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver")]
+        [Obsolete(
+            "ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver")]
         public IReferenceResolver? ReferenceResolver
         {
             get => ReferenceResolverProvider?.Invoke();
@@ -281,9 +305,14 @@ namespace Newtonsoft.Json
                     return adapter.SerializationBinder;
                 }
 
-                throw new InvalidOperationException("Cannot get SerializationBinder because an ISerializationBinder was previously set.");
+                throw new InvalidOperationException(
+                    "Cannot get SerializationBinder because an ISerializationBinder was previously set."
+                );
             }
-            set => SerializationBinder = value == null ? null : new SerializationBinderAdapter(value);
+            set =>
+                SerializationBinder = value == null
+                    ? null
+                    : new SerializationBinderAdapter(value);
         }
 
         /// <summary>
@@ -335,7 +364,10 @@ namespace Newtonsoft.Json
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Value must be positive.", nameof(value));
+                    throw new ArgumentException(
+                        "Value must be positive.",
+                        nameof(value)
+                    );
                 }
 
                 _maxDepth = value;

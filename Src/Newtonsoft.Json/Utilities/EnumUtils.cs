@@ -46,10 +46,17 @@ namespace Newtonsoft.Json.Utilities
         private const char EnumSeparatorChar = ',';
         private const string EnumSeparatorString = ", ";
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, NamingStrategy?>, EnumInfo> ValuesAndNamesPerEnum = new ThreadSafeStore<StructMultiKey<Type, NamingStrategy?>, EnumInfo>(InitializeValuesAndNames);
+        private static readonly ThreadSafeStore<StructMultiKey<Type,
+                NamingStrategy?>,
+            EnumInfo> ValuesAndNamesPerEnum = new ThreadSafeStore<StructMultiKey<Type,
+                NamingStrategy?>,
+            EnumInfo>(
+            InitializeValuesAndNames
+        );
 
-        private static EnumInfo InitializeValuesAndNames(StructMultiKey<Type, NamingStrategy?> key)
-        {
+        private static EnumInfo InitializeValuesAndNames(
+            StructMultiKey<Type, NamingStrategy?> key
+        ) {
             Type enumType = key.Value1;
             string[] names = Enum.GetNames(enumType);
             string[] resolvedNames = new string[names.Length];
@@ -59,7 +66,13 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f = enumType.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static)!;
+                FieldInfo f =
+                    enumType.GetField(
+                        name,
+                        BindingFlags.NonPublic |
+                        BindingFlags.Public |
+                        BindingFlags.Static
+                    )!;
                 values[i] = ToUInt64(f.GetValue(null));
 
                 string resolvedName;
@@ -90,13 +103,19 @@ namespace Newtonsoft.Json.Utilities
             return new EnumInfo(isFlags, values, names, resolvedNames);
         }
 
-        public static IList<T> GetFlagsValues<T>(T value) where T : struct
+        public static IList<T> GetFlagsValues<T>(T value)
+            where T : struct
         {
             Type enumType = typeof(T);
 
             if (!enumType.IsDefined(typeof(FlagsAttribute), false))
             {
-                throw new ArgumentException("Enum type {0} is not a set of flags.".FormatWith(CultureInfo.InvariantCulture, enumType));
+                throw new ArgumentException(
+                    "Enum type {0} is not a set of flags.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        enumType
+                    )
+                );
             }
 
             Type underlyingType = Enum.GetUnderlyingType(value.GetType());
@@ -111,12 +130,20 @@ namespace Newtonsoft.Json.Utilities
 
                 if ((num & v) == v && v != 0)
                 {
-                    selectedFlagsValues.Add((T)Convert.ChangeType(v, underlyingType, CultureInfo.CurrentCulture));
+                    selectedFlagsValues.Add(
+                        (T)Convert.ChangeType(
+                            v,
+                            underlyingType,
+                            CultureInfo.CurrentCulture
+                        )
+                    );
                 }
             }
 
-            if (selectedFlagsValues.Count == 0 && enumNameValues.Values.Any(v => v == 0))
-            {
+            if (
+                selectedFlagsValues.Count == 0 &&
+                enumNameValues.Values.Any(v => v == 0)
+            ) {
                 selectedFlagsValues.Add(default);
             }
 
@@ -125,14 +152,32 @@ namespace Newtonsoft.Json.Utilities
 
         // Used by Newtonsoft.Json.Schema
         private static CamelCaseNamingStrategy _camelCaseNamingStrategy = new CamelCaseNamingStrategy();
-        public static bool TryToString(Type enumType, object value, bool camelCase, [NotNullWhen(true)]out string? name)
-        {
-            return TryToString(enumType, value, camelCase ? _camelCaseNamingStrategy : null, out name);
+        public static bool TryToString(
+            Type enumType,
+            object value,
+            bool camelCase,
+            [NotNullWhen(true)]out string? name
+        ) {
+            return TryToString(
+                enumType,
+                value,
+                camelCase ? _camelCaseNamingStrategy : null,
+                out name
+            );
         }
 
-        public static bool TryToString(Type enumType, object value, NamingStrategy? namingStrategy, [NotNullWhen(true)]out string? name)
-        {
-            EnumInfo enumInfo = ValuesAndNamesPerEnum.Get(new StructMultiKey<Type, NamingStrategy?>(enumType, namingStrategy));
+        public static bool TryToString(
+            Type enumType,
+            object value,
+            NamingStrategy? namingStrategy,
+            [NotNullWhen(true)]out string? name
+        ) {
+            EnumInfo enumInfo = ValuesAndNamesPerEnum.Get(
+                new StructMultiKey<Type, NamingStrategy?>(
+                    enumType,
+                    namingStrategy
+                )
+            );
             ulong v = ToUInt64(value);
 
             if (!enumInfo.IsFlags)
@@ -155,8 +200,10 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private static string? InternalFlagsFormat(EnumInfo entry, ulong result)
-        {
+        private static string? InternalFlagsFormat(
+            EnumInfo entry,
+            ulong result
+        ) {
             string[] resolvedNames = entry.ResolvedNames;
             ulong[] values = entry.Values;
 
@@ -219,12 +266,17 @@ namespace Newtonsoft.Json.Utilities
 
         public static EnumInfo GetEnumValuesAndNames(Type enumType)
         {
-            return ValuesAndNamesPerEnum.Get(new StructMultiKey<Type, NamingStrategy?>(enumType, null));
+            return ValuesAndNamesPerEnum.Get(
+                new StructMultiKey<Type, NamingStrategy?>(enumType, null)
+            );
         }
 
         private static ulong ToUInt64(object value)
         {
-            PrimitiveTypeCode typeCode = ConvertUtils.GetTypeCode(value.GetType(), out bool _);
+            PrimitiveTypeCode typeCode = ConvertUtils.GetTypeCode(
+                value.GetType(),
+                out bool _
+            );
 
             switch (typeCode)
             {
@@ -255,23 +307,41 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        public static object ParseEnum(Type enumType, NamingStrategy? namingStrategy, string value, bool disallowNumber)
-        {
+        public static object ParseEnum(
+            Type enumType,
+            NamingStrategy? namingStrategy,
+            string value,
+            bool disallowNumber
+        ) {
             ValidationUtils.ArgumentNotNull(enumType, nameof(enumType));
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
             if (!enumType.IsEnum())
             {
-                throw new ArgumentException("Type provided must be an Enum.", nameof(enumType));
+                throw new ArgumentException(
+                    "Type provided must be an Enum.",
+                    nameof(enumType)
+                );
             }
 
-            EnumInfo entry = ValuesAndNamesPerEnum.Get(new StructMultiKey<Type, NamingStrategy?>(enumType, namingStrategy));
+            EnumInfo entry = ValuesAndNamesPerEnum.Get(
+                new StructMultiKey<Type, NamingStrategy?>(
+                    enumType,
+                    namingStrategy
+                )
+            );
             string[] enumNames = entry.Names;
             string[] resolvedNames = entry.ResolvedNames;
             ulong[] enumValues = entry.Values;
 
             // first check if the entire text (including commas) matches a resolved name
-            int? matchingIndex = FindIndexByName(resolvedNames, value, 0, value.Length, StringComparison.Ordinal);
+            int? matchingIndex = FindIndexByName(
+                resolvedNames,
+                value,
+                0,
+                value.Length,
+                StringComparison.Ordinal
+            );
             if (matchingIndex != null)
             {
                 return Enum.ToObject(enumType, enumValues[matchingIndex.Value]);
@@ -288,13 +358,18 @@ namespace Newtonsoft.Json.Utilities
             }
             if (firstNonWhitespaceIndex == -1)
             {
-                throw new ArgumentException("Must specify valid information for parsing in the string.");
+                throw new ArgumentException(
+                    "Must specify valid information for parsing in the string."
+                );
             }
 
             // check whether string is a number and parse as a number value
             char firstNonWhitespaceChar = value[firstNonWhitespaceIndex];
-            if (char.IsDigit(firstNonWhitespaceChar) || firstNonWhitespaceChar == '-' || firstNonWhitespaceChar == '+')
-            {
+            if (
+                char.IsDigit(firstNonWhitespaceChar) ||
+                firstNonWhitespaceChar == '-' ||
+                firstNonWhitespaceChar == '+'
+            ) {
                 Type underlyingType = Enum.GetUnderlyingType(enumType);
 
                 value = value.Trim();
@@ -302,7 +377,11 @@ namespace Newtonsoft.Json.Utilities
 
                 try
                 {
-                    temp = Convert.ChangeType(value, underlyingType, CultureInfo.InvariantCulture);
+                    temp = Convert.ChangeType(
+                        value,
+                        underlyingType,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 catch (FormatException)
                 {
@@ -315,7 +394,12 @@ namespace Newtonsoft.Json.Utilities
                 {
                     if (disallowNumber)
                     {
-                        throw new FormatException("Integer string '{0}' is not allowed.".FormatWith(CultureInfo.InvariantCulture, value));
+                        throw new FormatException(
+                            "Integer string '{0}' is not allowed.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                value
+                            )
+                        );
                     }
 
                     return Enum.ToObject(enumType, temp);
@@ -325,7 +409,9 @@ namespace Newtonsoft.Json.Utilities
             ulong result = 0;
 
             int valueIndex = firstNonWhitespaceIndex;
-            while (valueIndex <= value.Length) // '=' is to handle invalid case of an ending comma
+            while (
+                valueIndex <= value.Length
+            ) // '=' is to handle invalid case of an ending comma
             {
                 // Find the next separator, if there is one, otherwise the end of the string.
                 int endIndex = value.IndexOf(EnumSeparatorChar, valueIndex);
@@ -336,38 +422,70 @@ namespace Newtonsoft.Json.Utilities
 
                 // Shift the starting and ending indices to eliminate whitespace
                 int endIndexNoWhitespace = endIndex;
-                while (valueIndex < endIndex && char.IsWhiteSpace(value[valueIndex]))
-                {
+                while (
+                    valueIndex < endIndex &&
+                    char.IsWhiteSpace(value[valueIndex])
+                ) {
                     valueIndex++;
                 }
 
-                while (endIndexNoWhitespace > valueIndex && char.IsWhiteSpace(value[endIndexNoWhitespace - 1]))
-                {
+                while (
+                    endIndexNoWhitespace > valueIndex &&
+                    char.IsWhiteSpace(value[endIndexNoWhitespace - 1])
+                ) {
                     endIndexNoWhitespace--;
                 }
                 int valueSubstringLength = endIndexNoWhitespace - valueIndex;
 
                 // match with case sensitivity
-                matchingIndex = MatchName(value, enumNames, resolvedNames, valueIndex, valueSubstringLength, StringComparison.Ordinal);
+                matchingIndex = MatchName(
+                    value,
+                    enumNames,
+                    resolvedNames,
+                    valueIndex,
+                    valueSubstringLength,
+                    StringComparison.Ordinal
+                );
 
                 // if no match found, attempt case insensitive search
                 if (matchingIndex == null)
                 {
-                    matchingIndex = MatchName(value, enumNames, resolvedNames, valueIndex, valueSubstringLength, StringComparison.OrdinalIgnoreCase);
+                    matchingIndex = MatchName(
+                        value,
+                        enumNames,
+                        resolvedNames,
+                        valueIndex,
+                        valueSubstringLength,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
 
                 if (matchingIndex == null)
                 {
                     // still can't find a match
                     // before we throw an error, check whether the entire string has a case insensitive match against resolve names
-                    matchingIndex = FindIndexByName(resolvedNames, value, 0, value.Length, StringComparison.OrdinalIgnoreCase);
+                    matchingIndex = FindIndexByName(
+                        resolvedNames,
+                        value,
+                        0,
+                        value.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                     if (matchingIndex != null)
                     {
-                        return Enum.ToObject(enumType, enumValues[matchingIndex.Value]);
+                        return Enum.ToObject(
+                            enumType,
+                            enumValues[matchingIndex.Value]
+                        );
                     }
 
                     // no match so error
-                    throw new ArgumentException("Requested value '{0}' was not found.".FormatWith(CultureInfo.InvariantCulture, value));
+                    throw new ArgumentException(
+                        "Requested value '{0}' was not found.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            value
+                        )
+                    );
                 }
 
                 result |= enumValues[matchingIndex.Value];
@@ -379,24 +497,56 @@ namespace Newtonsoft.Json.Utilities
             return Enum.ToObject(enumType, result);
         }
 
-        private static int? MatchName(string value, string[] enumNames, string[] resolvedNames, int valueIndex, int valueSubstringLength, StringComparison comparison)
-        {
-            int? matchingIndex = FindIndexByName(resolvedNames, value, valueIndex, valueSubstringLength, comparison);
+        private static int? MatchName(
+            string value,
+            string[] enumNames,
+            string[] resolvedNames,
+            int valueIndex,
+            int valueSubstringLength,
+            StringComparison comparison
+        ) {
+            int? matchingIndex = FindIndexByName(
+                resolvedNames,
+                value,
+                valueIndex,
+                valueSubstringLength,
+                comparison
+            );
             if (matchingIndex == null)
             {
-                matchingIndex = FindIndexByName(enumNames, value, valueIndex, valueSubstringLength, comparison);
+                matchingIndex = FindIndexByName(
+                    enumNames,
+                    value,
+                    valueIndex,
+                    valueSubstringLength,
+                    comparison
+                );
             }
 
             return matchingIndex;
         }
 
-        private static int? FindIndexByName(string[] enumNames, string value, int valueIndex, int valueSubstringLength, StringComparison comparison)
-        {
+        private static int? FindIndexByName(
+            string[] enumNames,
+            string value,
+            int valueIndex,
+            int valueSubstringLength,
+            StringComparison comparison
+        ) {
             for (int i = 0; i < enumNames.Length; i++)
             {
-                if (enumNames[i].Length == valueSubstringLength &&
-                    string.Compare(enumNames[i], 0, value, valueIndex, valueSubstringLength, comparison) == 0)
-                {
+                if (
+                    enumNames[i].Length == valueSubstringLength &&
+                    string.Compare(
+                        enumNames[i],
+                        0,
+                        value,
+                        valueIndex,
+                        valueSubstringLength,
+                        comparison
+                    ) ==
+                    0
+                ) {
                     return i;
                 }
             }

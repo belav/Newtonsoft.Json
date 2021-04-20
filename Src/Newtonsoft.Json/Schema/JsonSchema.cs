@@ -42,7 +42,8 @@ namespace Newtonsoft.Json.Schema
     /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     public class JsonSchema
     {
         /// <summary>
@@ -279,8 +280,10 @@ namespace Newtonsoft.Json.Schema
         /// <param name="reader">The <see cref="JsonReader"/> containing the JSON Schema to read.</param>
         /// <param name="resolver">The <see cref="JsonSchemaResolver"/> to use when resolving schema references.</param>
         /// <returns>The <see cref="JsonSchema"/> object representing the JSON Schema.</returns>
-        public static JsonSchema Read(JsonReader reader, JsonSchemaResolver resolver)
-        {
+        public static JsonSchema Read(
+            JsonReader reader,
+            JsonSchemaResolver resolver
+        ) {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             ValidationUtils.ArgumentNotNull(resolver, nameof(resolver));
 
@@ -304,12 +307,15 @@ namespace Newtonsoft.Json.Schema
         /// <param name="json">A <see cref="String"/> that contains JSON Schema.</param>
         /// <param name="resolver">The resolver.</param>
         /// <returns>A <see cref="JsonSchema"/> populated from the string that contains JSON Schema.</returns>
-        public static JsonSchema Parse(string json, JsonSchemaResolver resolver)
-        {
+        public static JsonSchema Parse(
+            string json,
+            JsonSchemaResolver resolver
+        ) {
             ValidationUtils.ArgumentNotNull(json, nameof(json));
 
-            using (JsonReader reader = new JsonTextReader(new StringReader(json)))
-            {
+            using (
+                JsonReader reader = new JsonTextReader(new StringReader(json))
+            ) {
                 return Read(reader, resolver);
             }
         }
@@ -333,7 +339,10 @@ namespace Newtonsoft.Json.Schema
             ValidationUtils.ArgumentNotNull(writer, nameof(writer));
             ValidationUtils.ArgumentNotNull(resolver, nameof(resolver));
 
-            JsonSchemaWriter schemaWriter = new JsonSchemaWriter(writer, resolver);
+            JsonSchemaWriter schemaWriter = new JsonSchemaWriter(
+                writer,
+                resolver
+            );
             schemaWriter.WriteSchema(this);
         }
 
@@ -345,7 +354,9 @@ namespace Newtonsoft.Json.Schema
         /// </returns>
         public override string ToString()
         {
-            StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
+            StringWriter writer = new StringWriter(
+                CultureInfo.InvariantCulture
+            );
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
             jsonWriter.Formatting = Formatting.Indented;
 

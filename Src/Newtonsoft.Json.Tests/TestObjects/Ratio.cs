@@ -66,8 +66,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             _denominator = info.GetInt32("d");
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
+        public void GetObjectData(
+            SerializationInfo info,
+            StreamingContext context
+        ) {
             info.AddValue("n", _numerator);
             info.AddValue("d", _denominator);
         }
@@ -142,12 +144,18 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             return _denominator == 1
                 ? _numerator.ToString(provider)
-                : _numerator.ToString(provider) + "/" + _denominator.ToString(provider);
+                : _numerator.ToString(provider) +
+                    "/" +
+                    _denominator.ToString(provider);
         }
 
         public object ToType(Type conversionType, IFormatProvider provider)
         {
-            return Convert.ChangeType(ToDouble(provider), conversionType, provider);
+            return Convert.ChangeType(
+                ToDouble(provider),
+                conversionType,
+                provider
+            );
         }
 
         public ushort ToUInt16(IFormatProvider provider)
@@ -182,8 +190,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return Parse(input, CultureInfo.InvariantCulture);
         }
 
-        public static Ratio Parse(string input, IFormatProvider formatProvider)
-        {
+        public static Ratio Parse(
+            string input,
+            IFormatProvider formatProvider
+        ) {
             Ratio result;
             if (!TryParse(input, formatProvider, out result))
             {
@@ -191,7 +201,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "Text '{0}' is invalid text representation of ratio",
-                        input));
+                        input
+                    )
+                );
             }
             return result;
         }
@@ -201,8 +213,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return TryParse(input, CultureInfo.InvariantCulture, out result);
         }
 
-        public static bool TryParse(string input, IFormatProvider formatProvider, out Ratio result)
-        {
+        public static bool TryParse(
+            string input,
+            IFormatProvider formatProvider,
+            out Ratio result
+        ) {
             if (input != null)
             {
                 var fractionIndex = input.IndexOf('/');
@@ -210,8 +225,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 int numerator;
                 if (fractionIndex < 0)
                 {
-                    if (int.TryParse(input, NumberStyles.Integer, formatProvider, out numerator))
-                    {
+                    if (
+                        int.TryParse(
+                            input,
+                            NumberStyles.Integer,
+                            formatProvider,
+                            out numerator
+                        )
+                    ) {
                         result = new Ratio(numerator, 1);
                         return true;
                     }
@@ -219,9 +240,20 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 else
                 {
                     int denominator;
-                    if (int.TryParse(input.Substring(0, fractionIndex), NumberStyles.Integer, formatProvider, out numerator) &&
-                        int.TryParse(input.Substring(fractionIndex + 1), NumberStyles.Integer, formatProvider, out denominator))
-                    {
+                    if (
+                        int.TryParse(
+                            input.Substring(0, fractionIndex),
+                            NumberStyles.Integer,
+                            formatProvider,
+                            out numerator
+                        ) &&
+                        int.TryParse(
+                            input.Substring(fractionIndex + 1),
+                            NumberStyles.Integer,
+                            formatProvider,
+                            out denominator
+                        )
+                    ) {
                         result = new Ratio(numerator, denominator);
                         return true;
                     }

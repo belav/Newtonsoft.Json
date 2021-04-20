@@ -146,7 +146,11 @@ namespace Newtonsoft.Json.Linq
                 case JTokenType.Property:
                     return null;
                 default:
-                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(c.Type), c.Type, "Unexpected JContainer type.");
+                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
+                        nameof(c.Type),
+                        c.Type,
+                        "Unexpected JContainer type."
+                    );
             }
         }
 
@@ -193,7 +197,10 @@ namespace Newtonsoft.Json.Linq
                     SetToken(JsonToken.StartArray);
                     break;
                 case JTokenType.Constructor:
-                    SetToken(JsonToken.StartConstructor, ((JConstructor)token).Name);
+                    SetToken(
+                        JsonToken.StartConstructor,
+                        ((JConstructor)token).Name
+                    );
                     break;
                 case JTokenType.Property:
                     SetToken(JsonToken.PropertyName, ((JProperty)token).Name);
@@ -220,16 +227,19 @@ namespace Newtonsoft.Json.Linq
                     SetToken(JsonToken.Undefined, ((JValue)token).Value);
                     break;
                 case JTokenType.Date:
+                {
+                    object? v = ((JValue)token).Value;
+                    if (v is DateTime dt)
                     {
-                        object? v = ((JValue)token).Value;
-                        if (v is DateTime dt)
-                        {
-                            v = DateTimeUtils.EnsureDateTime(dt, DateTimeZoneHandling);
-                        }
-
-                        SetToken(JsonToken.Date, v);
-                        break;
+                        v = DateTimeUtils.EnsureDateTime(
+                            dt,
+                            DateTimeZoneHandling
+                        );
                     }
+
+                    SetToken(JsonToken.Date, v);
+                    break;
+                }
                 case JTokenType.Raw:
                     SetToken(JsonToken.Raw, ((JValue)token).Value);
                     break;
@@ -237,19 +247,32 @@ namespace Newtonsoft.Json.Linq
                     SetToken(JsonToken.Bytes, ((JValue)token).Value);
                     break;
                 case JTokenType.Guid:
-                    SetToken(JsonToken.String, SafeToString(((JValue)token).Value));
+                    SetToken(
+                        JsonToken.String,
+                        SafeToString(((JValue)token).Value)
+                    );
                     break;
                 case JTokenType.Uri:
-                    {
-                        object? v = ((JValue)token).Value;
-                        SetToken(JsonToken.String, v is Uri uri ? uri.OriginalString : SafeToString(v));
-                        break;
-                    }
+                {
+                    object? v = ((JValue)token).Value;
+                    SetToken(
+                        JsonToken.String,
+                        v is Uri uri ? uri.OriginalString : SafeToString(v)
+                    );
+                    break;
+                }
                 case JTokenType.TimeSpan:
-                    SetToken(JsonToken.String, SafeToString(((JValue)token).Value));
+                    SetToken(
+                        JsonToken.String,
+                        SafeToString(((JValue)token).Value)
+                    );
                     break;
                 default:
-                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(token.Type), token.Type, "Unexpected JTokenType.");
+                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
+                        nameof(token.Type),
+                        token.Type,
+                        "Unexpected JTokenType."
+                    );
             }
         }
 

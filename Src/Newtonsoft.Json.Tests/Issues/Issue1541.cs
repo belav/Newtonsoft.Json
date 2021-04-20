@@ -59,7 +59,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 () => JsonConvert.SerializeObject(fileInfo),
                 "Unable to serialize instance of 'System.IO.FileInfo'.");
         }
-
 #if !(NETSTANDARD1_0 || NETSTANDARD1_3)
         [Test]
         public void Test_DriveInfo()

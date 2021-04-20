@@ -70,7 +70,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Size = 50 * 1024
             };
 
-            string json = JsonConvert.SerializeObject(file, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                file,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -79,10 +82,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""ImportantLegalDocuments.docx"",
   ""Size"": 51200
-}", json);
+}",
+                json
+            );
         }
     }
 }

@@ -57,7 +57,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ["Starcraft","Halo","Legend of Zelda"]
             #endregion
 
-            Assert.AreEqual(@"[""Starcraft"",""Halo"",""Legend of Zelda""]", json);
+            Assert.AreEqual(
+                @"[""Starcraft"",""Halo"",""Legend of Zelda""]",
+                json
+            );
         }
     }
 }

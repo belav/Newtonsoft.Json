@@ -37,8 +37,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return TypeCode.Object;
         }
 
-        object IConvertible.ToType(Type conversionType, IFormatProvider provider)
-        {
+        object IConvertible.ToType(
+            Type conversionType,
+            IFormatProvider provider
+        ) {
             if (conversionType == typeof(object))
             {
                 return this;
