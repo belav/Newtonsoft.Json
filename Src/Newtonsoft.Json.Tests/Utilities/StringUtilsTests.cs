@@ -57,26 +57,14 @@ namespace Newtonsoft.Json.Tests.Utilities
             Assert.AreEqual("vmQ", StringUtils.ToCamelCase("VmQ"));
             Assert.AreEqual("xml2Json", StringUtils.ToCamelCase("Xml2Json"));
             Assert.AreEqual("snAkEcAsE", StringUtils.ToCamelCase("SnAkEcAsE"));
-            Assert.AreEqual(
-                "snA__kEcAsE",
-                StringUtils.ToCamelCase("SnA__kEcAsE")
-            );
-            Assert.AreEqual(
-                "snA__ kEcAsE",
-                StringUtils.ToCamelCase("SnA__ kEcAsE")
-            );
+            Assert.AreEqual("snA__kEcAsE", StringUtils.ToCamelCase("SnA__kEcAsE"));
+            Assert.AreEqual("snA__ kEcAsE", StringUtils.ToCamelCase("SnA__ kEcAsE"));
             Assert.AreEqual(
                 "already_snake_case_ ",
                 StringUtils.ToCamelCase("already_snake_case_ ")
             );
-            Assert.AreEqual(
-                "isJSONProperty",
-                StringUtils.ToCamelCase("IsJSONProperty")
-            );
-            Assert.AreEqual(
-                "shoutinG_CASE",
-                StringUtils.ToCamelCase("SHOUTING_CASE")
-            );
+            Assert.AreEqual("isJSONProperty", StringUtils.ToCamelCase("IsJSONProperty"));
+            Assert.AreEqual("shoutinG_CASE", StringUtils.ToCamelCase("SHOUTING_CASE"));
             Assert.AreEqual(
                 "9999-12-31T23:59:59.9999999Z",
                 StringUtils.ToCamelCase("9999-12-31T23:59:59.9999999Z")
@@ -86,18 +74,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 StringUtils.ToCamelCase("Hi!! This is text. Time to test.")
             );
             Assert.AreEqual("building", StringUtils.ToCamelCase("BUILDING"));
-            Assert.AreEqual(
-                "building Property",
-                StringUtils.ToCamelCase("BUILDING Property")
-            );
-            Assert.AreEqual(
-                "building Property",
-                StringUtils.ToCamelCase("Building Property")
-            );
-            Assert.AreEqual(
-                "building PROPERTY",
-                StringUtils.ToCamelCase("BUILDING PROPERTY")
-            );
+            Assert.AreEqual("building Property", StringUtils.ToCamelCase("BUILDING Property"));
+            Assert.AreEqual("building Property", StringUtils.ToCamelCase("Building Property"));
+            Assert.AreEqual("building PROPERTY", StringUtils.ToCamelCase("BUILDING PROPERTY"));
         }
 
         [Test]
@@ -119,30 +98,12 @@ namespace Newtonsoft.Json.Tests.Utilities
             Assert.AreEqual("is_cia", StringUtils.ToSnakeCase("IsCIA"));
             Assert.AreEqual("vm_q", StringUtils.ToSnakeCase("VmQ"));
             Assert.AreEqual("xml2_json", StringUtils.ToSnakeCase("Xml2Json"));
-            Assert.AreEqual(
-                "sn_ak_ec_as_e",
-                StringUtils.ToSnakeCase("SnAkEcAsE")
-            );
-            Assert.AreEqual(
-                "sn_a__k_ec_as_e",
-                StringUtils.ToSnakeCase("SnA__kEcAsE")
-            );
-            Assert.AreEqual(
-                "sn_a__k_ec_as_e",
-                StringUtils.ToSnakeCase("SnA__ kEcAsE")
-            );
-            Assert.AreEqual(
-                "already_snake_case_",
-                StringUtils.ToSnakeCase("already_snake_case_ ")
-            );
-            Assert.AreEqual(
-                "is_json_property",
-                StringUtils.ToSnakeCase("IsJSONProperty")
-            );
-            Assert.AreEqual(
-                "shouting_case",
-                StringUtils.ToSnakeCase("SHOUTING_CASE")
-            );
+            Assert.AreEqual("sn_ak_ec_as_e", StringUtils.ToSnakeCase("SnAkEcAsE"));
+            Assert.AreEqual("sn_a__k_ec_as_e", StringUtils.ToSnakeCase("SnA__kEcAsE"));
+            Assert.AreEqual("sn_a__k_ec_as_e", StringUtils.ToSnakeCase("SnA__ kEcAsE"));
+            Assert.AreEqual("already_snake_case_", StringUtils.ToSnakeCase("already_snake_case_ "));
+            Assert.AreEqual("is_json_property", StringUtils.ToSnakeCase("IsJSONProperty"));
+            Assert.AreEqual("shouting_case", StringUtils.ToSnakeCase("SHOUTING_CASE"));
             Assert.AreEqual(
                 "9999-12-31_t23:59:59.9999999_z",
                 StringUtils.ToSnakeCase("9999-12-31T23:59:59.9999999Z")
@@ -172,30 +133,12 @@ namespace Newtonsoft.Json.Tests.Utilities
             Assert.AreEqual("is-cia", StringUtils.ToKebabCase("IsCIA"));
             Assert.AreEqual("vm-q", StringUtils.ToKebabCase("VmQ"));
             Assert.AreEqual("xml2-json", StringUtils.ToKebabCase("Xml2Json"));
-            Assert.AreEqual(
-                "ke-ba-bc-as-e",
-                StringUtils.ToKebabCase("KeBaBcAsE")
-            );
-            Assert.AreEqual(
-                "ke-b--a-bc-as-e",
-                StringUtils.ToKebabCase("KeB--aBcAsE")
-            );
-            Assert.AreEqual(
-                "ke-b--a-bc-as-e",
-                StringUtils.ToKebabCase("KeB-- aBcAsE")
-            );
-            Assert.AreEqual(
-                "already-kebab-case-",
-                StringUtils.ToKebabCase("already-kebab-case- ")
-            );
-            Assert.AreEqual(
-                "is-json-property",
-                StringUtils.ToKebabCase("IsJSONProperty")
-            );
-            Assert.AreEqual(
-                "shouting-case",
-                StringUtils.ToKebabCase("SHOUTING-CASE")
-            );
+            Assert.AreEqual("ke-ba-bc-as-e", StringUtils.ToKebabCase("KeBaBcAsE"));
+            Assert.AreEqual("ke-b--a-bc-as-e", StringUtils.ToKebabCase("KeB--aBcAsE"));
+            Assert.AreEqual("ke-b--a-bc-as-e", StringUtils.ToKebabCase("KeB-- aBcAsE"));
+            Assert.AreEqual("already-kebab-case-", StringUtils.ToKebabCase("already-kebab-case- "));
+            Assert.AreEqual("is-json-property", StringUtils.ToKebabCase("IsJSONProperty"));
+            Assert.AreEqual("shouting-case", StringUtils.ToKebabCase("SHOUTING-CASE"));
             Assert.AreEqual(
                 "9999-12-31-t23:59:59.9999999-z",
                 StringUtils.ToKebabCase("9999-12-31T23:59:59.9999999Z")

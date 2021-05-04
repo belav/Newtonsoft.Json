@@ -83,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 {
                     JsonSerializer serializer = new JsonSerializer();
 
-                    serializer.Deserialize<TraceTestObject>(
-                        json.CreateReader()
-                    );
+                    serializer.Deserialize<TraceTestObject>(json.CreateReader());
                 },
                 "Could not convert string to integer: two. Path 'IntList[1]', line 1, position 20."
             );
@@ -96,21 +94,10 @@ namespace Newtonsoft.Json.Tests.Linq
         public void YahooFinance()
         {
             JObject o = new JObject(
-                new JProperty(
-                    "Test1",
-                    new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)
-                ),
+                new JProperty("Test1", new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)),
                 new JProperty(
                     "Test2",
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    )
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0))
                 ),
                 new JProperty("Test3", "Test3Value"),
                 new JProperty("Test4", null)
@@ -146,15 +133,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 jsonReader.Read();
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
                 Assert.AreEqual(
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    ),
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
                     jsonReader.Value
                 );
 
@@ -181,9 +160,8 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(JsonToken.None, jsonReader.TokenType);
             }
 
-            using (
-                JsonReader jsonReader = new JTokenReader(o.Property("Test2"))
-            ) {
+            using (JsonReader jsonReader = new JTokenReader(o.Property("Test2")))
+            {
                 Assert.IsTrue(jsonReader.Read());
                 Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
                 Assert.AreEqual("Test2", jsonReader.Value);
@@ -191,15 +169,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.IsTrue(jsonReader.Read());
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
                 Assert.AreEqual(
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    ),
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
                     jsonReader.Value
                 );
 
@@ -274,10 +244,7 @@ namespace Newtonsoft.Json.Tests.Linq
             reader.ReadAsDateTimeOffset();
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
-            Assert.AreEqual(
-                new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero), reader.Value);
         }
 #endif
 
@@ -326,10 +293,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(2, lineInfo.LineNumber);
                 Assert.AreEqual(14, lineInfo.LinePosition);
                 Assert.AreEqual(true, lineInfo.HasLineInfo());
-                Assert.AreEqual(
-                    o.Property("CPU").Value,
-                    jsonReader.CurrentToken
-                );
+                Assert.AreEqual(o.Property("CPU").Value, jsonReader.CurrentToken);
 
                 jsonReader.Read();
                 Assert.AreEqual(jsonReader.TokenType, JsonToken.PropertyName);
@@ -344,10 +308,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(3, lineInfo.LineNumber);
                 Assert.AreEqual(11, lineInfo.LinePosition);
                 Assert.AreEqual(true, lineInfo.HasLineInfo());
-                Assert.AreEqual(
-                    o.Property("Drives").Value,
-                    jsonReader.CurrentToken
-                );
+                Assert.AreEqual(o.Property("Drives").Value, jsonReader.CurrentToken);
 
                 jsonReader.Read();
                 Assert.AreEqual(jsonReader.TokenType, JsonToken.String);
@@ -427,16 +388,10 @@ namespace Newtonsoft.Json.Tests.Linq
                     using (JTokenReader jsonReader = new JTokenReader(o))
                     {
                         jsonReader.Read();
-                        Assert.AreEqual(
-                            JsonToken.StartObject,
-                            jsonReader.TokenType
-                        );
+                        Assert.AreEqual(JsonToken.StartObject, jsonReader.TokenType);
 
                         jsonReader.Read();
-                        Assert.AreEqual(
-                            JsonToken.PropertyName,
-                            jsonReader.TokenType
-                        );
+                        Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
                         Assert.AreEqual("Test1", jsonReader.Value);
 
                         jsonReader.ReadAsBytes();
@@ -465,8 +420,7 @@ namespace Newtonsoft.Json.Tests.Linq
             jsonReader = new JTokenReader(jToken);
 
             var result2 =
-                (HasBytes)JsonSerializer.Create(null)
-                    .Deserialize(jsonReader, typeof(HasBytes));
+                (HasBytes)JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEqual(new byte[] { 1, 2, 3, 4 }, result2.Bytes);
         }
@@ -485,8 +439,7 @@ namespace Newtonsoft.Json.Tests.Linq
             jsonReader = new JTokenReader(jToken);
 
             var result2 =
-                (HasBytes)JsonSerializer.Create(null)
-                    .Deserialize(jsonReader, typeof(HasBytes));
+                (HasBytes)JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEquivalent(new byte[0], result2.Bytes);
         }
@@ -513,18 +466,12 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void DeserializeByteArrayWithTypeNameHandling()
         {
-            TestObject test = new TestObject(
-                "Test",
-                new byte[] { 72, 63, 62, 71, 92, 55 }
-            );
+            TestObject test = new TestObject("Test", new byte[] { 72, 63, 62, 71, 92, 55 });
 
             string json = JsonConvert.SerializeObject(
                 test,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                }
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
             );
 
             JObject o = JObject.Parse(json);
@@ -535,8 +482,7 @@ namespace Newtonsoft.Json.Tests.Linq
             using (JsonReader nodeReader = o.CreateReader())
             {
                 // Get exception here
-                TestObject newObject =
-                    (TestObject)serializer.Deserialize(nodeReader);
+                TestObject newObject = (TestObject)serializer.Deserialize(nodeReader);
 
                 Assert.AreEqual("Test", newObject.Name);
                 CollectionAssert.AreEquivalent(
@@ -549,8 +495,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void DeserializeStringInt()
         {
-            string json =
-                @"{
+            string json = @"{
   ""PreProperty"": ""99"",
   ""PostProperty"": ""-1""
 }";
@@ -919,9 +864,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadAsDateTimeOffset_DateTime()
         {
-            JValue v = new JValue(
-                new DateTime(2001, 12, 12, 12, 12, 12, DateTimeKind.Utc)
-            );
+            JValue v = new JValue(new DateTime(2001, 12, 12, 12, 12, 12, DateTimeKind.Utc));
 
             JTokenReader reader = new JTokenReader(v);
 
@@ -947,9 +890,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadAsDateTime_DateTimeOffset()
         {
-            JValue v = new JValue(
-                new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero)
-            );
+            JValue v = new JValue(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero));
 
             JTokenReader reader = new JTokenReader(v);
 

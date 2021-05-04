@@ -89,14 +89,8 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             var t = new List<TestClass>
             {
-                new TestClass
-                {
-                    Color = new Color { A = 1, G = 1, B = 1, R = 1 }
-                },
-                new TestClass
-                {
-                    Color = new Color { A = 2, G = 2, B = 2, R = 2 }
-                }
+                new TestClass { Color = new Color { A = 1, G = 1, B = 1, R = 1 } },
+                new TestClass { Color = new Color { A = 2, G = 2, B = 2, R = 2 } }
             };
             var settings = new JsonSerializerSettings
             {
@@ -110,10 +104,7 @@ namespace Newtonsoft.Json.Tests.Issues
             var exception = ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    JsonConvert.DeserializeObject<List<TestClass>>(
-                        json,
-                        settings
-                    );
+                    JsonConvert.DeserializeObject<List<TestClass>>(json, settings);
                 },
                 "Error reading object reference '4'. Path '[1].Color.A', line 16, position 10."
             );
@@ -129,14 +120,8 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             var t = new List<TestClass>
             {
-                new TestClass
-                {
-                    Color = new Color { A = 1, G = 1, B = 1, R = 1 }
-                },
-                new TestClass
-                {
-                    Color = new Color { A = 2, G = 2, B = 2, R = 2 }
-                }
+                new TestClass { Color = new Color { A = 1, G = 1, B = 1, R = 1 } },
+                new TestClass { Color = new Color { A = 2, G = 2, B = 2, R = 2 } }
             };
             var settings = new JsonSerializerSettings
             {
@@ -147,10 +132,7 @@ namespace Newtonsoft.Json.Tests.Issues
             };
             var json = JsonConvert.SerializeObject(t, settings);
 
-            var obj = JsonConvert.DeserializeObject<List<TestClass>>(
-                json,
-                settings
-            );
+            var obj = JsonConvert.DeserializeObject<List<TestClass>>(json, settings);
 
             var o1 = obj[0];
             Assert.AreEqual(1, o1.Color.A);

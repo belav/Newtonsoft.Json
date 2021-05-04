@@ -50,20 +50,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             JsonPropertyAttribute attribute = new JsonPropertyAttribute();
             Assert.AreEqual(null, attribute._defaultValueHandling);
-            Assert.AreEqual(
-                ReferenceLoopHandling.Error,
-                attribute.ReferenceLoopHandling
-            );
+            Assert.AreEqual(ReferenceLoopHandling.Error, attribute.ReferenceLoopHandling);
 
             attribute.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            Assert.AreEqual(
-                ReferenceLoopHandling.Ignore,
-                attribute._referenceLoopHandling
-            );
-            Assert.AreEqual(
-                ReferenceLoopHandling.Ignore,
-                attribute.ReferenceLoopHandling
-            );
+            Assert.AreEqual(ReferenceLoopHandling.Ignore, attribute._referenceLoopHandling);
+            Assert.AreEqual(ReferenceLoopHandling.Ignore, attribute.ReferenceLoopHandling);
         }
 
         [Test]
@@ -188,10 +179,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             public ChildClass Child { get; set; }
 
-            public void GetObjectData(
-                SerializationInfo info,
-                StreamingContext context
-            ) {
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
                 info.AddValue("Child", Child);
             }
         }
@@ -202,10 +191,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             public string Name { get; set; }
             public MainClass Parent { get; set; }
 
-            public void GetObjectData(
-                SerializationInfo info,
-                StreamingContext context
-            ) {
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
                 info.AddValue("Parent", Parent);
                 info.AddValue("Name", Name);
             }
@@ -265,18 +252,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Values = new Dictionary<string, object>();
             }
 
-            public override bool TrySetMember(
-                SetMemberBinder binder,
-                object value
-            ) {
+            public override bool TrySetMember(SetMemberBinder binder, object value)
+            {
                 Values[binder.Name] = value;
                 return true;
             }
 
-            public override bool TryGetMember(
-                GetMemberBinder binder,
-                out object result
-            ) {
+            public override bool TryGetMember(GetMemberBinder binder, out object result)
+            {
                 return Values.TryGetValue(binder.Name, out result);
             }
 
@@ -318,10 +301,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var c = JsonConvert.SerializeObject(parent, settings);
-            Assert.AreEqual(
-                @"{""child"":{""name"":""child""},""name"":""parent""}",
-                c
-            );
+            Assert.AreEqual(@"{""child"":{""name"":""child""},""name"":""parent""}", c);
         }
 #endif
 
@@ -407,8 +387,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public string Text { get; set; }
 
-        [JsonProperty(
-            ItemReferenceLoopHandling = ReferenceLoopHandling.Serialize)]
+        [JsonProperty(ItemReferenceLoopHandling = ReferenceLoopHandling.Serialize)]
         public IList<PropertyItemReferenceLoopHandling> Data
         {
             get

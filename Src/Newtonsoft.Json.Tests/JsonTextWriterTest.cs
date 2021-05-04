@@ -63,21 +63,13 @@ namespace Newtonsoft.Json.Tests
 
             string longString = new string('A', 2000);
             string longEscapedString =
-                "Hello!" +
-                new string('!', 50) +
-                new string('\n', 1000) +
-                "Good bye!";
+                "Hello!" + new string('!', 50) + new string('\n', 1000) + "Good bye!";
             string longerEscapedString =
-                "Hello!" +
-                new string('!', 2000) +
-                new string('\n', 1000) +
-                "Good bye!";
+                "Hello!" + new string('!', 2000) + new string('\n', 1000) + "Good bye!";
 
             for (int i = 0; i < 1000; i++)
             {
-                StringWriter sw = new StringWriter(
-                    CultureInfo.InvariantCulture
-                );
+                StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
 
                 using (JsonTextWriter writer = new JsonTextWriter(sw))
                 {
@@ -86,9 +78,7 @@ namespace Newtonsoft.Json.Tests
                     writer.WriteStartObject();
 
                     writer.WritePropertyName("Prop1");
-                    writer.WriteValue(
-                        new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)
-                    );
+                    writer.WriteValue(new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc));
 
                     writer.WritePropertyName("Prop2");
                     writer.WriteValue(longString);
@@ -104,9 +94,7 @@ namespace Newtonsoft.Json.Tests
 
                 if ((i + 1) % 100 == 0)
                 {
-                    Console.WriteLine(
-                        "Allocated buffers: " + arrayPool.FreeArrays.Count
-                    );
+                    Console.WriteLine("Allocated buffers: " + arrayPool.FreeArrays.Count);
                 }
             }
 
@@ -131,9 +119,7 @@ namespace Newtonsoft.Json.Tests
                     writer.WriteStartObject();
 
                     writer.WritePropertyName("Prop1");
-                    writer.WriteValue(
-                        new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)
-                    );
+                    writer.WriteValue(new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc));
 
                     writer.WritePropertyName("Prop2");
                     writer.WriteValue("This is an escaped \n string!");
@@ -158,10 +144,10 @@ namespace Newtonsoft.Json.Tests
 
                 {
                     "BodyHtml",
-                    "<h3>Title!</h3>" +
-                    Environment.NewLine +
-                    new string(' ', 100) +
-                    "<p>Content!</p>"
+                    "<h3>Title!</h3>"
+                    + Environment.NewLine
+                    + new string(' ', 100)
+                    + "<p>Content!</p>"
                 }
             };
 
@@ -192,13 +178,7 @@ namespace Newtonsoft.Json.Tests
             MemoryStream ms = new MemoryStream();
 
             using (
-                var streamWriter = new StreamWriter(
-                    ms,
-                    new UTF8Encoding(false)
-                )
-                {
-                    NewLine = "\n"
-                }
+                var streamWriter = new StreamWriter(ms, new UTF8Encoding(false)) { NewLine = "\n" }
             )
             using (
                 var jsonWriter = new JsonTextWriter(
@@ -220,10 +200,7 @@ namespace Newtonsoft.Json.Tests
 
             string json = Encoding.UTF8.GetString(data, 0, data.Length);
 
-            Assert.AreEqual(
-                @"{" + '\n' + @"  ""prop"": true" + '\n' + "}",
-                json
-            );
+            Assert.AreEqual(@"{" + '\n' + @"  ""prop"": true" + '\n' + "}", json);
         }
 
         [Test]
@@ -231,12 +208,7 @@ namespace Newtonsoft.Json.Tests
         {
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
-            {
-                QuoteName = false
-            };
+            JsonTextWriter writer = new JsonTextWriter(sw) { QuoteName = false };
 
             writer.WriteStartObject();
 
@@ -260,12 +232,7 @@ namespace Newtonsoft.Json.Tests
             Assert.IsFalse(ms.CanRead);
 
             ms = new MemoryStream();
-            writer = new JsonTextWriter(
-                new StreamWriter(ms)
-            )
-            {
-                CloseOutput = false
-            };
+            writer = new JsonTextWriter(new StreamWriter(ms)) { CloseOutput = false };
 
             Assert.IsTrue(ms.CanRead);
             writer.Close();
@@ -426,9 +393,7 @@ namespace Newtonsoft.Json.Tests
             using (JsonWriter jsonWriter = new JsonTextWriter(sw))
             {
                 jsonWriter.WriteStartArray();
-                jsonWriter.WriteValue(
-                    @"""These pretzels are making me thirsty!"""
-                );
+                jsonWriter.WriteValue(@"""These pretzels are making me thirsty!""");
                 jsonWriter.WriteValue("Jeff's house was burninated.");
                 jsonWriter.WriteValue(
                     "1. You don't talk about fight club.\r\n2. You don't talk about fight club."
@@ -860,9 +825,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void WriteToken()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[1,2,3,4,5]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[1,2,3,4,5]"));
             reader.Read();
             reader.Read();
 
@@ -897,10 +860,7 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteEndObject();
             }
 
-            Assert.AreEqual(
-                @"{""d0"":[1,2],""d1"":[1,2],""d2"":[1,2]}",
-                sb.ToString()
-            );
+            Assert.AreEqual(@"{""d0"":[1,2],""d1"":[1,2],""d2"":[1,2]}", sb.ToString());
         }
 
         [Test]
@@ -924,10 +884,7 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteEndObject();
             }
 
-            Assert.AreEqual(
-                @"{""con"":new Ext.data.JsonStore({""aa"":""aa""})}",
-                sb.ToString()
-            );
+            Assert.AreEqual(@"{""con"":new Ext.data.JsonStore({""aa"":""aa""})}", sb.ToString());
         }
 
         [Test]
@@ -979,12 +936,7 @@ namespace Newtonsoft.Json.Tests
             StringWriter sw = new StringWriter(sb);
 
             using (
-                JsonWriter jsonWriter = new JsonTextWriter(
-                    sw
-                )
-                {
-                    Formatting = Formatting.Indented
-                }
+                JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
             ) {
                 jsonWriter.WriteStartArray();
 
@@ -1046,10 +998,7 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteToken(JsonToken.EndArray);
             }
 
-            Assert.AreEqual(
-                @"[1,{""integer"":2147483647,""null-string"":null}]",
-                sb.ToString()
-            );
+            Assert.AreEqual(@"[1,{""integer"":2147483647,""null-string"":null}]", sb.ToString());
         }
 
         [Test]
@@ -1085,9 +1034,8 @@ Parameter name: value",
         [Test]
         public void WriteTokenNullCheck()
         {
-            using (
-                JsonWriter jsonWriter = new JsonTextWriter(new StringWriter())
-            ) {
+            using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
+            {
                 ExceptionAssert.Throws<ArgumentNullException>(
                     () =>
                     {
@@ -1106,9 +1054,8 @@ Parameter name: value",
         [Test]
         public void TokenTypeOutOfRange()
         {
-            using (
-                JsonWriter jsonWriter = new JsonTextWriter(new StringWriter())
-            ) {
+            using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
+            {
                 ArgumentOutOfRangeException ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(
                     () => jsonWriter.WriteToken((JsonToken)int.MinValue)
                 );
@@ -1201,8 +1148,7 @@ Parameter name: value",
                 jsonWriter.WriteEndObject();
             }
 
-            string expected =
-                @"{
+            string expected = @"{
 _____'propertyName': NaN,
 ??????'prop2': 123
 }";
@@ -1396,8 +1342,7 @@ _____'propertyName': NaN,
 
             foreach (
                 FieldInfo field in enumType.GetFields(
-                    System.Reflection.BindingFlags.Public |
-                    System.Reflection.BindingFlags.Static
+                    System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static
                 )
             ) {
                 object value = field.GetValue(enumType);
@@ -1418,9 +1363,7 @@ _____'propertyName': NaN,
                 DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
             };
 
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
 
             Assert.AreEqual(@"""2000-01-01T01:01:01Z""", sw.ToString());
         }
@@ -1436,8 +1379,7 @@ _____'propertyName': NaN,
                 StringEscapeHandling = StringEscapeHandling.EscapeHtml
             };
 
-            string script =
-                @"<script type=""text/javascript"">alert('hi');</script>";
+            string script = @"<script type=""text/javascript"">alert('hi');</script>";
 
             writer.WriteValue(script);
 
@@ -1478,12 +1420,7 @@ _____'propertyName': NaN,
             Assert.AreEqual(unicode, reader.ReadAsString());
 
             sw = new StringWriter();
-            writer = new JsonTextWriter(
-                sw
-            )
-            {
-                StringEscapeHandling = StringEscapeHandling.Default
-            };
+            writer = new JsonTextWriter(sw) { StringEscapeHandling = StringEscapeHandling.Default };
 
             writer.WriteValue(unicode);
 
@@ -1563,28 +1500,16 @@ _____'propertyName': NaN,
 
             writer.WriteStartArray();
 
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc)
-            );
-            writer.WriteValue(
-                new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc));
+            writer.WriteValue(new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero));
 
             writer.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc)
-            );
-            writer.WriteValue(
-                new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc));
+            writer.WriteValue(new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero));
 
             writer.DateFormatString = "yyyy gg";
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc)
-            );
-            writer.WriteValue(
-                new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc));
+            writer.WriteValue(new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero));
 
             writer.WriteValue(new byte[] { 1, 2, 3 });
             writer.WriteValue(TimeSpan.Zero);
@@ -1626,22 +1551,15 @@ _____'propertyName': NaN,
 
             writer.WriteStartArray();
 
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc)
-            );
-            writer.WriteValue(
-                new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc));
+            writer.WriteValue(new DateTimeOffset(2000, 1, 1, 1, 1, 1, TimeSpan.Zero));
 
             writer.WriteEnd();
 
-            StringAssert.AreEqual(
-                @"[
+            StringAssert.AreEqual(@"[
   '2000 a.m.',
   '2000 a.m.'
-]",
-                sw.ToString()
-            );
+]", sw.ToString());
         }
 #endif
 
@@ -1791,11 +1709,7 @@ _____'propertyName': NaN,
                         }
 
                         // write unchanged chars before writing escaped text
-                        writer.Write(
-                            chars,
-                            lastWritePosition,
-                            i - lastWritePosition
-                        );
+                        writer.Write(chars, lastWritePosition, i - lastWritePosition);
                     }
 
                     lastWritePosition = i + 1;
@@ -1822,11 +1736,7 @@ _____'propertyName': NaN,
                     }
 
                     // write remaining text
-                    writer.Write(
-                        chars,
-                        lastWritePosition,
-                        s.Length - lastWritePosition
-                    );
+                    writer.Write(chars, lastWritePosition, s.Length - lastWritePosition);
                 }
             }
 
@@ -1857,12 +1767,9 @@ _____'propertyName': NaN,
             writer.WriteEndObject();
             Assert.AreEqual(WriteState.Start, writer.WriteState);
 
-            StringAssert.AreEqual(
-                @"{{{
+            StringAssert.AreEqual(@"{{{
   ""1ytreporP"": NULL!!!
-}}}",
-                sw.ToString()
-            );
+}}}", sw.ToString());
         }
 
         [Test]
@@ -1876,14 +1783,8 @@ _____'propertyName': NaN,
             var serializer = JsonSerializer.Create(jsonSerializerSettings);
             using (var stringWriter = new StringWriter())
             {
-                using (
-                    var writer = new JsonTextWriter(
-                        stringWriter
-                    )
-                    {
-                        QuoteName = false
-                    }
-                ) {
+                using (var writer = new JsonTextWriter(stringWriter) { QuoteName = false })
+                {
                     serializer.Serialize(writer, d);
                     writer.Close();
                 }
@@ -1901,19 +1802,19 @@ _____'propertyName': NaN,
                 @"//comment*//*hi*/
 {//comment
 Name://comment
-true//comment after true" +
-                StringUtils.CarriageReturn +
-                @"
-,//comment after comma" +
-                StringUtils.CarriageReturnLineFeed +
-                @"
-""ExpiryDate""://comment" +
-                StringUtils.LineFeed +
-                @"
+true//comment after true"
+                + StringUtils.CarriageReturn
+                + @"
+,//comment after comma"
+                + StringUtils.CarriageReturnLineFeed
+                + @"
+""ExpiryDate""://comment"
+                + StringUtils.LineFeed
+                + @"
 new
-" +
-                StringUtils.LineFeed +
-                @"Constructor
+"
+                + StringUtils.LineFeed
+                + @"Constructor
 (//comment
 null//comment
 ),

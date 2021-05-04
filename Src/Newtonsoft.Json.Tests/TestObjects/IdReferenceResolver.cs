@@ -31,8 +31,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class IdReferenceResolver : IReferenceResolver
     {
-        private readonly IDictionary<Guid,
-            PersonReference> _people = new Dictionary<Guid, PersonReference>();
+        private readonly IDictionary<Guid, PersonReference> _people = new Dictionary<Guid,
+            PersonReference>();
 
         public object ResolveReference(object context, string reference)
         {
@@ -59,11 +59,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return _people.ContainsKey(p.Id);
         }
 
-        public void AddReference(
-            object context,
-            string reference,
-            object value
-        ) {
+        public void AddReference(object context, string reference, object value)
+        {
             Guid id = new Guid(reference);
 
             _people[id] = (PersonReference)value;

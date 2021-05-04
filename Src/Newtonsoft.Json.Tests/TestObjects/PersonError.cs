@@ -54,10 +54,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string Title { get; set; }
 
         [OnError]
-        internal void HandleError(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) {
+        internal void HandleError(StreamingContext context, ErrorContext errorContext)
+        {
             errorContext.Handled = true;
         }
     }

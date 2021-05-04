@@ -61,9 +61,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public void Generate_GenericDictionary()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(
-                typeof(Dictionary<string, List<string>>)
-            );
+            JsonSchema schema = generator.Generate(typeof(Dictionary<string, List<string>>));
 
             string json = schema.ToString();
 
@@ -86,17 +84,13 @@ namespace Newtonsoft.Json.Tests.Schema
                 json
             );
 
-            Dictionary<string, List<string>> value = new Dictionary<string,
-                List<string>>
+            Dictionary<string, List<string>> value = new Dictionary<string, List<string>>
             {
                 { "HasValue", new List<string>() { "first", "second", null } },
                 { "NoValue", null }
             };
 
-            string valueJson = JsonConvert.SerializeObject(
-                value,
-                Formatting.Indented
-            );
+            string valueJson = JsonConvert.SerializeObject(value, Formatting.Indented);
             JObject o = JObject.Parse(valueJson);
 
             Assert.IsTrue(o.IsValid(schema));
@@ -107,9 +101,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public void Generate_DefaultValueAttributeTestClass()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(
-                typeof(DefaultValueAttributeTestClass)
-            );
+            JsonSchema schema = generator.Generate(typeof(DefaultValueAttributeTestClass));
 
             string json = schema.ToString();
 
@@ -240,14 +232,9 @@ namespace Newtonsoft.Json.Tests.Schema
         public void Generate_RequiredMembersClass()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(
-                typeof(RequiredMembersClass)
-            );
+            JsonSchema schema = generator.Generate(typeof(RequiredMembersClass));
 
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                schema.Properties["FirstName"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.String, schema.Properties["FirstName"].Type);
             Assert.AreEqual(
                 JsonSchemaType.String | JsonSchemaType.Null,
                 schema.Properties["MiddleName"].Type
@@ -256,10 +243,7 @@ namespace Newtonsoft.Json.Tests.Schema
                 JsonSchemaType.String | JsonSchemaType.Null,
                 schema.Properties["LastName"].Type
             );
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                schema.Properties["BirthDate"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.String, schema.Properties["BirthDate"].Type);
         }
 
         [Test]
@@ -312,15 +296,9 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(
-                typeof(CircularReferenceClass),
-                true
-            );
+            JsonSchema schema = generator.Generate(typeof(CircularReferenceClass), true);
 
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                schema.Properties["Name"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.String, schema.Properties["Name"].Type);
             Assert.AreEqual(typeof(CircularReferenceClass).FullName, schema.Id);
             Assert.AreEqual(
                 JsonSchemaType.Object | JsonSchemaType.Null,
@@ -334,9 +312,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
 
-            JsonSchema schema = generator.Generate(
-                typeof(CircularReferenceWithIdClass)
-            );
+            JsonSchema schema = generator.Generate(typeof(CircularReferenceWithIdClass));
 
             Assert.AreEqual(
                 JsonSchemaType.String | JsonSchemaType.Null,
@@ -360,10 +336,7 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(JsonSchemaType.String, schema.Type);
 
-            string json = JsonConvert.SerializeObject(
-                typeof(Version),
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(typeof(Version), Formatting.Indented);
 
             JValue v = new JValue(json);
             Assert.IsTrue(v.IsValid(schema));
@@ -376,9 +349,7 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(
-                typeof(ISerializableTestObject)
-            );
+            JsonSchema schema = generator.Generate(typeof(ISerializableTestObject));
 
             Assert.AreEqual(JsonSchemaType.Object, schema.Type);
             Assert.AreEqual(true, schema.AllowAdditionalProperties);
@@ -418,10 +389,7 @@ namespace Newtonsoft.Json.Tests.Schema
                 Type type,
                 MemberSerialization memberSerialization
             ) {
-                IList<JsonProperty> properties = base.CreateProperties(
-                    type,
-                    memberSerialization
-                );
+                IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
                 JsonPropertyCollection c = new JsonPropertyCollection(type);
                 c.AddRange(properties.Where(m => m.PropertyName != "Root"));
@@ -500,10 +468,7 @@ namespace Newtonsoft.Json.Tests.Schema
             generator.ContractResolver = contractResolver;
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(
-                typeof(SerializableTestObject),
-                true
-            );
+            JsonSchema schema = generator.Generate(typeof(SerializableTestObject), true);
 
             string json = schema.ToString();
 
@@ -531,25 +496,16 @@ namespace Newtonsoft.Json.Tests.Schema
             JTokenWriter jsonWriter = new JTokenWriter();
             JsonSerializer serializer = new JsonSerializer();
             serializer.ContractResolver = contractResolver;
-            serializer.Serialize(
-                jsonWriter,
-                new SerializableTestObject { Name = "Name!" }
-            );
+            serializer.Serialize(jsonWriter, new SerializableTestObject { Name = "Name!" });
 
             List<string> errors = new List<string>();
-            jsonWriter.Token.Validate(
-                schema,
-                (sender, args) => errors.Add(args.Message)
-            );
+            jsonWriter.Token.Validate(schema, (sender, args) => errors.Add(args.Message));
 
             Assert.AreEqual(0, errors.Count);
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""_name"": ""Name!""
-}",
-                jsonWriter.Token.ToString()
-            );
+}", jsonWriter.Token.ToString());
 
             SerializableTestObject c = jsonWriter.Token.ToObject<SerializableTestObject>(
                 serializer
@@ -616,9 +572,7 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
             jsonSchemaGenerator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
-            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(
-                typeof(CircularReferenceClass)
-            );
+            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(typeof(CircularReferenceClass));
             string json = jsonSchema.ToString();
 
             StringAssert.AreEqual(
@@ -725,9 +679,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
-            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(
-                typeof(NullableInt32TestClass)
-            );
+            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(typeof(NullableInt32TestClass));
             string json = jsonSchema.ToString();
 
             StringAssert.AreEqual(

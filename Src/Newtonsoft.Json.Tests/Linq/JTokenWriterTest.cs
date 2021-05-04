@@ -239,23 +239,16 @@ namespace Newtonsoft.Json.Tests.Linq
             // this is a bug. write raw shouldn't be autocompleting like this
             // hard to fix without introducing Raw and RawValue token types
             // meh
-            StringAssert.AreEqual(
-                @"[
+            StringAssert.AreEqual(@"[
   fail,
   fail
-]",
-                writer.Token.ToString()
-            );
+]", writer.Token.ToString());
         }
 
         [Test]
         public void WriteTokenWithParent()
         {
-            JObject o = new JObject
-            {
-                ["prop1"] = new JArray(1),
-                ["prop2"] = 1
-            };
+            JObject o = new JObject { ["prop1"] = new JArray(1), ["prop2"] = 1 };
 
             JTokenWriter writer = new JTokenWriter();
 
@@ -298,12 +291,9 @@ namespace Newtonsoft.Json.Tests.Linq
 
             writer.WriteEndObject();
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""Prop1"": 1
-}",
-                writer.Token.ToString()
-            );
+}", writer.Token.ToString());
         }
 
         [Test]
@@ -356,13 +346,10 @@ namespace Newtonsoft.Json.Tests.Linq
             writer.WriteRawValue("fail");
             writer.WriteEndArray();
 
-            StringAssert.AreEqual(
-                @"[
+            StringAssert.AreEqual(@"[
   fail,
   fail
-]",
-                writer.Token.ToString()
-            );
+]", writer.Token.ToString());
         }
 
         [Test]
@@ -382,12 +369,9 @@ namespace Newtonsoft.Json.Tests.Linq
 
             writer.WriteEndObject();
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""prop1"": []
-}",
-                writer.Token.ToString()
-            );
+}", writer.Token.ToString());
         }
 
         [Test]
@@ -398,17 +382,12 @@ namespace Newtonsoft.Json.Tests.Linq
                 DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
             };
 
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
 
             JValue value = (JValue)writer.Token;
             DateTime dt = (DateTime)value.Value;
 
-            Assert.AreEqual(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc),
-                dt
-            );
+            Assert.AreEqual(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Utc), dt);
         }
 
         [Test]

@@ -58,16 +58,9 @@ namespace Newtonsoft.Json.Tests.Issues
             // given x === y, if x is the same Number value as y, return true.
             target = lhs.One;
             AssertAll(StrictEquality, target, rhs.One, rhs.OneDotZero);
-            Assert.IsFalse(
-                BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Two)
-            );
+            Assert.IsFalse(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Two));
             target = lhs.Scientific;
-            Assert.IsTrue(
-                BooleanQueryExpression.EqualsWithStrictMatch(
-                    target,
-                    rhs.Scientific
-                )
-            );
+            Assert.IsTrue(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Scientific));
 
             // given x === y, if Type(x) is String, then return true if x and y are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return false.
             target = lhs.DerpString;
@@ -106,18 +99,8 @@ namespace Newtonsoft.Json.Tests.Issues
             AssertNone(StrictEquality, target, rhs.DateYearMonth);
             AssertAll(StrictEquality, target, rhs.DateYear);
             target = lhs.DateISO;
-            Assert.IsTrue(
-                BooleanQueryExpression.EqualsWithStrictMatch(
-                    target,
-                    rhs.DateISO
-                )
-            );
-            Assert.IsFalse(
-                BooleanQueryExpression.EqualsWithStrictMatch(
-                    target,
-                    rhs.OtherISODate
-                )
-            );
+            Assert.IsTrue(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.DateISO));
+            Assert.IsFalse(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.OtherISODate));
         }
 
         #region helpers
@@ -132,22 +115,16 @@ namespace Newtonsoft.Json.Tests.Issues
 
         // a bunch of convenience methods for the test belwo
         // these make sure the comparator returns false for all do not wants
-        private void AssertNone(
-            Comparator comparator,
-            JValue token,
-            params JValue[][] doNotWant
-        ) {
+        private void AssertNone(Comparator comparator, JValue token, params JValue[][] doNotWant)
+        {
             foreach (var group in doNotWant)
             {
                 AssertNone(comparator, token, group);
             }
         }
 
-        private void AssertNone(
-            Comparator comparator,
-            JValue token,
-            params JValue[] doNotWant
-        ) {
+        private void AssertNone(Comparator comparator, JValue token, params JValue[] doNotWant)
+        {
             foreach (var item in doNotWant)
             {
                 Assert.IsTrue(!comparator(token, item));
@@ -155,22 +132,16 @@ namespace Newtonsoft.Json.Tests.Issues
         }
 
         // these make sure the comparator returns true for all do not wants
-        private void AssertAll(
-            Comparator comparator,
-            JValue token,
-            params JValue[][] want
-        ) {
+        private void AssertAll(Comparator comparator, JValue token, params JValue[][] want)
+        {
             foreach (var group in want)
             {
                 AssertAll(comparator, token, group);
             }
         }
 
-        private void AssertAll(
-            Comparator comparator,
-            JValue token,
-            params JValue[] want
-        ) {
+        private void AssertAll(Comparator comparator, JValue token, params JValue[] want)
+        {
             foreach (var item in want)
             {
                 Assert.IsTrue(comparator(token, item));

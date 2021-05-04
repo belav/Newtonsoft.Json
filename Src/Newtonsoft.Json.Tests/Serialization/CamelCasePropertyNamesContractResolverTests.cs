@@ -71,24 +71,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void JsonConvertSerializerSettings()
         {
             Person person = new Person();
-            person.BirthDate = new DateTime(
-                2000,
-                11,
-                20,
-                23,
-                55,
-                44,
-                DateTimeKind.Utc
-            );
-            person.LastModified = new DateTime(
-                2000,
-                11,
-                20,
-                23,
-                55,
-                44,
-                DateTimeKind.Utc
-            );
+            person.BirthDate = new DateTime(2000, 11, 20, 23, 55, 44, DateTimeKind.Utc);
+            person.LastModified = new DateTime(2000, 11, 20, 23, 55, 44, DateTimeKind.Utc);
             person.Name = "Name!";
 
             string json = JsonConvert.SerializeObject(
@@ -118,10 +102,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             Assert.AreEqual(person.BirthDate, deserializedPerson.BirthDate);
-            Assert.AreEqual(
-                person.LastModified,
-                deserializedPerson.LastModified
-            );
+            Assert.AreEqual(person.LastModified, deserializedPerson.LastModified);
             Assert.AreEqual(person.Name, deserializedPerson.Name);
 
             json = JsonConvert.SerializeObject(person, Formatting.Indented);
@@ -174,8 +155,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver
                     {
-                        DefaultMembersSearchFlags = BindingFlags.NonPublic |
-                        BindingFlags.Instance
+                        DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance
                     }
                 }
             );
@@ -199,8 +179,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver
                     {
-                        DefaultMembersSearchFlags = BindingFlags.NonPublic |
-                        BindingFlags.Instance
+                        DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance
                     }
                 }
             );
@@ -246,15 +225,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Product product = new Product
             {
-                ExpiryDate = new DateTime(
-                    2010,
-                    12,
-                    20,
-                    18,
-                    1,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
                 Sizes = new[] { "Small", "Medium", "Large" }

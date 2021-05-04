@@ -33,10 +33,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class DateTimeErrorObjectCollection : Collection<DateTime>
     {
         [OnError]
-        internal void OnErrorMethod(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) {
+        internal void OnErrorMethod(StreamingContext context, ErrorContext errorContext)
+        {
             errorContext.Handled = true;
         }
     }

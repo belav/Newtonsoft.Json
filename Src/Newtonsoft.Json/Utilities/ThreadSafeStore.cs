@@ -91,10 +91,7 @@ namespace Newtonsoft.Json.Utilities
                         return checkValue;
                     }
 
-                    Dictionary<TKey, TValue> newStore = new Dictionary<TKey,
-                        TValue>(
-                        _store
-                    );
+                    Dictionary<TKey, TValue> newStore = new Dictionary<TKey, TValue>(_store);
                     newStore[key] = value;
 
 #if HAVE_MEMORY_BARRIER

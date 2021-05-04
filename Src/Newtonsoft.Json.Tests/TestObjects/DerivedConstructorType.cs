@@ -27,11 +27,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class DerivedConstructorType : BaseConstructorType
     {
-        public DerivedConstructorType(
-            string baseProperty,
-            string derivedProperty
-        )
-            : base(baseProperty) {
+        public DerivedConstructorType(string baseProperty, string derivedProperty)
+            : base(baseProperty)
+        {
             DerivedProperty = derivedProperty;
         }
 

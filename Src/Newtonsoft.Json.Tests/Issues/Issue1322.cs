@@ -45,16 +45,12 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            IList<KeyValuePair<string,
-                    string>> values = new List<KeyValuePair<string, string>>
+            IList<KeyValuePair<string, string>> values = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("123", "2017-05-19T11:00:59")
             };
 
-            string json = JsonConvert.SerializeObject(
-                values,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(values, Formatting.Indented);
 
             IList<KeyValuePair<string,
                     string>> v1 = JsonConvert.DeserializeObject<IList<KeyValuePair<string,

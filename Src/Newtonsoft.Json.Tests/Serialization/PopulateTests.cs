@@ -55,10 +55,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PopulateArray()
         {
-            IList<Person> people = new List<Person>
-            {
-                new Person { Name = "Initial" }
-            };
+            IList<Person> people = new List<Person> { new Person { Name = "Initial" } };
 
             JsonConvert.PopulateObject(@"[{""Name"":""James""}, null]", people);
 
@@ -77,15 +74,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 new Product
                 {
-                    ExpiryDate = new DateTime(
-                        2000,
-                        12,
-                        3,
-                        0,
-                        0,
-                        0,
-                        DateTimeKind.Utc
-                    ),
+                    ExpiryDate = new DateTime(2000, 12, 3, 0, 0, 0, DateTimeKind.Utc),
                     Name = "ProductName!",
                     Price = 9.9m
                 }
@@ -148,10 +137,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             List<Person> p = new List<Person>();
 
             JsonSerializer serializer = new JsonSerializer();
-            serializer.Populate(
-                new StringReader(@"[{""Name"":""James""},{""Name"":""Jim""}]"),
-                p
-            );
+            serializer.Populate(new StringReader(@"[{""Name"":""James""},{""Name"":""Jim""}]"), p);
 
             Assert.AreEqual(2, p.Count);
             Assert.AreEqual("James", p[0].Name);

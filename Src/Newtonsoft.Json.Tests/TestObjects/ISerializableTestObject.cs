@@ -64,10 +64,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             _dateTimeValue = new DateTime(0, DateTimeKind.Utc);
         }
 
-        protected ISerializableTestObject(
-            SerializationInfo info,
-            StreamingContext context
-        ) {
+        protected ISerializableTestObject(SerializationInfo info, StreamingContext context)
+        {
             _stringValue = info.GetString("stringValue");
             _intValue = info.GetInt32("intValue");
             _dateTimeOffsetValue = (DateTimeOffset)info.GetValue(
@@ -75,10 +73,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 typeof(DateTimeOffset)
             );
             _personValue = (Person)info.GetValue("personValue", typeof(Person));
-            _nullPersonValue = (Person)info.GetValue(
-                "nullPersonValue",
-                typeof(Person)
-            );
+            _nullPersonValue = (Person)info.GetValue("nullPersonValue", typeof(Person));
             _nullableInt = (int?)info.GetValue("nullableInt", typeof(int?));
 
             _booleanValue = info.GetBoolean("booleanValue");
@@ -95,16 +90,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             _ulongValue = info.GetUInt64("ulongValue");
         }
 
-        public void GetObjectData(
-            SerializationInfo info,
-            StreamingContext context
-        ) {
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue((string)"stringValue", (object)_stringValue);
             info.AddValue((string)"intValue", (int)_intValue);
-            info.AddValue(
-                (string)"dateTimeOffsetValue",
-                (object)_dateTimeOffsetValue
-            );
+            info.AddValue((string)"dateTimeOffsetValue", (object)_dateTimeOffsetValue);
             info.AddValue((string)"personValue", (object)_personValue);
             info.AddValue((string)"nullPersonValue", (object)_nullPersonValue);
             info.AddValue("nullableInt", null);

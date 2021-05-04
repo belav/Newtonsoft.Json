@@ -34,9 +34,7 @@ using Newtonsoft.Json.Tests.TestObjects.Organization;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class VersionKeyedCollection
-        : KeyedCollection<string, Person>,
-            IEnumerable<Person>
+    public class VersionKeyedCollection : KeyedCollection<string, Person>, IEnumerable<Person>
     {
         public List<string> Messages { get; set; }
 
@@ -51,16 +49,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [OnError]
-        internal void OnErrorMethod(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) {
+        internal void OnErrorMethod(StreamingContext context, ErrorContext errorContext)
+        {
             Messages.Add(
-                errorContext.Path +
-                " - Error message for member " +
-                errorContext.Member +
-                " = " +
-                errorContext.Error.Message
+                errorContext.Path
+                + " - Error message for member "
+                + errorContext.Member
+                + " = "
+                + errorContext.Error.Message
             );
             errorContext.Handled = true;
         }

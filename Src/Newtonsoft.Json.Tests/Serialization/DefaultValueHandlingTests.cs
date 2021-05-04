@@ -54,9 +54,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
             public readonly string Text;
 
-            public DefaultValueWithConstructorAndRename(
-                string text = DefaultText
-            ) {
+            public DefaultValueWithConstructorAndRename(string text = DefaultText)
+            {
                 Text = text;
             }
         }
@@ -67,10 +66,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             DefaultValueWithConstructorAndRename myObject = JsonConvert.DeserializeObject<DefaultValueWithConstructorAndRename>(
                 "{}"
             );
-            Assert.AreEqual(
-                DefaultValueWithConstructorAndRename.DefaultText,
-                myObject.Text
-            );
+            Assert.AreEqual(DefaultValueWithConstructorAndRename.DefaultText, myObject.Text);
         }
 
         private class DefaultValueWithConstructor
@@ -96,10 +92,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             DefaultValueWithConstructor myObject = JsonConvert.DeserializeObject<DefaultValueWithConstructor>(
                 "{}"
             );
-            Assert.AreEqual(
-                DefaultValueWithConstructor.DefaultText,
-                myObject.Text
-            );
+            Assert.AreEqual(DefaultValueWithConstructor.DefaultText, myObject.Text);
         }
 
         public class MyClass
@@ -161,10 +154,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string included = JsonConvert.SerializeObject(
                 invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Include
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include }
             );
 
             StringAssert.AreEqual(
@@ -214,10 +204,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string ignored = JsonConvert.SerializeObject(
                 invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
             StringAssert.AreEqual(
@@ -235,10 +222,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = JsonConvert.SerializeObject(
                 new DefaultValueAttributeTestClass(),
                 Formatting.None,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
             Assert.AreEqual(@"{""TestField1"":0,""TestProperty1"":null}", json);
 
@@ -249,15 +233,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TestProperty1 = "NotDefault"
                 },
                 Formatting.None,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
-            Assert.AreEqual(
-                @"{""TestField1"":-2147483648,""TestProperty1"":""NotDefault""}",
-                json
-            );
+            Assert.AreEqual(@"{""TestField1"":-2147483648,""TestProperty1"":""NotDefault""}", json);
 
             json = JsonConvert.SerializeObject(
                 new DefaultValueAttributeTestClass
@@ -266,10 +244,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TestProperty1 = "NotDefault"
                 },
                 Formatting.None,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
             Assert.AreEqual(@"{""TestProperty1"":""NotDefault""}", json);
 
@@ -280,10 +255,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TestProperty1 = "TestProperty1Value"
                 },
                 Formatting.None,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
             Assert.AreEqual(@"{}", json);
         }
@@ -295,10 +267,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultValueAttributeTestClass c = JsonConvert.DeserializeObject<DefaultValueAttributeTestClass>(
                 json,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Populate
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate }
             );
             Assert.AreEqual("TestProperty1Value", c.TestProperty1);
 
@@ -437,21 +406,15 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""IntInclude"": 0,
   ""IntDefault"": 0
-}",
-                json
-            );
+}", json);
 
             json = JsonConvert.SerializeObject(
                 c,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
             StringAssert.AreEqual(@"{
@@ -461,33 +424,23 @@ namespace Newtonsoft.Json.Tests.Serialization
             json = JsonConvert.SerializeObject(
                 c,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Include
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include }
             );
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""IntInclude"": 0,
   ""IntDefault"": 0
-}",
-                json
-            );
+}", json);
         }
 
         [Test]
         public void DeserializeWithIgnore()
         {
-            string json =
-                @"{'Value':null,'IntValue1':1,'IntValue2':0,'IntValue3':null}";
+            string json = @"{'Value':null,'IntValue1':1,'IntValue2':0,'IntValue3':null}";
 
             var o = JsonConvert.DeserializeObject<DefaultValueHandlingDeserializeHolder>(
                 json,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
             Assert.AreEqual(int.MaxValue, o.IntValue1);
@@ -503,10 +456,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var o = JsonConvert.DeserializeObject<DefaultValueHandlingDeserializePopulate>(
                 json,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Populate
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate }
             );
 
             Assert.AreEqual(1, o.IntValue1);
@@ -595,10 +545,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
 
             [JsonConstructor]
-            private FieldExportFormat(
-                string format,
-                ExportFormat? exportFormat
-            ) {
+            private FieldExportFormat(string format, ExportFormat? exportFormat)
+            {
                 if (exportFormat.HasValue)
                 {
                     ExportFormat = exportFormat;
@@ -617,10 +565,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             FieldExportFormat o = JsonConvert.DeserializeObject<FieldExportFormat>(
                 json,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Populate
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate }
             );
 
             Assert.AreEqual(ExportFormat.Default, o.ExportFormat);
@@ -632,8 +577,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     [DataContract]
     public class TestClass
     {
-        [JsonProperty(
-            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [DataMember(EmitDefaultValue = false)]
         [DefaultValue("fff")]
         public string Field1 { set; get; }

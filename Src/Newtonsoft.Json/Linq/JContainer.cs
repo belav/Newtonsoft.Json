@@ -322,10 +322,10 @@ namespace Newtonsoft.Json.Linq
 
         internal bool IsMultiContent([NotNullWhen(true)]object? content)
         {
-            return (content is IEnumerable &&
-            !(content is string) &&
-            !(content is JToken) &&
-            !(content is byte[]));
+            return (content is IEnumerable
+            && !(content is string)
+            && !(content is JToken)
+            && !(content is byte[]));
         }
 
         internal JToken EnsureParentToken(JToken? item, bool skipParentCheck)
@@ -344,11 +344,8 @@ namespace Newtonsoft.Json.Linq
             // the item already has a parent
             // the item is being added to itself
             // the item is being added to the root parent of itself
-            if (
-                item.Parent != null ||
-                item == this ||
-                (item.HasValues && Root == item)
-            ) {
+            if (item.Parent != null || item == this || (item.HasValues && Root == item))
+            {
                 item = item.CloneToken();
             }
 
@@ -357,11 +354,8 @@ namespace Newtonsoft.Json.Linq
 
         internal abstract int IndexOfItem(JToken? item);
 
-        internal virtual bool InsertItem(
-            int index,
-            JToken? item,
-            bool skipParentCheck
-        ) {
+        internal virtual bool InsertItem(int index, JToken? item, bool skipParentCheck)
+        {
             IList<JToken> children = ChildrenTokens;
 
             if (index > children.Count)
@@ -420,10 +414,7 @@ namespace Newtonsoft.Json.Linq
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index),
-                    "Index is less than 0."
-                );
+                throw new ArgumentOutOfRangeException(nameof(index), "Index is less than 0.");
             }
             if (index >= children.Count)
             {
@@ -437,9 +428,7 @@ namespace Newtonsoft.Json.Linq
 
             JToken item = children[index];
             JToken? previous = (index == 0) ? null : children[index - 1];
-            JToken? next = (index == children.Count - 1)
-                ? null
-                : children[index + 1];
+            JToken? next = (index == children.Count - 1) ? null : children[index + 1];
 
             if (previous != null)
             {
@@ -495,10 +484,7 @@ namespace Newtonsoft.Json.Linq
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index),
-                    "Index is less than 0."
-                );
+                throw new ArgumentOutOfRangeException(nameof(index), "Index is less than 0.");
             }
             if (index >= children.Count)
             {
@@ -522,9 +508,7 @@ namespace Newtonsoft.Json.Linq
             ValidateToken(item, existing);
 
             JToken? previous = (index == 0) ? null : children[index - 1];
-            JToken? next = (index == children.Count - 1)
-                ? null
-                : children[index + 1];
+            JToken? next = (index == children.Count - 1) ? null : children[index + 1];
 
             item.Parent = this;
 
@@ -637,10 +621,8 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal static bool IsTokenUnchanged(
-            JToken currentValue,
-            JToken? newValue
-        ) {
+        internal static bool IsTokenUnchanged(JToken currentValue, JToken? newValue)
+        {
             if (currentValue is JValue v1)
             {
                 if (newValue == null)
@@ -699,11 +681,8 @@ namespace Newtonsoft.Json.Linq
             TryAddInternal(0, content, false);
         }
 
-        internal bool TryAddInternal(
-            int index,
-            object? content,
-            bool skipParentCheck
-        ) {
+        internal bool TryAddInternal(int index, object? content, bool skipParentCheck)
+        {
             if (IsMultiContent(content))
             {
                 IEnumerable enumerable = (IEnumerable)content;
@@ -762,10 +741,7 @@ namespace Newtonsoft.Json.Linq
             ClearItems();
         }
 
-        internal abstract void MergeItem(
-            object content,
-            JsonMergeSettings? settings
-        );
+        internal abstract void MergeItem(object content, JsonMergeSettings? settings);
 
         /// <summary>
         /// Merge the specified content into this <see cref="JToken"/>.
@@ -786,10 +762,8 @@ namespace Newtonsoft.Json.Linq
             MergeItem(content, settings);
         }
 
-        internal void ReadTokenFrom(
-            JsonReader reader,
-            JsonLoadSettings? options
-        ) {
+        internal void ReadTokenFrom(JsonReader reader, JsonLoadSettings? options)
+        {
             int startDepth = reader.Depth;
 
             if (!reader.Read())
@@ -819,10 +793,8 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal void ReadContentFrom(
-            JsonReader r,
-            JsonLoadSettings? settings
-        ) {
+        internal void ReadContentFrom(JsonReader r, JsonLoadSettings? settings)
+        {
             ValidationUtils.ArgumentNotNull(r, nameof(r));
             IJsonLineInfo? lineInfo = r as IJsonLineInfo;
 
@@ -876,9 +848,7 @@ namespace Newtonsoft.Json.Linq
                         parent = parent.Parent;
                         break;
                     case JsonToken.StartConstructor:
-                        JConstructor constructor = new JConstructor(
-                            r.Value!.ToString()
-                        );
+                        JConstructor constructor = new JConstructor(r.Value!.ToString());
                         constructor.SetLineInfo(lineInfo, settings);
                         parent.Add(constructor);
                         parent = constructor;
@@ -902,10 +872,8 @@ namespace Newtonsoft.Json.Linq
                         parent.Add(v);
                         break;
                     case JsonToken.Comment:
-                        if (
-                            settings != null &&
-                            settings.CommentHandling == CommentHandling.Load
-                        ) {
+                        if (settings != null && settings.CommentHandling == CommentHandling.Load)
+                        {
                             v = JValue.CreateComment(r.Value!.ToString());
                             v.SetLineInfo(lineInfo, settings);
                             parent.Add(v);
@@ -922,12 +890,7 @@ namespace Newtonsoft.Json.Linq
                         parent.Add(v);
                         break;
                     case JsonToken.PropertyName:
-                        JProperty? property = ReadProperty(
-                            r,
-                            settings,
-                            lineInfo,
-                            parent
-                        );
+                        JProperty? property = ReadProperty(r, settings, lineInfo, parent);
                         if (property != null)
                         {
                             parent = property;
@@ -956,8 +919,7 @@ namespace Newtonsoft.Json.Linq
             JContainer parent
         ) {
             DuplicatePropertyNameHandling duplicatePropertyNameHandling =
-                settings?.DuplicatePropertyNameHandling ??
-                DuplicatePropertyNameHandling.Replace;
+                settings?.DuplicatePropertyNameHandling ?? DuplicatePropertyNameHandling.Replace;
 
             JObject parentObject = (JObject)parent;
             string propertyName = r.Value!.ToString();
@@ -967,16 +929,12 @@ namespace Newtonsoft.Json.Linq
             );
             if (existingPropertyWithName != null)
             {
-                if (
-                    duplicatePropertyNameHandling ==
-                    DuplicatePropertyNameHandling.Ignore
-                ) {
+                if (duplicatePropertyNameHandling == DuplicatePropertyNameHandling.Ignore)
+                {
                     return null;
                 }
-                else if (
-                    duplicatePropertyNameHandling ==
-                    DuplicatePropertyNameHandling.Error
-                ) {
+                else if (duplicatePropertyNameHandling == DuplicatePropertyNameHandling.Error)
+                {
                     throw JsonReaderException.Create(
                         r,
                         "Property with the name '{0}' already exists in the current JSON object.".FormatWith(
@@ -1160,11 +1118,7 @@ namespace Newtonsoft.Json.Linq
             {
                 if (_syncRoot == null)
                 {
-                    Interlocked.CompareExchange(
-                        ref _syncRoot,
-                        new object(),
-                        null
-                    );
+                    Interlocked.CompareExchange(ref _syncRoot, new object(), null);
                 }
 
                 return _syncRoot;
@@ -1263,9 +1217,7 @@ namespace Newtonsoft.Json.Linq
                     }
 #else
                     Dictionary<JToken,
-                        bool> items = new Dictionary<JToken, bool>(
-                        EqualityComparer
-                    );
+                        bool> items = new Dictionary<JToken, bool>(EqualityComparer);
                     foreach (JToken t in target)
                     {
                         items[t] = true;
@@ -1308,9 +1260,7 @@ namespace Newtonsoft.Json.Linq
                             {
                                 if (targetItem != null)
                                 {
-                                    JToken contentValue = CreateFromContent(
-                                        targetItem
-                                    );
+                                    JToken contentValue = CreateFromContent(targetItem);
                                     if (contentValue.Type != JTokenType.Null)
                                     {
                                         target[i] = contentValue;

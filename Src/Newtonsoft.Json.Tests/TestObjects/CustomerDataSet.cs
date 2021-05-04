@@ -36,11 +36,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [global::System.Serializable()]
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.Xml.Serialization.XmlSchemaProviderAttribute(
-        "GetTypedDataSetSchema")]
+    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("CustomerDataSet")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute(
-        "vs.data.DataSet")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class CustomerDataSet : global::System.Data.DataSet
     {
         private CustomersDataTable tableCustomers;
@@ -83,11 +81,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 Relations.CollectionChanged += schemaChangedHandler1;
                 return;
             }
-            string strSchema =
-                ((string)(info.GetValue("XmlSchema", typeof(string))));
+            string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
             if (
-                (DetermineSchemaSerializationMode(info, context) ==
-                global::System.Data.SchemaSerializationMode.IncludeSchema)
+                (DetermineSchemaSerializationMode(info, context)
+                == global::System.Data.SchemaSerializationMode.IncludeSchema)
             ) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(
@@ -97,9 +94,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 );
                 if ((ds.Tables["Customers"] != null))
                 {
-                    base.Tables.Add(
-                        new CustomersDataTable(ds.Tables["Customers"])
-                    );
+                    base.Tables.Add(new CustomersDataTable(ds.Tables["Customers"]));
                 }
                 DataSetName = ds.DataSetName;
                 Prefix = ds.Prefix;
@@ -218,21 +213,18 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
             "System.Data.Design.TypedDataSetGenerator",
             "4.0.0.0")]
-        protected override void ReadXmlSerializable(
-            global::System.Xml.XmlReader reader
-        ) {
+        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader)
+        {
             if (
-                (DetermineSchemaSerializationMode(reader) ==
-                global::System.Data.SchemaSerializationMode.IncludeSchema)
+                (DetermineSchemaSerializationMode(reader)
+                == global::System.Data.SchemaSerializationMode.IncludeSchema)
             ) {
                 Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
                 if ((ds.Tables["Customers"] != null))
                 {
-                    base.Tables.Add(
-                        new CustomersDataTable(ds.Tables["Customers"])
-                    );
+                    base.Tables.Add(new CustomersDataTable(ds.Tables["Customers"]));
                 }
                 DataSetName = ds.DataSetName;
                 Prefix = ds.Prefix;
@@ -321,10 +313,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             object sender,
             global::System.ComponentModel.CollectionChangeEventArgs e
         ) {
-            if (
-                (e.Action ==
-                global::System.ComponentModel.CollectionChangeAction.Remove)
-            ) {
+            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
+            {
                 InitVars();
             }
         }
@@ -369,8 +359,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                             s2.Position = 0;
                             for (
                                 ;
-                                ((s1.Position != s1.Length) &&
-                                (s1.ReadByte() == s2.ReadByte()));
+                                ((s1.Position != s1.Length) && (s1.ReadByte() == s2.ReadByte()));
 
                             ) {
                                 ;
@@ -411,8 +400,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute(
-            "GetTypedTableSchema")]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class CustomersDataTable
             : global::System.Data.DataTable,
                 global::System.Collections.IEnumerable
@@ -442,9 +430,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 {
                     CaseSensitive = table.CaseSensitive;
                 }
-                if (
-                    (table.Locale.ToString() != table.DataSet.Locale.ToString())
-                ) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     Locale = table.Locale;
                 }
                 if ((table.Namespace != table.DataSet.Namespace))
@@ -622,18 +609,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
                 "System.Data.Design.TypedDataSetGenerator",
                 "4.0.0.0")]
-            protected override void OnRowChanged(
-                global::System.Data.DataRowChangeEventArgs e
-            ) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
                 if ((CustomersRowChanged != null))
                 {
                     CustomersRowChanged(
                         this,
-                        new CustomersRowChangeEvent(
-                            ((CustomersRow)(e.Row)),
-                            e.Action
-                        )
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
                     );
                 }
             }
@@ -642,18 +625,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
                 "System.Data.Design.TypedDataSetGenerator",
                 "4.0.0.0")]
-            protected override void OnRowChanging(
-                global::System.Data.DataRowChangeEventArgs e
-            ) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
                 if ((CustomersRowChanging != null))
                 {
                     CustomersRowChanging(
                         this,
-                        new CustomersRowChangeEvent(
-                            ((CustomersRow)(e.Row)),
-                            e.Action
-                        )
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
                     );
                 }
             }
@@ -662,18 +641,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
                 "System.Data.Design.TypedDataSetGenerator",
                 "4.0.0.0")]
-            protected override void OnRowDeleted(
-                global::System.Data.DataRowChangeEventArgs e
-            ) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
                 if ((CustomersRowDeleted != null))
                 {
                     CustomersRowDeleted(
                         this,
-                        new CustomersRowChangeEvent(
-                            ((CustomersRow)(e.Row)),
-                            e.Action
-                        )
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
                     );
                 }
             }
@@ -682,18 +657,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute(
                 "System.Data.Design.TypedDataSetGenerator",
                 "4.0.0.0")]
-            protected override void OnRowDeleting(
-                global::System.Data.DataRowChangeEventArgs e
-            ) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
                 if ((CustomersRowDeleting != null))
                 {
                     CustomersRowDeleting(
                         this,
-                        new CustomersRowChangeEvent(
-                            ((CustomersRow)(e.Row)),
-                            e.Action
-                        )
+                        new CustomersRowChangeEvent(((CustomersRow)(e.Row)), e.Action)
                     );
                 }
             }
@@ -763,8 +734,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                                 s2.Position = 0;
                                 for (
                                     ;
-                                    ((s1.Position != s1.Length) &&
-                                    (s1.ReadByte() == s2.ReadByte()));
+                                    ((s1.Position != s1.Length)
+                                    && (s1.ReadByte() == s2.ReadByte()));
 
                                 ) {
                                     ;
@@ -821,9 +792,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 {
                     try
                     {
-                        return ((string)(this[
-                            tableCustomers.CustomerIDColumn
-                        ]));
+                        return ((string)(this[tableCustomers.CustomerIDColumn]));
                     }
                     catch (global::System.InvalidCastException e)
                     {
@@ -851,9 +820,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 "4.0.0.0")]
             public void SetCustomerIDNull()
             {
-                this[
-                    tableCustomers.CustomerIDColumn
-                ] = global::System.Convert.DBNull;
+                this[tableCustomers.CustomerIDColumn] = global::System.Convert.DBNull;
             }
         }
 

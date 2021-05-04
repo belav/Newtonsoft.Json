@@ -85,10 +85,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             #region Usage
             User user = new User { UserName = @"domain\username" };
 
-            string json = JsonConvert.SerializeObject(
-                user,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(user, Formatting.Indented);
 
             Console.WriteLine(json);
             // "domain\\username"

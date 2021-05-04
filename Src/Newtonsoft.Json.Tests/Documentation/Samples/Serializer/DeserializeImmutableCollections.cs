@@ -57,9 +57,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               '3'
             ]";
 
-            ImmutableList<string> l = JsonConvert.DeserializeObject<ImmutableList<string>>(
-                json
-            );
+            ImmutableList<string> l = JsonConvert.DeserializeObject<ImmutableList<string>>(json);
 
             foreach (string s in l)
             {

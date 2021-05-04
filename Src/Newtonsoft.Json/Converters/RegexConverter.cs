@@ -47,11 +47,8 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             if (value == null)
             {
                 writer.WriteNull();
@@ -115,25 +112,18 @@ namespace Newtonsoft.Json.Converters
         }
 #pragma warning restore 618
 
-        private void WriteJson(
-            JsonWriter writer,
-            Regex regex,
-            JsonSerializer serializer
-        ) {
+        private void WriteJson(JsonWriter writer, Regex regex, JsonSerializer serializer)
+        {
             DefaultContractResolver? resolver =
                 serializer.ContractResolver as DefaultContractResolver;
 
             writer.WriteStartObject();
             writer.WritePropertyName(
-                (resolver != null)
-                    ? resolver.GetResolvedPropertyName(PatternName)
-                    : PatternName
+                (resolver != null) ? resolver.GetResolvedPropertyName(PatternName) : PatternName
             );
             writer.WriteValue(regex.ToString());
             writer.WritePropertyName(
-                (resolver != null)
-                    ? resolver.GetResolvedPropertyName(OptionsName)
-                    : OptionsName
+                (resolver != null) ? resolver.GetResolvedPropertyName(OptionsName) : OptionsName
             );
             serializer.Serialize(writer, regex.Options);
             writer.WriteEndObject();
@@ -163,10 +153,7 @@ namespace Newtonsoft.Json.Converters
                     return null;
             }
 
-            throw JsonSerializationException.Create(
-                reader,
-                "Unexpected token when reading Regex."
-            );
+            throw JsonSerializationException.Create(reader, "Unexpected token when reading Regex.");
         }
 
         private object ReadRegexString(JsonReader reader)
@@ -179,17 +166,10 @@ namespace Newtonsoft.Json.Converters
 
                 if (patternOptionDelimiterIndex > 0)
                 {
-                    string patternText = regexText.Substring(
-                        1,
-                        patternOptionDelimiterIndex - 1
-                    );
-                    string optionsText = regexText.Substring(
-                        patternOptionDelimiterIndex + 1
-                    );
+                    string patternText = regexText.Substring(1, patternOptionDelimiterIndex - 1);
+                    string optionsText = regexText.Substring(patternOptionDelimiterIndex + 1);
 
-                    RegexOptions options = MiscellaneousUtils.GetRegexOptions(
-                        optionsText
-                    );
+                    RegexOptions options = MiscellaneousUtils.GetRegexOptions(optionsText);
 
                     return new Regex(patternText, options);
                 }
@@ -201,10 +181,8 @@ namespace Newtonsoft.Json.Converters
             );
         }
 
-        private Regex ReadRegexObject(
-            JsonReader reader,
-            JsonSerializer serializer
-        ) {
+        private Regex ReadRegexObject(JsonReader reader, JsonSerializer serializer)
+        {
             string? pattern = null;
             RegexOptions? options = null;
 
@@ -239,9 +217,7 @@ namespace Newtonsoft.Json.Converters
                                 StringComparison.OrdinalIgnoreCase
                             )
                         ) {
-                            options = serializer.Deserialize<RegexOptions>(
-                                reader
-                            );
+                            options = serializer.Deserialize<RegexOptions>(reader);
                         }
                         else
                         {
@@ -263,10 +239,7 @@ namespace Newtonsoft.Json.Converters
                 }
             }
 
-            throw JsonSerializationException.Create(
-                reader,
-                "Unexpected end when reading Regex."
-            );
+            throw JsonSerializationException.Create(reader, "Unexpected end when reading Regex.");
         }
 
         /// <summary>

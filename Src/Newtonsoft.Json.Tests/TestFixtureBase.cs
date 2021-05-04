@@ -203,9 +203,7 @@ namespace Newtonsoft.Json.Tests
         protected string GetDataContractJsonSerializeResult(object o)
         {
             MemoryStream ms = new MemoryStream();
-            DataContractJsonSerializer s = new DataContractJsonSerializer(
-                o.GetType()
-            );
+            DataContractJsonSerializer s = new DataContractJsonSerializer(o.GetType());
             s.WriteObject(ms, o);
 
             var data = ms.ToArray();
@@ -215,17 +213,13 @@ namespace Newtonsoft.Json.Tests
 
         public static string ResolvePath(string path)
         {
-            var assemblyPath = Path.GetDirectoryName(
-                typeof(TestFixtureBase).Assembly().Location
-            );
+            var assemblyPath = Path.GetDirectoryName(typeof(TestFixtureBase).Assembly().Location);
 
             return Path.Combine(assemblyPath, path);
         }
 
-        protected string GetOffset(
-            DateTime d,
-            DateFormatHandling dateFormatHandling
-        ) {
+        protected string GetOffset(DateTime d, DateFormatHandling dateFormatHandling)
+        {
             char[] chars = new char[8];
             int pos = DateTimeUtils.WriteDateTimeOffset(
                 chars,
@@ -347,11 +341,8 @@ namespace Newtonsoft.Json.Tests
             Contains(collection, value, null);
         }
 
-        public static void Contains(
-            IList collection,
-            object value,
-            string message
-        ) {
+        public static void Contains(IList collection, object value, string message)
+        {
 #if !(DNXCORE50)
             Assert.Contains(value, collection, message);
 #else
@@ -399,19 +390,17 @@ namespace Newtonsoft.Json.Tests
 
     public static class ExceptionAssert
     {
-        public static TException Throws<TException>(
-            Action action,
-            params string[] possibleMessages
-        )
-            where TException : Exception {
+        public static TException Throws<TException>(Action action, params string[] possibleMessages)
+            where TException : Exception
+        {
             try
             {
                 action();
 
                 Assert.Fail(
-                    "Exception of type " +
-                    typeof(TException).Name +
-                    " expected. No exception thrown."
+                    "Exception of type "
+                    + typeof(TException).Name
+                    + " expected. No exception thrown."
                 );
                 return null;
             }
@@ -430,16 +419,16 @@ namespace Newtonsoft.Json.Tests
                 }
 
                 throw new Exception(
-                    "Unexpected exception message." +
-                    Environment.NewLine +
-                    "Expected one of: " +
-                    string.Join(Environment.NewLine, possibleMessages) +
-                    Environment.NewLine +
-                    "Got: " +
-                    ex.Message +
-                    Environment.NewLine +
-                    Environment.NewLine +
-                    ex
+                    "Unexpected exception message."
+                    + Environment.NewLine
+                    + "Expected one of: "
+                    + string.Join(Environment.NewLine, possibleMessages)
+                    + Environment.NewLine
+                    + "Got: "
+                    + ex.Message
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + ex
                 );
             }
             catch (Exception ex)
@@ -466,9 +455,9 @@ namespace Newtonsoft.Json.Tests
                 await action();
 
                 Assert.Fail(
-                    "Exception of type " +
-                    typeof(TException).Name +
-                    " expected. No exception thrown."
+                    "Exception of type "
+                    + typeof(TException).Name
+                    + " expected. No exception thrown."
                 );
                 return null;
             }
@@ -487,16 +476,16 @@ namespace Newtonsoft.Json.Tests
                 }
 
                 throw new Exception(
-                    "Unexpected exception message." +
-                    Environment.NewLine +
-                    "Expected one of: " +
-                    string.Join(Environment.NewLine, possibleMessages) +
-                    Environment.NewLine +
-                    "Got: " +
-                    ex.Message +
-                    Environment.NewLine +
-                    Environment.NewLine +
-                    ex
+                    "Unexpected exception message."
+                    + Environment.NewLine
+                    + "Expected one of: "
+                    + string.Join(Environment.NewLine, possibleMessages)
+                    + Environment.NewLine
+                    + "Got: "
+                    + ex.Message
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + ex
                 );
             }
             catch (Exception ex)

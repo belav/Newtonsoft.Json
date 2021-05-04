@@ -99,17 +99,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             //   "CodePlex"
             // ]
 
-            string[] categoriesText = categories.Select(c => (string)c)
-                .ToArray();
+            string[] categoriesText = categories.Select(c => (string)c).ToArray();
 
             Console.WriteLine(string.Join(", ", categoriesText));
             // Json.NET, CodePlex
             #endregion
 
-            Assert.AreEqual(
-                "Json.NET, CodePlex",
-                string.Join(", ", categoriesText)
-            );
+            Assert.AreEqual("Json.NET, CodePlex", string.Join(", ", categoriesText));
         }
     }
 }

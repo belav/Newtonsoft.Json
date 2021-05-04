@@ -88,9 +88,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         #region CustomTraceWriterExample
         public class NLogTraceWriter : ITraceWriter
         {
-            private static readonly Logger Logger = LogManager.GetLogger(
-                "NLogTraceWriter"
-            );
+            private static readonly Logger Logger = LogManager.GetLogger("NLogTraceWriter");
 
             public TraceLevel LevelFilter
             {
@@ -137,15 +135,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             Staff staff = new Staff();
             staff.Name = "Arnie Admin";
             staff.Roles = new List<string> { "Administrator" };
-            staff.StartDate = new DateTime(
-                2000,
-                12,
-                12,
-                12,
-                12,
-                12,
-                DateTimeKind.Utc
-            );
+            staff.StartDate = new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc);
 
             ITraceWriter traceWriter = new MemoryTraceWriter();
 
@@ -177,8 +167,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // }
             #endregion
 
-            MemoryTraceWriter memoryTraceWriter =
-                (MemoryTraceWriter)traceWriter;
+            MemoryTraceWriter memoryTraceWriter = (MemoryTraceWriter)traceWriter;
 
             Assert.AreEqual(916, memoryTraceWriter.ToString().Length);
             Assert.AreEqual(7, memoryTraceWriter.GetTraceMessages().Count());

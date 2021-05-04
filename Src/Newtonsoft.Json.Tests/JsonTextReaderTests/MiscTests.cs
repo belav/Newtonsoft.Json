@@ -65,8 +65,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadWithSupportMultipleContentCommaDelimited()
         {
-            string json =
-                @"{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string'";
+            string json = @"{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string'";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.SupportMultipleContent = true;
@@ -121,9 +120,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             string json = "{}";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -234,8 +231,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void SurrogatePairValid()
         {
-            string json =
-                @"{ ""MATHEMATICAL ITALIC CAPITAL ALPHA"": ""\uD835\uDEE2"" }";
+            string json = @"{ ""MATHEMATICAL ITALIC CAPITAL ALPHA"": ""\uD835\uDEE2"" }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -256,16 +252,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         public void SurrogatePairReplacement()
         {
             // existing good surrogate pair
-            Assert.AreEqual(
-                "ABC \ud800\udc00 DEF",
-                ReadString("ABC \\ud800\\udc00 DEF")
-            );
+            Assert.AreEqual("ABC \ud800\udc00 DEF", ReadString("ABC \\ud800\\udc00 DEF"));
 
             // invalid surrogates (two high back-to-back)
-            Assert.AreEqual(
-                "ABC \ufffd\ufffd DEF",
-                ReadString("ABC \\ud800\\ud800 DEF")
-            );
+            Assert.AreEqual("ABC \ufffd\ufffd DEF", ReadString("ABC \\ud800\\ud800 DEF"));
 
             // invalid surrogates (two high back-to-back)
             Assert.AreEqual(
@@ -292,16 +282,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual("ABC \ufffd DEF", ReadString("ABC \\ud800 DEF"));
 
             // low surrogate not preceded by high surrogate
-            Assert.AreEqual(
-                "ABC \ufffd\ufffd DEF",
-                ReadString("ABC \\udc00\\ud800 DEF")
-            );
+            Assert.AreEqual("ABC \ufffd\ufffd DEF", ReadString("ABC \\udc00\\ud800 DEF"));
 
             // make sure unencoded invalid surrogate characters don't make it through
-            Assert.AreEqual(
-                "\ufffd\ufffd\ufffd",
-                ReadString("\udc00\ud800\ud800")
-            );
+            Assert.AreEqual("\ufffd\ufffd\ufffd", ReadString("\udc00\ud800\ud800"));
 
             Assert.AreEqual("ABC \ufffd\b", ReadString("ABC \\ud800\\b"));
             Assert.AreEqual("ABC \ufffd ", ReadString("ABC \\ud800 "));
@@ -310,9 +294,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
         private string ReadString(string input)
         {
-            MemoryStream ms = new MemoryStream(
-                Encoding.UTF8.GetBytes(@"""" + input + @"""")
-            );
+            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(@"""" + input + @""""));
 
             JsonTextReader reader = new JsonTextReader(new StreamReader(ms));
             reader.Read();
@@ -333,12 +315,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsFalse(ms.CanRead);
 
             ms = new MemoryStream();
-            reader = new JsonTextReader(
-                new StreamReader(ms)
-            )
-            {
-                CloseInput = false
-            };
+            reader = new JsonTextReader(new StreamReader(ms)) { CloseInput = false };
 
             Assert.IsTrue(ms.CanRead);
             reader.Close();
@@ -370,11 +347,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 }
 ";
 
-            using (
-                JsonReader jsonReader = new JsonTextReader(
-                    new StringReader(input)
-                )
-            ) {
+            using (JsonReader jsonReader = new JsonTextReader(new StringReader(input)))
+            {
                 while (jsonReader.Read()) { }
             }
         }
@@ -590,9 +564,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
               ""Drives"": [
                 ""DVD read/writer"",
                 ""500 gigabyte hard drive"",
-                ""Amazing Drive" +
-                new string('!', 9000) +
-                @"""
+                ""Amazing Drive"
+                + new string('!', 9000)
+                + @"""
               ]
             }";
 
@@ -600,11 +574,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             for (int i = 0; i < 1000; i++)
             {
-                using (
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader(json)
-                    )
-                ) {
+                using (JsonTextReader reader = new JsonTextReader(new StringReader(json)))
+                {
                     reader.ArrayPool = arrayPool;
 
                     while (reader.Read()) { }
@@ -612,9 +583,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
                 if ((i + 1) % 100 == 0)
                 {
-                    Console.WriteLine(
-                        "Allocated buffers: " + arrayPool.FreeArrays.Count
-                    );
+                    Console.WriteLine("Allocated buffers: " + arrayPool.FreeArrays.Count);
                 }
             }
 
@@ -635,11 +604,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             try
             {
                 // dispose will free used buffers
-                using (
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader(json)
-                    )
-                ) {
+                using (JsonTextReader reader = new JsonTextReader(new StringReader(json)))
+                {
                     reader.ArrayPool = arrayPool;
 
                     while (reader.Read()) { }
@@ -660,12 +626,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             StringWriter sw = new StringWriter(sb);
 
             using (
-                JsonWriter jsonWriter = new JsonTextWriter(
-                    sw
-                )
-                {
-                    Formatting = Formatting.Indented
-                }
+                JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
             ) {
                 jsonWriter.WriteStartArray();
                 jsonWriter.WriteValue(true);
@@ -703,20 +664,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             JsonSerializer serializer = new JsonSerializer();
 
-            object jsonObject = serializer.Deserialize(
-                new JsonTextReader(new StringReader(json))
-            );
+            object jsonObject = serializer.Deserialize(new JsonTextReader(new StringReader(json)));
 
             sb = new StringBuilder();
             sw = new StringWriter(sb);
 
             using (
-                JsonWriter jsonWriter = new JsonTextWriter(
-                    sw
-                )
-                {
-                    Formatting = Formatting.Indented
-                }
+                JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
             ) {
                 serializer.Serialize(jsonWriter, jsonObject);
             }
@@ -764,10 +718,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual("<", reader.Value);
 
             reader.Read();
-            Assert.AreEqual(
-                24352,
-                Convert.ToInt32(Convert.ToChar((string)reader.Value))
-            );
+            Assert.AreEqual(24352, Convert.ToInt32(Convert.ToChar((string)reader.Value)));
 
             reader.Read();
             Assert.AreEqual(JsonToken.EndArray, reader.TokenType);
@@ -777,9 +728,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         public void SupportMultipleContent()
         {
             JsonTextReader reader = new JsonTextReader(
-                new StringReader(
-                    @"{'prop1':[1]} 1 2 ""name"" [][]null {}{} 1.1"
-                )
+                new StringReader(@"{'prop1':[1]} 1 2 ""name"" [][]null {}{} 1.1")
             );
             reader.SupportMultipleContent = true;
 
@@ -850,15 +799,15 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 @"//comment*//*hi*/
 {//comment
 Name://comment
-true//comment after true" +
-                StringUtils.CarriageReturn +
-                @",//comment after comma" +
-                StringUtils.CarriageReturnLineFeed +
-                @"""ExpiryDate""://comment" +
-                StringUtils.LineFeed +
-                @"new " +
-                StringUtils.LineFeed +
-                @"Date
+true//comment after true"
+                + StringUtils.CarriageReturn
+                + @",//comment after comma"
+                + StringUtils.CarriageReturnLineFeed
+                + @"""ExpiryDate""://comment"
+                + StringUtils.LineFeed
+                + @"new "
+                + StringUtils.LineFeed
+                + @"Date
 (//comment
 null//comment
 ),
@@ -872,9 +821,7 @@ null//comment
 //comment 1 ";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -995,9 +942,7 @@ null//comment
             string json = @"//comment";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1014,10 +959,7 @@ null//comment
 
             d = Convert.ToDouble("6.0221418e23", CultureInfo.InvariantCulture);
 
-            Assert.AreEqual(
-                "6,0221418E+23",
-                d.ToString(new CultureInfo("fr-FR"))
-            );
+            Assert.AreEqual("6,0221418E+23", d.ToString(new CultureInfo("fr-FR")));
             Assert.AreEqual(
                 "602214180000000000000000",
                 d.ToString(

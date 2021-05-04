@@ -115,10 +115,8 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <param name="namingStrategy">The naming strategy used to resolve how enum text is written.</param>
         /// <param name="allowIntegerValues"><c>true</c> if integers are allowed when serializing and deserializing; otherwise, <c>false</c>.</param>
-        public StringEnumConverter(
-            NamingStrategy namingStrategy,
-            bool allowIntegerValues = true
-        ) {
+        public StringEnumConverter(NamingStrategy namingStrategy, bool allowIntegerValues = true)
+        {
             NamingStrategy = namingStrategy;
             AllowIntegerValues = allowIntegerValues;
         }
@@ -129,10 +127,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="namingStrategyType">The <see cref="System.Type"/> of the <see cref="Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
         public StringEnumConverter(Type namingStrategyType)
         {
-            ValidationUtils.ArgumentNotNull(
-                namingStrategyType,
-                nameof(namingStrategyType)
-            );
+            ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
             NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
                 namingStrategyType,
@@ -150,14 +145,9 @@ namespace Newtonsoft.Json.Converters
         /// When non-<c>null</c>, there must be a constructor defined in the <see cref="Newtonsoft.Json.Serialization.NamingStrategy"/> that exactly matches the number,
         /// order, and type of these parameters.
         /// </param>
-        public StringEnumConverter(
-            Type namingStrategyType,
-            object[] namingStrategyParameters
-        ) {
-            ValidationUtils.ArgumentNotNull(
-                namingStrategyType,
-                nameof(namingStrategyType)
-            );
+        public StringEnumConverter(Type namingStrategyType, object[] namingStrategyParameters)
+        {
+            ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
             NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
                 namingStrategyType,
@@ -181,10 +171,7 @@ namespace Newtonsoft.Json.Converters
             object[] namingStrategyParameters,
             bool allowIntegerValues
         ) {
-            ValidationUtils.ArgumentNotNull(
-                namingStrategyType,
-                nameof(namingStrategyType)
-            );
+            ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
             NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
                 namingStrategyType,
@@ -199,11 +186,8 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             if (value == null)
             {
                 writer.WriteNull();
@@ -212,14 +196,8 @@ namespace Newtonsoft.Json.Converters
 
             Enum e = (Enum)value;
 
-            if (
-                !EnumUtils.TryToString(
-                    e.GetType(),
-                    value,
-                    NamingStrategy,
-                    out string? enumName
-                )
-            ) {
+            if (!EnumUtils.TryToString(e.GetType(), value, NamingStrategy, out string? enumName))
+            {
                 if (!AllowIntegerValues)
                 {
                     throw JsonSerializationException.Create(
@@ -273,9 +251,7 @@ namespace Newtonsoft.Json.Converters
             }
 
             bool isNullable = ReflectionUtils.IsNullableType(objectType);
-            Type t = isNullable
-                ? Nullable.GetUnderlyingType(objectType)
-                : objectType;
+            Type t = isNullable ? Nullable.GetUnderlyingType(objectType) : objectType;
 
             try
             {
@@ -288,12 +264,7 @@ namespace Newtonsoft.Json.Converters
                         return null;
                     }
 
-                    return EnumUtils.ParseEnum(
-                        t,
-                        NamingStrategy,
-                        enumText!,
-                        !AllowIntegerValues
-                    );
+                    return EnumUtils.ParseEnum(t, NamingStrategy, enumText!, !AllowIntegerValues);
                 }
 
                 if (reader.TokenType == JsonToken.Integer)

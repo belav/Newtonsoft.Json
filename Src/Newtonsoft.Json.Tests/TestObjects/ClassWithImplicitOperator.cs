@@ -29,9 +29,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public string Value { get; set; }
 
-        public static implicit operator ClassWithImplicitOperator(
-            string value
-        ) {
+        public static implicit operator ClassWithImplicitOperator(string value)
+        {
             return new ClassWithImplicitOperator() { Value = value };
         }
     }

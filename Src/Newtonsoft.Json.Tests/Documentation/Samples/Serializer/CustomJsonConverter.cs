@@ -70,13 +70,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 else
                 {
                     JObject o = (JObject)t;
-                    IList<string> propertyNames = o.Properties()
-                        .Select(p => p.Name)
-                        .ToList();
+                    IList<string> propertyNames = o.Properties().Select(p => p.Name).ToList();
 
-                    o.AddFirst(
-                        new JProperty("Keys", new JArray(propertyNames))
-                    );
+                    o.AddFirst(new JProperty("Keys", new JArray(propertyNames)));
 
                     o.WriteTo(writer);
                 }

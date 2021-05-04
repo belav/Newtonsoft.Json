@@ -41,10 +41,8 @@ namespace Newtonsoft.Json.Utilities
     internal static class MiscellaneousUtils
     {
         [Conditional("DEBUG")]
-        public static void Assert(
-            [DoesNotReturnIf(false)]bool condition,
-            string? message = null
-        ) {
+        public static void Assert([DoesNotReturnIf(false)]bool condition, string? message = null)
+        {
             Debug.Assert(condition, message);
         }
 
@@ -63,17 +61,14 @@ namespace Newtonsoft.Json.Utilities
             // make types the same then compare
             if (objA.GetType() != objB.GetType())
             {
-                if (
-                    ConvertUtils.IsInteger(objA) && ConvertUtils.IsInteger(objB)
-                ) {
+                if (ConvertUtils.IsInteger(objA) && ConvertUtils.IsInteger(objB))
+                {
                     return Convert.ToDecimal(objA, CultureInfo.CurrentCulture)
-                        .Equals(
-                            Convert.ToDecimal(objB, CultureInfo.CurrentCulture)
-                        );
+                        .Equals(Convert.ToDecimal(objB, CultureInfo.CurrentCulture));
                 }
                 else if (
-                    (objA is double || objA is float || objA is decimal) &&
-                    (objB is double || objB is float || objB is decimal)
+                    (objA is double || objA is float || objA is decimal)
+                    && (objB is double || objB is float || objB is decimal)
                 ) {
                     return MathUtils.ApproxEquals(
                         Convert.ToDouble(objA, CultureInfo.CurrentCulture),
@@ -95,12 +90,9 @@ namespace Newtonsoft.Json.Utilities
             string message
         ) {
             string newMessage =
-                message +
-                Environment.NewLine +
-                @"Actual value was {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    actualValue
-                );
+                message
+                + Environment.NewLine
+                + @"Actual value was {0}.".FormatWith(CultureInfo.InvariantCulture, actualValue);
 
             return new ArgumentOutOfRangeException(paramName, newMessage);
         }
@@ -112,7 +104,8 @@ namespace Newtonsoft.Json.Utilities
                 return "{null}";
             }
 
-            return (value is string s) ? @"""" + s + @"""" : value!.ToString();
+            return (value
+                is string s) ? @"""" + s + @"""" : value!.ToString();
         }
 
         public static int ByteArrayCompare(byte[] a1, byte[] a2)
@@ -157,8 +150,8 @@ namespace Newtonsoft.Json.Utilities
             int colonPosition = qualifiedName.IndexOf(':');
 
             if (
-                (colonPosition == -1 || colonPosition == 0) ||
-                (qualifiedName.Length - 1) == colonPosition
+                (colonPosition == -1 || colonPosition == 0)
+                || (qualifiedName.Length - 1) == colonPosition
             ) {
                 prefix = null;
                 localName = qualifiedName;

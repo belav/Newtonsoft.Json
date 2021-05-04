@@ -27,8 +27,7 @@ using System;
 
 namespace Newtonsoft.Json.Utilities
 {
-    internal readonly struct StructMultiKey<T1, T2>
-        : IEquatable<StructMultiKey<T1, T2>>
+    internal readonly struct StructMultiKey<T1, T2> : IEquatable<StructMultiKey<T1, T2>>
     {
         public readonly T1 Value1;
         public readonly T2 Value2;
@@ -56,8 +55,7 @@ namespace Newtonsoft.Json.Utilities
 
         public bool Equals(StructMultiKey<T1, T2> other)
         {
-            return (Equals(Value1, other.Value1) &&
-            Equals(Value2, other.Value2));
+            return (Equals(Value1, other.Value1) && Equals(Value2, other.Value2));
         }
     }
 }

@@ -72,10 +72,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string jsonIgnoreDefaultValues = JsonConvert.SerializeObject(
                 person,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
             Console.WriteLine(jsonIgnoreDefaultValues);

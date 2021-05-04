@@ -75,10 +75,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 CreatedDate = new DateTime(2010, 10, 1)
             };
 
-            string json = JsonConvert.SerializeObject(
-                account,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(account, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

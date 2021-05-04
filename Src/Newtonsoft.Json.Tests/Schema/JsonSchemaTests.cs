@@ -465,15 +465,12 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = writer.ToString();
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""items"": [
     {},
     {}
   ]
-}",
-                json
-            );
+}", json);
         }
 
         [Test]
@@ -572,10 +569,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchema schema = new JsonSchema();
             schema.PositionalItemsValidation = true;
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { Type = JsonSchemaType.String }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } };
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -601,10 +595,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public void WriteTo_PositionalItemsValidation_FalseWithItemsSchema()
         {
             JsonSchema schema = new JsonSchema();
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { Type = JsonSchemaType.String }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } };
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -614,14 +605,11 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = writer.ToString();
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""items"": {
     ""type"": ""string""
   }
-}",
-                json
-            );
+}", json);
         }
 
         [Test]
@@ -644,11 +632,9 @@ namespace Newtonsoft.Json.Tests.Schema
 }"
             );
 
-            JObject json = JObject.Parse(
-                @"{
+            JObject json = JObject.Parse(@"{
         ""NumberProperty"": 23
-      }"
-            );
+      }");
 
             Assert.IsTrue(json.IsValid(schema));
         }

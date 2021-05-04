@@ -63,14 +63,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ]
             #endregion
 
-            StringAssert.AreEqual(
-                @"[
+            StringAssert.AreEqual(@"[
   ""One"",
   ""II"",
   ""3""
-]",
-                json
-            );
+]", json);
         }
     }
 }

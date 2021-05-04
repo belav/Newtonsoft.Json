@@ -78,10 +78,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             #endregion
 
             Assert.AreEqual(1, newtonsoftPackages.Count);
-            Assert.AreEqual(
-                "Newtonsoft.Json",
-                (string)newtonsoftPackages[0]["PackageId"]
-            );
+            Assert.AreEqual("Newtonsoft.Json", (string)newtonsoftPackages[0]["PackageId"]);
         }
     }
 }

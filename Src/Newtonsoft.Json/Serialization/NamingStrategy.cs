@@ -55,10 +55,8 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="name">The initial property name.</param>
         /// <param name="hasSpecifiedName">A flag indicating whether the property has had a name explicitly specified.</param>
         /// <returns>The serialized property name.</returns>
-        public virtual string GetPropertyName(
-            string name,
-            bool hasSpecifiedName
-        ) {
+        public virtual string GetPropertyName(string name, bool hasSpecifiedName)
+        {
             if (hasSpecifiedName && !OverrideSpecifiedNames)
             {
                 return name;
@@ -113,12 +111,9 @@ namespace Newtonsoft.Json.Serialization
             unchecked
             {
                 var hashCode = GetType().GetHashCode(); // make sure different types do not result in equal values
-                hashCode = (hashCode * 397) ^
-                ProcessDictionaryKeys.GetHashCode();
-                hashCode = (hashCode * 397) ^
-                ProcessExtensionDataNames.GetHashCode();
-                hashCode = (hashCode * 397) ^
-                OverrideSpecifiedNames.GetHashCode();
+                hashCode = (hashCode * 397) ^ ProcessDictionaryKeys.GetHashCode();
+                hashCode = (hashCode * 397) ^ ProcessExtensionDataNames.GetHashCode();
+                hashCode = (hashCode * 397) ^ OverrideSpecifiedNames.GetHashCode();
                 return hashCode;
             }
         }
@@ -128,8 +123,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj) =>
-            Equals(obj as NamingStrategy);
+        public override bool Equals(object obj) => Equals(obj as NamingStrategy);
 
         /// <summary>
         /// Compare to another NamingStrategy
@@ -143,10 +137,10 @@ namespace Newtonsoft.Json.Serialization
                 return false;
             }
 
-            return GetType() == other.GetType() &&
-            ProcessDictionaryKeys == other.ProcessDictionaryKeys &&
-            ProcessExtensionDataNames == other.ProcessExtensionDataNames &&
-            OverrideSpecifiedNames == other.OverrideSpecifiedNames;
+            return GetType() == other.GetType()
+                && ProcessDictionaryKeys == other.ProcessDictionaryKeys
+                && ProcessExtensionDataNames == other.ProcessExtensionDataNames
+                && OverrideSpecifiedNames == other.OverrideSpecifiedNames;
         }
     }
 }

@@ -92,10 +92,7 @@ namespace Newtonsoft.Json.Tests.Issues
             var p = JsonConvert.DeserializeObject<PersonWithXmlNode>(json);
 
             Assert.AreEqual("Kumar", p.Name);
-            Assert.AreEqual(
-                "vinoth",
-                p.TestXml.SelectSingleNode("//name").InnerText
-            );
+            Assert.AreEqual("vinoth", p.TestXml.SelectSingleNode("//name").InnerText);
         }
 #endif
 
@@ -138,18 +135,15 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual("Kumar", p.Name);
             Assert.AreEqual(
                 "vinoth",
-                (string)((XDocument)p.TestXml1).Root.Element("order")
-                    .Element("name")
+                (string)((XDocument)p.TestXml1).Root.Element("order").Element("name")
             );
             Assert.AreEqual(
                 "vinoth",
-                (string)((XDocument)p.TestXml2).Root.Element("order")
-                    .Element("name")
+                (string)((XDocument)p.TestXml2).Root.Element("order").Element("name")
             );
             Assert.AreEqual(
                 "vinoth",
-                (string)((XDocument)p.TestXml3).Root.Element("order")
-                    .Element("name")
+                (string)((XDocument)p.TestXml3).Root.Element("order").Element("name")
             );
         }
 #endif

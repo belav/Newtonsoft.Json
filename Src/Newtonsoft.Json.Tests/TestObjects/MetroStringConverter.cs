@@ -30,16 +30,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class MetroStringConverter : JsonConverter
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
 #if !(DNXCORE50)
             writer.WriteValue(
-                ":::" +
-                value.ToString().ToUpper(CultureInfo.InvariantCulture) +
-                ":::"
+                ":::" + value.ToString().ToUpper(CultureInfo.InvariantCulture) + ":::"
             );
 #else
             writer.WriteValue(":::" + value.ToString().ToUpper() + ":::");

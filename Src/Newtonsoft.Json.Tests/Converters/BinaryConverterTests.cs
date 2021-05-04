@@ -79,8 +79,7 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeBinaryClassFromJsonArray()
         {
-            string json =
-                @"{
+            string json = @"{
   ""Binary"": [0, 1, 2, 3],
   ""NullBinary"": null
 }";
@@ -90,10 +89,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 new BinaryConverter()
             );
 
-            Assert.AreEqual(
-                new byte[] { 0, 1, 2, 3 },
-                binaryClass.Binary.ToArray()
-            );
+            Assert.AreEqual(new byte[] { 0, 1, 2, 3 }, binaryClass.Binary.ToArray());
             Assert.AreEqual(null, binaryClass.NullBinary);
         }
 
@@ -133,10 +129,7 @@ namespace Newtonsoft.Json.Tests.Converters
             byteArrayClass.ByteArray = TestData;
             byteArrayClass.NullByteArray = null;
 
-            string json = JsonConvert.SerializeObject(
-                byteArrayClass,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(byteArrayClass, Formatting.Indented);
 
             StringAssert.AreEqual(
                 @"{
@@ -195,10 +188,7 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 
             Assert.AreEqual(new SqlBinary(TestData), sqlBinaryClass.SqlBinary);
-            Assert.AreEqual(
-                new SqlBinary(TestData),
-                sqlBinaryClass.NullableSqlBinary1
-            );
+            Assert.AreEqual(new SqlBinary(TestData), sqlBinaryClass.NullableSqlBinary1);
             Assert.AreEqual(null, sqlBinaryClass.NullableSqlBinary2);
         }
 #endif
@@ -212,9 +202,7 @@ namespace Newtonsoft.Json.Tests.Converters
   ""NullByteArray"": null
 }";
 
-            ByteArrayClass byteArrayClass = JsonConvert.DeserializeObject<ByteArrayClass>(
-                json
-            );
+            ByteArrayClass byteArrayClass = JsonConvert.DeserializeObject<ByteArrayClass>(json);
 
             CollectionAssert.AreEquivalent(TestData, byteArrayClass.ByteArray);
             Assert.AreEqual(null, byteArrayClass.NullByteArray);
@@ -223,21 +211,15 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeByteArrayFromJsonArray()
         {
-            string json =
-                @"{
+            string json = @"{
   ""ByteArray"": [0, 1, 2, 3],
   ""NullByteArray"": null
 }";
 
-            ByteArrayClass c = JsonConvert.DeserializeObject<ByteArrayClass>(
-                json
-            );
+            ByteArrayClass c = JsonConvert.DeserializeObject<ByteArrayClass>(json);
             Assert.IsNotNull(c.ByteArray);
             Assert.AreEqual(4, c.ByteArray.Length);
-            CollectionAssert.AreEquivalent(
-                new byte[] { 0, 1, 2, 3 },
-                c.ByteArray
-            );
+            CollectionAssert.AreEquivalent(new byte[] { 0, 1, 2, 3 }, c.ByteArray);
         }
     }
 }

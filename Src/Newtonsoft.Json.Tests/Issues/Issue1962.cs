@@ -73,10 +73,7 @@ namespace Newtonsoft.Json.Tests.Issues
 [ 1, 2, 42 ]";
             JToken token = JToken.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    CommentHandling = CommentHandling.Ignore
-                }
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
             );
 
             Assert.AreEqual(JTokenType.Array, token.Type);

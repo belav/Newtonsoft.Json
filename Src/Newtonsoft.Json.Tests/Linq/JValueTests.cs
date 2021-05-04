@@ -68,9 +68,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ToObjectEnum()
         {
-            StringComparison? v = new JValue(
-                "OrdinalIgnoreCase"
-            ).ToObject<StringComparison?>();
+            StringComparison? v = new JValue("OrdinalIgnoreCase").ToObject<StringComparison?>();
             Assert.AreEqual(StringComparison.OrdinalIgnoreCase, v.Value);
 
             v = JValue.CreateNull().ToObject<StringComparison?>();
@@ -225,10 +223,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual("True", v.ToString());
 
             v = new JValue(Encoding.UTF8.GetBytes("Blah"));
-            Assert.AreEqual(
-                "System.Byte[]",
-                v.ToString(null, CultureInfo.InvariantCulture)
-            );
+            Assert.AreEqual("System.Byte[]", v.ToString(null, CultureInfo.InvariantCulture));
 
             v = new JValue("I am a string!");
             Assert.AreEqual("I am a string!", v.ToString());
@@ -243,10 +238,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new DateTime(2000, 12, 12, 20, 59, 59, DateTimeKind.Utc),
                 JTokenType.Date
             );
-            Assert.AreEqual(
-                "12/12/2000 20:59:59",
-                v.ToString(null, CultureInfo.InvariantCulture)
-            );
+            Assert.AreEqual("12/12/2000 20:59:59", v.ToString(null, CultureInfo.InvariantCulture));
 
             v = new JValue(new Uri("http://json.codeplex.com/"));
             Assert.AreEqual(
@@ -255,10 +247,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             v = new JValue(TimeSpan.FromDays(1));
-            Assert.AreEqual(
-                "1.00:00:00",
-                v.ToString(null, CultureInfo.InvariantCulture)
-            );
+            Assert.AreEqual("1.00:00:00", v.ToString(null, CultureInfo.InvariantCulture));
 
             v = new JValue(new Guid("B282ADE7-C520-496C-A448-4084F6803DE5"));
             Assert.AreEqual(
@@ -406,10 +395,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(JToken.DeepEquals(new JValue(5L), new JValue(5)));
             Assert.IsFalse(JToken.DeepEquals(new JValue(5M), new JValue(5)));
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((ulong)long.MaxValue),
-                    new JValue(long.MaxValue)
-                )
+                JToken.DeepEquals(new JValue((ulong)long.MaxValue), new JValue(long.MaxValue))
             );
             Assert.IsFalse(
                 JToken.DeepEquals(
@@ -464,10 +450,7 @@ namespace Newtonsoft.Json.Tests.Linq
             IFormattable f = (new JValue(1).Value<IFormattable>());
             Assert.AreEqual(1L, f);
 
-            Assert.AreEqual(
-                "01",
-                f.ToString("00", CultureInfo.InvariantCulture)
-            );
+            Assert.AreEqual("01", f.ToString("00", CultureInfo.InvariantCulture));
         }
 
         [Test]
@@ -506,10 +489,7 @@ namespace Newtonsoft.Json.Tests.Linq
             public decimal Compoundings { get; set; }
         }
 
-        private readonly Rate rate = new Rate
-        {
-            Compoundings = 12.166666666666666666666666667m
-        };
+        private readonly Rate rate = new Rate { Compoundings = 12.166666666666666666666666667m };
 
         [Test]
         public void WriteFullDecimalPrecision()
@@ -591,18 +571,11 @@ namespace Newtonsoft.Json.Tests.Linq
                 DateParseHandling = DateParseHandling.DateTimeOffset,
                 DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
             };
-            JObject obj =
-                (JObject)JsonConvert.DeserializeObject(
-                    content,
-                    jsonSerializerSettings
-                );
+            JObject obj = (JObject)JsonConvert.DeserializeObject(content, jsonSerializerSettings);
 
             object startDateTime = obj["startDateTime"];
 
-            CustomAssert.IsInstanceOfType(
-                typeof(DateTimeOffset),
-                ((JValue)startDateTime).Value
-            );
+            CustomAssert.IsInstanceOfType(typeof(DateTimeOffset), ((JValue)startDateTime).Value);
         }
 #endif
 
@@ -622,20 +595,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConvertsToInt32()
         {
-            Assert.AreEqual(
-                Int32.MaxValue,
-                Convert.ToInt32(new JValue(Int32.MaxValue))
-            );
+            Assert.AreEqual(Int32.MaxValue, Convert.ToInt32(new JValue(Int32.MaxValue)));
         }
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void ConvertsToInt32_BigInteger()
         {
-            Assert.AreEqual(
-                123,
-                Convert.ToInt32(new JValue(BigInteger.Parse("123")))
-            );
+            Assert.AreEqual(123, Convert.ToInt32(new JValue(BigInteger.Parse("123"))));
         }
 #endif
 
@@ -648,91 +615,61 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConvertsToSByte()
         {
-            Assert.AreEqual(
-                SByte.MaxValue,
-                Convert.ToSByte(new JValue(SByte.MaxValue))
-            );
+            Assert.AreEqual(SByte.MaxValue, Convert.ToSByte(new JValue(SByte.MaxValue)));
         }
 
         [Test]
         public void ConvertsToByte()
         {
-            Assert.AreEqual(
-                Byte.MaxValue,
-                Convert.ToByte(new JValue(Byte.MaxValue))
-            );
+            Assert.AreEqual(Byte.MaxValue, Convert.ToByte(new JValue(Byte.MaxValue)));
         }
 
         [Test]
         public void ConvertsToInt16()
         {
-            Assert.AreEqual(
-                Int16.MaxValue,
-                Convert.ToInt16(new JValue(Int16.MaxValue))
-            );
+            Assert.AreEqual(Int16.MaxValue, Convert.ToInt16(new JValue(Int16.MaxValue)));
         }
 
         [Test]
         public void ConvertsToUInt16()
         {
-            Assert.AreEqual(
-                UInt16.MaxValue,
-                Convert.ToUInt16(new JValue(UInt16.MaxValue))
-            );
+            Assert.AreEqual(UInt16.MaxValue, Convert.ToUInt16(new JValue(UInt16.MaxValue)));
         }
 
         [Test]
         public void ConvertsToUInt32()
         {
-            Assert.AreEqual(
-                UInt32.MaxValue,
-                Convert.ToUInt32(new JValue(UInt32.MaxValue))
-            );
+            Assert.AreEqual(UInt32.MaxValue, Convert.ToUInt32(new JValue(UInt32.MaxValue)));
         }
 
         [Test]
         public void ConvertsToInt64()
         {
-            Assert.AreEqual(
-                Int64.MaxValue,
-                Convert.ToInt64(new JValue(Int64.MaxValue))
-            );
+            Assert.AreEqual(Int64.MaxValue, Convert.ToInt64(new JValue(Int64.MaxValue)));
         }
 
         [Test]
         public void ConvertsToUInt64()
         {
-            Assert.AreEqual(
-                UInt64.MaxValue,
-                Convert.ToUInt64(new JValue(UInt64.MaxValue))
-            );
+            Assert.AreEqual(UInt64.MaxValue, Convert.ToUInt64(new JValue(UInt64.MaxValue)));
         }
 
         [Test]
         public void ConvertsToSingle()
         {
-            Assert.AreEqual(
-                Single.MaxValue,
-                Convert.ToSingle(new JValue(Single.MaxValue))
-            );
+            Assert.AreEqual(Single.MaxValue, Convert.ToSingle(new JValue(Single.MaxValue)));
         }
 
         [Test]
         public void ConvertsToDouble()
         {
-            Assert.AreEqual(
-                Double.MaxValue,
-                Convert.ToDouble(new JValue(Double.MaxValue))
-            );
+            Assert.AreEqual(Double.MaxValue, Convert.ToDouble(new JValue(Double.MaxValue)));
         }
 
         [Test]
         public void ConvertsToDecimal()
         {
-            Assert.AreEqual(
-                Decimal.MaxValue,
-                Convert.ToDecimal(new JValue(Decimal.MaxValue))
-            );
+            Assert.AreEqual(Decimal.MaxValue, Convert.ToDecimal(new JValue(Decimal.MaxValue)));
         }
 
         [Test]
@@ -762,10 +699,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConvertsToString_Null()
         {
-            Assert.AreEqual(
-                string.Empty,
-                Convert.ToString(JValue.CreateNull())
-            );
+            Assert.AreEqual(string.Empty, Convert.ToString(JValue.CreateNull()));
         }
 
         [Test]
@@ -797,9 +731,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             Assert.AreEqual(
                 new DateTime(2013, 02, 01, 01, 02, 03, 04),
-                Convert.ToDateTime(
-                    new JValue(new DateTime(2013, 02, 01, 01, 02, 03, 04))
-                )
+                Convert.ToDateTime(new JValue(new DateTime(2013, 02, 01, 01, 02, 03, 04)))
             );
         }
 
@@ -807,16 +739,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConvertsToDateTime_DateTimeOffset()
         {
-            var offset = new DateTimeOffset(
-                2013,
-                02,
-                01,
-                01,
-                02,
-                03,
-                04,
-                TimeSpan.Zero
-            );
+            var offset = new DateTimeOffset(2013, 02, 01, 01, 02, 03, 04, TimeSpan.Zero);
 
             Assert.AreEqual(
                 new DateTime(2013, 02, 01, 01, 02, 03, 04),
@@ -850,9 +773,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void GetTypeCode()
         {
-            IConvertible v = new JValue(
-                new Guid("0B5D4F85-E94C-4143-94C8-35F2AAEBB100")
-            );
+            IConvertible v = new JValue(new Guid("0B5D4F85-E94C-4143-94C8-35F2AAEBB100"));
             Assert.AreEqual(TypeCode.Object, v.GetTypeCode());
 
             v = new JValue(new Uri("http://www.google.com"));
@@ -864,9 +785,7 @@ namespace Newtonsoft.Json.Tests.Linq
 #endif
 
 #if !(NET20)
-            v = new JValue(
-                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)
-            );
+            v = new JValue(new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero));
             Assert.AreEqual(TypeCode.Object, v.GetTypeCode());
 #endif
         }
@@ -880,11 +799,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(9, i);
 
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-            BigInteger bi =
-                (BigInteger)v.ToType(
-                    typeof(BigInteger),
-                    CultureInfo.InvariantCulture
-                );
+            BigInteger bi = (BigInteger)v.ToType(typeof(BigInteger), CultureInfo.InvariantCulture);
             Assert.AreEqual(new BigInteger(9), bi);
 #endif
         }
@@ -903,18 +818,7 @@ namespace Newtonsoft.Json.Tests.Linq
         public void ToStringNewTypes()
         {
             JArray a = new JArray(
-                new JValue(
-                    new DateTimeOffset(
-                        2013,
-                        02,
-                        01,
-                        01,
-                        02,
-                        03,
-                        04,
-                        TimeSpan.FromHours(1)
-                    )
-                ),
+                new JValue(new DateTimeOffset(2013, 02, 01, 01, 02, 03, 04, TimeSpan.FromHours(1))),
                 new JValue(new BigInteger(5)),
                 new JValue(1.1f)
             );
@@ -935,9 +839,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JArray a = new JArray(
                 new JValue(new Uri("http://james.newtonking.com")),
-                new JValue(
-                    new Uri("http://james.newtonking.com/install?v=7.0.1")
-                )
+                new JValue(new Uri("http://james.newtonking.com/install?v=7.0.1"))
             );
 
             StringAssert.AreEqual(
@@ -1022,10 +924,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject(new JProperty("name", "Hello World"));
 
-            string json = o.ToString(
-                Formatting.Indented,
-                new ReadOnlyStringConverter()
-            );
+            string json = o.ToString(Formatting.Indented, new ReadOnlyStringConverter());
 
             StringAssert.AreEqual(@"{
   ""name"": ""Hello World""

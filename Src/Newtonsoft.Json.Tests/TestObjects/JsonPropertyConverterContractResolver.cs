@@ -35,10 +35,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             MemberInfo member,
             MemberSerialization memberSerialization
         ) {
-            JsonProperty property = base.CreateProperty(
-                member,
-                memberSerialization
-            );
+            JsonProperty property = base.CreateProperty(member, memberSerialization);
             if (property.PropertyName == "JavaScriptDate")
             {
                 property.Converter = new JavaScriptDateTimeConverter();

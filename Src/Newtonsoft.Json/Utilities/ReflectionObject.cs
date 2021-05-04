@@ -71,10 +71,8 @@ namespace Newtonsoft.Json.Utilities
             return Members[member].MemberType!;
         }
 
-        public static ReflectionObject Create(
-            Type t,
-            params string[] memberNames
-        ) {
+        public static ReflectionObject Create(Type t, params string[] memberNames)
+        {
             return Create(t, null, memberNames);
         }
 
@@ -83,23 +81,18 @@ namespace Newtonsoft.Json.Utilities
             MethodBase? creator,
             params string[] memberNames
         ) {
-            ReflectionDelegateFactory delegateFactory =
-                JsonTypeReflector.ReflectionDelegateFactory;
+            ReflectionDelegateFactory delegateFactory = JsonTypeReflector.ReflectionDelegateFactory;
 
             ObjectConstructor<object>? creatorConstructor = null;
             if (creator != null)
             {
-                creatorConstructor = delegateFactory.CreateParameterizedConstructor(
-                    creator
-                );
+                creatorConstructor = delegateFactory.CreateParameterizedConstructor(creator);
             }
             else
             {
                 if (ReflectionUtils.HasDefaultConstructor(t, false))
                 {
-                    Func<object> ctor = delegateFactory.CreateDefaultConstructor<object>(
-                        t
-                    );
+                    Func<object> ctor = delegateFactory.CreateDefaultConstructor<object>(t);
 
                     creatorConstructor = args => ctor();
                 }
@@ -133,21 +126,12 @@ namespace Newtonsoft.Json.Utilities
                     case MemberTypes.Property:
                         if (ReflectionUtils.CanReadMemberValue(member, false))
                         {
-                            reflectionMember.Getter = delegateFactory.CreateGet<object>(
-                                member
-                            );
+                            reflectionMember.Getter = delegateFactory.CreateGet<object>(member);
                         }
 
-                        if (
-                            ReflectionUtils.CanSetMemberValue(
-                                member,
-                                false,
-                                false
-                            )
-                        ) {
-                            reflectionMember.Setter = delegateFactory.CreateSet<object>(
-                                member
-                            );
+                        if (ReflectionUtils.CanSetMemberValue(member, false, false))
+                        {
+                            reflectionMember.Setter = delegateFactory.CreateSet<object>(member);
                         }
                         break;
                     case MemberTypes.Method:
@@ -155,29 +139,21 @@ namespace Newtonsoft.Json.Utilities
                         if (method.IsPublic)
                         {
                             ParameterInfo[] parameters = method.GetParameters();
-                            if (
-                                parameters.Length == 0 &&
-                                method.ReturnType != typeof(void)
-                            ) {
+                            if (parameters.Length == 0 && method.ReturnType != typeof(void))
+                            {
                                 MethodCall<object,
                                     object?> call = delegateFactory.CreateMethodCall<object>(
                                     method
                                 );
-                                reflectionMember.Getter = target =>
-                                    call(target);
+                                reflectionMember.Getter = target => call(target);
                             }
-                            else if (
-                                parameters.Length == 1 &&
-                                method.ReturnType == typeof(void)
-                            ) {
+                            else if (parameters.Length == 1 && method.ReturnType == typeof(void))
+                            {
                                 MethodCall<object,
                                     object?> call = delegateFactory.CreateMethodCall<object>(
                                     method
                                 );
-                                reflectionMember.Setter = (target, arg) => call(
-                                    target,
-                                    arg
-                                );
+                                reflectionMember.Setter = (target, arg) => call(target, arg);
                             }
                         }
                         break;
@@ -191,9 +167,7 @@ namespace Newtonsoft.Json.Utilities
                         );
                 }
 
-                reflectionMember.MemberType = ReflectionUtils.GetMemberUnderlyingType(
-                    member
-                );
+                reflectionMember.MemberType = ReflectionUtils.GetMemberUnderlyingType(member);
 
                 d.Members[memberName] = reflectionMember;
             }

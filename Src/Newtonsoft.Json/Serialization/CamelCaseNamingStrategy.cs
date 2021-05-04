@@ -42,10 +42,8 @@ namespace Newtonsoft.Json.Serialization
         /// A flag indicating whether explicitly specified property names should be processed,
         /// e.g. a property name customized with a <see cref="JsonPropertyAttribute"/>.
         /// </param>
-        public CamelCaseNamingStrategy(
-            bool processDictionaryKeys,
-            bool overrideSpecifiedNames
-        ) {
+        public CamelCaseNamingStrategy(bool processDictionaryKeys, bool overrideSpecifiedNames)
+        {
             ProcessDictionaryKeys = processDictionaryKeys;
             OverrideSpecifiedNames = overrideSpecifiedNames;
         }

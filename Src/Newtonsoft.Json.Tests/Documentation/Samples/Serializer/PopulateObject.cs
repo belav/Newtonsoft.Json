@@ -63,15 +63,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 Email = "james@example.com",
                 Active = true,
-                CreatedDate = new DateTime(
-                    2013,
-                    1,
-                    20,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                CreatedDate = new DateTime(2013, 1, 20, 0, 0, 0, DateTimeKind.Utc),
                 Roles = new List<string> { "User", "Admin" }
             };
 
@@ -95,10 +87,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // User, Admin, Expired
             #endregion
 
-            Assert.AreEqual(
-                "User, Admin, Expired",
-                string.Join(", ", account.Roles.ToArray())
-            );
+            Assert.AreEqual("User, Admin, Expired", string.Join(", ", account.Roles.ToArray()));
         }
     }
 }

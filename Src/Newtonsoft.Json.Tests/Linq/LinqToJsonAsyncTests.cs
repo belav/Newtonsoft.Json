@@ -49,23 +49,18 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(
-                @"[
+            StringReader textReader = new StringReader(@"[
     // hi
     1,
     2,
     3
-]"
-            );
+]");
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
                 (JArray)await JToken.ReadFromAsync(
                     jsonReader,
-                    new JsonLoadSettings
-                    {
-                        CommentHandling = CommentHandling.Load
-                    }
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
 
             Assert.AreEqual(4, a.Count);
@@ -76,14 +71,12 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(
-                @"[
+            StringReader textReader = new StringReader(@"[
     // hi
     1,
     2,
     3
-]"
-            );
+]");
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a = (JArray)await JToken.ReadFromAsync(jsonReader);
@@ -96,24 +89,19 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(
-                @"
+            StringReader textReader = new StringReader(@"
 // hi
 [
     1,
     2,
     3
-]"
-            );
+]");
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v =
                 (JValue)await JToken.ReadFromAsync(
                     jsonReader,
-                    new JsonLoadSettings
-                    {
-                        CommentHandling = CommentHandling.Load
-                    }
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
 
             Assert.AreEqual(JTokenType.Comment, v.Type);
@@ -127,24 +115,19 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(
-                @"
+            StringReader textReader = new StringReader(@"
 // hi
 [
     1,
     2,
     3
-]"
-            );
+]");
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
                 (JArray)await JToken.ReadFromAsync(
                     jsonReader,
-                    new JsonLoadSettings
-                    {
-                        CommentHandling = CommentHandling.Ignore
-                    }
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
                 );
 
             Assert.AreEqual(JTokenType.Array, a.Type);
@@ -158,15 +141,13 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingUndefinedAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(
-                @"
+            StringReader textReader = new StringReader(@"
 undefined
 [
     1,
     2,
     3
-]"
-            );
+]");
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v = (JValue)await JToken.ReadFromAsync(jsonReader);

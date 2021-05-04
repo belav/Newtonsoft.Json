@@ -41,8 +41,7 @@ namespace Newtonsoft.Json.Schema
     {
         private JsonSchemaNodeCollection _nodes = new JsonSchemaNodeCollection();
         private Dictionary<JsonSchemaNode,
-            JsonSchemaModel> _nodeModels = new Dictionary<JsonSchemaNode,
-            JsonSchemaModel>();
+            JsonSchemaModel> _nodeModels = new Dictionary<JsonSchemaNode, JsonSchemaModel>();
         private JsonSchemaNode _node;
 
         public JsonSchemaModel Build(JsonSchema schema)
@@ -56,10 +55,8 @@ namespace Newtonsoft.Json.Schema
             return model;
         }
 
-        public JsonSchemaNode AddSchema(
-            JsonSchemaNode existingNode,
-            JsonSchema schema
-        ) {
+        public JsonSchemaNode AddSchema(JsonSchemaNode existingNode, JsonSchema schema)
+        {
             string newId;
             if (existingNode != null)
             {
@@ -68,9 +65,7 @@ namespace Newtonsoft.Json.Schema
                     return existingNode;
                 }
 
-                newId = JsonSchemaNode.GetId(
-                    existingNode.Schemas.Union(new[] { schema })
-                );
+                newId = JsonSchemaNode.GetId(existingNode.Schemas.Union(new[] { schema }));
             }
             else
             {
@@ -90,10 +85,7 @@ namespace Newtonsoft.Json.Schema
 
             AddProperties(schema.Properties, currentNode.Properties);
 
-            AddProperties(
-                schema.PatternProperties,
-                currentNode.PatternProperties
-            );
+            AddProperties(schema.PatternProperties, currentNode.PatternProperties);
 
             if (schema.Items != null)
             {
@@ -110,10 +102,7 @@ namespace Newtonsoft.Json.Schema
 
             if (schema.AdditionalProperties != null)
             {
-                AddAdditionalProperties(
-                    currentNode,
-                    schema.AdditionalProperties
-                );
+                AddAdditionalProperties(currentNode, schema.AdditionalProperties);
             }
 
             if (schema.Extends != null)
@@ -150,11 +139,8 @@ namespace Newtonsoft.Json.Schema
             target[propertyName] = AddSchema(propertyNode, schema);
         }
 
-        public void AddItem(
-            JsonSchemaNode parentNode,
-            int index,
-            JsonSchema schema
-        ) {
+        public void AddItem(JsonSchemaNode parentNode, int index, JsonSchema schema)
+        {
             JsonSchemaNode existingItemNode = (parentNode.Items.Count > index)
                 ? parentNode.Items[index]
                 : null;
@@ -171,24 +157,14 @@ namespace Newtonsoft.Json.Schema
             }
         }
 
-        public void AddAdditionalProperties(
-            JsonSchemaNode parentNode,
-            JsonSchema schema
-        ) {
-            parentNode.AdditionalProperties = AddSchema(
-                parentNode.AdditionalProperties,
-                schema
-            );
+        public void AddAdditionalProperties(JsonSchemaNode parentNode, JsonSchema schema)
+        {
+            parentNode.AdditionalProperties = AddSchema(parentNode.AdditionalProperties, schema);
         }
 
-        public void AddAdditionalItems(
-            JsonSchemaNode parentNode,
-            JsonSchema schema
-        ) {
-            parentNode.AdditionalItems = AddSchema(
-                parentNode.AdditionalItems,
-                schema
-            );
+        public void AddAdditionalItems(JsonSchemaNode parentNode, JsonSchema schema)
+        {
+            parentNode.AdditionalItems = AddSchema(parentNode.AdditionalItems, schema);
         }
 
         private JsonSchemaModel BuildNodeModel(JsonSchemaNode node)
@@ -201,30 +177,23 @@ namespace Newtonsoft.Json.Schema
             model = JsonSchemaModel.Create(node.Schemas);
             _nodeModels[node] = model;
 
-            foreach (
-                KeyValuePair<string, JsonSchemaNode> property in node.Properties
-            ) {
+            foreach (KeyValuePair<string, JsonSchemaNode> property in node.Properties)
+            {
                 if (model.Properties == null)
                 {
-                    model.Properties = new Dictionary<string,
-                        JsonSchemaModel>();
+                    model.Properties = new Dictionary<string, JsonSchemaModel>();
                 }
 
                 model.Properties[property.Key] = BuildNodeModel(property.Value);
             }
-            foreach (
-                KeyValuePair<string,
-                    JsonSchemaNode> property in node.PatternProperties
-            ) {
+            foreach (KeyValuePair<string, JsonSchemaNode> property in node.PatternProperties)
+            {
                 if (model.PatternProperties == null)
                 {
-                    model.PatternProperties = new Dictionary<string,
-                        JsonSchemaModel>();
+                    model.PatternProperties = new Dictionary<string, JsonSchemaModel>();
                 }
 
-                model.PatternProperties[property.Key] = BuildNodeModel(
-                    property.Value
-                );
+                model.PatternProperties[property.Key] = BuildNodeModel(property.Value);
             }
             foreach (JsonSchemaNode t in node.Items)
             {
@@ -237,9 +206,7 @@ namespace Newtonsoft.Json.Schema
             }
             if (node.AdditionalProperties != null)
             {
-                model.AdditionalProperties = BuildNodeModel(
-                    node.AdditionalProperties
-                );
+                model.AdditionalProperties = BuildNodeModel(node.AdditionalProperties);
             }
             if (node.AdditionalItems != null)
             {

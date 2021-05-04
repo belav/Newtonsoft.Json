@@ -62,16 +62,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
                 )
                 where
-                    converter.CanConvertFrom(typeof(string)) &&
-                    converter.CanConvertTo(typeof(string))
+                    converter.CanConvertFrom(typeof(string))
+                    && converter.CanConvertTo(typeof(string))
                 select converter).FirstOrDefault();
         }
 
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             var converter = GetConverter(value.GetType());
             var text = converter.ConvertToInvariantString(value);
 
@@ -85,9 +82,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             JsonSerializer serializer
         ) {
             var converter = GetConverter(objectType);
-            return converter.ConvertFromInvariantString(
-                reader.Value.ToString()
-            );
+            return converter.ConvertFromInvariantString(reader.Value.ToString());
         }
 
         public override bool CanConvert(Type objectType)

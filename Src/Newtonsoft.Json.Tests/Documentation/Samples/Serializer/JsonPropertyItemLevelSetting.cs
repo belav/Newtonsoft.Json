@@ -63,11 +63,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             #region Usage
             Employee manager = new Employee { Name = "George-Michael" };
-            Employee worker = new Employee
-            {
-                Name = "Maeby",
-                Manager = manager
-            };
+            Employee worker = new Employee { Name = "Maeby", Manager = manager };
 
             Business business = new Business
             {
@@ -75,10 +71,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Employees = new List<Employee> { manager, worker }
             };
 
-            string json = JsonConvert.SerializeObject(
-                business,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(business, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

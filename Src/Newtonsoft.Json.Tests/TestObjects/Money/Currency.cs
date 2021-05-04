@@ -51,9 +51,7 @@ namespace Newtonsoft.Json.Tests.TestObjects.Money
         internal static readonly Currency _unique_JPY = new Currency(5);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
-        internal static readonly Currency _unique_LocalCurrency = new Currency(
-            0
-        );
+        internal static readonly Currency _unique_LocalCurrency = new Currency(0);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
         internal static readonly Currency _unique_NZD = new Currency(2);
@@ -70,156 +68,99 @@ namespace Newtonsoft.Json.Tests.TestObjects.Money
         [CompilerGenerated, DebuggerNonUserCode]
         internal object __DebugDisplay()
         {
-            return ExtraTopLevelOperators.PrintFormatToString<FSharpFunc<Currency,
-                    string>>(
-                    new PrintfFormat<FSharpFunc<Currency, string>,
-                        Unit,
-                        string,
-                        string,
-                        string>(
+            return ExtraTopLevelOperators.PrintFormatToString<FSharpFunc<Currency, string>>(
+                    new PrintfFormat<FSharpFunc<Currency, string>, Unit, string, string, string>(
                         "%+0.8A"
                     )
                 )
                 .Invoke(this);
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency AUD
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 1)]
             get { return _unique_AUD; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency EUR
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 4)]
             get { return _unique_EUR; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsAUD
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 1); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsEUR
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 4); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsJPY
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 5); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsLocalCurrency
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 0); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsNZD
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 2); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsUSD
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return (this.Tag == 3); }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency JPY
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 5)]
             get { return _unique_JPY; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency LocalCurrency
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 0)]
             get { return _unique_LocalCurrency; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency NZD
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 2)]
             get { return _unique_NZD; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public int Tag
         {
             [CompilerGenerated, DebuggerNonUserCode]
             get { return this._tag; }
         }
 
-        [
-            CompilerGenerated,
-            DebuggerNonUserCode,
-            DebuggerBrowsable(DebuggerBrowsableState.Never)
-        ]
+        [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Currency USD
         {
             [CompilationMapping(SourceConstructFlags.UnionCase, 3)]

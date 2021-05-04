@@ -80,10 +80,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             dataSet.AcceptChanges();
 
-            string json = JsonConvert.SerializeObject(
-                dataSet,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(dataSet, Formatting.Indented);
 
             StringAssert.AreEqual(
                 @"{
@@ -101,9 +98,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            DataSet deserializedDataSet = JsonConvert.DeserializeObject<DataSet>(
-                json
-            );
+            DataSet deserializedDataSet = JsonConvert.DeserializeObject<DataSet>(json);
             Assert.IsNotNull(deserializedDataSet);
 
             Assert.AreEqual(1, deserializedDataSet.Tables.Count);
@@ -148,9 +143,7 @@ namespace Newtonsoft.Json.Tests.Converters
   ""Set"": null
 }", json);
 
-            DataSetTestClass c2 = JsonConvert.DeserializeObject<DataSetTestClass>(
-                json
-            );
+            DataSetTestClass c2 = JsonConvert.DeserializeObject<DataSetTestClass>(json);
 
             Assert.AreEqual(null, c2.Set);
         }
@@ -355,15 +348,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 myNewRow["Int32Col"] = i;
                 myNewRow["BooleanCol"] = true;
                 myNewRow["TimeSpanCol"] = new TimeSpan(10, 22, 10, 15, 100);
-                myNewRow["DateTimeCol"] = new DateTime(
-                    2000,
-                    12,
-                    29,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                );
+                myNewRow["DateTimeCol"] = new DateTime(2000, 12, 29, 0, 0, 0, DateTimeKind.Utc);
                 myNewRow["DecimalCol"] = 64.0021;
                 myTable.Rows.Add(myNewRow);
             }
@@ -548,10 +533,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             table.Rows.Add(row);
 
-            string json1 = JsonConvert.SerializeObject(
-                ds1,
-                Formatting.Indented
-            );
+            string json1 = JsonConvert.SerializeObject(ds1, Formatting.Indented);
 
             StringAssert.AreEqual(
                 @"{
@@ -632,19 +614,13 @@ namespace Newtonsoft.Json.Tests.Converters
             );
         }
 
-        private static DataTable CreateDataTable(
-            int cols,
-            string colNamePrefix
-        ) {
+        private static DataTable CreateDataTable(int cols, string colNamePrefix)
+        {
             var table = new DataTable();
             for (int i = 1; i <= cols; i++)
             {
                 table.Columns.Add(
-                    new DataColumn()
-                    {
-                        ColumnName = colNamePrefix + i,
-                        DefaultValue = i
-                    }
+                    new DataColumn() { ColumnName = colNamePrefix + i, DefaultValue = i }
                 );
             }
             table.Rows.Add(table.NewRow());

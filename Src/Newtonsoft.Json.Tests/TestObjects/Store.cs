@@ -31,15 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class Store
     {
         public StoreColor Color = StoreColor.Yellow;
-        public DateTime Establised = new DateTime(
-            2010,
-            1,
-            22,
-            1,
-            1,
-            1,
-            DateTimeKind.Utc
-        );
+        public DateTime Establised = new DateTime(2010, 1, 22, 1, 1, 1, DateTimeKind.Utc);
         public double Width = 1.1;
         public int Employees = 999;
         public int[] RoomsPerFloor = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -64,15 +56,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             Product rocket = new Product();
             rocket.Name = "Rocket";
-            rocket.ExpiryDate = new DateTime(
-                2000,
-                2,
-                2,
-                23,
-                1,
-                30,
-                DateTimeKind.Utc
-            );
+            rocket.ExpiryDate = new DateTime(2000, 2, 2, 23, 1, 30, DateTimeKind.Utc);
             Product alien = new Product();
             alien.Name = "Alien";
 

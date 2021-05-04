@@ -31,14 +31,11 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> how to serialize the object.
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Class |
-        AttributeTargets.Struct |
-        AttributeTargets.Interface,
+        AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface,
         AllowMultiple = false)]
     public sealed class JsonObjectAttribute : JsonContainerAttribute
     {
-        private MemberSerialization _memberSerialization =
-            MemberSerialization.OptOut;
+        private MemberSerialization _memberSerialization = MemberSerialization.OptOut;
         internal MissingMemberHandling? _missingMemberHandling;
 
         // yuck. can't set nullable properties on an attribute in C#

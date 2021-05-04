@@ -50,9 +50,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInString()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -68,9 +66,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInStringAndBool()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -259,20 +255,14 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Func<object,
                 object> getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetProperty(
-                    typeof(StaticTestClass),
-                    "StringProperty"
-                )
+                TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
             );
 
             object v = getter(null);
             Assert.AreEqual(StaticTestClass.StringProperty, v);
 
             getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(StaticTestClass),
-                    "StringField"
-                )
+                TestReflectionUtils.GetField(typeof(StaticTestClass), "StringField")
             );
 
             v = getter(null);
@@ -284,20 +274,14 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             Action<object,
                 object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetProperty(
-                    typeof(StaticTestClass),
-                    "StringProperty"
-                )
+                TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
             );
 
             setter(null, "New property!");
             Assert.AreEqual("New property!", StaticTestClass.StringProperty);
 
             setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(StaticTestClass),
-                    "StringField"
-                )
+                TestReflectionUtils.GetField(typeof(StaticTestClass), "StringField")
             );
 
             setter(null, "New field!");
@@ -315,28 +299,18 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateGetField()
         {
-            FieldsTestClass c = new FieldsTestClass
-            {
-                BoolField = true,
-                StringField = "String!"
-            };
+            FieldsTestClass c = new FieldsTestClass { BoolField = true, StringField = "String!" };
 
             Func<object,
                 object> getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(FieldsTestClass),
-                    "StringField"
-                )
+                TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
             );
 
             object value = getter(c);
             Assert.AreEqual("String!", value);
 
             getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(FieldsTestClass),
-                    "BoolField"
-                )
+                TestReflectionUtils.GetField(typeof(FieldsTestClass), "BoolField")
             );
 
             value = getter(c);
@@ -350,10 +324,7 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Action<object,
                 object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(FieldsTestClass),
-                    "IntReadOnlyField"
-                )
+                TestReflectionUtils.GetField(typeof(FieldsTestClass), "IntReadOnlyField")
             );
 
             setter(c, int.MinValue);
@@ -367,20 +338,14 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Action<object,
                 object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(FieldsTestClass),
-                    "StringField"
-                )
+                TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
             );
 
             setter(c, "String!");
             Assert.AreEqual("String!", c.StringField);
 
             setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(
-                    typeof(FieldsTestClass),
-                    "BoolField"
-                )
+                TestReflectionUtils.GetField(typeof(FieldsTestClass), "BoolField")
             );
 
             setter(c, true);
@@ -394,10 +359,7 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Action<object,
                 object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetProperty(
-                    typeof(StructTest),
-                    "StringProperty"
-                )
+                TestReflectionUtils.GetProperty(typeof(StructTest), "StringProperty")
             );
 
             setter(structTest, "Hi1");

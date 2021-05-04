@@ -25,8 +25,7 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class ChildClassWithProtectedOverridePlusJsonProperty
-        : BaseClassWithProtectedVirtual
+    public class ChildClassWithProtectedOverridePlusJsonProperty : BaseClassWithProtectedVirtual
     {
         [JsonProperty]
         protected override string MyProperty { get; set; }

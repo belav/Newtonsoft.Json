@@ -62,10 +62,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DateTimeTestClass c = JsonConvert.DeserializeObject<DateTimeTestClass>(
                 @"{DateTimeField:null}",
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
             );
             Assert.AreEqual(c.DateTimeField, default(DateTime));
         }
@@ -75,10 +72,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DateTimeTestClass c = JsonConvert.DeserializeObject<DateTimeTestClass>(
                 @"{DateTimeField:""""}",
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
             );
             Assert.AreEqual(c.DateTimeField, default(DateTime));
         }
@@ -153,10 +147,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string ignored = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
             );
 
             // {
@@ -164,15 +155,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             //   "Description": "It's no Bad Boys"
             // }
 
-            StringAssert.AreEqual(
-                MovieNullValueHandlingIncludeExpectedResult,
-                included
-            );
+            StringAssert.AreEqual(MovieNullValueHandlingIncludeExpectedResult, included);
 
-            StringAssert.AreEqual(
-                MovieNullValueHandlingIgnoreExpectedResult,
-                ignored
-            );
+            StringAssert.AreEqual(MovieNullValueHandlingIgnoreExpectedResult, ignored);
         }
 
         [Test]
@@ -187,10 +172,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string ignored = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Include
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include }
             );
 
             // {
@@ -198,10 +180,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             //   "Description": "It's no Bad Boys"
             // }
 
-            StringAssert.AreEqual(
-                MovieNullValueHandlingIgnoreExpectedResult,
-                ignored
-            );
+            StringAssert.AreEqual(MovieNullValueHandlingIgnoreExpectedResult, ignored);
         }
 
         [Test]
@@ -216,10 +195,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string included = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
             );
 
             // {
@@ -231,10 +207,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             //   "ReleaseCountries": null
             // }
 
-            StringAssert.AreEqual(
-                MovieNullValueHandlingIncludeExpectedResult,
-                included
-            );
+            StringAssert.AreEqual(MovieNullValueHandlingIncludeExpectedResult, included);
         }
     }
 }

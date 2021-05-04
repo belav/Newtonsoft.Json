@@ -251,11 +251,8 @@ namespace Newtonsoft.Json.Linq
             return _content.IndexOf(item);
         }
 
-        internal override bool InsertItem(
-            int index,
-            JToken? item,
-            bool skipParentCheck
-        ) {
+        internal override bool InsertItem(int index, JToken? item, bool skipParentCheck)
+        {
             // don't add comments to JProperty
             if (item != null && item.Type == JTokenType.Comment)
             {
@@ -280,10 +277,8 @@ namespace Newtonsoft.Json.Linq
             return (Value == item);
         }
 
-        internal override void MergeItem(
-            object content,
-            JsonMergeSettings? settings
-        ) {
+        internal override void MergeItem(object content, JsonMergeSettings? settings)
+        {
             JToken? value = (content as JProperty)?.Value;
 
             if (value != null && value.Type != JTokenType.Null)
@@ -349,9 +344,7 @@ namespace Newtonsoft.Json.Linq
 
             _name = name;
 
-            Value = IsMultiContent(content)
-                ? new JArray(content)
-                : CreateFromContent(content);
+            Value = IsMultiContent(content) ? new JArray(content) : CreateFromContent(content);
         }
 
         /// <summary>
@@ -359,10 +352,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        public override void WriteTo(
-            JsonWriter writer,
-            params JsonConverter[] converters
-        ) {
+        public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
+        {
             writer.WritePropertyName(_name);
 
             JToken value = Value;
@@ -398,10 +389,8 @@ namespace Newtonsoft.Json.Linq
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <returns>A <see cref="JProperty"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JProperty Load(
-            JsonReader reader,
-            JsonLoadSettings? settings
-        ) {
+        public new static JProperty Load(JsonReader reader, JsonLoadSettings? settings)
+        {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!reader.Read())

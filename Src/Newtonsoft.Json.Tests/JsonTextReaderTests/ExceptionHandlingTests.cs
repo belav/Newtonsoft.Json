@@ -67,11 +67,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             byte[] data = Encoding.UTF8.GetBytes("Hello world");
 
             string json =
-                @"['" +
-                Convert.ToBase64String(data) +
-                "' '" +
-                Convert.ToBase64String(data) +
-                @"']";
+                @"['" + Convert.ToBase64String(data) + "' '" + Convert.ToBase64String(data) + @"']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(reader.Read());
@@ -116,8 +112,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDateTime_MissingComma()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(reader.Read());
@@ -136,8 +131,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDateTimeOffset_MissingComma()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(reader.Read());
@@ -156,8 +150,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsString_MissingComma()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(reader.Read());
@@ -217,9 +210,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void UnexpectedEndOfHex()
         {
-            JsonReader reader = new JsonTextReader(
-                new StringReader(@"'h\u123")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader(@"'h\u123"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -283,8 +274,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ThrowErrorWhenParsingUnquoteStringThatStartsWithNE()
         {
-            const string json =
-                @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
+            const string json = @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -345,22 +335,14 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             ToggleReaderError toggleReaderError = new ToggleReaderError(
                 new StringReader("{'first':1,'second':2,'third':3}")
             );
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                toggleReaderError
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(toggleReaderError);
 
             Assert.IsTrue(jsonTextReader.Read());
 
             toggleReaderError.Error = true;
 
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
 
             toggleReaderError.Error = false;
 
@@ -369,10 +351,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             toggleReaderError.Error = true;
 
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
 
             toggleReaderError.Error = false;
 
@@ -381,18 +360,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             toggleReaderError.Error = true;
 
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
-            ExceptionAssert.Throws<Exception>(
-                () => jsonTextReader.Read(),
-                "Read error"
-            );
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
+            ExceptionAssert.Throws<Exception>(() => jsonTextReader.Read(), "Read error");
 
             toggleReaderError.Error = false;
         }
@@ -400,9 +370,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void MatchWithInsufficentCharacters()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nul")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nul"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -416,9 +384,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void MatchWithWrongCharacters()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nulz")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nulz"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -432,9 +398,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void MatchWithNoTrailingSeparator()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nullz")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nullz"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -448,9 +412,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void UnclosedComment()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"/* sdf")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"/* sdf"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -464,9 +426,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void BadCommentStart()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"/sdf")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"/sdf"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -514,12 +474,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 },
                 new string[]
                 {
-                    "Value cannot be null." +
-                    Environment.NewLine +
-                    "Parameter name: reader",
-                    "Argument cannot be null." +
-                    Environment.NewLine +
-                    "Parameter name: reader", // Mono
+                    "Value cannot be null." + Environment.NewLine + "Parameter name: reader",
+                    "Argument cannot be null." + Environment.NewLine + "Parameter name: reader", // Mono
                     "Value cannot be null. (Parameter 'reader')"
                 }
             );
@@ -647,9 +603,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ParseIncompleteCommentSeparator()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("true/")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("true/"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -707,14 +661,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadIntegerWithError()
         {
-            string json =
-                @"{
+            string json = @"{
     ChildId: 333333333333333333333333333333333333333
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -736,17 +687,14 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadIntegerWithErrorInArray()
         {
-            string json =
-                @"[
+            string json = @"[
   333333333333333333333333333333333333333,
   3.3,
   ,
   0f
 ]";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartArray, jsonTextReader.TokenType);
@@ -784,9 +732,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
     ChildId: '123'
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -824,15 +770,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                     () =>
                     {
                         reader = new JsonTextReader(
-                            new StringReader(
-                                total.ToString(CultureInfo.InvariantCulture)
-                            )
+                            new StringReader(total.ToString(CultureInfo.InvariantCulture))
                         );
                         reader.ReadAsInt32();
                     },
-                    "JSON integer " +
-                    total +
-                    " is too large or small for an Int32. Path '', line 1, position 10."
+                    "JSON integer "
+                    + total
+                    + " is too large or small for an Int32. Path '', line 1, position 10."
                 );
             }
         }
@@ -856,15 +800,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                     () =>
                     {
                         reader = new JsonTextReader(
-                            new StringReader(
-                                total.ToString(CultureInfo.InvariantCulture)
-                            )
+                            new StringReader(total.ToString(CultureInfo.InvariantCulture))
                         );
                         reader.ReadAsInt32();
                     },
-                    "JSON integer " +
-                    total +
-                    " is too large or small for an Int32. Path '', line 1, position 11."
+                    "JSON integer "
+                    + total
+                    + " is too large or small for an Int32. Path '', line 1, position 11."
                 );
             }
         }
@@ -886,9 +828,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 BigInteger total = i + j;
 
                 reader = new JsonTextReader(
-                    new StringReader(
-                        total.ToString(CultureInfo.InvariantCulture)
-                    )
+                    new StringReader(total.ToString(CultureInfo.InvariantCulture))
                 );
                 reader.Read();
 
@@ -914,9 +854,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 BigInteger total = i + -j;
 
                 reader = new JsonTextReader(
-                    new StringReader(
-                        total.ToString(CultureInfo.InvariantCulture)
-                    )
+                    new StringReader(total.ToString(CultureInfo.InvariantCulture))
                 );
                 reader.Read();
 
@@ -1086,9 +1024,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsBytesArrayWithBadContent()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[1.0]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[1.0]"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -1102,9 +1038,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsBytesBadContent()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -1118,9 +1052,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsBytes_CommaErrors()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
             reader.Read();
 
             ExceptionAssert.Throws<JsonReaderException>(
@@ -1152,9 +1084,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsBytes_CommaErrors_Multiple()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("['',,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
             reader.Read();
             CollectionAssert.AreEquivalent(new byte[0], reader.ReadAsBytes());
 
@@ -1239,9 +1169,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDateTimeOffsetBadContent()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -1256,9 +1184,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDecimalBadContent()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -1272,10 +1198,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDecimalBadContent_SecondLine()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"
-new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"
+new Date()"));
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
@@ -1303,9 +1227,7 @@ new Date()")
         [Test]
         public void ReadNumberValue_CommaErrors()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,1]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,1]"));
             reader.Read();
 
             ExceptionAssert.Throws<JsonReaderException>(
@@ -1337,9 +1259,7 @@ new Date()")
         [Test]
         public void ReadNumberValue_CommaErrors_Multiple()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[1,,1]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[1,,1]"));
             reader.Read();
             reader.ReadAsInt32();
 
@@ -1404,9 +1324,7 @@ new Date()")
         [Test]
         public void ReadStringValue_CommaErrors()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
             reader.Read();
 
             ExceptionAssert.Throws<JsonReaderException>(
@@ -1424,9 +1342,7 @@ new Date()")
         [Test]
         public void ReadStringValue_CommaErrors_Multiple()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("['',,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
             reader.Read();
             reader.ReadAsInt32();
 
@@ -1445,9 +1361,7 @@ new Date()")
         [Test]
         public void ReadStringValue_Numbers_NotString()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[56,56]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[56,56]"));
             reader.Read();
 
             ExceptionAssert.Throws<JsonReaderException>(
@@ -1484,9 +1398,7 @@ new Date()")
             string json = @"/";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             ExceptionAssert.Throws<JsonReaderException>(
@@ -1517,9 +1429,7 @@ new Date()")
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
                 {
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader(json)
-                    );
+                    JsonTextReader reader = new JsonTextReader(new StringReader(json));
                     while (reader.Read()) { }
                 },
                 "Unexpected character encountered while parsing value: !. Path 'frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source', line 6, position 20."
@@ -1531,12 +1441,7 @@ new Date()")
         {
             string json = "[[]]";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(json)
-            )
-            {
-                MaxDepth = 1
-            };
+            JsonTextReader reader = new JsonTextReader(new StringReader(json)) { MaxDepth = 1 };
 
             Assert.IsTrue(reader.Read());
 
@@ -1554,12 +1459,7 @@ new Date()")
         {
             string json = "[[[[]]],[[]]]";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(json)
-            )
-            {
-                MaxDepth = 1
-            };
+            JsonTextReader reader = new JsonTextReader(new StringReader(json)) { MaxDepth = 1 };
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(0, reader.Depth);

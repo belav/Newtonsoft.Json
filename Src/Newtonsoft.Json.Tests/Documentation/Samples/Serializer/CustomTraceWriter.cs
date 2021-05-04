@@ -47,9 +47,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         #region Types
         public class NLogTraceWriter : ITraceWriter
         {
-            private static readonly Logger Logger = LogManager.GetLogger(
-                "NLogTraceWriter"
-            );
+            private static readonly Logger Logger = LogManager.GetLogger("NLogTraceWriter");
 
             public TraceLevel LevelFilter
             {
@@ -104,10 +102,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string json = JsonConvert.SerializeObject(
                 countries,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    TraceWriter = new NLogTraceWriter()
-                }
+                new JsonSerializerSettings { TraceWriter = new NLogTraceWriter() }
             );
 
             Console.WriteLine(json);

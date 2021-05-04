@@ -68,22 +68,15 @@ namespace Newtonsoft.Json.Tests.Linq
         public void ReadFrom()
         {
             JObject o =
-                (JObject)JToken.ReadFrom(
-                    new JsonTextReader(new StringReader("{'pie':true}"))
-                );
+                (JObject)JToken.ReadFrom(new JsonTextReader(new StringReader("{'pie':true}")));
             Assert.AreEqual(true, (bool)o["pie"]);
 
-            JArray a =
-                (JArray)JToken.ReadFrom(
-                    new JsonTextReader(new StringReader("[1,2,3]"))
-                );
+            JArray a = (JArray)JToken.ReadFrom(new JsonTextReader(new StringReader("[1,2,3]")));
             Assert.AreEqual(1, (int)a[0]);
             Assert.AreEqual(2, (int)a[1]);
             Assert.AreEqual(3, (int)a[2]);
 
-            JsonReader reader = new JsonTextReader(
-                new StringReader("{'pie':true}")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader("{'pie':true}"));
             reader.Read();
             reader.Read();
 
@@ -92,29 +85,19 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(true, (bool)p.Value);
 
             JConstructor c =
-                (JConstructor)JToken.ReadFrom(
-                    new JsonTextReader(new StringReader("new Date(1)"))
-                );
+                (JConstructor)JToken.ReadFrom(new JsonTextReader(new StringReader("new Date(1)")));
             Assert.AreEqual("Date", c.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0))
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0)));
 
             JValue v;
 
-            v = (JValue)JToken.ReadFrom(
-                new JsonTextReader(new StringReader(@"""stringvalue"""))
-            );
+            v = (JValue)JToken.ReadFrom(new JsonTextReader(new StringReader(@"""stringvalue""")));
             Assert.AreEqual("stringvalue", (string)v);
 
-            v = (JValue)JToken.ReadFrom(
-                new JsonTextReader(new StringReader(@"1"))
-            );
+            v = (JValue)JToken.ReadFrom(new JsonTextReader(new StringReader(@"1")));
             Assert.AreEqual(1, (int)v);
 
-            v = (JValue)JToken.ReadFrom(
-                new JsonTextReader(new StringReader(@"1.1"))
-            );
+            v = (JValue)JToken.ReadFrom(new JsonTextReader(new StringReader(@"1.1")));
             Assert.AreEqual(1.1, (double)v);
 
 #if !NET20
@@ -140,10 +123,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Load()
         {
-            JObject o =
-                (JObject)JToken.Load(
-                    new JsonTextReader(new StringReader("{'pie':true}"))
-                );
+            JObject o = (JObject)JToken.Load(new JsonTextReader(new StringReader("{'pie':true}")));
             Assert.AreEqual(true, (bool)o["pie"]);
         }
 
@@ -181,10 +161,7 @@ namespace Newtonsoft.Json.Tests.Linq
             // new value should be cloned
             Assert.AreNotSame(p.Value, v);
 
-            Assert.AreEqual(
-                (DateTime)((JValue)p.Value[1]).Value,
-                (DateTime)((JValue)v[1]).Value
-            );
+            Assert.AreEqual((DateTime)((JValue)p.Value[1]).Value, (DateTime)((JValue)v[1]).Value);
 
             Assert.AreEqual(v, o["Test1"]);
 
@@ -196,10 +173,7 @@ namespace Newtonsoft.Json.Tests.Linq
             JProperty o2 = new JProperty("O2", o);
 
             Assert.AreNotSame(o1.Value, o2.Value);
-            Assert.AreEqual(
-                o1.Value.Children().Count(),
-                o2.Value.Children().Count()
-            );
+            Assert.AreEqual(o1.Value.Children().Count(), o2.Value.Children().Count());
             Assert.AreEqual(false, JToken.DeepEquals(o1, o2));
             Assert.AreEqual(true, JToken.DeepEquals(o1.Value, o2.Value));
         }
@@ -243,12 +217,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Children()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             Assert.AreEqual(4, a.Count());
             Assert.AreEqual(3, a.Children<JArray>().Count());
@@ -257,12 +226,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void BeforeAfter()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1, 2, 3),
-                new JArray(1, 2, 3),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1, 2, 3), new JArray(1, 2, 3), new JArray(1, 2, 3));
 
             Assert.AreEqual(5, (int)a[1].Previous);
             Assert.AreEqual(2, a[2].BeforeSelf().Count());
@@ -302,9 +266,7 @@ namespace Newtonsoft.Json.Tests.Linq
 #if !NET20
             Assert.AreEqual(
                 new DateTimeOffset(2000, 12, 20, 0, 0, 0, TimeSpan.Zero),
-                (DateTimeOffset)new JValue(
-                    new DateTime(2000, 12, 20, 0, 0, 0, DateTimeKind.Utc)
-                )
+                (DateTimeOffset)new JValue(new DateTime(2000, 12, 20, 0, 0, 0, DateTimeKind.Utc))
             );
             Assert.AreEqual(
                 new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero),
@@ -312,10 +274,7 @@ namespace Newtonsoft.Json.Tests.Linq
                     new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero)
                 )
             );
-            Assert.AreEqual(
-                null,
-                (DateTimeOffset?)new JValue((DateTimeOffset?)null)
-            );
+            Assert.AreEqual(null, (DateTimeOffset?)new JValue((DateTimeOffset?)null));
             Assert.AreEqual(null, (DateTimeOffset?)(JValue?)null);
 #endif
             Assert.AreEqual(true, (bool)new JValue(true));
@@ -363,14 +322,8 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(5f, (float)(new JValue(5m)));
             Assert.AreEqual(5f, (float?)(new JValue(5m)));
             Assert.AreEqual(5, (byte)(new JValue(5)));
-            Assert.AreEqual(
-                SByte.MinValue,
-                (sbyte?)(new JValue(SByte.MinValue))
-            );
-            Assert.AreEqual(
-                SByte.MinValue,
-                (sbyte)(new JValue(SByte.MinValue))
-            );
+            Assert.AreEqual(SByte.MinValue, (sbyte?)(new JValue(SByte.MinValue)));
+            Assert.AreEqual(SByte.MinValue, (sbyte)(new JValue(SByte.MinValue)));
 
             Assert.AreEqual(null, (sbyte?)JValue.CreateNull());
 
@@ -382,16 +335,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, (string?)(JValue?)null);
             Assert.AreEqual(
                 "12/12/2000 12:12:12",
-                (string?)(new JValue(
-                    new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)
-                ))
+                (string?)(new JValue(new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)))
             );
 #if !NET20
             Assert.AreEqual(
                 "12/12/2000 12:12:12 +00:00",
-                (string?)(new JValue(
-                    new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)
-                ))
+                (string?)(new JValue(new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)))
             );
 #endif
             Assert.AreEqual(true, (bool)(new JValue(1)));
@@ -412,19 +361,11 @@ namespace Newtonsoft.Json.Tests.Linq
                 TimeSpan.FromMinutes(1),
                 (TimeSpan)(new JValue(TimeSpan.FromMinutes(1)))
             );
-            Assert.AreEqual(
-                "00:01:00",
-                (string?)(new JValue(TimeSpan.FromMinutes(1)))
-            );
-            Assert.AreEqual(
-                TimeSpan.FromMinutes(1),
-                (TimeSpan)(new JValue("00:01:00"))
-            );
+            Assert.AreEqual("00:01:00", (string?)(new JValue(TimeSpan.FromMinutes(1))));
+            Assert.AreEqual(TimeSpan.FromMinutes(1), (TimeSpan)(new JValue("00:01:00")));
             Assert.AreEqual(
                 "46efe013-b56a-4e83-99e4-4dce7678a5bc",
-                (string?)(new JValue(
-                    new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")
-                ))
+                (string?)(new JValue(new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")))
             );
             Assert.AreEqual(
                 "http://www.google.com/",
@@ -436,9 +377,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
             Assert.AreEqual(
                 new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC"),
-                (Guid)(new JValue(
-                    new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")
-                ))
+                (Guid)(new JValue(new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")))
             );
             Assert.AreEqual(
                 new Uri("http://www.google.com"),
@@ -455,25 +394,15 @@ namespace Newtonsoft.Json.Tests.Linq
             );
             CollectionAssert.AreEquivalent(
                 (byte[])Encoding.UTF8.GetBytes("hi"),
-                (byte[]?)(new JValue(
-                    Convert.ToBase64String(Encoding.UTF8.GetBytes("hi"))
-                ))
+                (byte[]?)(new JValue(Convert.ToBase64String(Encoding.UTF8.GetBytes("hi"))))
             );
             Assert.AreEqual(
                 new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC"),
-                (Guid)(new JValue(
-                    new Guid(
-                        "46EFE013-B56A-4E83-99E4-4DCE7678A5BC"
-                    ).ToByteArray()
-                ))
+                (Guid)(new JValue(new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC").ToByteArray()))
             );
             Assert.AreEqual(
                 new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC"),
-                (Guid?)(new JValue(
-                    new Guid(
-                        "46EFE013-B56A-4E83-99E4-4DCE7678A5BC"
-                    ).ToByteArray()
-                ))
+                (Guid?)(new JValue(new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC").ToByteArray()))
             );
             Assert.AreEqual((sbyte?)1, (sbyte?)(new JValue((short?)1)));
 
@@ -503,10 +432,7 @@ namespace Newtonsoft.Json.Tests.Linq
             byte[] data = new byte[0];
             Assert.AreEqual(data, (byte[]?)(new JValue(data)));
 
-            Assert.AreEqual(
-                5,
-                (int)(new JValue(StringComparison.OrdinalIgnoreCase))
-            );
+            Assert.AreEqual(5, (int)(new JValue(StringComparison.OrdinalIgnoreCase)));
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             string bigIntegerText =
@@ -525,30 +451,15 @@ namespace Newtonsoft.Json.Tests.Linq
                 new BigInteger(long.MaxValue),
                 (new JValue(long.MaxValue)).ToObject<BigInteger>()
             );
-            Assert.AreEqual(
-                new BigInteger(4.5d),
-                (new JValue((4.5d))).ToObject<BigInteger>()
-            );
-            Assert.AreEqual(
-                new BigInteger(4.5f),
-                (new JValue((4.5f))).ToObject<BigInteger>()
-            );
+            Assert.AreEqual(new BigInteger(4.5d), (new JValue((4.5d))).ToObject<BigInteger>());
+            Assert.AreEqual(new BigInteger(4.5f), (new JValue((4.5f))).ToObject<BigInteger>());
             Assert.AreEqual(
                 new BigInteger(byte.MaxValue),
                 (new JValue(byte.MaxValue)).ToObject<BigInteger>()
             );
-            Assert.AreEqual(
-                new BigInteger(123),
-                (new JValue(123)).ToObject<BigInteger>()
-            );
-            Assert.AreEqual(
-                new BigInteger(123),
-                (new JValue(123)).ToObject<BigInteger?>()
-            );
-            Assert.AreEqual(
-                null,
-                (JValue.CreateNull()).ToObject<BigInteger?>()
-            );
+            Assert.AreEqual(new BigInteger(123), (new JValue(123)).ToObject<BigInteger>());
+            Assert.AreEqual(new BigInteger(123), (new JValue(123)).ToObject<BigInteger?>());
+            Assert.AreEqual(null, (JValue.CreateNull()).ToObject<BigInteger?>());
 
             byte[]? intData = BigInteger.Parse(bigIntegerText).ToByteArray();
             Assert.AreEqual(
@@ -558,16 +469,11 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(4.0d, (double)(new JValue(new BigInteger(4.5d))));
             Assert.AreEqual(true, (bool)(new JValue(new BigInteger(1))));
-            Assert.AreEqual(
-                long.MaxValue,
-                (long)(new JValue(new BigInteger(long.MaxValue)))
-            );
+            Assert.AreEqual(long.MaxValue, (long)(new JValue(new BigInteger(long.MaxValue))));
             Assert.AreEqual(
                 long.MaxValue,
                 (long)(new JValue(
-                    new BigInteger(
-                        new byte[] { 255, 255, 255, 255, 255, 255, 255, 127 }
-                    )
+                    new BigInteger(new byte[] { 255, 255, 255, 255, 255, 255, 255, 127 })
                 ))
             );
             Assert.AreEqual(
@@ -625,8 +531,7 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i =
-                        (DateTime)new JValue(new Uri("http://www.google.com"));
+                    var i = (DateTime)new JValue(new Uri("http://www.google.com"));
                 },
                 "Can not convert Uri to DateTime."
             );
@@ -765,8 +670,7 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i =
-                        (TimeSpan)new JValue(new Uri("http://www.google.com"));
+                    var i = (TimeSpan)new JValue(new Uri("http://www.google.com"));
                 },
                 "Can not convert Uri to TimeSpan."
             );
@@ -858,9 +762,7 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i = (new JValue(
-                        new Uri("http://www.google.com")
-                    )).ToObject<BigInteger>();
+                    var i = (new JValue(new Uri("http://www.google.com"))).ToObject<BigInteger>();
                 },
                 "Can not convert Uri to BigInteger."
             );
@@ -881,9 +783,7 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i = (new JValue(
-                        Guid.NewGuid()
-                    )).ToObject<BigInteger?>();
+                    var i = (new JValue(Guid.NewGuid())).ToObject<BigInteger?>();
                 },
                 "Can not convert Guid to BigInteger."
             );
@@ -907,18 +807,14 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i = (new JValue(
-                        "Ordinal1"
-                    )).ToObject<StringComparison>();
+                    var i = (new JValue("Ordinal1")).ToObject<StringComparison>();
                 },
                 "Could not convert 'Ordinal1' to StringComparison."
             );
             ExceptionAssert.Throws<ArgumentException>(
                 () =>
                 {
-                    var i = (new JValue(
-                        "Ordinal1"
-                    )).ToObject<StringComparison?>();
+                    var i = (new JValue("Ordinal1")).ToObject<StringComparison?>();
                 },
                 "Could not convert 'Ordinal1' to StringComparison."
             );
@@ -928,70 +824,31 @@ namespace Newtonsoft.Json.Tests.Linq
         public void ToObject()
         {
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-            Assert.AreEqual(
-                (BigInteger)1,
-                (new JValue(1).ToObject(typeof(BigInteger)))
-            );
-            Assert.AreEqual(
-                (BigInteger)1,
-                (new JValue(1).ToObject(typeof(BigInteger?)))
-            );
-            Assert.AreEqual(
-                (BigInteger?)null,
-                (JValue.CreateNull().ToObject(typeof(BigInteger?)))
-            );
+            Assert.AreEqual((BigInteger)1, (new JValue(1).ToObject(typeof(BigInteger))));
+            Assert.AreEqual((BigInteger)1, (new JValue(1).ToObject(typeof(BigInteger?))));
+            Assert.AreEqual((BigInteger?)null, (JValue.CreateNull().ToObject(typeof(BigInteger?))));
 #endif
-            Assert.AreEqual(
-                (ushort)1,
-                (new JValue(1).ToObject(typeof(ushort)))
-            );
-            Assert.AreEqual(
-                (ushort)1,
-                (new JValue(1).ToObject(typeof(ushort?)))
-            );
+            Assert.AreEqual((ushort)1, (new JValue(1).ToObject(typeof(ushort))));
+            Assert.AreEqual((ushort)1, (new JValue(1).ToObject(typeof(ushort?))));
             Assert.AreEqual((uint)1L, (new JValue(1).ToObject(typeof(uint))));
             Assert.AreEqual((uint)1L, (new JValue(1).ToObject(typeof(uint?))));
             Assert.AreEqual((ulong)1L, (new JValue(1).ToObject(typeof(ulong))));
-            Assert.AreEqual(
-                (ulong)1L,
-                (new JValue(1).ToObject(typeof(ulong?)))
-            );
+            Assert.AreEqual((ulong)1L, (new JValue(1).ToObject(typeof(ulong?))));
             Assert.AreEqual((sbyte)1L, (new JValue(1).ToObject(typeof(sbyte))));
-            Assert.AreEqual(
-                (sbyte)1L,
-                (new JValue(1).ToObject(typeof(sbyte?)))
-            );
-            Assert.AreEqual(
-                null,
-                (JValue.CreateNull().ToObject(typeof(sbyte?)))
-            );
+            Assert.AreEqual((sbyte)1L, (new JValue(1).ToObject(typeof(sbyte?))));
+            Assert.AreEqual(null, (JValue.CreateNull().ToObject(typeof(sbyte?))));
             Assert.AreEqual((byte)1L, (new JValue(1).ToObject(typeof(byte))));
             Assert.AreEqual((byte)1L, (new JValue(1).ToObject(typeof(byte?))));
             Assert.AreEqual((short)1L, (new JValue(1).ToObject(typeof(short))));
-            Assert.AreEqual(
-                (short)1L,
-                (new JValue(1).ToObject(typeof(short?)))
-            );
+            Assert.AreEqual((short)1L, (new JValue(1).ToObject(typeof(short?))));
             Assert.AreEqual(1, (new JValue(1).ToObject(typeof(int))));
             Assert.AreEqual(1, (new JValue(1).ToObject(typeof(int?))));
             Assert.AreEqual(1L, (new JValue(1).ToObject(typeof(long))));
             Assert.AreEqual(1L, (new JValue(1).ToObject(typeof(long?))));
-            Assert.AreEqual(
-                (float)1,
-                (new JValue(1.0).ToObject(typeof(float)))
-            );
-            Assert.AreEqual(
-                (float)1,
-                (new JValue(1.0).ToObject(typeof(float?)))
-            );
-            Assert.AreEqual(
-                (double)1,
-                (new JValue(1.0).ToObject(typeof(double)))
-            );
-            Assert.AreEqual(
-                (double)1,
-                (new JValue(1.0).ToObject(typeof(double?)))
-            );
+            Assert.AreEqual((float)1, (new JValue(1.0).ToObject(typeof(float))));
+            Assert.AreEqual((float)1, (new JValue(1.0).ToObject(typeof(float?))));
+            Assert.AreEqual((double)1, (new JValue(1.0).ToObject(typeof(double))));
+            Assert.AreEqual((double)1, (new JValue(1.0).ToObject(typeof(double?))));
             Assert.AreEqual(1m, (new JValue(1).ToObject(typeof(decimal))));
             Assert.AreEqual(1m, (new JValue(1).ToObject(typeof(decimal?))));
             Assert.AreEqual(true, (new JValue(true).ToObject(typeof(bool))));
@@ -1017,35 +874,29 @@ namespace Newtonsoft.Json.Tests.Linq
 #if !NET20
             Assert.AreEqual(
                 DateTimeOffset.MaxValue,
-                (new JValue(DateTimeOffset.MaxValue).ToObject(
-                    typeof(DateTimeOffset)
-                ))
+                (new JValue(DateTimeOffset.MaxValue).ToObject(typeof(DateTimeOffset)))
             );
             Assert.AreEqual(
                 DateTimeOffset.MaxValue,
-                (new JValue(DateTimeOffset.MaxValue).ToObject(
-                    typeof(DateTimeOffset?)
-                ))
+                (new JValue(DateTimeOffset.MaxValue).ToObject(typeof(DateTimeOffset?)))
             );
 #endif
             Assert.AreEqual("b", (new JValue("b").ToObject(typeof(string))));
             Assert.AreEqual(
                 new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"),
-                (new JValue(
-                    new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")
-                ).ToObject(typeof(Guid)))
+                (new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")).ToObject(
+                    typeof(Guid)
+                ))
             );
             Assert.AreEqual(
                 new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"),
-                (new JValue(
-                    new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")
-                ).ToObject(typeof(Guid?)))
+                (new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")).ToObject(
+                    typeof(Guid?)
+                ))
             );
             Assert.AreEqual(
                 new Uri("http://www.google.com/"),
-                (new JValue(new Uri("http://www.google.com/")).ToObject(
-                    typeof(Uri)
-                ))
+                (new JValue(new Uri("http://www.google.com/")).ToObject(typeof(Uri)))
             );
             Assert.AreEqual(
                 StringComparison.Ordinal,
@@ -1055,10 +906,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 StringComparison.Ordinal,
                 (new JValue("Ordinal").ToObject(typeof(StringComparison?)))
             );
-            Assert.AreEqual(
-                null,
-                (JValue.CreateNull().ToObject(typeof(StringComparison?)))
-            );
+            Assert.AreEqual(null, (JValue.CreateNull().ToObject(typeof(StringComparison?))));
         }
 
 #nullable enable
@@ -1074,229 +922,76 @@ namespace Newtonsoft.Json.Tests.Linq
 #if !NET20
             Assert.IsTrue(
                 JToken.DeepEquals(
-                    new JValue(
-                        new DateTimeOffset(
-                            2000,
-                            12,
-                            20,
-                            23,
-                            50,
-                            10,
-                            TimeSpan.Zero
-                        )
-                    ),
-                    (JValue)new DateTimeOffset(
-                        2000,
-                        12,
-                        20,
-                        23,
-                        50,
-                        10,
-                        TimeSpan.Zero
-                    )
+                    new JValue(new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero)),
+                    (JValue)new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero)
                 )
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((DateTimeOffset?)null),
-                    (JValue)(DateTimeOffset?)null
-                )
+                JToken.DeepEquals(new JValue((DateTimeOffset?)null), (JValue)(DateTimeOffset?)null)
             );
 #endif
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             // had to remove implicit casting to avoid user reference to System.Numerics.dll
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(new BigInteger(1)),
-                    new JValue(new BigInteger(1))
-                )
+                JToken.DeepEquals(new JValue(new BigInteger(1)), new JValue(new BigInteger(1)))
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((BigInteger?)null),
-                    new JValue((BigInteger?)null)
-                )
+                JToken.DeepEquals(new JValue((BigInteger?)null), new JValue((BigInteger?)null))
             );
 #endif
             Assert.IsTrue(JToken.DeepEquals(new JValue(true), (JValue)true));
             Assert.IsTrue(JToken.DeepEquals(new JValue(true), (JValue)true));
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue(true), (JValue)(bool?)true)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((bool?)null), (JValue)(bool?)null)
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JValue(true), (JValue)(bool?)true));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((bool?)null), (JValue)(bool?)null));
             Assert.IsTrue(JToken.DeepEquals(new JValue(10), (JValue)10));
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((long?)null), (JValue)(long?)null)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((DateTime?)null),
-                    (JValue)(DateTime?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(long.MaxValue),
-                    (JValue)long.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((int?)null), (JValue)(int?)null)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((short?)null),
-                    (JValue)(short?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((double?)null),
-                    (JValue)(double?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((uint?)null), (JValue)(uint?)null)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((decimal?)null),
-                    (JValue)(decimal?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((ulong?)null),
-                    (JValue)(ulong?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((sbyte?)null),
-                    (JValue)(sbyte?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((sbyte)1), (JValue)(sbyte)1)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((byte?)null), (JValue)(byte?)null)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue((byte)1), (JValue)(byte)1)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((ushort?)null),
-                    (JValue)(ushort?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(short.MaxValue),
-                    (JValue)short.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(ushort.MaxValue),
-                    (JValue)ushort.MaxValue
-                )
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JValue((long?)null), (JValue)(long?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((DateTime?)null), (JValue)(DateTime?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(long.MaxValue), (JValue)long.MaxValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((int?)null), (JValue)(int?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((short?)null), (JValue)(short?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((double?)null), (JValue)(double?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((uint?)null), (JValue)(uint?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((decimal?)null), (JValue)(decimal?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((ulong?)null), (JValue)(ulong?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((sbyte?)null), (JValue)(sbyte?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((sbyte)1), (JValue)(sbyte)1));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((byte?)null), (JValue)(byte?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((byte)1), (JValue)(byte)1));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((ushort?)null), (JValue)(ushort?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(short.MaxValue), (JValue)short.MaxValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(ushort.MaxValue), (JValue)ushort.MaxValue));
             Assert.IsTrue(JToken.DeepEquals(new JValue(11.1f), (JValue)11.1f));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(float.MinValue), (JValue)float.MinValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(double.MinValue), (JValue)double.MinValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(uint.MaxValue), (JValue)uint.MaxValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(ulong.MaxValue), (JValue)ulong.MaxValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue(ulong.MinValue), (JValue)ulong.MinValue));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((string?)null), (JValue)(string?)null));
+            Assert.IsTrue(JToken.DeepEquals(new JValue((DateTime?)null), (JValue)(DateTime?)null));
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(float.MinValue),
-                    (JValue)float.MinValue
-                )
+                JToken.DeepEquals(new JValue(decimal.MaxValue), (JValue)decimal.MaxValue)
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(double.MinValue),
-                    (JValue)double.MinValue
-                )
+                JToken.DeepEquals(new JValue(decimal.MaxValue), (JValue)(decimal?)decimal.MaxValue)
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(uint.MaxValue),
-                    (JValue)uint.MaxValue
-                )
+                JToken.DeepEquals(new JValue(decimal.MinValue), (JValue)decimal.MinValue)
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(ulong.MaxValue),
-                    (JValue)ulong.MaxValue
-                )
+                JToken.DeepEquals(new JValue(float.MaxValue), (JValue)(float?)float.MaxValue)
             );
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(ulong.MinValue),
-                    (JValue)ulong.MinValue
-                )
+                JToken.DeepEquals(new JValue(double.MaxValue), (JValue)(double?)double.MaxValue)
             );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((string?)null),
-                    (JValue)(string?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue((DateTime?)null),
-                    (JValue)(DateTime?)null
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(decimal.MaxValue),
-                    (JValue)decimal.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(decimal.MaxValue),
-                    (JValue)(decimal?)decimal.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(decimal.MinValue),
-                    (JValue)decimal.MinValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(float.MaxValue),
-                    (JValue)(float?)float.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JValue(double.MaxValue),
-                    (JValue)(double?)double.MaxValue
-                )
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), (JValue)(double?)null)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(double?)null));
 
-            Assert.IsFalse(
-                JToken.DeepEquals(new JValue(true), (JValue)(bool?)null)
-            );
-            Assert.IsFalse(
-                JToken.DeepEquals(JValue.CreateNull(), (JValue?)(object?)null)
-            );
+            Assert.IsFalse(JToken.DeepEquals(new JValue(true), (JValue)(bool?)null));
+            Assert.IsFalse(JToken.DeepEquals(JValue.CreateNull(), (JValue?)(object?)null));
 
             byte[] emptyData = new byte[0];
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue(emptyData), (JValue)emptyData)
-            );
-            Assert.IsFalse(
-                JToken.DeepEquals(new JValue(emptyData), (JValue)new byte[1])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JValue(emptyData), (JValue)emptyData));
+            Assert.IsFalse(JToken.DeepEquals(new JValue(emptyData), (JValue)new byte[1]));
             Assert.IsTrue(
                 JToken.DeepEquals(
                     new JValue(Encoding.UTF8.GetBytes("Hi")),
@@ -1310,9 +1005,7 @@ namespace Newtonsoft.Json.Tests.Linq
                     (JValue)TimeSpan.FromMinutes(1)
                 )
             );
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), (JValue)(TimeSpan?)null)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(TimeSpan?)null));
             Assert.IsTrue(
                 JToken.DeepEquals(
                     new JValue(TimeSpan.FromMinutes(1)),
@@ -1321,9 +1014,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
             Assert.IsTrue(
                 JToken.DeepEquals(
-                    new JValue(
-                        new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")
-                    ),
+                    new JValue(new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")),
                     (JValue)new Guid("46EFE013-B56A-4E83-99E4-4DCE7678A5BC")
                 )
             );
@@ -1333,12 +1024,8 @@ namespace Newtonsoft.Json.Tests.Linq
                     (JValue)new Uri("http://www.google.com")
                 )
             );
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), (JValue)(Uri?)null)
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), (JValue)(Guid?)null)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(Uri?)null));
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(Guid?)null));
         }
 #nullable disable
 
@@ -1387,32 +1074,20 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AfterSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JToken t = a[1];
             List<JToken> afterTokens = t.AfterSelf().ToList();
 
             Assert.AreEqual(2, afterTokens.Count);
             Assert.IsTrue(JToken.DeepEquals(new JArray(1, 2), afterTokens[0]));
-            Assert.IsTrue(
-                JToken.DeepEquals(new JArray(1, 2, 3), afterTokens[1])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JArray(1, 2, 3), afterTokens[1]));
         }
 
         [Test]
         public void BeforeSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JToken t = a[2];
             List<JToken> beforeTokens = t.BeforeSelf().ToList();
@@ -1425,12 +1100,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void HasValues()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             Assert.IsTrue(a.HasValues);
         }
@@ -1438,12 +1108,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Ancestors()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JToken t = a[1][0];
             List<JToken> ancestors = t.Ancestors().ToList();
@@ -1455,12 +1120,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AncestorsAndSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JToken t = a[1][0];
             List<JToken> ancestors = t.AncestorsAndSelf().ToList();
@@ -1473,12 +1133,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AncestorsAndSelf_Many()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JObject o = new JObject { { "prop1", "value1" } };
 
@@ -1500,12 +1155,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Ancestors_Many()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JObject o = new JObject { { "prop1", "value1" } };
 
@@ -1525,21 +1175,13 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Descendants()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             List<JToken> descendants = a.Descendants().ToList();
             Assert.AreEqual(10, descendants.Count());
             Assert.AreEqual(5, (int)descendants[0]);
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JArray(1, 2, 3),
-                    descendants[descendants.Count - 4]
-                )
+                JToken.DeepEquals(new JArray(1, 2, 3), descendants[descendants.Count - 4])
             );
             Assert.AreEqual(1, (int)descendants[descendants.Count - 3]);
             Assert.AreEqual(2, (int)descendants[descendants.Count - 2]);
@@ -1549,12 +1191,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Descendants_Many()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JObject o = new JObject { { "prop1", "value1" } };
 
@@ -1564,30 +1201,19 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(12, descendants.Count());
             Assert.AreEqual(5, (int)descendants[0]);
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JArray(1, 2, 3),
-                    descendants[descendants.Count - 6]
-                )
+                JToken.DeepEquals(new JArray(1, 2, 3), descendants[descendants.Count - 6])
             );
             Assert.AreEqual(1, (int)descendants[descendants.Count - 5]);
             Assert.AreEqual(2, (int)descendants[descendants.Count - 4]);
             Assert.AreEqual(3, (int)descendants[descendants.Count - 3]);
-            Assert.AreEqual(
-                o.Property("prop1"),
-                descendants[descendants.Count - 2]
-            );
+            Assert.AreEqual(o.Property("prop1"), descendants[descendants.Count - 2]);
             Assert.AreEqual(o["prop1"], descendants[descendants.Count - 1]);
         }
 
         [Test]
         public void DescendantsAndSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             List<JToken> descendantsAndSelf = a.DescendantsAndSelf().ToList();
             Assert.AreEqual(11, descendantsAndSelf.Count());
@@ -1599,36 +1225,21 @@ namespace Newtonsoft.Json.Tests.Linq
                     descendantsAndSelf[descendantsAndSelf.Count - 4]
                 )
             );
-            Assert.AreEqual(
-                1,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 3]
-            );
-            Assert.AreEqual(
-                2,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 2]
-            );
-            Assert.AreEqual(
-                3,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 1]
-            );
+            Assert.AreEqual(1, (int)descendantsAndSelf[descendantsAndSelf.Count - 3]);
+            Assert.AreEqual(2, (int)descendantsAndSelf[descendantsAndSelf.Count - 2]);
+            Assert.AreEqual(3, (int)descendantsAndSelf[descendantsAndSelf.Count - 1]);
         }
 
         [Test]
         public void DescendantsAndSelf_Many()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JObject o = new JObject { { "prop1", "value1" } };
 
             List<JContainer> source = new List<JContainer> { a, o };
 
-            List<JToken> descendantsAndSelf = source.DescendantsAndSelf()
-                .ToList();
+            List<JToken> descendantsAndSelf = source.DescendantsAndSelf().ToList();
             Assert.AreEqual(14, descendantsAndSelf.Count());
             Assert.AreEqual(a, descendantsAndSelf[0]);
             Assert.AreEqual(5, (int)descendantsAndSelf[1]);
@@ -1638,41 +1249,18 @@ namespace Newtonsoft.Json.Tests.Linq
                     descendantsAndSelf[descendantsAndSelf.Count - 7]
                 )
             );
-            Assert.AreEqual(
-                1,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 6]
-            );
-            Assert.AreEqual(
-                2,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 5]
-            );
-            Assert.AreEqual(
-                3,
-                (int)descendantsAndSelf[descendantsAndSelf.Count - 4]
-            );
-            Assert.AreEqual(
-                o,
-                descendantsAndSelf[descendantsAndSelf.Count - 3]
-            );
-            Assert.AreEqual(
-                o.Property("prop1"),
-                descendantsAndSelf[descendantsAndSelf.Count - 2]
-            );
-            Assert.AreEqual(
-                o["prop1"],
-                descendantsAndSelf[descendantsAndSelf.Count - 1]
-            );
+            Assert.AreEqual(1, (int)descendantsAndSelf[descendantsAndSelf.Count - 6]);
+            Assert.AreEqual(2, (int)descendantsAndSelf[descendantsAndSelf.Count - 5]);
+            Assert.AreEqual(3, (int)descendantsAndSelf[descendantsAndSelf.Count - 4]);
+            Assert.AreEqual(o, descendantsAndSelf[descendantsAndSelf.Count - 3]);
+            Assert.AreEqual(o.Property("prop1"), descendantsAndSelf[descendantsAndSelf.Count - 2]);
+            Assert.AreEqual(o["prop1"], descendantsAndSelf[descendantsAndSelf.Count - 1]);
         }
 
         [Test]
         public void CreateWriter()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JsonWriter writer = a.CreateWriter();
             Assert.IsNotNull(writer);
@@ -1689,22 +1277,14 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(6, a.Count());
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JObject(new JProperty("Property", "PropertyValue")),
-                    a[5]
-                )
+                JToken.DeepEquals(new JObject(new JProperty("Property", "PropertyValue")), a[5])
             );
         }
 
         [Test]
         public void AddFirst()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             a.AddFirst("First");
 
@@ -1725,12 +1305,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void RemoveAll()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JToken first = a.First;
             Assert.AreEqual(5, (int)first);
@@ -1771,12 +1346,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Replace()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             a[0].Replace(new JValue(int.MaxValue));
             Assert.AreEqual(int.MaxValue, (int)a[0]);
@@ -1791,12 +1361,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.IsTrue(
                 JToken.DeepEquals(
-                    new JArray(
-                        int.MaxValue,
-                        new JArray("Test"),
-                        int.MaxValue,
-                        new JArray(1, 2, 3)
-                    ),
+                    new JArray(int.MaxValue, new JArray("Test"), int.MaxValue, new JArray(1, 2, 3)),
                     a
                 )
             );
@@ -1805,14 +1370,9 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ToStringWithConverters()
         {
-            JArray a = new JArray(
-                new JValue(new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc))
-            );
+            JArray a = new JArray(new JValue(new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc)));
 
-            string json = a.ToString(
-                Formatting.Indented,
-                new IsoDateTimeConverter()
-            );
+            string json = a.ToString(Formatting.Indented, new IsoDateTimeConverter());
 
             StringAssert.AreEqual(@"[
   ""2009-02-15T00:00:00Z""
@@ -1826,14 +1386,9 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ToStringWithNoIndenting()
         {
-            JArray a = new JArray(
-                new JValue(new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc))
-            );
+            JArray a = new JArray(new JValue(new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc)));
 
-            string json = a.ToString(
-                Formatting.None,
-                new IsoDateTimeConverter()
-            );
+            string json = a.ToString(Formatting.None, new IsoDateTimeConverter());
 
             Assert.AreEqual(@"[""2009-02-15T00:00:00Z""]", json);
         }
@@ -1841,12 +1396,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AddAfterSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             a[1].AddAfterSelf("pie");
 
@@ -1864,12 +1414,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AddBeforeSelf()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             a[1].AddBeforeSelf("pie");
 
@@ -1903,10 +1448,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JArray(1, 2),
                 new JArray(1, 2, 3),
                 new JObject(
-                    new JProperty(
-                        "First",
-                        new JValue(Encoding.UTF8.GetBytes("Hi"))
-                    ),
+                    new JProperty("First", new JValue(Encoding.UTF8.GetBytes("Hi"))),
                     new JProperty("Second", 1),
                     new JProperty("Third", null),
                     new JProperty("Fourth", new JConstructor("Date", 12345)),
@@ -1959,10 +1501,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JArray(1, 2),
                 new JArray(1, 2, 3),
                 new JObject(
-                    new JProperty(
-                        "First",
-                        new JValue(Encoding.UTF8.GetBytes("Hi"))
-                    ),
+                    new JProperty("First", new JValue(Encoding.UTF8.GetBytes("Hi"))),
                     new JProperty("Second", 1),
                     new JProperty("Third", null),
                     new JProperty("Fourth", new JConstructor("Date", 12345)),
@@ -1982,11 +1521,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void DoubleDeepEquals()
         {
-            JArray a = new JArray(
-                double.NaN,
-                double.PositiveInfinity,
-                double.NegativeInfinity
-            );
+            JArray a = new JArray(double.NaN, double.PositiveInfinity, double.NegativeInfinity);
 
             JArray a2 = (JArray)a.DeepClone();
 
@@ -2029,18 +1564,11 @@ namespace Newtonsoft.Json.Tests.Linq
                     new JObject(
                         new JProperty(
                             "Test1",
-                            new JArray(
-                                1,
-                                new JObject(new JProperty("Test1", 1)),
-                                3
-                            )
+                            new JArray(1, new JObject(new JProperty("Test1", 1)), 3)
                         )
                     )
                 ),
-                new JProperty(
-                    "Test4",
-                    new JConstructor("Date", new JArray(1, 2, 3))
-                )
+                new JProperty("Test4", new JConstructor("Date", new JArray(1, 2, 3)))
             );
 
             JToken t = o.SelectToken("Test1[0]");
@@ -2077,10 +1605,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JToken o = JToken.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    CommentHandling = CommentHandling.Ignore
-                }
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
             );
 
             Assert.AreEqual(3, o["prop"].Count());
@@ -2106,8 +1631,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Parse_ExcessiveContent()
         {
-            string json =
-                @"{'prop':[1,2,3]}/*comment*/
+            string json = @"{'prop':[1,2,3]}/*comment*/
 //Another comment.
 {}";
 

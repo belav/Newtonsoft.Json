@@ -29,11 +29,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class IntToFloatConverter : JsonConverter
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             writer.WriteValue(Convert.ToDouble(value));
         }
 

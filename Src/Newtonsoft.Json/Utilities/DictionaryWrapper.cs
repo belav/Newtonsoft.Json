@@ -43,9 +43,7 @@ namespace Newtonsoft.Json.Utilities
         object UnderlyingDictionary { get; }
     }
 
-    internal class DictionaryWrapper<TKey, TValue>
-        : IDictionary<TKey, TValue>,
-            IWrappedDictionary
+    internal class DictionaryWrapper<TKey, TValue> : IDictionary<TKey, TValue>, IWrappedDictionary
     {
         private readonly IDictionary? _dictionary;
         private readonly IDictionary<TKey, TValue>? _genericDictionary;
@@ -428,13 +426,7 @@ namespace Newtonsoft.Json.Utilities
             if (_dictionary != null)
             {
                 return _dictionary.Cast<DictionaryEntry>()
-                    .Select(
-                        de =>
-                            new KeyValuePair<TKey, TValue>(
-                                (TKey)de.Key,
-                                (TValue)de.Value
-                            )
-                    )
+                    .Select(de => new KeyValuePair<TKey, TValue>((TKey)de.Key, (TValue)de.Value))
                     .GetEnumerator();
             }
 #if HAVE_READ_ONLY_COLLECTIONS
@@ -516,13 +508,10 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private readonly struct DictionaryEnumerator<
-            TEnumeratorKey,
-            TEnumeratorValue
-        > : IDictionaryEnumerator
+        private readonly struct DictionaryEnumerator<TEnumeratorKey, TEnumeratorValue>
+            : IDictionaryEnumerator
         {
-            private readonly IEnumerator<KeyValuePair<TEnumeratorKey,
-                    TEnumeratorValue>> _e;
+            private readonly IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> _e;
 
             public DictionaryEnumerator(
                 IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e
@@ -537,8 +526,7 @@ namespace Newtonsoft.Json.Utilities
 
             public object Value => Entry.Value;
 
-            public object Current =>
-                new DictionaryEntry(_e.Current.Key, _e.Current.Value);
+            public object Current => new DictionaryEntry(_e.Current.Key, _e.Current.Value);
 
             public bool MoveNext()
             {
@@ -565,9 +553,7 @@ namespace Newtonsoft.Json.Utilities
 #endif
             else
             {
-                return new DictionaryEnumerator<TKey, TValue>(
-                    GenericDictionary.GetEnumerator()
-                );
+                return new DictionaryEnumerator<TKey, TValue>(GenericDictionary.GetEnumerator());
             }
         }
 
@@ -684,10 +670,7 @@ namespace Newtonsoft.Json.Utilities
 #endif
             else
             {
-                GenericDictionary.CopyTo(
-                    (KeyValuePair<TKey, TValue>[])array,
-                    index
-                );
+                GenericDictionary.CopyTo((KeyValuePair<TKey, TValue>[])array, index);
             }
         }
 
@@ -712,11 +695,7 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (_syncRoot == null)
                 {
-                    Interlocked.CompareExchange(
-                        ref _syncRoot,
-                        new object(),
-                        null
-                    );
+                    Interlocked.CompareExchange(ref _syncRoot, new object(), null);
                 }
 
                 return _syncRoot;

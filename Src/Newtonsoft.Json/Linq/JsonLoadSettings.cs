@@ -31,10 +31,8 @@ namespace Newtonsoft.Json.Linq
             get => _commentHandling;
             set
             {
-                if (
-                    value < CommentHandling.Ignore ||
-                    value > CommentHandling.Load
-                ) {
+                if (value < CommentHandling.Ignore || value > CommentHandling.Load)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -52,10 +50,8 @@ namespace Newtonsoft.Json.Linq
             get => _lineInfoHandling;
             set
             {
-                if (
-                    value < LineInfoHandling.Ignore ||
-                    value > LineInfoHandling.Load
-                ) {
+                if (value < LineInfoHandling.Ignore || value > LineInfoHandling.Load)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -74,8 +70,8 @@ namespace Newtonsoft.Json.Linq
             set
             {
                 if (
-                    value < DuplicatePropertyNameHandling.Replace ||
-                    value > DuplicatePropertyNameHandling.Error
+                    value < DuplicatePropertyNameHandling.Replace
+                    || value > DuplicatePropertyNameHandling.Error
                 ) {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }

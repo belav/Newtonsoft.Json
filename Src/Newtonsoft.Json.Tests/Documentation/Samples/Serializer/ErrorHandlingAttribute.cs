@@ -67,10 +67,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Title { get; set; }
 
             [OnError]
-            internal void OnError(
-                StreamingContext context,
-                ErrorContext errorContext
-            ) {
+            internal void OnError(StreamingContext context, ErrorContext errorContext)
+            {
                 errorContext.Handled = true;
             }
         }
@@ -88,10 +86,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Title = "Mister Manager"
             };
 
-            string json = JsonConvert.SerializeObject(
-                person,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(person, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

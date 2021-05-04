@@ -215,28 +215,19 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(
                 false,
                 ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>(
-                        "PropertyNameValue1",
-                        new JValue(1)
-                    )
+                    new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1))
                 )
             );
             Assert.AreEqual(
                 false,
                 ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>(
-                        "PropertyNameValue",
-                        new JValue(2)
-                    )
+                    new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2))
                 )
             );
             Assert.AreEqual(
                 false,
                 ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>(
-                        "PropertyNameValue",
-                        new JValue(1)
-                    )
+                    new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
                 )
             );
             Assert.AreEqual(
@@ -282,10 +273,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject();
             ((ICollection<KeyValuePair<string, JToken>>)o).Add(
-                new KeyValuePair<string, JToken>(
-                    "PropertyNameValue",
-                    new JValue(1)
-                )
+                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
             );
 
             Assert.AreEqual(1, (int)o["PropertyNameValue"]);
@@ -315,12 +303,8 @@ namespace Newtonsoft.Json.Tests.Linq
             o.Add("PropertyNameValue", v);
             Assert.AreEqual(1, o.Children().Count());
 
-            bool contains = ((ICollection<KeyValuePair<string,
-                    JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>(
-                    "PropertyNameValue",
-                    new JValue(1)
-                )
+            bool contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
+                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
             );
             Assert.AreEqual(false, contains);
 
@@ -330,18 +314,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(true, contains);
 
             contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>(
-                    "PropertyNameValue",
-                    new JValue(2)
-                )
+                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2))
             );
             Assert.AreEqual(false, contains);
 
             contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>(
-                    "PropertyNameValue1",
-                    new JValue(1)
-                )
+                new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1))
             );
             Assert.AreEqual(false, contains);
 
@@ -383,9 +361,7 @@ Parameter name: propertyName",
             o.Add("PropertyNameValue", new JValue(1));
             Assert.AreEqual(1, o.Children().Count());
 
-            bool contains = ((IDictionary<string, JToken>)o).ContainsKey(
-                "PropertyNameValue"
-            );
+            bool contains = ((IDictionary<string, JToken>)o).ContainsKey("PropertyNameValue");
             Assert.AreEqual(true, contains);
         }
 
@@ -398,8 +374,7 @@ Parameter name: propertyName",
             o.Add("PropertyNameValue3", new JValue(3));
             Assert.AreEqual(3, o.Children().Count());
 
-            KeyValuePair<string, JToken>[] a =
-                new KeyValuePair<string, JToken>[5];
+            KeyValuePair<string, JToken>[] a = new KeyValuePair<string, JToken>[5];
 
             ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(a, 1);
 
@@ -424,10 +399,7 @@ Parameter name: propertyName",
                 () =>
                 {
                     JObject o = new JObject();
-                    ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(
-                        null,
-                        0
-                    );
+                    ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(null, 0);
                 },
                 @"Value cannot be null.
 Parameter name: array",
@@ -769,9 +741,7 @@ Parameter name: arrayIndex",
             o["rc"] = new JValue(200);
             o["m"] = new JValue("");
             o["o"] = new JValue(
-                @"<div class='s1'>" +
-                StringUtils.CarriageReturnLineFeed +
-                @"</div>"
+                @"<div class='s1'>" + StringUtils.CarriageReturnLineFeed + @"</div>"
             );
 
             StringAssert.AreEqual(
@@ -1597,9 +1567,7 @@ Parameter name: arrayIndex",
             JProperty p2 = new JProperty("Test2", "Two");
             ITypedList l = new JObject(p1, p2);
 
-            PropertyDescriptorCollection propertyDescriptors = l.GetItemProperties(
-                null
-            );
+            PropertyDescriptorCollection propertyDescriptors = l.GetItemProperties(null);
             Assert.IsNull(propertyDescriptors);
         }
 
@@ -1734,11 +1702,9 @@ Parameter name: arrayIndex",
             JObject o = JObject.Parse(json);
 
             string searchAddress =
-                (string)o["Placemark"][0]["AddressDetails"]["Country"][
-                    "AdministrativeArea"
-                ]["SubAdministrativeArea"]["Locality"]["Thoroughfare"][
-                    "ThoroughfareName"
-                ];
+                (string)o["Placemark"][0]["AddressDetails"]["Country"]["AdministrativeArea"][
+                    "SubAdministrativeArea"
+                ]["Locality"]["Thoroughfare"]["ThoroughfareName"];
             Assert.AreEqual("435 N Mulford Rd", searchAddress);
         }
 
@@ -1769,8 +1735,7 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1784,8 +1749,7 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_EmptySettings()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1799,8 +1763,7 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_IgnoreDuplicateSetting()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1820,8 +1783,7 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_ReplaceDuplicateSetting()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1959,9 +1921,7 @@ Parameter name: arrayIndex",
     {
       ""code"":0";
 
-                    JsonReader reader = new JsonTextReader(
-                        new StringReader(jsonText)
-                    );
+                    JsonReader reader = new JsonTextReader(new StringReader(jsonText));
                     reader.Read();
                     reader.Read();
                     reader.Read();
@@ -1978,9 +1938,7 @@ Parameter name: arrayIndex",
         [Test]
         public void GetProperties()
         {
-            JObject o = JObject.Parse(
-                "{'prop1':12,'prop2':'hi!','prop3':null,'prop4':[1,2,3]}"
-            );
+            JObject o = JObject.Parse("{'prop1':12,'prop2':'hi!','prop3':null,'prop4':[1,2,3]}");
 
             ICustomTypeDescriptor descriptor = o;
 
@@ -2036,8 +1994,7 @@ Parameter name: arrayIndex",
         [Test]
         public void FromObjectUri()
         {
-            JValue v =
-                (JValue)JToken.FromObject(new Uri("http://www.stuff.co.nz"));
+            JValue v = (JValue)JToken.FromObject(new Uri("http://www.stuff.co.nz"));
             Assert.AreEqual(v.Value, new Uri("http://www.stuff.co.nz"));
 
             Assert.AreEqual("http://www.stuff.co.nz/", v.ToString());
@@ -2046,19 +2003,10 @@ Parameter name: arrayIndex",
         [Test]
         public void FromObjectGuid()
         {
-            JValue v =
-                (JValue)JToken.FromObject(
-                    new Guid("9065ACF3-C820-467D-BE50-8D4664BEAF35")
-                );
-            Assert.AreEqual(
-                v.Value,
-                new Guid("9065ACF3-C820-467D-BE50-8D4664BEAF35")
-            );
+            JValue v = (JValue)JToken.FromObject(new Guid("9065ACF3-C820-467D-BE50-8D4664BEAF35"));
+            Assert.AreEqual(v.Value, new Guid("9065ACF3-C820-467D-BE50-8D4664BEAF35"));
 
-            Assert.AreEqual(
-                "9065acf3-c820-467d-be50-8d4664beaf35",
-                v.ToString()
-            );
+            Assert.AreEqual("9065acf3-c820-467d-be50-8d4664beaf35", v.ToString());
         }
 
         [Test]
@@ -2147,8 +2095,7 @@ Parameter name: arrayIndex",
             IList<JToken> l1 = o.ToList<JToken>();
             Assert.AreEqual(0, l1.Count);
 
-            IList<KeyValuePair<string,
-                    JToken>> l2 = o.ToList<KeyValuePair<string, JToken>>();
+            IList<KeyValuePair<string, JToken>> l2 = o.ToList<KeyValuePair<string, JToken>>();
             Assert.AreEqual(0, l2.Count);
 
             o = JObject.Parse(@"{'hi':null}");
@@ -2185,12 +2132,10 @@ Parameter name: arrayIndex",
       }"
             );
 
-            string exactMatch =
-                (string)o.GetValue("NAME", StringComparison.OrdinalIgnoreCase);
+            string exactMatch = (string)o.GetValue("NAME", StringComparison.OrdinalIgnoreCase);
             // Upper
 
-            string ignoreCase =
-                (string)o.GetValue("Name", StringComparison.OrdinalIgnoreCase);
+            string ignoreCase = (string)o.GetValue("Name", StringComparison.OrdinalIgnoreCase);
             // Lower
 
             Assert.AreEqual("Upper", exactMatch);
@@ -2212,35 +2157,24 @@ Parameter name: arrayIndex",
                 "Name!",
                 (string)a.GetValue("NAME", StringComparison.OrdinalIgnoreCase)
             );
-            Assert.AreEqual(
-                "name!",
-                (string)a.GetValue("name", StringComparison.Ordinal)
-            );
+            Assert.AreEqual("name!", (string)a.GetValue("name", StringComparison.Ordinal));
             Assert.AreEqual(null, a.GetValue(null, StringComparison.Ordinal));
             Assert.AreEqual(null, a.GetValue(null));
 
             JToken v;
-            Assert.IsFalse(
-                a.TryGetValue("NAME", StringComparison.Ordinal, out v)
-            );
+            Assert.IsFalse(a.TryGetValue("NAME", StringComparison.Ordinal, out v));
             Assert.AreEqual(null, v);
 
             Assert.IsFalse(a.TryGetValue("NAME", out v));
             Assert.IsFalse(a.TryGetValue("TITLE", out v));
 
-            Assert.IsTrue(
-                a.TryGetValue("NAME", StringComparison.OrdinalIgnoreCase, out v)
-            );
+            Assert.IsTrue(a.TryGetValue("NAME", StringComparison.OrdinalIgnoreCase, out v));
             Assert.AreEqual("Name!", (string)v);
 
-            Assert.IsTrue(
-                a.TryGetValue("name", StringComparison.Ordinal, out v)
-            );
+            Assert.IsTrue(a.TryGetValue("name", StringComparison.Ordinal, out v));
             Assert.AreEqual("name!", (string)v);
 
-            Assert.IsFalse(
-                a.TryGetValue(null, StringComparison.Ordinal, out v)
-            );
+            Assert.IsFalse(a.TryGetValue(null, StringComparison.Ordinal, out v));
         }
 
         public class FooJsonConverter : JsonConverter
@@ -2317,10 +2251,7 @@ Parameter name: arrayIndex",
 
             JObject o = JObject.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    CommentHandling = CommentHandling.Ignore
-                }
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
             );
 
             Assert.AreEqual(3, o["prop"].Count());
@@ -2346,8 +2277,7 @@ Parameter name: arrayIndex",
         [Test]
         public void Parse_ExcessiveContent()
         {
-            string json =
-                @"{'prop':[1,2,3]}/*comment*/
+            string json = @"{'prop':[1,2,3]}/*comment*/
 //Another comment.
 []";
 
@@ -2389,27 +2319,15 @@ Parameter name: arrayIndex",
             Assert.AreEqual(null, a.Property("NAME"));
             Assert.AreEqual(null, a.Property("TITLE"));
             Assert.AreEqual(null, a.Property(null, StringComparison.Ordinal));
-            Assert.AreEqual(
-                null,
-                a.Property(null, StringComparison.OrdinalIgnoreCase)
-            );
+            Assert.AreEqual(null, a.Property(null, StringComparison.OrdinalIgnoreCase));
             Assert.AreEqual(null, a.Property(null));
 
             // Return first match when ignoring case
-            Assert.AreEqual(
-                "Name",
-                a.Property("NAME", StringComparison.OrdinalIgnoreCase).Name
-            );
+            Assert.AreEqual("Name", a.Property("NAME", StringComparison.OrdinalIgnoreCase).Name);
             // Return exact match before ignoring case
-            Assert.AreEqual(
-                "name",
-                a.Property("name", StringComparison.OrdinalIgnoreCase).Name
-            );
+            Assert.AreEqual("name", a.Property("name", StringComparison.OrdinalIgnoreCase).Name);
             // Return exact match without ignoring case
-            Assert.AreEqual(
-                "name",
-                a.Property("name", StringComparison.Ordinal).Name
-            );
+            Assert.AreEqual("name", a.Property("name", StringComparison.Ordinal).Name);
         }
     }
 }

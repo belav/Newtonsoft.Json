@@ -56,10 +56,7 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual(null, exception.InnerException);
 
-            exception = new JsonSerializationException(
-                "Message!",
-                new Exception("Inner!")
-            );
+            exception = new JsonSerializationException("Message!", new Exception("Inner!"));
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual("Inner!", exception.InnerException.Message);
         }
@@ -77,10 +74,7 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual(null, exception.InnerException);
 
-            exception = new JsonWriterException(
-                "Message!",
-                new Exception("Inner!")
-            );
+            exception = new JsonWriterException("Message!", new Exception("Inner!"));
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual("Inner!", exception.InnerException.Message);
         }
@@ -98,10 +92,7 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual(null, exception.InnerException);
 
-            exception = new JsonReaderException(
-                "Message!",
-                new Exception("Inner!")
-            );
+            exception = new JsonReaderException("Message!", new Exception("Inner!"));
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual("Inner!", exception.InnerException.Message);
         }
@@ -120,10 +111,7 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual(null, exception.InnerException);
 
-            exception = new JsonSchemaException(
-                "Message!",
-                new Exception("Inner!")
-            );
+            exception = new JsonSchemaException("Message!", new Exception("Inner!"));
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual("Inner!", exception.InnerException.Message);
         }

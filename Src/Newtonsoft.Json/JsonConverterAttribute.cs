@@ -33,13 +33,13 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> to use the specified <see cref="JsonConverter"/> when serializing the member or class.
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Field |
-        AttributeTargets.Property |
-        AttributeTargets.Class |
-        AttributeTargets.Struct |
-        AttributeTargets.Interface |
-        AttributeTargets.Enum |
-        AttributeTargets.Parameter,
+        AttributeTargets.Field
+        | AttributeTargets.Property
+        | AttributeTargets.Class
+        | AttributeTargets.Struct
+        | AttributeTargets.Interface
+        | AttributeTargets.Enum
+        | AttributeTargets.Parameter,
         AllowMultiple = false)]
     public sealed class JsonConverterAttribute : Attribute
     {
@@ -76,11 +76,9 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="converterType">Type of the <see cref="JsonConverter"/>.</param>
         /// <param name="converterParameters">Parameter list to use when constructing the <see cref="JsonConverter"/>. Can be <c>null</c>.</param>
-        public JsonConverterAttribute(
-            Type converterType,
-            params object[] converterParameters
-        )
-            : this(converterType) {
+        public JsonConverterAttribute(Type converterType, params object[] converterParameters)
+            : this(converterType)
+        {
             ConverterParameters = converterParameters;
         }
     }

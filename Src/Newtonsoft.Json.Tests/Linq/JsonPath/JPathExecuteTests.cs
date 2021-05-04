@@ -113,8 +113,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JObject models = JObject.Parse(json);
 
-            var results = models.SelectTokens("$.persons[?(@.age > 3)]")
-                .ToList();
+            var results = models.SelectTokens("$.persons[?(@.age > 3)]").ToList();
 
             Assert.AreEqual(1, results.Count);
         }
@@ -138,8 +137,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JObject models = JObject.Parse(json);
 
-            var results = models.SelectTokens("$.persons[?(@.age > '3')]")
-                .ToList();
+            var results = models.SelectTokens("$.persons[?(@.age > '3')]").ToList();
 
             Assert.AreEqual(1, results.Count);
         }
@@ -216,14 +214,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JObject models = JObject.Parse(json);
 
-            var results = models.SelectTokens("$.elements..[?(@.id=='AAA')]")
-                .ToList();
+            var results = models.SelectTokens("$.elements..[?(@.id=='AAA')]").ToList();
 
             Assert.AreEqual(1, results.Count);
-            Assert.AreEqual(
-                models["elements"][0]["children"][0]["children"][0],
-                results[0]
-            );
+            Assert.AreEqual(models["elements"][0]["children"][0]["children"][0], results[0]);
         }
 
         [Test]
@@ -373,10 +367,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JObject models = JObject.Parse(json);
 
-            var results = models.SelectTokens(
-                    "$..['My.Child.Node','Prop1','Prop2']"
-                )
-                .ToList();
+            var results = models.SelectTokens("$..['My.Child.Node','Prop1','Prop2']").ToList();
             Assert.AreEqual("Val1", (string)results[0]);
             Assert.AreEqual("Val2", (string)results[1]);
             Assert.AreEqual(JTokenType.Object, results[2].Type);
@@ -436,8 +427,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void SelectTokenAfterEmptyContainer()
         {
-            string json =
-                @"{
+            string json = @"{
     'cont': [],
     'test': 'no one will find me'
 }";
@@ -512,9 +502,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void EvaluateDollarTypeString()
         {
-            JObject o = new JObject(
-                new JProperty("$values", new JArray(1, 2, 3))
-            );
+            JObject o = new JObject(new JProperty("$values", new JArray(1, 2, 3)));
 
             JToken t = o.SelectToken("$values[1]");
             Assert.AreEqual(2, (int)t);
@@ -534,10 +522,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void EvaluateWildcardProperty()
         {
-            JObject o = new JObject(
-                new JProperty("Blah", 1),
-                new JProperty("Blah2", 2)
-            );
+            JObject o = new JObject(new JProperty("Blah", 1), new JProperty("Blah2", 2));
 
             IList<JToken> t = o.SelectTokens("$.*").ToList();
             Assert.IsNotNull(t);
@@ -926,10 +911,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JObject o1 = new JObject { { "Name", 1 } };
             JObject o2 = new JObject { { "Name", 2 } };
-            JObject o3 = new JObject
-            {
-                { "Name", new JObject { { "Name", new JArray(3) } } }
-            };
+            JObject o3 = new JObject { { "Name", new JObject { { "Name", new JArray(3) } } } };
             JArray a = new JArray(o1, o2, o3);
 
             IList<JToken> t = a.SelectTokens("$..Name").ToList();
@@ -937,12 +919,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(4, t.Count);
             Assert.AreEqual(1, (int)t[0]);
             Assert.AreEqual(2, (int)t[1]);
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JObject { { "Name", new JArray(3) } },
-                    t[2]
-                )
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject { { "Name", new JArray(3) } }, t[2]));
             Assert.IsTrue(JToken.DeepEquals(new JArray(3), t[3]));
         }
 
@@ -951,10 +928,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JObject o1 = new JObject { { "Name", 1 } };
             JObject o2 = new JObject { { "Name", 2 } };
-            JObject o3 = new JObject
-            {
-                { "Name", new JObject { { "Name", new JArray(3) } } }
-            };
+            JObject o3 = new JObject { { "Name", new JObject { { "Name", new JArray(3) } } } };
             JArray a = new JArray(o1, o2, o3);
 
             IList<JToken> t = a.SelectTokens("$..*").ToList();
@@ -967,12 +941,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.IsTrue(JToken.DeepEquals(o2, t[3]));
             Assert.AreEqual(2, (int)t[4]);
             Assert.IsTrue(JToken.DeepEquals(o3, t[5]));
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JObject { { "Name", new JArray(3) } },
-                    t[6]
-                )
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject { { "Name", new JArray(3) } }, t[6]));
             Assert.IsTrue(JToken.DeepEquals(new JArray(3), t[7]));
             Assert.AreEqual(3, (int)t[8]);
         }
@@ -1011,9 +980,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IList<JToken> t = a.SelectTokens("[ ?( @.hi ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(1, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", "ho")), t[0])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", "ho")), t[0]));
         }
 
         [Test]
@@ -1024,13 +991,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 new JObject(new JProperty("hi", "ha"))
             );
 
-            IList<JToken> t = a.SelectTokens("[ ?( @.['hi'] == 'ha' ) ]")
-                .ToList();
+            IList<JToken> t = a.SelectTokens("[ ?( @.['hi'] == 'ha' ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(1, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", "ha")), t[0])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", "ha")), t[0]));
         }
 
         [Test]
@@ -1045,10 +1009,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.IsNotNull(t);
             Assert.AreEqual(1, t.Count);
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JArray(new JObject(new JProperty("hi", "ho"))),
-                    t[0]
-                )
+                JToken.DeepEquals(new JArray(new JObject(new JProperty("hi", "ho"))), t[0])
             );
         }
 
@@ -1072,8 +1033,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             // json path does item based evaluation - http://www.sitepen.com/blog/2008/03/17/jsonpath-support/
             // first query resolves array to ints
             // int has no children to query
-            IList<JToken> t = a.SelectTokens("[?(@ <> 1)][?(@ <> 4)][?(@ < 7)]")
-                .ToList();
+            IList<JToken> t = a.SelectTokens("[?(@ <> 1)][?(@ <> 4)][?(@ < 7)]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(0, t.Count);
         }
@@ -1090,12 +1050,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IList<JToken> t = a.SelectTokens("[ ?( @.hi > 1 ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(2, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1]));
         }
 
         [Test]
@@ -1110,12 +1066,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IList<JToken> t = a.SelectTokens("[ ?( 1 < @.hi ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(2, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1]));
         }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40 || NET35 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -1131,12 +1083,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IList<JToken> t = a.SelectTokens("[ ?( @.hi > 1 ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(2, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1]));
         }
 #endif
 
@@ -1153,18 +1101,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IList<JToken> t = a.SelectTokens("[ ?( @.hi >= 1 ) ]").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(4, t.Count);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 1)), t[0])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[1])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 2.0)), t[2])
-            );
-            Assert.IsTrue(
-                JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[3])
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 1)), t[0]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[1]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2.0)), t[2]));
+            Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[3]));
         }
 
         [Test]
@@ -1175,35 +1115,26 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                     new JProperty("name", "Bad Boys"),
                     new JProperty(
                         "cast",
-                        new JArray(
-                            new JObject(new JProperty("name", "Will Smith"))
-                        )
+                        new JArray(new JObject(new JProperty("name", "Will Smith")))
                     )
                 ),
                 new JObject(
                     new JProperty("name", "Independence Day"),
                     new JProperty(
                         "cast",
-                        new JArray(
-                            new JObject(new JProperty("name", "Will Smith"))
-                        )
+                        new JArray(new JObject(new JProperty("name", "Will Smith")))
                     )
                 ),
                 new JObject(
                     new JProperty("name", "The Rock"),
                     new JProperty(
                         "cast",
-                        new JArray(
-                            new JObject(new JProperty("name", "Nick Cage"))
-                        )
+                        new JArray(new JObject(new JProperty("name", "Nick Cage")))
                     )
                 )
             );
 
-            IList<JToken> t = a.SelectTokens(
-                    "[?(@.cast[?(@.name=='Will Smith')])].name"
-                )
-                .ToList();
+            IList<JToken> t = a.SelectTokens("[?(@.cast[?(@.name=='Will Smith')])].name").ToList();
             Assert.IsNotNull(t);
             Assert.AreEqual(2, t.Count);
             Assert.AreEqual("Bad Boys", (string)t[0]);
@@ -1380,15 +1311,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 new DateTime(2000, 12, 5, 5, 7, 59, DateTimeKind.Utc),
 #if !NET20
                 "2000-12-05T05:07:59-10:00",
-                new DateTimeOffset(
-                    2000,
-                    12,
-                    5,
-                    5,
-                    7,
-                    59,
-                    -TimeSpan.FromHours(10)
-                ),
+                new DateTimeOffset(2000, 12, 5, 5, 7, 59, -TimeSpan.FromHours(10)),
 #endif
                 "SGVsbG8gd29ybGQ=",
                 Encoding.UTF8.GetBytes("Hello world"),
@@ -1399,11 +1322,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             JObject o = new JObject(
                 new JProperty(
                     "prop",
-                    new JArray(
-                        values.Select(
-                            v => new JObject(new JProperty("childProp", v))
-                        )
-                    )
+                    new JArray(values.Select(v => new JObject(new JProperty("childProp", v))))
                 )
             );
 
@@ -1413,30 +1332,21 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 .ToList();
             Assert.AreEqual(2, t.Count);
 
-            t = o.SelectTokens("$.prop[?(@.childProp =='http://localhost')]")
-                .ToList();
+            t = o.SelectTokens("$.prop[?(@.childProp =='http://localhost')]").ToList();
             Assert.AreEqual(2, t.Count);
 
-            t = o.SelectTokens(
-                    "$.prop[?(@.childProp =='2000-12-05T05:07:59Z')]"
-                )
-                .ToList();
+            t = o.SelectTokens("$.prop[?(@.childProp =='2000-12-05T05:07:59Z')]").ToList();
             Assert.AreEqual(2, t.Count);
 
 #if !NET20
-            t = o.SelectTokens(
-                    "$.prop[?(@.childProp =='2000-12-05T05:07:59-10:00')]"
-                )
-                .ToList();
+            t = o.SelectTokens("$.prop[?(@.childProp =='2000-12-05T05:07:59-10:00')]").ToList();
             Assert.AreEqual(2, t.Count);
 #endif
 
-            t = o.SelectTokens("$.prop[?(@.childProp =='SGVsbG8gd29ybGQ=')]")
-                .ToList();
+            t = o.SelectTokens("$.prop[?(@.childProp =='SGVsbG8gd29ybGQ=')]").ToList();
             Assert.AreEqual(2, t.Count);
 
-            t = o.SelectTokens("$.prop[?(@.childProp =='365.23:59:59')]")
-                .ToList();
+            t = o.SelectTokens("$.prop[?(@.childProp =='365.23:59:59')]").ToList();
             Assert.AreEqual(2, t.Count);
         }
 
@@ -1479,21 +1389,17 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             // Acme Co
 
-            decimal productPrice =
-                (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
+            decimal productPrice = (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
             // 50
 
-            string productName =
-                (string)o.SelectToken("Manufacturers[1].Products[0].Name");
+            string productName = (string)o.SelectToken("Manufacturers[1].Products[0].Name");
             // Elbow Grease
 
             Assert.AreEqual("Acme Co", name);
             Assert.AreEqual(50m, productPrice);
             Assert.AreEqual("Elbow Grease", productName);
 
-            IList<string> storeNames = o.SelectToken("Stores")
-                .Select(s => (string)s)
-                .ToList();
+            IList<string> storeNames = o.SelectToken("Stores").Select(s => (string)s).ToList();
             // Lambton Quay
             // Willis Street
 
@@ -1553,10 +1459,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             List<JToken> result = a.SelectTokens("$.[?(@.value!=1)]").ToList();
             Assert.AreEqual(4, result.Count);
 
-            result = a.SelectTokens(
-                    "$.[?(@.value!='2000-12-05T05:07:59-10:00')]"
-                )
-                .ToList();
+            result = a.SelectTokens("$.[?(@.value!='2000-12-05T05:07:59-10:00')]").ToList();
             Assert.AreEqual(4, result.Count);
 
             result = a.SelectTokens("$.[?(@.value!=null)]").ToList();
@@ -1615,14 +1518,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JArray a = JArray.Parse(json);
 
-            List<JToken> result = a.SelectTokens(
-                    "$.[?($.[0].store.bicycle.price < 20)]"
-                )
-                .ToList();
+            List<JToken> result = a.SelectTokens("$.[?($.[0].store.bicycle.price < 20)]").ToList();
             Assert.AreEqual(1, result.Count);
 
-            result = a.SelectTokens("$.[?($.[0].store.bicycle.price < 10)]")
-                .ToList();
+            result = a.SelectTokens("$.[?($.[0].store.bicycle.price < 10)]").ToList();
             Assert.AreEqual(0, result.Count);
         }
 
@@ -1672,14 +1571,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             JObject a = JObject.Parse(json);
 
-            List<JToken> result = a.SelectTokens(
-                    "$..book[?(@.price <= $['expensive'])]"
-                )
-                .ToList();
+            List<JToken> result = a.SelectTokens("$..book[?(@.price <= $['expensive'])]").ToList();
             Assert.AreEqual(2, result.Count);
 
-            result = a.SelectTokens("$.store..[?(@.price > $.expensive)]")
-                .ToList();
+            result = a.SelectTokens("$.store..[?(@.price > $.expensive)]").ToList();
             Assert.AreEqual(3, result.Count);
         }
 
@@ -1694,19 +1589,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                     "dateObjectsArray",
                     new JArray()
                     {
-                        new JObject
-                        {
-                            { "date", new JValue(DateTime.MinValue) }
-                        },
-                        new JObject
-                        {
-                            { "date", new JValue(DateTime.MaxValue) }
-                        },
+                        new JObject { { "date", new JValue(DateTime.MinValue) } },
+                        new JObject { { "date", new JValue(DateTime.MaxValue) } },
                         new JObject { { "date", new JValue(DateTime.Now) } },
-                        new JObject
-                        {
-                            { "date", new JValue(DateTime.MinValue) }
-                        },
+                        new JObject { { "date", new JValue(DateTime.MinValue) } },
                     }
                 }
             };
@@ -1736,22 +1622,14 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             );
 
             // just to verify expected behavior hasn't changed
-            IEnumerable<string> sanity1 = o.SelectTokens(
-                    "Values[?(@.Coercible == '1')].Name"
-                )
+            IEnumerable<string> sanity1 = o.SelectTokens("Values[?(@.Coercible == '1')].Name")
                 .Select(x => (string)x);
-            IEnumerable<string> sanity2 = o.SelectTokens(
-                    "Values[?(@.Coercible != '1')].Name"
-                )
+            IEnumerable<string> sanity2 = o.SelectTokens("Values[?(@.Coercible != '1')].Name")
                 .Select(x => (string)x);
             // new behavior
-            IEnumerable<string> mustBeNumber1 = o.SelectTokens(
-                    "Values[?(@.Coercible === 1)].Name"
-                )
+            IEnumerable<string> mustBeNumber1 = o.SelectTokens("Values[?(@.Coercible === 1)].Name")
                 .Select(x => (string)x);
-            IEnumerable<string> mustBeString1 = o.SelectTokens(
-                    "Values[?(@.Coercible !== 1)].Name"
-                )
+            IEnumerable<string> mustBeString1 = o.SelectTokens("Values[?(@.Coercible !== 1)].Name")
                 .Select(x => (string)x);
             IEnumerable<string> mustBeString2 = o.SelectTokens(
                     "Values[?(@.Coercible === '1')].Name"
@@ -1787,8 +1665,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 }"
             );
 
-            var tokens = t.SelectTokens("$..[?(@.['@Type'] == 'FindMe')]")
-                .ToList();
+            var tokens = t.SelectTokens("$..[?(@.['@Type'] == 'FindMe')]").ToList();
             Assert.AreEqual(1, tokens.Count);
         }
 
@@ -1812,52 +1689,41 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Theory]
 #endif
         [TestCaseSource(nameof(StrictMatchWithInverseTestData))]
-        public static void EqualsStrict(
-            string value1,
-            string value2,
-            bool matchStrict
-        ) {
+        public static void EqualsStrict(string value1, string value2, bool matchStrict)
+        {
             string completeJson =
                 @"{
   ""Values"": [
     {
-      ""Property"": " +
-                value1 +
-                @"
+      ""Property"": " + value1 + @"
     }
   ]
 }";
-            string completeEqualsStrictPath =
-                "$.Values[?(@.Property === " + value2 + ")]";
-            string completeNotEqualsStrictPath =
-                "$.Values[?(@.Property !== " + value2 + ")]";
+            string completeEqualsStrictPath = "$.Values[?(@.Property === " + value2 + ")]";
+            string completeNotEqualsStrictPath = "$.Values[?(@.Property !== " + value2 + ")]";
 
             JToken t = JToken.Parse(completeJson);
 
-            bool hasEqualsStrict = t.SelectTokens(completeEqualsStrictPath)
-                .Any();
+            bool hasEqualsStrict = t.SelectTokens(completeEqualsStrictPath).Any();
             Assert.AreEqual(
                 matchStrict,
                 hasEqualsStrict,
-                $"Expected {value1} and {value2} to match: {matchStrict}" +
-                Environment.NewLine +
-                completeJson +
-                Environment.NewLine +
-                completeEqualsStrictPath
+                $"Expected {value1} and {value2} to match: {matchStrict}"
+                + Environment.NewLine
+                + completeJson
+                + Environment.NewLine
+                + completeEqualsStrictPath
             );
 
-            bool hasNotEqualsStrict = t.SelectTokens(
-                    completeNotEqualsStrictPath
-                )
-                .Any();
+            bool hasNotEqualsStrict = t.SelectTokens(completeNotEqualsStrictPath).Any();
             Assert.AreNotEqual(
                 matchStrict,
                 hasNotEqualsStrict,
-                $"Expected {value1} and {value2} to match: {!matchStrict}" +
-                Environment.NewLine +
-                completeJson +
-                Environment.NewLine +
-                completeEqualsStrictPath
+                $"Expected {value1} and {value2} to match: {!matchStrict}"
+                + Environment.NewLine
+                + completeJson
+                + Environment.NewLine
+                + completeEqualsStrictPath
             );
         }
 

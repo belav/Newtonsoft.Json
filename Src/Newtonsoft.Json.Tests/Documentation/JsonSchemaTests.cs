@@ -132,15 +132,11 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            JsonValidatingReader validatingReader = new JsonValidatingReader(
-                reader
-            );
+            JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
             validatingReader.Schema = JsonSchema.Parse(schemaJson);
 
             IList<string> messages = new List<string>();
-            validatingReader.ValidationEventHandler += (o, a) => messages.Add(
-                a.Message
-            );
+            validatingReader.ValidationEventHandler += (o, a) => messages.Add(a.Message);
 
             JsonSerializer serializer = new JsonSerializer();
             Person p = serializer.Deserialize<Person>(validatingReader);
@@ -154,12 +150,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             JsonSchema schema1 = JsonSchema.Parse(@"{'type':'object'}");
 
             // load from a file
-            using (
-                TextReader reader = File.OpenText(@"c:\schema\Person.json")
-            ) {
-                JsonSchema schema2 = JsonSchema.Read(
-                    new JsonTextReader(reader)
-                );
+            using (TextReader reader = File.OpenText(@"c:\schema\Person.json"))
+            {
+                JsonSchema schema2 = JsonSchema.Read(new JsonTextReader(reader));
                 // do stuff
             }
             #endregion

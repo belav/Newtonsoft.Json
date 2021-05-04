@@ -39,9 +39,7 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
 
         public char[] Rent(int minimumLength)
         {
-            char[] a = FreeArrays.FirstOrDefault(
-                b => b.Length >= minimumLength
-            );
+            char[] a = FreeArrays.FirstOrDefault(b => b.Length >= minimumLength);
             if (a != null)
             {
                 FreeArrays.Remove(a);
@@ -63,12 +61,7 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
                 FreeArrays.Add(array);
 
                 // smallest first so the first array large enough is rented
-                FreeArrays.Sort(
-                    (b1, b2) => Comparer<int>.Default.Compare(
-                        b1.Length,
-                        b2.Length
-                    )
-                );
+                FreeArrays.Sort((b1, b2) => Comparer<int>.Default.Compare(b1.Length, b2.Length));
             }
         }
     }

@@ -114,18 +114,13 @@ namespace Newtonsoft.Json
             LinePosition = linePosition;
         }
 
-        internal static JsonReaderException Create(
-            JsonReader reader,
-            string message
-        ) {
+        internal static JsonReaderException Create(JsonReader reader, string message)
+        {
             return Create(reader, message, null);
         }
 
-        internal static JsonReaderException Create(
-            JsonReader reader,
-            string message,
-            Exception? ex
-        ) {
+        internal static JsonReaderException Create(JsonReader reader, string message, Exception? ex)
+        {
             return Create(reader as IJsonLineInfo, reader.Path, message, ex);
         }
 
@@ -150,13 +145,7 @@ namespace Newtonsoft.Json
                 linePosition = 0;
             }
 
-            return new JsonReaderException(
-                message,
-                path,
-                lineNumber,
-                linePosition,
-                ex
-            );
+            return new JsonReaderException(message, path, lineNumber, linePosition, ex);
         }
     }
 }

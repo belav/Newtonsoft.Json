@@ -48,10 +48,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 return null;
             }
 
-            var address = messageJObject.GetValue(
-                    "Address",
-                    StringComparison.OrdinalIgnoreCase
-                )
+            var address = messageJObject.GetValue("Address", StringComparison.OrdinalIgnoreCase)
                 .ToObject<string>();
 
             JToken displayNameToken;
@@ -61,10 +58,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     "DisplayName",
                     StringComparison.OrdinalIgnoreCase,
                     out displayNameToken
-                ) &&
-                !string.IsNullOrEmpty(
-                    displayName = displayNameToken.ToObject<string>()
                 )
+                && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>())
             ) {
                 return new System.Net.Mail.MailAddress(address, displayName);
             }
@@ -72,11 +67,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return new System.Net.Mail.MailAddress(address);
         }
 
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             throw new NotImplementedException();
         }
     }

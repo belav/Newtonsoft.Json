@@ -34,11 +34,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public abstract string ConverterType { get; }
 
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             ConverterPrecedenceClass c = (ConverterPrecedenceClass)value;
 
             JToken j = new JArray(ConverterType, c.TestValue);

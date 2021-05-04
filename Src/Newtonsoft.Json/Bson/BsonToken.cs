@@ -43,13 +43,7 @@ namespace Newtonsoft.Json.Bson
 
         public void Add(string name, BsonToken token)
         {
-            _children.Add(
-                new BsonProperty
-                {
-                    Name = new BsonString(name, false),
-                    Value = token
-                }
-            );
+            _children.Add(new BsonProperty { Name = new BsonString(name, false), Value = token });
             token.Parent = this;
         }
 
@@ -92,9 +86,7 @@ namespace Newtonsoft.Json.Bson
     internal class BsonEmpty : BsonToken
     {
         public static readonly BsonToken Null = new BsonEmpty(BsonType.Null);
-        public static readonly BsonToken Undefined = new BsonEmpty(
-            BsonType.Undefined
-        );
+        public static readonly BsonToken Undefined = new BsonEmpty(BsonType.Undefined);
 
         private BsonEmpty(BsonType type)
         {

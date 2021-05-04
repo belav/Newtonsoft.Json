@@ -62,10 +62,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             string json = JsonConvert.SerializeObject(
                 foo,
-                new JsonSerializerSettings()
-                {
-                    Converters =  { new FooConverter() }
-                }
+                new JsonSerializerSettings() { Converters =  { new FooConverter() } }
             );
             Assert.AreEqual(@"""foo""", json);
         }
@@ -78,10 +75,10 @@ namespace Newtonsoft.Json.Tests.Issues
 
             List<MemberInfo> properties = ReflectionUtils.GetFieldsAndProperties(
                     foo.GetType(),
-                    BindingFlags.Instance |
-                    BindingFlags.Static |
-                    BindingFlags.Public |
-                    BindingFlags.NonPublic
+                    BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
                 )
                 .ToList();
 

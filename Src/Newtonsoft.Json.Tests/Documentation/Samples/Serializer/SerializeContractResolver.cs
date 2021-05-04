@@ -58,11 +58,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person
-            {
-                FirstName = "Sarah",
-                LastName = "Security"
-            };
+            Person person = new Person { FirstName = "Sarah", LastName = "Security" };
 
             string json = JsonConvert.SerializeObject(
                 person,

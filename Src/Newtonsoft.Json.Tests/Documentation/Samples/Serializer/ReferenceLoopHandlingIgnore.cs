@@ -60,10 +60,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string json = JsonConvert.SerializeObject(
                 joe,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                }
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
             );
 
             Console.WriteLine(json);

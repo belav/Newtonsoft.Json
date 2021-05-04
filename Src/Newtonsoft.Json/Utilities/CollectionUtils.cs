@@ -66,10 +66,8 @@ namespace Newtonsoft.Json.Utilities
         /// </summary>
         /// <param name="initial">The list to add to.</param>
         /// <param name="collection">The collection of elements to add.</param>
-        public static void AddRange<T>(
-            this IList<T> initial,
-            IEnumerable<T> collection
-        ) {
+        public static void AddRange<T>(this IList<T> initial, IEnumerable<T> collection)
+        {
             if (initial == null)
             {
                 throw new ArgumentNullException(nameof(initial));
@@ -87,10 +85,8 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if !HAVE_COVARIANT_GENERICS
-        public static void AddRange<T>(
-            this IList<T> initial,
-            IEnumerable collection
-        ) {
+        public static void AddRange<T>(this IList<T> initial, IEnumerable collection)
+        {
             ValidationUtils.ArgumentNotNull(initial, nameof(initial));
 
             // because earlier versions of .NET didn't support covariant generics
@@ -106,12 +102,8 @@ namespace Newtonsoft.Json.Utilities
             {
                 return true;
             }
-            if (
-                ReflectionUtils.ImplementsGenericDefinition(
-                    type,
-                    typeof(IDictionary<, >)
-                )
-            ) {
+            if (ReflectionUtils.ImplementsGenericDefinition(type, typeof(IDictionary<, >)))
+            {
                 return true;
             }
 #if HAVE_READ_ONLY_COLLECTIONS
@@ -128,9 +120,7 @@ namespace Newtonsoft.Json.Utilities
             Type collectionType,
             Type collectionItemType
         ) {
-            Type genericConstructorArgument = typeof(IList<>).MakeGenericType(
-                collectionItemType
-            );
+            Type genericConstructorArgument = typeof(IList<>).MakeGenericType(collectionItemType);
 
             return ResolveEnumerableCollectionConstructor(
                 collectionType,
@@ -144,9 +134,7 @@ namespace Newtonsoft.Json.Utilities
             Type collectionItemType,
             Type constructorArgumentType
         ) {
-            Type genericEnumerable = typeof(IEnumerable<>).MakeGenericType(
-                collectionItemType
-            );
+            Type genericEnumerable = typeof(IEnumerable<>).MakeGenericType(collectionItemType);
             ConstructorInfo? match = null;
 
             foreach (
@@ -170,11 +158,8 @@ namespace Newtonsoft.Json.Utilities
                     // in case we can't find an exact match, use first inexact
                     if (match == null)
                     {
-                        if (
-                            parameterType.IsAssignableFrom(
-                                constructorArgumentType
-                            )
-                        ) {
+                        if (parameterType.IsAssignableFrom(constructorArgumentType))
+                        {
                             match = constructor;
                         }
                     }
@@ -247,10 +232,8 @@ namespace Newtonsoft.Json.Utilities
             return allAdded;
         }
 
-        public static int IndexOf<T>(
-            this IEnumerable<T> collection,
-            Func<T, bool> predicate
-        ) {
+        public static int IndexOf<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
+        {
             int index = 0;
             foreach (T value in collection)
             {
@@ -265,11 +248,8 @@ namespace Newtonsoft.Json.Utilities
             return -1;
         }
 
-        public static bool Contains<T>(
-            this List<T> list,
-            T value,
-            IEqualityComparer comparer
-        ) {
+        public static bool Contains<T>(this List<T> list, T value, IEqualityComparer comparer)
+        {
             for (int i = 0; i < list.Count; i++)
             {
                 if (comparer.Equals(value, list[i]))
@@ -310,10 +290,8 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        private static IList<int> GetDimensions(
-            IList values,
-            int dimensionsCount
-        ) {
+        private static IList<int> GetDimensions(IList values, int dimensionsCount)
+        {
             IList<int> dimensions = new List<int>();
 
             IList currentArray = values;
@@ -354,10 +332,7 @@ namespace Newtonsoft.Json.Utilities
             int dimension = indices.Length;
             if (dimension == multidimensionalArray.Rank)
             {
-                multidimensionalArray.SetValue(
-                    JaggedArrayGetValue(values, indices),
-                    indices
-                );
+                multidimensionalArray.SetValue(JaggedArrayGetValue(values, indices), indices);
                 return;
             }
 
@@ -377,17 +352,10 @@ namespace Newtonsoft.Json.Utilities
                 newIndices[i] = indices[i];
             }
 
-            for (
-                int i = 0;
-                i < multidimensionalArray.GetLength(dimension);
-                i++
-            ) {
+            for (int i = 0; i < multidimensionalArray.GetLength(dimension); i++)
+            {
                 newIndices[dimension] = i;
-                CopyFromJaggedToMultidimensionalArray(
-                    values,
-                    multidimensionalArray,
-                    newIndices
-                );
+                CopyFromJaggedToMultidimensionalArray(values, multidimensionalArray, newIndices);
             }
         }
 
@@ -409,11 +377,8 @@ namespace Newtonsoft.Json.Utilities
             return currentList;
         }
 
-        public static Array ToMultidimensionalArray(
-            IList values,
-            Type type,
-            int rank
-        ) {
+        public static Array ToMultidimensionalArray(IList values, Type type, int rank)
+        {
             IList<int> dimensions = GetDimensions(values, rank);
 
             while (dimensions.Count < rank)
@@ -421,15 +386,8 @@ namespace Newtonsoft.Json.Utilities
                 dimensions.Add(0);
             }
 
-            Array multidimensionalArray = Array.CreateInstance(
-                type,
-                dimensions.ToArray()
-            );
-            CopyFromJaggedToMultidimensionalArray(
-                values,
-                multidimensionalArray,
-                ArrayEmpty<int>()
-            );
+            Array multidimensionalArray = Array.CreateInstance(type, dimensions.ToArray());
+            CopyFromJaggedToMultidimensionalArray(values, multidimensionalArray, ArrayEmpty<int>());
 
             return multidimensionalArray;
         }

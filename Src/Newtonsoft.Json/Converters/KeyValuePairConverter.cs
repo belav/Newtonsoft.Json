@@ -40,8 +40,7 @@ namespace Newtonsoft.Json.Converters
         private const string ValueName = "Value";
 
         private static readonly ThreadSafeStore<Type,
-            ReflectionObject> ReflectionObjectPerType = new ThreadSafeStore<Type,
-            ReflectionObject>(
+            ReflectionObject> ReflectionObjectPerType = new ThreadSafeStore<Type, ReflectionObject>(
             InitializeReflectionObject
         );
 
@@ -65,29 +64,22 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             if (value == null)
             {
                 writer.WriteNull();
                 return;
             }
 
-            ReflectionObject reflectionObject = ReflectionObjectPerType.Get(
-                value.GetType()
-            );
+            ReflectionObject reflectionObject = ReflectionObjectPerType.Get(value.GetType());
 
             DefaultContractResolver? resolver =
                 serializer.ContractResolver as DefaultContractResolver;
 
             writer.WriteStartObject();
             writer.WritePropertyName(
-                (resolver != null)
-                    ? resolver.GetResolvedPropertyName(KeyName)
-                    : KeyName
+                (resolver != null) ? resolver.GetResolvedPropertyName(KeyName) : KeyName
             );
             serializer.Serialize(
                 writer,
@@ -95,9 +87,7 @@ namespace Newtonsoft.Json.Converters
                 reflectionObject.GetType(KeyName)
             );
             writer.WritePropertyName(
-                (resolver != null)
-                    ? resolver.GetResolvedPropertyName(ValueName)
-                    : ValueName
+                (resolver != null) ? resolver.GetResolvedPropertyName(ValueName) : ValueName
             );
             serializer.Serialize(
                 writer,
@@ -154,33 +144,17 @@ namespace Newtonsoft.Json.Converters
             while (reader.TokenType == JsonToken.PropertyName)
             {
                 string propertyName = reader.Value!.ToString();
-                if (
-                    string.Equals(
-                        propertyName,
-                        KeyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                ) {
+                if (string.Equals(propertyName, KeyName, StringComparison.OrdinalIgnoreCase))
+                {
                     reader.ReadForTypeAndAssert(keyContract, false);
 
-                    key = serializer.Deserialize(
-                        reader,
-                        keyContract.UnderlyingType
-                    );
+                    key = serializer.Deserialize(reader, keyContract.UnderlyingType);
                 }
-                else if (
-                    string.Equals(
-                        propertyName,
-                        ValueName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                ) {
+                else if (string.Equals(propertyName, ValueName, StringComparison.OrdinalIgnoreCase))
+                {
                     reader.ReadForTypeAndAssert(valueContract, false);
 
-                    value = serializer.Deserialize(
-                        reader,
-                        valueContract.UnderlyingType
-                    );
+                    value = serializer.Deserialize(reader, valueContract.UnderlyingType);
                 }
                 else
                 {
@@ -208,8 +182,7 @@ namespace Newtonsoft.Json.Converters
 
             if (t.IsValueType() && t.IsGenericType())
             {
-                return (t.GetGenericTypeDefinition() ==
-                typeof(KeyValuePair<, >));
+                return (t.GetGenericTypeDefinition() == typeof(KeyValuePair<, >));
             }
 
             return false;

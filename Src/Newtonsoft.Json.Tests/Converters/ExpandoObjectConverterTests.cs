@@ -132,9 +132,7 @@ namespace Newtonsoft.Json.Tests.Converters
   ""After"": ""After!""
 }";
 
-            ExpandoContainer o = JsonConvert.DeserializeObject<ExpandoContainer>(
-                json
-            );
+            ExpandoContainer o = JsonConvert.DeserializeObject<ExpandoContainer>(json);
 
             Assert.AreEqual(o.Before, "Before!");
             Assert.AreEqual(o.After, "After!");
@@ -172,16 +170,13 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeNullExpandoObject()
         {
-            string json =
-                @"{
+            string json = @"{
   ""Before"": null,
   ""Expando"": null,
   ""After"": null
 }";
 
-            ExpandoContainer c = JsonConvert.DeserializeObject<ExpandoContainer>(
-                json
-            );
+            ExpandoContainer c = JsonConvert.DeserializeObject<ExpandoContainer>(json);
 
             Assert.AreEqual(null, c.Expando);
         }

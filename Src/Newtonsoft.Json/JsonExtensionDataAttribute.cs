@@ -6,9 +6,7 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> to deserialize properties with no matching class member into the specified collection
     /// and write values during serialization.
     /// </summary>
-    [AttributeUsage(
-        AttributeTargets.Field | AttributeTargets.Property,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
     public class JsonExtensionDataAttribute : Attribute
     {
         /// <summary>

@@ -52,9 +52,7 @@ namespace Newtonsoft.Json.Tests.Issues
             string s1 = JsonConvert.SerializeObject(new ConcreteSerializable());
             Assert.AreEqual("{}", s1);
 
-            string s2 = JsonConvert.SerializeObject(
-                new ClassWithSerializableProperty()
-            );
+            string s2 = JsonConvert.SerializeObject(new ClassWithSerializableProperty());
             Assert.AreEqual(@"{""Serializable"":null}", s2);
         }
 
@@ -80,10 +78,7 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             public ConcreteSerializable() { }
 
-            protected ConcreteSerializable(
-                SerializationInfo info,
-                StreamingContext context
-            )
+            protected ConcreteSerializable(SerializationInfo info, StreamingContext context)
                 : base(info, context) { }
         }
 
@@ -93,15 +88,9 @@ namespace Newtonsoft.Json.Tests.Issues
             public BaseSerializable() { }
 
             //it won't fail when that constructor is missing
-            protected BaseSerializable(
-                SerializationInfo info,
-                StreamingContext context
-            ) { }
+            protected BaseSerializable(SerializationInfo info, StreamingContext context) { }
 
-            public void GetObjectData(
-                SerializationInfo info,
-                StreamingContext context
-            ) { }
+            public void GetObjectData(SerializationInfo info, StreamingContext context) { }
         }
     }
 }

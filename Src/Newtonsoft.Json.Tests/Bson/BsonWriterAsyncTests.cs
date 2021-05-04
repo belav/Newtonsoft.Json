@@ -77,10 +77,7 @@ namespace Newtonsoft.Json.Tests.Bson
             await writer.WriteEndObjectAsync();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual(
-                "0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00",
-                bson
-            );
+            Assert.AreEqual("0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00", bson);
         }
 
         [Test]
@@ -105,9 +102,7 @@ namespace Newtonsoft.Json.Tests.Bson
             await writer.WriteValueAsync(
                 new DateTimeOffset(2000, 12, 29, 12, 30, 0, TimeSpan.Zero)
             );
-            await writer.WriteValueAsync(
-                new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc)
-            );
+            await writer.WriteValueAsync(new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc));
             await writer.WriteEndAsync();
 
             string bson = BytesToHex(ms.ToArray());
@@ -128,10 +123,7 @@ namespace Newtonsoft.Json.Tests.Bson
             await writer.WriteEndAsync();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual(
-                "10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00",
-                bson
-            );
+            Assert.AreEqual("10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00", bson);
         }
 
         [Test]
@@ -216,17 +208,13 @@ namespace Newtonsoft.Json.Tests.Bson
             await writer.WriteStartObjectAsync();
 
             await writer.WritePropertyNameAsync("_id");
-            await writer.WriteValueAsync(
-                HexToBytes("4A-78-93-79-17-22-00-00-00-00-61-CF")
-            );
+            await writer.WriteValueAsync(HexToBytes("4A-78-93-79-17-22-00-00-00-00-61-CF"));
 
             await writer.WritePropertyNameAsync("a");
             await writer.WriteStartArrayAsync();
             for (int i = 1; i <= 8; i++)
             {
-                double value = (i != 5)
-                    ? Convert.ToDouble(i)
-                    : 5.78960446186581E+77d;
+                double value = (i != 5) ? Convert.ToDouble(i) : 5.78960446186581E+77d;
 
                 await writer.WriteValueAsync(value);
             }
@@ -262,9 +250,7 @@ namespace Newtonsoft.Json.Tests.Bson
                     largeStringBuilder.Append("-");
                 }
 
-                largeStringBuilder.Append(
-                    i.ToString(CultureInfo.InvariantCulture)
-                );
+                largeStringBuilder.Append(i.ToString(CultureInfo.InvariantCulture));
             }
             string largeString = largeStringBuilder.ToString();
 
@@ -481,12 +467,8 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.DateTimeKindHandling = DateTimeKind.Unspecified;
 
             await writer.WriteStartArrayAsync();
-            await writer.WriteValueAsync(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc)
-            );
-            await writer.WriteValueAsync(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Local)
-            );
+            await writer.WriteValueAsync(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc));
+            await writer.WriteValueAsync(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Local));
             await writer.WriteValueAsync(
                 new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Unspecified)
             );
@@ -503,24 +485,15 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.EndArray, reader.TokenType);

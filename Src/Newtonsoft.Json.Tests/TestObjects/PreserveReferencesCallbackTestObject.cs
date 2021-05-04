@@ -61,20 +61,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
             _serializationInfo = info;
         }
 
-        public void GetObjectData(
-            SerializationInfo info,
-            StreamingContext context
-        ) {
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue("stringValue", _stringValue);
             info.AddValue("intValue", _intValue);
             info.AddValue("person1", _person1, typeof(PersonReference));
             info.AddValue("person2", _person2, typeof(PersonReference));
             info.AddValue("person3", _person3, typeof(PersonReference));
-            info.AddValue(
-                "parent",
-                _parent,
-                typeof(PreserveReferencesCallbackTestObject)
-            );
+            info.AddValue("parent", _parent, typeof(PreserveReferencesCallbackTestObject));
         }
 
         [OnDeserialized]

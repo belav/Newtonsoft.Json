@@ -55,8 +55,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
         public void Example()
         {
             #region Usage
-            string s =
-                "MQAAAAMwACkAAAACTmFtZQAHAAAARWFzdGVyAAlTdGFydERhdGUAgDf0uj0BAAAAAA==";
+            string s = "MQAAAAMwACkAAAACTmFtZQAHAAAARWFzdGVyAAlTdGFydERhdGUAgDf0uj0BAAAAAA==";
             byte[] data = Convert.FromBase64String(s);
 
             MemoryStream ms = new MemoryStream(data);
@@ -66,9 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
 
                 JsonSerializer serializer = new JsonSerializer();
 
-                IList<Event> events = serializer.Deserialize<IList<Event>>(
-                    reader
-                );
+                IList<Event> events = serializer.Deserialize<IList<Event>>(reader);
 
                 Console.WriteLine(events.Count);
                 // 1

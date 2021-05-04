@@ -197,10 +197,7 @@ namespace Newtonsoft.Json.Linq
                     SetToken(JsonToken.StartArray);
                     break;
                 case JTokenType.Constructor:
-                    SetToken(
-                        JsonToken.StartConstructor,
-                        ((JConstructor)token).Name
-                    );
+                    SetToken(JsonToken.StartConstructor, ((JConstructor)token).Name);
                     break;
                 case JTokenType.Property:
                     SetToken(JsonToken.PropertyName, ((JProperty)token).Name);
@@ -231,10 +228,7 @@ namespace Newtonsoft.Json.Linq
                     object? v = ((JValue)token).Value;
                     if (v is DateTime dt)
                     {
-                        v = DateTimeUtils.EnsureDateTime(
-                            dt,
-                            DateTimeZoneHandling
-                        );
+                        v = DateTimeUtils.EnsureDateTime(dt, DateTimeZoneHandling);
                     }
 
                     SetToken(JsonToken.Date, v);
@@ -247,25 +241,16 @@ namespace Newtonsoft.Json.Linq
                     SetToken(JsonToken.Bytes, ((JValue)token).Value);
                     break;
                 case JTokenType.Guid:
-                    SetToken(
-                        JsonToken.String,
-                        SafeToString(((JValue)token).Value)
-                    );
+                    SetToken(JsonToken.String, SafeToString(((JValue)token).Value));
                     break;
                 case JTokenType.Uri:
                 {
                     object? v = ((JValue)token).Value;
-                    SetToken(
-                        JsonToken.String,
-                        v is Uri uri ? uri.OriginalString : SafeToString(v)
-                    );
+                    SetToken(JsonToken.String, v is Uri uri ? uri.OriginalString : SafeToString(v));
                     break;
                 }
                 case JTokenType.TimeSpan:
-                    SetToken(
-                        JsonToken.String,
-                        SafeToString(((JValue)token).Value)
-                    );
+                    SetToken(JsonToken.String, SafeToString(((JValue)token).Value));
                     break;
                 default:
                     throw MiscellaneousUtils.CreateArgumentOutOfRangeException(

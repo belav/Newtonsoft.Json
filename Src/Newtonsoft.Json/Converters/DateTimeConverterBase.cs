@@ -41,10 +41,8 @@ namespace Newtonsoft.Json.Converters
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            if (
-                objectType == typeof(DateTime) ||
-                objectType == typeof(DateTime?)
-            ) {
+            if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
+            {
                 return true;
             }
 #if HAVE_DATE_TIME_OFFSET

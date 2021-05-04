@@ -71,23 +71,19 @@ namespace Newtonsoft.Json.Utilities
         private const string ImmutableSetGenericInterfaceTypeName =
             "System.Collections.Immutable.IImmutableSet`1";
 
-        private const string ImmutableArrayTypeName =
-            "System.Collections.Immutable.ImmutableArray";
+        private const string ImmutableArrayTypeName = "System.Collections.Immutable.ImmutableArray";
         private const string ImmutableArrayGenericTypeName =
             "System.Collections.Immutable.ImmutableArray`1";
 
-        private const string ImmutableListTypeName =
-            "System.Collections.Immutable.ImmutableList";
+        private const string ImmutableListTypeName = "System.Collections.Immutable.ImmutableList";
         private const string ImmutableListGenericTypeName =
             "System.Collections.Immutable.ImmutableList`1";
 
-        private const string ImmutableQueueTypeName =
-            "System.Collections.Immutable.ImmutableQueue";
+        private const string ImmutableQueueTypeName = "System.Collections.Immutable.ImmutableQueue";
         private const string ImmutableQueueGenericTypeName =
             "System.Collections.Immutable.ImmutableQueue`1";
 
-        private const string ImmutableStackTypeName =
-            "System.Collections.Immutable.ImmutableStack";
+        private const string ImmutableStackTypeName = "System.Collections.Immutable.ImmutableStack";
         private const string ImmutableStackGenericTypeName =
             "System.Collections.Immutable.ImmutableStack`1";
 
@@ -191,8 +187,7 @@ namespace Newtonsoft.Json.Utilities
             Type underlyingType,
             Type collectionItemType,
             [NotNullWhen(true)]out Type? createdType,
-            [NotNullWhen(
-                true)]out ObjectConstructor<object>? parameterizedCreator
+            [NotNullWhen(true)]out ObjectConstructor<object>? parameterizedCreator
         ) {
             if (underlyingType.IsGenericType())
             {
@@ -209,24 +204,16 @@ namespace Newtonsoft.Json.Utilities
                     Type builderTypeDefinition = underlyingTypeDefinition.Assembly()
                         .GetType(definition.BuilderTypeName);
 
-                    if (
-                        createdTypeDefinition != null &&
-                        builderTypeDefinition != null
-                    ) {
+                    if (createdTypeDefinition != null && builderTypeDefinition != null)
+                    {
                         MethodInfo mb = builderTypeDefinition.GetMethods()
                             .FirstOrDefault(
-                                m =>
-                                    m.Name == "CreateRange" &&
-                                    m.GetParameters().Length == 1
+                                m => m.Name == "CreateRange" && m.GetParameters().Length == 1
                             );
                         if (mb != null)
                         {
-                            createdType = createdTypeDefinition.MakeGenericType(
-                                collectionItemType
-                            );
-                            MethodInfo method = mb.MakeGenericMethod(
-                                collectionItemType
-                            );
+                            createdType = createdTypeDefinition.MakeGenericType(collectionItemType);
+                            MethodInfo method = mb.MakeGenericMethod(collectionItemType);
                             parameterizedCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
                                 method
                             );
@@ -246,8 +233,7 @@ namespace Newtonsoft.Json.Utilities
             Type keyItemType,
             Type valueItemType,
             [NotNullWhen(true)]out Type? createdType,
-            [NotNullWhen(
-                true)]out ObjectConstructor<object>? parameterizedCreator
+            [NotNullWhen(true)]out ObjectConstructor<object>? parameterizedCreator
         ) {
             if (underlyingType.IsGenericType())
             {
@@ -264,25 +250,19 @@ namespace Newtonsoft.Json.Utilities
                     Type builderTypeDefinition = underlyingTypeDefinition.Assembly()
                         .GetType(definition.BuilderTypeName);
 
-                    if (
-                        createdTypeDefinition != null &&
-                        builderTypeDefinition != null
-                    ) {
+                    if (createdTypeDefinition != null && builderTypeDefinition != null)
+                    {
                         MethodInfo mb = builderTypeDefinition.GetMethods()
                             .FirstOrDefault(
                                 m =>
                                 {
                                     ParameterInfo[] parameters = m.GetParameters();
 
-                                    return m.Name == "CreateRange" &&
-                                    parameters.Length == 1 &&
-                                    parameters[
-                                        0
-                                    ].ParameterType.IsGenericType() &&
-                                    parameters[
-                                        0
-                                    ].ParameterType.GetGenericTypeDefinition() ==
-                                    typeof(IEnumerable<>);
+                                    return m.Name == "CreateRange"
+                                        && parameters.Length == 1
+                                        && parameters[0].ParameterType.IsGenericType()
+                                        && parameters[0].ParameterType.GetGenericTypeDefinition()
+                                        == typeof(IEnumerable<>);
                                 }
                             );
                         if (mb != null)
@@ -291,10 +271,7 @@ namespace Newtonsoft.Json.Utilities
                                 keyItemType,
                                 valueItemType
                             );
-                            MethodInfo method = mb.MakeGenericMethod(
-                                keyItemType,
-                                valueItemType
-                            );
+                            MethodInfo method = mb.MakeGenericMethod(keyItemType, valueItemType);
                             parameterizedCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
                                 method
                             );

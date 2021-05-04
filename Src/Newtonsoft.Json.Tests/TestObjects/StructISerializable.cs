@@ -33,10 +33,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private string _name;
 
-        public StructISerializable(
-            SerializationInfo info,
-            StreamingContext context
-        ) {
+        public StructISerializable(SerializationInfo info, StreamingContext context)
+        {
             _name = info.GetString("Name");
         }
 
@@ -47,10 +45,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             set { _name = value; }
         }
 
-        public void GetObjectData(
-            SerializationInfo info,
-            StreamingContext context
-        ) {
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue("Name", _name);
         }
     }

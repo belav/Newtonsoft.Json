@@ -77,10 +77,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               'BirthDate': '1983-02-02T00:00:00'
             }";
 
-            Person person = JsonConvert.DeserializeObject<Person>(
-                json,
-                new PersonConverter()
-            );
+            Person person = JsonConvert.DeserializeObject<Person>(json, new PersonConverter());
 
             Console.WriteLine(person.GetType().Name);
             // Employee

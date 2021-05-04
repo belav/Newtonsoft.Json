@@ -53,9 +53,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInString()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -71,9 +69,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInStringAndBool()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -196,10 +192,7 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                     setter(structTest, "Hi");
 
-                    Assert.AreEqual(
-                        "Hi",
-                        ((StructTest)structTest).StringProperty
-                    );
+                    Assert.AreEqual("Hi", ((StructTest)structTest).StringProperty);
 
                     setter(new TimeSpan(), "Hi");
                 },
@@ -250,9 +243,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreatePropertyGetter()
         {
-            PropertyInfo namePropertyInfo = typeof(Person).GetProperty(
-                nameof(Person.Name)
-            );
+            PropertyInfo namePropertyInfo = typeof(Person).GetProperty(nameof(Person.Name));
 
             Assert.IsNotNull(namePropertyInfo);
 

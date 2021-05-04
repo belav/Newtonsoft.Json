@@ -67,9 +67,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             const string testJson = "{float: 0.0620}";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(testJson)
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(testJson));
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
 
@@ -82,9 +80,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             const string testJson = "{float: NaN}";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(testJson)
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(testJson));
 
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
@@ -102,9 +98,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             const string testJson = "{float: NaN}";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(testJson)
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(testJson));
 
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
@@ -125,9 +119,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 ]";
             ;
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(testJson)
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(testJson));
 
             Assert.IsTrue(reader.Read());
 
@@ -157,9 +149,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 ]";
             ;
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(testJson)
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(testJson));
 
             Assert.IsTrue(reader.Read());
 
@@ -167,17 +157,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual(JsonConvert.NaN, reader.Value);
 
-            Assert.AreEqual(
-                JsonConvert.PositiveInfinity,
-                reader.ReadAsString()
-            );
+            Assert.AreEqual(JsonConvert.PositiveInfinity, reader.ReadAsString());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual(JsonConvert.PositiveInfinity, reader.Value);
 
-            Assert.AreEqual(
-                JsonConvert.NegativeInfinity,
-                reader.ReadAsString()
-            );
+            Assert.AreEqual(JsonConvert.NegativeInfinity, reader.ReadAsString());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual(JsonConvert.NegativeInfinity, reader.Value);
 
@@ -205,10 +189,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual("1.7976931348623157E+308", reader.Value);
 
-            Assert.AreEqual(
-                "792281625142643375935439503.35",
-                reader.ReadAsString()
-            );
+            Assert.AreEqual("792281625142643375935439503.35", reader.ReadAsString());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual("792281625142643375935439503.35", reader.Value);
 
@@ -317,11 +298,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json =
                 @"[0.0,0.0,0.1,1.0,1.000001,1E-06,4.94065645841247E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN,0e-10,0.25e-5,0.3e10]";
 
-            using (
-                JsonReader jsonReader = new JsonTextReader(
-                    new StringReader(json)
-                )
-            ) {
+            using (JsonReader jsonReader = new JsonTextReader(new StringReader(json)))
+            {
                 jsonReader.Read();
                 Assert.AreEqual(JsonToken.StartArray, jsonReader.TokenType);
 

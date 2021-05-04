@@ -125,9 +125,9 @@ namespace Newtonsoft.Json.Tests
                 // create hex string from value
                 HtmlColor color = (HtmlColor)value;
                 string hexString =
-                    color.Red.ToString("X2") +
-                    color.Green.ToString("X2") +
-                    color.Blue.ToString("X2");
+                    color.Red.ToString("X2")
+                    + color.Green.ToString("X2")
+                    + color.Blue.ToString("X2");
 
                 // write value to json
                 writer.WriteValue("#" + hexString);
@@ -169,26 +169,19 @@ namespace Newtonsoft.Json.Tests
         {
             IList<string> roles = new List<string> { "User", "Admin" };
 
-            string roleJson = JsonConvert.SerializeObject(
-                roles,
-                Formatting.Indented
-            );
+            string roleJson = JsonConvert.SerializeObject(roles, Formatting.Indented);
             // [
             //   "User",
             //   "Admin"
             // ]
 
-            IDictionary<DateTime,
-                int> dailyRegistrations = new Dictionary<DateTime, int>
+            IDictionary<DateTime, int> dailyRegistrations = new Dictionary<DateTime, int>
             {
                 { new DateTime(2014, 6, 1), 23 },
                 { new DateTime(2014, 6, 2), 50 }
             };
 
-            string regJson = JsonConvert.SerializeObject(
-                dailyRegistrations,
-                Formatting.Indented
-            );
+            string regJson = JsonConvert.SerializeObject(dailyRegistrations, Formatting.Indented);
             // {
             //   "2014-06-01T00:00:00": 23,
             //   "2014-06-02T00:00:00": 50
@@ -196,10 +189,7 @@ namespace Newtonsoft.Json.Tests
 
             City c = new City { Name = "Oslo", Population = 650000 };
 
-            string cityJson = JsonConvert.SerializeObject(
-                c,
-                Formatting.Indented
-            );
+            string cityJson = JsonConvert.SerializeObject(c, Formatting.Indented);
             // {
             //   "Name": "Oslo",
             //   "Population": 650000
@@ -276,10 +266,7 @@ namespace Newtonsoft.Json.Tests
 
             var s = JsonConvert.DeserializeObject<Session>(
                 j,
-                new JsonSerializerSettings
-                {
-                    Converters =  { new JavaScriptDateTimeConverter() }
-                }
+                new JsonSerializerSettings { Converters =  { new JavaScriptDateTimeConverter() } }
             );
             // Name = Serialize All The Things
             // Date = Tuesday, 3 June 2014
@@ -293,8 +280,7 @@ namespace Newtonsoft.Json.Tests
             Session s = new Session();
             s.Date = new DateTime(2014, 6, 4);
 
-            string j =
-                @"{
+            string j = @"{
               'Name': 'Serialize All The Things'
             }";
 
@@ -329,10 +315,7 @@ namespace Newtonsoft.Json.Tests
             mike.Reportees = new[] { arnie, susan };
             susan.Reportees = new[] { arnie };
 
-            string json = JsonConvert.SerializeObject(
-                mike,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(mike, Formatting.Indented);
             // {
             //   "Reportees": [
             //     {
@@ -484,9 +467,7 @@ namespace Newtonsoft.Json.Tests
             Object.ReferenceEquals(mike.Reportees[0], susan.Reportees[0]);
             // true
 
-            Assert.IsTrue(
-                ReferenceEquals(mike.Reportees[0], susan.Reportees[0])
-            );
+            Assert.IsTrue(ReferenceEquals(mike.Reportees[0], susan.Reportees[0]));
         }
 
         public class House
@@ -569,10 +550,7 @@ namespace Newtonsoft.Json.Tests
             house.FloorArea = 100m;
             house.BuildDate = new DateTime(1890, 1, 1);
 
-            string json = JsonConvert.SerializeObject(
-                house,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(house, Formatting.Indented);
             // {
             //   "StreetAddress": "221B Baker Street",
             //   "Bedrooms": 2,
@@ -658,11 +636,8 @@ namespace Newtonsoft.Json.Tests
             IList<int> value;
 
             JsonSerializer serializer = new JsonSerializer();
-            using (
-                JsonTextReader reader = new JsonTextReader(
-                    new StringReader(@"[1,2,3,4]")
-                )
-            ) {
+            using (JsonTextReader reader = new JsonTextReader(new StringReader(@"[1,2,3,4]")))
+            {
                 reader.ArrayPool = JsonArrayPool.Instance;
 
                 value = serializer.Deserialize<IList<int>>(reader);
@@ -766,14 +741,10 @@ namespace Newtonsoft.Json.Tests
                     )
                 )
             ) {
-                largeJson = await JArray.LoadAsync(
-                    new JsonTextReader(textReader)
-                );
+                largeJson = await JArray.LoadAsync(new JsonTextReader(textReader));
             }
 
-            JToken user = largeJson.SelectToken(
-                "$[?(@.name == 'Woodard Caldwell')]"
-            );
+            JToken user = largeJson.SelectToken("$[?(@.name == 'Woodard Caldwell')]");
             user["isActive"] = false;
 
             // write asynchronously to a file

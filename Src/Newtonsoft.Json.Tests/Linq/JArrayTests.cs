@@ -433,16 +433,8 @@ Parameter name: index",
 
             IEnumerable<ListItemFields> t = new List<ListItemFields>
             {
-                new ListItemFields
-                {
-                    ListItemText = "First",
-                    ListItemValue = 1
-                },
-                new ListItemFields
-                {
-                    ListItemText = "Second",
-                    ListItemValue = 2
-                },
+                new ListItemFields { ListItemText = "First", ListItemValue = 1 },
+                new ListItemFields { ListItemText = "Second", ListItemValue = 2 },
                 new ListItemFields { ListItemText = "Third", ListItemValue = 3 }
             };
 
@@ -459,10 +451,7 @@ Parameter name: index",
                             orderby r.ListItemValue
                             select new JObject(
                                 new JProperty("text", r.ListItemText),
-                                new JProperty(
-                                    "value",
-                                    r.ListItemValue.ToString()
-                                )
+                                new JProperty("value", r.ListItemValue.ToString())
                             )
                     )
                 )
@@ -516,9 +505,7 @@ Parameter name: index",
             JProperty p2 = new JProperty("Test2", "Two");
             ITypedList a = new JArray(new JObject(p1, p2));
 
-            PropertyDescriptorCollection propertyDescriptors = a.GetItemProperties(
-                null
-            );
+            PropertyDescriptorCollection propertyDescriptors = a.GetItemProperties(null);
             Assert.IsNotNull(propertyDescriptors);
             Assert.AreEqual(2, propertyDescriptors.Count);
             Assert.AreEqual("Test1", propertyDescriptors[0].Name);
@@ -648,10 +635,7 @@ Parameter name: index",
 
             a = JArray.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    CommentHandling = CommentHandling.Ignore
-                }
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
             );
 
             Assert.AreEqual(3, a.Count);
@@ -659,10 +643,7 @@ Parameter name: index",
             Assert.AreEqual(2, (int)a[1]);
             Assert.AreEqual(3, (int)a[2]);
 
-            a = JArray.Parse(
-                json,
-                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
-            );
+            a = JArray.Parse(json, new JsonLoadSettings { CommentHandling = CommentHandling.Load });
 
             Assert.AreEqual(4, a.Count);
             Assert.AreEqual(1, (int)a[0]);
@@ -712,10 +693,7 @@ Parameter name: index",
 
             a = JArray.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    LineInfoHandling = LineInfoHandling.Ignore
-                }
+                new JsonLoadSettings { LineInfoHandling = LineInfoHandling.Ignore }
             );
 
             Assert.AreEqual(false, ((IJsonLineInfo)a).HasLineInfo());
@@ -725,10 +703,7 @@ Parameter name: index",
 
             a = JArray.Parse(
                 json,
-                new JsonLoadSettings
-                {
-                    LineInfoHandling = LineInfoHandling.Load
-                }
+                new JsonLoadSettings { LineInfoHandling = LineInfoHandling.Load }
             );
 
             Assert.AreEqual(true, ((IJsonLineInfo)a).HasLineInfo());

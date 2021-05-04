@@ -59,9 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
         private JTokenType PeekState()
         {
-            JTokenType current = (_stateStack.Count > 0)
-                ? _stateStack.Peek()
-                : JTokenType.None;
+            JTokenType current = (_stateStack.Count > 0) ? _stateStack.Peek() : JTokenType.None;
             return current;
         }
 
@@ -83,11 +81,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                             throw new Exception("No type specified.");
                         }
 
-                        _valueType = (JTokenType)Enum.Parse(
-                            typeof(JTokenType),
-                            typeName,
-                            true
-                        );
+                        _valueType = (JTokenType)Enum.Parse(typeof(JTokenType), typeName, true);
 
                         switch (PeekState())
                         {
@@ -95,10 +89,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                                 HandleValueType();
                                 return true;
                             case JTokenType.Object:
-                                SetToken(
-                                    JsonToken.PropertyName,
-                                    _reader.LocalName
-                                );
+                                SetToken(JsonToken.PropertyName, _reader.LocalName);
                                 _stateStack.Push(JTokenType.Property);
                                 return true;
                             case JTokenType.Array:
@@ -149,19 +140,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                             case JTokenType.Integer:
                                 SetToken(
                                     JsonToken.Integer,
-                                    Convert.ToInt64(
-                                        _reader.Value,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    Convert.ToInt64(_reader.Value, CultureInfo.InvariantCulture)
                                 );
                                 break;
                             case JTokenType.Float:
                                 SetToken(
                                     JsonToken.Float,
-                                    Convert.ToDouble(
-                                        _reader.Value,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    Convert.ToDouble(_reader.Value, CultureInfo.InvariantCulture)
                                 );
                                 break;
                             case JTokenType.String:
@@ -173,26 +158,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                             case JTokenType.Boolean:
                                 SetToken(
                                     JsonToken.Boolean,
-                                    Convert.ToBoolean(
-                                        _reader.Value,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    Convert.ToBoolean(_reader.Value, CultureInfo.InvariantCulture)
                                 );
                                 break;
                             case JTokenType.Date:
                                 SetToken(
                                     JsonToken.Date,
-                                    Convert.ToDateTime(
-                                        _reader.Value,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    Convert.ToDateTime(_reader.Value, CultureInfo.InvariantCulture)
                                 );
                                 break;
                             case JTokenType.Bytes:
-                                SetToken(
-                                    JsonToken.Bytes,
-                                    Convert.FromBase64String(_reader.Value)
-                                );
+                                SetToken(JsonToken.Bytes, Convert.FromBase64String(_reader.Value));
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
@@ -292,9 +268,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 return null;
             }
 
-            return (Value != null)
-                ? (DateTime?)Convert.ToDateTime(Value)
-                : null;
+            return (Value != null) ? (DateTime?)Convert.ToDateTime(Value) : null;
         }
 
         public override DateTimeOffset? ReadAsDateTimeOffset()
@@ -304,9 +278,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 return null;
             }
 
-            return (Value != null)
-                ? (DateTimeOffset?)Convert.ToDateTime(Value)
-                : null;
+            return (Value != null) ? (DateTimeOffset?)Convert.ToDateTime(Value) : null;
         }
     }
     #endregion
@@ -432,10 +404,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.Date, reader.TokenType);
-                Assert.AreEqual(
-                    DateTime.Parse("2001-02-22T20:59:59Z"),
-                    reader.Value
-                );
+                Assert.AreEqual(DateTime.Parse("2001-02-22T20:59:59Z"), reader.Value);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
@@ -443,10 +412,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.Date, reader.TokenType);
-                Assert.AreEqual(
-                    DateTime.Parse("2001-02-22T20:59:59+12:00"),
-                    reader.Value
-                );
+                Assert.AreEqual(DateTime.Parse("2001-02-22T20:59:59+12:00"), reader.Value);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
@@ -478,10 +444,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.String, reader.TokenType);
-                Assert.AreEqual(
-                    "d66eab59-3715-4b35-9e06-fa61c1216eaa",
-                    reader.Value
-                );
+                Assert.AreEqual("d66eab59-3715-4b35-9e06-fa61c1216eaa", reader.Value);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
@@ -504,10 +467,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.Bytes, reader.TokenType);
-                Assert.AreEqual(
-                    Encoding.UTF8.GetBytes("Hello world!"),
-                    reader.Value
-                );
+                Assert.AreEqual(Encoding.UTF8.GetBytes("Hello world!"), reader.Value);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(JsonToken.Boolean, reader.TokenType);

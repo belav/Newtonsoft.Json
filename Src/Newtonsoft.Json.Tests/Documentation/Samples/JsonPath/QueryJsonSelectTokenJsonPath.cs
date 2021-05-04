@@ -83,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             );
 
             // manufacturer with the name 'Acme Co'
-            JToken acme = o.SelectToken(
-                "$.Manufacturers[?(@.Name == 'Acme Co')]"
-            );
+            JToken acme = o.SelectToken("$.Manufacturers[?(@.Name == 'Acme Co')]");
 
             Console.WriteLine(acme);
             // { "Name": "Acme Co", Products: [{ "Name": "Anvil", "Price": 50 }] }

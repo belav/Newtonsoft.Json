@@ -58,33 +58,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Flight flight = new Flight
             {
                 Destination = "Dubai",
-                DepartureDate = new DateTime(
-                    2013,
-                    1,
-                    21,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Unspecified
-                ),
-                DepartureDateUtc = new DateTime(
-                    2013,
-                    1,
-                    21,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
-                DepartureDateLocal = new DateTime(
-                    2013,
-                    1,
-                    21,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Local
-                ),
+                DepartureDate = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                DepartureDateUtc = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Utc),
+                DepartureDateLocal = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Local),
                 Duration = TimeSpan.FromHours(5.5)
             };
 
@@ -109,10 +85,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string jsonWithLocalTimeZone = JsonConvert.SerializeObject(
                 flight,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Local
-                }
+                new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Local }
             );
 
             Console.WriteLine(jsonWithLocalTimeZone);
@@ -127,10 +100,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string jsonWithUtcTimeZone = JsonConvert.SerializeObject(
                 flight,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
-                }
+                new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
             );
 
             Console.WriteLine(jsonWithUtcTimeZone);

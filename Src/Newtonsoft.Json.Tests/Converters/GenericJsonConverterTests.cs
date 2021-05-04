@@ -118,13 +118,7 @@ namespace Newtonsoft.Json.Tests.Converters
             jsonReader.Read();
 
             TestGenericConverter converter = new TestGenericConverter();
-            string s = converter.ReadJson(
-                jsonReader,
-                typeof(string),
-                null,
-                false,
-                null
-            );
+            string s = converter.ReadJson(jsonReader, typeof(string), null, false, null);
 
             Assert.AreEqual(@"String!", s);
         }
@@ -137,13 +131,7 @@ namespace Newtonsoft.Json.Tests.Converters
             jsonReader.Read();
 
             TestGenericConverter converter = new TestGenericConverter();
-            string s = converter.ReadJson(
-                jsonReader,
-                typeof(string),
-                "Existing!",
-                true,
-                null
-            );
+            string s = converter.ReadJson(jsonReader, typeof(string), "Existing!", true, null);
 
             Assert.AreEqual(@"String!Existing!", s);
         }
@@ -156,13 +144,7 @@ namespace Newtonsoft.Json.Tests.Converters
             jsonReader.Read();
 
             TestGenericConverter converter = new TestGenericConverter();
-            string s =
-                (string)converter.ReadJson(
-                    jsonReader,
-                    typeof(string),
-                    null,
-                    null
-                );
+            string s = (string)converter.ReadJson(jsonReader, typeof(string), null, null);
 
             Assert.AreEqual(@"String!", s);
         }

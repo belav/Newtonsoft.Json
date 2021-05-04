@@ -39,10 +39,7 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
     public class Shape
     {
         // Fields
-        [
-            DebuggerBrowsable(DebuggerBrowsableState.Never),
-            CompilerGenerated
-        ]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
         internal readonly int _tag;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
@@ -66,11 +63,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
         }
 
         [CompilationMapping(SourceConstructFlags.UnionCase, 2)]
-        public static Shape NewPrism(
-            double _width,
-            double item2,
-            double _height
-        ) {
+        public static Shape NewPrism(double _width, double item2, double _height)
+        {
             return new Prism(_width, item2, _height);
         }
 
@@ -126,17 +120,11 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
         public class Circle : Shape
         {
             // Fields
-            [
-                DebuggerBrowsable(DebuggerBrowsableState.Never),
-                CompilerGenerated
-            ]
+            [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
             internal readonly double _radius;
 
             // Methods
-            [
-                CompilerGenerated,
-                DebuggerNonUserCode
-            ]
+            [CompilerGenerated, DebuggerNonUserCode]
             internal Circle(double _radius)
                 : base(1)
             {
@@ -144,11 +132,10 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             }
 
             // Properties
-            [
-                CompilationMapping(SourceConstructFlags.Field, 1, 0),
-                CompilerGenerated,
-                DebuggerNonUserCode
-            ]
+            [CompilationMapping(
+                    SourceConstructFlags.Field,
+                    1,
+                    0), CompilerGenerated, DebuggerNonUserCode]
             public double radius
             {
                 [CompilerGenerated, DebuggerNonUserCode]

@@ -29,11 +29,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class NameContainerConverter : JsonConverter
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             NameContainer nameContainer = value as NameContainer;
 
             if (nameContainer != null)

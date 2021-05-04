@@ -58,9 +58,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Ignore()
         {
-            RefAndRefReadonlyIgnoredTestClass c = new RefAndRefReadonlyIgnoredTestClass(
-                123
-            );
+            RefAndRefReadonlyIgnoredTestClass c = new RefAndRefReadonlyIgnoredTestClass(123);
             c.SetRefField(456);
 
             string json = JsonConvert.SerializeObject(c);

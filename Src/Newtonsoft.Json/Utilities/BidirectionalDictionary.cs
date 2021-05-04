@@ -37,10 +37,7 @@ namespace Newtonsoft.Json.Utilities
         private readonly string _duplicateSecondErrorMessage;
 
         public BidirectionalDictionary()
-            : this(
-                EqualityComparer<TFirst>.Default,
-                EqualityComparer<TSecond>.Default
-            ) { }
+            : this(EqualityComparer<TFirst>.Default, EqualityComparer<TSecond>.Default) { }
 
         public BidirectionalDictionary(
             IEqualityComparer<TFirst> firstEqualityComparer,
@@ -59,12 +56,8 @@ namespace Newtonsoft.Json.Utilities
             string duplicateFirstErrorMessage,
             string duplicateSecondErrorMessage
         ) {
-            _firstToSecond = new Dictionary<TFirst, TSecond>(
-                firstEqualityComparer
-            );
-            _secondToFirst = new Dictionary<TSecond, TFirst>(
-                secondEqualityComparer
-            );
+            _firstToSecond = new Dictionary<TFirst, TSecond>(firstEqualityComparer);
+            _secondToFirst = new Dictionary<TSecond, TFirst>(secondEqualityComparer);
             _duplicateFirstErrorMessage = duplicateFirstErrorMessage;
             _duplicateSecondErrorMessage = duplicateSecondErrorMessage;
         }
@@ -76,10 +69,7 @@ namespace Newtonsoft.Json.Utilities
                 if (!existingSecond!.Equals(second))
                 {
                     throw new ArgumentException(
-                        _duplicateFirstErrorMessage.FormatWith(
-                            CultureInfo.InvariantCulture,
-                            first
-                        )
+                        _duplicateFirstErrorMessage.FormatWith(CultureInfo.InvariantCulture, first)
                     );
                 }
             }

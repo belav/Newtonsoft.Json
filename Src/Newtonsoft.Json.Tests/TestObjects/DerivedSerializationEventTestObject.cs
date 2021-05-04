@@ -28,8 +28,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class DerivedSerializationEventTestObject
-        : SerializationEventTestObject
+    public class DerivedSerializationEventTestObject : SerializationEventTestObject
     {
         // This field is set to null, but populated after deserialization, only
         // in the derived class
@@ -54,9 +53,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [OnError]
-        internal void OnDerivedErrorMethod(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) { }
+        internal void OnDerivedErrorMethod(StreamingContext context, ErrorContext errorContext) { }
     }
 }

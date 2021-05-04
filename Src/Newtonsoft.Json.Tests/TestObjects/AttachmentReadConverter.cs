@@ -46,9 +46,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             var attachment = info != null
                 ? new System.Net.Mail.Attachment(
-                        new MemoryStream(
-                            Convert.FromBase64String(info.ContentBase64)
-                        ),
+                        new MemoryStream(Convert.FromBase64String(info.ContentBase64)),
                         "application/octet-stream"
                     )
                     {
@@ -58,11 +56,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return attachment;
         }
 
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             throw new NotImplementedException();
         }
 

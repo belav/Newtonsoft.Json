@@ -34,11 +34,8 @@ namespace Newtonsoft.Json.Tests.LinqToSql
 {
     public class GuidByteArrayConverter : JsonConverter
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             Guid guid = (Guid)value;
             writer.WriteValue(Convert.ToBase64String(guid.ToByteArray()));
         }

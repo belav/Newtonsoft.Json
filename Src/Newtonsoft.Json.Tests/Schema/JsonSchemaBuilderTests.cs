@@ -60,53 +60,32 @@ namespace Newtonsoft.Json.Tests.Schema
 }
 ";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("A person", schema.Description);
             Assert.AreEqual(JsonSchemaType.Object, schema.Type);
 
             Assert.AreEqual(2, schema.Properties.Count);
 
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                schema.Properties["name"].Type
-            );
-            Assert.AreEqual(
-                JsonSchemaType.Array,
-                schema.Properties["hobbies"].Type
-            );
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                schema.Properties["hobbies"].Items[0].Type
-            );
+            Assert.AreEqual(JsonSchemaType.String, schema.Properties["name"].Type);
+            Assert.AreEqual(JsonSchemaType.Array, schema.Properties["hobbies"].Type);
+            Assert.AreEqual(JsonSchemaType.String, schema.Properties["hobbies"].Items[0].Type);
         }
 
         [Test]
         public void MultipleTypes()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Age"",
   ""type"":[""string"", ""integer""]
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Age", schema.Description);
-            Assert.AreEqual(
-                JsonSchemaType.String | JsonSchemaType.Integer,
-                schema.Type
-            );
+            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Integer, schema.Type);
         }
 
         [Test]
@@ -119,12 +98,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""items"": [{""type"":""string""},{""type"":""array""}]
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("MultipleItems", schema.Description);
             Assert.AreEqual(JsonSchemaType.String, schema.Items[0].Type);
@@ -141,12 +116,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""additionalProperties"":{""type"":[""object"", ""boolean""]}
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("AdditionalProperties", schema.Description);
             Assert.AreEqual(
@@ -158,18 +129,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Required()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Required"",
   ""required"":true
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Required", schema.Description);
             Assert.AreEqual(true, schema.Required);
@@ -178,18 +144,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ExclusiveMinimum_ExclusiveMaximum()
         {
-            string json =
-                @"{
+            string json = @"{
   ""exclusiveMinimum"":true,
   ""exclusiveMaximum"":true
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual(true, schema.ExclusiveMinimum);
             Assert.AreEqual(true, schema.ExclusiveMaximum);
@@ -198,18 +159,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ReadOnly()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""ReadOnly"",
   ""readonly"":true
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("ReadOnly", schema.Description);
             Assert.AreEqual(true, schema.ReadOnly);
@@ -218,18 +174,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Hidden()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Hidden"",
   ""hidden"":true
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Hidden", schema.Description);
             Assert.AreEqual(true, schema.Hidden);
@@ -238,18 +189,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Id()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Id"",
   ""id"":""testid""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Id", schema.Description);
             Assert.AreEqual("testid", schema.Id);
@@ -258,18 +204,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Title()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Title"",
   ""title"":""testtitle""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Title", schema.Description);
             Assert.AreEqual("testtitle", schema.Title);
@@ -278,18 +219,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Pattern()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Pattern"",
   ""pattern"":""testpattern""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Pattern", schema.Description);
             Assert.AreEqual("testpattern", schema.Pattern);
@@ -298,18 +234,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Format()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""Format"",
   ""format"":""testformat""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Format", schema.Description);
             Assert.AreEqual("testformat", schema.Format);
@@ -324,12 +255,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""requires"":""PurpleMonkeyDishwasher""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Requires", schema.Description);
             Assert.AreEqual("PurpleMonkeyDishwasher", schema.Requires);
@@ -350,12 +277,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""divisibleBy"":3,
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("MinimumMaximum", schema.Description);
             Assert.AreEqual(1.1, schema.Minimum);
@@ -376,12 +299,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""disallow"":""string""
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("DisallowSingleType", schema.Description);
             Assert.AreEqual(JsonSchemaType.String, schema.Disallow);
@@ -396,35 +315,23 @@ namespace Newtonsoft.Json.Tests.Schema
   ""disallow"":[""string"",""number""]
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("DisallowMultipleTypes", schema.Description);
-            Assert.AreEqual(
-                JsonSchemaType.String | JsonSchemaType.Float,
-                schema.Disallow
-            );
+            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Float, schema.Disallow);
         }
 
         [Test]
         public void DefaultPrimitiveType()
         {
-            string json =
-                @"{
+            string json = @"{
   ""description"":""DefaultPrimitiveType"",
   ""default"":1.1
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("DefaultPrimitiveType", schema.Description);
             Assert.AreEqual(1.1, (double)schema.Default);
@@ -439,20 +346,11 @@ namespace Newtonsoft.Json.Tests.Schema
   ""default"":{""pie"":true}
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("DefaultComplexType", schema.Description);
-            Assert.IsTrue(
-                JToken.DeepEquals(
-                    JObject.Parse(@"{""pie"":true}"),
-                    schema.Default
-                )
-            );
+            Assert.IsTrue(JToken.DeepEquals(JObject.Parse(@"{""pie"":true}"), schema.Default));
         }
 
         [Test]
@@ -465,18 +363,11 @@ namespace Newtonsoft.Json.Tests.Schema
   ""enum"":[""string"",""object"",""array"",""boolean"",""number"",""integer"",""null"",""any""]
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("Type", schema.Description);
-            Assert.AreEqual(
-                JsonSchemaType.String | JsonSchemaType.Array,
-                schema.Type
-            );
+            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Array, schema.Type);
 
             Assert.AreEqual(8, schema.Enum.Count);
             Assert.AreEqual("string", (string)schema.Enum[0]);
@@ -494,12 +385,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""items"":{""$ref"":""CircularReferenceArray""}
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("CircularReference", schema.Description);
             Assert.AreEqual("CircularReferenceArray", schema.Id);
@@ -522,12 +409,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""items"":{""$ref"":""MyUnresolvedReference""}
 }";
 
-                    JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                        new JsonSchemaResolver()
-                    );
-                    JsonSchema schema = builder.Read(
-                        new JsonTextReader(new StringReader(json))
-                    );
+                    JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+                    JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
                 },
                 @"Could not resolve schema reference 'MyUnresolvedReference'."
             );
@@ -543,12 +426,8 @@ namespace Newtonsoft.Json.Tests.Schema
   }
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.IsNotNull(schema.PatternProperties);
             Assert.AreEqual(1, schema.PatternProperties.Count);
@@ -564,36 +443,24 @@ namespace Newtonsoft.Json.Tests.Schema
     ""additionalItems"": {""type"": ""integer""}
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.IsNotNull(schema.AdditionalItems);
-            Assert.AreEqual(
-                JsonSchemaType.Integer,
-                schema.AdditionalItems.Type
-            );
+            Assert.AreEqual(JsonSchemaType.Integer, schema.AdditionalItems.Type);
             Assert.AreEqual(true, schema.AllowAdditionalItems);
         }
 
         [Test]
         public void DisallowAdditionalItems()
         {
-            string json =
-                @"{
+            string json = @"{
     ""items"": [],
     ""additionalItems"": false
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.IsNull(schema.AdditionalItems);
             Assert.AreEqual(false, schema.AllowAdditionalItems);
@@ -602,18 +469,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void AllowAdditionalItems()
         {
-            string json =
-                @"{
+            string json = @"{
     ""items"": {},
     ""additionalItems"": false
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.IsNull(schema.AdditionalItems);
             Assert.AreEqual(false, schema.AllowAdditionalItems);
@@ -643,18 +505,11 @@ namespace Newtonsoft.Json.Tests.Schema
   }
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual("#", schema.Location);
-            Assert.AreEqual(
-                "#/properties/foo",
-                schema.Properties["foo"].Location
-            );
+            Assert.AreEqual("#/properties/foo", schema.Properties["foo"].Location);
             Assert.AreEqual(
                 "#/properties/foo/items/1/properties/foo",
                 schema.Properties["foo"].Items[1].Properties["foo"].Location
@@ -672,12 +527,8 @@ namespace Newtonsoft.Json.Tests.Schema
   }
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual(schema.Properties["foo"], schema.Properties["bar"]);
         }
@@ -693,12 +544,8 @@ namespace Newtonsoft.Json.Tests.Schema
   }
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual(schema.Properties["foo"], schema.Properties["bar"]);
         }
@@ -717,12 +564,8 @@ namespace Newtonsoft.Json.Tests.Schema
   }
 }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
             Assert.AreEqual(schema.Properties["foo"], schema.Properties["bar"]);
         }
@@ -742,25 +585,12 @@ namespace Newtonsoft.Json.Tests.Schema
             }
         }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
-            Assert.AreEqual(
-                JsonSchemaType.Integer,
-                schema.Properties["tilda"].Type
-            );
-            Assert.AreEqual(
-                JsonSchemaType.Object,
-                schema.Properties["slash"].Type
-            );
-            Assert.AreEqual(
-                JsonSchemaType.Array,
-                schema.Properties["percent"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.Integer, schema.Properties["tilda"].Type);
+            Assert.AreEqual(JsonSchemaType.Object, schema.Properties["slash"].Type);
+            Assert.AreEqual(JsonSchemaType.Array, schema.Properties["percent"].Type);
         }
 
         [Test]
@@ -775,21 +605,11 @@ namespace Newtonsoft.Json.Tests.Schema
             }
         }";
 
-            JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                new JsonSchemaResolver()
-            );
-            JsonSchema schema = builder.Read(
-                new JsonTextReader(new StringReader(json))
-            );
+            JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
+            JsonSchema schema = builder.Read(new JsonTextReader(new StringReader(json)));
 
-            Assert.AreEqual(
-                JsonSchemaType.Integer,
-                schema.Properties["array"].Type
-            );
-            Assert.AreEqual(
-                JsonSchemaType.Object,
-                schema.Properties["arrayprop"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.Integer, schema.Properties["array"].Type);
+            Assert.AreEqual(JsonSchemaType.Object, schema.Properties["arrayprop"].Type);
         }
 
         [Test]
@@ -809,9 +629,7 @@ namespace Newtonsoft.Json.Tests.Schema
             ExceptionAssert.Throws<JsonException>(
                 () =>
                 {
-                    JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                        new JsonSchemaResolver()
-                    );
+                    JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
                     builder.Read(new JsonTextReader(new StringReader(json)));
                 },
                 "Could not resolve schema reference '#/array/10'."
@@ -833,9 +651,7 @@ namespace Newtonsoft.Json.Tests.Schema
             ExceptionAssert.Throws<JsonException>(
                 () =>
                 {
-                    JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                        new JsonSchemaResolver()
-                    );
+                    JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
                     builder.Read(new JsonTextReader(new StringReader(json)));
                 },
                 "Could not resolve schema reference '#/array/-1'."
@@ -857,9 +673,7 @@ namespace Newtonsoft.Json.Tests.Schema
             ExceptionAssert.Throws<JsonException>(
                 () =>
                 {
-                    JsonSchemaBuilder builder = new JsonSchemaBuilder(
-                        new JsonSchemaResolver()
-                    );
+                    JsonSchemaBuilder builder = new JsonSchemaBuilder(new JsonSchemaResolver());
                     builder.Read(new JsonTextReader(new StringReader(json)));
                 },
                 "Could not resolve schema reference '#/array/one'."

@@ -50,17 +50,13 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             long seconds;
 
             if (value is DateTime dateTime)
             {
-                seconds = (long)(dateTime.ToUniversalTime() -
-                UnixEpoch).TotalSeconds;
+                seconds = (long)(dateTime.ToUniversalTime() - UnixEpoch).TotalSeconds;
             }
 #if HAVE_DATE_TIME_OFFSET
             else if (value is DateTimeOffset dateTimeOffset)
@@ -70,9 +66,7 @@ namespace Newtonsoft.Json.Converters
 #endif
             else
             {
-                throw new JsonSerializationException(
-                    "Expected date object value."
-                );
+                throw new JsonSerializationException("Expected date object value.");
             }
 
             if (seconds < 0)

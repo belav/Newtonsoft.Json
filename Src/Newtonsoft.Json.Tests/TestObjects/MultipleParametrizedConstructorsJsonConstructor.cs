@@ -50,10 +50,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [JsonConstructor]
-        public MultipleParametrizedConstructorsJsonConstructor(
-            string value,
-            int age
-        ) {
+        public MultipleParametrizedConstructorsJsonConstructor(string value, int age)
+        {
             Value = value;
             Age = age;
             Constructor = "Public Parameterized 2";

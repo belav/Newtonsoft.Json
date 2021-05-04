@@ -68,10 +68,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy
-                {
-                    ProcessDictionaryKeys = false
-                }
+                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = false }
             };
 
             string json = JsonConvert.SerializeObject(

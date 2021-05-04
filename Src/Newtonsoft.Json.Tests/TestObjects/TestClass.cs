@@ -83,8 +83,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public List<string> strings = new List<string>();
 
         [DataMember]
-        public Dictionary<string, int> dictionary = new Dictionary<string,
-            int>();
+        public Dictionary<string, int> dictionary = new Dictionary<string, int>();
     }
 #endif
 }

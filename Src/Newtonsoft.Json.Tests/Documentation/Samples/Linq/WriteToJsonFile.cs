@@ -52,10 +52,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 new JProperty("Call of Duty", 7.5)
             );
 
-            File.WriteAllText(
-                @"c:\videogames.json",
-                videogameRatings.ToString()
-            );
+            File.WriteAllText(@"c:\videogames.json", videogameRatings.ToString());
 
             // write JSON directly to a file
             using (StreamWriter file = File.CreateText(@"c:\videogames.json"))

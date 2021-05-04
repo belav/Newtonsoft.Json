@@ -72,17 +72,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Directory directory = new Directory
             {
                 Name = "My Documents",
-                Files =
-                {
-                    "ImportantLegalDocuments.docx",
-                    "WiseFinancalAdvice.xlsx"
-                }
+                Files =  { "ImportantLegalDocuments.docx", "WiseFinancalAdvice.xlsx" }
             };
 
-            string json = JsonConvert.SerializeObject(
-                directory,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(directory, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

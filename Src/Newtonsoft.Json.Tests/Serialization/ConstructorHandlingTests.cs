@@ -53,9 +53,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{Name:""Name!""}";
 
-            var c = JsonConvert.DeserializeObject<PrivateConstructorTestClass>(
-                json
-            );
+            var c = JsonConvert.DeserializeObject<PrivateConstructorTestClass>(json);
 
             Assert.AreEqual("Name!", c.Name);
         }
@@ -113,9 +111,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{Name:""Name!""}";
 
-            var c = JsonConvert.DeserializeObject<PublicParameterizedConstructorTestClass>(
-                json
-            );
+            var c = JsonConvert.DeserializeObject<PublicParameterizedConstructorTestClass>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual("Name!", c.Name);
         }
@@ -273,10 +269,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 private set;
             }
 
-            public ConstructorParametersRespectDefaultValue(
-                string parameter1,
-                string parameter2
-            ) {
+            public ConstructorParametersRespectDefaultValue(string parameter1, string parameter2)
+            {
                 Parameter1 = parameter1;
                 Parameter2 = parameter2;
             }
@@ -291,16 +285,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type type,
                 MemberSerialization memberSerialization
             ) {
-                var properties = base.CreateProperties(
-                    type,
-                    memberSerialization
-                );
+                var properties = base.CreateProperties(type, memberSerialization);
 
-                foreach (
-                    var property in properties.Where(
-                        p => p.PropertyType == typeof(string)
-                    )
-                ) {
+                foreach (var property in properties.Where(p => p.PropertyType == typeof(string)))
+                {
                     property.DefaultValue = ConstructorParametersRespectDefaultValue.DefaultValue;
                     property.DefaultValueHandling = DefaultValueHandling.Populate;
                 }

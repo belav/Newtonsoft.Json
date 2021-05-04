@@ -79,12 +79,7 @@ namespace Newtonsoft.Json.Schema
             if (schema == null)
             {
                 schema = LoadedSchemas.SingleOrDefault(
-                    s =>
-                        string.Equals(
-                            s.Location,
-                            reference,
-                            StringComparison.Ordinal
-                        )
+                    s => string.Equals(s.Location, reference, StringComparison.Ordinal)
                 );
             }
 

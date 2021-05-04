@@ -64,10 +64,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             string result;
             try
             {
-                result = (string)items.SelectToken(
-                    @"$.[3]['Name']",
-                    errorWhenNoMatch: true
-                );
+                result = (string)items.SelectToken(@"$.[3]['Name']", errorWhenNoMatch: true);
             }
             catch (JsonException)
             {

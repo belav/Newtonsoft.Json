@@ -81,9 +81,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             JObject rss = JObject.Parse(json);
 
-            var postTitles =
-                from p in rss["channel"]["item"]
-                select (string)p["title"];
+            var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
             foreach (var item in postTitles)
             {
@@ -93,9 +91,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             //Json.NET 1.3 + New license + Now on CodePlex
 
             var categories =
-                from c in rss["channel"]["item"].Children()[
-                    "category"
-                ].Values<string>()
+                from c in rss["channel"]["item"].Children()["category"].Values<string>()
                 group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };

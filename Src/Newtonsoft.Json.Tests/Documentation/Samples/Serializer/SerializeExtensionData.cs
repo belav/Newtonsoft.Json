@@ -68,9 +68,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               'TaxRate': 0.125
             }";
 
-            CustomerInvoice invoice = JsonConvert.DeserializeObject<CustomerInvoice>(
-                json
-            );
+            CustomerInvoice invoice = JsonConvert.DeserializeObject<CustomerInvoice>(json);
 
             // increase tax to 15%
             invoice.TaxRate = 0.15m;
@@ -83,10 +81,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            Assert.AreEqual(
-                @"{""TaxRate"":0.15,""HourlyRate"":150,""Hours"":40}",
-                result
-            );
+            Assert.AreEqual(@"{""TaxRate"":0.15,""HourlyRate"":150,""Hours"":40}", result);
         }
     }
 }

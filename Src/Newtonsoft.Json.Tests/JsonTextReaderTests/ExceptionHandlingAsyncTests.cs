@@ -56,18 +56,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             byte[] data = Encoding.UTF8.GetBytes("Hello world");
 
             string json =
-                @"['" +
-                Convert.ToBase64String(data) +
-                "' '" +
-                Convert.ToBase64String(data) +
-                @"']";
+                @"['" + Convert.ToBase64String(data) + "' '" + Convert.ToBase64String(data) + @"']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            CollectionAssert.AreEquivalent(
-                data,
-                await reader.ReadAsBytesAsync()
-            );
+            CollectionAssert.AreEquivalent(data, await reader.ReadAsBytesAsync());
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsBytesAsync(),
@@ -108,8 +101,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDateTime_MissingCommaAsync()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -128,8 +120,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDateTimeOffset_MissingCommaAsync()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -148,15 +139,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsString_MissingCommaAsync()
         {
-            string json =
-                "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
+            string json = "['2017-02-04T00:00:00Z' '2018-02-04T00:00:00Z' '2019-02-04T00:00:00Z']";
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(
-                "2017-02-04T00:00:00Z",
-                await reader.ReadAsStringAsync()
-            );
+            Assert.AreEqual("2017-02-04T00:00:00Z", await reader.ReadAsStringAsync());
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsStringAsync(),
@@ -212,9 +199,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task UnexpectedEndOfHexAsync()
         {
-            JsonReader reader = new JsonTextReader(
-                new StringReader(@"'h\u123")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader(@"'h\u123"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -278,8 +263,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ThrowErrorWhenParsingUnquoteStringThatStartsWithNEAsync()
         {
-            const string json =
-                @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
+            const string json = @"{ ""ItemName"": ""value"", ""u"":netanelsalinger,""r"":9 }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -340,9 +324,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             ToggleReaderError toggleReaderError = new ToggleReaderError(
                 new StringReader("{'first':1,'second':2,'third':3}")
             );
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                toggleReaderError
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(toggleReaderError);
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
 
@@ -395,9 +377,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task MatchWithInsufficentCharactersAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nul")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nul"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -411,9 +391,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task MatchWithWrongCharactersAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nulz")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nulz"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -427,9 +405,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task MatchWithNoTrailingSeparatorAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"nullz")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"nullz"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -443,9 +419,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task UnclosedCommentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"/* sdf")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"/* sdf"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -459,9 +433,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task BadCommentStartAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"/sdf")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"/sdf"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -621,9 +593,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParseIncompleteCommentSeparatorAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("true/")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("true/"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -681,14 +651,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadIntegerWithErrorAsync()
         {
-            string json =
-                @"{
+            string json = @"{
     ChildId: 333333333333333333333333333333333333333
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -710,17 +677,14 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadIntegerWithErrorInArrayAsync()
         {
-            string json =
-                @"[
+            string json = @"[
   333333333333333333333333333333333333333,
   3.3,
   ,
   0f
 ]";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartArray, jsonTextReader.TokenType);
@@ -758,9 +722,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
     ChildId: '123'
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(await jsonTextReader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -798,15 +760,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                     async () =>
                     {
                         reader = new JsonTextReader(
-                            new StringReader(
-                                total.ToString(CultureInfo.InvariantCulture)
-                            )
+                            new StringReader(total.ToString(CultureInfo.InvariantCulture))
                         );
                         await reader.ReadAsInt32Async();
                     },
-                    "JSON integer " +
-                    total +
-                    " is too large or small for an Int32. Path '', line 1, position 10."
+                    "JSON integer "
+                    + total
+                    + " is too large or small for an Int32. Path '', line 1, position 10."
                 );
             }
         }
@@ -830,15 +790,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                     async () =>
                     {
                         reader = new JsonTextReader(
-                            new StringReader(
-                                total.ToString(CultureInfo.InvariantCulture)
-                            )
+                            new StringReader(total.ToString(CultureInfo.InvariantCulture))
                         );
                         await reader.ReadAsInt32Async();
                     },
-                    "JSON integer " +
-                    total +
-                    " is too large or small for an Int32. Path '', line 1, position 11."
+                    "JSON integer "
+                    + total
+                    + " is too large or small for an Int32. Path '', line 1, position 11."
                 );
             }
         }
@@ -860,9 +818,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 BigInteger total = i + j;
 
                 reader = new JsonTextReader(
-                    new StringReader(
-                        total.ToString(CultureInfo.InvariantCulture)
-                    )
+                    new StringReader(total.ToString(CultureInfo.InvariantCulture))
                 );
                 await reader.ReadAsync();
 
@@ -886,9 +842,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 BigInteger total = i + -j;
 
                 reader = new JsonTextReader(
-                    new StringReader(
-                        total.ToString(CultureInfo.InvariantCulture)
-                    )
+                    new StringReader(total.ToString(CultureInfo.InvariantCulture))
                 );
                 await reader.ReadAsync();
 
@@ -1058,9 +1012,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsBytesArrayWithBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[1.0]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[1.0]"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1074,9 +1026,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsBytesBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1090,9 +1040,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsBytes_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
             await reader.ReadAsync();
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
@@ -1103,10 +1051,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: ,. Path '[0]', line 1, position 2."
             );
 
-            CollectionAssert.AreEquivalent(
-                new byte[0],
-                await reader.ReadAsBytesAsync()
-            );
+            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
             Assert.IsTrue(await reader.ReadAsync());
         }
 
@@ -1127,14 +1072,9 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsBytes_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("['',,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
             await reader.ReadAsync();
-            CollectionAssert.AreEquivalent(
-                new byte[0],
-                await reader.ReadAsBytesAsync()
-            );
+            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1144,10 +1084,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: ,. Path '[1]', line 1, position 5."
             );
 
-            CollectionAssert.AreEquivalent(
-                new byte[0],
-                await reader.ReadAsBytesAsync()
-            );
+            CollectionAssert.AreEquivalent(new byte[0], await reader.ReadAsBytesAsync());
             Assert.IsTrue(await reader.ReadAsync());
         }
 
@@ -1220,9 +1157,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDateTimeOffsetBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1237,9 +1172,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDecimalBadContentAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"new Date()"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1253,10 +1186,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDecimalBadContent_SecondLineAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"
-new Date()")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"
+new Date()"));
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
@@ -1284,9 +1215,7 @@ new Date()")
         [Test]
         public async Task ReadNumberValue_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,1]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,1]"));
             await reader.ReadAsync();
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
@@ -1318,9 +1247,7 @@ new Date()")
         [Test]
         public async Task ReadNumberValue_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[1,,1]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[1,,1]"));
             await reader.ReadAsync();
             await reader.ReadAsInt32Async();
 
@@ -1385,9 +1312,7 @@ new Date()")
         [Test]
         public async Task ReadStringValue_CommaErrorsAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[,'']"));
             await reader.ReadAsync();
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
@@ -1405,9 +1330,7 @@ new Date()")
         [Test]
         public async Task ReadStringValue_CommaErrors_MultipleAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("['',,'']")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("['',,'']"));
             await reader.ReadAsync();
             await reader.ReadAsInt32Async();
 
@@ -1426,9 +1349,7 @@ new Date()")
         [Test]
         public async Task ReadStringValue_Numbers_NotStringAsync()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("[56,56]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("[56,56]"));
             await reader.ReadAsync();
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
@@ -1465,9 +1386,7 @@ new Date()")
             string json = @"/";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
@@ -1498,9 +1417,7 @@ new Date()")
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>
                 {
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader(json)
-                    );
+                    JsonTextReader reader = new JsonTextReader(new StringReader(json));
                     while (await reader.ReadAsync()) { }
                 },
                 "Unexpected character encountered while parsing value: !. Path 'frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source', line 6, position 20."
@@ -1512,12 +1429,7 @@ new Date()")
         {
             string json = "[[]]";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(json)
-            )
-            {
-                MaxDepth = 1
-            };
+            JsonTextReader reader = new JsonTextReader(new StringReader(json)) { MaxDepth = 1 };
 
             Assert.IsTrue(await reader.ReadAsync());
 
@@ -1535,12 +1447,7 @@ new Date()")
         {
             string json = "[[[[]]],[[]]]";
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(json)
-            )
-            {
-                MaxDepth = 1
-            };
+            JsonTextReader reader = new JsonTextReader(new StringReader(json)) { MaxDepth = 1 };
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(0, reader.Depth);

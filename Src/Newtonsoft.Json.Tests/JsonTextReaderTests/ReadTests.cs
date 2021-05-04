@@ -132,9 +132,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
                 {
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader("undefined")
-                    );
+                    JsonTextReader reader = new JsonTextReader(new StringReader("undefined"));
                     reader.ReadAsInt32();
                 },
                 "Unexpected character encountered while parsing value: u. Path '', line 1, position 1."
@@ -295,10 +293,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
-            Assert.AreEqual(
-                @"Hi,I" + '\u0092' + "ve send you smth",
-                reader.Value
-            );
+            Assert.AreEqual(@"Hi,I" + '\u0092' + "ve send you smth", reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
@@ -533,10 +528,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.AreEqual(
-                new DateTimeOffset(
-                    new DateTime(2000, 1, 1),
-                    TimeSpan.FromHours(6)
-                ),
+                new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6)),
                 reader.Value
             );
 
@@ -563,10 +555,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.AreEqual(
-                new DateTimeOffset(
-                    new DateTime(2000, 1, 1),
-                    TimeSpan.FromHours(-6)
-                ),
+                new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(-6)),
                 reader.Value
             );
 
@@ -617,10 +606,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.AreEqual(
-                new DateTimeOffset(
-                    new DateTime(2000, 1, 1),
-                    TimeSpan.FromHours(6)
-                ),
+                new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6)),
                 reader.Value
             );
 
@@ -900,45 +886,35 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDouble_Null()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("null")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("null"));
             Assert.AreEqual(null, reader.ReadAsDouble());
         }
 
         [Test]
         public void ReadAsDouble_Success()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("'12.34'")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("'12.34'"));
             Assert.AreEqual(12.34d, reader.ReadAsDouble());
         }
 
         [Test]
         public void ReadAsDouble_Hex()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("0XCAFEBABE")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("0XCAFEBABE"));
             Assert.AreEqual(3405691582d, reader.ReadAsDouble());
         }
 
         [Test]
         public void ReadAsDouble_AllowThousands()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("'1,112.34'")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("'1,112.34'"));
             Assert.AreEqual(1112.34d, reader.ReadAsDouble());
         }
 
         [Test]
         public void ReadAsDouble_Failure()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("['Trump',1]")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("['Trump',1]"));
 
             Assert.IsTrue(reader.Read());
 
@@ -957,9 +933,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsString_Boolean()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("{\"Test1\":false}")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("{\"Test1\":false}"));
 
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
@@ -974,9 +948,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void Read_Boolean_Failure()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("{\"Test1\":false1}")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("{\"Test1\":false1}"));
 
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
@@ -997,9 +969,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsString_Boolean_Failure()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader("{\"Test1\":false1}")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader("{\"Test1\":false1}"));
 
             Assert.IsTrue(reader.Read());
             Assert.IsTrue(reader.Read());
@@ -1059,9 +1029,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 @"/*comment*/[/*comment*/1/*comment*/,2,/*comment*//*comment*/""three""/*comment*/,""four""/*comment*/,null,/*comment*/null,3.99,1.1/*comment*/,''/*comment*/]/*comment*/";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1113,18 +1081,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json =
                 @"/*comment*/{/*comment*/Name:/*comment*/true/*comment*/,/*comment*/
         ""ExpiryDate"":/*comment*/new
-" +
-                StringUtils.LineFeed +
-                @"Date
+"
+                + StringUtils.LineFeed
+                + @"Date
 (/*comment*/null/*comment*/),
         ""Price"": 3.99,
         ""Sizes"":/*comment*/[/*comment*/
           ""Small""/*comment*/]/*comment*/}/*comment*/";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1189,9 +1155,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 ]";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             reader.Read();
@@ -1227,9 +1191,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "[false, true, true, false, 'test!', 1.11, 0e-10, 0E-10, 0.25e-5, 0.3e10, 6.0221418e23, 'Purple\\r \\n monkey\\'s:\\tdishwasher']";
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1296,9 +1258,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
     ]
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
 
@@ -1334,9 +1294,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 new StringReader("'AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA'")
             );
             byte[] data = jsonTextReader.ReadAsBytes();
-            byte[] expected = Convert.FromBase64String(
-                "AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA"
-            );
+            byte[] expected = Convert.FromBase64String("AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA");
 
             CollectionAssert.AreEqual(expected, data);
 
@@ -1344,9 +1302,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 new StringReader("'AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAABAAAA'")
             );
             data = jsonTextReader.ReadAsBytes();
-            expected = new Guid(
-                "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAABAAAA"
-            ).ToByteArray();
+            expected = new Guid("AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAABAAAA").ToByteArray();
 
             CollectionAssert.AreEqual(expected, data);
         }
@@ -1356,9 +1312,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         {
             string json = @"{""NameOfStore"":""Forest's Bakery And Cafe""}";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
             jsonTextReader.Read();
             jsonTextReader.Read();
             jsonTextReader.Read();
@@ -1373,19 +1327,14 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 second line
 third line""";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.String, jsonTextReader.TokenType);
 
-            Assert.AreEqual(
-                @"first line
+            Assert.AreEqual(@"first line
 second line
-third line",
-                jsonTextReader.Value
-            );
+third line", jsonTextReader.Value);
         }
 
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -1398,9 +1347,7 @@ third line",
     ChildId: 333333333333333333333333333333333333333,
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -1429,10 +1376,7 @@ third line",
 
             JObject o = JObject.Parse(json);
             var i = (BigInteger)((JValue)o["ChildId"]).Value;
-            Assert.AreEqual(
-                BigInteger.Parse("333333333333333333333333333333333333333"),
-                i
-            );
+            Assert.AreEqual(BigInteger.Parse("333333333333333333333333333333333333333"), i);
         }
 #endif
 
@@ -1440,14 +1384,11 @@ third line",
         [Test]
         public void ReadBadMSDateAsString()
         {
-            string json =
-                @"{
+            string json = @"{
     ChildId: '\/Date(9467082_PIE_340000-0631)\/'
 }";
 
-            JsonTextReader jsonTextReader = new JsonTextReader(
-                new StringReader(json)
-            );
+            JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(json));
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.StartObject, jsonTextReader.TokenType);
@@ -1457,10 +1398,7 @@ third line",
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.String, jsonTextReader.TokenType);
-            Assert.AreEqual(
-                @"/Date(9467082_PIE_340000-0631)/",
-                jsonTextReader.Value
-            );
+            Assert.AreEqual(@"/Date(9467082_PIE_340000-0631)/", jsonTextReader.Value);
 
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.EndObject, jsonTextReader.TokenType);
@@ -1475,9 +1413,7 @@ third line",
                 @"{""DefaultConverter"":new Date(0, ""hi""),""MemberConverter"":""1970-01-01T00:00:00Z""}";
 
             JsonReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1583,9 +1519,7 @@ third line",
         public void ReadLongString()
         {
             string s = new string('a', 10000);
-            JsonReader reader = new JsonTextReader(
-                new StringReader("'" + s + "'")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader("'" + s + "'"));
             reader.Read();
 
             Assert.AreEqual(s, reader.Value);
@@ -1623,9 +1557,7 @@ third line",
             string json =
                 "\0{\0'\0h\0i\0'\0:\0[\01\0,\0'\0'\0\0,\0null\0]\0,\0do\0:true\0}\0\0/*\0sd\0f\0*/\0/*\0sd\0f\0*/ \0";
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(reader.Read());
@@ -1692,66 +1624,66 @@ third line",
         public void ReadNewLines()
         {
             string newLinesText =
-                StringUtils.CarriageReturn +
-                StringUtils.CarriageReturnLineFeed +
-                StringUtils.LineFeed +
-                StringUtils.CarriageReturnLineFeed +
-                " " +
-                StringUtils.CarriageReturn +
-                StringUtils.CarriageReturnLineFeed;
+                StringUtils.CarriageReturn
+                + StringUtils.CarriageReturnLineFeed
+                + StringUtils.LineFeed
+                + StringUtils.CarriageReturnLineFeed
+                + " "
+                + StringUtils.CarriageReturn
+                + StringUtils.CarriageReturnLineFeed;
 
             string json =
-                newLinesText +
-                "{" +
-                newLinesText +
-                "'" +
-                newLinesText +
-                "name1" +
-                newLinesText +
-                "'" +
-                newLinesText +
-                ":" +
-                newLinesText +
-                "[" +
-                newLinesText +
-                "new" +
-                newLinesText +
-                "Date" +
-                newLinesText +
-                "(" +
-                newLinesText +
-                "1" +
-                newLinesText +
-                "," +
-                newLinesText +
-                "null" +
-                newLinesText +
-                "/*" +
-                newLinesText +
-                "blah comment" +
-                newLinesText +
-                "*/" +
-                newLinesText +
-                ")" +
-                newLinesText +
-                "," +
-                newLinesText +
-                "1.1111" +
-                newLinesText +
-                "]" +
-                newLinesText +
-                "," +
-                newLinesText +
-                "name2" +
-                newLinesText +
-                ":" +
-                newLinesText +
-                "{" +
-                newLinesText +
-                "}" +
-                newLinesText +
-                "}" +
-                newLinesText;
+                newLinesText
+                + "{"
+                + newLinesText
+                + "'"
+                + newLinesText
+                + "name1"
+                + newLinesText
+                + "'"
+                + newLinesText
+                + ":"
+                + newLinesText
+                + "["
+                + newLinesText
+                + "new"
+                + newLinesText
+                + "Date"
+                + newLinesText
+                + "("
+                + newLinesText
+                + "1"
+                + newLinesText
+                + ","
+                + newLinesText
+                + "null"
+                + newLinesText
+                + "/*"
+                + newLinesText
+                + "blah comment"
+                + newLinesText
+                + "*/"
+                + newLinesText
+                + ")"
+                + newLinesText
+                + ","
+                + newLinesText
+                + "1.1111"
+                + newLinesText
+                + "]"
+                + newLinesText
+                + ","
+                + newLinesText
+                + "name2"
+                + newLinesText
+                + ":"
+                + newLinesText
+                + "{"
+                + newLinesText
+                + "}"
+                + newLinesText
+                + "}"
+                + newLinesText;
 
             int count = 0;
             StringReader sr = new StringReader(newLinesText);
@@ -1761,19 +1693,14 @@ third line",
             }
 
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(7, reader.LineNumber);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(31, reader.LineNumber);
-            Assert.AreEqual(
-                newLinesText + "name1" + newLinesText,
-                reader.Value
-            );
+            Assert.AreEqual(newLinesText + "name1" + newLinesText, reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(37, reader.LineNumber);
@@ -1793,10 +1720,7 @@ third line",
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(91, reader.LineNumber);
-            Assert.AreEqual(
-                newLinesText + "blah comment" + newLinesText,
-                reader.Value
-            );
+            Assert.AreEqual(newLinesText + "blah comment" + newLinesText, reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(97, reader.LineNumber);
@@ -1828,9 +1752,7 @@ third line",
             byte[] helloWorldData = Encoding.UTF8.GetBytes(helloWorld);
 
             JsonReader reader = new JsonTextReader(
-                new StringReader(
-                    @"[1,'" + Convert.ToBase64String(helloWorldData) + @"']"
-                )
+                new StringReader(@"[1,'" + Convert.ToBase64String(helloWorldData) + @"']")
             );
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.StartArray, reader.TokenType);
@@ -1852,11 +1774,7 @@ third line",
             byte[] helloWorldData = Encoding.UTF8.GetBytes(helloWorld);
 
             JsonReader reader = new JsonTextReader(
-                new StringReader(
-                    @"{num:1,data:'" +
-                    Convert.ToBase64String(helloWorldData) +
-                    @"'}"
-                )
+                new StringReader(@"{num:1,data:'" + Convert.ToBase64String(helloWorldData) + @"'}")
             );
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -1894,10 +1812,7 @@ third line",
 
                 jsonReader.Read();
                 Assert.AreEqual(jsonReader.TokenType, JsonToken.String);
-                Assert.AreEqual(
-                    "Purple\r \n monkey's:\tdishwasher",
-                    jsonReader.Value
-                );
+                Assert.AreEqual("Purple\r \n monkey's:\tdishwasher", jsonReader.Value);
                 Assert.AreEqual('\'', jsonReader.QuoteChar);
                 Assert.AreEqual(1, jsonReader.Depth);
 
@@ -1917,8 +1832,8 @@ third line",
     'DVD read/writer',
     ""500 gigabyte hard drive""
   ]
-}" +
-                '\n';
+}"
+                + '\n';
 
             object o = JsonConvert.DeserializeObject(input);
         }

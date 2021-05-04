@@ -12,11 +12,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JsonSelectSettings? settings
         );
 
-        protected static JToken? GetTokenIndex(
-            JToken t,
-            JsonSelectSettings? settings,
-            int index
-        ) {
+        protected static JToken? GetTokenIndex(JToken t, JsonSelectSettings? settings, int index)
+        {
             if (t is JArray a)
             {
                 if (a.Count <= index)
@@ -85,11 +82,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             else
             {
                 // finished container, move to parent
-                while (
-                    value != null &&
-                    value != originalParent &&
-                    value == value.Parent!.Last
-                ) {
+                while (value != null && value != originalParent && value == value.Parent!.Last)
+                {
                     value = value.Parent;
                 }
 

@@ -55,16 +55,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Vessel vessel = new Vessel
-            {
-                Name = "Red October",
-                Class = "Typhoon"
-            };
+            Vessel vessel = new Vessel { Name = "Red October", Class = "Typhoon" };
 
-            string json = JsonConvert.SerializeObject(
-                vessel,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(vessel, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

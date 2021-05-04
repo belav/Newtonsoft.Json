@@ -66,15 +66,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            JsonValidatingReader validatingReader = new JsonValidatingReader(
-                reader
-            );
+            JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
             validatingReader.Schema = JsonSchema.Parse(schemaJson);
 
             IList<string> messages = new List<string>();
-            validatingReader.ValidationEventHandler += (o, a) => messages.Add(
-                a.Message
-            );
+            validatingReader.ValidationEventHandler += (o, a) => messages.Add(a.Message);
 
             JsonSerializer serializer = new JsonSerializer();
             Person p = serializer.Deserialize<Person>(validatingReader);

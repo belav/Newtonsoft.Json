@@ -54,9 +54,7 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             person.PersonRoles.Add(
                 new PersonRole
                 {
-                    PersonRoleId = new Guid(
-                        "B012DD41-71DF-4839-B8D5-D1333FB886BC"
-                    ),
+                    PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
                     Role = role
                 }
             );
@@ -70,10 +68,7 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             string json = JsonConvert.SerializeObject(
                 person,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                }
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
             );
 
             StringAssert.AreEqual(
@@ -130,10 +125,7 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             Person person = JsonConvert.DeserializeObject<Person>(json);
             Assert.IsNotNull(person);
 
-            Assert.AreEqual(
-                new Guid("7AA027AA-C995-4986-908D-999D8063599F"),
-                person.PersonId
-            );
+            Assert.AreEqual(new Guid("7AA027AA-C995-4986-908D-999D8063599F"), person.PersonId);
             Assert.AreEqual("FirstName!", person.FirstName);
             Assert.AreEqual("LastName!", person.LastName);
             Assert.AreEqual(1, person.PersonRoles.Count);

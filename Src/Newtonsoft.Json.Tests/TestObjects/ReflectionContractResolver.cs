@@ -30,9 +30,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class ReflectionContractResolver : DefaultContractResolver
     {
-        protected override IValueProvider CreateMemberValueProvider(
-            MemberInfo member
-        ) {
+        protected override IValueProvider CreateMemberValueProvider(MemberInfo member)
+        {
             return new ReflectionValueProvider(member);
         }
     }

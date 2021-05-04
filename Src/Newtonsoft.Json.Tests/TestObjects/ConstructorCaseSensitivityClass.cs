@@ -31,11 +31,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string Param1 { get; set; }
         public string Param2 { get; set; }
 
-        public ConstructorCaseSensitivityClass(
-            string param1,
-            string Param1,
-            string param2
-        ) {
+        public ConstructorCaseSensitivityClass(string param1, string Param1, string param2)
+        {
             this.param1 = param1;
             this.Param1 = Param1;
             Param2 = param2;

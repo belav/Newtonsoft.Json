@@ -125,9 +125,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Console.WriteLine(obj.Member4);
             // null
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(json);
 
             Console.WriteLine(obj.Member1);
             // 11
@@ -139,10 +137,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // This value was set after deserialization.
             #endregion
 
-            Assert.AreEqual(
-                "This value was set after deserialization.",
-                obj.Member4
-            );
+            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
         }
     }
 }

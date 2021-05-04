@@ -56,10 +56,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Movie movie = new Movie { Name = "Bad Boys", Year = 1995 };
 
             // serialize JSON to a string and then write string to a file
-            File.WriteAllText(
-                @"c:\movie.json",
-                JsonConvert.SerializeObject(movie)
-            );
+            File.WriteAllText(@"c:\movie.json", JsonConvert.SerializeObject(movie));
 
             // serialize JSON directly to a file
             using (StreamWriter file = File.CreateText(@"c:\movie.json"))

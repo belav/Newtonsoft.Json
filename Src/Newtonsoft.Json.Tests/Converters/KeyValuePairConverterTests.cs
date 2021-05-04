@@ -26,22 +26,15 @@ namespace Newtonsoft.Json.Tests.Converters
                     typeof(KeyValuePair<string, int>)
                 );
 
-            Assert.AreEqual(
-                typeof(KeyValuePairConverter),
-                contract.InternalConverter.GetType()
-            );
+            Assert.AreEqual(typeof(KeyValuePairConverter), contract.InternalConverter.GetType());
 
-            IList<KeyValuePair<string,
-                    int>> values = new List<KeyValuePair<string, int>>
+            IList<KeyValuePair<string, int>> values = new List<KeyValuePair<string, int>>
             {
                 new KeyValuePair<string, int>("123", 123),
                 new KeyValuePair<string, int>("456", 456)
             };
 
-            string json = JsonConvert.SerializeObject(
-                values,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(values, Formatting.Indented);
 
             StringAssert.AreEqual(
                 @"[
@@ -58,8 +51,9 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 
             IList<KeyValuePair<string,
-                    int>> v2 = JsonConvert.DeserializeObject<IList<KeyValuePair<string,
-                        int>>>(json);
+                    int>> v2 = JsonConvert.DeserializeObject<IList<KeyValuePair<string, int>>>(
+                json
+            );
 
             Assert.AreEqual(2, v2.Count);
             Assert.AreEqual("123", v2[0].Key);
