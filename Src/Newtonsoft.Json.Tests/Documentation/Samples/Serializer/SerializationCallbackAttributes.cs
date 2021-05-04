@@ -48,11 +48,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // This member is serialized and deserialized with no change.
             public int Member1 { get; set; }
 
-            // The value of this field is set and reset during and 
+            // The value of this field is set and reset during and
             // after serialization.
             public string Member2 { get; set; }
 
-            // This field is not serialized. The OnDeserializedAttribute 
+            // This field is not serialized. The OnDeserializedAttribute
             // is used to set the member value after serialization.
             [JsonIgnore]
             public string Member3 { get; set; }
@@ -125,7 +125,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Console.WriteLine(obj.Member4);
             // null
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(json);
+            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(
+                json
+            );
 
             Console.WriteLine(obj.Member1);
             // 11
@@ -137,7 +139,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // This value was set after deserialization.
             #endregion
 
-            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
+            Assert.AreEqual(
+                "This value was set after deserialization.",
+                obj.Member4
+            );
         }
     }
 }

@@ -58,11 +58,20 @@ namespace Newtonsoft.Json.Tests
         {
             JsonPropertyAttribute attribute = new JsonPropertyAttribute();
             Assert.AreEqual(null, attribute._nullValueHandling);
-            Assert.AreEqual(NullValueHandling.Include, attribute.NullValueHandling);
+            Assert.AreEqual(
+                NullValueHandling.Include,
+                attribute.NullValueHandling
+            );
 
             attribute.NullValueHandling = NullValueHandling.Ignore;
-            Assert.AreEqual(NullValueHandling.Ignore, attribute._nullValueHandling);
-            Assert.AreEqual(NullValueHandling.Ignore, attribute.NullValueHandling);
+            Assert.AreEqual(
+                NullValueHandling.Ignore,
+                attribute._nullValueHandling
+            );
+            Assert.AreEqual(
+                NullValueHandling.Ignore,
+                attribute.NullValueHandling
+            );
         }
 
         [Test]
@@ -70,11 +79,20 @@ namespace Newtonsoft.Json.Tests
         {
             JsonPropertyAttribute attribute = new JsonPropertyAttribute();
             Assert.AreEqual(null, attribute._defaultValueHandling);
-            Assert.AreEqual(DefaultValueHandling.Include, attribute.DefaultValueHandling);
+            Assert.AreEqual(
+                DefaultValueHandling.Include,
+                attribute.DefaultValueHandling
+            );
 
             attribute.DefaultValueHandling = DefaultValueHandling.Ignore;
-            Assert.AreEqual(DefaultValueHandling.Ignore, attribute._defaultValueHandling);
-            Assert.AreEqual(DefaultValueHandling.Ignore, attribute.DefaultValueHandling);
+            Assert.AreEqual(
+                DefaultValueHandling.Ignore,
+                attribute._defaultValueHandling
+            );
+            Assert.AreEqual(
+                DefaultValueHandling.Ignore,
+                attribute.DefaultValueHandling
+            );
         }
     }
 }

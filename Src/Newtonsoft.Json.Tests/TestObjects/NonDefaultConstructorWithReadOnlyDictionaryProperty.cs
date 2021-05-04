@@ -30,10 +30,15 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class NonDefaultConstructorWithReadOnlyDictionaryProperty
     {
         public string Title { get; set; }
-        public IDictionary<string, int> Categories { get; private set; }
-
-        public NonDefaultConstructorWithReadOnlyDictionaryProperty(string title)
+        public IDictionary<string, int> Categories
         {
+            get;
+            private set;
+        }
+
+        public NonDefaultConstructorWithReadOnlyDictionaryProperty(
+            string title
+        ) {
             Title = title;
             Categories = new Dictionary<string, int>();
         }

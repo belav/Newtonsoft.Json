@@ -57,10 +57,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             joe.Manager = mike;
             mike.Manager = mike;
 
-            string json = JsonConvert.SerializeObject(joe, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+            string json = JsonConvert.SerializeObject(
+                joe,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -71,12 +75,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Joe User"",
   ""Manager"": {
     ""Name"": ""Mike Manager""
   }
-}", json);
+}",
+                json
+            );
         }
     }
 }

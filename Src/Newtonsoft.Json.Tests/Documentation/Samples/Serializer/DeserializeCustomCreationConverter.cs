@@ -68,7 +68,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'Department': 'Furniture',
               'JobTitle': 'Carpenter',
               'FirstName': 'John',
@@ -76,7 +77,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               'BirthDate': '1983-02-02T00:00:00'
             }";
 
-            Person person = JsonConvert.DeserializeObject<Person>(json, new PersonConverter());
+            Person person = JsonConvert.DeserializeObject<Person>(
+                json,
+                new PersonConverter()
+            );
 
             Console.WriteLine(person.GetType().Name);
             // Employee

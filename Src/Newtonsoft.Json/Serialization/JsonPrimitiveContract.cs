@@ -48,13 +48,18 @@ namespace Newtonsoft.Json.Serialization
             TypeCode = ConvertUtils.GetTypeCode(underlyingType);
             IsReadOnlyOrFixedSize = true;
 
-            if (ReadTypeMap.TryGetValue(NonNullableUnderlyingType, out ReadType readType))
-            {
+            if (
+                ReadTypeMap.TryGetValue(
+                    NonNullableUnderlyingType,
+                    out ReadType readType
+                )
+            ) {
                 InternalReadType = readType;
             }
         }
 
-        private static readonly Dictionary<Type, ReadType> ReadTypeMap = new Dictionary<Type, ReadType>
+        private static readonly Dictionary<Type,
+            ReadType> ReadTypeMap = new Dictionary<Type, ReadType>
         {
             [typeof(byte[])] = ReadType.ReadAsBytes,
             [typeof(byte)] = ReadType.ReadAsInt32,
@@ -67,7 +72,9 @@ namespace Newtonsoft.Json.Serialization
 #if HAVE_DATE_TIME_OFFSET
             [typeof(DateTimeOffset)] = ReadType.ReadAsDateTimeOffset,
 #endif
-            [typeof(float)] = ReadType.ReadAsDouble,
+            [
+                typeof(float)
+            ] = ReadType.ReadAsDouble,
             [typeof(double)] = ReadType.ReadAsDouble,
             [typeof(long)] = ReadType.ReadAsInt64
         };

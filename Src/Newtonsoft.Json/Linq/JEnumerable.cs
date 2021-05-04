@@ -39,12 +39,17 @@ namespace Newtonsoft.Json.Linq
     /// Represents a collection of <see cref="JToken"/> objects.
     /// </summary>
     /// <typeparam name="T">The type of token.</typeparam>
-    public readonly struct JEnumerable<T> : IJEnumerable<T>, IEquatable<JEnumerable<T>> where T : JToken
+    public readonly struct JEnumerable<T>
+        : IJEnumerable<T>,
+            IEquatable<JEnumerable<T>>
+        where T : JToken
     {
         /// <summary>
         /// An empty collection of <see cref="JToken"/> objects.
         /// </summary>
-        public static readonly JEnumerable<T> Empty = new JEnumerable<T>(Enumerable.Empty<T>());
+        public static readonly JEnumerable<T> Empty = new JEnumerable<T>(
+            Enumerable.Empty<T>()
+        );
 
         private readonly IEnumerable<T> _enumerable;
 
@@ -88,7 +93,9 @@ namespace Newtonsoft.Json.Linq
                     return JEnumerable<JToken>.Empty;
                 }
 
-                return new JEnumerable<JToken>(_enumerable.Values<T, JToken>(key)!);
+                return new JEnumerable<JToken>(
+                    _enumerable.Values<T, JToken>(key)!
+                );
             }
         }
 

@@ -94,7 +94,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                 return sr.ReadToEnd();
             }
         }
-
 #if (!DNXCORE50)
         [Benchmark]
         public byte[] BinaryFormatter()
@@ -157,7 +156,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return SerializeJsonNetLinq(TestClass);
         }
-
 #region SerializeJsonNetManual
         private string SerializeJsonNetLinq(TestClass c)
         {
@@ -187,7 +185,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return SerializeJsonNetManual(TestClass);
         }
-
 #region SerializeJsonNetManual
         private string SerializeJsonNetManual(TestClass c)
         {
@@ -313,7 +310,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             await writer.FlushAsync();
             return sw.ToString();
         }
-
 #pragma warning disable 618
         [Benchmark]
         public byte[] JsonNetBson()
@@ -335,5 +331,4 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 #pragma warning restore 618
     }
 }
-
 #endif

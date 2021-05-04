@@ -79,7 +79,9 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_creatorParameters == null)
                 {
-                    _creatorParameters = new JsonPropertyCollection(UnderlyingType);
+                    _creatorParameters = new JsonPropertyCollection(
+                        UnderlyingType
+                    );
                 }
 
                 return _creatorParameters;
@@ -122,7 +124,8 @@ namespace Newtonsoft.Json.Serialization
             set
             {
                 _extensionDataValueType = value;
-                ExtensionDataIsJToken = (value != null && typeof(JToken).IsAssignableFrom(value));
+                ExtensionDataIsJToken = (value != null &&
+                typeof(JToken).IsAssignableFrom(value));
             }
         }
 
@@ -147,16 +150,22 @@ namespace Newtonsoft.Json.Serialization
                 {
                     _hasRequiredOrDefaultValueProperties = false;
 
-                    if (ItemRequired.GetValueOrDefault(Required.Default) != Required.Default)
-                    {
+                    if (
+                        ItemRequired.GetValueOrDefault(Required.Default) !=
+                        Required.Default
+                    ) {
                         _hasRequiredOrDefaultValueProperties = true;
                     }
                     else
                     {
                         foreach (JsonProperty property in Properties)
                         {
-                            if (property.Required != Required.Default || (property.DefaultValueHandling & DefaultValueHandling.Populate) == DefaultValueHandling.Populate)
-                            {
+                            if (
+                                property.Required != Required.Default ||
+                                (property.DefaultValueHandling &
+                                DefaultValueHandling.Populate) ==
+                                DefaultValueHandling.Populate
+                            ) {
                                 _hasRequiredOrDefaultValueProperties = true;
                                 break;
                             }
@@ -179,7 +188,6 @@ namespace Newtonsoft.Json.Serialization
 
             Properties = new JsonPropertyCollection(UnderlyingType);
         }
-
 #if HAVE_BINARY_FORMATTER
 #if HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE
         [SecuritySafeCritical]

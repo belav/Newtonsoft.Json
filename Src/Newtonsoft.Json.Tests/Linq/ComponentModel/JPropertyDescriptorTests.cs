@@ -63,7 +63,9 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
         {
             JObject o = JObject.Parse("{prop1:'12345!'}");
 
-            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor("prop1");
+            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor(
+                "prop1"
+            );
 
             propertyDescriptor1.SetValue(o, "54321!");
 
@@ -83,7 +85,9 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
         {
             JObject o = JObject.Parse("{prop1:'12345!'}");
 
-            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor("prop1");
+            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor(
+                "prop1"
+            );
             propertyDescriptor1.ResetValue(o);
 
             Assert.AreEqual("12345!", (string)o["prop1"]);
@@ -92,7 +96,9 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
         [Test]
         public void IsReadOnly()
         {
-            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor("prop1");
+            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor(
+                "prop1"
+            );
 
             Assert.AreEqual(false, propertyDescriptor1.IsReadOnly);
         }
@@ -100,7 +106,9 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
         [Test]
         public void PropertyType()
         {
-            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor("prop1");
+            JPropertyDescriptor propertyDescriptor1 = new JPropertyDescriptor(
+                "prop1"
+            );
 
             Assert.AreEqual(typeof(object), propertyDescriptor1.PropertyType);
         }

@@ -67,7 +67,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             dataSet.AcceptChanges();
 
-            string json = JsonConvert.SerializeObject(dataSet, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                dataSet,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -84,7 +87,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Table1"": [
     {
       ""id"": 0,
@@ -95,7 +99,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
       ""item"": ""item 1""
     }
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

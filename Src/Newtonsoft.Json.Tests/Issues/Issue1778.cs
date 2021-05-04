@@ -54,26 +54,32 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"{""enddate"":-1}"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"{""enddate"":-1}")
+            );
             reader.Read();
             reader.Read();
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () => reader.ReadAsDateTime(),
-                "Cannot read number value as type. Path 'enddate', line 1, position 13.");
+                "Cannot read number value as type. Path 'enddate', line 1, position 13."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
         [Test]
         public async Task Test_Async()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"{""enddate"":-1}"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(@"{""enddate"":-1}")
+            );
             reader.Read();
             reader.Read();
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 () => reader.ReadAsDateTimeAsync(),
-                "Cannot read number value as type. Path 'enddate', line 1, position 13.");
+                "Cannot read number value as type. Path 'enddate', line 1, position 13."
+            );
         }
 #endif
     }

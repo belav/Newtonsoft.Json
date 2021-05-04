@@ -58,16 +58,44 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Flight flight = new Flight
             {
                 Destination = "Dubai",
-                DepartureDate = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Unspecified),
-                DepartureDateUtc = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Utc),
-                DepartureDateLocal = new DateTime(2013, 1, 21, 0, 0, 0, DateTimeKind.Local),
+                DepartureDate = new DateTime(
+                    2013,
+                    1,
+                    21,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Unspecified
+                ),
+                DepartureDateUtc = new DateTime(
+                    2013,
+                    1,
+                    21,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Utc
+                ),
+                DepartureDateLocal = new DateTime(
+                    2013,
+                    1,
+                    21,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Local
+                ),
                 Duration = TimeSpan.FromHours(5.5)
             };
 
-            string jsonWithRoundtripTimeZone = JsonConvert.SerializeObject(flight, Formatting.Indented, new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
-            });
+            string jsonWithRoundtripTimeZone = JsonConvert.SerializeObject(
+                flight,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
+                }
+            );
 
             Console.WriteLine(jsonWithRoundtripTimeZone);
             // {
@@ -78,10 +106,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Duration": "05:30:00"
             // }
 
-            string jsonWithLocalTimeZone = JsonConvert.SerializeObject(flight, Formatting.Indented, new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Local
-            });
+            string jsonWithLocalTimeZone = JsonConvert.SerializeObject(
+                flight,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Local
+                }
+            );
 
             Console.WriteLine(jsonWithLocalTimeZone);
             // {
@@ -92,10 +124,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Duration": "05:30:00"
             // }
 
-            string jsonWithUtcTimeZone = JsonConvert.SerializeObject(flight, Formatting.Indented, new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
-            });
+            string jsonWithUtcTimeZone = JsonConvert.SerializeObject(
+                flight,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                }
+            );
 
             Console.WriteLine(jsonWithUtcTimeZone);
             // {
@@ -106,10 +142,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Duration": "05:30:00"
             // }
 
-            string jsonWithUnspecifiedTimeZone = JsonConvert.SerializeObject(flight, Formatting.Indented, new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Unspecified
-            });
+            string jsonWithUnspecifiedTimeZone = JsonConvert.SerializeObject(
+                flight,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Unspecified
+                }
+            );
 
             Console.WriteLine(jsonWithUnspecifiedTimeZone);
             // {

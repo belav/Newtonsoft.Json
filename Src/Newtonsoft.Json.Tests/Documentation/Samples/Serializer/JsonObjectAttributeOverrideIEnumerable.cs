@@ -79,7 +79,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 }
             };
 
-            string json = JsonConvert.SerializeObject(directory, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                directory,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -91,13 +94,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""My Documents"",
   ""Files"": [
     ""ImportantLegalDocuments.docx"",
     ""WiseFinancalAdvice.xlsx""
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

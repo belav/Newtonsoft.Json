@@ -43,9 +43,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonException"/> class.
         /// </summary>
-        public JsonException()
-        {
-        }
+        public JsonException() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonException"/> class
@@ -53,9 +51,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public JsonException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonException"/> class
@@ -64,9 +60,7 @@ namespace Newtonsoft.Json
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
         public JsonException(string message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
         /// <summary>
@@ -82,8 +76,11 @@ namespace Newtonsoft.Json
         }
 #endif
 
-        internal static JsonException Create(IJsonLineInfo lineInfo, string path, string message)
-        {
+        internal static JsonException Create(
+            IJsonLineInfo lineInfo,
+            string path,
+            string message
+        ) {
             message = JsonPosition.FormatMessage(lineInfo, path, message);
 
             return new JsonException(message);

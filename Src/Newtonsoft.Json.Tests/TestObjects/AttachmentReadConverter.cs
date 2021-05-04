@@ -36,21 +36,33 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return objectType == typeof(System.Net.Mail.Attachment);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             var info = serializer.Deserialize<AttachmentInfo>(reader);
 
             var attachment = info != null
-                ? new System.Net.Mail.Attachment(new MemoryStream(Convert.FromBase64String(info.ContentBase64)), "application/octet-stream")
-                {
-                    ContentDisposition = { FileName = info.FileName }
-                }
+                ? new System.Net.Mail.Attachment(
+                        new MemoryStream(
+                            Convert.FromBase64String(info.ContentBase64)
+                        ),
+                        "application/octet-stream"
+                    )
+                    {
+                        ContentDisposition =  { FileName = info.FileName }
+                    }
                 : null;
             return attachment;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) {
             throw new NotImplementedException();
         }
 

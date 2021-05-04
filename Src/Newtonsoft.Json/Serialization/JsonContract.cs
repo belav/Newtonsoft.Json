@@ -51,7 +51,10 @@ namespace Newtonsoft.Json.Serialization
     /// </summary>
     /// <param name="o">The object that raised the callback event.</param>
     /// <param name="context">The streaming context.</param>
-    public delegate void SerializationCallback(object o, StreamingContext context);
+    public delegate void SerializationCallback(
+        object o,
+        StreamingContext context
+    );
 
     /// <summary>
     /// Handles <see cref="JsonSerializer"/> serialization error callback events.
@@ -59,7 +62,11 @@ namespace Newtonsoft.Json.Serialization
     /// <param name="o">The object that raised the callback event.</param>
     /// <param name="context">The streaming context.</param>
     /// <param name="errorContext">The error context.</param>
-    public delegate void SerializationErrorCallback(object o, StreamingContext context, ErrorContext errorContext);
+    public delegate void SerializationErrorCallback(
+        object o,
+        StreamingContext context,
+        ErrorContext errorContext
+    );
 
     /// <summary>
     /// Sets extension data for an object during deserialization.
@@ -67,13 +74,18 @@ namespace Newtonsoft.Json.Serialization
     /// <param name="o">The object to set extension data on.</param>
     /// <param name="key">The extension data key.</param>
     /// <param name="value">The extension data value.</param>
-    public delegate void ExtensionDataSetter(object o, string key, object? value);
+    public delegate void ExtensionDataSetter(
+        object o,
+        string key,
+        object? value
+    );
 
     /// <summary>
     /// Gets extension data for an object during serialization.
     /// </summary>
     /// <param name="o">The object to set extension data on.</param>
-    public delegate IEnumerable<KeyValuePair<object, object>>? ExtensionDataGetter(object o);
+    public delegate IEnumerable<KeyValuePair<object,
+            object>>? ExtensionDataGetter(object o);
 
     /// <summary>
     /// Contract details for a <see cref="System.Type"/> used by the <see cref="JsonSerializer"/>.
@@ -116,7 +128,8 @@ namespace Newtonsoft.Json.Serialization
                 _createdType = value;
 
                 IsSealed = _createdType.IsSealed();
-                IsInstantiable = !(_createdType.IsInterface() || _createdType.IsAbstract());
+                IsInstantiable = !(_createdType.IsInterface() ||
+                _createdType.IsAbstract());
             }
         }
 
@@ -137,7 +150,11 @@ namespace Newtonsoft.Json.Serialization
         /// This converter is used as a fallback converter when no other converter is resolved.
         /// Setting <see cref="Converter"/> will always override this converter.
         /// </summary>
-        public JsonConverter? InternalConverter { get; internal set; }
+        public JsonConverter? InternalConverter
+        {
+            get;
+            internal set;
+        }
 
         /// <summary>
         /// Gets or sets all methods called immediately after deserialization of the object.
@@ -238,7 +255,10 @@ namespace Newtonsoft.Json.Serialization
 
         internal JsonContract(Type underlyingType)
         {
-            ValidationUtils.ArgumentNotNull(underlyingType, nameof(underlyingType));
+            ValidationUtils.ArgumentNotNull(
+                underlyingType,
+                nameof(underlyingType)
+            );
 
             UnderlyingType = underlyingType;
 
@@ -247,12 +267,17 @@ namespace Newtonsoft.Json.Serialization
             underlyingType = ReflectionUtils.EnsureNotByRefType(underlyingType);
 
             IsNullable = ReflectionUtils.IsNullable(underlyingType);
-             
-            NonNullableUnderlyingType = (IsNullable && ReflectionUtils.IsNullableType(underlyingType)) ? Nullable.GetUnderlyingType(underlyingType) : underlyingType;
+
+            NonNullableUnderlyingType = (IsNullable &&
+                ReflectionUtils.IsNullableType(underlyingType))
+                ? Nullable.GetUnderlyingType(underlyingType)
+                : underlyingType;
 
             _createdType = CreatedType = NonNullableUnderlyingType;
 
-            IsConvertable = ConvertUtils.IsConvertible(NonNullableUnderlyingType);
+            IsConvertable = ConvertUtils.IsConvertible(
+                NonNullableUnderlyingType
+            );
             IsEnum = NonNullableUnderlyingType.IsEnum();
 
             InternalReadType = ReadType.Read;
@@ -262,8 +287,9 @@ namespace Newtonsoft.Json.Serialization
         {
             if (_onSerializingCallbacks != null)
             {
-                foreach (SerializationCallback callback in _onSerializingCallbacks)
-                {
+                foreach (
+                    SerializationCallback callback in _onSerializingCallbacks
+                ) {
                     callback(o, context);
                 }
             }
@@ -273,19 +299,23 @@ namespace Newtonsoft.Json.Serialization
         {
             if (_onSerializedCallbacks != null)
             {
-                foreach (SerializationCallback callback in _onSerializedCallbacks)
-                {
+                foreach (
+                    SerializationCallback callback in _onSerializedCallbacks
+                ) {
                     callback(o, context);
                 }
             }
         }
 
-        internal void InvokeOnDeserializing(object o, StreamingContext context)
-        {
+        internal void InvokeOnDeserializing(
+            object o,
+            StreamingContext context
+        ) {
             if (_onDeserializingCallbacks != null)
             {
-                foreach (SerializationCallback callback in _onDeserializingCallbacks)
-                {
+                foreach (
+                    SerializationCallback callback in _onDeserializingCallbacks
+                ) {
                     callback(o, context);
                 }
             }
@@ -295,32 +325,45 @@ namespace Newtonsoft.Json.Serialization
         {
             if (_onDeserializedCallbacks != null)
             {
-                foreach (SerializationCallback callback in _onDeserializedCallbacks)
-                {
+                foreach (
+                    SerializationCallback callback in _onDeserializedCallbacks
+                ) {
                     callback(o, context);
                 }
             }
         }
 
-        internal void InvokeOnError(object o, StreamingContext context, ErrorContext errorContext)
-        {
+        internal void InvokeOnError(
+            object o,
+            StreamingContext context,
+            ErrorContext errorContext
+        ) {
             if (_onErrorCallbacks != null)
             {
-                foreach (SerializationErrorCallback callback in _onErrorCallbacks)
-                {
+                foreach (
+                    SerializationErrorCallback callback in _onErrorCallbacks
+                ) {
                     callback(o, context, errorContext);
                 }
             }
         }
 
-        internal static SerializationCallback CreateSerializationCallback(MethodInfo callbackMethodInfo)
-        {
-            return (o, context) => callbackMethodInfo.Invoke(o, new object[] { context });
+        internal static SerializationCallback CreateSerializationCallback(
+            MethodInfo callbackMethodInfo
+        ) {
+            return (o, context) => callbackMethodInfo.Invoke(
+                o,
+                new object[] { context }
+            );
         }
 
-        internal static SerializationErrorCallback CreateSerializationErrorCallback(MethodInfo callbackMethodInfo)
-        {
-            return (o, context, econtext) => callbackMethodInfo.Invoke(o, new object[] { context, econtext });
+        internal static SerializationErrorCallback CreateSerializationErrorCallback(
+            MethodInfo callbackMethodInfo
+        ) {
+            return (o, context, econtext) => callbackMethodInfo.Invoke(
+                o,
+                new object[] { context, econtext }
+            );
         }
     }
 }

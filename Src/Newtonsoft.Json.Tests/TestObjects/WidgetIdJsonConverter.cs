@@ -31,17 +31,25 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(WidgetId1) || objectType == typeof(WidgetId1?);
+            return objectType == typeof(WidgetId1) ||
+            objectType == typeof(WidgetId1?);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) {
             WidgetId1 id = (WidgetId1)value;
             writer.WriteValue(id.Value.ToString());
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;

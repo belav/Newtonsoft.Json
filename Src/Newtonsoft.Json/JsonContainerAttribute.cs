@@ -31,7 +31,9 @@ namespace Newtonsoft.Json
     /// <summary>
     /// Instructs the <see cref="JsonSerializer"/> how to serialize the object.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = false)]
     public abstract class JsonContainerAttribute : Attribute
     {
         /// <summary>
@@ -164,9 +166,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class.
         /// </summary>
-        protected JsonContainerAttribute()
-        {
-        }
+        protected JsonContainerAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class with the specified container Id.

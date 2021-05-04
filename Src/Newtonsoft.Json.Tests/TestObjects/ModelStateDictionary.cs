@@ -31,11 +31,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class ModelStateDictionary<T> : IDictionary<string, T>
     {
-        private readonly Dictionary<string, T> _innerDictionary = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string,
+            T> _innerDictionary = new Dictionary<string, T>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
-        public ModelStateDictionary()
-        {
-        }
+        public ModelStateDictionary() { }
 
         public ModelStateDictionary(ModelStateDictionary<T> dictionary)
         {
@@ -57,7 +58,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public bool IsReadOnly
         {
-            get { return ((IDictionary<string, T>)_innerDictionary).IsReadOnly; }
+            get
+            {
+                return ((IDictionary<string, T>)_innerDictionary).IsReadOnly;
+            }
         }
 
         public ICollection<string> Keys
@@ -108,7 +112,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public void CopyTo(KeyValuePair<string, T>[] array, int arrayIndex)
         {
-            ((IDictionary<string, T>)_innerDictionary).CopyTo(array, arrayIndex);
+            ((IDictionary<string, T>)_innerDictionary).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         public IEnumerator<KeyValuePair<string, T>> GetEnumerator()

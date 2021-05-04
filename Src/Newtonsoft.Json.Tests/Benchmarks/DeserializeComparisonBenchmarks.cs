@@ -70,7 +70,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return (T)dataContractSerializer.ReadObject(ms);
         }
-
 #if (!DNXCORE50)
         [Benchmark]
         public TestClass BinaryFormatter()
@@ -121,7 +120,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return DeserializeJsonNetManual(BenchmarkConstants.JsonText);
         }
-
 #region DeserializeJsonNetManual
         private TestClass DeserializeJsonNetManual(string json)
         {
@@ -311,7 +309,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             }
             return a;
         }
-
 #pragma warning disable 618
         [Benchmark]
         public TestClass JsonNetBson()
@@ -327,5 +324,4 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 #pragma warning restore 618
     }
 }
-
 #endif

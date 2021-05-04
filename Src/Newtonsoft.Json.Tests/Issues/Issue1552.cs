@@ -46,15 +46,21 @@ namespace Newtonsoft.Json.Tests.Issues
 
             JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.SerializeObject(c),
-                "Error getting value from 'RefField' on 'Newtonsoft.Json.Tests.Issues.RefAndRefReadonlyTestClass'.");
+                "Error getting value from 'RefField' on 'Newtonsoft.Json.Tests.Issues.RefAndRefReadonlyTestClass'."
+            );
 
-            Assert.AreEqual("Could not create getter for Int32& RefField. ByRef return values are not supported.", ex.InnerException.Message);
+            Assert.AreEqual(
+                "Could not create getter for Int32& RefField. ByRef return values are not supported.",
+                ex.InnerException.Message
+            );
         }
 
         [Test]
         public void Test_Ignore()
         {
-            RefAndRefReadonlyIgnoredTestClass c = new RefAndRefReadonlyIgnoredTestClass(123);
+            RefAndRefReadonlyIgnoredTestClass c = new RefAndRefReadonlyIgnoredTestClass(
+                123
+            );
             c.SetRefField(456);
 
             string json = JsonConvert.SerializeObject(c);

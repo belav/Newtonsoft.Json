@@ -40,7 +40,8 @@ namespace Newtonsoft.Json.Schema
     /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     public static class Extensions
     {
         /// <summary>
@@ -56,11 +57,18 @@ namespace Newtonsoft.Json.Schema
         /// <returns>
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
-        [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [Obsolete(
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
         public static bool IsValid(this JToken source, JsonSchema schema)
         {
             bool valid = true;
-            source.Validate(schema, (sender, args) => { valid = false; });
+            source.Validate(
+                schema,
+                (sender, args) =>
+                {
+                    valid = false;
+                }
+            );
             return valid;
         }
 
@@ -78,9 +86,13 @@ namespace Newtonsoft.Json.Schema
         /// <returns>
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
-        [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
-        public static bool IsValid(this JToken source, JsonSchema schema, out IList<string> errorMessages)
-        {
+        [Obsolete(
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        public static bool IsValid(
+            this JToken source,
+            JsonSchema schema,
+            out IList<string> errorMessages
+        ) {
             IList<string> errors = new List<string>();
 
             source.Validate(schema, (sender, args) => errors.Add(args.Message));
@@ -99,7 +111,8 @@ namespace Newtonsoft.Json.Schema
         /// </summary>
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
-        [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [Obsolete(
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
         public static void Validate(this JToken source, JsonSchema schema)
         {
             source.Validate(schema, null);
@@ -116,23 +129,28 @@ namespace Newtonsoft.Json.Schema
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
         /// <param name="validationEventHandler">The validation event handler.</param>
-        [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
-        public static void Validate(this JToken source, JsonSchema schema, ValidationEventHandler validationEventHandler)
-        {
+        [Obsolete(
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        public static void Validate(
+            this JToken source,
+            JsonSchema schema,
+            ValidationEventHandler validationEventHandler
+        ) {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
             ValidationUtils.ArgumentNotNull(schema, nameof(schema));
 
-            using (JsonValidatingReader reader = new JsonValidatingReader(source.CreateReader()))
-            {
+            using (
+                JsonValidatingReader reader = new JsonValidatingReader(
+                    source.CreateReader()
+                )
+            ) {
                 reader.Schema = schema;
                 if (validationEventHandler != null)
                 {
                     reader.ValidationEventHandler += validationEventHandler;
                 }
 
-                while (reader.Read())
-                {
-                }
+                while (reader.Read()) { }
             }
         }
     }

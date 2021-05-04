@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JArray packages = JArray.Parse(@"[
+            JArray packages = JArray.Parse(
+                @"[
               {
                 'PackageId': 'Newtonsoft.Json',
                 'Version': '11.0.1',
@@ -60,20 +61,27 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                 'Version': '3.9.0',
                 'ReleaseDate': '2017-11-10T00:00:00'
               }
-            ]");
+            ]"
+            );
 
             // Find Newtonsoft packages
-            List<JToken> newtonsoftPackages = packages.SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]").ToList();
+            List<JToken> newtonsoftPackages = packages.SelectTokens(
+                    @"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]"
+                )
+                .ToList();
 
             foreach (JToken item in newtonsoftPackages)
             {
-                Console.WriteLine((string) item["PackageId"]);
+                Console.WriteLine((string)item["PackageId"]);
             }
             // Newtonsoft.Json
             #endregion
 
             Assert.AreEqual(1, newtonsoftPackages.Count);
-            Assert.AreEqual("Newtonsoft.Json", (string)newtonsoftPackages[0]["PackageId"]);
+            Assert.AreEqual(
+                "Newtonsoft.Json",
+                (string)newtonsoftPackages[0]["PackageId"]
+            );
         }
     }
 }

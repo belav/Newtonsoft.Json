@@ -63,7 +63,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 SnakeRating = 10
             };
 
-            string json = JsonConvert.SerializeObject(user, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                user,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -73,11 +76,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Tom"",
   ""lastName"": ""Riddle"",
   ""snake_rating"": 10
-}", json);
+}",
+                json
+            );
         }
     }
 }

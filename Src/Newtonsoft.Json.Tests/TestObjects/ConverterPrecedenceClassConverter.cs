@@ -34,8 +34,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public abstract string ConverterType { get; }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) {
             ConverterPrecedenceClass c = (ConverterPrecedenceClass)value;
 
             JToken j = new JArray(ConverterType, c.TestValue);
@@ -43,14 +46,25 @@ namespace Newtonsoft.Json.Tests.TestObjects
             j.WriteTo(writer);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             JToken j = JArray.Load(reader);
 
             string converter = (string)j[0];
             if (converter != ConverterType)
             {
-                throw new Exception(StringUtils.FormatWith("Serialize converter {0} and deserialize converter {1} do not match.", CultureInfo.InvariantCulture, converter, ConverterType));
+                throw new Exception(
+                    StringUtils.FormatWith(
+                        "Serialize converter {0} and deserialize converter {1} do not match.",
+                        CultureInfo.InvariantCulture,
+                        converter,
+                        ConverterType
+                    )
+                );
             }
 
             string testValue = (string)j[1];

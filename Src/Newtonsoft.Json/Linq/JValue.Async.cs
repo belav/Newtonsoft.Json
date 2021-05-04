@@ -83,7 +83,6 @@ namespace Newtonsoft.Json.Linq
                     {
                         return writer.WriteValueAsync(ul, cancellationToken);
                     }
-
 #if HAVE_BIG_INTEGER
                     if (_value is BigInteger integer)
                     {
@@ -134,5 +133,4 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
-
 #endif

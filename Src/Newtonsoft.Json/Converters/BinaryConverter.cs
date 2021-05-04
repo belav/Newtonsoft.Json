@@ -85,7 +85,6 @@ namespace Newtonsoft.Json.Converters
 
             throw new JsonSerializationException("Unexpected value type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
         }
-
 #if HAVE_LINQ
         private static void EnsureReflectionObject(Type t)
         {
@@ -137,7 +136,6 @@ namespace Newtonsoft.Json.Converters
             Type t = (ReflectionUtils.IsNullableType(objectType))
                 ? Nullable.GetUnderlyingType(objectType)
                 : objectType;
-
 #if HAVE_LINQ
             if (t.FullName == BinaryTypeName)
             {
@@ -208,5 +206,4 @@ namespace Newtonsoft.Json.Converters
         }
     }
 }
-
 #endif

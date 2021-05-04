@@ -50,13 +50,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               'One',
               'II',
               '3'
             ]";
 
-            ImmutableList<string> l = JsonConvert.DeserializeObject<ImmutableList<string>>(json);
+            ImmutableList<string> l = JsonConvert.DeserializeObject<ImmutableList<string>>(
+                json
+            );
 
             foreach (string s in l)
             {

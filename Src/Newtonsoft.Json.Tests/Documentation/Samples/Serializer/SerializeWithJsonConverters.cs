@@ -56,25 +56,42 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 StringComparison.Ordinal
             };
 
-            string jsonWithoutConverter = JsonConvert.SerializeObject(stringComparisons);
+            string jsonWithoutConverter = JsonConvert.SerializeObject(
+                stringComparisons
+            );
 
             Console.WriteLine(jsonWithoutConverter);
             // [0,4]
 
-            string jsonWithConverter = JsonConvert.SerializeObject(stringComparisons, new StringEnumConverter());
+            string jsonWithConverter = JsonConvert.SerializeObject(
+                stringComparisons,
+                new StringEnumConverter()
+            );
 
             Console.WriteLine(jsonWithConverter);
             // ["CurrentCulture","Ordinal"]
 
             List<StringComparison> newStringComparsions = JsonConvert.DeserializeObject<List<StringComparison>>(
                 jsonWithConverter,
-                new StringEnumConverter());
+                new StringEnumConverter()
+            );
 
-            Console.WriteLine(string.Join(", ", newStringComparsions.Select(c => c.ToString()).ToArray()));
+            Console.WriteLine(
+                string.Join(
+                    ", ",
+                    newStringComparsions.Select(c => c.ToString()).ToArray()
+                )
+            );
             // CurrentCulture, Ordinal
             #endregion
 
-            Assert.AreEqual("CurrentCulture, Ordinal", string.Join(", ", newStringComparsions.Select(c => c.ToString()).ToArray()));
+            Assert.AreEqual(
+                "CurrentCulture, Ordinal",
+                string.Join(
+                    ", ",
+                    newStringComparsions.Select(c => c.ToString()).ToArray()
+                )
+            );
         }
     }
 }

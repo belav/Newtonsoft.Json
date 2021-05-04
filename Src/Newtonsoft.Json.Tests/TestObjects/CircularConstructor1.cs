@@ -27,7 +27,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class CircularConstructor1
     {
-        public CircularConstructor2 C2 { get; internal set; }
+        public CircularConstructor2 C2
+        {
+            get;
+            internal set;
+        }
         public string StringProperty { get; set; }
 
         public CircularConstructor1(CircularConstructor2 c2)

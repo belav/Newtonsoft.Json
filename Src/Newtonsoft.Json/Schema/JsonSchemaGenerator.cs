@@ -34,7 +34,6 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 #nullable disable
@@ -49,7 +48,8 @@ namespace Newtonsoft.Json.Schema
     /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     public class JsonSchemaGenerator
     {
         /// <summary>
@@ -161,19 +161,28 @@ namespace Newtonsoft.Json.Schema
         /// <param name="resolver">The <see cref="JsonSchemaResolver"/> used to resolve schema references.</param>
         /// <param name="rootSchemaNullable">Specify whether the generated root <see cref="JsonSchema"/> will be nullable.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
-        public JsonSchema Generate(Type type, JsonSchemaResolver resolver, bool rootSchemaNullable)
-        {
+        public JsonSchema Generate(
+            Type type,
+            JsonSchemaResolver resolver,
+            bool rootSchemaNullable
+        ) {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
             ValidationUtils.ArgumentNotNull(resolver, nameof(resolver));
 
             _resolver = resolver;
 
-            return GenerateInternal(type, (!rootSchemaNullable) ? Required.Always : Required.Default, false);
+            return GenerateInternal(
+                type,
+                (!rootSchemaNullable) ? Required.Always : Required.Default,
+                false
+            );
         }
 
         private string GetTitle(Type type)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
+            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
+                type
+            );
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Title))
             {
@@ -185,7 +194,9 @@ namespace Newtonsoft.Json.Schema
 
         private string GetDescription(Type type)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
+            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
+                type
+            );
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Description))
             {
@@ -202,7 +213,9 @@ namespace Newtonsoft.Json.Schema
 
         private string GetTypeId(Type type, bool explicitOnly)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
+            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
+                type
+            );
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Id))
             {
@@ -225,8 +238,11 @@ namespace Newtonsoft.Json.Schema
             }
         }
 
-        private JsonSchema GenerateInternal(Type type, Required valueRequired, bool required)
-        {
+        private JsonSchema GenerateInternal(
+            Type type,
+            Required valueRequired,
+            bool required
+        ) {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
 
             string resolvedId = GetTypeId(type, false);
@@ -239,8 +255,10 @@ namespace Newtonsoft.Json.Schema
                 {
                     // resolved schema is not null but referencing member allows nulls
                     // change resolved schema to allow nulls. hacky but what are ya gonna do?
-                    if (valueRequired != Required.Always && !HasFlag(resolvedSchema.Type, JsonSchemaType.Null))
-                    {
+                    if (
+                        valueRequired != Required.Always &&
+                        !HasFlag(resolvedSchema.Type, JsonSchemaType.Null)
+                    ) {
                         resolvedSchema.Type |= JsonSchemaType.Null;
                     }
                     if (required && resolvedSchema.Required != true)
@@ -255,11 +273,17 @@ namespace Newtonsoft.Json.Schema
             // test for unresolved circular reference
             if (_stack.Any(tc => tc.Type == type))
             {
-                throw new JsonException("Unresolved circular reference for type '{0}'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property.".FormatWith(CultureInfo.InvariantCulture, type));
+                throw new JsonException(
+                    "Unresolved circular reference for type '{0}'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        type
+                    )
+                );
             }
 
             JsonContract contract = ContractResolver.ResolveContract(type);
-            JsonConverter converter = contract.Converter ?? contract.InternalConverter;
+            JsonConverter converter =
+                contract.Converter ?? contract.InternalConverter;
 
             Push(new TypeSchema(type, new JsonSchema()));
 
@@ -285,64 +309,114 @@ namespace Newtonsoft.Json.Schema
                 switch (contract.ContractType)
                 {
                     case JsonContractType.Object:
-                        CurrentSchema.Type = AddNullType(JsonSchemaType.Object, valueRequired);
+                        CurrentSchema.Type = AddNullType(
+                            JsonSchemaType.Object,
+                            valueRequired
+                        );
                         CurrentSchema.Id = GetTypeId(type, false);
-                        GenerateObjectSchema(type, (JsonObjectContract)contract);
+                        GenerateObjectSchema(
+                            type,
+                            (JsonObjectContract)contract
+                        );
                         break;
                     case JsonContractType.Array:
-                        CurrentSchema.Type = AddNullType(JsonSchemaType.Array, valueRequired);
+                        CurrentSchema.Type = AddNullType(
+                            JsonSchemaType.Array,
+                            valueRequired
+                        );
 
                         CurrentSchema.Id = GetTypeId(type, false);
 
-                        JsonArrayAttribute arrayAttribute = JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(type);
-                        bool allowNullItem = (arrayAttribute == null || arrayAttribute.AllowNullItems);
+                        JsonArrayAttribute arrayAttribute = JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(
+                            type
+                        );
+                        bool allowNullItem =
+                            (arrayAttribute == null ||
+                            arrayAttribute.AllowNullItems);
 
-                        Type collectionItemType = ReflectionUtils.GetCollectionItemType(type);
+                        Type collectionItemType = ReflectionUtils.GetCollectionItemType(
+                            type
+                        );
                         if (collectionItemType != null)
                         {
                             CurrentSchema.Items = new List<JsonSchema>();
-                            CurrentSchema.Items.Add(GenerateInternal(collectionItemType, (!allowNullItem) ? Required.Always : Required.Default, false));
+                            CurrentSchema.Items.Add(
+                                GenerateInternal(
+                                    collectionItemType,
+                                    (!allowNullItem)
+                                        ? Required.Always
+                                        : Required.Default,
+                                    false
+                                )
+                            );
                         }
                         break;
                     case JsonContractType.Primitive:
-                        CurrentSchema.Type = GetJsonSchemaType(type, valueRequired);
+                        CurrentSchema.Type = GetJsonSchemaType(
+                            type,
+                            valueRequired
+                        );
 
-                        if (CurrentSchema.Type == JsonSchemaType.Integer && type.IsEnum() && !type.IsDefined(typeof(FlagsAttribute), true))
-                        {
+                        if (
+                            CurrentSchema.Type == JsonSchemaType.Integer &&
+                            type.IsEnum() &&
+                            !type.IsDefined(typeof(FlagsAttribute), true)
+                        ) {
                             CurrentSchema.Enum = new List<JToken>();
 
-                            EnumInfo enumValues = EnumUtils.GetEnumValuesAndNames(type);
+                            EnumInfo enumValues = EnumUtils.GetEnumValuesAndNames(
+                                type
+                            );
                             for (int i = 0; i < enumValues.Names.Length; i++)
                             {
                                 ulong v = enumValues.Values[i];
-                                JToken value = JToken.FromObject(Enum.ToObject(type, v));
+                                JToken value = JToken.FromObject(
+                                    Enum.ToObject(type, v)
+                                );
 
                                 CurrentSchema.Enum.Add(value);
                             }
                         }
                         break;
                     case JsonContractType.String:
-                        JsonSchemaType schemaType = (!ReflectionUtils.IsNullable(contract.UnderlyingType))
+                        JsonSchemaType schemaType = (!ReflectionUtils.IsNullable(
+                                contract.UnderlyingType
+                            ))
                             ? JsonSchemaType.String
                             : AddNullType(JsonSchemaType.String, valueRequired);
 
                         CurrentSchema.Type = schemaType;
                         break;
                     case JsonContractType.Dictionary:
-                        CurrentSchema.Type = AddNullType(JsonSchemaType.Object, valueRequired);
+                        CurrentSchema.Type = AddNullType(
+                            JsonSchemaType.Object,
+                            valueRequired
+                        );
 
                         Type keyType;
                         Type valueType;
-                        ReflectionUtils.GetDictionaryKeyValueTypes(type, out keyType, out valueType);
+                        ReflectionUtils.GetDictionaryKeyValueTypes(
+                            type,
+                            out keyType,
+                            out valueType
+                        );
 
                         if (keyType != null)
                         {
-                            JsonContract keyContract = ContractResolver.ResolveContract(keyType);
+                            JsonContract keyContract = ContractResolver.ResolveContract(
+                                keyType
+                            );
 
                             // can be converted to a string
-                            if (keyContract.ContractType == JsonContractType.Primitive)
-                            {
-                                CurrentSchema.AdditionalProperties = GenerateInternal(valueType, Required.Default, false);
+                            if (
+                                keyContract.ContractType ==
+                                JsonContractType.Primitive
+                            ) {
+                                CurrentSchema.AdditionalProperties = GenerateInternal(
+                                    valueType,
+                                    Required.Default,
+                                    false
+                                );
                             }
                         }
                         break;
@@ -360,15 +434,22 @@ namespace Newtonsoft.Json.Schema
                         CurrentSchema.Type = JsonSchemaType.Any;
                         break;
                     default:
-                        throw new JsonException("Unexpected contract type: {0}".FormatWith(CultureInfo.InvariantCulture, contract));
+                        throw new JsonException(
+                            "Unexpected contract type: {0}".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                contract
+                            )
+                        );
                 }
             }
 
             return Pop().Schema;
         }
 
-        private JsonSchemaType AddNullType(JsonSchemaType type, Required valueRequired)
-        {
+        private JsonSchemaType AddNullType(
+            JsonSchemaType type,
+            Required valueRequired
+        ) {
             if (valueRequired != Required.Always)
             {
                 return type | JsonSchemaType.Null;
@@ -377,31 +458,49 @@ namespace Newtonsoft.Json.Schema
             return type;
         }
 
-        private bool HasFlag(DefaultValueHandling value, DefaultValueHandling flag)
-        {
+        private bool HasFlag(
+            DefaultValueHandling value,
+            DefaultValueHandling flag
+        ) {
             return ((value & flag) == flag);
         }
 
-        private void GenerateObjectSchema(Type type, JsonObjectContract contract)
-        {
+        private void GenerateObjectSchema(
+            Type type,
+            JsonObjectContract contract
+        ) {
             CurrentSchema.Properties = new Dictionary<string, JsonSchema>();
             foreach (JsonProperty property in contract.Properties)
             {
                 if (!property.Ignored)
                 {
-                    bool optional = property.NullValueHandling == NullValueHandling.Ignore ||
-                                    HasFlag(property.DefaultValueHandling.GetValueOrDefault(), DefaultValueHandling.Ignore) ||
-                                    property.ShouldSerialize != null ||
-                                    property.GetIsSpecified != null;
+                    bool optional =
+                        property.NullValueHandling ==
+                        NullValueHandling.Ignore ||
+                        HasFlag(
+                            property.DefaultValueHandling.GetValueOrDefault(),
+                            DefaultValueHandling.Ignore
+                        ) ||
+                        property.ShouldSerialize != null ||
+                        property.GetIsSpecified != null;
 
-                    JsonSchema propertySchema = GenerateInternal(property.PropertyType, property.Required, !optional);
+                    JsonSchema propertySchema = GenerateInternal(
+                        property.PropertyType,
+                        property.Required,
+                        !optional
+                    );
 
                     if (property.DefaultValue != null)
                     {
-                        propertySchema.Default = JToken.FromObject(property.DefaultValue);
+                        propertySchema.Default = JToken.FromObject(
+                            property.DefaultValue
+                        );
                     }
 
-                    CurrentSchema.Properties.Add(property.PropertyName, propertySchema);
+                    CurrentSchema.Properties.Add(
+                        property.PropertyName,
+                        propertySchema
+                    );
                 }
             }
 
@@ -418,8 +517,10 @@ namespace Newtonsoft.Json.Schema
         }
 #endif
 
-        internal static bool HasFlag(JsonSchemaType? value, JsonSchemaType flag)
-        {
+        internal static bool HasFlag(
+            JsonSchemaType? value,
+            JsonSchemaType flag
+        ) {
             // default value is Any
             if (value == null)
             {
@@ -433,19 +534,25 @@ namespace Newtonsoft.Json.Schema
             }
 
             // integer is a subset of float
-            if (flag == JsonSchemaType.Integer && (value & JsonSchemaType.Float) == JsonSchemaType.Float)
-            {
+            if (
+                flag == JsonSchemaType.Integer &&
+                (value & JsonSchemaType.Float) == JsonSchemaType.Float
+            ) {
                 return true;
             }
 
             return false;
         }
 
-        private JsonSchemaType GetJsonSchemaType(Type type, Required valueRequired)
-        {
+        private JsonSchemaType GetJsonSchemaType(
+            Type type,
+            Required valueRequired
+        ) {
             JsonSchemaType schemaType = JsonSchemaType.None;
-            if (valueRequired != Required.Always && ReflectionUtils.IsNullable(type))
-            {
+            if (
+                valueRequired != Required.Always &&
+                ReflectionUtils.IsNullable(type)
+            ) {
                 schemaType = JsonSchemaType.Null;
                 if (ReflectionUtils.IsNullableType(type))
                 {
@@ -497,7 +604,13 @@ namespace Newtonsoft.Json.Schema
                 case PrimitiveTypeCode.Bytes:
                     return schemaType | JsonSchemaType.String;
                 default:
-                    throw new JsonException("Unexpected type code '{0}' for type '{1}'.".FormatWith(CultureInfo.InvariantCulture, typeCode, type));
+                    throw new JsonException(
+                        "Unexpected type code '{0}' for type '{1}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            typeCode,
+                            type
+                        )
+                    );
             }
         }
     }

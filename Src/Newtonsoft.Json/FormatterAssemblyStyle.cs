@@ -1,5 +1,4 @@
-﻿
-#if HAVE_OBSOLETE_FORMATTER_ASSEMBLY_STYLE
+﻿#if HAVE_OBSOLETE_FORMATTER_ASSEMBLY_STYLE
 
 namespace System.Runtime.Serialization.Formatters
 {
@@ -20,5 +19,4 @@ namespace System.Runtime.Serialization.Formatters
         Full = 1
     }
 }
-
 #endif

@@ -30,7 +30,8 @@ using System.Collections.Generic;
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     internal static class JsonSchemaConstants
     {
         public const string TypePropertyName = "type";
@@ -39,7 +40,8 @@ namespace Newtonsoft.Json.Schema
         public const string AdditionalItemsPropertyName = "additionalItems";
         public const string RequiredPropertyName = "required";
         public const string PatternPropertiesPropertyName = "patternProperties";
-        public const string AdditionalPropertiesPropertyName = "additionalProperties";
+        public const string AdditionalPropertiesPropertyName =
+            "additionalProperties";
         public const string RequiresPropertyName = "requires";
         public const string MinimumPropertyName = "minimum";
         public const string MaximumPropertyName = "maximum";
@@ -67,7 +69,9 @@ namespace Newtonsoft.Json.Schema
         public const string OptionValuePropertyName = "value";
         public const string OptionLabelPropertyName = "label";
 
-        public static readonly IDictionary<string, JsonSchemaType> JsonSchemaTypeMapping = new Dictionary<string, JsonSchemaType>
+        public static readonly IDictionary<string,
+            JsonSchemaType> JsonSchemaTypeMapping = new Dictionary<string,
+            JsonSchemaType>
         {
             { "string", JsonSchemaType.String },
             { "object", JsonSchemaType.Object },

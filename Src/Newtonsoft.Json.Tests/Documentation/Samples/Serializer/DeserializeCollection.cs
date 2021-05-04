@@ -51,13 +51,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             #region Usage
             string json = @"['Starcraft','Halo','Legend of Zelda']";
 
-            List<string> videogames = JsonConvert.DeserializeObject<List<string>>(json);
+            List<string> videogames = JsonConvert.DeserializeObject<List<string>>(
+                json
+            );
 
             Console.WriteLine(string.Join(", ", videogames.ToArray()));
             // Starcraft, Halo, Legend of Zelda
             #endregion
 
-            Assert.AreEqual("Starcraft, Halo, Legend of Zelda", string.Join(", ", videogames.ToArray()));
+            Assert.AreEqual(
+                "Starcraft, Halo, Legend of Zelda",
+                string.Join(", ", videogames.ToArray())
+            );
         }
     }
 }

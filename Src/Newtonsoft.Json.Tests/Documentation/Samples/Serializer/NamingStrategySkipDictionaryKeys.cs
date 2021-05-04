@@ -74,11 +74,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 }
             };
 
-            string json = JsonConvert.SerializeObject(dailyHighScores, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver,
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                dailyHighScores,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver,
+                    Formatting = Formatting.Indented
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -92,7 +95,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""date"": ""2016-06-27T00:00:00Z"",
   ""game"": ""Donkey Kong"",
   ""userPoints"": {
@@ -100,7 +104,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
     ""JoC"": 1337,
     ""JessicaN"": 1000
   }
-}", json);
+}",
+                json
+            );
         }
     }
 }

@@ -49,14 +49,18 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Raw()
         {
-            FooClass c = JsonConvert.DeserializeObject<FooClass>(@"{ ""Value"" : 96.014e-05 }");
+            FooClass c = JsonConvert.DeserializeObject<FooClass>(
+                @"{ ""Value"" : 96.014e-05 }"
+            );
             Assert.AreEqual(0.00096014m, c.Value);
         }
 
         [Test]
         public void Test_String()
         {
-            FooClass c = JsonConvert.DeserializeObject<FooClass>(@"{ ""Value"" : ""96.014e-05"" }");
+            FooClass c = JsonConvert.DeserializeObject<FooClass>(
+                @"{ ""Value"" : ""96.014e-05"" }"
+            );
             Assert.AreEqual(0.00096014m, c.Value);
         }
 

@@ -48,8 +48,24 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void JsonConvertSerializerSettings()
         {
             Person person = new Person();
-            person.BirthDate = new DateTime(2000, 11, 20, 23, 55, 44, DateTimeKind.Utc);
-            person.LastModified = new DateTime(2000, 11, 20, 23, 55, 44, DateTimeKind.Utc);
+            person.BirthDate = new DateTime(
+                2000,
+                11,
+                20,
+                23,
+                55,
+                44,
+                DateTimeKind.Utc
+            );
+            person.LastModified = new DateTime(
+                2000,
+                11,
+                20,
+                23,
+                55,
+                44,
+                DateTimeKind.Utc
+            );
             person.Name = "Name!";
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
@@ -57,32 +73,48 @@ namespace Newtonsoft.Json.Tests.Serialization
                 NamingStrategy = new KebabCaseNamingStrategy()
             };
 
-            string json = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            string json = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Name!"",
   ""birth-date"": ""2000-11-20T23:55:44Z"",
   ""last-modified"": ""2000-11-20T23:55:44Z""
-}", json);
+}",
+                json
+            );
 
-            Person deserializedPerson = JsonConvert.DeserializeObject<Person>(json, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            Person deserializedPerson = JsonConvert.DeserializeObject<Person>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver
+                }
+            );
 
             Assert.AreEqual(person.BirthDate, deserializedPerson.BirthDate);
-            Assert.AreEqual(person.LastModified, deserializedPerson.LastModified);
+            Assert.AreEqual(
+                person.LastModified,
+                deserializedPerson.LastModified
+            );
             Assert.AreEqual(person.Name, deserializedPerson.Name);
 
             json = JsonConvert.SerializeObject(person, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Name!"",
   ""BirthDate"": ""2000-11-20T23:55:44Z"",
   ""LastModified"": ""2000-11-20T23:55:44Z""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -118,7 +150,15 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Product product = new Product
             {
-                ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
+                ExpiryDate = new DateTime(
+                    2010,
+                    12,
+                    20,
+                    18,
+                    1,
+                    0,
+                    DateTimeKind.Utc
+                ),
                 Name = "Widget",
                 Price = 9.99m,
                 Sizes = new[] { "Small", "Medium", "Large" }
@@ -129,12 +169,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                 NamingStrategy = new KebabCaseNamingStrategy()
             };
 
-            string json =
-                JsonConvert.SerializeObject(
-                    product,
-                    Formatting.Indented,
-                    new JsonSerializerSettings { ContractResolver = contractResolver }
-                    );
+            string json = JsonConvert.SerializeObject(
+                product,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver
+                }
+            );
 
             //{
             //  "name": "Widget",
@@ -147,7 +189,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Widget"",
   ""expiry-date"": ""2010-12-20T18:01:00Z"",
   ""price"": 9.99,
@@ -156,7 +199,9 @@ namespace Newtonsoft.Json.Tests.Serialization
     ""Medium"",
     ""Large""
   ]
-}", json);
+}",
+                json
+            );
         }
 
 #if !(NET35 || NET20 || PORTABLE40)
@@ -175,19 +220,25 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
             };
 
-            string json = JsonConvert.SerializeObject(o, Formatting.Indented,
+            string json = JsonConvert.SerializeObject(
+                o,
+                Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""explicit"": false,
   ""text"": ""Text!"",
   ""integer"": 2147483647,
   ""int"": 0,
   ""child-object"": null
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -205,16 +256,22 @@ namespace Newtonsoft.Json.Tests.Serialization
                 NamingStrategy = new KebabCaseNamingStrategy()
             };
 
-            string json = JsonConvert.SerializeObject(values, Formatting.Indented,
+            string json = JsonConvert.SerializeObject(
+                values,
+                Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": ""Value1!"",
   ""Second"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -234,16 +291,22 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
             };
 
-            string json = JsonConvert.SerializeObject(values, Formatting.Indented,
+            string json = JsonConvert.SerializeObject(
+                values,
+                Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""first"": ""Value1!"",
   ""second"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
 
         public class PropertyAttributeNamingStrategyTestClass
@@ -266,10 +329,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""HasNoAttributeNamingStrategy"": ""Value1!"",
   ""has-attribute-naming-strategy"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
 
         [JsonObject(NamingStrategyType = typeof(KebabCaseNamingStrategy))]
@@ -292,15 +358,21 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""prop1"": ""Value1!"",
   ""prop2"": ""Value2!"",
   ""HasAttributeNamingStrategy"": null
-}", json);
+}",
+                json
+            );
         }
 
-        [JsonDictionary(NamingStrategyType = typeof(KebabCaseNamingStrategy), NamingStrategyParameters = new object[] { true, true })]
-        public class DictionaryAttributeNamingStrategyTestClass : Dictionary<string, string>
+        [JsonDictionary(
+            NamingStrategyType = typeof(KebabCaseNamingStrategy),
+            NamingStrategyParameters = new object[] { true, true })]
+        public class DictionaryAttributeNamingStrategyTestClass
+            : Dictionary<string, string>
         {
         }
 
@@ -315,10 +387,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""key1"": ""Value1!"",
   ""key2"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
     }
 }

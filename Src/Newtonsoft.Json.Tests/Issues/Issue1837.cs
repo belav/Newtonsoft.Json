@@ -50,17 +50,24 @@ namespace Newtonsoft.Json.Tests.Issues
             var rhs = new TestData();
 
             // For all tests, if Type(x) is different from Type(y), return false.
-            // given x === y, if Type(x) is Null, return true 
+            // given x === y, if Type(x) is Null, return true
             var target = lhs.Null;
-            AssertAll(StrictEquality, target, rhs.Null);            
+            AssertAll(StrictEquality, target, rhs.Null);
             AssertNone(StrictEquality, target, rhs.ErrybodyButNull);
 
             // given x === y, if x is the same Number value as y, return true.
             target = lhs.One;
             AssertAll(StrictEquality, target, rhs.One, rhs.OneDotZero);
-            Assert.IsFalse(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Two));
+            Assert.IsFalse(
+                BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Two)
+            );
             target = lhs.Scientific;
-            Assert.IsTrue(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Scientific));
+            Assert.IsTrue(
+                BooleanQueryExpression.EqualsWithStrictMatch(
+                    target,
+                    rhs.Scientific
+                )
+            );
 
             // given x === y, if Type(x) is String, then return true if x and y are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return false.
             target = lhs.DerpString;
@@ -70,12 +77,28 @@ namespace Newtonsoft.Json.Tests.Issues
             // given x === y, if Type(x) is Boolean, return true if x and y are both true or both false; otherwise, return false.
             target = lhs.True;
             AssertAll(StrictEquality, target, rhs.True);
-            AssertNone(StrictEquality, target, new[] { rhs.False }, rhs.Nopes, rhs.Numbers, rhs.Strings, rhs.Dates);
+            AssertNone(
+                StrictEquality,
+                target,
+                new[] { rhs.False },
+                rhs.Nopes,
+                rhs.Numbers,
+                rhs.Strings,
+                rhs.Dates
+            );
             target = lhs.False;
             AssertAll(StrictEquality, target, rhs.False);
-            AssertNone(StrictEquality, target, new[] { rhs.True }, rhs.Nopes, rhs.Numbers, rhs.Strings, rhs.Dates);
+            AssertNone(
+                StrictEquality,
+                target,
+                new[] { rhs.True },
+                rhs.Nopes,
+                rhs.Numbers,
+                rhs.Strings,
+                rhs.Dates
+            );
 
-            //Dates 
+            //Dates
             target = lhs.DateYearMonth;
             AssertAll(StrictEquality, target, rhs.DateYearMonth);
             AssertNone(StrictEquality, target, rhs.DateYear);
@@ -83,29 +106,48 @@ namespace Newtonsoft.Json.Tests.Issues
             AssertNone(StrictEquality, target, rhs.DateYearMonth);
             AssertAll(StrictEquality, target, rhs.DateYear);
             target = lhs.DateISO;
-            Assert.IsTrue(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.DateISO));
-            Assert.IsFalse(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.OtherISODate));
+            Assert.IsTrue(
+                BooleanQueryExpression.EqualsWithStrictMatch(
+                    target,
+                    rhs.DateISO
+                )
+            );
+            Assert.IsFalse(
+                BooleanQueryExpression.EqualsWithStrictMatch(
+                    target,
+                    rhs.OtherISODate
+                )
+            );
         }
 
-        #region helpers        
+        #region helpers
         // used by asserters to perform the comparison
         public delegate bool Comparator(JValue lhs, JValue rhs);
 
         // there was going to be an abstractEquality, but check the exception for it's implementation for why that's skipped for now
-        private readonly Comparator StrictEquality = (lhs, rhs) => BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
- 
+        private readonly Comparator StrictEquality = (
+            lhs,
+            rhs
+        ) => BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
+
         // a bunch of convenience methods for the test belwo
         // these make sure the comparator returns false for all do not wants
-        private void AssertNone(Comparator comparator, JValue token, params JValue[][] doNotWant)
-        {
+        private void AssertNone(
+            Comparator comparator,
+            JValue token,
+            params JValue[][] doNotWant
+        ) {
             foreach (var group in doNotWant)
             {
                 AssertNone(comparator, token, group);
             }
         }
 
-        private void AssertNone(Comparator comparator, JValue token, params JValue[] doNotWant)
-        {
+        private void AssertNone(
+            Comparator comparator,
+            JValue token,
+            params JValue[] doNotWant
+        ) {
             foreach (var item in doNotWant)
             {
                 Assert.IsTrue(!comparator(token, item));
@@ -113,16 +155,22 @@ namespace Newtonsoft.Json.Tests.Issues
         }
 
         // these make sure the comparator returns true for all do not wants
-        private void AssertAll(Comparator comparator, JValue token, params JValue[][] want)
-        {
+        private void AssertAll(
+            Comparator comparator,
+            JValue token,
+            params JValue[][] want
+        ) {
             foreach (var group in want)
             {
                 AssertAll(comparator, token, group);
             }
         }
 
-        private void AssertAll(Comparator comparator, JValue token, params JValue[] want)
-        {
+        private void AssertAll(
+            Comparator comparator,
+            JValue token,
+            params JValue[] want
+        ) {
             foreach (var item in want)
             {
                 Assert.IsTrue(comparator(token, item));
@@ -177,7 +225,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public TestData()
         {
-            var shebang = JObject.Parse("{\"null\":null,\"NaN\":null,\"true\":true,\"false\":false,\"two\":2,\"int\":1,\"float\":1.0,\"scifloat\":-1.3e+70,\"herp\":\"herp\",\"derp\":\"derp\",\"timespan\":86400000,\"dateYearMonth\":\"2018-09-01T00: 00:00.000Z\",\"dateYear\":\"2018-01-01T00: 00:00.000Z\",\"dateJSONAndISOZulu\":\"2018-09-20T20:38:59.463Z\", \"otherDate\": \"2018-09-20T20:41:14.821Z\"}");
+            var shebang = JObject.Parse(
+                "{\"null\":null,\"NaN\":null,\"true\":true,\"false\":false,\"two\":2,\"int\":1,\"float\":1.0,\"scifloat\":-1.3e+70,\"herp\":\"herp\",\"derp\":\"derp\",\"timespan\":86400000,\"dateYearMonth\":\"2018-09-01T00: 00:00.000Z\",\"dateYear\":\"2018-01-01T00: 00:00.000Z\",\"dateJSONAndISOZulu\":\"2018-09-20T20:38:59.463Z\", \"otherDate\": \"2018-09-20T20:41:14.821Z\"}"
+            );
             Null = (JValue)shebang["null"];
             One = (JValue)shebang["int"];
             OneDotZero = (JValue)shebang["float"];
@@ -193,22 +243,9 @@ namespace Newtonsoft.Json.Tests.Issues
             OtherISODate = (JValue)shebang["otherDate"];
             Dates = new[] { DateYearMonth, DateYear, DateISO, OtherISODate };
             Boolies = new[] { True, False };
-            Strings = new[]
-            {
-                HerpString,
-                DerpString
-            };
-            Numbers = new[]
-            {
-                One,
-                OneDotZero,
-                Two,
-                Scientific
-            };
-            Nopes = new[]
-            {
-                Null
-            };
+            Strings = new[] { HerpString, DerpString };
+            Numbers = new[] { One, OneDotZero, Two, Scientific };
+            Nopes = new[] { Null };
             Errybody = new[] { Nopes, Numbers, Strings, Boolies, Dates };
             ErrybodyButNull = new[] { Numbers, Strings, Boolies, Dates };
         }

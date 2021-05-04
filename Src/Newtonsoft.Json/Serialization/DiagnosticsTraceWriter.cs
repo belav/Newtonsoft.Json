@@ -75,5 +75,4 @@ namespace Newtonsoft.Json.Serialization
         }
     }
 }
-
 #endif

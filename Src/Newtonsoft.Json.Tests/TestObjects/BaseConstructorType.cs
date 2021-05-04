@@ -28,7 +28,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class BaseConstructorType
     {
         [JsonProperty]
-        public string BaseProperty { get; private set; }
+        public string BaseProperty
+        {
+            get;
+            private set;
+        }
 
         public BaseConstructorType(string baseProperty)
         {

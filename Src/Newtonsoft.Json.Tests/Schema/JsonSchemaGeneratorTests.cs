@@ -61,11 +61,14 @@ namespace Newtonsoft.Json.Tests.Schema
         public void Generate_GenericDictionary()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(typeof(Dictionary<string, List<string>>));
+            JsonSchema schema = generator.Generate(
+                typeof(Dictionary<string, List<string>>)
+            );
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""type"": ""object"",
   ""additionalProperties"": {
     ""type"": [
@@ -79,15 +82,21 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}", json);
+}",
+                json
+            );
 
-            Dictionary<string, List<string>> value = new Dictionary<string, List<string>>
+            Dictionary<string, List<string>> value = new Dictionary<string,
+                List<string>>
             {
                 { "HasValue", new List<string>() { "first", "second", null } },
                 { "NoValue", null }
             };
 
-            string valueJson = JsonConvert.SerializeObject(value, Formatting.Indented);
+            string valueJson = JsonConvert.SerializeObject(
+                value,
+                Formatting.Indented
+            );
             JObject o = JObject.Parse(valueJson);
 
             Assert.IsTrue(o.IsValid(schema));
@@ -98,11 +107,14 @@ namespace Newtonsoft.Json.Tests.Schema
         public void Generate_DefaultValueAttributeTestClass()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(typeof(DefaultValueAttributeTestClass));
+            JsonSchema schema = generator.Generate(
+                typeof(DefaultValueAttributeTestClass)
+            );
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""description"": ""DefaultValueAttributeTestClass description!"",
   ""type"": ""object"",
   ""additionalProperties"": false,
@@ -121,7 +133,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ""default"": ""TestProperty1Value""
     }
   }
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -133,7 +147,8 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""id"": ""Person"",
   ""title"": ""Title!"",
   ""description"": ""JsonObjectAttribute description!"",
@@ -155,7 +170,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ""type"": ""string""
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -166,7 +183,8 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""type"": ""object"",
   ""properties"": {
     ""Id"": {
@@ -213,19 +231,35 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void Generate_RequiredMembersClass()
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            JsonSchema schema = generator.Generate(typeof(RequiredMembersClass));
+            JsonSchema schema = generator.Generate(
+                typeof(RequiredMembersClass)
+            );
 
-            Assert.AreEqual(JsonSchemaType.String, schema.Properties["FirstName"].Type);
-            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Null, schema.Properties["MiddleName"].Type);
-            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Null, schema.Properties["LastName"].Type);
-            Assert.AreEqual(JsonSchemaType.String, schema.Properties["BirthDate"].Type);
+            Assert.AreEqual(
+                JsonSchemaType.String,
+                schema.Properties["FirstName"].Type
+            );
+            Assert.AreEqual(
+                JsonSchemaType.String | JsonSchemaType.Null,
+                schema.Properties["MiddleName"].Type
+            );
+            Assert.AreEqual(
+                JsonSchemaType.String | JsonSchemaType.Null,
+                schema.Properties["LastName"].Type
+            );
+            Assert.AreEqual(
+                JsonSchemaType.String,
+                schema.Properties["BirthDate"].Type
+            );
         }
 
         [Test]
@@ -262,11 +296,14 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void CircularReferenceError()
         {
-            ExceptionAssert.Throws<Exception>(() =>
-            {
-                JsonSchemaGenerator generator = new JsonSchemaGenerator();
-                generator.Generate(typeof(CircularReferenceClass));
-            }, @"Unresolved circular reference for type 'Newtonsoft.Json.Tests.TestObjects.CircularReferenceClass'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property.");
+            ExceptionAssert.Throws<Exception>(
+                () =>
+                {
+                    JsonSchemaGenerator generator = new JsonSchemaGenerator();
+                    generator.Generate(typeof(CircularReferenceClass));
+                },
+                @"Unresolved circular reference for type 'Newtonsoft.Json.Tests.TestObjects.CircularReferenceClass'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property."
+            );
         }
 
         [Test]
@@ -275,11 +312,20 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(typeof(CircularReferenceClass), true);
+            JsonSchema schema = generator.Generate(
+                typeof(CircularReferenceClass),
+                true
+            );
 
-            Assert.AreEqual(JsonSchemaType.String, schema.Properties["Name"].Type);
+            Assert.AreEqual(
+                JsonSchemaType.String,
+                schema.Properties["Name"].Type
+            );
             Assert.AreEqual(typeof(CircularReferenceClass).FullName, schema.Id);
-            Assert.AreEqual(JsonSchemaType.Object | JsonSchemaType.Null, schema.Properties["Child"].Type);
+            Assert.AreEqual(
+                JsonSchemaType.Object | JsonSchemaType.Null,
+                schema.Properties["Child"].Type
+            );
             Assert.AreEqual(schema, schema.Properties["Child"]);
         }
 
@@ -288,11 +334,19 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
 
-            JsonSchema schema = generator.Generate(typeof(CircularReferenceWithIdClass));
+            JsonSchema schema = generator.Generate(
+                typeof(CircularReferenceWithIdClass)
+            );
 
-            Assert.AreEqual(JsonSchemaType.String | JsonSchemaType.Null, schema.Properties["Name"].Type);
+            Assert.AreEqual(
+                JsonSchemaType.String | JsonSchemaType.Null,
+                schema.Properties["Name"].Type
+            );
             Assert.AreEqual("MyExplicitId", schema.Id);
-            Assert.AreEqual(JsonSchemaType.Object | JsonSchemaType.Null, schema.Properties["Child"].Type);
+            Assert.AreEqual(
+                JsonSchemaType.Object | JsonSchemaType.Null,
+                schema.Properties["Child"].Type
+            );
             Assert.AreEqual(schema, schema.Properties["Child"]);
         }
 
@@ -306,7 +360,10 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(JsonSchemaType.String, schema.Type);
 
-            string json = JsonConvert.SerializeObject(typeof(Version), Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                typeof(Version),
+                Formatting.Indented
+            );
 
             JValue v = new JValue(json);
             Assert.IsTrue(v.IsValid(schema));
@@ -319,7 +376,9 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(typeof(ISerializableTestObject));
+            JsonSchema schema = generator.Generate(
+                typeof(ISerializableTestObject)
+            );
 
             Assert.AreEqual(JsonSchemaType.Object, schema.Type);
             Assert.AreEqual(true, schema.AllowAdditionalProperties);
@@ -343,9 +402,7 @@ namespace Newtonsoft.Json.Tests.Schema
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         public class CustomDirectoryInfoMapper : DefaultContractResolver
         {
-            public CustomDirectoryInfoMapper()
-            {
-            }
+            public CustomDirectoryInfoMapper() { }
 
             protected override JsonContract CreateContract(Type objectType)
             {
@@ -357,9 +414,14 @@ namespace Newtonsoft.Json.Tests.Schema
                 return base.CreateContract(objectType);
             }
 
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-            {
-                IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
+            protected override IList<JsonProperty> CreateProperties(
+                Type type,
+                MemberSerialization memberSerialization
+            ) {
+                IList<JsonProperty> properties = base.CreateProperties(
+                    type,
+                    memberSerialization
+                );
 
                 JsonPropertyCollection c = new JsonPropertyCollection(type);
                 c.AddRange(properties.Where(m => m.PropertyName != "Root"));
@@ -385,7 +447,8 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""id"": ""Newtonsoft.Json.Tests.TestObjects.VersionOld"",
   ""type"": [
     ""object"",
@@ -418,7 +481,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ""type"": ""integer""
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -435,11 +500,15 @@ namespace Newtonsoft.Json.Tests.Schema
             generator.ContractResolver = contractResolver;
             generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
 
-            JsonSchema schema = generator.Generate(typeof(SerializableTestObject), true);
+            JsonSchema schema = generator.Generate(
+                typeof(SerializableTestObject),
+                true
+            );
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""id"": ""Newtonsoft.Json.Tests.Schema.SerializableTestObject"",
   ""type"": [
     ""object"",
@@ -455,27 +524,36 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}", json);
+}",
+                json
+            );
 
             JTokenWriter jsonWriter = new JTokenWriter();
             JsonSerializer serializer = new JsonSerializer();
             serializer.ContractResolver = contractResolver;
-            serializer.Serialize(jsonWriter, new SerializableTestObject
-            {
-                Name = "Name!"
-            });
-
+            serializer.Serialize(
+                jsonWriter,
+                new SerializableTestObject { Name = "Name!" }
+            );
 
             List<string> errors = new List<string>();
-            jsonWriter.Token.Validate(schema, (sender, args) => errors.Add(args.Message));
+            jsonWriter.Token.Validate(
+                schema,
+                (sender, args) => errors.Add(args.Message)
+            );
 
             Assert.AreEqual(0, errors.Count);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""_name"": ""Name!""
-}", jsonWriter.Token.ToString());
+}",
+                jsonWriter.Token.ToString()
+            );
 
-            SerializableTestObject c = jsonWriter.Token.ToObject<SerializableTestObject>(serializer);
+            SerializableTestObject c = jsonWriter.Token.ToObject<SerializableTestObject>(
+                serializer
+            );
             Assert.AreEqual("Name!", c.Name);
         }
 #endif
@@ -500,7 +578,8 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = schema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""type"": ""object"",
   ""properties"": {
     ""x"": {
@@ -513,7 +592,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -535,10 +616,13 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
             jsonSchemaGenerator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
-            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(typeof(CircularReferenceClass));
+            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(
+                typeof(CircularReferenceClass)
+            );
             string json = jsonSchema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""id"": ""Newtonsoft.Json.Tests.TestObjects.CircularReferenceClass"",
   ""type"": [
     ""object"",
@@ -553,7 +637,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ""$ref"": ""Newtonsoft.Json.Tests.TestObjects.CircularReferenceClass""
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -562,10 +648,13 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
             jsonSchemaGenerator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseTypeName;
-            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(typeof(JsonPropertyWithHandlingValues));
+            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(
+                typeof(JsonPropertyWithHandlingValues)
+            );
             string json = jsonSchema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""id"": ""Newtonsoft.Json.Tests.TestObjects.JsonPropertyWithHandlingValues"",
   ""required"": true,
   ""type"": [
@@ -626,7 +715,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ""$ref"": ""Newtonsoft.Json.Tests.TestObjects.JsonPropertyWithHandlingValues""
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -634,10 +725,13 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
-            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(typeof(NullableInt32TestClass));
+            JsonSchema jsonSchema = jsonSchemaGenerator.Generate(
+                typeof(NullableInt32TestClass)
+            );
             string json = jsonSchema.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""type"": ""object"",
   ""properties"": {
     ""Value"": {
@@ -648,7 +742,9 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

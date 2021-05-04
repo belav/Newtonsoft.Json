@@ -31,9 +31,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class JsonPropertyConverterContractResolver : DefaultContractResolver
     {
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-        {
-            JsonProperty property = base.CreateProperty(member, memberSerialization);
+        protected override JsonProperty CreateProperty(
+            MemberInfo member,
+            MemberSerialization memberSerialization
+        ) {
+            JsonProperty property = base.CreateProperty(
+                member,
+                memberSerialization
+            );
             if (property.PropertyName == "JavaScriptDate")
             {
                 property.Converter = new JavaScriptDateTimeConverter();

@@ -81,16 +81,12 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JTokenWriter"/> class.
         /// </summary>
-        public JTokenWriter()
-        {
-        }
+        public JTokenWriter() { }
 
         /// <summary>
         /// Flushes whatever is in the buffer to the underlying <see cref="JContainer"/>.
         /// </summary>
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         /// <summary>
         /// Closes this writer.
@@ -224,6 +220,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="value">The <see cref="Object"/> value to write.</param>
         public override void WriteValue(object? value)
         {
+
 #if HAVE_BIG_INTEGER
             if (value is BigInteger)
             {
@@ -489,11 +486,19 @@ namespace Newtonsoft.Json.Linq
         }
         #endregion
 
-        internal override void WriteToken(JsonReader reader, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
-        {
+        internal override void WriteToken(
+            JsonReader reader,
+            bool writeChildren,
+            bool writeDateConstructorAsDate,
+            bool writeComments
+        ) {
             // cloning the token rather than reading then writing it doesn't lose some type information, e.g. Guid, byte[], etc
-            if (reader is JTokenReader tokenReader && writeChildren && writeDateConstructorAsDate && writeComments)
-            {
+            if (
+                reader is JTokenReader tokenReader &&
+                writeChildren &&
+                writeDateConstructorAsDate &&
+                writeComments
+            ) {
                 if (tokenReader.TokenType == JsonToken.None)
                 {
                     if (!tokenReader.Read())
@@ -531,7 +536,12 @@ namespace Newtonsoft.Json.Linq
             }
             else
             {
-                base.WriteToken(reader, writeChildren, writeDateConstructorAsDate, writeComments);
+                base.WriteToken(
+                    reader,
+                    writeChildren,
+                    writeDateConstructorAsDate,
+                    writeComments
+                );
             }
         }
     }

@@ -33,15 +33,20 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private Dictionary<string, string> _properties;
 
         [JsonConstructor]
-        public ParticipantEntity()
-        {
-        }
+        public ParticipantEntity() { }
 
         /// <summary>
         /// Gets or sets the date and time that the participant was created in the CU.
         /// </summary>
-        [JsonProperty(PropertyName = "pa_created", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset CreationDate { get; internal set; }
+        [JsonProperty(
+            PropertyName = "pa_created",
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+            NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset CreationDate
+        {
+            get;
+            internal set;
+        }
 
         /// <summary>
         /// Gets the properties of the participant.
@@ -49,7 +54,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonProperty(PropertyName = "pa_info")]
         public Dictionary<string, string> Properties
         {
-            get { return _properties ?? (_properties = new Dictionary<string, string>()); }
+            get
+            {
+                return _properties ??
+                (_properties = new Dictionary<string, string>());
+            }
             set { _properties = value; }
         }
     }

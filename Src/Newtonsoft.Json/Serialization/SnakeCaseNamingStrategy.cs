@@ -42,8 +42,10 @@ namespace Newtonsoft.Json.Serialization
         /// A flag indicating whether explicitly specified property names should be processed,
         /// e.g. a property name customized with a <see cref="JsonPropertyAttribute"/>.
         /// </param>
-        public SnakeCaseNamingStrategy(bool processDictionaryKeys, bool overrideSpecifiedNames)
-        {
+        public SnakeCaseNamingStrategy(
+            bool processDictionaryKeys,
+            bool overrideSpecifiedNames
+        ) {
             ProcessDictionaryKeys = processDictionaryKeys;
             OverrideSpecifiedNames = overrideSpecifiedNames;
         }
@@ -61,18 +63,19 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="processExtensionDataNames">
         /// A flag indicating whether extension data names should be processed.
         /// </param>
-        public SnakeCaseNamingStrategy(bool processDictionaryKeys, bool overrideSpecifiedNames, bool processExtensionDataNames)
-            : this(processDictionaryKeys, overrideSpecifiedNames)
-        {
+        public SnakeCaseNamingStrategy(
+            bool processDictionaryKeys,
+            bool overrideSpecifiedNames,
+            bool processExtensionDataNames
+        )
+            : this(processDictionaryKeys, overrideSpecifiedNames) {
             ProcessExtensionDataNames = processExtensionDataNames;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SnakeCaseNamingStrategy"/> class.
         /// </summary>
-        public SnakeCaseNamingStrategy()
-        {
-        }
+        public SnakeCaseNamingStrategy() { }
 
         /// <summary>
         /// Resolves the specified property name.

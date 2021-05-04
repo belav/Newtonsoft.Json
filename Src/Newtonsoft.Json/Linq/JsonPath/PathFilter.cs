@@ -6,17 +6,29 @@ namespace Newtonsoft.Json.Linq.JsonPath
 {
     internal abstract class PathFilter
     {
-        public abstract IEnumerable<JToken> ExecuteFilter(JToken root, IEnumerable<JToken> current, JsonSelectSettings? settings);
+        public abstract IEnumerable<JToken> ExecuteFilter(
+            JToken root,
+            IEnumerable<JToken> current,
+            JsonSelectSettings? settings
+        );
 
-        protected static JToken? GetTokenIndex(JToken t, JsonSelectSettings? settings, int index)
-        {
+        protected static JToken? GetTokenIndex(
+            JToken t,
+            JsonSelectSettings? settings,
+            int index
+        ) {
             if (t is JArray a)
             {
                 if (a.Count <= index)
                 {
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
-                        throw new JsonException("Index {0} outside the bounds of JArray.".FormatWith(CultureInfo.InvariantCulture, index));
+                        throw new JsonException(
+                            "Index {0} outside the bounds of JArray.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                index
+                            )
+                        );
                     }
 
                     return null;
@@ -30,7 +42,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
-                        throw new JsonException("Index {0} outside the bounds of JConstructor.".FormatWith(CultureInfo.InvariantCulture, index));
+                        throw new JsonException(
+                            "Index {0} outside the bounds of JConstructor.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                index
+                            )
+                        );
                     }
 
                     return null;
@@ -42,15 +59,24 @@ namespace Newtonsoft.Json.Linq.JsonPath
             {
                 if (settings?.ErrorWhenNoMatch ?? false)
                 {
-                    throw new JsonException("Index {0} not valid on {1}.".FormatWith(CultureInfo.InvariantCulture, index, t.GetType().Name));
+                    throw new JsonException(
+                        "Index {0} not valid on {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            index,
+                            t.GetType().Name
+                        )
+                    );
                 }
 
                 return null;
             }
         }
 
-        protected static JToken? GetNextScanValue(JToken originalParent, JToken? container, JToken? value)
-        {
+        protected static JToken? GetNextScanValue(
+            JToken originalParent,
+            JToken? container,
+            JToken? value
+        ) {
             // step into container's values
             if (container != null && container.HasValues)
             {
@@ -59,8 +85,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
             else
             {
                 // finished container, move to parent
-                while (value != null && value != originalParent && value == value.Parent!.Last)
-                {
+                while (
+                    value != null &&
+                    value != originalParent &&
+                    value == value.Parent!.Last
+                ) {
                     value = value.Parent;
                 }
 

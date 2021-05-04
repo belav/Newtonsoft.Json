@@ -49,18 +49,28 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Load()
         {
-            JsonReader reader = new JsonTextReader(new StringReader("new Date(123)"));
+            JsonReader reader = new JsonTextReader(
+                new StringReader("new Date(123)")
+            );
             reader.Read();
 
             JConstructor constructor = JConstructor.Load(reader);
             Assert.AreEqual("Date", constructor.Name);
-            Assert.IsTrue(JToken.DeepEquals(new JValue(123), constructor.Values().ElementAt(0)));
+            Assert.IsTrue(
+                JToken.DeepEquals(
+                    new JValue(123),
+                    constructor.Values().ElementAt(0)
+                )
+            );
         }
 
         [Test]
         public void CreateWithMultiValue()
         {
-            JConstructor constructor = new JConstructor("Test", new List<int> { 1, 2, 3 });
+            JConstructor constructor = new JConstructor(
+                "Test",
+                new List<int> { 1, 2, 3 }
+            );
             Assert.AreEqual("Test", constructor.Name);
             Assert.AreEqual(3, constructor.Children().Count());
             Assert.AreEqual(1, (int)constructor.Children().ElementAt(0));
@@ -84,11 +94,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void SetValueWithInvalidIndex()
         {
-            ExceptionAssert.Throws<ArgumentException>(() =>
-            {
-                JConstructor c = new JConstructor();
-                c["badvalue"] = new JValue(3);
-            }, @"Set JConstructor values with invalid key value: ""badvalue"". Argument position index expected.");
+            ExceptionAssert.Throws<ArgumentException>(
+                () =>
+                {
+                    JConstructor c = new JConstructor();
+                    c["badvalue"] = new JValue(3);
+                },
+                @"Set JConstructor values with invalid key value: ""badvalue"". Argument position index expected."
+            );
         }
 
         [Test]

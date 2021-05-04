@@ -52,7 +52,9 @@ namespace Newtonsoft.Json.Tests.Issues
             string s1 = JsonConvert.SerializeObject(new ConcreteSerializable());
             Assert.AreEqual("{}", s1);
 
-            string s2 = JsonConvert.SerializeObject(new ClassWithSerializableProperty());
+            string s2 = JsonConvert.SerializeObject(
+                new ClassWithSerializableProperty()
+            );
             Assert.AreEqual(@"{""Serializable"":null}", s2);
         }
 
@@ -60,8 +62,12 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_Deserialize()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { JsonConvert.DeserializeObject<BaseSerializable>("{}"); },
-                "Could not create an instance of type Newtonsoft.Json.Tests.Issues.Issue1682+BaseSerializable. Type is an interface or abstract class and cannot be instantiated. Path '', line 1, position 2.");
+                () =>
+                {
+                    JsonConvert.DeserializeObject<BaseSerializable>("{}");
+                },
+                "Could not create an instance of type Newtonsoft.Json.Tests.Issues.Issue1682+BaseSerializable. Type is an interface or abstract class and cannot be instantiated. Path '', line 1, position 2."
+            );
         }
 
         public class ClassWithSerializableProperty
@@ -72,31 +78,30 @@ namespace Newtonsoft.Json.Tests.Issues
         [Serializable]
         public class ConcreteSerializable : BaseSerializable
         {
-            public ConcreteSerializable()
-            {
-            }
+            public ConcreteSerializable() { }
 
-            protected ConcreteSerializable(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+            protected ConcreteSerializable(
+                SerializationInfo info,
+                StreamingContext context
+            )
+                : base(info, context) { }
         }
 
         [Serializable] // it won't blow up after removing that attribute
         public abstract class BaseSerializable : ISerializable //or that interface, or when we will remove "abstract" keyword
         {
-            public BaseSerializable()
-            {
-            }
+            public BaseSerializable() { }
 
             //it won't fail when that constructor is missing
-            protected BaseSerializable(SerializationInfo info, StreamingContext context)
-            {
-            }
+            protected BaseSerializable(
+                SerializationInfo info,
+                StreamingContext context
+            ) { }
 
-            public void GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-            }
+            public void GetObjectData(
+                SerializationInfo info,
+                StreamingContext context
+            ) { }
         }
     }
 }

@@ -28,7 +28,8 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class ThisGenericTest<T> where T : IKeyValueId
+    public class ThisGenericTest<T>
+        where T : IKeyValueId
     {
         private Dictionary<string, T> _dict1 = new Dictionary<string, T>();
 
@@ -47,7 +48,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public T this[int id]
         {
-            get { return Enumerable.FirstOrDefault(_dict1.Values, x => x.Id == id); }
+            get
+            {
+                return Enumerable.FirstOrDefault(
+                    _dict1.Values,
+                    x => x.Id == id
+                );
+            }
             set
             {
                 var item = this[id];

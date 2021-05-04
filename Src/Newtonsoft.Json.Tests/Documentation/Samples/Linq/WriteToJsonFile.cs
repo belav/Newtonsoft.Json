@@ -49,9 +49,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             JObject videogameRatings = new JObject(
                 new JProperty("Halo", 9),
                 new JProperty("Starcraft", 9),
-                new JProperty("Call of Duty", 7.5));
+                new JProperty("Call of Duty", 7.5)
+            );
 
-            File.WriteAllText(@"c:\videogames.json", videogameRatings.ToString());
+            File.WriteAllText(
+                @"c:\videogames.json",
+                videogameRatings.ToString()
+            );
 
             // write JSON directly to a file
             using (StreamWriter file = File.CreateText(@"c:\videogames.json"))
@@ -69,9 +73,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 return new StreamWriter(new MemoryStream());
             }
 
-            public static void WriteAllText(string s1, string s2)
-            {
-            }
+            public static void WriteAllText(string s1, string s2) { }
         }
     }
 }

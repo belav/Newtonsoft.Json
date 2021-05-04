@@ -70,13 +70,23 @@ namespace Newtonsoft.Json.Tests.Serialization
                 return true;
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
-                return new ContentA() { B = serializer.Deserialize<ContentB>(reader) }; // Construct my data back.
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) {
+                return new ContentA()
+                {
+                    B = serializer.Deserialize<ContentB>(reader)
+                }; // Construct my data back.
             }
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) {
                 ContentB b = ((ContentA)value).B;
                 serializer.Serialize(writer, b); // My Content.B contains all useful data.
             }
@@ -110,12 +120,19 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string s = JsonConvert.SerializeObject(c1, settings);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$type"": ""Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+Container, Newtonsoft.Json.Tests"",
   ""ListA"": {
     ""$id"": ""2"",
-    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(List<ContentA>), 0, DefaultSerializationBinder.Instance) + @""",
+    ""$type"": """ +
+                ReflectionUtils.GetTypeName(
+                    typeof(List<ContentA>),
+                    0,
+                    DefaultSerializationBinder.Instance
+                ) +
+                @""",
     ""$values"": [
       {
         ""$id"": ""3"",
@@ -126,16 +143,27 @@ namespace Newtonsoft.Json.Tests.Serialization
   },
   ""ListB"": {
     ""$id"": ""4"",
-    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(List<ContentA>), 0, DefaultSerializationBinder.Instance) + @""",
+    ""$type"": """ +
+                ReflectionUtils.GetTypeName(
+                    typeof(List<ContentA>),
+                    0,
+                    DefaultSerializationBinder.Instance
+                ) +
+                @""",
     ""$values"": [
       {
         ""$ref"": ""3""
       }
     ]
   }
-}", s);
+}",
+                s
+            );
 
-            Container c2 = JsonConvert.DeserializeObject<Container>(s, settings);
+            Container c2 = JsonConvert.DeserializeObject<Container>(
+                s,
+                settings
+            );
 
             Assert.AreEqual(c2.ListA[0], c2.ListB[0]);
             Assert.AreEqual(true, c2.ListA[0].B.SomeValue);
@@ -168,14 +196,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeReadOnlyProperty()
         {
-            Child c = new Child
-            {
-                PropertyName = "value?"
-            };
-            IList<string> l = new List<string>
-            {
-                "value!"
-            };
+            Child c = new Child { PropertyName = "value?" };
+            IList<string> l = new List<string> { "value!" };
             Parent p = new Parent
             {
                 Child1 = c,
@@ -184,13 +206,17 @@ namespace Newtonsoft.Json.Tests.Serialization
                 List2 = l
             };
 
-            string json = JsonConvert.SerializeObject(p, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                PreserveReferencesHandling = PreserveReferencesHandling.All
-            });
+            string json = JsonConvert.SerializeObject(
+                p,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""ReadOnlyChild"": {
     ""PropertyName"": ""value?""
@@ -214,13 +240,18 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""List2"": {
     ""$ref"": ""3""
   }
-}", json);
+}",
+                json
+            );
 
-            Parent newP = JsonConvert.DeserializeObject<Parent>(json, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                PreserveReferencesHandling = PreserveReferencesHandling.All
-            });
+            Parent newP = JsonConvert.DeserializeObject<Parent>(
+                json,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
             Assert.AreEqual("value?", newP.Child1.PropertyName);
             Assert.AreEqual(newP.Child1, newP.Child2);
@@ -235,13 +266,23 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeDictionarysWithPreserveObjectReferences()
         {
             CircularDictionary circularDictionary = new CircularDictionary();
-            circularDictionary.Add("other", new CircularDictionary { { "blah", null } });
+            circularDictionary.Add(
+                "other",
+                new CircularDictionary { { "blah", null } }
+            );
             circularDictionary.Add("self", circularDictionary);
 
-            string json = JsonConvert.SerializeObject(circularDictionary, Formatting.Indented,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All });
+            string json = JsonConvert.SerializeObject(
+                circularDictionary,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""other"": {
     ""$id"": ""2"",
@@ -250,13 +291,16 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""self"": {
     ""$ref"": ""1""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeDictionarysWithPreserveObjectReferences()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""other"": {
     ""$id"": ""2"",
@@ -267,15 +311,19 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            CircularDictionary circularDictionary = JsonConvert.DeserializeObject<CircularDictionary>(json,
+            CircularDictionary circularDictionary = JsonConvert.DeserializeObject<CircularDictionary>(
+                json,
                 new JsonSerializerSettings
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.All
-                });
+                }
+            );
 
             Assert.AreEqual(2, circularDictionary.Count);
             Assert.AreEqual(1, circularDictionary["other"].Count);
-            Assert.IsTrue(ReferenceEquals(circularDictionary, circularDictionary["self"]));
+            Assert.IsTrue(
+                ReferenceEquals(circularDictionary, circularDictionary["self"])
+            );
         }
 
         public class CircularList : List<CircularList>
@@ -290,9 +338,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(new CircularList { new CircularList { circularList } });
+            circularList.Add(
+                new CircularList { new CircularList { circularList } }
+            );
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.SerializeObject(circularList, Formatting.Indented); }, "Self referencing loop detected with type '" + classRef + "'. Path '[2][0]'.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.SerializeObject(
+                        circularList,
+                        Formatting.Indented
+                    );
+                },
+                "Self referencing loop detected with type '" +
+                classRef +
+                "'. Path '[2][0]'."
+            );
         }
 
         [Test]
@@ -301,13 +362,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(new CircularList { new CircularList { circularList } });
+            circularList.Add(
+                new CircularList { new CircularList { circularList } }
+            );
 
-            string json = JsonConvert.SerializeObject(circularList,
+            string json = JsonConvert.SerializeObject(
+                circularList,
                 Formatting.Indented,
-                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   null,
   [
     null
@@ -315,7 +384,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   [
     []
   ]
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -324,12 +395,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(new CircularList { new CircularList { circularList } });
+            circularList.Add(
+                new CircularList { new CircularList { circularList } }
+            );
 
-            string json = JsonConvert.SerializeObject(circularList, Formatting.Indented,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All });
+            string json = JsonConvert.SerializeObject(
+                circularList,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     null,
@@ -353,13 +433,16 @@ namespace Newtonsoft.Json.Tests.Serialization
       ]
     }
   ]
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeListsWithPreserveObjectReferences()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     null,
@@ -385,8 +468,13 @@ namespace Newtonsoft.Json.Tests.Serialization
   ]
 }";
 
-            CircularList circularList = JsonConvert.DeserializeObject<CircularList>(json,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All });
+            CircularList circularList = JsonConvert.DeserializeObject<CircularList>(
+                json,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All
+                }
+            );
 
             Assert.AreEqual(3, circularList.Count);
             Assert.AreEqual(null, circularList[0]);
@@ -399,7 +487,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeArraysWithPreserveObjectReferences()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     null,
@@ -425,11 +514,19 @@ namespace Newtonsoft.Json.Tests.Serialization
   ]
 }";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<string[][]>(json,
-                    new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All });
-            }, @"Cannot preserve reference to array or readonly list, or list created from a non-default constructor: System.String[][]. Path '$values', line 3, position 14.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<string[][]>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.All
+                        }
+                    );
+                },
+                @"Cannot preserve reference to array or readonly list, or list created from a non-default constructor: System.String[][]. Path '$values', line 3, position 14."
+            );
         }
 
         public class CircularDictionary : Dictionary<string, CircularDictionary>
@@ -442,27 +539,53 @@ namespace Newtonsoft.Json.Tests.Serialization
             string classRef = typeof(CircularDictionary).FullName;
 
             CircularDictionary circularDictionary = new CircularDictionary();
-            circularDictionary.Add("other", new CircularDictionary { { "blah", null } });
+            circularDictionary.Add(
+                "other",
+                new CircularDictionary { { "blah", null } }
+            );
             circularDictionary.Add("self", circularDictionary);
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.SerializeObject(circularDictionary, Formatting.Indented); }, @"Self referencing loop detected with type '" + classRef + "'. Path ''.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.SerializeObject(
+                        circularDictionary,
+                        Formatting.Indented
+                    );
+                },
+                @"Self referencing loop detected with type '" +
+                classRef +
+                "'. Path ''."
+            );
         }
 
         [Test]
         public void SerializeCircularDictionarysIgnore()
         {
             CircularDictionary circularDictionary = new CircularDictionary();
-            circularDictionary.Add("other", new CircularDictionary { { "blah", null } });
+            circularDictionary.Add(
+                "other",
+                new CircularDictionary { { "blah", null } }
+            );
             circularDictionary.Add("self", circularDictionary);
 
-            string json = JsonConvert.SerializeObject(circularDictionary, Formatting.Indented,
-                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            string json = JsonConvert.SerializeObject(
+                circularDictionary,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""other"": {
     ""blah"": null
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -471,50 +594,75 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{
   ""$id"":";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<string[][]>(json,
-                    new JsonSerializerSettings
-                    {
-                        PreserveReferencesHandling = PreserveReferencesHandling.All,
-                        MetadataPropertyHandling = MetadataPropertyHandling.Default
-                    });
-            }, @"Unexpected end when reading JSON. Path '$id', line 2, position 8.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<string[][]>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.All,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Default
+                        }
+                    );
+                },
+                @"Unexpected end when reading JSON. Path '$id', line 2, position 8."
+            );
         }
 
         public class CircularReferenceClassConverter : JsonConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                CircularReferenceClass circularReferenceClass = (CircularReferenceClass)value;
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) {
+                CircularReferenceClass circularReferenceClass =
+                    (CircularReferenceClass)value;
 
-                string reference = serializer.ReferenceResolver.GetReference(serializer, circularReferenceClass);
+                string reference = serializer.ReferenceResolver.GetReference(
+                    serializer,
+                    circularReferenceClass
+                );
 
                 JObject me = new JObject();
                 me["$id"] = new JValue(reference);
                 me["$type"] = new JValue(value.GetType().Name);
                 me["Name"] = new JValue(circularReferenceClass.Name);
 
-                JObject o = JObject.FromObject(circularReferenceClass.Child, serializer);
+                JObject o = JObject.FromObject(
+                    circularReferenceClass.Child,
+                    serializer
+                );
                 me["Child"] = o;
 
                 me.WriteTo(writer);
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) {
                 JObject o = JObject.Load(reader);
                 string id = (string)o["$id"];
                 if (id != null)
                 {
                     CircularReferenceClass circularReferenceClass = new CircularReferenceClass();
-                    serializer.Populate(o.CreateReader(), circularReferenceClass);
+                    serializer.Populate(
+                        o.CreateReader(),
+                        circularReferenceClass
+                    );
                     return circularReferenceClass;
                 }
                 else
                 {
                     string reference = (string)o["$ref"];
-                    return serializer.ReferenceResolver.ResolveReference(serializer, reference);
+                    return serializer.ReferenceResolver.ResolveReference(
+                        serializer,
+                        reference
+                    );
                 }
             }
 
@@ -527,21 +675,38 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeCircularReferencesWithConverter()
         {
-            CircularReferenceClass c1 = new CircularReferenceClass { Name = "c1" };
-            CircularReferenceClass c2 = new CircularReferenceClass { Name = "c2" };
-            CircularReferenceClass c3 = new CircularReferenceClass { Name = "c3" };
+            CircularReferenceClass c1 = new CircularReferenceClass
+            {
+                Name = "c1"
+            };
+            CircularReferenceClass c2 = new CircularReferenceClass
+            {
+                Name = "c2"
+            };
+            CircularReferenceClass c3 = new CircularReferenceClass
+            {
+                Name = "c3"
+            };
 
             c1.Child = c2;
             c2.Child = c3;
             c3.Child = c1;
 
-            string json = JsonConvert.SerializeObject(c1, Formatting.Indented, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                Converters = new List<JsonConverter> { new CircularReferenceClassConverter() }
-            });
+            string json = JsonConvert.SerializeObject(
+                c1,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    Converters = new List<JsonConverter>
+                    {
+                        new CircularReferenceClassConverter()
+                    }
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$type"": ""CircularReferenceClass"",
   ""Name"": ""c1"",
@@ -558,13 +723,16 @@ namespace Newtonsoft.Json.Tests.Serialization
       }
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeCircularReferencesWithConverter()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$type"": ""CircularReferenceClass"",
   ""Name"": ""c1"",
@@ -583,11 +751,17 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            CircularReferenceClass c1 = JsonConvert.DeserializeObject<CircularReferenceClass>(json, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                Converters = new List<JsonConverter> { new CircularReferenceClassConverter() }
-            });
+            CircularReferenceClass c1 = JsonConvert.DeserializeObject<CircularReferenceClass>(
+                json,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    Converters = new List<JsonConverter>
+                    {
+                        new CircularReferenceClassConverter()
+                    }
+                }
+            );
 
             Assert.AreEqual("c1", c1.Name);
             Assert.AreEqual("c2", c1.Child.Name);
@@ -614,8 +788,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 joeUser
             };
 
-            string json = JsonConvert.SerializeObject(employees, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            string json = JsonConvert.SerializeObject(
+                employees,
+                Formatting.Indented
+            );
+            StringAssert.AreEqual(
+                @"[
   {
     ""$id"": ""1"",
     ""Name"": ""Mike Manager"",
@@ -628,13 +806,16 @@ namespace Newtonsoft.Json.Tests.Serialization
       ""$ref"": ""1""
     }
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeEmployeeReference()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""$id"": ""1"",
     ""Name"": ""Mike Manager"",
@@ -649,7 +830,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(json);
+            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(
+                json
+            );
 
             Assert.AreEqual(2, employees.Count);
             Assert.AreEqual("Mike Manager", employees[0].Name);
@@ -674,8 +857,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public Condition Condition2 { get; }
 
-            public ClassWithConditions(Condition condition1, Condition condition2)
-            {
+            public ClassWithConditions(
+                Condition condition1,
+                Condition condition2
+            ) {
                 Condition1 = condition1;
                 Condition2 = condition2;
             }
@@ -685,10 +870,17 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeIsReferenceReadonlyProperty()
         {
             Condition condition = new Condition(1);
-            ClassWithConditions value = new ClassWithConditions(condition, condition);
+            ClassWithConditions value = new ClassWithConditions(
+                condition,
+                condition
+            );
 
-            string json = JsonConvert.SerializeObject(value, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            string json = JsonConvert.SerializeObject(
+                value,
+                Formatting.Indented
+            );
+            StringAssert.AreEqual(
+                @"{
   ""Condition1"": {
     ""$id"": ""1"",
     ""Value"": 1
@@ -696,13 +888,16 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Condition2"": {
     ""$ref"": ""1""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeIsReferenceReadonlyProperty()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Condition1"": {
     ""$id"": ""1"",
     ""Value"": 1
@@ -712,7 +907,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            ClassWithConditions value = JsonConvert.DeserializeObject<ClassWithConditions>(json);
+            ClassWithConditions value = JsonConvert.DeserializeObject<ClassWithConditions>(
+                json
+            );
             Assert.AreEqual(value.Condition1.Value, 1);
             Assert.AreEqual(value.Condition1, value.Condition2);
         }
@@ -720,20 +917,34 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeCircularReference()
         {
-            CircularReferenceClass c1 = new CircularReferenceClass { Name = "c1" };
-            CircularReferenceClass c2 = new CircularReferenceClass { Name = "c2" };
-            CircularReferenceClass c3 = new CircularReferenceClass { Name = "c3" };
+            CircularReferenceClass c1 = new CircularReferenceClass
+            {
+                Name = "c1"
+            };
+            CircularReferenceClass c2 = new CircularReferenceClass
+            {
+                Name = "c2"
+            };
+            CircularReferenceClass c3 = new CircularReferenceClass
+            {
+                Name = "c3"
+            };
 
             c1.Child = c2;
             c2.Child = c3;
             c3.Child = c1;
 
-            string json = JsonConvert.SerializeObject(c1, Formatting.Indented, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
+            string json = JsonConvert.SerializeObject(
+                c1,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""Name"": ""c1"",
   ""Child"": {
@@ -747,13 +958,16 @@ namespace Newtonsoft.Json.Tests.Serialization
       }
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeCircularReference()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""Name"": ""c1"",
   ""Child"": {
@@ -769,11 +983,13 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            CircularReferenceClass c1 =
-                JsonConvert.DeserializeObject<CircularReferenceClass>(json, new JsonSerializerSettings
+            CircularReferenceClass c1 = JsonConvert.DeserializeObject<CircularReferenceClass>(
+                json,
+                new JsonSerializerSettings
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                });
+                }
+            );
 
             Assert.AreEqual("c1", c1.Name);
             Assert.AreEqual("c2", c1.Child.Name);
@@ -787,11 +1003,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             EmployeeReference e1 = new EmployeeReference { Name = "e1" };
             EmployeeReference e2 = new EmployeeReference { Name = "e2" };
 
-            List<EmployeeReference> employees = new List<EmployeeReference> { e1, e2, e1, e2 };
+            List<EmployeeReference> employees = new List<EmployeeReference>
+            {
+                e1,
+                e2,
+                e1,
+                e2
+            };
 
-            string json = JsonConvert.SerializeObject(employees, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                employees,
+                Formatting.Indented
+            );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""$id"": ""1"",
     ""Name"": ""e1"",
@@ -808,13 +1034,16 @@ namespace Newtonsoft.Json.Tests.Serialization
   {
     ""$ref"": ""2""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeReferenceInList()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""$id"": ""1"",
     ""Name"": ""e1"",
@@ -833,7 +1062,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(json);
+            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(
+                json
+            );
             Assert.AreEqual(4, employees.Count);
 
             Assert.AreEqual("e1", employees[0].Name);
@@ -851,7 +1082,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             EmployeeReference e1 = new EmployeeReference { Name = "e1" };
             EmployeeReference e2 = new EmployeeReference { Name = "e2" };
 
-            Dictionary<string, EmployeeReference> employees = new Dictionary<string, EmployeeReference>
+            Dictionary<string,
+                EmployeeReference> employees = new Dictionary<string,
+                EmployeeReference>
             {
                 { "One", e1 },
                 { "Two", e2 },
@@ -859,9 +1092,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                 { "Four", e2 }
             };
 
-            string json = JsonConvert.SerializeObject(employees, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                employees,
+                Formatting.Indented
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""One"": {
     ""$id"": ""1"",
     ""Name"": ""e1"",
@@ -878,13 +1115,16 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Four"": {
     ""$ref"": ""2""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeReferenceInDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""One"": {
     ""$id"": ""1"",
     ""Name"": ""e1"",
@@ -903,7 +1143,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            Dictionary<string, EmployeeReference> employees = JsonConvert.DeserializeObject<Dictionary<string, EmployeeReference>>(json);
+            Dictionary<string,
+                EmployeeReference> employees = JsonConvert.DeserializeObject<Dictionary<string,
+                    EmployeeReference>>(json);
             Assert.AreEqual(4, employees.Count);
 
             EmployeeReference e1 = employees["One"];
@@ -921,8 +1163,24 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Person p = new Person
             {
-                BirthDate = new DateTime(1980, 12, 23, 0, 0, 0, DateTimeKind.Utc),
-                LastModified = new DateTime(2009, 2, 20, 12, 59, 21, DateTimeKind.Utc),
+                BirthDate = new DateTime(
+                    1980,
+                    12,
+                    23,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Utc
+                ),
+                LastModified = new DateTime(
+                    2009,
+                    2,
+                    20,
+                    12,
+                    59,
+                    21,
+                    DateTimeKind.Utc
+                ),
                 Department = "IT",
                 Name = "James"
             };
@@ -931,7 +1189,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             people.Add(p);
             people.Add(p);
 
-            string json = JsonConvert.SerializeObject(people, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                people,
+                Formatting.Indented
+            );
             //[
             //  {
             //    "Name": "James",
@@ -951,8 +1212,24 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Person p = new Person
             {
-                BirthDate = new DateTime(1980, 12, 23, 0, 0, 0, DateTimeKind.Utc),
-                LastModified = new DateTime(2009, 2, 20, 12, 59, 21, DateTimeKind.Utc),
+                BirthDate = new DateTime(
+                    1980,
+                    12,
+                    23,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Utc
+                ),
+                LastModified = new DateTime(
+                    2009,
+                    2,
+                    20,
+                    12,
+                    59,
+                    21,
+                    DateTimeKind.Utc
+                ),
                 Department = "IT",
                 Name = "James"
             };
@@ -961,8 +1238,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             people.Add(p);
             people.Add(p);
 
-            string json = JsonConvert.SerializeObject(people, Formatting.Indented,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            string json = JsonConvert.SerializeObject(
+                people,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
             //[
             //  {
             //    "$id": "1",
@@ -975,8 +1258,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  }
             //]
 
-            List<Person> deserializedPeople = JsonConvert.DeserializeObject<List<Person>>(json,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            List<Person> deserializedPeople = JsonConvert.DeserializeObject<List<Person>>(
+                json,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }
+            );
 
             Assert.AreEqual(2, deserializedPeople.Count);
 
@@ -994,7 +1282,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class User
         {
             #region properties
-            [JsonProperty(Required = Required.Always, PropertyName = "SecretType")]
+            [JsonProperty(
+                Required = Required.Always,
+                PropertyName = "SecretType")]
             private string secretType;
 
             [JsonProperty(Required = Required.Always)]
@@ -1011,9 +1301,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             #endregion
 
             #region constructors
-            public User()
-            {
-            }
+            public User() { }
 
             public User(string login, Type secretType)
                 : this()
@@ -1031,7 +1319,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public override string ToString()
             {
-                return string.Format("SecretType: {0}, Login: {1}", secretType, Login);
+                return string.Format(
+                    "SecretType: {0}, Login: {1}",
+                    secretType,
+                    Login
+                );
             }
             #endregion
         }
@@ -1052,9 +1344,16 @@ namespace Newtonsoft.Json.Tests.Serialization
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects
             };
 
-            string json = JsonConvert.SerializeObject(user1, Formatting.Indented, serializerSettings);
+            string json = JsonConvert.SerializeObject(
+                user1,
+                Formatting.Indented,
+                serializerSettings
+            );
 
-            User deserializedUser = JsonConvert.DeserializeObject<User>(json, serializerSettings);
+            User deserializedUser = JsonConvert.DeserializeObject<User>(
+                json,
+                serializerSettings
+            );
             Assert.IsNotNull(deserializedUser);
         }
 
@@ -1063,11 +1362,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             MyClass c = new MyClass();
 
-            IList<MyClass> myClasses1 = new List<MyClass>
-            {
-                c,
-                c
-            };
+            IList<MyClass> myClasses1 = new List<MyClass> { c, c };
 
             var ser = new JsonSerializer()
             {
@@ -1077,15 +1372,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             MemoryStream ms = new MemoryStream();
 
             using (var sw = new StreamWriter(ms))
-            using (var writer = new JsonTextWriter(sw) { Formatting = Formatting.Indented })
-            {
+            using (
+                var writer = new JsonTextWriter(
+                    sw
+                )
+                {
+                    Formatting = Formatting.Indented
+                }
+            ) {
                 ser.Serialize(writer, myClasses1);
             }
 
             byte[] data = ms.ToArray();
             string json = Encoding.UTF8.GetString(data, 0, data.Length);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     {
@@ -1097,7 +1399,9 @@ namespace Newtonsoft.Json.Tests.Serialization
       ""$ref"": ""2""
     }
   ]
-}", json);
+}",
+                json
+            );
 
             ms = new MemoryStream(data);
             IList<MyClass> myClasses2;
@@ -1141,7 +1445,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add(c1);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""$id"": ""1"",
     ""MyProperty"": 0
@@ -1153,7 +1458,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   {
     ""$ref"": ""1""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -1165,11 +1472,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add("Third", 3);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": 1,
   ""Second"": 2,
   ""Third"": 3
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -1183,7 +1493,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add("Third", c1);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": {
     ""$id"": ""1"",
     ""MyProperty"": 0
@@ -1195,9 +1506,13 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Third"": {
     ""$ref"": ""1""
   }
-}", json);
+}",
+                json
+            );
 
-            ReferencedDictionary<TestComponentSimple> d = JsonConvert.DeserializeObject<ReferencedDictionary<TestComponentSimple>>(json);
+            ReferencedDictionary<TestComponentSimple> d = JsonConvert.DeserializeObject<ReferencedDictionary<TestComponentSimple>>(
+                json
+            );
             Assert.AreEqual(3, d.Count);
             Assert.IsTrue(ReferenceEquals(d["First"], d["Third"]));
         }
@@ -1214,7 +1529,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             o1.Integer = int.MaxValue;
 
             string json = JsonConvert.SerializeObject(o1, Formatting.Indented);
-            string expected = @"{
+            string expected =
+                @"{
   ""Component1"": {
     ""$id"": ""1"",
     ""MyProperty"": 1
@@ -1230,10 +1546,17 @@ namespace Newtonsoft.Json.Tests.Serialization
 }";
             StringAssert.AreEqual(expected, json);
 
-            ReferenceObject referenceObject = JsonConvert.DeserializeObject<ReferenceObject>(json);
+            ReferenceObject referenceObject = JsonConvert.DeserializeObject<ReferenceObject>(
+                json
+            );
             Assert.IsNotNull(referenceObject);
 
-            Assert.IsTrue(ReferenceEquals(referenceObject.Component1, referenceObject.Component2));
+            Assert.IsTrue(
+                ReferenceEquals(
+                    referenceObject.Component1,
+                    referenceObject.Component2
+                )
+            );
         }
 
         [Test]
@@ -1247,15 +1570,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     Prop1 = c1,
                     Prop2 = c1,
-                    Data = new List<TestComponentSimple>
-                    {
-                        c1
-                    }
+                    Data = new List<TestComponentSimple> { c1 }
                 }
             };
 
             string json = JsonConvert.SerializeObject(o1, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Data"": {
     ""Prop1"": {
       ""$id"": ""1"",
@@ -1273,9 +1594,13 @@ namespace Newtonsoft.Json.Tests.Serialization
       ]
     }
   }
-}", json);
+}",
+                json
+            );
 
-            PropertyItemIsReferenceObject o2 = JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(json);
+            PropertyItemIsReferenceObject o2 = JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(
+                json
+            );
 
             TestComponentSimple c2 = o2.Data.Prop1;
             TestComponentSimple c3 = o2.Data.Prop2;
@@ -1288,7 +1613,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DuplicateId()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Data"": {
     ""Prop1"": {
       ""$id"": ""1"",
@@ -1301,10 +1627,16 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(json, new JsonSerializerSettings
-            {
-                MetadataPropertyHandling = MetadataPropertyHandling.Default
-            }), "Error reading object reference '1'. Path 'Data.Prop2.MyProperty', line 9, position 19.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        MetadataPropertyHandling = MetadataPropertyHandling.Default
+                    }
+                ),
+                "Error reading object reference '1'. Path 'Data.Prop2.MyProperty', line 9, position 19."
+            );
         }
     }
 

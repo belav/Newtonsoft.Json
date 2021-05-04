@@ -69,7 +69,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ShouldSerialize will skip this property
             mike.Manager = mike;
 
-            string json = JsonConvert.SerializeObject(new[] { joe, mike }, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                new[] { joe, mike },
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // [
@@ -85,7 +88,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -95,7 +99,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
     }
 }

@@ -77,7 +77,6 @@ namespace Newtonsoft.Json.Tests.Documentation
                 writer.WriteEnd();
                 writer.WriteEndObject();
             }
-
             // {
             //   "CPU": "Intel",
             //   "PSU": "500W",
@@ -95,7 +94,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void ReadingJsonText()
         {
             #region ReadingJsonText
-            string json = @"{
+            string json =
+                @"{
                'CPU': 'Intel',
                'PSU': '500W',
                'Drives': [
@@ -111,14 +111,17 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 if (reader.Value != null)
                 {
-                    Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
+                    Console.WriteLine(
+                        "Token: {0}, Value: {1}",
+                        reader.TokenType,
+                        reader.Value
+                    );
                 }
                 else
                 {
                     Console.WriteLine("Token: {0}", reader.TokenType);
                 }
             }
-
             // Token: StartObject
             // Token: PropertyName, Value: CPU
             // Token: String, Value: Intel
@@ -142,10 +145,14 @@ namespace Newtonsoft.Json.Tests.Documentation
             JObject o = new JObject(
                 new JProperty("Name", "John Smith"),
                 new JProperty("BirthDate", new DateTime(1983, 3, 20))
-                );
+            );
 
             JsonSerializer serializer = new JsonSerializer();
-            Person p = (Person)serializer.Deserialize(new JTokenReader(o), typeof(Person));
+            Person p =
+                (Person)serializer.Deserialize(
+                    new JTokenReader(o),
+                    typeof(Person)
+                );
 
             Console.WriteLine(p.Name);
             // John Smith

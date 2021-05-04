@@ -29,7 +29,9 @@ using System.Collections.Generic;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class CollectionClassAttributeDerived : ClassAttributeBase, ICollection<object>
+    public class CollectionClassAttributeDerived
+        : ClassAttributeBase,
+            ICollection<object>
     {
         [JsonProperty]
         public string CollectionDerivedClassValue { get; set; }

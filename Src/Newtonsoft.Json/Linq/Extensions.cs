@@ -33,7 +33,6 @@ using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Linq
@@ -49,8 +48,10 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JToken"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the ancestors of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> Ancestors<T>(this IEnumerable<T> source) where T : JToken
-        {
+        public static IJEnumerable<JToken> Ancestors<T>(
+            this IEnumerable<T> source
+        )
+            where T : JToken {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             return source.SelectMany(j => j.Ancestors()).AsJEnumerable();
@@ -62,8 +63,10 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JToken"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains every token in the source collection, the ancestors of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> AncestorsAndSelf<T>(this IEnumerable<T> source) where T : JToken
-        {
+        public static IJEnumerable<JToken> AncestorsAndSelf<T>(
+            this IEnumerable<T> source
+        )
+            where T : JToken {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             return source.SelectMany(j => j.AncestorsAndSelf()).AsJEnumerable();
@@ -75,8 +78,10 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JContainer"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the descendants of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> Descendants<T>(this IEnumerable<T> source) where T : JContainer
-        {
+        public static IJEnumerable<JToken> Descendants<T>(
+            this IEnumerable<T> source
+        )
+            where T : JContainer {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             return source.SelectMany(j => j.Descendants()).AsJEnumerable();
@@ -88,11 +93,14 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JContainer"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains every token in the source collection, and the descendants of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> DescendantsAndSelf<T>(this IEnumerable<T> source) where T : JContainer
-        {
+        public static IJEnumerable<JToken> DescendantsAndSelf<T>(
+            this IEnumerable<T> source
+        )
+            where T : JContainer {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
-            return source.SelectMany(j => j.DescendantsAndSelf()).AsJEnumerable();
+            return source.SelectMany(j => j.DescendantsAndSelf())
+                .AsJEnumerable();
         }
 
         /// <summary>
@@ -100,8 +108,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JObject"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JProperty"/> that contains the properties of every object in the source collection.</returns>
-        public static IJEnumerable<JProperty> Properties(this IEnumerable<JObject> source)
-        {
+        public static IJEnumerable<JProperty> Properties(
+            this IEnumerable<JObject> source
+        ) {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             return source.SelectMany(d => d.Properties()).AsJEnumerable();
@@ -113,8 +122,10 @@ namespace Newtonsoft.Json.Linq
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <param name="key">The token key.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the values of every token in the source collection with the given key.</returns>
-        public static IJEnumerable<JToken> Values(this IEnumerable<JToken> source, object? key)
-        {
+        public static IJEnumerable<JToken> Values(
+            this IEnumerable<JToken> source,
+            object? key
+        ) {
             return Values<JToken, JToken>(source, key)!.AsJEnumerable();
         }
 
@@ -123,8 +134,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the values of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> Values(this IEnumerable<JToken> source)
-        {
+        public static IJEnumerable<JToken> Values(
+            this IEnumerable<JToken> source
+        ) {
             return source.Values(null);
         }
 
@@ -135,8 +147,10 @@ namespace Newtonsoft.Json.Linq
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <param name="key">The token key.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the converted values of every token in the source collection with the given key.</returns>
-        public static IEnumerable<U?> Values<U>(this IEnumerable<JToken> source, object key)
-        {
+        public static IEnumerable<U?> Values<U>(
+            this IEnumerable<JToken> source,
+            object key
+        ) {
             return Values<JToken, U>(source, key);
         }
 
@@ -146,8 +160,9 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="U">The type to convert the values to.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the converted values of every token in the source collection.</returns>
-        public static IEnumerable<U?> Values<U>(this IEnumerable<JToken> source)
-        {
+        public static IEnumerable<U?> Values<U>(
+            this IEnumerable<JToken> source
+        ) {
             return Values<JToken, U>(source, null);
         }
 
@@ -169,7 +184,8 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="U">The type to convert the value to.</typeparam>
         /// <param name="value">A <see cref="JToken"/> cast as a <see cref="IEnumerable{T}"/> of <see cref="JToken"/>.</param>
         /// <returns>A converted value.</returns>
-        public static U? Value<T, U>(this IEnumerable<T> value) where T : JToken
+        public static U? Value<T, U>(this IEnumerable<T> value)
+            where T : JToken
         {
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
@@ -181,8 +197,11 @@ namespace Newtonsoft.Json.Linq
             return token.Convert<JToken, U>();
         }
 
-        internal static IEnumerable<U?> Values<T, U>(this IEnumerable<T> source, object? key) where T : JToken
-        {
+        internal static IEnumerable<U?> Values<T, U>(
+            this IEnumerable<T> source,
+            object? key
+        )
+            where T : JToken {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             if (key == null)
@@ -224,8 +243,10 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The source collection type.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the values of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> Children<T>(this IEnumerable<T> source) where T : JToken
-        {
+        public static IJEnumerable<JToken> Children<T>(
+            this IEnumerable<T> source
+        )
+            where T : JToken {
             return Children<T, JToken>(source)!.AsJEnumerable();
         }
 
@@ -236,15 +257,18 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="U">The type to convert the values to.</typeparam>
         /// <typeparam name="T">The source collection type.</typeparam>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the converted values of every token in the source collection.</returns>
-        public static IEnumerable<U?> Children<T, U>(this IEnumerable<T> source) where T : JToken
+        public static IEnumerable<U?> Children<T, U>(this IEnumerable<T> source)
+            where T : JToken
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             return source.SelectMany(c => c.Children()).Convert<JToken, U>();
         }
 
-        internal static IEnumerable<U?> Convert<T, U>(this IEnumerable<T> source) where T : JToken
-        {
+        internal static IEnumerable<U?> Convert<T, U>(
+            this IEnumerable<T> source
+        )
+            where T : JToken {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
             foreach (T token in source)
@@ -253,7 +277,8 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal static U? Convert<T, U>(this T token) where T : JToken?
+        internal static U? Convert<T, U>(this T token)
+            where T : JToken?
         {
             if (token == null)
             {
@@ -262,17 +287,26 @@ namespace Newtonsoft.Json.Linq
 #pragma warning restore CS8653 // A default expression introduces a null value for a type parameter.
             }
 
-            if (token is U castValue
+            if (
+                token is U castValue
                 // don't want to cast JValue to its interfaces, want to get the internal value
-                && typeof(U) != typeof(IComparable) && typeof(U) != typeof(IFormattable))
-            {
+                &&
+                typeof(U) != typeof(IComparable) &&
+                typeof(U) != typeof(IFormattable)
+            ) {
                 return castValue;
             }
             else
             {
                 if (!(token is JValue value))
                 {
-                    throw new InvalidCastException("Cannot cast {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, token.GetType(), typeof(T)));
+                    throw new InvalidCastException(
+                        "Cannot cast {0} to {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.GetType(),
+                            typeof(T)
+                        )
+                    );
                 }
 
                 if (value.Value is U u)
@@ -294,7 +328,11 @@ namespace Newtonsoft.Json.Linq
                     targetType = Nullable.GetUnderlyingType(targetType);
                 }
 
-                return (U)System.Convert.ChangeType(value.Value, targetType, CultureInfo.InvariantCulture);
+                return (U)System.Convert.ChangeType(
+                    value.Value,
+                    targetType,
+                    CultureInfo.InvariantCulture
+                );
             }
         }
 
@@ -306,8 +344,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>The input typed as <see cref="IJEnumerable{T}"/>.</returns>
-        public static IJEnumerable<JToken> AsJEnumerable(this IEnumerable<JToken> source)
-        {
+        public static IJEnumerable<JToken> AsJEnumerable(
+            this IEnumerable<JToken> source
+        ) {
             return source.AsJEnumerable<JToken>();
         }
 
@@ -317,8 +356,10 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The source collection type.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>The input typed as <see cref="IJEnumerable{T}"/>.</returns>
-        public static IJEnumerable<T> AsJEnumerable<T>(this IEnumerable<T> source) where T : JToken
-        {
+        public static IJEnumerable<T> AsJEnumerable<T>(
+            this IEnumerable<T> source
+        )
+            where T : JToken {
             if (source == null)
             {
                 return null!;

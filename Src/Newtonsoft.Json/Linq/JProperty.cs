@@ -223,12 +223,22 @@ namespace Newtonsoft.Json.Linq
 
         internal override bool RemoveItem(JToken? item)
         {
-            throw new JsonException("Cannot add or remove items from {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JProperty)));
+            throw new JsonException(
+                "Cannot add or remove items from {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    typeof(JProperty)
+                )
+            );
         }
 
         internal override void RemoveItemAt(int index)
         {
-            throw new JsonException("Cannot add or remove items from {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JProperty)));
+            throw new JsonException(
+                "Cannot add or remove items from {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    typeof(JProperty)
+                )
+            );
         }
 
         internal override int IndexOfItem(JToken? item)
@@ -241,8 +251,11 @@ namespace Newtonsoft.Json.Linq
             return _content.IndexOf(item);
         }
 
-        internal override bool InsertItem(int index, JToken? item, bool skipParentCheck)
-        {
+        internal override bool InsertItem(
+            int index,
+            JToken? item,
+            bool skipParentCheck
+        ) {
             // don't add comments to JProperty
             if (item != null && item.Type == JTokenType.Comment)
             {
@@ -251,7 +264,12 @@ namespace Newtonsoft.Json.Linq
 
             if (Value != null)
             {
-                throw new JsonException("{0} cannot have multiple values.".FormatWith(CultureInfo.InvariantCulture, typeof(JProperty)));
+                throw new JsonException(
+                    "{0} cannot have multiple values.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        typeof(JProperty)
+                    )
+                );
             }
 
             return base.InsertItem(0, item, false);
@@ -262,8 +280,10 @@ namespace Newtonsoft.Json.Linq
             return (Value == item);
         }
 
-        internal override void MergeItem(object content, JsonMergeSettings? settings)
-        {
+        internal override void MergeItem(
+            object content,
+            JsonMergeSettings? settings
+        ) {
             JToken? value = (content as JProperty)?.Value;
 
             if (value != null && value.Type != JTokenType.Null)
@@ -274,7 +294,12 @@ namespace Newtonsoft.Json.Linq
 
         internal override void ClearItems()
         {
-            throw new JsonException("Cannot add or remove items from {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JProperty)));
+            throw new JsonException(
+                "Cannot add or remove items from {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    typeof(JProperty)
+                )
+            );
         }
 
         internal override bool DeepEquals(JToken node)
@@ -311,9 +336,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="name">The property name.</param>
         /// <param name="content">The property content.</param>
         public JProperty(string name, params object[] content)
-            : this(name, (object)content)
-        {
-        }
+            : this(name, (object)content) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JProperty"/> class.
@@ -336,8 +359,10 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
-        {
+        public override void WriteTo(
+            JsonWriter writer,
+            params JsonConverter[] converters
+        ) {
             writer.WritePropertyName(_name);
 
             JToken value = Value;
@@ -373,13 +398,18 @@ namespace Newtonsoft.Json.Linq
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <returns>A <see cref="JProperty"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JProperty Load(JsonReader reader, JsonLoadSettings? settings)
-        {
+        public new static JProperty Load(
+            JsonReader reader,
+            JsonLoadSettings? settings
+        ) {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!reader.Read())
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JProperty from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JProperty from JsonReader."
+                    );
                 }
             }
 
@@ -387,7 +417,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.PropertyName)
             {
-                throw JsonReaderException.Create(reader, "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JProperty p = new JProperty((string)reader.Value!);

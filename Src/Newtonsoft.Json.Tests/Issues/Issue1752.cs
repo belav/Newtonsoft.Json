@@ -53,11 +53,20 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_EmptyString()
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto };
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
 
-            string s1 = JsonConvert.SerializeObject(new TestObject() { Obj = new byte[] { } }, settings);
+            string s1 = JsonConvert.SerializeObject(
+                new TestObject() { Obj = new byte[] {  } },
+                settings
+            );
 
-            TestObject t1 = JsonConvert.DeserializeObject<TestObject>(s1, settings);
+            TestObject t1 = JsonConvert.DeserializeObject<TestObject>(
+                s1,
+                settings
+            );
             Assert.IsNotNull(t1.Obj);
 
             byte[] data = (byte[])t1.Obj;
@@ -67,7 +76,9 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Null()
         {
-            TestObject1 t1 = JsonConvert.DeserializeObject<TestObject1>("{'Obj':null}");
+            TestObject1 t1 = JsonConvert.DeserializeObject<TestObject1>(
+                "{'Obj':null}"
+            );
             Assert.IsNull(t1.Obj);
         }
 

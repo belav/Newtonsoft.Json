@@ -55,12 +55,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'Name': 'Starcraft III',
               'ReleaseDate': null
             }";
 
-            Videogame starcraft = JsonConvert.DeserializeObject<Videogame>(json);
+            Videogame starcraft = JsonConvert.DeserializeObject<Videogame>(
+                json
+            );
 
             Console.WriteLine(starcraft.Name);
             // Starcraft III

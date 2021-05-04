@@ -61,7 +61,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Class = "Typhoon"
             };
 
-            string json = JsonConvert.SerializeObject(vessel, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                vessel,
+                Formatting.Indented
+            );
 
             Console.WriteLine(json);
             // {
@@ -70,10 +73,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Red October"",
   ""Class"": ""Typhoon""
-}", json);
+}",
+                json
+            );
         }
     }
 }

@@ -42,7 +42,26 @@ namespace Newtonsoft.Json
 
     internal struct JsonPosition
     {
-        private static readonly char[] SpecialCharacters = { '.', ' ', '\'', '/', '"', '[', ']', '(', ')', '\t', '\n', '\r', '\f', '\b', '\\', '\u0085', '\u2028', '\u2029' };
+        private static readonly char[] SpecialCharacters = {
+            '.',
+            ' ',
+            '\'',
+            '/',
+            '"',
+            '[',
+            ']',
+            '(',
+            ')',
+            '\t',
+            '\n',
+            '\r',
+            '\f',
+            '\b',
+            '\\',
+            '\u0085',
+            '\u2028',
+            '\u2029'
+        };
 
         internal JsonContainerType Type;
         internal int Position;
@@ -71,8 +90,11 @@ namespace Newtonsoft.Json
             }
         }
 
-        internal void WriteTo(StringBuilder sb, ref StringWriter? writer, ref char[]? buffer)
-        {
+        internal void WriteTo(
+            StringBuilder sb,
+            ref StringWriter? writer,
+            ref char[]? buffer
+        ) {
             switch (Type)
             {
                 case JsonContainerType.Object:
@@ -86,7 +108,16 @@ namespace Newtonsoft.Json
                             writer = new StringWriter(sb);
                         }
 
-                        JavaScriptUtils.WriteEscapedJavaScriptString(writer, propertyName, '\'', false, JavaScriptUtils.SingleQuoteCharEscapeFlags, StringEscapeHandling.Default, null, ref buffer);
+                        JavaScriptUtils.WriteEscapedJavaScriptString(
+                            writer,
+                            propertyName,
+                            '\'',
+                            false,
+                            JavaScriptUtils.SingleQuoteCharEscapeFlags,
+                            StringEscapeHandling.Default,
+                            null,
+                            ref buffer
+                        );
 
                         sb.Append(@"']");
                     }
@@ -111,11 +142,14 @@ namespace Newtonsoft.Json
 
         internal static bool TypeHasIndex(JsonContainerType type)
         {
-            return (type == JsonContainerType.Array || type == JsonContainerType.Constructor);
+            return (type == JsonContainerType.Array ||
+            type == JsonContainerType.Constructor);
         }
 
-        internal static string BuildPath(List<JsonPosition> positions, JsonPosition? currentPosition)
-        {
+        internal static string BuildPath(
+            List<JsonPosition> positions,
+            JsonPosition? currentPosition
+        ) {
             int capacity = 0;
             if (positions != null)
             {
@@ -126,7 +160,8 @@ namespace Newtonsoft.Json
             }
             if (currentPosition != null)
             {
-                capacity += currentPosition.GetValueOrDefault().CalculateLength();
+                capacity += currentPosition.GetValueOrDefault()
+                    .CalculateLength();
             }
 
             StringBuilder sb = new StringBuilder(capacity);
@@ -141,17 +176,22 @@ namespace Newtonsoft.Json
             }
             if (currentPosition != null)
             {
-                currentPosition.GetValueOrDefault().WriteTo(sb, ref writer, ref buffer);
+                currentPosition.GetValueOrDefault()
+                    .WriteTo(sb, ref writer, ref buffer);
             }
 
             return sb.ToString();
         }
 
-        internal static string FormatMessage(IJsonLineInfo? lineInfo, string path, string message)
-        {
+        internal static string FormatMessage(
+            IJsonLineInfo? lineInfo,
+            string path,
+            string message
+        ) {
             // don't add a fullstop and space when message ends with a new line
-            if (!message.EndsWith(Environment.NewLine, StringComparison.Ordinal))
-            {
+            if (
+                !message.EndsWith(Environment.NewLine, StringComparison.Ordinal)
+            ) {
                 message = message.Trim();
 
                 if (!message.EndsWith('.'))
@@ -162,11 +202,18 @@ namespace Newtonsoft.Json
                 message += " ";
             }
 
-            message += "Path '{0}'".FormatWith(CultureInfo.InvariantCulture, path);
+            message += "Path '{0}'".FormatWith(
+                CultureInfo.InvariantCulture,
+                path
+            );
 
             if (lineInfo != null && lineInfo.HasLineInfo())
             {
-                message += ", line {0}, position {1}".FormatWith(CultureInfo.InvariantCulture, lineInfo.LineNumber, lineInfo.LinePosition);
+                message += ", line {0}, position {1}".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    lineInfo.LineNumber,
+                    lineInfo.LinePosition
+                );
             }
 
             message += ".";

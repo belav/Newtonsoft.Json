@@ -50,9 +50,14 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XmlNode()
         {
-            XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(JsonWithoutNamespace, "", true);
+            XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(
+                JsonWithoutNamespace,
+                "",
+                true
+            );
 
-            StringAssert.AreEqual(@"<Test_Service>
+            StringAssert.AreEqual(
+                @"<Test_Service>
   <fname>mark</fname>
   <lname>joye</lname>
   <CarCompany>saab</CarCompany>
@@ -84,11 +89,18 @@ namespace Newtonsoft.Json.Tests.Issues
       </addtionaldetails>
     </contactdetails>
   </collections>
-</Test_Service>", IndentXml(xmlDoc.OuterXml));
+</Test_Service>",
+                IndentXml(xmlDoc.OuterXml)
+            );
 
-            xmlDoc = JsonConvert.DeserializeXmlNode(JsonWithNamespace, "", true);
+            xmlDoc = JsonConvert.DeserializeXmlNode(
+                JsonWithNamespace,
+                "",
+                true
+            );
 
-            StringAssert.AreEqual(@"<ns3:Test_Service xmlns:ns3=""http://www.CCKS.org/XRT/Form"">
+            StringAssert.AreEqual(
+                @"<ns3:Test_Service xmlns:ns3=""http://www.CCKS.org/XRT/Form"">
   <ns3:fname>mark</ns3:fname>
   <ns3:lname>joye</ns3:lname>
   <ns3:CarCompany>saab</ns3:CarCompany>
@@ -120,7 +132,9 @@ namespace Newtonsoft.Json.Tests.Issues
       </ns3:addtionaldetails>
     </ns3:contactdetails>
   </ns3:collections>
-</ns3:Test_Service>", IndentXml(xmlDoc.OuterXml));
+</ns3:Test_Service>",
+                IndentXml(xmlDoc.OuterXml)
+            );
         }
 
         private string IndentXml(string xml)
@@ -128,7 +142,14 @@ namespace Newtonsoft.Json.Tests.Issues
             XmlReader reader = XmlReader.Create(new StringReader(xml));
 
             StringWriter sw = new StringWriter();
-            XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true });
+            XmlWriter writer = XmlWriter.Create(
+                sw,
+                new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = true
+                }
+            );
 
             while (reader.Read())
             {
@@ -145,10 +166,15 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XNode()
         {
-            XDocument xmlDoc = JsonConvert.DeserializeXNode(JsonWithoutNamespace, "", true);
+            XDocument xmlDoc = JsonConvert.DeserializeXNode(
+                JsonWithoutNamespace,
+                "",
+                true
+            );
 
             string xml = xmlDoc.ToString();
-            StringAssert.AreEqual(@"<Test_Service>
+            StringAssert.AreEqual(
+                @"<Test_Service>
   <fname>mark</fname>
   <lname>joye</lname>
   <CarCompany>saab</CarCompany>
@@ -180,12 +206,15 @@ namespace Newtonsoft.Json.Tests.Issues
       </addtionaldetails>
     </contactdetails>
   </collections>
-</Test_Service>", xml);
+</Test_Service>",
+                xml
+            );
 
             xmlDoc = JsonConvert.DeserializeXNode(JsonWithNamespace, "", true);
 
             xml = xmlDoc.ToString();
-            StringAssert.AreEqual(@"<ns3:Test_Service xmlns:ns3=""http://www.CCKS.org/XRT/Form"">
+            StringAssert.AreEqual(
+                @"<ns3:Test_Service xmlns:ns3=""http://www.CCKS.org/XRT/Form"">
   <ns3:fname>mark</ns3:fname>
   <ns3:lname>joye</ns3:lname>
   <ns3:CarCompany>saab</ns3:CarCompany>
@@ -217,11 +246,14 @@ namespace Newtonsoft.Json.Tests.Issues
       </ns3:addtionaldetails>
     </ns3:contactdetails>
   </ns3:collections>
-</ns3:Test_Service>", xml);
+</ns3:Test_Service>",
+                xml
+            );
         }
 #endif
 
-        private const string JsonWithoutNamespace = @"{
+        private const string JsonWithoutNamespace =
+            @"{
   ""Test_Service"": {
     ""fname"": ""mark"",
     ""lname"": ""joye"",
@@ -267,7 +299,8 @@ namespace Newtonsoft.Json.Tests.Issues
   }
 }";
 
-        private const string JsonWithNamespace = @"{
+        private const string JsonWithNamespace =
+            @"{
   ""ns3:Test_Service"": {
     ""@xmlns:ns3"": ""http://www.CCKS.org/XRT/Form"",
     ""ns3:fname"": ""mark"",

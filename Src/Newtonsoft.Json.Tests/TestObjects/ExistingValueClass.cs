@@ -38,10 +38,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             {
                 { "existing", "yup" }
             };
-            List = new List<string>
-            {
-                "existing"
-            };
+            List = new List<string> { "existing" };
         }
     }
 }

@@ -25,7 +25,8 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class MemberConverterPrecedenceClassConverter : ConverterPrecedenceClassConverter
+    public class MemberConverterPrecedenceClassConverter
+        : ConverterPrecedenceClassConverter
     {
         public override string ConverterType
         {
