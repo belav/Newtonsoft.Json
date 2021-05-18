@@ -29,11 +29,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public sealed class JsonReaderStubWithIsClosed : JsonReader
     {
-        public bool IsClosed
-        {
-            get;
-            private set;
-        }
+        public bool IsClosed { get; private set; }
 
         public override void Close()
         {

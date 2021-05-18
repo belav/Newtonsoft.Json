@@ -346,7 +346,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
             );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   null,
   [
     null
@@ -354,7 +355,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   [
     []
   ]
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -530,17 +533,21 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""other"": {
     ""blah"": null
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void UnexpectedEnd()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"":";
 
             ExceptionAssert.Throws<JsonSerializationException>(
@@ -1263,11 +1270,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add(3);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -1308,11 +1318,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add("Third", 3);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": 1,
   ""Second"": 2,
   ""Third"": 3
-}", json);
+}",
+                json
+            );
         }
 
         [Test]

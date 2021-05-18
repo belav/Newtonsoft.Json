@@ -1147,7 +1147,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadNullIntLineNumberAndPosition()
         {
-            string json = @"[
+            string json =
+                @"[
   1,
   2,
   3,
@@ -1323,7 +1324,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadMultilineString()
         {
-            string json = @"""first line
+            string json =
+                @"""first line
 second line
 third line""";
 
@@ -1332,9 +1334,12 @@ third line""";
             Assert.IsTrue(jsonTextReader.Read());
             Assert.AreEqual(JsonToken.String, jsonTextReader.TokenType);
 
-            Assert.AreEqual(@"first line
+            Assert.AreEqual(
+                @"first line
 second line
-third line", jsonTextReader.Value);
+third line",
+                jsonTextReader.Value
+            );
         }
 
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -1384,7 +1389,8 @@ third line", jsonTextReader.Value);
         [Test]
         public void ReadBadMSDateAsString()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: '\/Date(9467082_PIE_340000-0631)\/'
 }";
 

@@ -65,11 +65,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public class PrivateSetterTestClass
         {
-            public string Value
-            {
-                get;
-                private set;
-            }
+            public string Value { get; private set; }
         }
     }
 }

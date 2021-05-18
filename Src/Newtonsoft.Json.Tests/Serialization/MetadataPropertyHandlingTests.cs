@@ -741,7 +741,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeCircularReferencesWithConverter()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$type"": ""CircularReferenceClass""
 }";

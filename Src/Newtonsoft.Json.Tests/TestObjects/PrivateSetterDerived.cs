@@ -29,11 +29,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class PrivateSetterDerived : PrivateSetterBase
     {
         [JsonProperty]
-        public string IDoWork
-        {
-            get;
-            private set;
-        }
+        public string IDoWork { get; private set; }
 
         private PrivateSetterDerived() { }
 

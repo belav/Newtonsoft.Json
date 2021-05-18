@@ -174,7 +174,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseMultipleProperties_EmptySettingsAsync()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -189,7 +190,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseMultipleProperties_IgnoreDuplicateSettingAsync()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";

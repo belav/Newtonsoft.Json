@@ -495,7 +495,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void DeserializeStringInt()
         {
-            string json = @"{
+            string json =
+                @"{
   ""PreProperty"": ""99"",
   ""PostProperty"": ""-1""
 }";

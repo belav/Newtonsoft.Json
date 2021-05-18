@@ -44,11 +44,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public class UserViewModel
         {
             public string Name { get; set; }
-            public IList<string> Offices
-            {
-                get;
-                private set;
-            }
+            public IList<string> Offices { get; private set; }
 
             public UserViewModel()
             {

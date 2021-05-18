@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Default()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
             JToken token = JToken.Parse(json);
 
@@ -52,7 +53,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_LoadComments()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
             JToken token = JToken.Parse(
                 json,
@@ -69,7 +71,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_IgnoreComments()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
             JToken token = JToken.Parse(
                 json,

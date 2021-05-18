@@ -427,7 +427,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void SelectTokenAfterEmptyContainer()
         {
-            string json = @"{
+            string json =
+                @"{
     'cont': [],
     'test': 'no one will find me'
 }";
@@ -1584,7 +1585,6 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             JObject rootObject = new JObject
             {
                 { "referenceDate", new JValue(DateTime.MinValue) },
-
                 {
                     "dateObjectsArray",
                     new JArray()
@@ -1695,7 +1695,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 @"{
   ""Values"": [
     {
-      ""Property"": " + value1 + @"
+      ""Property"": "
+                + value1
+                + @"
     }
   ]
 }";

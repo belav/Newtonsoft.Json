@@ -196,8 +196,11 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteCommentAsync("fail");
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
-  /*fail*/]", writer.Token.ToString());
+            StringAssert.AreEqual(
+                @"[
+  /*fail*/]",
+                writer.Token.ToString()
+            );
         }
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -215,9 +218,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(new BigInteger(123), i.Value);
             Assert.AreEqual(JTokenType.Integer, i.Type);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   123
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 #endif
 
@@ -232,10 +238,13 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteEndArrayAsync();
 
             // this is a bug. See non-async equivalent test.
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -284,9 +293,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Prop1"": 1
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -304,9 +316,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -339,10 +354,13 @@ namespace Newtonsoft.Json.Tests.Linq
             await writer.WriteRawValueAsync("fail");
             await writer.WriteEndArrayAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   fail,
   fail
-]", writer.Token.ToString());
+]",
+                writer.Token.ToString()
+            );
         }
 
         [Test]
@@ -362,9 +380,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             await writer.WriteEndObjectAsync();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""prop1"": []
-}", writer.Token.ToString());
+}",
+                writer.Token.ToString()
+            );
         }
 
         [Test]

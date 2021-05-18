@@ -332,10 +332,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""key1"": ""Value1!"",
   ""key2"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
     }
 }

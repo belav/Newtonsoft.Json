@@ -50,11 +50,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
 
             FSharpList<int> l2 = JsonConvert.DeserializeObject<FSharpList<int>>(json);
 
@@ -69,11 +72,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
 
             FSharpSet<int> l2 = JsonConvert.DeserializeObject<FSharpSet<int>>(json);
 

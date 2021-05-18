@@ -905,7 +905,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[1,2,3,4,5]  [
+            string expected =
+                @"[1,2,3,4,5]  [
   NaN
 ]";
             string result = sb.ToString();
@@ -932,7 +933,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   NaN,[1,2,3,4,5],[1,2,3,4,5],
   NaN
 ]";
@@ -1262,7 +1264,8 @@ Parameter name: value",
                 await jsonWriter.WriteEndObjectAsync();
             }
 
-            string expected = @"{
+            string expected =
+                @"{
 _____'propertyName': NaN,
 ??????'prop2': 123
 }";
@@ -1567,10 +1570,13 @@ _____'propertyName': NaN,
 
             await writer.WriteEndAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   '2000 a.m.',
   '2000 a.m.'
-]", sw.ToString());
+]",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1777,9 +1783,12 @@ _____'propertyName': NaN,
             await writer.WriteEndObjectAsync();
             Assert.AreEqual(WriteState.Start, writer.WriteState);
 
-            StringAssert.AreEqual(@"{{{
+            StringAssert.AreEqual(
+                @"{{{
   ""1ytreporP"": NULL!!!
-}}}", sw.ToString());
+}}}",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1799,9 +1808,12 @@ _____'propertyName': NaN,
                     await writer.CloseAsync();
                 }
 
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   a: 1
-}", stringWriter.ToString());
+}",
+                    stringWriter.ToString()
+                );
             }
         }
 

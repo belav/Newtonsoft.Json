@@ -557,10 +557,13 @@ namespace Newtonsoft.Json.Tests.Converters
             var jsonSerializer = JsonSerializer.CreateDefault(jsonSerializerSettings);
             XDocument d = json.ToObject<XDocument>(jsonSerializer);
 
-            StringAssert.Equals(@"<object>
+            StringAssert.Equals(
+                @"<object>
   <Prop1 />
   <Prop2 />
-</object>", d.ToString());
+</object>",
+                d.ToString()
+            );
         }
 
         public class Foo
@@ -1934,9 +1937,12 @@ namespace Newtonsoft.Json.Tests.Converters
             doc.LoadXml(@"<name>O""Connor</name>"); // i use "" so it will be easier to see the  problem
 
             string json = SerializeXmlNode(doc);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""O\""Connor""
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -2327,7 +2333,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeMetadataPropertyWithBadValue()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": []
 }";
 
@@ -2343,7 +2350,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataWithNullValue()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": null
 }";
 
@@ -2358,15 +2366,19 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": """"
-}", newJson);
+}",
+                newJson
+            );
         }
 
         [Test]
         public void SerializeDeserializeMetadataArrayNull()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$values"": null
 }";

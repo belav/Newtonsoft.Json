@@ -1446,9 +1446,12 @@ Newtonsoft.Json Error: 0 : Error!
                 traceWriter.TraceRecords[5].Message
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Age"": 27
-}", json);
+}",
+                json
+            );
 
             traceWriter = new InMemoryTraceWriter { LevelFilter = TraceLevel.Verbose };
 
@@ -1543,7 +1546,8 @@ Newtonsoft.Json Error: 0 : Error!
             traceWriter.Flush();
             traceWriter.Close();
 
-            string json = @"{
+            string json =
+                @"{
   ""Prop1"": 1
 }";
 
@@ -1568,7 +1572,8 @@ Newtonsoft.Json Error: 0 : Error!
             await traceWriter.FlushAsync();
             traceWriter.Close();
 
-            string json = @"{
+            string json =
+                @"{
   ""Prop1"": 1
 }";
 

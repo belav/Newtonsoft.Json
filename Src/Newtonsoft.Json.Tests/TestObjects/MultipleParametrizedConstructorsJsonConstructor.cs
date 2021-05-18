@@ -27,21 +27,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class MultipleParametrizedConstructorsJsonConstructor
     {
-        public string Value
-        {
-            get;
-            private set;
-        }
-        public int Age
-        {
-            get;
-            private set;
-        }
-        public string Constructor
-        {
-            get;
-            private set;
-        }
+        public string Value { get; private set; }
+        public int Age { get; private set; }
+        public string Constructor { get; private set; }
 
         public MultipleParametrizedConstructorsJsonConstructor(string value)
         {

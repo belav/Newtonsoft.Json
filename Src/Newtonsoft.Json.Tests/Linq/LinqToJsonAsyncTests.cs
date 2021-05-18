@@ -49,12 +49,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
@@ -71,12 +73,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a = (JArray)await JToken.ReadFromAsync(jsonReader);
@@ -89,13 +93,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v =
@@ -115,13 +121,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
@@ -141,13 +149,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingUndefinedAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 undefined
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v = (JValue)await JToken.ReadFromAsync(jsonReader);

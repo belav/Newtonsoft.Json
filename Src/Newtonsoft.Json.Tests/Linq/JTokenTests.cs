@@ -1374,9 +1374,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = a.ToString(Formatting.Indented, new IsoDateTimeConverter());
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""2009-02-15T00:00:00Z""
-]", json);
+]",
+                json
+            );
 
             json = JsonConvert.SerializeObject(a, new IsoDateTimeConverter());
 
@@ -1541,7 +1544,8 @@ namespace Newtonsoft.Json.Tests.Linq
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
                 {
-                    string json = @"[
+                    string json =
+                        @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -1617,7 +1621,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Parse_ExcessiveContentJustComments()
         {
-            string json = @"{'prop':[1,2,3]}/*comment*/
+            string json =
+                @"{'prop':[1,2,3]}/*comment*/
 //Another comment.";
 
             JToken o = JToken.Parse(json);
@@ -1631,7 +1636,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Parse_ExcessiveContent()
         {
-            string json = @"{'prop':[1,2,3]}/*comment*/
+            string json =
+                @"{'prop':[1,2,3]}/*comment*/
 //Another comment.
 {}";
 

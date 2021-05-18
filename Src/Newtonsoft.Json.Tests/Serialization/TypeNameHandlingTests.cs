@@ -540,9 +540,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 null
             );
 
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
-  ""$type"": """ + cookieRef + @"""
+  ""$type"": """
+                + cookieRef
+                + @"""
 }";
 
             object cookie = JsonConvert.DeserializeObject(
@@ -1104,11 +1107,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class TypeNameSerializationBinder : SerializationBinder
         {
-            public string TypeFormat
-            {
-                get;
-                private set;
-            }
+            public string TypeFormat { get; private set; }
 
             public TypeNameSerializationBinder(string typeFormat)
             {
@@ -1207,11 +1206,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class NewTypeNameSerializationBinder : ISerializationBinder
         {
-            public string TypeFormat
-            {
-                get;
-                private set;
-            }
+            public string TypeFormat { get; private set; }
 
             public NewTypeNameSerializationBinder(string typeFormat)
             {
@@ -1369,7 +1364,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 { "First", new UrlStatus { Status = 404, Url = @"http://www.bing.com" } },
                 { "Second", new UrlStatus { Status = 400, Url = @"http://www.google.com" } },
-
                 {
                     "List",
                     new List<UrlStatus>
@@ -1492,7 +1486,9 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             StringAssert.AreEqual(
                 @"{
-  ""$type"": """ + productClassRef + @""",
+  ""$type"": """
+                + productClassRef
+                + @""",
   ""$values"": []
 }",
                 json
@@ -1740,11 +1736,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             l.Add(3);
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -1992,7 +1991,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Data = new Dictionary<string, object>
                 {
                     { "one", new TestComponentSimple { MyProperty = 1 } },
-
                     {
                         "two",
                         new Dictionary<string, object>
@@ -2532,11 +2530,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(objWithMessage, serializerSettings);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Message"": {
     ""Value"": ""Hello!""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -2548,7 +2549,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting = Formatting.Indented
             };
 
-            string json = @"{
+            string json =
+                @"{
   ""Message"": {
     ""Value"": ""Hello!""
   }
@@ -2678,11 +2680,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [JsonProperty(
             ItemTypeNameHandling = TypeNameHandling.Auto,
             TypeNameHandling = TypeNameHandling.Auto)]
-        public Dictionary<string, IEnumerable<IMyInterfaceType>> Rows
-        {
-            get;
-            private set;
-        }
+        public Dictionary<string, IEnumerable<IMyInterfaceType>> Rows { get; private set; }
     }
 
     public interface IMyInterfaceType
@@ -2705,11 +2703,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     [Serializable]
     public class MyParent : ISerializable
     {
-        public ISomeBase Child
-        {
-            get;
-            internal set;
-        }
+        public ISomeBase Child { get; internal set; }
 
         public MyParent(SerializationInfo info, StreamingContext context)
         {
@@ -2727,11 +2721,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     public class MyChild : ISomeBase
     {
         [JsonProperty("p")]
-        public String MyProperty
-        {
-            get;
-            internal set;
-        }
+        public String MyProperty { get; internal set; }
     }
 
     public class MyChildList : List<string>, ISomeBase

@@ -503,9 +503,12 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(0, errors.Count);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""_name"": ""Name!""
-}", jsonWriter.Token.ToString());
+}",
+                jsonWriter.Token.ToString()
+            );
 
             SerializableTestObject c = jsonWriter.Token.ToObject<SerializableTestObject>(
                 serializer

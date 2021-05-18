@@ -65,11 +65,7 @@ namespace Newtonsoft.Json.Serialization
 
         internal bool IsArray { get; }
         internal bool ShouldCreateWrapper { get; }
-        internal bool CanDeserialize
-        {
-            get;
-            private set;
-        }
+        internal bool CanDeserialize { get; private set; }
 
         private readonly ConstructorInfo? _parameterizedConstructor;
 

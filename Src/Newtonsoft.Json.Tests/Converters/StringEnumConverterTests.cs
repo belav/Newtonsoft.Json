@@ -377,16 +377,22 @@ Parameter name: namingStrategyType",
                 Formatting.Indented,
                 new StringEnumConverter()
             );
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Enum"": ""@first""
-}", json);
+}",
+                json
+            );
 
             c = new EnumContainer<NamedEnum> { Enum = NamedEnum.Third };
 
             json = JsonConvert.SerializeObject(c, Formatting.Indented, new StringEnumConverter());
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Enum"": ""Third""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -402,9 +408,12 @@ Parameter name: namingStrategyType",
                 Formatting.Indented,
                 new StringEnumConverter()
             );
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Enum"": "",third""
-}", json);
+}",
+                json
+            );
 
             EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
                 json,
@@ -426,9 +435,12 @@ Parameter name: namingStrategyType",
                 Formatting.Indented,
                 new StringEnumConverter()
             );
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Enum"": "",""
-}", json);
+}",
+                json
+            );
 
             EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
                 json,
@@ -450,7 +462,8 @@ Parameter name: namingStrategyType",
         [Test]
         public void DeserializeNameEnumTest()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Enum"": ""@first""
 }";
 
@@ -652,7 +665,8 @@ Parameter name: namingStrategyType",
         [Test]
         public void DeserializeNegativeEnum()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Value1"": ""Negative"",
   ""Value2"": -2147483648
 }";
@@ -744,15 +758,19 @@ Parameter name: namingStrategyType",
                 new StringEnumConverter { CamelCaseText = true }
             );
 #pragma warning restore CS0618 // Type or member is obsolete
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Enum"": ""first, second""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void CamelCaseTextFlagEnumDeserialization()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Enum"": ""first, second""
 }";
 
@@ -888,11 +906,14 @@ Parameter name: namingStrategyType",
             );
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""foo_bar"",
   ""Bat"",
   ""baz""
-]", json2);
+]",
+                json2
+            );
 
             IList<Bar> bars = JsonConvert.DeserializeObject<List<Bar>>(json2);
 

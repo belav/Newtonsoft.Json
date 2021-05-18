@@ -60,11 +60,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
 
         public string Name { get; set; }
-        public IList<string> Likes
-        {
-            get;
-            private set;
-        }
+        public IList<string> Likes { get; private set; }
     }
     #endregion
 

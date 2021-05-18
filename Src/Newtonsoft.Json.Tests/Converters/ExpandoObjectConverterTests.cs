@@ -170,7 +170,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeNullExpandoObject()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Before"": null,
   ""Expando"": null,
   ""After"": null

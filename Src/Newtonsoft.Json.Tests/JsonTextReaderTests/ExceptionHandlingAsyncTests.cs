@@ -447,7 +447,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task MissingColonAsync()
         {
-            string json = @"{
+            string json =
+                @"{
     ""A"" : true,
     ""B"" """;
 
@@ -519,7 +520,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParseAdditionalContent_CommaAsync()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -539,7 +541,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParseAdditionalContent_TextAsync()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -651,7 +654,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadIntegerWithErrorAsync()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: 333333333333333333333333333333333333333
 }";
 
@@ -677,7 +681,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadIntegerWithErrorInArrayAsync()
         {
-            string json = @"[
+            string json =
+                @"[
   333333333333333333333333333333333333333,
   3.3,
   ,
@@ -718,7 +723,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadBytesWithErrorAsync()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: '123'
 }";
 
@@ -1186,8 +1192,12 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ReadAsDecimalBadContent_SecondLineAsync()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"
-new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(
+                    @"
+new Date()"
+                )
+            );
 
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () =>

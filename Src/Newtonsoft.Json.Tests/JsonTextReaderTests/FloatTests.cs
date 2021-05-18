@@ -112,7 +112,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void Float_NaNAndInifinity_ReadAsDouble()
         {
-            const string testJson = @"[
+            const string testJson =
+                @"[
   NaN,
   Infinity,
   -Infinity
@@ -142,7 +143,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void Float_NaNAndInifinity_ReadAsString()
         {
-            const string testJson = @"[
+            const string testJson =
+                @"[
   NaN,
   Infinity,
   -Infinity
@@ -262,7 +264,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void FloatingPointNonFiniteNumbers()
         {
-            string input = @"[
+            string input =
+                @"[
   NaN,
   Infinity,
   -Infinity

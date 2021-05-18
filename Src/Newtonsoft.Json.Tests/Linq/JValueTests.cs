@@ -926,9 +926,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = o.ToString(Formatting.Indented, new ReadOnlyStringConverter());
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Hello World""
-}", json);
+}",
+                json
+            );
         }
 
 #if !(NET20 || NET35 || PORTABLE40)

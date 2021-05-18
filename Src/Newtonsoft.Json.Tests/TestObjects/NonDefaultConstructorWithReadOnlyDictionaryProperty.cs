@@ -30,11 +30,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class NonDefaultConstructorWithReadOnlyDictionaryProperty
     {
         public string Title { get; set; }
-        public IDictionary<string, int> Categories
-        {
-            get;
-            private set;
-        }
+        public IDictionary<string, int> Categories { get; private set; }
 
         public NonDefaultConstructorWithReadOnlyDictionaryProperty(string title)
         {

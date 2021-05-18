@@ -51,11 +51,7 @@ namespace Newtonsoft.Json.Schema
         /// Gets or sets the loaded schemas.
         /// </summary>
         /// <value>The loaded schemas.</value>
-        public IList<JsonSchema> LoadedSchemas
-        {
-            get;
-            protected set;
-        }
+        public IList<JsonSchema> LoadedSchemas { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaResolver"/> class.

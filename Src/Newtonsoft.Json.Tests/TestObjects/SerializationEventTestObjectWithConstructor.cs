@@ -32,35 +32,19 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class SerializationEventTestObjectWithConstructor
     {
         // This member is serialized and deserialized with no change.
-        public int Member1
-        {
-            get;
-            private set;
-        }
+        public int Member1 { get; private set; }
 
         // The value of this field is set and reset during and
         // after serialization.
-        public string Member2
-        {
-            get;
-            private set;
-        }
+        public string Member2 { get; private set; }
 
         // This field is not serialized. The OnDeserializedAttribute
         // is used to set the member value after serialization.
         [JsonIgnore]
-        public string Member3
-        {
-            get;
-            private set;
-        }
+        public string Member3 { get; private set; }
 
         // This field is set to null, but populated after deserialization.
-        public string Member4
-        {
-            get;
-            private set;
-        }
+        public string Member4 { get; private set; }
 
         public SerializationEventTestObjectWithConstructor(
             int member1,

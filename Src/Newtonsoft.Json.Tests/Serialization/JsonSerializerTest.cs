@@ -220,7 +220,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeGenericIEnumerableWithImplicitConversion()
         {
-            string deserialized = @"{
+            string deserialized =
+                @"{
   ""Enumerable"": [ ""abc"", ""def"" ] 
 }";
             var enumerableClass = JsonConvert.DeserializeObject<GenericIEnumerableWithImplicitConversion>(
@@ -657,9 +658,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Name!""
-}", json);
+}",
+                json
+            );
 
             string deserializeJson =
                 @"{
@@ -1630,9 +1634,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, v.Value);
             Assert.AreEqual(JTokenType.String, v.Type);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""title"": null
-}", output);
+}",
+                output
+            );
         }
 
         // bug: the generic member (T) that hides the base member will not
@@ -2662,9 +2669,12 @@ keyword such as type of business.""
                 new ClassWithTimeSpan { TimeSpanField = ts },
                 Formatting.Indented
             );
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TimeSpanField"": ""23:59:01""
-}", json);
+}",
+                json
+            );
 
             ClassWithTimeSpan c = JsonConvert.DeserializeObject<ClassWithTimeSpan>(json);
             Assert.AreEqual(ts, c.TimeSpanField);
@@ -3165,7 +3175,8 @@ keyword such as type of business.""
         {
             try
             {
-                string json = @"{
+                string json =
+                    @"{
   ""FirstName"": ""Bob""
 }";
 
@@ -3636,10 +3647,13 @@ keyword such as type of business.""
 
             string json = JsonConvert.SerializeObject(optInClass, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""James NK"",
   ""Age"": 26
-}", json);
+}",
+                json
+            );
 
             OptInClass newOptInClass = JsonConvert.DeserializeObject<OptInClass>(
                 @"{
@@ -4264,10 +4278,13 @@ Path '', line 1, position 1."
         {
             ConstructorReadonlyFields c1 = new ConstructorReadonlyFields("String!", int.MaxValue);
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""A"": ""String!"",
   ""B"": 2147483647
-}", json);
+}",
+                json
+            );
 
             ConstructorReadonlyFields c2 = JsonConvert.DeserializeObject<ConstructorReadonlyFields>(
                 json
@@ -4315,13 +4332,16 @@ Path '', line 1, position 1."
             f.Bars.Add(new Bar { Id = 2 });
 
             string json = JsonConvert.SerializeObject(f, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Bars"": [
     0,
     1,
     2
   ]
-}", json);
+}",
+                json
+            );
 
             Foo newFoo = JsonConvert.DeserializeObject<Foo>(json);
             Assert.AreEqual(3, newFoo.Bars.Count);
@@ -5341,7 +5361,8 @@ Path '', line 1, position 1."
             testObject.Document = document;
 
             string json = JsonConvert.SerializeObject(testObject, Formatting.Indented);
-            string expected = @"{
+            string expected =
+                @"{
   ""Document"": {
     ""root"": ""hehe, root""
   }
@@ -5525,11 +5546,14 @@ Path '', line 1, position 1."
                 Formatting.Indented
             );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   2.4,
   4.3,
   null
-]", jsonText);
+]",
+                jsonText
+            );
         }
 
         [Test]
@@ -5560,11 +5584,14 @@ Path '', line 1, position 1."
                 Formatting.Indented
             );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""2"",
   ""III""
-]", jsonText);
+]",
+                jsonText
+            );
 
             HashSet<string> d = JsonConvert.DeserializeObject<HashSet<string>>(jsonText);
 
@@ -5645,9 +5672,12 @@ Path '', line 1, position 1."
 
             string json = JsonConvert.SerializeObject(testStruct, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""MyInt"": 2147483647
-}", json);
+}",
+                json
+            );
 
             StructWithAttribute newStruct = JsonConvert.DeserializeObject<StructWithAttribute>(
                 json
@@ -5741,9 +5771,12 @@ Path '', line 1, position 1."
         {
             string json = JsonConvert.SerializeObject(new DerivedEvent(), Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""event"": ""derived""
-}", json);
+}",
+                json
+            );
         }
 
 #if !(NET35 || NET20 || PORTABLE40)
@@ -6019,9 +6052,12 @@ Path '', line 1, position 1."
 
             string json = JsonConvert.SerializeObject(i, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": null
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -6572,11 +6608,14 @@ Path '', line 1, position 1."
                 new JsonSerializerSettings { ContractResolver = contractResolver }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""x"": 2147483647,
   ""y"": 2,
   ""z"": 3
-}", json);
+}",
+                json
+            );
 
             StaticTestClass c2 = JsonConvert.DeserializeObject<StaticTestClass>(
                 @"{
@@ -6606,11 +6645,14 @@ Path '', line 1, position 1."
                 new JsonSerializerSettings { ContractResolver = contractResolver }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""x"": 2147483647,
   ""y"": 2,
   ""z"": 3
-}", json);
+}",
+                json
+            );
 
             StaticTestClass c2 = JsonConvert.DeserializeObject<StaticTestClass>(
                 @"{
@@ -6714,7 +6756,8 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeNullInt()
         {
-            string json = @"[
+            string json =
+                @"[
   1,
   2,
   3,
@@ -6798,7 +6841,8 @@ Path '', line 1, position 1."
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>
                 {
-                    string json = @"{
+                    string json =
+                        @"{
   ""PreProperty"": true,
   ""PostProperty"": ""-1""
 }";
@@ -6815,7 +6859,8 @@ Path '', line 1, position 1."
             ExceptionAssert.Throws<JsonException>(
                 () =>
                 {
-                    string json = @"{
+                    string json =
+                        @"{
   ""PreProperty"": ";
 
                     JsonConvert.DeserializeObject<TestObjects.MyClass>(json);
@@ -7291,9 +7336,12 @@ Path '', line 1, position 1."
             JValue v = (JValue)a[0];
 
             Assert.AreEqual(typeof(string), v.Value.GetType());
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""2000-01-02T03:04:05+06:00""
-]", a.ToString());
+]",
+                a.ToString()
+            );
         }
 #pragma warning restore 618
 
@@ -8021,10 +8069,13 @@ This is just junk, though.";
                 }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""key"": 123,
   ""value"": ""test value""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -8059,7 +8110,8 @@ This is just junk, though.";
         [Test]
         public void DeserializeReadOnlyListWithBigInteger()
         {
-            string json = @"[
+            string json =
+                @"[
         9000000000000000000000000000000000000000000000000
       ]";
 
@@ -8078,7 +8130,8 @@ This is just junk, though.";
         [Test]
         public void DeserializeReadOnlyListWithInt()
         {
-            string json = @"[
+            string json =
+                @"[
         900
       ]";
 
@@ -8093,7 +8146,8 @@ This is just junk, though.";
         [Test]
         public void DeserializeReadOnlyListWithNullableType()
         {
-            string json = @"[
+            string json =
+                @"[
         1,
         null
       ]";
@@ -8249,10 +8303,13 @@ This is just junk, though.";
                 new JsonSerializerSettings { DateFormatString = "yyyy tt", Culture = culture }
             );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""2000 p.m."",
   ""2000 p.m.""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -8314,10 +8371,13 @@ This is just junk, though.";
 
             string json = sw.ToString();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""2000 p.m."",
   ""2000 p.m.""
-]", json);
+]",
+                json
+            );
         }
 
 #if !(NET20 || NET35)
@@ -8353,9 +8413,12 @@ This is just junk, though.";
 
             string json = sw.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""html"": ""\u003chtml\u003e\u003c/html\u003e""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -8425,7 +8488,8 @@ This is just junk, though.";
         [Test]
         public void ReadStringFloatingPointSymbols()
         {
-            string json = @"[
+            string json =
+                @"[
   ""NaN"",
   ""Infinity"",
   ""-Infinity""
@@ -8447,24 +8511,20 @@ This is just junk, though.";
         {
             IDictionary<string, object> dates = new Dictionary<string, object>
             {
-
                 {
                     "DateTime-Unspecified",
                     new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Unspecified)
                 },
                 { "DateTime-Utc", new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc) },
                 { "DateTime-Local", new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Local) },
-
                 {
                     "DateTimeOffset-Zero",
                     new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)
                 },
-
                 {
                     "DateTimeOffset-Plus1",
                     new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1))
                 },
-
                 {
                     "DateTimeOffset-Plus15",
                     new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1.5))
@@ -8852,9 +8912,12 @@ This is just junk, though.";
             dict2.Add(consoleWriter, "Console");
 
             var text2 = JsonConvert.SerializeObject(dict2, Formatting.Indented, options);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Console Writer"": ""Console""
-}", text2);
+}",
+                text2
+            );
 
             var restoredObject = JsonConvert.DeserializeObject<Dictionary<IMyInterface, string>>(
                 text2,
@@ -8870,9 +8933,12 @@ This is just junk, though.";
             dict3.Add("Console", consoleWriter);
 
             var text3 = JsonConvert.SerializeObject(dict3, Formatting.Indented, options);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Console"": ""Console Writer""
-}", text3);
+}",
+                text3
+            );
 
             var restoredDict2 = JsonConvert.DeserializeObject<Dictionary<string, IMyInterface>>(
                 text3,
@@ -8901,10 +8967,13 @@ This is just junk, though.";
         {
             var c = new TestClassConvertable { Id = new ConvertibleId { Value = 1 }, X = 2 };
             var s = JsonConvert.SerializeObject(c, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Id"": ""1"",
   ""X"": 2
-}", s);
+}",
+                s
+            );
         }
 #endif
 
@@ -9040,9 +9109,12 @@ This is just junk, though.";
                 settings
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""2000-pie-Dec-Friday-22"": ""123""
-}", json);
+}",
+                json
+            );
 
             Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<Dictionary<DateTime,
                     string>>(json, settings);
@@ -9067,9 +9139,12 @@ This is just junk, though.";
                 settings
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""2000-pie-Dec-Friday-22"": ""123""
-}", json);
+}",
+                json
+            );
 
             Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<Dictionary<DateTime,
                     string>>(json, settings);
@@ -9094,9 +9169,12 @@ This is just junk, though.";
                 settings
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""2000-pie-Dec-Friday-22!+00:00"": ""123""
-}", json);
+}",
+                json
+            );
 
             Dictionary<DateTimeOffset,
                 string> d = JsonConvert.DeserializeObject<Dictionary<DateTimeOffset, string>>(
@@ -9124,9 +9202,12 @@ This is just junk, though.";
                 settings
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""2000-pie-Dec-Friday-22!+00:00"": ""123""
-}", json);
+}",
+                json
+            );
 
             Dictionary<DateTimeOffset,
                 string> d = JsonConvert.DeserializeObject<Dictionary<DateTimeOffset, string>>(
@@ -9176,9 +9257,12 @@ This is just junk, though.";
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""MY_CONSTANT"": "".""
-}", json);
+}",
+                json
+            );
 
             JsonConvert.DeserializeObject<ConstantTestClass>(json);
         }

@@ -73,10 +73,13 @@ namespace Newtonsoft.Json.Tests.Converters
                 new RegexConverter()
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Pattern"": ""abc"",
   ""Options"": 513
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -112,7 +115,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeCamelCaseAndStringEnums()
         {
-            string json = @"{
+            string json =
+                @"{
   ""pattern"": ""abc"",
   ""options"": ""ignoreCase""
 }";
@@ -150,7 +154,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeStringRegex()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Regex"": ""\/abc\/""
 }";
 
@@ -166,7 +171,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeStringRegex_NoStartSlash_Error()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Regex"": ""abc\/""
 }";
 
@@ -182,7 +188,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeStringRegex_NoEndSlash_Error()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Regex"": ""\/abc""
 }";
 
@@ -198,7 +205,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeStringRegex_NoStartAndEndSlashes_Error()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Regex"": ""abc""
 }";
 
@@ -311,7 +319,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeFromText()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Pattern"": ""abc"",
   ""Options"": 513
 }";

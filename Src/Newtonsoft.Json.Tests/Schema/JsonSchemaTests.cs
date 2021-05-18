@@ -453,9 +453,11 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_MultipleItems()
         {
-            JsonSchema schema = JsonSchema.Parse(@"{
+            JsonSchema schema = JsonSchema.Parse(
+                @"{
   ""items"":[{},{}]
-}");
+}"
+            );
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -465,12 +467,15 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = writer.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""items"": [
     {},
     {}
   ]
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -559,9 +564,12 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = writer.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""items"": []
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -605,11 +613,14 @@ namespace Newtonsoft.Json.Tests.Schema
 
             string json = writer.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""items"": {
     ""type"": ""string""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -632,9 +643,11 @@ namespace Newtonsoft.Json.Tests.Schema
 }"
             );
 
-            JObject json = JObject.Parse(@"{
+            JObject json = JObject.Parse(
+                @"{
         ""NumberProperty"": 23
-      }");
+      }"
+            );
 
             Assert.IsTrue(json.IsValid(schema));
         }

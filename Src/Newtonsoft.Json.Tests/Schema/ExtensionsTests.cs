@@ -442,7 +442,6 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchema schema = new JsonSchema();
             schema.Properties = new Dictionary<string, JsonSchema>
             {
-
                 {
                     "bar",
                     new JsonSchema { Enum = new List<JToken> { new JValue(1), new JValue(2) } }

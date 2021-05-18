@@ -30,11 +30,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class FooRequired
     {
         [JsonProperty(Required = Required.Always)]
-        public List<string> Bars
-        {
-            get;
-            private set;
-        }
+        public List<string> Bars { get; private set; }
 
         public FooRequired(IEnumerable<string> bars)
         {

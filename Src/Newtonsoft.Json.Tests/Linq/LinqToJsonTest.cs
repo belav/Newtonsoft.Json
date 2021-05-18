@@ -150,9 +150,12 @@ namespace Newtonsoft.Json.Tests.Linq
             TestClass_ULong instance = new TestClass_ULong { Value = ulong.MaxValue };
             JObject output = JObject.FromObject(instance);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Value"": 18446744073709551615
-}", output.ToString());
+}",
+                output.ToString()
+            );
         }
 
         public class TestClass_Byte
@@ -166,9 +169,12 @@ namespace Newtonsoft.Json.Tests.Linq
             TestClass_Byte instance = new TestClass_Byte { Value = byte.MaxValue };
             JObject output = JObject.FromObject(instance);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Value"": 255
-}", output.ToString());
+}",
+                output.ToString()
+            );
         }
 
         [Test]
@@ -252,12 +258,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void CommentsAndReadFrom()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
@@ -274,12 +282,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void CommentsAndReadFrom_IgnoreComments()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a = (JArray)JToken.ReadFrom(jsonReader);
@@ -292,13 +302,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void StartingCommentAndReadFrom()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v =
@@ -318,13 +330,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void StartingCommentAndReadFrom_IgnoreComments()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a =
@@ -344,13 +358,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void StartingUndefinedAndReadFrom()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 undefined
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v = (JValue)JToken.ReadFrom(jsonReader);
@@ -448,9 +464,12 @@ undefined
 
             foreach (JObject friend in items)
             {
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   ""name"": ""value!""
-}", friend.ToString());
+}",
+                    friend.ToString()
+                );
             }
         }
 
@@ -735,10 +754,13 @@ keyword such as type of business.""
             json = @"[null,undefined]";
 
             JArray a = JArray.Parse(json);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   null,
   undefined
-]", a.ToString());
+]",
+                a.ToString()
+            );
             Assert.AreEqual(@"", a.Children().ElementAt(0).ToString());
             Assert.AreEqual(@"", a.Children().ElementAt(1).ToString());
         }
@@ -1231,7 +1253,6 @@ keyword such as type of business.""
                         { "title", "James Newton-King" },
                         { "link", "http://james.newtonking.com" },
                         { "description", "James Newton-King's blog." },
-
                         {
                             "item",
                             (

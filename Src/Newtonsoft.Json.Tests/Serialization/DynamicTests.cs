@@ -191,7 +191,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     var settings = new JsonSerializerSettings();
                     settings.NullValueHandling = NullValueHandling.Ignore;
-                    var json = @"{
+                    var json =
+                        @"{
   ""contributors"": null
 }";
 
@@ -203,11 +204,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class DictionaryDynamicObject : DynamicObject
         {
-            public IDictionary<string, object> Values
-            {
-                get;
-                private set;
-            }
+            public IDictionary<string, object> Values { get; private set; }
 
             protected DictionaryDynamicObject()
             {
@@ -362,10 +359,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore, }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Text"": ""Text!"",
   ""Int"": 2147483647
-}", json);
+}",
+                json
+            );
         }
     }
 
