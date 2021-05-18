@@ -280,7 +280,8 @@ namespace Newtonsoft.Json.Tests
             Session s = new Session();
             s.Date = new DateTime(2014, 6, 4);
 
-            string j = @"{
+            string j =
+                @"{
               'Name': 'Serialize All The Things'
             }";
 

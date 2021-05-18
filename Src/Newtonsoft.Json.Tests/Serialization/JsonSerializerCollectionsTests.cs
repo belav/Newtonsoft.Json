@@ -531,11 +531,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string output = JsonConvert.SerializeObject(onebasedArray, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""2"",
   ""3"",
   ""4""
-]", output);
+]",
+                output
+            );
         }
 
         [Test]
@@ -663,7 +666,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeIEnumerableFromConstructor()
         {
-            string json = @"[
+            string json =
+                @"[
   1,
   2,
   null
@@ -700,7 +704,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeIEnumerableFromConstructor_Failure()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -912,10 +917,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(dic, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""one"": 1,
   ""two"": 2
-}", json);
+}",
+                json
+            );
         }
 
         public class CustomReadOnlyCollection<T> : IReadOnlyCollection<T>
@@ -951,11 +959,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             CustomReadOnlyCollection<int> list = new CustomReadOnlyCollection<int>(l);
 
             string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
         }
 #endif
 
@@ -2249,12 +2260,15 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3,
   2147483647
-]", json);
+]",
+                json
+            );
         }
 #endif
 
@@ -2674,83 +2688,39 @@ namespace Newtonsoft.Json.Tests.Serialization
         /// <summary>
         /// Fast felt der altid findes.
         /// </summary>
-        public string user
-        {
-            get;
-            private set;
-        }
+        public string user { get; private set; }
 
         /// <summary>
         /// Person type som dictionary indeholdende de ekstra informationer returneret ved login.
         /// </summary>
-        public Dictionary<string, string> Person
-        {
-            get;
-            private set;
-        }
+        public Dictionary<string, string> Person { get; private set; }
 
         /// <summary>
         /// Den oprindelige xml returneret fra CAS.
         /// </summary>
-        public string XMLResponce
-        {
-            get;
-            private set;
-        }
+        public string XMLResponce { get; private set; }
 
         /// <summary>
         /// Det sprog der benyttes i SSO. Muligheder er da eller en.
         /// </summary>
-        public ssoLanguage Language
-        {
-            get;
-            private set;
-        }
+        public ssoLanguage Language { get; private set; }
 
         /// <summary>
         /// Liste af grupper som man er medlem af. Kun udvalgt iblandt dem der blev puttet ind i systemet.
         /// </summary>
-        public List<string> Groups
-        {
-            get;
-            private set;
-        }
+        public List<string> Groups { get; private set; }
 
-        public string Domain
-        {
-            get;
-            private set;
-        }
+        public string Domain { get; private set; }
 
-        public string Mail
-        {
-            get;
-            private set;
-        }
+        public string Mail { get; private set; }
 
-        public string Surname
-        {
-            get;
-            private set;
-        }
+        public string Surname { get; private set; }
 
-        public string Givenname
-        {
-            get;
-            private set;
-        }
+        public string Givenname { get; private set; }
 
-        public string CommonName
-        {
-            get;
-            private set;
-        }
+        public string CommonName { get; private set; }
 
-        public string OrganizationName
-        {
-            get;
-            private set;
-        }
+        public string OrganizationName { get; private set; }
     }
 #endif
 

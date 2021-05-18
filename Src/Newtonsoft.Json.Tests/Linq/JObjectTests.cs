@@ -68,9 +68,12 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string output = o.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""title"": null
-}", output);
+}",
+                output
+            );
 
             Assert.AreEqual(null, v.Value);
             Assert.IsNull((string)o.title);
@@ -130,9 +133,12 @@ namespace Newtonsoft.Json.Tests.Linq
             var o = new JObject();
             o.Add(new JProperty("novalue"));
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""novalue"": null
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
 
         [Test]
@@ -608,10 +614,13 @@ Parameter name: arrayIndex",
 
             string json = o.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""val1"": 1,
   ""val2"": 1
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -663,9 +672,12 @@ Parameter name: arrayIndex",
 
             string output = o.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""title"": null
-}", output);
+}",
+                output
+            );
         }
 
         [Test]
@@ -1735,7 +1747,8 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1749,7 +1762,8 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_EmptySettings()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1763,7 +1777,8 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_IgnoreDuplicateSetting()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1783,7 +1798,8 @@ Parameter name: arrayIndex",
         [Test]
         public void ParseMultipleProperties_ReplaceDuplicateSetting()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -1814,9 +1830,12 @@ Parameter name: arrayIndex",
 
             string output = o.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""title"": null
-}", output);
+}",
+                output
+            );
         }
 #endif
 
@@ -2263,7 +2282,8 @@ Parameter name: arrayIndex",
         [Test]
         public void Parse_ExcessiveContentJustComments()
         {
-            string json = @"{'prop':[1,2,3]}/*comment*/
+            string json =
+                @"{'prop':[1,2,3]}/*comment*/
 //Another comment.";
 
             JObject o = JObject.Parse(json);
@@ -2277,7 +2297,8 @@ Parameter name: arrayIndex",
         [Test]
         public void Parse_ExcessiveContent()
         {
-            string json = @"{'prop':[1,2,3]}/*comment*/
+            string json =
+                @"{'prop':[1,2,3]}/*comment*/
 //Another comment.
 []";
 

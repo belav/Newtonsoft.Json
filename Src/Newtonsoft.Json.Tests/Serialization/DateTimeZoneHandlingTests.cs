@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeObject()
         {
-            string json = @"
+            string json =
+                @"
   {
     ""Value"": ""2017-12-05T21:59:00""
   }";
@@ -83,7 +84,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeFromJObject()
         {
-            string json = @"
+            string json =
+                @"
   {
     ""Value"": ""2017-12-05T21:59:00""
   }";

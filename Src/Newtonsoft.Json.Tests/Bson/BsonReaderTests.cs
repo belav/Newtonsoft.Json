@@ -1649,11 +1649,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 Name = name;
             }
 
-            public string Name
-            {
-                get;
-                private set;
-            }
+            public string Name { get; private set; }
         }
 
         class Dog : Animal

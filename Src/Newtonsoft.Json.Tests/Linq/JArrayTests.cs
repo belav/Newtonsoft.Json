@@ -590,7 +590,8 @@ Parameter name: index",
         [Test]
         public void ParseAdditionalContent()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -655,7 +656,8 @@ Parameter name: index",
         [Test]
         public void Parse_ExcessiveContentJustComments()
         {
-            string json = @"[1,2,3]/*comment*/
+            string json =
+                @"[1,2,3]/*comment*/
 //Another comment.";
 
             JArray a = JArray.Parse(json);
@@ -669,7 +671,8 @@ Parameter name: index",
         [Test]
         public void Parse_ExcessiveContent()
         {
-            string json = @"[1,2,3]/*comment*/
+            string json =
+                @"[1,2,3]/*comment*/
 //Another comment.
 []";
 

@@ -152,7 +152,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ValidateUnrestrictedArray()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""array""
 }";
 
@@ -347,7 +348,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void StringDoesNotMatchPattern()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""string"",
   ""pattern"":""foo""
 }";
@@ -379,7 +381,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerGreaterThanMaximumValue()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
@@ -412,7 +415,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerGreaterThanMaximumValue_BigInteger()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
@@ -444,7 +448,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerLessThanMaximumValue_BigInteger()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""integer"",
   ""minimum"":5
 }";
@@ -476,7 +481,8 @@ namespace Newtonsoft.Json.Tests
             ExceptionAssert.Throws<JsonSchemaException>(
                 () =>
                 {
-                    string schemaJson = @"{
+                    string schemaJson =
+                        @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
@@ -495,7 +501,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerLessThanMinimumValue()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""integer"",
   ""minimum"":5
 }";
@@ -576,7 +583,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void FloatGreaterThanMaximumValue()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""number"",
   ""maximum"":5
 }";
@@ -607,7 +615,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void FloatLessThanMinimumValue()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""number"",
   ""minimum"":5
 }";
@@ -1011,7 +1020,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ArrayCountGreaterThanMaximumItems()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""array"",
   ""minItems"":2,
   ""maxItems"":3
@@ -1055,7 +1065,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ArrayCountLessThanMinimumItems()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""type"":""array"",
   ""minItems"":2,
   ""maxItems"":3

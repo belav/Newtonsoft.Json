@@ -42,7 +42,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
             schema.Properties = new Dictionary<string, JsonSchema>
             {
                 { "name", new JsonSchema { Type = JsonSchemaType.String } },
-
                 {
                     "hobbies",
                     new JsonSchema

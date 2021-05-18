@@ -34,10 +34,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [JsonProperty]
-        public string DerivedProperty
-        {
-            get;
-            private set;
-        }
+        public string DerivedProperty { get; private set; }
     }
 }

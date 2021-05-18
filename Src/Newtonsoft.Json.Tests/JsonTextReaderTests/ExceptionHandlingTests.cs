@@ -440,7 +440,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void MissingColon()
         {
-            string json = @"{
+            string json =
+                @"{
     ""A"" : true,
     ""B"" """;
 
@@ -529,7 +530,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ParseAdditionalContent_Comma()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -549,7 +551,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ParseAdditionalContent_Text()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -661,7 +664,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadIntegerWithError()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: 333333333333333333333333333333333333333
 }";
 
@@ -687,7 +691,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadIntegerWithErrorInArray()
         {
-            string json = @"[
+            string json =
+                @"[
   333333333333333333333333333333333333333,
   3.3,
   ,
@@ -728,7 +733,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadBytesWithError()
         {
-            string json = @"{
+            string json =
+                @"{
     ChildId: '123'
 }";
 
@@ -1198,8 +1204,12 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ReadAsDecimalBadContent_SecondLine()
         {
-            JsonTextReader reader = new JsonTextReader(new StringReader(@"
-new Date()"));
+            JsonTextReader reader = new JsonTextReader(
+                new StringReader(
+                    @"
+new Date()"
+                )
+            );
 
             ExceptionAssert.Throws<JsonReaderException>(
                 () =>

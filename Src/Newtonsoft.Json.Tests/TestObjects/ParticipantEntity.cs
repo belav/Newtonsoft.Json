@@ -42,11 +42,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             PropertyName = "pa_created",
             DefaultValueHandling = DefaultValueHandling.Ignore,
             NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset CreationDate
-        {
-            get;
-            internal set;
-        }
+        public DateTimeOffset CreationDate { get; internal set; }
 
         /// <summary>
         /// Gets the properties of the participant.

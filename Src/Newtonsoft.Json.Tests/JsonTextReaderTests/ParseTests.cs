@@ -64,7 +64,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public void ParseAdditionalContent_Whitespace()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""

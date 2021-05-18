@@ -192,18 +192,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class ConstructorParametersRespectDefaultValueAttributes
         {
             [DefaultValue("parameter1_default")]
-            public string Parameter1
-            {
-                get;
-                private set;
-            }
+            public string Parameter1 { get; private set; }
 
             [DefaultValue("parameter2_default")]
-            public string Parameter2
-            {
-                get;
-                private set;
-            }
+            public string Parameter2 { get; private set; }
 
             [DefaultValue("parameter3_default")]
             public string Parameter3 { get; set; }
@@ -258,16 +250,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             public const string DefaultValue = "Default Value";
 
-            public string Parameter1
-            {
-                get;
-                private set;
-            }
-            public string Parameter2
-            {
-                get;
-                private set;
-            }
+            public string Parameter1 { get; private set; }
+            public string Parameter2 { get; private set; }
 
             public ConstructorParametersRespectDefaultValue(string parameter1, string parameter2)
             {

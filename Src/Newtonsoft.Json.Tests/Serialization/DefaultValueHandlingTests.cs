@@ -407,10 +407,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""IntInclude"": 0,
   ""IntDefault"": 0
-}", json);
+}",
+                json
+            );
 
             json = JsonConvert.SerializeObject(
                 c,
@@ -418,9 +421,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""IntInclude"": 0
-}", json);
+}",
+                json
+            );
 
             json = JsonConvert.SerializeObject(
                 c,
@@ -428,10 +434,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""IntInclude"": 0,
   ""IntDefault"": 0
-}", json);
+}",
+                json
+            );
         }
 
         [Test]

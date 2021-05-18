@@ -139,11 +139,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
 
             [JsonExtensionData]
-            public IDictionary<string, object> Data
-            {
-                get;
-                private set;
-            }
+            public IDictionary<string, object> Data { get; private set; }
         }
 
         [Test]
@@ -199,10 +195,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Name!"",
   ""Key!"": ""Value!""
-}", json);
+}",
+                json
+            );
 
             var c2 = JsonConvert.DeserializeObject<ExtensionDataDeserializeWithNonDefaultConstructor>(
                 json
@@ -311,11 +310,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonIgnore]
             public IList<int> Ignored { get; set; }
 
-            public bool GetPrivate
-            {
-                get;
-                internal set;
-            }
+            public bool GetPrivate { get; internal set; }
 
             public bool GetOnly
             {

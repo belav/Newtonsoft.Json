@@ -82,10 +82,13 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = left.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Property1"": 1,
   ""Property2"": 2
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -122,11 +125,14 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = left.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Property1"": {
     ""SubProperty1"": 1
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -405,12 +411,15 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = left.ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Array1"": [
     4,
     5
   ]
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -426,10 +435,13 @@ namespace Newtonsoft.Json.Tests.Linq
 
             string json = left.ToString();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   4,
   5
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -596,14 +608,16 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeNullValueHandling_Array()
         {
-            string originalJson = @"{
+            string originalJson =
+                @"{
   ""Bar"": [
     ""a"",
     ""b"",
     ""c""
   ]
 }";
-            string newJson = @"{
+            string newJson =
+                @"{
   ""Bar"": null
 }";
 
@@ -628,10 +642,12 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeNullValueHandling_Object()
         {
-            string originalJson = @"{
+            string originalJson =
+                @"{
   ""Bar"": {}
 }";
-            string newJson = @"{
+            string newJson =
+                @"{
   ""Bar"": null
 }";
 

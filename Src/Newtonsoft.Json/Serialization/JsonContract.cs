@@ -141,11 +141,7 @@ namespace Newtonsoft.Json.Serialization
         /// This converter is used as a fallback converter when no other converter is resolved.
         /// Setting <see cref="Converter"/> will always override this converter.
         /// </summary>
-        public JsonConverter? InternalConverter
-        {
-            get;
-            internal set;
-        }
+        public JsonConverter? InternalConverter { get; internal set; }
 
         /// <summary>
         /// Gets or sets all methods called immediately after deserialization of the object.

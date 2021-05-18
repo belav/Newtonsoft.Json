@@ -317,9 +317,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             SerializationEventContextSubClassTestObject obj = new SerializationEventContextSubClassTestObject();
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TestMember"": ""Set!""
-}", json);
+}",
+                json
+            );
         }
 
 #if !(PORTABLE || DNXCORE50) || NETSTANDARD2_0
@@ -348,9 +351,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
             );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TestMember"": ""Remoting ContextValue""
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -505,11 +511,7 @@ OnSerialized_Derived_Derived",
 
     public class SerializationEventOrderTestObject
     {
-        protected IList<string> Events
-        {
-            get;
-            private set;
-        }
+        protected IList<string> Events { get; private set; }
 
         public SerializationEventOrderTestObject()
         {

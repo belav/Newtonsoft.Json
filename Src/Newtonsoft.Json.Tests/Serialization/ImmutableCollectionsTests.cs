@@ -53,17 +53,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeList()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -80,7 +84,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeListInterface()
         {
-            string json = @"[
+            string json =
+                @"[
         'Volibear',
         'Teemo',
         'Katarina'
@@ -107,17 +112,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeArray()
         {
-            string json = @"[
+            string json =
+                @"[
           ""One"",
           ""II"",
           ""3""
@@ -153,17 +162,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeQueue()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -180,7 +193,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeQueueInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -206,17 +220,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""3"",
   ""II"",
   ""One""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeStack()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -233,7 +251,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeStackInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -270,7 +289,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeHashSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -289,7 +309,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeHashSetInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -315,17 +336,21 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""3"",
   ""II"",
   ""One""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeSortedSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -361,7 +386,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
@@ -379,7 +405,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeDictionaryInterface()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
@@ -419,7 +446,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeSortedDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""

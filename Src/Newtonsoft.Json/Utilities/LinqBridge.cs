@@ -1906,11 +1906,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                 Key = key;
             }
 
-            public K Key
-            {
-                get;
-                private set;
-            }
+            public K Key { get; private set; }
         }
     }
 

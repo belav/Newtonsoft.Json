@@ -622,17 +622,21 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeObject(dt, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""CustomerID"": ""432""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializedTypedDataTable()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""CustomerID"": ""432""
   }
@@ -655,9 +659,12 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Table"": null
-}", json);
+}",
+                json
+            );
 
             DataTableTestClass c2 = JsonConvert.DeserializeObject<DataTableTestClass>(json);
 

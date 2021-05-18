@@ -76,7 +76,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void MultipleTypes()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Age"",
   ""type"":[""string"", ""integer""]
 }";
@@ -129,7 +130,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Required()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Required"",
   ""required"":true
 }";
@@ -144,7 +146,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ExclusiveMinimum_ExclusiveMaximum()
         {
-            string json = @"{
+            string json =
+                @"{
   ""exclusiveMinimum"":true,
   ""exclusiveMaximum"":true
 }";
@@ -159,7 +162,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ReadOnly()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""ReadOnly"",
   ""readonly"":true
 }";
@@ -174,7 +178,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Hidden()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Hidden"",
   ""hidden"":true
 }";
@@ -189,7 +194,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Id()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Id"",
   ""id"":""testid""
 }";
@@ -204,7 +210,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Title()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Title"",
   ""title"":""testtitle""
 }";
@@ -219,7 +226,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Pattern()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Pattern"",
   ""pattern"":""testpattern""
 }";
@@ -234,7 +242,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Format()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""Format"",
   ""format"":""testformat""
 }";
@@ -325,7 +334,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void DefaultPrimitiveType()
         {
-            string json = @"{
+            string json =
+                @"{
   ""description"":""DefaultPrimitiveType"",
   ""default"":1.1
 }";
@@ -454,7 +464,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void DisallowAdditionalItems()
         {
-            string json = @"{
+            string json =
+                @"{
     ""items"": [],
     ""additionalItems"": false
 }";
@@ -469,7 +480,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void AllowAdditionalItems()
         {
-            string json = @"{
+            string json =
+                @"{
     ""items"": {},
     ""additionalItems"": false
 }";

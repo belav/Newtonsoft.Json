@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AccessPropertyValue()
         {
-            string rawJson = @"{
+            string rawJson =
+                @"{
   ""task"": {
     ""dueDate"": ""2012-12-03T00:00:00""
   }

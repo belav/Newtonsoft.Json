@@ -139,9 +139,12 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Set"": null
-}", json);
+}",
+                json
+            );
 
             DataSetTestClass c2 = JsonConvert.DeserializeObject<DataSetTestClass>(json);
 
@@ -163,7 +166,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeNullTable()
         {
-            string json = @"{
+            string json =
+                @"{
   ""TableName"": null
 }";
 

@@ -82,7 +82,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                         new JObject
                         {
                             { "Title", p.Title },
-
                             {
                                 "Author",
                                 new JObject

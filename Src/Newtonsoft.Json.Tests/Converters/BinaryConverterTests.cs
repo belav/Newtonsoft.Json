@@ -79,7 +79,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeBinaryClassFromJsonArray()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Binary"": [0, 1, 2, 3],
   ""NullBinary"": null
 }";
@@ -211,7 +212,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeByteArrayFromJsonArray()
         {
-            string json = @"{
+            string json =
+                @"{
   ""ByteArray"": [0, 1, 2, 3],
   ""NullByteArray"": null
 }";

@@ -226,10 +226,13 @@ namespace Newtonsoft.Json.Tests.Converters
             };
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1514840476,
   3
-]", json);
+]",
+                json
+            );
 
             UnixConverterList<object> l2 = JsonConvert.DeserializeObject<UnixConverterList<object>>(
                 json
@@ -250,10 +253,13 @@ namespace Newtonsoft.Json.Tests.Converters
             };
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": 3,
   ""Second"": 1514840476
-}", json);
+}",
+                json
+            );
 
             UnixConverterDictionary<object> l2 = JsonConvert.DeserializeObject<UnixConverterDictionary<object>>(
                 json

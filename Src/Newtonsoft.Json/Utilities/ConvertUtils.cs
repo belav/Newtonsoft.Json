@@ -144,7 +144,6 @@ namespace Newtonsoft.Json.Utilities
             { typeof(double?), PrimitiveTypeCode.DoubleNullable },
             { typeof(DateTime), PrimitiveTypeCode.DateTime },
             { typeof(DateTime?), PrimitiveTypeCode.DateTimeNullable },
-
 #if HAVE_DATE_TIME_OFFSET
                 { typeof(DateTimeOffset), PrimitiveTypeCode.DateTimeOffset },
                 { typeof(DateTimeOffset?), PrimitiveTypeCode.DateTimeOffsetNullable },
@@ -158,7 +157,6 @@ namespace Newtonsoft.Json.Utilities
             { typeof(Guid?), PrimitiveTypeCode.GuidNullable },
             { typeof(TimeSpan), PrimitiveTypeCode.TimeSpan },
             { typeof(TimeSpan?), PrimitiveTypeCode.TimeSpanNullable },
-
 #if HAVE_BIG_INTEGER
                 { typeof(BigInteger), PrimitiveTypeCode.BigInteger },
                 { typeof(BigInteger?), PrimitiveTypeCode.BigIntegerNullable },

@@ -141,7 +141,6 @@ namespace Newtonsoft.Json.Tests
         {
             JObject o = new JObject
             {
-
                 {
                     "BodyHtml",
                     "<h3>Title!</h3>"
@@ -765,7 +764,8 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteEndArray();
             }
 
-            string expected = @"[1,2,3,4,5]  [
+            string expected =
+                @"[1,2,3,4,5]  [
   NaN
 ]";
             string result = sb.ToString();
@@ -792,7 +792,8 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteEndArray();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   NaN,[1,2,3,4,5],[1,2,3,4,5],
   NaN
 ]";
@@ -1148,7 +1149,8 @@ Parameter name: value",
                 jsonWriter.WriteEndObject();
             }
 
-            string expected = @"{
+            string expected =
+                @"{
 _____'propertyName': NaN,
 ??????'prop2': 123
 }";
@@ -1556,10 +1558,13 @@ _____'propertyName': NaN,
 
             writer.WriteEnd();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   '2000 a.m.',
   '2000 a.m.'
-]", sw.ToString());
+]",
+                sw.ToString()
+            );
         }
 #endif
 
@@ -1767,9 +1772,12 @@ _____'propertyName': NaN,
             writer.WriteEndObject();
             Assert.AreEqual(WriteState.Start, writer.WriteState);
 
-            StringAssert.AreEqual(@"{{{
+            StringAssert.AreEqual(
+                @"{{{
   ""1ytreporP"": NULL!!!
-}}}", sw.ToString());
+}}}",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1789,9 +1797,12 @@ _____'propertyName': NaN,
                     writer.Close();
                 }
 
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   a: 1
-}", stringWriter.ToString());
+}",
+                    stringWriter.ToString()
+                );
             }
         }
 

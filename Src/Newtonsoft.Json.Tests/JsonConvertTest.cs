@@ -80,7 +80,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void PopulateObjectWithHeaderComment()
         {
-            string json = @"// file header
+            string json =
+                @"// file header
 {
   ""prop"": 1.0
 }";
@@ -94,7 +95,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void PopulateObjectWithMultipleHeaderComment()
         {
-            string json = @"// file header
+            string json =
+                @"// file header
 // another file header?
 {
   ""prop"": 1.0
@@ -152,13 +154,16 @@ namespace Newtonsoft.Json.Tests
 
                 string json = JsonConvert.SerializeObject(new { test = new[] { 1, 2, 3 } });
 
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   ""test"": [
     1,
     2,
     3
   ]
-}", json);
+}",
+                    json
+                );
             }
 
             finally
@@ -372,11 +377,14 @@ namespace Newtonsoft.Json.Tests
                 JsonSerializer serializer = JsonSerializer.CreateDefault();
                 serializer.Serialize(sw, l);
 
-                StringAssert.AreEqual(@"[
+                StringAssert.AreEqual(
+                    @"[
   1,
   2,
   3
-]", sw.ToString());
+]",
+                    sw.ToString()
+                );
 
                 sw = new StringWriter();
                 serializer.Formatting = Formatting.None;
@@ -421,21 +429,27 @@ namespace Newtonsoft.Json.Tests
                 );
                 serializer.Serialize(sw, l);
 
-                StringAssert.AreEqual(@"[
+                StringAssert.AreEqual(
+                    @"[
   2,
   4,
   6
-]", sw.ToString());
+]",
+                    sw.ToString()
+                );
 
                 sw = new StringWriter();
                 serializer.Converters.Clear();
                 serializer.Serialize(sw, l);
 
-                StringAssert.AreEqual(@"[
+                StringAssert.AreEqual(
+                    @"[
   1,
   2,
   3
-]", sw.ToString());
+]",
+                    sw.ToString()
+                );
 
                 sw = new StringWriter();
                 serializer = JsonSerializer.Create(
@@ -443,11 +457,14 @@ namespace Newtonsoft.Json.Tests
                 );
                 serializer.Serialize(sw, l);
 
-                StringAssert.AreEqual(@"[
+                StringAssert.AreEqual(
+                    @"[
   1,
   2,
   3
-]", sw.ToString());
+]",
+                    sw.ToString()
+                );
             }
 
             finally
@@ -1640,17 +1657,9 @@ namespace Newtonsoft.Json.Tests
 
         public class ClobberingJsonConverter : JsonConverter
         {
-            public string ClobberValueString
-            {
-                get;
-                private set;
-            }
+            public string ClobberValueString { get; private set; }
 
-            public int ClobberValueInt
-            {
-                get;
-                private set;
-            }
+            public int ClobberValueInt { get; private set; }
 
             public ClobberingJsonConverter(string clobberValueString, int clobberValueInt)
             {
@@ -2268,7 +2277,8 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ShouldNotRequireIgnoredPropertiesWithItemsRequired()
         {
-            string json = @"{
+            string json =
+                @"{
   ""exp"": 1483228800,
   ""active"": true
 }";

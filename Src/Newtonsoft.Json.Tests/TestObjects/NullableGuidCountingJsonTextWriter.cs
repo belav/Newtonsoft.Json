@@ -33,11 +33,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public NullableGuidCountingJsonTextWriter(TextWriter textWriter)
             : base(textWriter) { }
 
-        public int NullableGuidCount
-        {
-            get;
-            private set;
-        }
+        public int NullableGuidCount { get; private set; }
 
         public override void WriteValue(Guid? value)
         {
