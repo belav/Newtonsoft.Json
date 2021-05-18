@@ -48,13 +48,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public T this[int id]
         {
-            get
-            {
-                return Enumerable.FirstOrDefault(
-                    _dict1.Values,
-                    x => x.Id == id
-                );
-            }
+            get { return Enumerable.FirstOrDefault(_dict1.Values, x => x.Id == id); }
             set
             {
                 var item = this[id];

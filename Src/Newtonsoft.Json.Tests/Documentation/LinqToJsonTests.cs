@@ -54,9 +54,7 @@ namespace Newtonsoft.Json.Tests.Documentation
     {
         public static StreamReader OpenText(string path)
         {
-            return new StreamReader(
-                new MemoryStream(Encoding.UTF8.GetBytes("{}"))
-            );
+            return new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes("{}")));
         }
 
         public static StreamWriter CreateText(string path)
@@ -95,8 +93,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string firstDrive = (string)o["Drives"][0];
             // DVD read/writer
 
-            IList<string> allDrives = o["Drives"].Select(t => (string)t)
-                .ToList();
+            IList<string> allDrives = o["Drives"].Select(t => (string)t).ToList();
             // DVD read/writer
             // 500 gigabyte hard drive
             #endregion
@@ -146,10 +143,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                     new JObject(
                         new JProperty("title", "James Newton-King"),
                         new JProperty("link", "http://james.newtonking.com"),
-                        new JProperty(
-                            "description",
-                            "James Newton-King's blog."
-                        ),
+                        new JProperty("description", "James Newton-King's blog."),
                         new JProperty(
                             "item",
                             new JArray(
@@ -158,18 +152,11 @@ namespace Newtonsoft.Json.Tests.Documentation
                                     orderby p.Title
                                     select new JObject(
                                         new JProperty("title", p.Title),
-                                        new JProperty(
-                                            "description",
-                                            p.Description
-                                        ),
+                                        new JProperty("description", p.Description),
                                         new JProperty("link", p.Link),
                                         new JProperty(
                                             "category",
-                                            new JArray(
-
-                                                    from c in p.Categories
-                                                    select new JValue(c)
-                                            )
+                                            new JArray( from c in p.Categories select new JValue(c))
                                         )
                                     )
                             )
@@ -277,8 +264,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region LinqToJsonReadObject
             using (StreamReader reader = File.OpenText(@"c:\person.json"))
             {
-                JObject o =
-                    (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 // do stuff
             }
             #endregion
@@ -328,8 +314,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             JArray categories = (JArray)rss["channel"]["item"][0]["categories"];
             // ["Json.NET", "CodePlex"]
 
-            IList<string> categoriesText = categories.Select(c => (string)c)
-                .ToList();
+            IList<string> categoriesText = categories.Select(c => (string)c).ToList();
             // Json.NET
             // CodePlex
             #endregion
@@ -369,9 +354,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             );
 
             #region LinqToJsonQuerying
-            var postTitles =
-                from p in rss["channel"]["item"]
-                select (string)p["title"];
+            var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
             foreach (var item in postTitles)
             {
@@ -382,10 +365,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //Json.NET 1.3 + New license + Now on CodePlex
 
             var categories =
-                from c in rss["channel"]["item"].SelectMany(
-                        i => i["categories"]
-                    )
-                    .Values<string>()
+                from c in rss["channel"]["item"].SelectMany(i => i["categories"]).Values<string>()
                 group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };
@@ -543,12 +523,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             // Acme Co
 
-            decimal productPrice =
-                (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
+            decimal productPrice = (decimal)o.SelectToken("Manufacturers[0].Products[0].Price");
             // 50
 
-            string productName =
-                (string)o.SelectToken("Manufacturers[1].Products[0].Name");
+            string productName = (string)o.SelectToken("Manufacturers[1].Products[0].Name");
             // Elbow Grease
             #endregion
 
@@ -594,9 +572,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             );
 
             #region SelectTokenLinq
-            IList<string> storeNames = o.SelectToken("Stores")
-                .Select(s => (string)s)
-                .ToList();
+            IList<string> storeNames = o.SelectToken("Stores").Select(s => (string)s).ToList();
             // Lambton Quay
             // Willis Street
 

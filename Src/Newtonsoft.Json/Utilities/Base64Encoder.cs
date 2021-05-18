@@ -83,13 +83,7 @@ namespace Newtonsoft.Json.Utilities
                     return;
                 }
 
-                int num2 = Convert.ToBase64CharArray(
-                    _leftOverBytes,
-                    0,
-                    3,
-                    _charsLine,
-                    0
-                );
+                int num2 = Convert.ToBase64CharArray(_leftOverBytes, 0, 3, _charsLine, 0);
                 WriteChars(_charsLine, 0, num2);
             }
 
@@ -103,23 +97,14 @@ namespace Newtonsoft.Json.Utilities
                 {
                     length = num4 - index;
                 }
-                int num6 = Convert.ToBase64CharArray(
-                    buffer,
-                    index,
-                    length,
-                    _charsLine,
-                    0
-                );
+                int num6 = Convert.ToBase64CharArray(buffer, index, length, _charsLine, 0);
                 WriteChars(_charsLine, 0, num6);
                 index += length;
             }
         }
 
-        private void StoreLeftOverBytes(
-            byte[] buffer,
-            int index,
-            ref int count
-        ) {
+        private void StoreLeftOverBytes(byte[] buffer, int index, ref int count)
+        {
             int leftOverBytesCount = count % 3;
             if (leftOverBytesCount > 0)
             {
@@ -138,11 +123,8 @@ namespace Newtonsoft.Json.Utilities
             _leftOverBytesCount = leftOverBytesCount;
         }
 
-        private bool FulfillFromLeftover(
-            byte[] buffer,
-            int index,
-            ref int count
-        ) {
+        private bool FulfillFromLeftover(byte[] buffer, int index, ref int count)
+        {
             int leftOverBytesCount = _leftOverBytesCount;
             while (leftOverBytesCount < 3 && count > 0)
             {

@@ -57,10 +57,7 @@ namespace Newtonsoft.Json.Tests.Linq
             JsonReader reader = jObject.CreateReader();
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(
-                10000000000000000000d,
-                await reader.ReadAsDoubleAsync()
-            );
+            Assert.AreEqual(10000000000000000000d, await reader.ReadAsDoubleAsync());
             Assert.IsTrue(await reader.ReadAsync());
         }
 #endif
@@ -69,21 +66,10 @@ namespace Newtonsoft.Json.Tests.Linq
         public async Task YahooFinanceAsync()
         {
             JObject o = new JObject(
-                new JProperty(
-                    "Test1",
-                    new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)
-                ),
+                new JProperty("Test1", new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)),
                 new JProperty(
                     "Test2",
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    )
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0))
                 ),
                 new JProperty("Test3", "Test3Value"),
                 new JProperty("Test4", null)
@@ -119,15 +105,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 await jsonReader.ReadAsync();
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
                 Assert.AreEqual(
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    ),
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
                     jsonReader.Value
                 );
 
@@ -154,9 +132,8 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(JsonToken.None, jsonReader.TokenType);
             }
 
-            using (
-                JsonReader jsonReader = new JTokenReader(o.Property("Test2"))
-            ) {
+            using (JsonReader jsonReader = new JTokenReader(o.Property("Test2")))
+            {
                 Assert.IsTrue(await jsonReader.ReadAsync());
                 Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
                 Assert.AreEqual("Test2", jsonReader.Value);
@@ -164,15 +141,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.IsTrue(await jsonReader.ReadAsync());
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
                 Assert.AreEqual(
-                    new DateTimeOffset(
-                        2000,
-                        10,
-                        15,
-                        5,
-                        5,
-                        5,
-                        new TimeSpan(11, 11, 0)
-                    ),
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
                     jsonReader.Value
                 );
 
@@ -247,10 +216,7 @@ namespace Newtonsoft.Json.Tests.Linq
             await reader.ReadAsDateTimeOffsetAsync();
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
-            Assert.AreEqual(
-                new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero), reader.Value);
         }
 
         [Test]
@@ -298,10 +264,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(2, lineInfo.LineNumber);
                 Assert.AreEqual(14, lineInfo.LinePosition);
                 Assert.AreEqual(true, lineInfo.HasLineInfo());
-                Assert.AreEqual(
-                    o.Property("CPU").Value,
-                    jsonReader.CurrentToken
-                );
+                Assert.AreEqual(o.Property("CPU").Value, jsonReader.CurrentToken);
 
                 await jsonReader.ReadAsync();
                 Assert.AreEqual(jsonReader.TokenType, JsonToken.PropertyName);
@@ -316,10 +279,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(3, lineInfo.LineNumber);
                 Assert.AreEqual(11, lineInfo.LinePosition);
                 Assert.AreEqual(true, lineInfo.HasLineInfo());
-                Assert.AreEqual(
-                    o.Property("Drives").Value,
-                    jsonReader.CurrentToken
-                );
+                Assert.AreEqual(o.Property("Drives").Value, jsonReader.CurrentToken);
 
                 await jsonReader.ReadAsync();
                 Assert.AreEqual(jsonReader.TokenType, JsonToken.String);
@@ -399,16 +359,10 @@ namespace Newtonsoft.Json.Tests.Linq
                     using (JTokenReader jsonReader = new JTokenReader(o))
                     {
                         await jsonReader.ReadAsync();
-                        Assert.AreEqual(
-                            JsonToken.StartObject,
-                            jsonReader.TokenType
-                        );
+                        Assert.AreEqual(JsonToken.StartObject, jsonReader.TokenType);
 
                         await jsonReader.ReadAsync();
-                        Assert.AreEqual(
-                            JsonToken.PropertyName,
-                            jsonReader.TokenType
-                        );
+                        Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
                         Assert.AreEqual("Test1", jsonReader.Value);
 
                         await jsonReader.ReadAsBytesAsync();
@@ -773,9 +727,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ReadAsDateTimeOffset_DateTimeAsync()
         {
-            JValue v = new JValue(
-                new DateTime(2001, 12, 12, 12, 12, 12, DateTimeKind.Utc)
-            );
+            JValue v = new JValue(new DateTime(2001, 12, 12, 12, 12, 12, DateTimeKind.Utc));
 
             JTokenReader reader = new JTokenReader(v);
 
@@ -801,9 +753,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ReadAsDateTime_DateTimeOffsetAsync()
         {
-            JValue v = new JValue(
-                new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero)
-            );
+            JValue v = new JValue(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero));
 
             JTokenReader reader = new JTokenReader(v);
 
@@ -939,10 +889,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JTokenReader reader = new JTokenReader(n);
 
-            Assert.AreEqual(
-                "http://www.test.com",
-                await reader.ReadAsStringAsync()
-            );
+            Assert.AreEqual("http://www.test.com", await reader.ReadAsStringAsync());
         }
 
         [Test]

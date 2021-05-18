@@ -83,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             }"
             );
 
-            string[] storeNames = o.SelectToken("Stores")
-                .Select(s => (string)s)
-                .ToArray();
+            string[] storeNames = o.SelectToken("Stores").Select(s => (string)s).ToArray();
 
             Console.WriteLine(string.Join(", ", storeNames));
             // Lambton Quay, Willis Street

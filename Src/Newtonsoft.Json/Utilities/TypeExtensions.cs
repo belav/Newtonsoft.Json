@@ -580,19 +580,15 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string fullTypeName,
             bool searchInterfaces,
-            [NotNullWhen(true)]out Type? match
+            [NotNullWhen(true)]
+            out Type? match
         ) {
             Type current = type;
 
             while (current != null)
             {
-                if (
-                    string.Equals(
-                        current.FullName,
-                        fullTypeName,
-                        StringComparison.Ordinal
-                    )
-                ) {
+                if (string.Equals(current.FullName, fullTypeName, StringComparison.Ordinal))
+                {
                     match = current;
                     return true;
                 }
@@ -604,13 +600,8 @@ namespace Newtonsoft.Json.Utilities
             {
                 foreach (Type i in type.GetInterfaces())
                 {
-                    if (
-                        string.Equals(
-                            i.Name,
-                            fullTypeName,
-                            StringComparison.Ordinal
-                        )
-                    ) {
+                    if (string.Equals(i.Name, fullTypeName, StringComparison.Ordinal))
+                    {
                         match = type;
                         return true;
                     }
@@ -626,29 +617,18 @@ namespace Newtonsoft.Json.Utilities
             string fullTypeName,
             bool searchInterfaces
         ) {
-            return type.AssignableToTypeName(
-                fullTypeName,
-                searchInterfaces,
-                out _
-            );
+            return type.AssignableToTypeName(fullTypeName, searchInterfaces, out _);
         }
 
-        public static bool ImplementInterface(
-            this Type type,
-            Type interfaceType
-        ) {
-            for (
-                Type currentType = type;
-                currentType != null;
-                currentType = currentType.BaseType()
-            ) {
+        public static bool ImplementInterface(this Type type, Type interfaceType)
+        {
+            for (Type currentType = type; currentType != null; currentType = currentType.BaseType())
+            {
                 IEnumerable<Type> interfaces = currentType.GetInterfaces();
                 foreach (Type i in interfaces)
                 {
-                    if (
-                        i == interfaceType ||
-                        (i != null && i.ImplementInterface(interfaceType))
-                    ) {
+                    if (i == interfaceType || (i != null && i.ImplementInterface(interfaceType)))
+                    {
                         return true;
                     }
                 }

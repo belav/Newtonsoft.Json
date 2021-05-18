@@ -122,10 +122,7 @@ namespace Newtonsoft.Json
             DateFormatHandling format,
             DateTimeZoneHandling timeZoneHandling
         ) {
-            DateTime updatedDateTime = DateTimeUtils.EnsureDateTime(
-                value,
-                timeZoneHandling
-            );
+            DateTime updatedDateTime = DateTimeUtils.EnsureDateTime(value, timeZoneHandling);
 
             using (StringWriter writer = StringUtils.CreateStringWriter(64))
             {
@@ -278,10 +275,7 @@ namespace Newtonsoft.Json
         /// <returns>A JSON string representation of the <see cref="Single"/>.</returns>
         public static string ToString(float value)
         {
-            return EnsureDecimalPlace(
-                value,
-                value.ToString("R", CultureInfo.InvariantCulture)
-            );
+            return EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture));
         }
 
         internal static string ToString(
@@ -292,10 +286,7 @@ namespace Newtonsoft.Json
         ) {
             return EnsureFloatFormat(
                 value,
-                EnsureDecimalPlace(
-                    value,
-                    value.ToString("R", CultureInfo.InvariantCulture)
-                ),
+                EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)),
                 floatFormatHandling,
                 quoteChar,
                 nullable
@@ -310,8 +301,8 @@ namespace Newtonsoft.Json
             bool nullable
         ) {
             if (
-                floatFormatHandling == FloatFormatHandling.Symbol ||
-                !(double.IsInfinity(value) || double.IsNaN(value))
+                floatFormatHandling == FloatFormatHandling.Symbol
+                || !(double.IsInfinity(value) || double.IsNaN(value))
             ) {
                 return text;
             }
@@ -331,10 +322,7 @@ namespace Newtonsoft.Json
         /// <returns>A JSON string representation of the <see cref="Double"/>.</returns>
         public static string ToString(double value)
         {
-            return EnsureDecimalPlace(
-                value,
-                value.ToString("R", CultureInfo.InvariantCulture)
-            );
+            return EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture));
         }
 
         internal static string ToString(
@@ -345,10 +333,7 @@ namespace Newtonsoft.Json
         ) {
             return EnsureFloatFormat(
                 value,
-                EnsureDecimalPlace(
-                    value,
-                    value.ToString("R", CultureInfo.InvariantCulture)
-                ),
+                EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)),
                 floatFormatHandling,
                 quoteChar,
                 nullable
@@ -358,11 +343,11 @@ namespace Newtonsoft.Json
         private static string EnsureDecimalPlace(double value, string text)
         {
             if (
-                double.IsNaN(value) ||
-                double.IsInfinity(value) ||
-                text.IndexOf('.') != -1 ||
-                text.IndexOf('E') != -1 ||
-                text.IndexOf('e') != -1
+                double.IsNaN(value)
+                || double.IsInfinity(value)
+                || text.IndexOf('.') != -1
+                || text.IndexOf('E') != -1
+                || text.IndexOf('e') != -1
             ) {
                 return text;
             }
@@ -408,9 +393,7 @@ namespace Newtonsoft.Json
         /// <returns>A JSON string representation of the <see cref="Decimal"/>.</returns>
         public static string ToString(decimal value)
         {
-            return EnsureDecimalPlace(
-                value.ToString(null, CultureInfo.InvariantCulture)
-            );
+            return EnsureDecimalPlace(value.ToString(null, CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -534,9 +517,7 @@ namespace Newtonsoft.Json
                 return Null;
             }
 
-            PrimitiveTypeCode typeCode = ConvertUtils.GetTypeCode(
-                value.GetType()
-            );
+            PrimitiveTypeCode typeCode = ConvertUtils.GetTypeCode(value.GetType());
 
             switch (typeCode)
             {
@@ -619,15 +600,9 @@ namespace Newtonsoft.Json
         /// A JSON string representation of the object.
         /// </returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(
-            object? value,
-            Formatting formatting
-        ) {
-            return SerializeObject(
-                value,
-                formatting,
-                (JsonSerializerSettings?)null
-            );
+        public static string SerializeObject(object? value, Formatting formatting)
+        {
+            return SerializeObject(value, formatting, (JsonSerializerSettings?)null);
         }
 
         /// <summary>
@@ -637,12 +612,9 @@ namespace Newtonsoft.Json
         /// <param name="converters">A collection of converters used while serializing.</param>
         /// <returns>A JSON string representation of the object.</returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(
-            object? value,
-            params JsonConverter[] converters
-        ) {
-            JsonSerializerSettings? settings = (converters != null &&
-                converters.Length > 0)
+        public static string SerializeObject(object? value, params JsonConverter[] converters)
+        {
+            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
                 ? new JsonSerializerSettings { Converters = converters }
                 : null;
 
@@ -662,8 +634,7 @@ namespace Newtonsoft.Json
             Formatting formatting,
             params JsonConverter[] converters
         ) {
-            JsonSerializerSettings? settings = (converters != null &&
-                converters.Length > 0)
+            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
                 ? new JsonSerializerSettings { Converters = converters }
                 : null;
 
@@ -680,10 +651,8 @@ namespace Newtonsoft.Json
         /// A JSON string representation of the object.
         /// </returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(
-            object? value,
-            JsonSerializerSettings? settings
-        ) {
+        public static string SerializeObject(object? value, JsonSerializerSettings? settings)
+        {
             return SerializeObject(value, null, settings);
         }
 
@@ -707,9 +676,7 @@ namespace Newtonsoft.Json
             Type? type,
             JsonSerializerSettings? settings
         ) {
-            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(
-                settings
-            );
+            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
 
             return SerializeObjectInternal(value, type, jsonSerializer);
         }
@@ -755,9 +722,7 @@ namespace Newtonsoft.Json
             Formatting formatting,
             JsonSerializerSettings? settings
         ) {
-            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(
-                settings
-            );
+            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
             jsonSerializer.Formatting = formatting;
 
             return SerializeObjectInternal(value, type, jsonSerializer);
@@ -769,10 +734,7 @@ namespace Newtonsoft.Json
             JsonSerializer jsonSerializer
         ) {
             StringBuilder sb = new StringBuilder(256);
-            StringWriter sw = new StringWriter(
-                sb,
-                CultureInfo.InvariantCulture
-            );
+            StringWriter sw = new StringWriter(sb, CultureInfo.InvariantCulture);
             using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
             {
                 jsonWriter.Formatting = jsonSerializer.Formatting;
@@ -793,11 +755,7 @@ namespace Newtonsoft.Json
         [DebuggerStepThrough]
         public static object? DeserializeObject(string value)
         {
-            return DeserializeObject(
-                value,
-                null,
-                (JsonSerializerSettings?)null
-            );
+            return DeserializeObject(value, null, (JsonSerializerSettings?)null);
         }
 
         /// <summary>
@@ -810,10 +768,8 @@ namespace Newtonsoft.Json
         /// </param>
         /// <returns>The deserialized object from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static object? DeserializeObject(
-            string value,
-            JsonSerializerSettings settings
-        ) {
+        public static object? DeserializeObject(string value, JsonSerializerSettings settings)
+        {
             return DeserializeObject(value, null, settings);
         }
 
@@ -826,11 +782,7 @@ namespace Newtonsoft.Json
         [DebuggerStepThrough]
         public static object? DeserializeObject(string value, Type type)
         {
-            return DeserializeObject(
-                value,
-                type,
-                (JsonSerializerSettings?)null
-            );
+            return DeserializeObject(value, type, (JsonSerializerSettings?)null);
         }
 
         /// <summary>
@@ -857,10 +809,8 @@ namespace Newtonsoft.Json
         /// <param name="anonymousTypeObject">The anonymous type object.</param>
         /// <returns>The deserialized anonymous type from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static T? DeserializeAnonymousType<T>(
-            string value,
-            T anonymousTypeObject
-        ) {
+        public static T? DeserializeAnonymousType<T>(string value, T anonymousTypeObject)
+        {
             return DeserializeObject<T>(value);
         }
 
@@ -896,10 +846,8 @@ namespace Newtonsoft.Json
         /// <param name="converters">Converters to use while deserializing.</param>
         /// <returns>The deserialized object from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static T? DeserializeObject<T>(
-            string value,
-            params JsonConverter[] converters
-        ) {
+        public static T? DeserializeObject<T>(string value, params JsonConverter[] converters)
+        {
             return (T?)DeserializeObject(value, typeof(T), converters);
         }
 
@@ -914,10 +862,8 @@ namespace Newtonsoft.Json
         /// </param>
         /// <returns>The deserialized object from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static T? DeserializeObject<T>(
-            string value,
-            JsonSerializerSettings? settings
-        ) {
+        public static T? DeserializeObject<T>(string value, JsonSerializerSettings? settings)
+        {
             return (T?)DeserializeObject(value, typeof(T), settings);
         }
 
@@ -934,8 +880,7 @@ namespace Newtonsoft.Json
             Type type,
             params JsonConverter[] converters
         ) {
-            JsonSerializerSettings? settings = (converters != null &&
-                converters.Length > 0)
+            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
                 ? new JsonSerializerSettings { Converters = converters }
                 : null;
 
@@ -959,9 +904,7 @@ namespace Newtonsoft.Json
         ) {
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
-            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(
-                settings
-            );
+            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
 
             // by default DeserializeObject should check for additional content
             if (!jsonSerializer.IsCheckAdditionalContentSet())
@@ -969,11 +912,8 @@ namespace Newtonsoft.Json
                 jsonSerializer.CheckAdditionalContent = true;
             }
 
-            using (
-                JsonTextReader reader = new JsonTextReader(
-                    new StringReader(value)
-                )
-            ) {
+            using (JsonTextReader reader = new JsonTextReader(new StringReader(value)))
+            {
                 return jsonSerializer.Deserialize(reader, type);
             }
         }
@@ -1005,15 +945,10 @@ namespace Newtonsoft.Json
             object target,
             JsonSerializerSettings? settings
         ) {
-            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(
-                settings
-            );
+            JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
 
-            using (
-                JsonReader jsonReader = new JsonTextReader(
-                    new StringReader(value)
-                )
-            ) {
+            using (JsonReader jsonReader = new JsonTextReader(new StringReader(value)))
+            {
                 jsonSerializer.Populate(jsonReader, target);
 
                 if (settings != null && settings.CheckAdditionalContent)

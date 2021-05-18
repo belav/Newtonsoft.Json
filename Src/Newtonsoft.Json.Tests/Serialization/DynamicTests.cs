@@ -62,22 +62,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             d.Decimal = 99.9d;
             d.ChildObject = new DynamicChildObject();
 
-            Dictionary<string, object> values = new Dictionary<string,
-                object>();
+            Dictionary<string, object> values = new Dictionary<string, object>();
 
             IContractResolver c = DefaultContractResolver.Instance;
             JsonDynamicContract dynamicContract =
                 (JsonDynamicContract)c.ResolveContract(dynamicObject.GetType());
 
-            foreach (
-                string memberName in dynamicObject.GetDynamicMemberNames()
-            ) {
+            foreach (string memberName in dynamicObject.GetDynamicMemberNames())
+            {
                 object value;
-                dynamicContract.TryGetMember(
-                    dynamicObject,
-                    memberName,
-                    out value
-                );
+                dynamicContract.TryGetMember(dynamicObject, memberName, out value);
 
                 values.Add(memberName, value);
             }
@@ -86,10 +80,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(d.Decimal, values["Decimal"]);
             Assert.AreEqual(d.ChildObject, values["ChildObject"]);
 
-            string json = JsonConvert.SerializeObject(
-                dynamicObject,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(dynamicObject, Formatting.Indented);
             StringAssert.AreEqual(
                 @"{
   ""Explicit"": true,
@@ -112,10 +103,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(99.9, d.Decimal);
             Assert.AreEqual(1, d.Int);
-            Assert.AreEqual(
-                dynamicObject.ChildObject.Integer,
-                d.ChildObject.Integer
-            );
+            Assert.AreEqual(dynamicObject.ChildObject.Integer, d.ChildObject.Integer);
             Assert.AreEqual(dynamicObject.ChildObject.Text, d.ChildObject.Text);
         }
 
@@ -157,15 +145,15 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             StringAssert.AreEqual(
                 @"{
-  ""$type"": """ +
-                expandoObjectTypeName +
-                @""",
+  ""$type"": """
+                + expandoObjectTypeName
+                + @""",
   ""Text"": ""Text!"",
   ""Integer"": 2147483647,
   ""DynamicChildObject"": {
-    ""$type"": """ +
-                dynamicChildObjectTypeName +
-                @""",
+    ""$type"": """
+                + dynamicChildObjectTypeName
+                + @""",
     ""Text"": ""Child text!"",
     ""Integer"": -2147483648
   }
@@ -189,10 +177,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Text!", n.Text);
             Assert.AreEqual(int.MaxValue, n.Integer);
 
-            CustomAssert.IsInstanceOfType(
-                typeof(DynamicChildObject),
-                n.DynamicChildObject
-            );
+            CustomAssert.IsInstanceOfType(typeof(DynamicChildObject), n.DynamicChildObject);
             Assert.AreEqual("Child text!", n.DynamicChildObject.Text);
             Assert.AreEqual(int.MinValue, n.DynamicChildObject.Integer);
         }
@@ -210,10 +195,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""contributors"": null
 }";
 
-                    JsonConvert.DeserializeObject<DynamicObject>(
-                        json,
-                        settings
-                    );
+                    JsonConvert.DeserializeObject<DynamicObject>(json, settings);
                 },
                 "Unable to find a default constructor to use for type System.Dynamic.DynamicObject. Path 'contributors', line 2, position 17."
             );
@@ -232,10 +214,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Values = new Dictionary<string, object>();
             }
 
-            public override bool TrySetMember(
-                SetMemberBinder binder,
-                object value
-            ) {
+            public override bool TrySetMember(SetMemberBinder binder, object value)
+            {
                 Values[binder.Name] = value;
                 return true;
             }
@@ -325,10 +305,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = JsonConvert.SerializeObject(
                 o,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, }
             );
 
             StringAssert.AreEqual(
@@ -353,10 +330,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = JsonConvert.SerializeObject(
                 o,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Include,
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include, }
             );
 
             StringAssert.AreEqual(
@@ -385,19 +359,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = JsonConvert.SerializeObject(
                 o,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore,
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore, }
             );
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""Text"": ""Text!"",
   ""Int"": 2147483647
-}",
-                json
-            );
+}", json);
         }
     }
 
@@ -433,15 +401,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             return _members.Keys.Union(new[] { "Int", "ChildObject" });
         }
 
-        public override bool TryConvert(
-            ConvertBinder binder,
-            out object result
-        ) {
+        public override bool TryConvert(ConvertBinder binder, out object result)
+        {
             Type targetType = binder.Type;
 
             if (
-                targetType == typeof(IDictionary<string, object>) ||
-                targetType == typeof(IDictionary)
+                targetType == typeof(IDictionary<string, object>)
+                || targetType == typeof(IDictionary)
             ) {
                 result = new Dictionary<string, object>(_members);
                 return true;
@@ -457,17 +423,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             return _members.Remove(binder.Name);
         }
 
-        public override bool TryGetMember(
-            GetMemberBinder binder,
-            out object result
-        ) {
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
             return _members.TryGetValue(binder.Name, out result);
         }
 
-        public override bool TrySetMember(
-            SetMemberBinder binder,
-            object value
-        ) {
+        public override bool TrySetMember(SetMemberBinder binder, object value)
+        {
             _members[binder.Name] = value;
             return true;
         }
@@ -475,10 +437,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
     public class ErrorSettingDynamicObject : DynamicObject
     {
-        public override bool TrySetMember(
-            SetMemberBinder binder,
-            object value
-        ) {
+        public override bool TrySetMember(SetMemberBinder binder, object value)
+        {
             return false;
         }
     }

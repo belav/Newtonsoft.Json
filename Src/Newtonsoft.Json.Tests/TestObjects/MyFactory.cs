@@ -34,12 +34,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public static IMainClass InstantiateManiClass()
         {
-            return new MainClass
-            {
-                ID = 567,
-                Name = "XYZ",
-                Subclass = InstantiateSubclass()
-            };
+            return new MainClass { ID = 567, Name = "XYZ", Subclass = InstantiateSubclass() };
         }
     }
 }

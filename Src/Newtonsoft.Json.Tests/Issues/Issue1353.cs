@@ -42,15 +42,15 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            ConcurrentDictionary<string,
-                string> d1 = new ConcurrentDictionary<string, string>();
+            ConcurrentDictionary<string, string> d1 = new ConcurrentDictionary<string, string>();
             d1.TryAdd("key!", "value!");
 
             string json = JsonConvert.SerializeObject(d1, Formatting.Indented);
 
             ConcurrentDictionary<string,
-                string> d2 = JsonConvert.DeserializeObject<ConcurrentDictionary<string,
-                    string>>(json);
+                string> d2 = JsonConvert.DeserializeObject<ConcurrentDictionary<string, string>>(
+                json
+            );
 
             Assert.AreEqual(1, d2.Count);
             Assert.AreEqual("value!", d2["key!"]);

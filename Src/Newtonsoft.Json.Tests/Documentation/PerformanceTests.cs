@@ -78,10 +78,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             JsonContract contract = base.CreateContract(objectType);
 
             // this will only be called once and then cached
-            if (
-                objectType == typeof(DateTime) ||
-                objectType == typeof(DateTimeOffset)
-            ) {
+            if (objectType == typeof(DateTime) || objectType == typeof(DateTimeOffset))
+            {
                 contract.Converter = new JavaScriptDateTimeConverter();
             }
 
@@ -92,11 +90,8 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class PersonConverter : JsonConverter
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) { }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { }
 
         public override object ReadJson(
             JsonReader reader,
@@ -167,10 +162,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         {
             string json = JsonConvert.SerializeObject(
                 new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc),
-                new JsonSerializerSettings
-                {
-                    ContractResolver = ConverterContractResolver.Instance
-                }
+                new JsonSerializerSettings { ContractResolver = ConverterContractResolver.Instance }
             );
 
             Console.WriteLine(json);
@@ -197,8 +189,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             // read the json into a string
             // string could potentially be very large and cause memory problems
-            string json =
-                client.GetStringAsync("http://www.test.com/large.json").Result;
+            string json = client.GetStringAsync("http://www.test.com/large.json").Result;
 
             Person p = JsonConvert.DeserializeObject<Person>(json);
             #endregion
@@ -210,12 +201,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region DeserializeStream
             HttpClient client = new HttpClient();
 
-            using (
-                Stream s =
-                    client.GetStreamAsync(
-                        "http://www.test.com/large.json"
-                    ).Result
-            )
+            using (Stream s = client.GetStreamAsync("http://www.test.com/large.json").Result)
             using (StreamReader sr = new StreamReader(s))
             using (JsonReader reader = new JsonTextReader(sr))
             {

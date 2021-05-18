@@ -58,10 +58,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 AssemblyBuilderAccess.RunAndSave
             );
 
-            ModuleBuilder mb = ab.DefineDynamicModule(
-                aName.Name,
-                aName.Name + ".dll"
-            );
+            ModuleBuilder mb = ab.DefineDynamicModule(aName.Name, aName.Name + ".dll");
 
             TypeBuilder typeBuilder = mb.DefineType(
                 "TestEnum",
@@ -71,18 +68,16 @@ namespace Newtonsoft.Json.Tests.Issues
             typeBuilder.DefineField(
                 "value__",
                 typeof(int),
-                FieldAttributes.FamANDAssem |
-                FieldAttributes.Family |
-                FieldAttributes.SpecialName |
-                FieldAttributes.RTSpecialName
+                FieldAttributes.FamANDAssem
+                | FieldAttributes.Family
+                | FieldAttributes.SpecialName
+                | FieldAttributes.RTSpecialName
             );
 
             FieldBuilder fieldBuilder = typeBuilder.DefineField(
                 "TestValue",
                 typeBuilder,
-                FieldAttributes.Family |
-                FieldAttributes.Static |
-                FieldAttributes.Literal
+                FieldAttributes.Family | FieldAttributes.Static | FieldAttributes.Literal
             );
             fieldBuilder.SetConstant(0);
 
@@ -92,10 +87,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             string json = JsonConvert.SerializeObject(
                 o,
-                new JsonSerializerSettings
-                {
-                    Converters =  { new StringEnumConverter() }
-                }
+                new JsonSerializerSettings { Converters =  { new StringEnumConverter() } }
             );
             Assert.AreEqual(@"""TestValue""", json);
         }

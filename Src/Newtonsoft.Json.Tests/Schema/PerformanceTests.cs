@@ -137,12 +137,8 @@ namespace Newtonsoft.Json.Tests.Schema
             {
                 for (int i = 0; i < 5000; i++)
                 {
-                    JsonTextReader reader = new JsonTextReader(
-                        new StringReader(json)
-                    );
-                    JsonValidatingReader validatingReader = new JsonValidatingReader(
-                        reader
-                    );
+                    JsonTextReader reader = new JsonTextReader(new StringReader(json));
+                    JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
                     validatingReader.Schema = schema;
 
                     while (validatingReader.Read()) { }
@@ -157,9 +153,7 @@ namespace Newtonsoft.Json.Tests.Schema
         private readonly Action<TimeSpan> _callback;
 
         public PerformanceTester(string description)
-            : this(
-                ts => Console.WriteLine(description + ": " + ts.TotalSeconds)
-            ) { }
+            : this(ts => Console.WriteLine(description + ": " + ts.TotalSeconds)) { }
 
         public PerformanceTester(Action<TimeSpan> callback)
         {

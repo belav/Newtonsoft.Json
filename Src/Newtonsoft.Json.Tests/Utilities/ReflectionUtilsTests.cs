@@ -71,20 +71,14 @@ namespace Newtonsoft.Json.Tests.Utilities
                 TypeNameAssemblyFormatHandling.Simple,
                 null
             );
-            Assert.AreEqual(
-                "System.Collections.Generic.IList`1, mscorlib",
-                typeName
-            );
+            Assert.AreEqual("System.Collections.Generic.IList`1, mscorlib", typeName);
 
             typeName = ReflectionUtils.GetTypeName(
                 typeof(IDictionary<, >),
                 TypeNameAssemblyFormatHandling.Simple,
                 null
             );
-            Assert.AreEqual(
-                "System.Collections.Generic.IDictionary`2, mscorlib",
-                typeName
-            );
+            Assert.AreEqual("System.Collections.Generic.IDictionary`2, mscorlib", typeName);
         }
     }
 }

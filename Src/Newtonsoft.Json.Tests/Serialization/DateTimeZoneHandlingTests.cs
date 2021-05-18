@@ -56,18 +56,12 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DateTimeWrapper c1 = JsonConvert.DeserializeObject<DateTimeWrapper>(
                 json,
-                new JsonSerializerSettings()
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
-                }
+                new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
             );
 
             DateTimeWrapper c2 = JsonConvert.DeserializeObject<DateTimeWrapper>(
                 json,
-                new JsonSerializerSettings()
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Local
-                }
+                new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Local }
             );
 
             DateTimeWrapper c3 = JsonConvert.DeserializeObject<DateTimeWrapper>(
@@ -78,9 +72,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
             );
 
-            DateTimeWrapper c4 = JsonConvert.DeserializeObject<DateTimeWrapper>(
-                json
-            );
+            DateTimeWrapper c4 = JsonConvert.DeserializeObject<DateTimeWrapper>(json);
 
             Assert.AreEqual(DateTimeKind.Utc, c1.Value.Kind);
             Assert.AreEqual(DateTimeKind.Local, c2.Value.Kind);
@@ -100,19 +92,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DateTimeWrapper c1 = jo.ToObject<DateTimeWrapper>(
                 JsonSerializer.Create(
-                    new JsonSerializerSettings
-                    {
-                        DateTimeZoneHandling = DateTimeZoneHandling.Utc
-                    }
+                    new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
                 )
             );
 
             DateTimeWrapper c2 = jo.ToObject<DateTimeWrapper>(
                 JsonSerializer.Create(
-                    new JsonSerializerSettings
-                    {
-                        DateTimeZoneHandling = DateTimeZoneHandling.Local
-                    }
+                    new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Local }
                 )
             );
 

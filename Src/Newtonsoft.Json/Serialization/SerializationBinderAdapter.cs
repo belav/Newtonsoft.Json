@@ -35,9 +35,8 @@ namespace Newtonsoft.Json.Serialization
 #pragma warning restore 618
 
 #pragma warning disable 618
-        public SerializationBinderAdapter(
-            SerializationBinder serializationBinder
-        ) {
+        public SerializationBinderAdapter(SerializationBinder serializationBinder)
+        {
             SerializationBinder = serializationBinder;
         }
 #pragma warning restore 618
@@ -47,11 +46,8 @@ namespace Newtonsoft.Json.Serialization
             return SerializationBinder.BindToType(assemblyName, typeName);
         }
 
-        public void BindToName(
-            Type serializedType,
-            out string? assemblyName,
-            out string? typeName
-        ) {
+        public void BindToName(Type serializedType, out string? assemblyName, out string? typeName)
+        {
 #if HAVE_SERIALIZATION_BINDER_BIND_TO_NAME
             SerializationBinder.BindToName(serializedType, out assemblyName, out typeName);
 #else

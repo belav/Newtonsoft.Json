@@ -59,16 +59,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 _container = container;
             }
 
-            protected override JsonObjectContract CreateObjectContract(
-                Type objectType
-            ) {
+            protected override JsonObjectContract CreateObjectContract(Type objectType)
+            {
                 // use Autofac to create types that have been registered with it
                 if (_container.IsRegistered(objectType))
                 {
                     JsonObjectContract contract = ResolveContact(objectType);
-                    contract.DefaultCreator = () => _container.Resolve(
-                        objectType
-                    );
+                    contract.DefaultCreator = () => _container.Resolve(objectType);
 
                     return contract;
                 }
@@ -86,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                         out registration
                     )
                 ) {
-                    Type viewType =
-                        (registration.Activator as
-                        ReflectionActivator)?.LimitType;
+                    Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                     if (viewType != null)
                     {
                         return base.CreateObjectContract(viewType);
@@ -130,14 +125,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
-            builder.Register(c => new LogService(new DateTime(2000, 12, 12)))
-                .As<ILogger>();
+            builder.Register(c => new LogService(new DateTime(2000, 12, 12))).As<ILogger>();
 
             IContainer container = builder.Build();
 
-            AutofacContractResolver contractResolver = new AutofacContractResolver(
-                container
-            );
+            AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
             string json =
                 @"{
@@ -149,10 +141,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ITaskRespository and ILogger constructor parameters are injected by Autofac
             TaskController controller = JsonConvert.DeserializeObject<TaskController>(
                 json,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = contractResolver
-                }
+                new JsonSerializerSettings { ContractResolver = contractResolver }
             );
 
             Console.WriteLine(controller.Repository.GetType().Name);
@@ -162,10 +151,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Assert.IsNotNull(controller);
             Assert.IsNotNull(controller.Logger);
 
-            Assert.AreEqual(
-                new DateTime(2000, 12, 12),
-                controller.Logger.DateTime
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 12), controller.Logger.DateTime);
             Assert.AreEqual("Debug", controller.Logger.Level);
         }
     }

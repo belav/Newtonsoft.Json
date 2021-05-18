@@ -63,15 +63,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 {
                     FirstName = "Eric",
                     LastName = "Example",
-                    BirthDate = new DateTime(
-                        1980,
-                        4,
-                        20,
-                        0,
-                        0,
-                        0,
-                        DateTimeKind.Utc
-                    ),
+                    BirthDate = new DateTime(1980, 4, 20, 0, 0, 0, DateTimeKind.Utc),
                     Department = "IT",
                     JobTitle = "Web Dude"
                 };

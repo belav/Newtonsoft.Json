@@ -53,10 +53,8 @@ namespace Newtonsoft.Json.Linq
             get => _mergeArrayHandling;
             set
             {
-                if (
-                    value < MergeArrayHandling.Concat ||
-                    value > MergeArrayHandling.Merge
-                ) {
+                if (value < MergeArrayHandling.Concat || value > MergeArrayHandling.Merge)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -73,10 +71,8 @@ namespace Newtonsoft.Json.Linq
             get => _mergeNullValueHandling;
             set
             {
-                if (
-                    value < MergeNullValueHandling.Ignore ||
-                    value > MergeNullValueHandling.Merge
-                ) {
+                if (value < MergeNullValueHandling.Ignore || value > MergeNullValueHandling.Merge)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -96,8 +92,8 @@ namespace Newtonsoft.Json.Linq
             set
             {
                 if (
-                    value < StringComparison.CurrentCulture ||
-                    value > StringComparison.OrdinalIgnoreCase
+                    value < StringComparison.CurrentCulture
+                    || value > StringComparison.OrdinalIgnoreCase
                 ) {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }

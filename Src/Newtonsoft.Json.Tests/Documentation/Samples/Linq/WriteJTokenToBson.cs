@@ -48,11 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o = new JObject
-            {
-                { "name1", "value1" },
-                { "name2", "value2" }
-            };
+            JObject o = new JObject { { "name1", "value1" }, { "name2", "value2" } };
 
             MemoryStream ms = new MemoryStream();
             using (BsonWriter writer = new BsonWriter(ms))
@@ -66,10 +62,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=
             #endregion
 
-            Assert.AreEqual(
-                "KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=",
-                data
-            );
+            Assert.AreEqual("KQAAAAJuYW1lMQAHAAAAdmFsdWUxAAJuYW1lMgAHAAAAdmFsdWUyAAA=", data);
         }
 #pragma warning restore 618
     }

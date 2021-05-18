@@ -53,10 +53,7 @@ namespace Newtonsoft.Json.Linq
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
     /// </example>
-    public partial class JObject
-        : JContainer,
-            IDictionary<string, JToken?>,
-            INotifyPropertyChanged
+    public partial class JObject : JContainer, IDictionary<string, JToken?>, INotifyPropertyChanged
 #if HAVE_COMPONENT_MODEL
         , ICustomTypeDescriptor
 #endif
@@ -132,11 +129,8 @@ namespace Newtonsoft.Json.Linq
             return _properties.IndexOfReference(item);
         }
 
-        internal override bool InsertItem(
-            int index,
-            JToken? item,
-            bool skipParentCheck
-        ) {
+        internal override bool InsertItem(int index, JToken? item, bool skipParentCheck)
+        {
             // don't add comments to JObject, no name to reference comment by
             if (item != null && item.Type == JTokenType.Comment)
             {
@@ -185,10 +179,8 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal override void MergeItem(
-            object content,
-            JsonMergeSettings? settings
-        ) {
+        internal override void MergeItem(object content, JsonMergeSettings? settings)
+        {
             if (!(content is JObject o))
             {
                 return;
@@ -208,13 +200,13 @@ namespace Newtonsoft.Json.Linq
                 else if (contentItem.Value != null)
                 {
                     if (
-                        !(existingProperty.Value is JContainer existingContainer) ||
-                        existingContainer.Type != contentItem.Value.Type
+                        !(existingProperty.Value
+                            is JContainer existingContainer)
+                        || existingContainer.Type != contentItem.Value.Type
                     ) {
                         if (
-                            !IsNull(contentItem.Value) ||
-                            settings?.MergeNullValueHandling ==
-                            MergeNullValueHandling.Merge
+                            !IsNull(contentItem.Value)
+                            || settings?.MergeNullValueHandling == MergeNullValueHandling.Merge
                         ) {
                             existingProperty.Value = contentItem.Value;
                         }
@@ -389,24 +381,15 @@ namespace Newtonsoft.Json.Linq
         {
             get
             {
-                ValidationUtils.ArgumentNotNull(
-                    propertyName,
-                    nameof(propertyName)
-                );
+                ValidationUtils.ArgumentNotNull(propertyName, nameof(propertyName));
 
-                JProperty? property = Property(
-                    propertyName,
-                    StringComparison.Ordinal
-                );
+                JProperty? property = Property(propertyName, StringComparison.Ordinal);
 
                 return property?.Value;
             }
             set
             {
-                JProperty? property = Property(
-                    propertyName,
-                    StringComparison.Ordinal
-                );
+                JProperty? property = Property(propertyName, StringComparison.Ordinal);
                 if (property != null)
                 {
                     property.Value = value!;
@@ -445,10 +428,8 @@ namespace Newtonsoft.Json.Linq
         /// <exception cref="JsonReaderException">
         ///     <paramref name="reader"/> is not valid JSON.
         /// </exception>
-        public new static JObject Load(
-            JsonReader reader,
-            JsonLoadSettings? settings
-        ) {
+        public new static JObject Load(JsonReader reader, JsonLoadSettings? settings)
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
 
             if (reader.TokenType == JsonToken.None)
@@ -512,13 +493,10 @@ namespace Newtonsoft.Json.Linq
         /// <example>
         ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
         /// </example>
-        public new static JObject Parse(
-            string json,
-            JsonLoadSettings? settings
-        ) {
-            using (
-                JsonReader reader = new JsonTextReader(new StringReader(json))
-            ) {
+        public new static JObject Parse(string json, JsonLoadSettings? settings)
+        {
+            using (JsonReader reader = new JsonTextReader(new StringReader(json)))
+            {
                 JObject o = Load(reader, settings);
 
                 while (reader.Read())
@@ -546,10 +524,8 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JObject"/>.</param>
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the object.</param>
         /// <returns>A <see cref="JObject"/> with the values of the specified object.</returns>
-        public new static JObject FromObject(
-            object o,
-            JsonSerializer jsonSerializer
-        ) {
+        public new static JObject FromObject(object o, JsonSerializer jsonSerializer)
+        {
             JToken token = FromObjectInternal(o, jsonSerializer);
 
             if (token.Type != JTokenType.Object)
@@ -570,10 +546,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        public override void WriteTo(
-            JsonWriter writer,
-            params JsonConverter[] converters
-        ) {
+        public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
+        {
             writer.WriteStartObject();
 
             for (int i = 0; i < _properties.Count; i++)
@@ -602,10 +576,8 @@ namespace Newtonsoft.Json.Linq
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="comparison">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <returns>The <see cref="Newtonsoft.Json.Linq.JToken"/> with the specified property name.</returns>
-        public JToken? GetValue(
-            string? propertyName,
-            StringComparison comparison
-        ) {
+        public JToken? GetValue(string? propertyName, StringComparison comparison)
+        {
             if (propertyName == null)
             {
                 return null;
@@ -629,7 +601,8 @@ namespace Newtonsoft.Json.Linq
         public bool TryGetValue(
             string propertyName,
             StringComparison comparison,
-            [NotNullWhen(true)]out JToken? value
+            [NotNullWhen(true)]
+            out JToken? value
         ) {
             value = GetValue(propertyName, comparison);
             return (value != null);
@@ -658,8 +631,7 @@ namespace Newtonsoft.Json.Linq
             return _properties.Contains(propertyName);
         }
 
-        ICollection<string> IDictionary<string, JToken?>.Keys =>
-            _properties.Keys;
+        ICollection<string> IDictionary<string, JToken?>.Keys => _properties.Keys;
 
         /// <summary>
         /// Removes the property with the specified name.
@@ -668,10 +640,7 @@ namespace Newtonsoft.Json.Linq
         /// <returns><c>true</c> if item was successfully removed; otherwise, <c>false</c>.</returns>
         public bool Remove(string propertyName)
         {
-            JProperty? property = Property(
-                propertyName,
-                StringComparison.Ordinal
-            );
+            JProperty? property = Property(propertyName, StringComparison.Ordinal);
             if (property == null)
             {
                 return false;
@@ -687,14 +656,9 @@ namespace Newtonsoft.Json.Linq
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">The value.</param>
         /// <returns><c>true</c> if a value was successfully retrieved; otherwise, <c>false</c>.</returns>
-        public bool TryGetValue(
-            string propertyName,
-            [NotNullWhen(true)]out JToken? value
-        ) {
-            JProperty? property = Property(
-                propertyName,
-                StringComparison.Ordinal
-            );
+        public bool TryGetValue(string propertyName, [NotNullWhen(true)] out JToken? value)
+        {
+            JProperty? property = Property(propertyName, StringComparison.Ordinal);
             if (property == null)
             {
                 value = null;
@@ -711,9 +675,8 @@ namespace Newtonsoft.Json.Linq
         #endregion
 
         #region ICollection<KeyValuePair<string,JToken>> Members
-        void ICollection<KeyValuePair<string, JToken?>>.Add(
-            KeyValuePair<string, JToken?> item
-        ) {
+        void ICollection<KeyValuePair<string, JToken?>>.Add(KeyValuePair<string, JToken?> item)
+        {
             Add(new JProperty(item.Key, item.Value));
         }
 
@@ -722,9 +685,8 @@ namespace Newtonsoft.Json.Linq
             RemoveAll();
         }
 
-        bool ICollection<KeyValuePair<string, JToken?>>.Contains(
-            KeyValuePair<string, JToken?> item
-        ) {
+        bool ICollection<KeyValuePair<string, JToken?>>.Contains(KeyValuePair<string, JToken?> item)
+        {
             JProperty? property = Property(item.Key, StringComparison.Ordinal);
             if (property == null)
             {
@@ -775,14 +737,10 @@ namespace Newtonsoft.Json.Linq
 
         bool ICollection<KeyValuePair<string, JToken?>>.IsReadOnly => false;
 
-        bool ICollection<KeyValuePair<string, JToken?>>.Remove(
-            KeyValuePair<string, JToken?> item
-        ) {
-            if (
-                !((ICollection<KeyValuePair<string, JToken?>>)this).Contains(
-                    item
-                )
-            ) {
+        bool ICollection<KeyValuePair<string, JToken?>>.Remove(KeyValuePair<string, JToken?> item)
+        {
+            if (!((ICollection<KeyValuePair<string, JToken?>>)this).Contains(item))
+            {
                 return false;
             }
 
@@ -806,10 +764,7 @@ namespace Newtonsoft.Json.Linq
         {
             foreach (JProperty property in _properties)
             {
-                yield return new KeyValuePair<string, JToken?>(
-                    property.Name,
-                    property.Value
-                );
+                yield return new KeyValuePair<string, JToken?>(property.Name, property.Value);
             }
         }
 
@@ -819,10 +774,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(
-                this,
-                new PropertyChangedEventArgs(propertyName)
-            );
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 #if HAVE_INOTIFY_PROPERTY_CHANGING
         /// <summary>

@@ -299,11 +299,7 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (_syncRoot == null)
                 {
-                    Interlocked.CompareExchange(
-                        ref _syncRoot,
-                        new object(),
-                        null
-                    );
+                    Interlocked.CompareExchange(ref _syncRoot, new object(), null);
                 }
 
                 return _syncRoot;
@@ -328,10 +324,9 @@ namespace Newtonsoft.Json.Utilities
         private static bool IsCompatibleObject(object value)
         {
             if (
-                !(value is T) &&
-                (value != null ||
-                (typeof(T).IsValueType() &&
-                !ReflectionUtils.IsNullableType(typeof(T))))
+                !(value is T)
+                && (value != null
+                || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T))))
             ) {
                 return false;
             }
@@ -339,7 +334,6 @@ namespace Newtonsoft.Json.Utilities
             return true;
         }
 
-        public object UnderlyingCollection =>
-            (object)_genericCollection! ?? _list!;
+        public object UnderlyingCollection => (object)_genericCollection! ?? _list!;
     }
 }

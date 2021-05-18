@@ -61,9 +61,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               'ReleaseDate': null
             }";
 
-            Videogame starcraft = JsonConvert.DeserializeObject<Videogame>(
-                json
-            );
+            Videogame starcraft = JsonConvert.DeserializeObject<Videogame>(json);
 
             Console.WriteLine(starcraft.Name);
             // Starcraft III

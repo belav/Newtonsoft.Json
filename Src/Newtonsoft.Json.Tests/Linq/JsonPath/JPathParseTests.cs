@@ -52,15 +52,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             JPath path = new JPath("[?(1 > 2)]");
             Assert.AreEqual(1, path.Filters.Count);
             BooleanQueryExpression booleanExpression =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(1, (int)(JValue)booleanExpression.Left);
             Assert.AreEqual(2, (int)(JValue)booleanExpression.Right);
-            Assert.AreEqual(
-                QueryOperator.GreaterThan,
-                booleanExpression.Operator
-            );
+            Assert.AreEqual(QueryOperator.GreaterThan, booleanExpression.Operator);
         }
 
         [Test]
@@ -69,20 +64,13 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             JPath path = new JPath("[?(@.price > @.max_price)]");
             Assert.AreEqual(1, path.Filters.Count);
             BooleanQueryExpression booleanExpression =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
-            List<PathFilter> leftPaths =
-                (List<PathFilter>)booleanExpression.Left;
-            List<PathFilter> rightPaths =
-                (List<PathFilter>)booleanExpression.Right;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
+            List<PathFilter> leftPaths = (List<PathFilter>)booleanExpression.Left;
+            List<PathFilter> rightPaths = (List<PathFilter>)booleanExpression.Right;
 
             Assert.AreEqual("price", ((FieldFilter)leftPaths[0]).Name);
             Assert.AreEqual("max_price", ((FieldFilter)rightPaths[0]).Name);
-            Assert.AreEqual(
-                QueryOperator.GreaterThan,
-                booleanExpression.Operator
-            );
+            Assert.AreEqual(QueryOperator.GreaterThan, booleanExpression.Operator);
         }
 
         [Test]
@@ -254,9 +242,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual("elements", ((FieldFilter)path.Filters[0]).Name);
 
             BooleanQueryExpression expression =
-                (BooleanQueryExpression)((QueryScanFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryScanFilter)path.Filters[1]).Expression;
 
             List<PathFilter> paths = (List<PathFilter>)expression.Left;
 
@@ -313,9 +299,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Exists, expressions.Operator);
             List<PathFilter> paths = (List<PathFilter>)expressions.Left;
             Assert.AreEqual(1, paths.Count);
@@ -329,9 +313,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual("hi", (string)(JToken)expressions.Right);
         }
@@ -343,9 +325,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual("h'i", (string)(JToken)expressions.Right);
         }
@@ -357,9 +337,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual("h\\i", (string)(JToken)expressions.Right);
         }
@@ -371,9 +349,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.RegexEquals, expressions.Operator);
             Assert.AreEqual("/hi/i", (string)(JToken)expressions.Right);
         }
@@ -385,9 +361,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.RegexEquals, expressions.Operator);
             Assert.AreEqual("/^.*Sword.*$/", (string)(JToken)expressions.Right);
         }
@@ -395,15 +369,11 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void SinglePropertyAndFilterWithEscapedRegex()
         {
-            JPath path = new JPath(
-                @"Blah[?(@.title =~ /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g)]"
-            );
+            JPath path = new JPath(@"Blah[?(@.title =~ /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g)]");
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.RegexEquals, expressions.Operator);
             Assert.AreEqual(
                 @"/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g",
@@ -442,9 +412,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual(false, (bool)(JToken)expressions.Right);
         }
@@ -456,9 +424,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual(true, (bool)(JToken)expressions.Right);
         }
@@ -470,9 +436,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(2, path.Filters.Count);
             Assert.AreEqual("Blah", ((FieldFilter)path.Filters[0]).Name);
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    1
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[1]).Expression;
             Assert.AreEqual(QueryOperator.Equals, expressions.Operator);
             Assert.AreEqual(null, ((JValue)expressions.Right).Value);
         }
@@ -482,9 +446,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@..name<>null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             List<PathFilter> paths = (List<PathFilter>)expressions.Left;
             Assert.AreEqual("name", ((ScanFilter)paths[0]).Name);
         }
@@ -494,9 +456,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name<>null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(QueryOperator.NotEquals, expressions.Operator);
         }
 
@@ -505,9 +465,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name!=null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(QueryOperator.NotEquals, expressions.Operator);
         }
 
@@ -516,9 +474,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name<null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(QueryOperator.LessThan, expressions.Operator);
         }
 
@@ -527,13 +483,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name<=null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
-            Assert.AreEqual(
-                QueryOperator.LessThanOrEquals,
-                expressions.Operator
-            );
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
+            Assert.AreEqual(QueryOperator.LessThanOrEquals, expressions.Operator);
         }
 
         [Test]
@@ -541,9 +492,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(QueryOperator.GreaterThan, expressions.Operator);
         }
 
@@ -552,13 +501,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>=null)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
-            Assert.AreEqual(
-                QueryOperator.GreaterThanOrEquals,
-                expressions.Operator
-            );
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
+            Assert.AreEqual(QueryOperator.GreaterThanOrEquals, expressions.Operator);
         }
 
         [Test]
@@ -566,9 +510,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>=12)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(12, (int)(JToken)expressions.Right);
         }
 
@@ -577,9 +519,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>=-12)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(-12, (int)(JToken)expressions.Right);
         }
 
@@ -588,9 +528,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>=12.1)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(12.1d, (double)(JToken)expressions.Right);
         }
 
@@ -628,8 +566,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual("name", ((FieldFilter)firstPaths[0]).Name);
             Assert.AreEqual(QueryOperator.Exists, first.Operator);
 
-            CompositeExpression orExpression =
-                (CompositeExpression)andExpression.Expressions[1];
+            CompositeExpression orExpression = (CompositeExpression)andExpression.Expressions[1];
             Assert.AreEqual(2, orExpression.Expressions.Count);
 
             var orFirst = (BooleanQueryExpression)orExpression.Expressions[0];
@@ -648,9 +585,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?($.name>=12.1)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             List<PathFilter> paths = (List<PathFilter>)expressions.Left;
             Assert.AreEqual(2, paths.Count);
             Assert.IsInstanceOf(typeof(RootFilter), paths[0]);
@@ -734,9 +669,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[?(@.name>=5.56789e+0)]");
             BooleanQueryExpression expressions =
-                (BooleanQueryExpression)((QueryFilter)path.Filters[
-                    0
-                ]).Expression;
+                (BooleanQueryExpression)((QueryFilter)path.Filters[0]).Expression;
             Assert.AreEqual(5.56789e+0, (double)(JToken)expressions.Right);
         }
 
@@ -782,10 +715,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[111119990]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                111119990,
-                ((ArrayIndexFilter)path.Filters[0]).Index
-            );
+            Assert.AreEqual(111119990, ((ArrayIndexFilter)path.Filters[0]).Index);
         }
 
         [Test]
@@ -801,18 +731,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[111119990,3]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                2,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes.Count
-            );
-            Assert.AreEqual(
-                111119990,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[0]
-            );
-            Assert.AreEqual(
-                3,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[1]
-            );
+            Assert.AreEqual(2, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes.Count);
+            Assert.AreEqual(111119990, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[0]);
+            Assert.AreEqual(3, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[1]);
         }
 
         [Test]
@@ -820,18 +741,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[   111119990  ,   3   ]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                2,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes.Count
-            );
-            Assert.AreEqual(
-                111119990,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[0]
-            );
-            Assert.AreEqual(
-                3,
-                ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[1]
-            );
+            Assert.AreEqual(2, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes.Count);
+            Assert.AreEqual(111119990, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[0]);
+            Assert.AreEqual(3, ((ArrayMultipleIndexFilter)path.Filters[0]).Indexes[1]);
         }
 
         [Test]
@@ -839,18 +751,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("['111119990','3']");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                2,
-                ((FieldMultipleFilter)path.Filters[0]).Names.Count
-            );
-            Assert.AreEqual(
-                "111119990",
-                ((FieldMultipleFilter)path.Filters[0]).Names[0]
-            );
-            Assert.AreEqual(
-                "3",
-                ((FieldMultipleFilter)path.Filters[0]).Names[1]
-            );
+            Assert.AreEqual(2, ((FieldMultipleFilter)path.Filters[0]).Names.Count);
+            Assert.AreEqual("111119990", ((FieldMultipleFilter)path.Filters[0]).Names[0]);
+            Assert.AreEqual("3", ((FieldMultipleFilter)path.Filters[0]).Names[1]);
         }
 
         [Test]
@@ -858,18 +761,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[ '111119990' , '3' ]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                2,
-                ((FieldMultipleFilter)path.Filters[0]).Names.Count
-            );
-            Assert.AreEqual(
-                "111119990",
-                ((FieldMultipleFilter)path.Filters[0]).Names[0]
-            );
-            Assert.AreEqual(
-                "3",
-                ((FieldMultipleFilter)path.Filters[0]).Names[1]
-            );
+            Assert.AreEqual(2, ((FieldMultipleFilter)path.Filters[0]).Names.Count);
+            Assert.AreEqual("111119990", ((FieldMultipleFilter)path.Filters[0]).Names[0]);
+            Assert.AreEqual("3", ((FieldMultipleFilter)path.Filters[0]).Names[1]);
         }
 
         [Test]
@@ -877,10 +771,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[111119990:3:2]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                111119990,
-                ((ArraySliceFilter)path.Filters[0]).Start
-            );
+            Assert.AreEqual(111119990, ((ArraySliceFilter)path.Filters[0]).Start);
             Assert.AreEqual(3, ((ArraySliceFilter)path.Filters[0]).End);
             Assert.AreEqual(2, ((ArraySliceFilter)path.Filters[0]).Step);
         }
@@ -890,10 +781,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[111119990:3]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                111119990,
-                ((ArraySliceFilter)path.Filters[0]).Start
-            );
+            Assert.AreEqual(111119990, ((ArraySliceFilter)path.Filters[0]).Start);
             Assert.AreEqual(3, ((ArraySliceFilter)path.Filters[0]).End);
             Assert.AreEqual(null, ((ArraySliceFilter)path.Filters[0]).Step);
         }
@@ -903,10 +791,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[-111119990:-3:-2]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                -111119990,
-                ((ArraySliceFilter)path.Filters[0]).Start
-            );
+            Assert.AreEqual(-111119990, ((ArraySliceFilter)path.Filters[0]).Start);
             Assert.AreEqual(-3, ((ArraySliceFilter)path.Filters[0]).End);
             Assert.AreEqual(-2, ((ArraySliceFilter)path.Filters[0]).Step);
         }
@@ -936,10 +821,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JPath path = new JPath("[  -111119990  :  -3  :  -2  ]");
             Assert.AreEqual(1, path.Filters.Count);
-            Assert.AreEqual(
-                -111119990,
-                ((ArraySliceFilter)path.Filters[0]).Start
-            );
+            Assert.AreEqual(-111119990, ((ArraySliceFilter)path.Filters[0]).Start);
             Assert.AreEqual(-3, ((ArraySliceFilter)path.Filters[0]).End);
             Assert.AreEqual(-2, ((ArraySliceFilter)path.Filters[0]).Step);
         }
@@ -976,10 +858,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.AreEqual(1, ((ArrayIndexFilter)path.Filters[0]).Index);
             Assert.AreEqual(0, ((ArrayIndexFilter)path.Filters[1]).Index);
             Assert.AreEqual(0, ((ArrayIndexFilter)path.Filters[2]).Index);
-            Assert.AreEqual(
-                int.MaxValue,
-                ((ArrayIndexFilter)path.Filters[3]).Index
-            );
+            Assert.AreEqual(int.MaxValue, ((ArrayIndexFilter)path.Filters[3]).Index);
         }
 
         [Test]
@@ -1004,14 +883,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             Assert.AreEqual("frameworks", ((FieldFilter)path.Filters[0]).Name);
             Assert.AreEqual("dnxcore50", ((FieldFilter)path.Filters[1]).Name);
-            Assert.AreEqual(
-                "dependencies",
-                ((FieldFilter)path.Filters[2]).Name
-            );
-            Assert.AreEqual(
-                "System.Xml.ReaderWriter",
-                ((FieldFilter)path.Filters[3]).Name
-            );
+            Assert.AreEqual("dependencies", ((FieldFilter)path.Filters[2]).Name);
+            Assert.AreEqual("System.Xml.ReaderWriter", ((FieldFilter)path.Filters[3]).Name);
             Assert.AreEqual("source", ((FieldFilter)path.Filters[4]).Name);
         }
     }

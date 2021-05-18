@@ -111,11 +111,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 if (reader.Value != null)
                 {
-                    Console.WriteLine(
-                        "Token: {0}, Value: {1}",
-                        reader.TokenType,
-                        reader.Value
-                    );
+                    Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
                 }
                 else
                 {
@@ -148,11 +144,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             );
 
             JsonSerializer serializer = new JsonSerializer();
-            Person p =
-                (Person)serializer.Deserialize(
-                    new JTokenReader(o),
-                    typeof(Person)
-                );
+            Person p = (Person)serializer.Deserialize(new JTokenReader(o), typeof(Person));
 
             Console.WriteLine(p.Name);
             // John Smith

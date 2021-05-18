@@ -44,9 +44,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task LoadAsync()
         {
-            JsonReader reader = new JsonTextReader(
-                new StringReader("{'propertyname':['value1']}")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader("{'propertyname':['value1']}"));
             await reader.ReadAsync();
 
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -54,15 +52,11 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JProperty property = await JProperty.LoadAsync(reader);
             Assert.AreEqual("propertyname", property.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(JArray.Parse("['value1']"), property.Value)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JArray.Parse("['value1']"), property.Value));
 
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
 
-            reader = new JsonTextReader(
-                new StringReader("{'propertyname':null}")
-            );
+            reader = new JsonTextReader(new StringReader("{'propertyname':null}"));
             await reader.ReadAsync();
 
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -70,9 +64,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             property = await JProperty.LoadAsync(reader);
             Assert.AreEqual("propertyname", property.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), property.Value)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), property.Value));
 
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }

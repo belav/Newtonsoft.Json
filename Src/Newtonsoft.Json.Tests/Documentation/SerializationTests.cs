@@ -83,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  ]
             //}
 
-            Product deserializedProduct = JsonConvert.DeserializeObject<Product>(
-                output
-            );
+            Product deserializedProduct = JsonConvert.DeserializeObject<Product>(output);
             #endregion
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
@@ -216,9 +214,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             Console.WriteLine(obj.Member4);
             // null
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(json);
 
             Console.WriteLine(obj.Member1);
             // 11
@@ -270,10 +266,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // Cannot convert null value to System.DateTime.
             #endregion
 
-            Assert.AreEqual(
-                new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc),
-                c[0]
-            );
+            Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
         }
 
         [Test]
@@ -319,10 +312,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             public string Title { get; set; }
 
             [OnError]
-            internal void OnError(
-                StreamingContext context,
-                ErrorContext errorContext
-            ) {
+            internal void OnError(StreamingContext context, ErrorContext errorContext)
+            {
                 errorContext.Handled = true;
             }
         }
@@ -340,10 +331,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Title = "Mister Manager"
             };
 
-            string json = JsonConvert.SerializeObject(
-                person,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(person, Formatting.Indented);
 
             Console.WriteLine(json);
             //{
@@ -369,24 +357,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region PreservingObjectReferencesOff
             Person p = new Person
             {
-                BirthDate = new DateTime(
-                    1980,
-                    12,
-                    23,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
-                LastModified = new DateTime(
-                    2009,
-                    2,
-                    20,
-                    12,
-                    59,
-                    21,
-                    DateTimeKind.Utc
-                ),
+                BirthDate = new DateTime(1980, 12, 23, 0, 0, 0, DateTimeKind.Utc),
+                LastModified = new DateTime(2009, 2, 20, 12, 59, 21, DateTimeKind.Utc),
                 Name = "James"
             };
 
@@ -394,10 +366,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             people.Add(p);
             people.Add(p);
 
-            string json = JsonConvert.SerializeObject(
-                people,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(people, Formatting.Indented);
             //[
             //  {
             //    "Name": "James",
@@ -586,15 +555,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region ContractResolver
             Product product = new Product
             {
-                ExpiryDate = new DateTime(
-                    2010,
-                    12,
-                    20,
-                    18,
-                    1,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
                 Sizes = new[] { "Small", "Medium", "Large" }
@@ -644,39 +605,20 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 Name = "Product 1",
                 Price = 99.95m,
-                ExpiryDate = new DateTime(
-                    2000,
-                    12,
-                    29,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                ExpiryDate = new DateTime(2000, 12, 29, 0, 0, 0, DateTimeKind.Utc),
             };
             Product p2 = new Product
             {
                 Name = "Product 2",
                 Price = 12.50m,
-                ExpiryDate = new DateTime(
-                    2009,
-                    7,
-                    31,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                ExpiryDate = new DateTime(2009, 7, 31, 0, 0, 0, DateTimeKind.Utc),
             };
 
             List<Product> products = new List<Product>();
             products.Add(p1);
             products.Add(p2);
 
-            string json = JsonConvert.SerializeObject(
-                products,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             //[
             //  {
             //    "Name": "Product 1",
@@ -732,9 +674,7 @@ namespace Newtonsoft.Json.Tests.Documentation
               }
             ]";
 
-            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(
-                json
-            );
+            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
 
             Console.WriteLine(products.Count);
             // 2
@@ -754,8 +694,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region SerializingCollectionsDeserializingDictionaries
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string,
-                string> values = JsonConvert.DeserializeObject<Dictionary<string,
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string,
                     string>>(json);
 
             Console.WriteLine(values.Count);
@@ -792,10 +731,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
             };
-            string microsoftJson = JsonConvert.SerializeObject(
-                entry,
-                microsoftDateFormatSettings
-            );
+            string microsoftJson = JsonConvert.SerializeObject(entry, microsoftDateFormatSettings);
             // {"Details":"Application started.","LogDate":"\/Date(1234656000000)\/"}
 
             string javascriptJson = JsonConvert.SerializeObject(
@@ -877,10 +813,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string ignored = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                }
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }
             );
 
             // {
@@ -962,10 +895,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string ignored = JsonConvert.SerializeObject(
                 invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                }
+                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
             );
 
             // {
@@ -1009,17 +939,11 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Type type,
                 MemberSerialization memberSerialization
             ) {
-                IList<JsonProperty> properties = base.CreateProperties(
-                    type,
-                    memberSerialization
-                );
+                IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
                 // only serializer properties that start with the specified character
                 properties = properties.Where(
-                        p =>
-                            p.PropertyName.StartsWith(
-                                _startingWithChar.ToString()
-                            )
+                        p => p.PropertyName.StartsWith(_startingWithChar.ToString())
                     )
                     .ToList();
 
@@ -1053,10 +977,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string startingWithA = JsonConvert.SerializeObject(
                 book,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new DynamicContractResolver('A')
-                }
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('A') }
             );
 
             // {
@@ -1068,10 +989,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string startingWithB = JsonConvert.SerializeObject(
                 book,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new DynamicContractResolver('B')
-                }
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('B') }
             );
 
             // {
@@ -1167,9 +1085,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             JObject googleSearch = JObject.Parse(googleSearchText);
 
             // get JSON result objects into a list
-            IList<JToken> results = googleSearch["responseData"][
-                "results"
-            ].Children().ToList();
+            IList<JToken> results = googleSearch["responseData"]["results"].Children().ToList();
 
             // serialize JSON results into .NET objects
             IList<SearchResult> searchResults = new List<SearchResult>();
@@ -1207,10 +1123,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                     { "Han", "Leia" }
                 };
 
-            string json = JsonConvert.SerializeObject(
-                famousCouples,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(famousCouples, Formatting.Indented);
             // [
             //   ["Adam", "Eve"],
             //   ["Bonnie", "Clyde"],
@@ -1218,9 +1131,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //   ["Han", "Leia"]
             // ]
 
-            string[,] deserialized = JsonConvert.DeserializeObject<string[,]>(
-                json
-            );
+            string[,] deserialized = JsonConvert.DeserializeObject<string[,]>(json);
 
             Console.WriteLine(deserialized[3, 0] + ", " + deserialized[3, 1]);
             // Han, Leia

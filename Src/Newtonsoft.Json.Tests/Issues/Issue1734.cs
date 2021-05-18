@@ -50,11 +50,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XmlNode()
         {
-            XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(
-                JsonWithoutNamespace,
-                "",
-                true
-            );
+            XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(JsonWithoutNamespace, "", true);
 
             StringAssert.AreEqual(
                 @"<Test_Service>
@@ -93,11 +89,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 IndentXml(xmlDoc.OuterXml)
             );
 
-            xmlDoc = JsonConvert.DeserializeXmlNode(
-                JsonWithNamespace,
-                "",
-                true
-            );
+            xmlDoc = JsonConvert.DeserializeXmlNode(JsonWithNamespace, "", true);
 
             StringAssert.AreEqual(
                 @"<ns3:Test_Service xmlns:ns3=""http://www.CCKS.org/XRT/Form"">
@@ -144,11 +136,7 @@ namespace Newtonsoft.Json.Tests.Issues
             StringWriter sw = new StringWriter();
             XmlWriter writer = XmlWriter.Create(
                 sw,
-                new XmlWriterSettings
-                {
-                    Indent = true,
-                    OmitXmlDeclaration = true
-                }
+                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
             );
 
             while (reader.Read())
@@ -166,11 +154,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_XNode()
         {
-            XDocument xmlDoc = JsonConvert.DeserializeXNode(
-                JsonWithoutNamespace,
-                "",
-                true
-            );
+            XDocument xmlDoc = JsonConvert.DeserializeXNode(JsonWithoutNamespace, "", true);
 
             string xml = xmlDoc.ToString();
             StringAssert.AreEqual(

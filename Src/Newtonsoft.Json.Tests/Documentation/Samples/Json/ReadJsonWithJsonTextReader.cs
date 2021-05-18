@@ -62,11 +62,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             {
                 if (reader.Value != null)
                 {
-                    Console.WriteLine(
-                        "Token: {0}, Value: {1}",
-                        reader.TokenType,
-                        reader.Value
-                    );
+                    Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
                 }
                 else
                 {

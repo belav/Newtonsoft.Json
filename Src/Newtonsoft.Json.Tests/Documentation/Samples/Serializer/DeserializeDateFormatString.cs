@@ -67,18 +67,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // Wednesday, 10 February 2010
             #endregion
 
-            Assert.AreEqual(
-                new DateTime(2009, 12, 7, 0, 0, 0, DateTimeKind.Utc),
-                dateList[0]
-            );
-            Assert.AreEqual(
-                new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc),
-                dateList[1]
-            );
-            Assert.AreEqual(
-                new DateTime(2010, 2, 10, 0, 0, 0, DateTimeKind.Utc),
-                dateList[2]
-            );
+            Assert.AreEqual(new DateTime(2009, 12, 7, 0, 0, 0, DateTimeKind.Utc), dateList[0]);
+            Assert.AreEqual(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc), dateList[1]);
+            Assert.AreEqual(new DateTime(2010, 2, 10, 0, 0, 0, DateTimeKind.Utc), dateList[2]);
         }
     }
 }

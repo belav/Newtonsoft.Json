@@ -55,10 +55,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JsonContract contract = base.CreateContract(objectType);
 
                 // create a dynamic mock object for interfaces or abstract classes
-                if (
-                    contract.CreatedType.IsInterface ||
-                    contract.CreatedType.IsAbstract
-                ) {
+                if (contract.CreatedType.IsInterface || contract.CreatedType.IsAbstract)
+                {
                     contract.DefaultCreator = () => DynamicConcrete.GetInstanceFor(
                         contract.CreatedType
                     );
@@ -160,8 +158,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             lock (DynamicAssembly)
             {
                 var constructedType =
-                    DynamicAssembly.GetType(ProxyName(targetType)) ??
-                    GetConstructedType(targetType);
+                    DynamicAssembly.GetType(ProxyName(targetType))
+                    ?? GetConstructedType(targetType);
                 var instance = Activator.CreateInstance(constructedType);
                 return instance;
             }
@@ -179,9 +177,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 assemblyName,
                 AssemblyBuilderAccess.RunAndSave
             );
-            ModuleBuilder = DynamicAssembly.DefineDynamicModule(
-                "DynImplModule"
-            );
+            ModuleBuilder = DynamicAssembly.DefineDynamicModule("DynImplModule");
         }
 
         static Type GetConstructedType(Type targetType)
@@ -244,9 +240,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         static void BindMethod(TypeBuilder typeBuilder, MethodInfo methodInfo)
         {
-            var args = methodInfo.GetParameters()
-                .Select(p => p.ParameterType)
-                .ToArray();
+            var args = methodInfo.GetParameters().Select(p => p.ParameterType).ToArray();
             var methodBuilder = typeBuilder.DefineMethod(
                 methodInfo.Name,
                 MethodAttributes.Public | MethodAttributes.Virtual,
@@ -266,10 +260,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     methodILGen.Emit(OpCodes.Ldc_I4_0);
                 }
-                else if (
-                    methodInfo.ReturnType.IsValueType ||
-                    methodInfo.ReturnType.IsEnum
-                ) {
+                else if (methodInfo.ReturnType.IsValueType || methodInfo.ReturnType.IsEnum)
+                {
                     var getMethod = typeof(Activator).GetMethod(
                         "CreateInstance",
                         new[] { typeof(Type) }
@@ -278,10 +270,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     if (lb.LocalType != null)
                     {
                         methodILGen.Emit(OpCodes.Ldtoken, lb.LocalType);
-                        methodILGen.Emit(
-                            OpCodes.Call,
-                            typeof(Type).GetMethod("GetTypeFromHandle")
-                        );
+                        methodILGen.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle"));
                         methodILGen.Emit(OpCodes.Callvirt, getMethod);
                         methodILGen.Emit(OpCodes.Unbox_Any, lb.LocalType);
                     }
@@ -298,10 +287,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         /// <summary>
         /// Bind a new property into a type builder with getters and setters.
         /// </summary>
-        public static void BindProperty(
-            TypeBuilder typeBuilder,
-            MethodInfo methodInfo
-        ) {
+        public static void BindProperty(TypeBuilder typeBuilder, MethodInfo methodInfo)
+        {
             // Backing Field
             var propertyName = methodInfo.Name.Replace("get_", "");
             var propertyType = methodInfo.ReturnType;
@@ -314,10 +301,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             //Getter
             var backingGet = typeBuilder.DefineMethod(
                 "get_" + propertyName,
-                MethodAttributes.Public |
-                MethodAttributes.SpecialName |
-                MethodAttributes.Virtual |
-                MethodAttributes.HideBySig,
+                MethodAttributes.Public
+                | MethodAttributes.SpecialName
+                | MethodAttributes.Virtual
+                | MethodAttributes.HideBySig,
                 propertyType,
                 Type.EmptyTypes
             );
@@ -330,10 +317,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             //Setter
             var backingSet = typeBuilder.DefineMethod(
                 "set_" + propertyName,
-                MethodAttributes.Public |
-                MethodAttributes.SpecialName |
-                MethodAttributes.Virtual |
-                MethodAttributes.HideBySig,
+                MethodAttributes.Public
+                | MethodAttributes.SpecialName
+                | MethodAttributes.Virtual
+                | MethodAttributes.HideBySig,
                 null,
                 new[] { propertyType }
             );

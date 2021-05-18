@@ -34,8 +34,7 @@ namespace Newtonsoft.Json.Converters
     /// </summary>
     public class IsoDateTimeConverter : DateTimeConverterBase
     {
-        private const string DefaultDateTimeFormat =
-            "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+        private const string DefaultDateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
         private DateTimeStyles _dateTimeStyles = DateTimeStyles.RoundtripKind;
         private string? _dateTimeFormat;
@@ -58,10 +57,7 @@ namespace Newtonsoft.Json.Converters
         public string? DateTimeFormat
         {
             get => _dateTimeFormat ?? string.Empty;
-            set =>
-                _dateTimeFormat = (StringUtils.IsNullOrEmpty(value))
-                    ? null
-                    : value;
+            set => _dateTimeFormat = (StringUtils.IsNullOrEmpty(value)) ? null : value;
         }
 
         /// <summary>
@@ -80,28 +76,22 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             string text;
 
             if (value is DateTime dateTime)
             {
                 if (
-                    (_dateTimeStyles & DateTimeStyles.AdjustToUniversal) ==
-                    DateTimeStyles.AdjustToUniversal ||
-                    (_dateTimeStyles & DateTimeStyles.AssumeUniversal) ==
-                    DateTimeStyles.AssumeUniversal
+                    (_dateTimeStyles & DateTimeStyles.AdjustToUniversal)
+                    == DateTimeStyles.AdjustToUniversal
+                    || (_dateTimeStyles & DateTimeStyles.AssumeUniversal)
+                    == DateTimeStyles.AssumeUniversal
                 ) {
                     dateTime = dateTime.ToUniversalTime();
                 }
 
-                text = dateTime.ToString(
-                    _dateTimeFormat ?? DefaultDateTimeFormat,
-                    Culture
-                );
+                text = dateTime.ToString(_dateTimeFormat ?? DefaultDateTimeFormat, Culture);
             }
 #if HAVE_DATE_TIME_OFFSET
             else if (value is DateTimeOffset dateTimeOffset)
@@ -217,12 +207,7 @@ namespace Newtonsoft.Json.Converters
 
             if (!StringUtils.IsNullOrEmpty(_dateTimeFormat))
             {
-                return DateTime.ParseExact(
-                    dateText,
-                    _dateTimeFormat,
-                    Culture,
-                    _dateTimeStyles
-                );
+                return DateTime.ParseExact(dateText, _dateTimeFormat, Culture, _dateTimeStyles);
             }
             else
             {

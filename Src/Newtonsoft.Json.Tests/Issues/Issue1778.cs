@@ -54,9 +54,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"{""enddate"":-1}")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"{""enddate"":-1}"));
             reader.Read();
             reader.Read();
 
@@ -70,9 +68,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public async Task Test_Async()
         {
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"{""enddate"":-1}")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"{""enddate"":-1}"));
             reader.Read();
             reader.Read();
 

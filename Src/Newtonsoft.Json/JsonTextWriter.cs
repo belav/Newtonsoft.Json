@@ -94,9 +94,7 @@ namespace Newtonsoft.Json
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(
-                        "Indentation value must be greater than 0."
-                    );
+                    throw new ArgumentException("Indentation value must be greater than 0.");
                 }
 
                 _indentation = value;
@@ -235,10 +233,7 @@ namespace Newtonsoft.Json
         /// <param name="name">The name of the constructor.</param>
         public override void WriteStartConstructor(string name)
         {
-            InternalWriteStart(
-                JsonToken.StartConstructor,
-                JsonContainerType.Constructor
-            );
+            InternalWriteStart(JsonToken.StartConstructor, JsonContainerType.Constructor);
 
             _writer.Write("new ");
             _writer.Write(name);
@@ -263,11 +258,7 @@ namespace Newtonsoft.Json
                     _writer.Write(')');
                     break;
                 default:
-                    throw JsonWriterException.Create(
-                        this,
-                        "Invalid JsonToken: " + token,
-                        null
-                    );
+                    throw JsonWriterException.Create(this, "Invalid JsonToken: " + token, null);
             }
         }
 
@@ -322,10 +313,7 @@ namespace Newtonsoft.Json
 
         private void UpdateCharEscapeFlags()
         {
-            _charEscapeFlags = JavaScriptUtils.GetCharEscapeFlags(
-                StringEscapeHandling,
-                _quoteChar
-            );
+            _charEscapeFlags = JavaScriptUtils.GetCharEscapeFlags(StringEscapeHandling, _quoteChar);
         }
 
         /// <summary>
@@ -360,8 +348,7 @@ namespace Newtonsoft.Json
             string writerNewLine = _writer.NewLine;
             int newLineLen = writerNewLine.Length;
             bool match =
-                _indentChars != null &&
-                _indentChars.Length == IndentCharBufferSize + newLineLen;
+                _indentChars != null && _indentChars.Length == IndentCharBufferSize + newLineLen;
             if (match)
             {
                 for (int i = 0; i != newLineLen; ++i)
@@ -378,8 +365,8 @@ namespace Newtonsoft.Json
             {
                 // If we're here, either _indentChars hasn't been set yet, or _writer.NewLine
                 // has been changed, or _indentChar has been changed.
-                _indentChars = (writerNewLine +
-                new string(_indentChar, IndentCharBufferSize)).ToCharArray();
+                _indentChars = (writerNewLine
+                + new string(_indentChar, IndentCharBufferSize)).ToCharArray();
             }
 
             return newLineLen;
@@ -540,12 +527,7 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Float);
             WriteValueInternal(
-                JsonConvert.ToString(
-                    value,
-                    FloatFormatHandling,
-                    QuoteChar,
-                    false
-                ),
+                JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false),
                 JsonToken.Float
             );
         }
@@ -583,12 +565,7 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Float);
             WriteValueInternal(
-                JsonConvert.ToString(
-                    value,
-                    FloatFormatHandling,
-                    QuoteChar,
-                    false
-                ),
+                JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false),
                 JsonToken.Float
             );
         }
@@ -889,10 +866,7 @@ namespace Newtonsoft.Json
             else
             {
                 bool negative = value < 0;
-                WriteIntegerValue(
-                    negative ? (ulong)-value : (ulong)value,
-                    negative
-                );
+                WriteIntegerValue(negative ? (ulong)-value : (ulong)value, negative);
             }
         }
 
@@ -951,10 +925,7 @@ namespace Newtonsoft.Json
             else
             {
                 bool negative = value < 0;
-                WriteIntegerValue(
-                    negative ? (uint)-value : (uint)value,
-                    negative
-                );
+                WriteIntegerValue(negative ? (uint)-value : (uint)value, negative);
             }
         }
 

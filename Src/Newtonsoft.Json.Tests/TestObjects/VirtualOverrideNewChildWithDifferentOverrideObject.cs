@@ -25,8 +25,7 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class VirtualOverrideNewChildWithDifferentOverrideObject
-        : VirtualOverrideNewBaseObject
+    public class VirtualOverrideNewChildWithDifferentOverrideObject : VirtualOverrideNewBaseObject
     {
         [JsonProperty(PropertyName = "differentVirtualMember")]
         public override string VirtualMember { get; set; }

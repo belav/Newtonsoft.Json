@@ -169,9 +169,7 @@ namespace Newtonsoft.Json
             State[] errorStates = StateArrayTemplate[0];
             State[] valueStates = StateArrayTemplate[7];
 
-            EnumInfo enumValuesAndNames = EnumUtils.GetEnumValuesAndNames(
-                typeof(JsonToken)
-            );
+            EnumInfo enumValuesAndNames = EnumUtils.GetEnumValuesAndNames(typeof(JsonToken));
 
             foreach (ulong valueToken in enumValuesAndNames.Values)
             {
@@ -284,10 +282,8 @@ namespace Newtonsoft.Json
         {
             get
             {
-                if (
-                    _currentPosition.Type == JsonContainerType.None ||
-                    _stack == null
-                ) {
+                if (_currentPosition.Type == JsonContainerType.None || _stack == null)
+                {
                     return string.Empty;
                 }
 
@@ -308,13 +304,11 @@ namespace Newtonsoft.Json
                 }
 
                 bool insideContainer =
-                    (_currentState != State.ArrayStart &&
-                    _currentState != State.ConstructorStart &&
-                    _currentState != State.ObjectStart);
+                    (_currentState != State.ArrayStart
+                    && _currentState != State.ConstructorStart
+                    && _currentState != State.ObjectStart);
 
-                JsonPosition? current = insideContainer
-                    ? (JsonPosition?)_currentPosition
-                    : null;
+                JsonPosition? current = insideContainer ? (JsonPosition?)_currentPosition : null;
 
                 return JsonPosition.BuildPath(_stack!, current);
             }
@@ -353,8 +347,8 @@ namespace Newtonsoft.Json
             set
             {
                 if (
-                    value < DateFormatHandling.IsoDateFormat ||
-                    value > DateFormatHandling.MicrosoftDateFormat
+                    value < DateFormatHandling.IsoDateFormat
+                    || value > DateFormatHandling.MicrosoftDateFormat
                 ) {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -372,8 +366,7 @@ namespace Newtonsoft.Json
             set
             {
                 if (
-                    value < DateTimeZoneHandling.Local ||
-                    value > DateTimeZoneHandling.RoundtripKind
+                    value < DateTimeZoneHandling.Local || value > DateTimeZoneHandling.RoundtripKind
                 ) {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -390,10 +383,8 @@ namespace Newtonsoft.Json
             get => _stringEscapeHandling;
             set
             {
-                if (
-                    value < StringEscapeHandling.Default ||
-                    value > StringEscapeHandling.EscapeHtml
-                ) {
+                if (value < StringEscapeHandling.Default || value > StringEscapeHandling.EscapeHtml)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -417,10 +408,8 @@ namespace Newtonsoft.Json
             get => _floatFormatHandling;
             set
             {
-                if (
-                    value < FloatFormatHandling.String ||
-                    value > FloatFormatHandling.DefaultValue
-                ) {
+                if (value < FloatFormatHandling.String || value > FloatFormatHandling.DefaultValue)
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -560,10 +549,7 @@ namespace Newtonsoft.Json
         /// <param name="name">The name of the constructor.</param>
         public virtual void WriteStartConstructor(string name)
         {
-            InternalWriteStart(
-                JsonToken.StartConstructor,
-                JsonContainerType.Constructor
-            );
+            InternalWriteStart(JsonToken.StartConstructor, JsonContainerType.Constructor);
         }
 
         /// <summary>
@@ -666,9 +652,7 @@ namespace Newtonsoft.Json
                     else
 #endif
                     {
-                        WriteValue(
-                            Convert.ToInt64(value, CultureInfo.InvariantCulture)
-                        );
+                        WriteValue(Convert.ToInt64(value, CultureInfo.InvariantCulture));
                     }
                     break;
                 case JsonToken.Float:
@@ -687,12 +671,7 @@ namespace Newtonsoft.Json
                     }
                     else
                     {
-                        WriteValue(
-                            Convert.ToDouble(
-                                value,
-                                CultureInfo.InvariantCulture
-                            )
-                        );
+                        WriteValue(Convert.ToDouble(value, CultureInfo.InvariantCulture));
                     }
                     break;
                 case JsonToken.String:
@@ -702,9 +681,7 @@ namespace Newtonsoft.Json
                     break;
                 case JsonToken.Boolean:
                     ValidationUtils.ArgumentNotNull(value, nameof(value));
-                    WriteValue(
-                        Convert.ToBoolean(value, CultureInfo.InvariantCulture)
-                    );
+                    WriteValue(Convert.ToBoolean(value, CultureInfo.InvariantCulture));
                     break;
                 case JsonToken.Null:
                     WriteNull();
@@ -732,12 +709,7 @@ namespace Newtonsoft.Json
                     else
 #endif
                     {
-                        WriteValue(
-                            Convert.ToDateTime(
-                                value,
-                                CultureInfo.InvariantCulture
-                            )
-                        );
+                        WriteValue(Convert.ToDateTime(value, CultureInfo.InvariantCulture));
                     }
                     break;
                 case JsonToken.Raw:
@@ -784,54 +756,39 @@ namespace Newtonsoft.Json
             {
                 // write a JValue date when the constructor is for a date
                 if (
-                    writeDateConstructorAsDate &&
-                    reader.TokenType == JsonToken.StartConstructor &&
-                    string.Equals(
-                        reader.Value?.ToString(),
-                        "Date",
-                        StringComparison.Ordinal
-                    )
+                    writeDateConstructorAsDate
+                    && reader.TokenType == JsonToken.StartConstructor
+                    && string.Equals(reader.Value?.ToString(), "Date", StringComparison.Ordinal)
                 ) {
                     WriteConstructorDate(reader);
                 }
                 else
                 {
-                    if (
-                        writeComments || reader.TokenType != JsonToken.Comment
-                    ) {
+                    if (writeComments || reader.TokenType != JsonToken.Comment)
+                    {
                         WriteToken(reader.TokenType, reader.Value);
                     }
                 }
             }
             while (
             // stop if we have reached the end of the token being read
-            initialDepth -
-            1 <
-            reader.Depth -
-            (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0) &&
-            writeChildren &&
-            reader.Read());
+            initialDepth - 1 < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
+            && writeChildren
+            && reader.Read());
 
             if (IsWriteTokenIncomplete(reader, writeChildren, initialDepth))
             {
-                throw JsonWriterException.Create(
-                    this,
-                    "Unexpected end when reading token.",
-                    null
-                );
+                throw JsonWriterException.Create(this, "Unexpected end when reading token.", null);
             }
         }
 
-        private bool IsWriteTokenIncomplete(
-            JsonReader reader,
-            bool writeChildren,
-            int initialDepth
-        ) {
+        private bool IsWriteTokenIncomplete(JsonReader reader, bool writeChildren, int initialDepth)
+        {
             int finalDepth = CalculateWriteTokenFinalDepth(reader);
-            return initialDepth < finalDepth ||
-            (writeChildren &&
-            initialDepth == finalDepth &&
-            JsonTokenUtils.IsStartToken(reader.TokenType));
+            return initialDepth < finalDepth
+                || (writeChildren
+                && initialDepth == finalDepth
+                && JsonTokenUtils.IsStartToken(reader.TokenType));
         }
 
         private int CalculateWriteTokenInitialDepth(JsonReader reader)
@@ -842,9 +799,7 @@ namespace Newtonsoft.Json
                 return -1;
             }
 
-            return JsonTokenUtils.IsStartToken(type)
-                ? reader.Depth
-                : reader.Depth + 1;
+            return JsonTokenUtils.IsStartToken(type) ? reader.Depth : reader.Depth + 1;
         }
 
         private int CalculateWriteTokenFinalDepth(JsonReader reader)
@@ -855,9 +810,7 @@ namespace Newtonsoft.Json
                 return -1;
             }
 
-            return JsonTokenUtils.IsEndToken(type)
-                ? reader.Depth - 1
-                : reader.Depth;
+            return JsonTokenUtils.IsEndToken(type) ? reader.Depth - 1 : reader.Depth;
         }
 
         private void WriteConstructorDate(JsonReader reader)
@@ -939,10 +892,8 @@ namespace Newtonsoft.Json
 
                 if (_formatting == Formatting.Indented)
                 {
-                    if (
-                        _currentState != State.ObjectStart &&
-                        _currentState != State.ArrayStart
-                    ) {
+                    if (_currentState != State.ObjectStart && _currentState != State.ArrayStart)
+                    {
                         WriteIndent();
                     }
                 }
@@ -978,11 +929,7 @@ namespace Newtonsoft.Json
 
             if (levelsToComplete == 0)
             {
-                throw JsonWriterException.Create(
-                    this,
-                    "No token to close.",
-                    null
-                );
+                throw JsonWriterException.Create(this, "No token to close.", null);
             }
 
             return levelsToComplete;
@@ -1039,8 +986,7 @@ namespace Newtonsoft.Json
         internal void AutoComplete(JsonToken tokenBeingWritten)
         {
             // gets new state based on the current state and what is being written
-            State newState =
-                StateArray[(int)tokenBeingWritten][(int)_currentState];
+            State newState = StateArray[(int)tokenBeingWritten][(int)_currentState];
 
             if (newState == State.Error)
             {
@@ -1056,10 +1002,10 @@ namespace Newtonsoft.Json
             }
 
             if (
-                (_currentState == State.Object ||
-                _currentState == State.Array ||
-                _currentState == State.Constructor) &&
-                tokenBeingWritten != JsonToken.Comment
+                (_currentState == State.Object
+                || _currentState == State.Array
+                || _currentState == State.Constructor)
+                && tokenBeingWritten != JsonToken.Comment
             ) {
                 WriteValueDelimiter();
             }
@@ -1073,12 +1019,11 @@ namespace Newtonsoft.Json
 
                 // don't indent a property when it is the first token to be written (i.e. at the start)
                 if (
-                    (_currentState == State.Array ||
-                    _currentState == State.ArrayStart ||
-                    _currentState == State.Constructor ||
-                    _currentState == State.ConstructorStart) ||
-                    (tokenBeingWritten == JsonToken.PropertyName &&
-                    _currentState != State.Start)
+                    (_currentState == State.Array
+                    || _currentState == State.ArrayStart
+                    || _currentState == State.Constructor
+                    || _currentState == State.ConstructorStart)
+                    || (tokenBeingWritten == JsonToken.PropertyName && _currentState != State.Start)
                 ) {
                     WriteIndent();
                 }
@@ -1625,11 +1570,7 @@ namespace Newtonsoft.Json
                 }
 #endif
 
-                WriteValue(
-                    this,
-                    ConvertUtils.GetTypeCode(value.GetType()),
-                    value
-                );
+                WriteValue(this, ConvertUtils.GetTypeCode(value.GetType()), value);
             }
         }
         #endregion
@@ -1670,11 +1611,8 @@ namespace Newtonsoft.Json
             }
         }
 
-        internal static void WriteValue(
-            JsonWriter writer,
-            PrimitiveTypeCode typeCode,
-            object value
-        ) {
+        internal static void WriteValue(JsonWriter writer, PrimitiveTypeCode typeCode, object value)
+        {
             while (true)
             {
                 switch (typeCode)
@@ -1683,105 +1621,79 @@ namespace Newtonsoft.Json
                         writer.WriteValue((char)value);
                         return;
                     case PrimitiveTypeCode.CharNullable:
-                        writer.WriteValue(
-                            (value == null) ? (char?)null : (char)value
-                        );
+                        writer.WriteValue((value == null) ? (char?)null : (char)value);
                         return;
                     case PrimitiveTypeCode.Boolean:
                         writer.WriteValue((bool)value);
                         return;
                     case PrimitiveTypeCode.BooleanNullable:
-                        writer.WriteValue(
-                            (value == null) ? (bool?)null : (bool)value
-                        );
+                        writer.WriteValue((value == null) ? (bool?)null : (bool)value);
                         return;
                     case PrimitiveTypeCode.SByte:
                         writer.WriteValue((sbyte)value);
                         return;
                     case PrimitiveTypeCode.SByteNullable:
-                        writer.WriteValue(
-                            (value == null) ? (sbyte?)null : (sbyte)value
-                        );
+                        writer.WriteValue((value == null) ? (sbyte?)null : (sbyte)value);
                         return;
                     case PrimitiveTypeCode.Int16:
                         writer.WriteValue((short)value);
                         return;
                     case PrimitiveTypeCode.Int16Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (short?)null : (short)value
-                        );
+                        writer.WriteValue((value == null) ? (short?)null : (short)value);
                         return;
                     case PrimitiveTypeCode.UInt16:
                         writer.WriteValue((ushort)value);
                         return;
                     case PrimitiveTypeCode.UInt16Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (ushort?)null : (ushort)value
-                        );
+                        writer.WriteValue((value == null) ? (ushort?)null : (ushort)value);
                         return;
                     case PrimitiveTypeCode.Int32:
                         writer.WriteValue((int)value);
                         return;
                     case PrimitiveTypeCode.Int32Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (int?)null : (int)value
-                        );
+                        writer.WriteValue((value == null) ? (int?)null : (int)value);
                         return;
                     case PrimitiveTypeCode.Byte:
                         writer.WriteValue((byte)value);
                         return;
                     case PrimitiveTypeCode.ByteNullable:
-                        writer.WriteValue(
-                            (value == null) ? (byte?)null : (byte)value
-                        );
+                        writer.WriteValue((value == null) ? (byte?)null : (byte)value);
                         return;
                     case PrimitiveTypeCode.UInt32:
                         writer.WriteValue((uint)value);
                         return;
                     case PrimitiveTypeCode.UInt32Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (uint?)null : (uint)value
-                        );
+                        writer.WriteValue((value == null) ? (uint?)null : (uint)value);
                         return;
                     case PrimitiveTypeCode.Int64:
                         writer.WriteValue((long)value);
                         return;
                     case PrimitiveTypeCode.Int64Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (long?)null : (long)value
-                        );
+                        writer.WriteValue((value == null) ? (long?)null : (long)value);
                         return;
                     case PrimitiveTypeCode.UInt64:
                         writer.WriteValue((ulong)value);
                         return;
                     case PrimitiveTypeCode.UInt64Nullable:
-                        writer.WriteValue(
-                            (value == null) ? (ulong?)null : (ulong)value
-                        );
+                        writer.WriteValue((value == null) ? (ulong?)null : (ulong)value);
                         return;
                     case PrimitiveTypeCode.Single:
                         writer.WriteValue((float)value);
                         return;
                     case PrimitiveTypeCode.SingleNullable:
-                        writer.WriteValue(
-                            (value == null) ? (float?)null : (float)value
-                        );
+                        writer.WriteValue((value == null) ? (float?)null : (float)value);
                         return;
                     case PrimitiveTypeCode.Double:
                         writer.WriteValue((double)value);
                         return;
                     case PrimitiveTypeCode.DoubleNullable:
-                        writer.WriteValue(
-                            (value == null) ? (double?)null : (double)value
-                        );
+                        writer.WriteValue((value == null) ? (double?)null : (double)value);
                         return;
                     case PrimitiveTypeCode.DateTime:
                         writer.WriteValue((DateTime)value);
                         return;
                     case PrimitiveTypeCode.DateTimeNullable:
-                        writer.WriteValue(
-                            (value == null) ? (DateTime?)null : (DateTime)value
-                        );
+                        writer.WriteValue((value == null) ? (DateTime?)null : (DateTime)value);
                         return;
 #if HAVE_DATE_TIME_OFFSET
                     case PrimitiveTypeCode.DateTimeOffset:
@@ -1796,25 +1708,19 @@ namespace Newtonsoft.Json
                         writer.WriteValue((decimal)value);
                         return;
                     case PrimitiveTypeCode.DecimalNullable:
-                        writer.WriteValue(
-                            (value == null) ? (decimal?)null : (decimal)value
-                        );
+                        writer.WriteValue((value == null) ? (decimal?)null : (decimal)value);
                         return;
                     case PrimitiveTypeCode.Guid:
                         writer.WriteValue((Guid)value);
                         return;
                     case PrimitiveTypeCode.GuidNullable:
-                        writer.WriteValue(
-                            (value == null) ? (Guid?)null : (Guid)value
-                        );
+                        writer.WriteValue((value == null) ? (Guid?)null : (Guid)value);
                         return;
                     case PrimitiveTypeCode.TimeSpan:
                         writer.WriteValue((TimeSpan)value);
                         return;
                     case PrimitiveTypeCode.TimeSpanNullable:
-                        writer.WriteValue(
-                            (value == null) ? (TimeSpan?)null : (TimeSpan)value
-                        );
+                        writer.WriteValue((value == null) ? (TimeSpan?)null : (TimeSpan)value);
                         return;
 #if HAVE_BIG_INTEGER
                     case PrimitiveTypeCode.BigInteger:
@@ -1962,10 +1868,8 @@ namespace Newtonsoft.Json
 
         internal void InternalWriteRaw() { }
 
-        internal void InternalWriteStart(
-            JsonToken token,
-            JsonContainerType container
-        ) {
+        internal void InternalWriteStart(JsonToken token, JsonContainerType container)
+        {
             UpdateScopeWithFinishedValue();
             AutoComplete(token);
             Push(container);

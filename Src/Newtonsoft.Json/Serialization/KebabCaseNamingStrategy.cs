@@ -42,10 +42,8 @@ namespace Newtonsoft.Json.Serialization
         /// A flag indicating whether explicitly specified property names should be processed,
         /// e.g. a property name customized with a <see cref="JsonPropertyAttribute"/>.
         /// </param>
-        public KebabCaseNamingStrategy(
-            bool processDictionaryKeys,
-            bool overrideSpecifiedNames
-        ) {
+        public KebabCaseNamingStrategy(bool processDictionaryKeys, bool overrideSpecifiedNames)
+        {
             ProcessDictionaryKeys = processDictionaryKeys;
             OverrideSpecifiedNames = overrideSpecifiedNames;
         }
@@ -82,7 +80,6 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="name">The property name to resolve.</param>
         /// <returns>The resolved property name.</returns>
-        protected override string ResolvePropertyName(string name) =>
-            StringUtils.ToKebabCase(name);
+        protected override string ResolvePropertyName(string name) => StringUtils.ToKebabCase(name);
     }
 }

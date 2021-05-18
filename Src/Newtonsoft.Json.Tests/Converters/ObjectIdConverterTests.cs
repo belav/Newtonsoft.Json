@@ -83,14 +83,9 @@ namespace Newtonsoft.Json.Tests.Converters
             JsonSerializer serializer = new JsonSerializer();
 
             BsonReader reader = new BsonReader(new MemoryStream(bson));
-            ObjectIdTestClass c = serializer.Deserialize<ObjectIdTestClass>(
-                reader
-            );
+            ObjectIdTestClass c = serializer.Deserialize<ObjectIdTestClass>(reader);
 
-            CollectionAssert.AreEquivalent(
-                c.Id.Value,
-                HexToBytes("4ABBED9D1D8B0F0218000001")
-            );
+            CollectionAssert.AreEquivalent(c.Id.Value, HexToBytes("4ABBED9D1D8B0F0218000001"));
             Assert.AreEqual(c.Test, "1234£56");
         }
     }

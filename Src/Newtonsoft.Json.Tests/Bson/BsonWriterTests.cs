@@ -87,10 +87,7 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEndObject();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual(
-                "0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00",
-                bson
-            );
+            Assert.AreEqual("0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00", bson);
         }
 
 #if !NET20
@@ -113,12 +110,8 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteValue(float.MaxValue);
             writer.WriteValue(true);
             writer.WriteValue(new byte[] { 0, 1, 2, 3, 4 });
-            writer.WriteValue(
-                new DateTimeOffset(2000, 12, 29, 12, 30, 0, TimeSpan.Zero)
-            );
-            writer.WriteValue(
-                new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc)
-            );
+            writer.WriteValue(new DateTimeOffset(2000, 12, 29, 12, 30, 0, TimeSpan.Zero));
+            writer.WriteValue(new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc));
             writer.WriteEnd();
 
             string bson = BytesToHex(ms.ToArray());
@@ -140,10 +133,7 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEnd();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual(
-                "10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00",
-                bson
-            );
+            Assert.AreEqual("10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00", bson);
         }
 
         [Test]
@@ -228,17 +218,13 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteStartObject();
 
             writer.WritePropertyName("_id");
-            writer.WriteValue(
-                HexToBytes("4A-78-93-79-17-22-00-00-00-00-61-CF")
-            );
+            writer.WriteValue(HexToBytes("4A-78-93-79-17-22-00-00-00-00-61-CF"));
 
             writer.WritePropertyName("a");
             writer.WriteStartArray();
             for (int i = 1; i <= 8; i++)
             {
-                double value = (i != 5)
-                    ? Convert.ToDouble(i)
-                    : 5.78960446186581E+77d;
+                double value = (i != 5) ? Convert.ToDouble(i) : 5.78960446186581E+77d;
 
                 writer.WriteValue(value);
             }
@@ -274,29 +260,13 @@ namespace Newtonsoft.Json.Tests.Bson
             s1.product.Add(
                 new Product
                 {
-                    ExpiryDate = new DateTime(
-                        2000,
-                        9,
-                        28,
-                        3,
-                        59,
-                        58,
-                        DateTimeKind.Local
-                    ),
+                    ExpiryDate = new DateTime(2000, 9, 28, 3, 59, 58, DateTimeKind.Local),
                     Name = "BSON!",
                     Price = -0.1m,
                     Sizes = new[] { "First", "Second" }
                 }
             );
-            s1.Establised = new DateTime(
-                2000,
-                1,
-                1,
-                0,
-                0,
-                0,
-                DateTimeKind.Local
-            );
+            s1.Establised = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Local);
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Serialize(writer, s1);
@@ -342,9 +312,7 @@ namespace Newtonsoft.Json.Tests.Bson
                     largeStringBuilder.Append("-");
                 }
 
-                largeStringBuilder.Append(
-                    i.ToString(CultureInfo.InvariantCulture)
-                );
+                largeStringBuilder.Append(i.ToString(CultureInfo.InvariantCulture));
             }
             string largeString = largeStringBuilder.ToString();
 
@@ -437,10 +405,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 placemark.Address
             );
             Assert.AreEqual(8, placemark.AddressDetails.Accuracy);
-            Assert.AreEqual(
-                "US",
-                placemark.AddressDetails.Country.CountryNameCode
-            );
+            Assert.AreEqual("US", placemark.AddressDetails.Country.CountryNameCode);
             Assert.AreEqual(
                 "CA",
                 placemark.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
@@ -574,9 +539,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             // deserialize product from BSON
             BsonReader reader = new BsonReader(ms);
-            Product deserializedProduct = serializer.Deserialize<Product>(
-                reader
-            );
+            Product deserializedProduct = serializer.Deserialize<Product>(reader);
 
             Console.WriteLine(deserializedProduct.Name);
             // Carlos' Spicy Wieners
@@ -680,9 +643,7 @@ namespace Newtonsoft.Json.Tests.Bson
             ms.Seek(0, SeekOrigin.Begin);
 
             BsonReader reader = new BsonReader(ms);
-            Product deserializedProduct = serializer.Deserialize<Product>(
-                reader
-            );
+            Product deserializedProduct = serializer.Deserialize<Product>(reader);
 
             Console.WriteLine(deserializedProduct.Name);
 
@@ -740,15 +701,9 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.DateTimeKindHandling = DateTimeKind.Unspecified;
 
             writer.WriteStartArray();
-            writer.WriteValue(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc)
-            );
-            writer.WriteValue(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Local)
-            );
-            writer.WriteValue(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Unspecified)
-            );
+            writer.WriteValue(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc));
+            writer.WriteValue(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Local));
+            writer.WriteValue(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Unspecified));
             writer.WriteEndArray();
 
             ms.Seek(0, SeekOrigin.Begin);
@@ -762,24 +717,15 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 10, 12, 20, 55, 0, DateTimeKind.Utc), reader.Value);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndArray, reader.TokenType);
@@ -817,9 +763,7 @@ namespace Newtonsoft.Json.Tests.Bson
             };
 
             writer.WriteStartArray();
-            writer.WriteValue(
-                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
-            );
+            writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
             writer.WriteEndArray();
 
             Assert.AreEqual(
@@ -836,10 +780,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public void SerializeDeserializeRegex()
         {
-            Regex r1 = new Regex(
-                "(hi)",
-                RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase
-            );
+            Regex r1 = new Regex("(hi)", RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
             RegexTestClass c = new RegexTestClass { Regex = r1 };
 
             MemoryStream ms = new MemoryStream();
@@ -850,22 +791,13 @@ namespace Newtonsoft.Json.Tests.Bson
 
             string hex = BitConverter.ToString(ms.ToArray());
 
-            Assert.AreEqual(
-                "15-00-00-00-0B-52-65-67-65-78-00-28-68-69-29-00-69-75-78-00-00",
-                hex
-            );
+            Assert.AreEqual("15-00-00-00-0B-52-65-67-65-78-00-28-68-69-29-00-69-75-78-00-00", hex);
 
-            JObject o =
-                (JObject)JObject.ReadFrom(
-                    new BsonReader(new MemoryStream(ms.ToArray()))
-                );
+            JObject o = (JObject)JObject.ReadFrom(new BsonReader(new MemoryStream(ms.ToArray())));
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""Regex"": ""/(hi)/iux""
-}",
-                o.ToString()
-            );
+}", o.ToString());
         }
 
         [Test]
@@ -922,9 +854,7 @@ namespace Newtonsoft.Json.Tests.Bson
         public void WriteStringReadGuid()
         {
             StringTestClass c = new StringTestClass();
-            c.AGuid = new Guid(
-                "af45dccf-df13-44fe-82be-6212c09eda84"
-            ).ToString();
+            c.AGuid = new Guid("af45dccf-df13-44fe-82be-6212c09eda84").ToString();
 
             MemoryStream ms = new MemoryStream();
             JsonSerializer serializer = new JsonSerializer();
@@ -1057,10 +987,7 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
-            Assert.AreEqual(
-                new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 },
-                reader.ReadAsBytes()
-            );
+            Assert.AreEqual(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }, reader.ReadAsBytes());
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
             Assert.IsNull(reader.ReadAsBytes());
@@ -1129,10 +1056,7 @@ namespace Newtonsoft.Json.Tests.Bson
             }
 
             // nothing is written because a BSON document needs to be completed before it can be written
-            Assert.AreEqual(
-                string.Empty,
-                (BitConverter.ToString(ms.ToArray()))
-            );
+            Assert.AreEqual(string.Empty, (BitConverter.ToString(ms.ToArray())));
         }
 #endif
     }

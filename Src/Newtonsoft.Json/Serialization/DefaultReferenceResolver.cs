@@ -33,9 +33,8 @@ namespace Newtonsoft.Json.Serialization
     {
         private int _referenceCount;
 
-        private BidirectionalDictionary<string, object> GetMappings(
-            object context
-        ) {
+        private BidirectionalDictionary<string, object> GetMappings(object context)
+        {
             if (!(context is JsonSerializerInternalBase internalSerializer))
             {
                 if (context is JsonSerializerProxy proxy)
@@ -61,27 +60,20 @@ namespace Newtonsoft.Json.Serialization
 
         public string GetReference(object context, object value)
         {
-            BidirectionalDictionary<string, object> mappings = GetMappings(
-                context
-            );
+            BidirectionalDictionary<string, object> mappings = GetMappings(context);
 
             if (!mappings.TryGetBySecond(value, out string reference))
             {
                 _referenceCount++;
-                reference = _referenceCount.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                reference = _referenceCount.ToString(CultureInfo.InvariantCulture);
                 mappings.Set(reference, value);
             }
 
             return reference;
         }
 
-        public void AddReference(
-            object context,
-            string reference,
-            object value
-        ) {
+        public void AddReference(object context, string reference, object value)
+        {
             GetMappings(context).Set(reference, value);
         }
 

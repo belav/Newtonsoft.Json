@@ -27,8 +27,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     // set defaults for null arguments
                     int stepCount = Step ?? 1;
-                    int startIndex =
-                        Start ?? ((stepCount > 0) ? 0 : a.Count - 1);
+                    int startIndex = Start ?? ((stepCount > 0) ? 0 : a.Count - 1);
                     int stopIndex = End ?? ((stepCount > 0) ? a.Count : -1);
 
                     // start from the end of the list if start is negative
@@ -44,14 +43,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     }
 
                     // ensure indexes keep within collection bounds
-                    startIndex = Math.Max(
-                        startIndex,
-                        (stepCount > 0) ? 0 : int.MinValue
-                    );
-                    startIndex = Math.Min(
-                        startIndex,
-                        (stepCount > 0) ? a.Count : a.Count - 1
-                    );
+                    startIndex = Math.Max(startIndex, (stepCount > 0) ? 0 : int.MinValue);
+                    startIndex = Math.Min(startIndex, (stepCount > 0) ? a.Count : a.Count - 1);
                     stopIndex = Math.Max(stopIndex, -1);
                     stopIndex = Math.Min(stopIndex, a.Count);
 
@@ -76,15 +69,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
                                     CultureInfo.InvariantCulture,
                                     Start != null
                                         ? Start.GetValueOrDefault()
-                                                .ToString(
-                                                    CultureInfo.InvariantCulture
-                                                )
+                                                .ToString(CultureInfo.InvariantCulture)
                                         : "*",
                                     End != null
                                         ? End.GetValueOrDefault()
-                                                .ToString(
-                                                    CultureInfo.InvariantCulture
-                                                )
+                                                .ToString(CultureInfo.InvariantCulture)
                                         : "*"
                                 )
                             );

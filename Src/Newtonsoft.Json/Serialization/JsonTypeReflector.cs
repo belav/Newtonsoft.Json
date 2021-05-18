@@ -67,8 +67,7 @@ namespace Newtonsoft.Json.Serialization
 
 #if !(NET20 || DOTNET)
         private static readonly ThreadSafeStore<Type,
-            Type?> AssociatedMetadataTypesCache = new ThreadSafeStore<Type,
-            Type?>(
+            Type?> AssociatedMetadataTypesCache = new ThreadSafeStore<Type, Type?>(
             GetAssociateMetadataTypeFromAttribute
         );
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
@@ -191,9 +190,8 @@ namespace Newtonsoft.Json.Serialization
             return MemberSerialization.OptOut;
         }
 
-        public static JsonConverter? GetJsonConverter(
-            object attributeProvider
-        ) {
+        public static JsonConverter? GetJsonConverter(object attributeProvider)
+        {
             JsonConverterAttribute? converterAttribute = GetCachedAttribute<JsonConverterAttribute>(
                 attributeProvider
             );
@@ -205,9 +203,7 @@ namespace Newtonsoft.Json.Serialization
                 );
                 if (creator != null)
                 {
-                    return (JsonConverter)creator(
-                        converterAttribute.ConverterParameters
-                    );
+                    return (JsonConverter)creator(converterAttribute.ConverterParameters);
                 }
             }
 
@@ -220,13 +216,9 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="converterType">The <see cref="JsonConverter"/> type to create.</param>
         /// <param name="args">Optional arguments to pass to an initializing constructor of the JsonConverter.
         /// If <c>null</c>, the default constructor is used.</param>
-        public static JsonConverter CreateJsonConverterInstance(
-            Type converterType,
-            object[]? args
-        ) {
-            Func<object[]?, object> converterCreator = CreatorCache.Get(
-                converterType
-            );
+        public static JsonConverter CreateJsonConverterInstance(Type converterType, object[]? args)
+        {
+            Func<object[]?, object> converterCreator = CreatorCache.Get(converterType);
             return (JsonConverter)converterCreator(args);
         }
 
@@ -234,9 +226,7 @@ namespace Newtonsoft.Json.Serialization
             Type namingStrategyType,
             object[]? args
         ) {
-            Func<object[]?, object> converterCreator = CreatorCache.Get(
-                namingStrategyType
-            );
+            Func<object[]?, object> converterCreator = CreatorCache.Get(namingStrategyType);
             return (NamingStrategy)converterCreator(args);
         }
 
@@ -261,13 +251,8 @@ namespace Newtonsoft.Json.Serialization
 
         private static Func<object[]?, object> GetCreator(Type type)
         {
-            Func<object>? defaultConstructor = (ReflectionUtils.HasDefaultConstructor(
-                    type,
-                    false
-                ))
-                ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                        type
-                    )
+            Func<object>? defaultConstructor = (ReflectionUtils.HasDefaultConstructor(type, false))
+                ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
                 : null;
 
             return (parameters) =>
@@ -327,10 +312,7 @@ namespace Newtonsoft.Json.Serialization
                 catch (Exception ex)
                 {
                     throw new JsonException(
-                        "Error creating '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            type
-                        ),
+                        "Error creating '{0}'.".FormatWith(CultureInfo.InvariantCulture, type),
                         ex
                     );
                 }
@@ -345,11 +327,7 @@ namespace Newtonsoft.Json.Serialization
 
         private static Type? GetAssociateMetadataTypeFromAttribute(Type type)
         {
-            Attribute[] customAttributes = ReflectionUtils.GetAttributes(
-                type,
-                null,
-                true
-            );
+            Attribute[] customAttributes = ReflectionUtils.GetAttributes(type, null, true);
 
             foreach (Attribute attribute in customAttributes)
             {
@@ -410,10 +388,7 @@ namespace Newtonsoft.Json.Serialization
 
             foreach (Type typeInterface in type.GetInterfaces())
             {
-                attribute = ReflectionUtils.GetAttribute<T>(
-                    typeInterface,
-                    true
-                );
+                attribute = ReflectionUtils.GetAttribute<T>(typeInterface, true);
                 if (attribute != null)
                 {
                     return attribute;
@@ -429,9 +404,7 @@ namespace Newtonsoft.Json.Serialization
             T? attribute;
 
 #if !(NET20 || DOTNET)
-            Type? metadataType = GetAssociatedMetadataType(
-                memberInfo.DeclaringType
-            );
+            Type? metadataType = GetAssociatedMetadataType(memberInfo.DeclaringType);
             if (metadataType != null)
             {
                 MemberInfo metadataTypeMemberInfo = ReflectionUtils.GetMemberInfoFromType(
@@ -441,10 +414,7 @@ namespace Newtonsoft.Json.Serialization
 
                 if (metadataTypeMemberInfo != null)
                 {
-                    attribute = ReflectionUtils.GetAttribute<T>(
-                        metadataTypeMemberInfo,
-                        true
-                    );
+                    attribute = ReflectionUtils.GetAttribute<T>(metadataTypeMemberInfo, true);
                     if (attribute != null)
                     {
                         return attribute;
@@ -461,9 +431,8 @@ namespace Newtonsoft.Json.Serialization
 
             if (memberInfo.DeclaringType != null)
             {
-                foreach (
-                    Type typeInterface in memberInfo.DeclaringType.GetInterfaces()
-                ) {
+                foreach (Type typeInterface in memberInfo.DeclaringType.GetInterfaces())
+                {
                     MemberInfo interfaceTypeMemberInfo = ReflectionUtils.GetMemberInfoFromType(
                         typeInterface,
                         memberInfo
@@ -471,10 +440,7 @@ namespace Newtonsoft.Json.Serialization
 
                     if (interfaceTypeMemberInfo != null)
                     {
-                        attribute = ReflectionUtils.GetAttribute<T>(
-                            interfaceTypeMemberInfo,
-                            true
-                        );
+                        attribute = ReflectionUtils.GetAttribute<T>(interfaceTypeMemberInfo, true);
                         if (attribute != null)
                         {
                             return attribute;
@@ -591,8 +557,7 @@ namespace Newtonsoft.Json.Serialization
 #elif !(NET20 || NET35 || PORTABLE40)
                     AppDomain appDomain = AppDomain.CurrentDomain;
 
-                    _fullyTrusted = appDomain.IsHomogenous &&
-                    appDomain.IsFullyTrusted;
+                    _fullyTrusted = appDomain.IsHomogenous && appDomain.IsFullyTrusted;
 #else
                     try
                     {

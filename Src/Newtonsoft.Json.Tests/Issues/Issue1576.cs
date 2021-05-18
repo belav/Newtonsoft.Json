@@ -51,10 +51,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 ContractResolver = new CustomContractResolver()
             };
 
-            var result = JsonConvert.DeserializeObject<TestClass>(
-                "{ 'Items': '11' }",
-                settings
-            );
+            var result = JsonConvert.DeserializeObject<TestClass>("{ 'Items': '11' }", settings);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Items.Count, 1);
@@ -128,8 +125,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 var array = new JArray();
                 array.Add(token);
 
-                var list =
-                    array.ToObject(objectType, serializer) as IEnumerable;
+                var list = array.ToObject(objectType, serializer) as IEnumerable;
                 var existing = existingValue as IList;
 
                 if (list != null && existing != null)

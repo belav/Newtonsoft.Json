@@ -59,10 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 OnUnloadFunction = new JRaw("function(e) { alert(e); }")
             };
 
-            string json = JsonConvert.SerializeObject(
-                settings,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

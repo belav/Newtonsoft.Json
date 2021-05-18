@@ -120,11 +120,8 @@ namespace Newtonsoft.Json.Tests.Issues
             get { return false; }
         }
 
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             throw new NotImplementedException(
                 "Converter is not writable. Method should not be invoked"
             );
@@ -150,8 +147,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 return null;
             }
 
-            JsonLineInfo lineInfoObject =
-                Activator.CreateInstance(objectType) as JsonLineInfo;
+            JsonLineInfo lineInfoObject = Activator.CreateInstance(objectType) as JsonLineInfo;
             serializer.Populate(reader, lineInfoObject);
 
             IJsonLineInfo jsonLineInfo = reader as IJsonLineInfo;

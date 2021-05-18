@@ -31,14 +31,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public HolderClass() { }
 
-        [Newtonsoft.Json.JsonProperty(
-            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All)]
+        [Newtonsoft.Json.JsonProperty(TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All)]
         public ContentBaseClass TestMember { get; set; }
 
-        [Newtonsoft.Json.JsonProperty(
-            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All)]
-        public Dictionary<int,
-            IList<ContentBaseClass>> AnotherTestMember { get; set; }
+        [Newtonsoft.Json.JsonProperty(TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All)]
+        public Dictionary<int, IList<ContentBaseClass>> AnotherTestMember { get; set; }
 
         public ContentBaseClass AThirdTestMember { get; set; }
     }

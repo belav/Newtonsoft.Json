@@ -158,9 +158,7 @@ namespace Newtonsoft.Json.Tests.Linq
     {
       ""code"":0";
 
-                    JsonReader reader = new JsonTextReader(
-                        new StringReader(jsonText)
-                    );
+                    JsonReader reader = new JsonTextReader(new StringReader(jsonText));
                     await reader.ReadAsync();
                     await reader.ReadAsync();
                     await reader.ReadAsync();
@@ -176,18 +174,13 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseMultipleProperties_EmptySettingsAsync()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            JObject o =
-                (JObject)await JToken.ReadFromAsync(
-                    reader,
-                    new JsonLoadSettings()
-                );
+            JObject o = (JObject)await JToken.ReadFromAsync(reader, new JsonLoadSettings());
             string value = (string)o["Name"];
 
             Assert.AreEqual("Name2", value);
@@ -196,8 +189,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseMultipleProperties_IgnoreDuplicateSettingAsync()
         {
-            string json =
-                @"{
+            string json = @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";

@@ -112,11 +112,7 @@ namespace Newtonsoft.Json.Bson
         /// <param name="text">Text to place inside the comment.</param>
         public override void WriteComment(string text)
         {
-            throw JsonWriterException.Create(
-                this,
-                "Cannot write JSON comment as BSON.",
-                null
-            );
+            throw JsonWriterException.Create(this, "Cannot write JSON comment as BSON.", null);
         }
 
         /// <summary>
@@ -125,11 +121,7 @@ namespace Newtonsoft.Json.Bson
         /// <param name="name">The name of the constructor.</param>
         public override void WriteStartConstructor(string name)
         {
-            throw JsonWriterException.Create(
-                this,
-                "Cannot write JSON constructor as BSON.",
-                null
-            );
+            throw JsonWriterException.Create(this, "Cannot write JSON constructor as BSON.", null);
         }
 
         /// <summary>
@@ -138,11 +130,7 @@ namespace Newtonsoft.Json.Bson
         /// <param name="json">The raw JSON to write.</param>
         public override void WriteRaw(string json)
         {
-            throw JsonWriterException.Create(
-                this,
-                "Cannot write raw JSON as BSON.",
-                null
-            );
+            throw JsonWriterException.Create(this, "Cannot write raw JSON as BSON.", null);
         }
 
         /// <summary>
@@ -151,11 +139,7 @@ namespace Newtonsoft.Json.Bson
         /// <param name="json">The raw JSON to write.</param>
         public override void WriteRawValue(string json)
         {
-            throw JsonWriterException.Create(
-                this,
-                "Cannot write raw JSON as BSON.",
-                null
-            );
+            throw JsonWriterException.Create(this, "Cannot write raw JSON as BSON.", null);
         }
 
         /// <summary>
@@ -236,10 +220,8 @@ namespace Newtonsoft.Json.Bson
             }
             else
             {
-                if (
-                    token.Type != BsonType.Object &&
-                    token.Type != BsonType.Array
-                ) {
+                if (token.Type != BsonType.Object && token.Type != BsonType.Array)
+                {
                     throw JsonWriterException.Create(
                         this,
                         "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(
@@ -302,9 +284,7 @@ namespace Newtonsoft.Json.Bson
         public override void WriteValue(string value)
         {
             base.WriteValue(value);
-            AddToken(
-                value == null ? BsonEmpty.Null : new BsonString(value, true)
-            );
+            AddToken(value == null ? BsonEmpty.Null : new BsonString(value, true));
         }
 
         /// <summary>
@@ -551,11 +531,7 @@ namespace Newtonsoft.Json.Bson
 
             if (value.Length != 12)
             {
-                throw JsonWriterException.Create(
-                    this,
-                    "An object id must be 12 bytes",
-                    null
-                );
+                throw JsonWriterException.Create(this, "An object id must be 12 bytes", null);
             }
 
             // hack to update the writer state

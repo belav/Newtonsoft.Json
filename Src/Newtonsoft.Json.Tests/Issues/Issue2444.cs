@@ -46,27 +46,18 @@ namespace Newtonsoft.Json.Tests.Issues
             var namingStrategy = new SnakeCaseNamingStrategy();
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = namingStrategy
-                }
+                ContractResolver = new DefaultContractResolver { NamingStrategy = namingStrategy }
             };
 
             string json = @"{""dict"":{""value1"":""a"",""text_value"":""b""}}";
-            DataClass c = JsonConvert.DeserializeObject<DataClass>(
-                json,
-                settings
-            );
+            DataClass c = JsonConvert.DeserializeObject<DataClass>(json, settings);
 
             Assert.AreEqual(2, c.Dict.Count);
             Assert.AreEqual("a", c.Dict[MyEnum.Value1]);
             Assert.AreEqual("b", c.Dict[MyEnum.TextValue]);
 
             string json1 = @"{""dict"":{""Value1"":""a"",""TextValue"":""b""}}";
-            DataClass c1 = JsonConvert.DeserializeObject<DataClass>(
-                json1,
-                settings
-            );
+            DataClass c1 = JsonConvert.DeserializeObject<DataClass>(json1, settings);
 
             Assert.AreEqual(2, c1.Dict.Count);
             Assert.AreEqual("a", c1.Dict[MyEnum.Value1]);
@@ -76,10 +67,7 @@ namespace Newtonsoft.Json.Tests.Issues
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    JsonConvert.DeserializeObject<List<MyEnum>>(
-                        @"[""text_value""]",
-                        settings
-                    );
+                    JsonConvert.DeserializeObject<List<MyEnum>>(@"[""text_value""]", settings);
                 },
                 @"Error converting value ""text_value"" to type 'Newtonsoft.Json.Tests.Issues.Issue2444+MyEnum'. Path '[0]', line 1, position 13."
             );

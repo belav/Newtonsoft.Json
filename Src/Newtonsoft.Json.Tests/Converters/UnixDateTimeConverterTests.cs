@@ -46,10 +46,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             DateTime unixEpoch = UnixDateTimeConverter.UnixEpoch;
 
-            string result = JsonConvert.SerializeObject(
-                unixEpoch,
-                new UnixDateTimeConverter()
-            );
+            string result = JsonConvert.SerializeObject(unixEpoch, new UnixDateTimeConverter());
 
             Assert.AreEqual("0", result);
         }
@@ -58,14 +55,9 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeDateTimeNow()
         {
             DateTime now = DateTime.Now;
-            long nowSeconds =
-                (long)(now.ToUniversalTime() -
-                new DateTime(1970, 1, 1)).TotalSeconds;
+            long nowSeconds = (long)(now.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds;
 
-            string result = JsonConvert.SerializeObject(
-                now,
-                new UnixDateTimeConverter()
-            );
+            string result = JsonConvert.SerializeObject(now, new UnixDateTimeConverter());
 
             Assert.AreEqual(nowSeconds + "", result);
         }
@@ -88,11 +80,7 @@ namespace Newtonsoft.Json.Tests.Converters
             UnixDateTimeConverter converter = new UnixDateTimeConverter();
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => converter.WriteJson(
-                    new JTokenWriter(),
-                    new object(),
-                    new JsonSerializer()
-                ),
+                () => converter.WriteJson(new JTokenWriter(), new object(), new JsonSerializer()),
                 "Expected date object value."
             );
         }
@@ -101,20 +89,9 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDateTimeOffset()
         {
-            DateTimeOffset now = new DateTimeOffset(
-                2018,
-                1,
-                1,
-                16,
-                1,
-                16,
-                TimeSpan.FromHours(-5)
-            );
+            DateTimeOffset now = new DateTimeOffset(2018, 1, 1, 16, 1, 16, TimeSpan.FromHours(-5));
 
-            string result = JsonConvert.SerializeObject(
-                now,
-                new UnixDateTimeConverter()
-            );
+            string result = JsonConvert.SerializeObject(now, new UnixDateTimeConverter());
 
             Assert.AreEqual("1514840476", result);
         }
@@ -139,24 +116,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             t = new NullableDateTimeTestClass
             {
-                DateTimeField = new DateTime(
-                    2018,
-                    1,
-                    1,
-                    21,
-                    1,
-                    16,
-                    DateTimeKind.Utc
-                ),
-                DateTimeOffsetField = new DateTimeOffset(
-                    1970,
-                    2,
-                    1,
-                    20,
-                    6,
-                    18,
-                    TimeSpan.Zero
-                )
+                DateTimeField = new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc),
+                DateTimeOffsetField = new DateTimeOffset(1970, 2, 1, 20, 6, 18, TimeSpan.Zero)
             };
 
             result = JsonConvert.SerializeObject(t, converter);
@@ -182,27 +143,13 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeDateTimeOffset()
         {
             UnixDateTimeConverter converter = new UnixDateTimeConverter();
-            DateTimeOffset d = new DateTimeOffset(
-                1970,
-                2,
-                1,
-                20,
-                6,
-                18,
-                TimeSpan.Zero
-            );
+            DateTimeOffset d = new DateTimeOffset(1970, 2, 1, 20, 6, 18, TimeSpan.Zero);
 
             string json = JsonConvert.SerializeObject(d, converter);
 
-            DateTimeOffset result = JsonConvert.DeserializeObject<DateTimeOffset>(
-                json,
-                converter
-            );
+            DateTimeOffset result = JsonConvert.DeserializeObject<DateTimeOffset>(json, converter);
 
-            Assert.AreEqual(
-                new DateTimeOffset(1970, 2, 1, 20, 6, 18, TimeSpan.Zero),
-                result
-            );
+            Assert.AreEqual(new DateTimeOffset(1970, 2, 1, 20, 6, 18, TimeSpan.Zero), result);
         }
 
         [Test]
@@ -213,10 +160,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 new UnixDateTimeConverter()
             );
 
-            Assert.AreEqual(
-                new DateTimeOffset(2018, 1, 1, 21, 1, 16, TimeSpan.Zero),
-                result
-            );
+            Assert.AreEqual(new DateTimeOffset(2018, 1, 1, 21, 1, 16, TimeSpan.Zero), result);
         }
 
         [Test]
@@ -240,10 +184,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 new UnixDateTimeConverter()
             );
 
-            Assert.AreEqual(
-                new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc),
-                result
-            );
+            Assert.AreEqual(new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc), result);
         }
 
         [Test]
@@ -261,10 +202,7 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeInvalidValue()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<DateTime>(
-                    "-1",
-                    new UnixDateTimeConverter()
-                ),
+                () => JsonConvert.DeserializeObject<DateTime>("-1", new UnixDateTimeConverter()),
                 "Cannot convert value that is before Unix epoch of 00:00:00 UTC on 1 January 1970 to System.DateTime. Path '', line 1, position 2."
             );
         }
@@ -273,10 +211,7 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeInvalidValueType()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<DateTime>(
-                    "false",
-                    new UnixDateTimeConverter()
-                ),
+                () => JsonConvert.DeserializeObject<DateTime>("false", new UnixDateTimeConverter()),
                 "Unexpected token parsing date. Expected Integer or String, got Boolean. Path '', line 1, position 5."
             );
         }
@@ -301,14 +236,8 @@ namespace Newtonsoft.Json.Tests.Converters
             );
             Assert.IsNotNull(l2);
 
-            Assert.AreEqual(
-                new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc),
-                l2[0]
-            );
-            Assert.AreEqual(
-                new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc),
-                l2[1]
-            );
+            Assert.AreEqual(new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc), l2[0]);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc), l2[1]);
         }
 
         [Test]
@@ -316,40 +245,23 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             UnixConverterDictionary<object> l1 = new UnixConverterDictionary<object>
             {
-
-                {
-                    "First",
-                    new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc)
-                },
-
-                {
-                    "Second",
-                    new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc)
-                },
+                { "First", new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc) },
+                { "Second", new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc) },
             };
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""First"": 3,
   ""Second"": 1514840476
-}",
-                json
-            );
+}", json);
 
             UnixConverterDictionary<object> l2 = JsonConvert.DeserializeObject<UnixConverterDictionary<object>>(
                 json
             );
             Assert.IsNotNull(l2);
 
-            Assert.AreEqual(
-                new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc),
-                l2["First"]
-            );
-            Assert.AreEqual(
-                new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc),
-                l2["Second"]
-            );
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc), l2["First"]);
+            Assert.AreEqual(new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc), l2["Second"]);
         }
 
         [Test]
@@ -359,21 +271,10 @@ namespace Newtonsoft.Json.Tests.Converters
             {
                 Object1 = new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc),
                 Object2 = null,
-                ObjectNotHandled = new DateTime(
-                    2018,
-                    1,
-                    1,
-                    21,
-                    1,
-                    16,
-                    DateTimeKind.Utc
-                )
+                ObjectNotHandled = new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc)
             };
 
-            string json = JsonConvert.SerializeObject(
-                obj1,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(obj1, Formatting.Indented);
             StringAssert.AreEqual(
                 @"{
   ""Object1"": 3,
@@ -383,15 +284,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            UnixConverterObject obj2 = JsonConvert.DeserializeObject<UnixConverterObject>(
-                json
-            );
+            UnixConverterObject obj2 = JsonConvert.DeserializeObject<UnixConverterObject>(json);
             Assert.IsNotNull(obj2);
 
-            Assert.AreEqual(
-                new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc),
-                obj2.Object1
-            );
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc), obj2.Object1);
             Assert.IsNull(obj2.Object2);
             Assert.AreEqual(
                 new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc),

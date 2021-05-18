@@ -63,12 +63,8 @@ namespace Newtonsoft.Json.Schema
             Schemas = new ReadOnlyCollection<JsonSchema>(
                 source.Schemas.Union(new[] { schema }).ToList()
             );
-            Properties = new Dictionary<string, JsonSchemaNode>(
-                source.Properties
-            );
-            PatternProperties = new Dictionary<string, JsonSchemaNode>(
-                source.PatternProperties
-            );
+            Properties = new Dictionary<string, JsonSchemaNode>(source.Properties);
+            PatternProperties = new Dictionary<string, JsonSchemaNode>(source.PatternProperties);
             Items = new List<JsonSchemaNode>(source.Items);
             AdditionalProperties = source.AdditionalProperties;
             AdditionalItems = source.AdditionalItems;

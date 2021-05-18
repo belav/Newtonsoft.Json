@@ -32,10 +32,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class ListErrorObjectCollection : Collection<ListErrorObject>
     {
         [OnError]
-        internal void OnErrorMethod(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) {
+        internal void OnErrorMethod(StreamingContext context, ErrorContext errorContext)
+        {
             errorContext.Handled = true;
         }
     }

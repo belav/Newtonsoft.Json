@@ -65,10 +65,7 @@ namespace Newtonsoft.Json.Tests.Linq
             public decimal Compoundings { get; set; }
         }
 
-        private readonly Rate _rate = new Rate
-        {
-            Compoundings = 12.166666666666666666666666667m
-        };
+        private readonly Rate _rate = new Rate { Compoundings = 12.166666666666666666666666667m };
 
         [Test]
         public async Task ParseAndConvertDateTimeOffsetAsync()

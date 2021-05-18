@@ -391,21 +391,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 writer.WriteValue(123);
 
                 writer.WritePropertyName("DateTime");
-                writer.WriteValue(
-                    new DateTime(2001, 2, 22, 20, 59, 59, DateTimeKind.Utc)
-                );
+                writer.WriteValue(new DateTime(2001, 2, 22, 20, 59, 59, DateTimeKind.Utc));
 
                 writer.WritePropertyName("DateTimeOffset");
                 writer.WriteValue(
-                    new DateTimeOffset(
-                        2001,
-                        2,
-                        22,
-                        20,
-                        59,
-                        59,
-                        TimeSpan.FromHours(12)
-                    )
+                    new DateTimeOffset(2001, 2, 22, 20, 59, 59, TimeSpan.FromHours(12))
                 );
 
                 writer.WritePropertyName("Float");

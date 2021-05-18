@@ -160,11 +160,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public bool Equals(SerializableType other)
         {
-            return publicField == other.publicField &&
-            internalField == other.internalField &&
-            protectedInternalField == other.protectedInternalField &&
-            protectedField == other.protectedField &&
-            privateField == other.privateField;
+            return publicField == other.publicField
+                && internalField == other.internalField
+                && protectedInternalField == other.protectedInternalField
+                && protectedField == other.protectedField
+                && privateField == other.privateField;
         }
     }
 }

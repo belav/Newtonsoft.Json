@@ -139,11 +139,8 @@ namespace Newtonsoft.Json.Schema
             ValidationUtils.ArgumentNotNull(source, nameof(source));
             ValidationUtils.ArgumentNotNull(schema, nameof(schema));
 
-            using (
-                JsonValidatingReader reader = new JsonValidatingReader(
-                    source.CreateReader()
-                )
-            ) {
+            using (JsonValidatingReader reader = new JsonValidatingReader(source.CreateReader()))
+            {
                 reader.Schema = schema;
                 if (validationEventHandler != null)
                 {

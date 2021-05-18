@@ -67,10 +67,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             dataSet.AcceptChanges();
 
-            string json = JsonConvert.SerializeObject(
-                dataSet,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(dataSet, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

@@ -99,56 +99,31 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(4, model.Properties.Count);
 
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                model.Properties["firstproperty"].Type
-            );
+            Assert.AreEqual(JsonSchemaType.String, model.Properties["firstproperty"].Type);
 
-            Assert.AreEqual(
-                JsonSchemaType.String,
-                model.Properties["secondproperty"].Type
-            );
-            Assert.AreEqual(
-                10,
-                model.Properties["secondproperty"].MaximumLength
-            );
+            Assert.AreEqual(JsonSchemaType.String, model.Properties["secondproperty"].Type);
+            Assert.AreEqual(10, model.Properties["secondproperty"].MaximumLength);
             Assert.AreEqual(null, model.Properties["secondproperty"].Enum);
             Assert.AreEqual(null, model.Properties["secondproperty"].Patterns);
 
-            Assert.AreEqual(
-                JsonSchemaType.Object,
-                model.Properties["thirdproperty"].Type
-            );
-            Assert.AreEqual(
-                3,
-                model.Properties[
-                    "thirdproperty"
-                ].AdditionalProperties.Enum.Count
-            );
+            Assert.AreEqual(JsonSchemaType.Object, model.Properties["thirdproperty"].Type);
+            Assert.AreEqual(3, model.Properties["thirdproperty"].AdditionalProperties.Enum.Count);
             Assert.AreEqual(
                 "two",
-                (string)model.Properties[
-                    "thirdproperty"
-                ].AdditionalProperties.Enum[0]
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[0]
             );
             Assert.AreEqual(
                 "three",
-                (string)model.Properties[
-                    "thirdproperty"
-                ].AdditionalProperties.Enum[1]
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[1]
             );
             Assert.AreEqual(
                 "one",
-                (string)model.Properties[
-                    "thirdproperty"
-                ].AdditionalProperties.Enum[2]
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[2]
             );
 
             Assert.AreEqual(
                 JsonSchemaType.String,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Type
+                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Type
             );
             Assert.AreEqual(
                 9,
@@ -188,9 +163,7 @@ namespace Newtonsoft.Json.Tests.Schema
             );
             Assert.AreEqual(
                 null,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Items
+                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Items
             );
             Assert.AreEqual(
                 null,

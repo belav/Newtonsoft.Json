@@ -167,32 +167,22 @@ namespace Newtonsoft.Json.Tests.Utilities
         ) {
             decimal d;
             char[] c = s.ToCharArray();
-            ParseResult result = ConvertUtils.DecimalTryParse(
-                c,
-                0,
-                c.Length,
-                out d
-            );
+            ParseResult result = ConvertUtils.DecimalTryParse(c, 0, c.Length, out d);
 
             decimal d2;
             bool result2 =
-                decimal.TryParse(
-                    s,
-                    NumberStyles.Float,
-                    CultureInfo.InvariantCulture,
-                    out d2
-                ) &&
-                !s.StartsWith(".") &&
-                !s.EndsWith(".") &&
-                !(s.StartsWith("0") &&
-                s.Length > 1 &&
-                !s.StartsWith("0.") &&
-                !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase)) &&
-                !(s.StartsWith("-0") &&
-                s.Length > 2 &&
-                !s.StartsWith("-0.") &&
-                !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase)) &&
-                s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
+                decimal.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
+                && !s.StartsWith(".")
+                && !s.EndsWith(".")
+                && !(s.StartsWith("0")
+                && s.Length > 1
+                && !s.StartsWith("0.")
+                && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase))
+                && !(s.StartsWith("-0")
+                && s.Length > 2
+                && !s.StartsWith("-0.")
+                && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase))
+                && s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
 
             Assert.AreEqual(expectedResult, result);
             Assert.AreEqual(expectedResult == ParseResult.Success, result2);
@@ -206,8 +196,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 Assert.AreEqual(
                     expectedValue.Value,
                     d2,
-                    "DecimalTryParse result is not equal to decimal.Parse. Input string: " +
-                    s
+                    "DecimalTryParse result is not equal to decimal.Parse. Input string: " + s
                 );
 
                 Assert.AreEqual(expectedValue.Value.ToString(), d.ToString());
@@ -222,18 +211,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             AssertDecimalTryParse("1", ParseResult.Success, 1M);
             AssertDecimalTryParse("-1", ParseResult.Success, -1M);
             AssertDecimalTryParse("1E1", ParseResult.Success, 10M);
-            AssertDecimalTryParse(
-                "1E28",
-                ParseResult.Success,
-                10000000000000000000000000000M
-            );
+            AssertDecimalTryParse("1E28", ParseResult.Success, 10000000000000000000000000000M);
             AssertDecimalTryParse("1.0", ParseResult.Success, 1.0M);
             AssertDecimalTryParse("1.10000", ParseResult.Success, 1.10000M);
-            AssertDecimalTryParse(
-                "1000.000000000000",
-                ParseResult.Success,
-                1000.000000000000M
-            );
+            AssertDecimalTryParse("1000.000000000000", ParseResult.Success, 1000.000000000000M);
             AssertDecimalTryParse("87.50", ParseResult.Success, 87.50M);
 
             AssertDecimalTryParse(
@@ -309,11 +290,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 ParseResult.Success,
                 0.0000000000000000000000000001M
             );
-            AssertDecimalTryParse(
-                "1.2345678901234567890123456789e-29",
-                ParseResult.Success,
-                0M
-            );
+            AssertDecimalTryParse("1.2345678901234567890123456789e-29", ParseResult.Success, 0M);
 
 #if !(NET20 || NET35)
             AssertDecimalTryParse("1E-999", ParseResult.Success, 0M);
@@ -330,16 +307,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertDecimalTryParse("1E+29", ParseResult.Overflow, null);
             AssertDecimalTryParse("-1E+29", ParseResult.Overflow, null);
-            AssertDecimalTryParse(
-                "79228162514264337593543950336",
-                ParseResult.Overflow,
-                null
-            ); // decimal.MaxValue + 1
-            AssertDecimalTryParse(
-                "-79228162514264337593543950336",
-                ParseResult.Overflow,
-                null
-            ); // decimal.MinValue - 1
+            AssertDecimalTryParse("79228162514264337593543950336", ParseResult.Overflow, null); // decimal.MaxValue + 1
+            AssertDecimalTryParse("-79228162514264337593543950336", ParseResult.Overflow, null); // decimal.MinValue - 1
 
             AssertDecimalTryParse("1-1", ParseResult.Invalid, null);
             AssertDecimalTryParse("1-", ParseResult.Invalid, null);
@@ -372,12 +341,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             long l;
             char[] c = "43443333222211111117".ToCharArray();
-            ParseResult result = ConvertUtils.Int64TryParse(
-                c,
-                0,
-                c.Length,
-                out l
-            );
+            ParseResult result = ConvertUtils.Int64TryParse(c, 0, c.Length, out l);
             Assert.AreEqual(ParseResult.Overflow, result);
 
             c = "9223372036854775807".ToCharArray();
@@ -418,12 +382,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             int i;
             char[] c = "43443333227".ToCharArray();
-            ParseResult result = ConvertUtils.Int32TryParse(
-                c,
-                0,
-                c.Length,
-                out i
-            );
+            ParseResult result = ConvertUtils.Int32TryParse(c, 0, c.Length, out i);
             Assert.AreEqual(ParseResult.Overflow, result);
 
             c = "2147483647".ToCharArray();
@@ -449,9 +408,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 for (int k = 2; k < 10; k++)
                 {
                     string t =
-                        j.ToString(CultureInfo.InvariantCulture) +
-                        k.ToString(CultureInfo.InvariantCulture) +
-                        "47483647";
+                        j.ToString(CultureInfo.InvariantCulture)
+                        + k.ToString(CultureInfo.InvariantCulture)
+                        + "47483647";
 
                     c = t.ToCharArray();
                     result = ConvertUtils.Int32TryParse(c, 0, c.Length, out i);
@@ -465,10 +424,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 for (int k = 2; k < 10; k++)
                 {
                     string t =
-                        "-" +
-                        j.ToString(CultureInfo.InvariantCulture) +
-                        k.ToString(CultureInfo.InvariantCulture) +
-                        "47483648";
+                        "-"
+                        + j.ToString(CultureInfo.InvariantCulture)
+                        + k.ToString(CultureInfo.InvariantCulture)
+                        + "47483648";
 
                     c = t.ToCharArray();
                     result = ConvertUtils.Int32TryParse(c, 0, c.Length, out i);
@@ -496,14 +455,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         public void HexParseOffset()
         {
             int value;
-            Assert.IsTrue(
-                ConvertUtils.TryHexTextToInt(
-                    "!0000".ToCharArray(),
-                    1,
-                    5,
-                    out value
-                )
-            );
+            Assert.IsTrue(ConvertUtils.TryHexTextToInt("!0000".ToCharArray(), 1, 5, out value));
             Assert.AreEqual(0, value);
         }
 
@@ -511,66 +463,21 @@ namespace Newtonsoft.Json.Tests.Utilities
         public void HexParseError()
         {
             int value;
-            Assert.IsFalse(
-                ConvertUtils.TryHexTextToInt(
-                    "-100".ToCharArray(),
-                    0,
-                    4,
-                    out value
-                )
-            );
-            Assert.IsFalse(
-                ConvertUtils.TryHexTextToInt(
-                    "000g".ToCharArray(),
-                    0,
-                    4,
-                    out value
-                )
-            );
-            Assert.IsFalse(
-                ConvertUtils.TryHexTextToInt(
-                    " ssd".ToCharArray(),
-                    0,
-                    4,
-                    out value
-                )
-            );
-            Assert.IsFalse(
-                ConvertUtils.TryHexTextToInt(
-                    "000:".ToCharArray(),
-                    0,
-                    4,
-                    out value
-                )
-            );
-            Assert.IsFalse(
-                ConvertUtils.TryHexTextToInt(
-                    "000G".ToCharArray(),
-                    0,
-                    4,
-                    out value
-                )
-            );
+            Assert.IsFalse(ConvertUtils.TryHexTextToInt("-100".ToCharArray(), 0, 4, out value));
+            Assert.IsFalse(ConvertUtils.TryHexTextToInt("000g".ToCharArray(), 0, 4, out value));
+            Assert.IsFalse(ConvertUtils.TryHexTextToInt(" ssd".ToCharArray(), 0, 4, out value));
+            Assert.IsFalse(ConvertUtils.TryHexTextToInt("000:".ToCharArray(), 0, 4, out value));
+            Assert.IsFalse(ConvertUtils.TryHexTextToInt("000G".ToCharArray(), 0, 4, out value));
         }
 
         private void HexParseSame(string text)
         {
-            int v1 = int.Parse(
-                text,
-                NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture
-            );
+            int v1 = int.Parse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 
             int v2;
-            Assert.IsTrue(
-                ConvertUtils.TryHexTextToInt(text.ToCharArray(), 0, 4, out v2)
-            );
+            Assert.IsTrue(ConvertUtils.TryHexTextToInt(text.ToCharArray(), 0, 4, out v2));
 
-            Assert.AreEqual(
-                v1,
-                v2,
-                "Invalid result when parsing hex text: " + text
-            );
+            Assert.AreEqual(v1, v2, "Invalid result when parsing hex text: " + text);
         }
     }
 }

@@ -45,10 +45,8 @@ namespace Newtonsoft.Json.Schema
         private readonly JsonWriter _writer;
         private readonly JsonSchemaResolver _resolver;
 
-        public JsonSchemaWriter(
-            JsonWriter writer,
-            JsonSchemaResolver resolver
-        ) {
+        public JsonSchemaWriter(JsonWriter writer, JsonSchemaResolver resolver)
+        {
             ValidationUtils.ArgumentNotNull(writer, nameof(writer));
             _writer = writer;
             _resolver = resolver;
@@ -79,16 +77,8 @@ namespace Newtonsoft.Json.Schema
             }
 
             _writer.WriteStartObject();
-            WritePropertyIfNotNull(
-                _writer,
-                JsonSchemaConstants.IdPropertyName,
-                schema.Id
-            );
-            WritePropertyIfNotNull(
-                _writer,
-                JsonSchemaConstants.TitlePropertyName,
-                schema.Title
-            );
+            WritePropertyIfNotNull(_writer, JsonSchemaConstants.IdPropertyName, schema.Id);
+            WritePropertyIfNotNull(_writer, JsonSchemaConstants.TitlePropertyName, schema.Title);
             WritePropertyIfNotNull(
                 _writer,
                 JsonSchemaConstants.DescriptionPropertyName,
@@ -104,11 +94,7 @@ namespace Newtonsoft.Json.Schema
                 JsonSchemaConstants.ReadOnlyPropertyName,
                 schema.ReadOnly
             );
-            WritePropertyIfNotNull(
-                _writer,
-                JsonSchemaConstants.HiddenPropertyName,
-                schema.Hidden
-            );
+            WritePropertyIfNotNull(_writer, JsonSchemaConstants.HiddenPropertyName, schema.Hidden);
             WritePropertyIfNotNull(
                 _writer,
                 JsonSchemaConstants.TransientPropertyName,
@@ -124,35 +110,27 @@ namespace Newtonsoft.Json.Schema
             }
             if (!schema.AllowAdditionalProperties)
             {
-                _writer.WritePropertyName(
-                    JsonSchemaConstants.AdditionalPropertiesPropertyName
-                );
+                _writer.WritePropertyName(JsonSchemaConstants.AdditionalPropertiesPropertyName);
                 _writer.WriteValue(schema.AllowAdditionalProperties);
             }
             else
             {
                 if (schema.AdditionalProperties != null)
                 {
-                    _writer.WritePropertyName(
-                        JsonSchemaConstants.AdditionalPropertiesPropertyName
-                    );
+                    _writer.WritePropertyName(JsonSchemaConstants.AdditionalPropertiesPropertyName);
                     ReferenceOrWriteSchema(schema.AdditionalProperties);
                 }
             }
             if (!schema.AllowAdditionalItems)
             {
-                _writer.WritePropertyName(
-                    JsonSchemaConstants.AdditionalItemsPropertyName
-                );
+                _writer.WritePropertyName(JsonSchemaConstants.AdditionalItemsPropertyName);
                 _writer.WriteValue(schema.AllowAdditionalItems);
             }
             else
             {
                 if (schema.AdditionalItems != null)
                 {
-                    _writer.WritePropertyName(
-                        JsonSchemaConstants.AdditionalItemsPropertyName
-                    );
+                    _writer.WritePropertyName(JsonSchemaConstants.AdditionalItemsPropertyName);
                     ReferenceOrWriteSchema(schema.AdditionalItems);
                 }
             }
@@ -212,11 +190,7 @@ namespace Newtonsoft.Json.Schema
                 JsonSchemaConstants.DivisibleByPropertyName,
                 schema.DivisibleBy
             );
-            WritePropertyIfNotNull(
-                _writer,
-                JsonSchemaConstants.FormatPropertyName,
-                schema.Format
-            );
+            WritePropertyIfNotNull(_writer, JsonSchemaConstants.FormatPropertyName, schema.Format);
             WritePropertyIfNotNull(
                 _writer,
                 JsonSchemaConstants.PatternPropertyName,
@@ -234,9 +208,7 @@ namespace Newtonsoft.Json.Schema
             }
             if (schema.Default != null)
             {
-                _writer.WritePropertyName(
-                    JsonSchemaConstants.DefaultPropertyName
-                );
+                _writer.WritePropertyName(JsonSchemaConstants.DefaultPropertyName);
                 schema.Default.WriteTo(_writer);
             }
             if (schema.Disallow != null)
@@ -249,9 +221,7 @@ namespace Newtonsoft.Json.Schema
             }
             if (schema.Extends != null && schema.Extends.Count > 0)
             {
-                _writer.WritePropertyName(
-                    JsonSchemaConstants.ExtendsPropertyName
-                );
+                _writer.WritePropertyName(JsonSchemaConstants.ExtendsPropertyName);
                 if (schema.Extends.Count == 1)
                 {
                     ReferenceOrWriteSchema(schema.Extends[0]);
@@ -278,9 +248,8 @@ namespace Newtonsoft.Json.Schema
             {
                 writer.WritePropertyName(propertyName);
                 writer.WriteStartObject();
-                foreach (
-                    KeyValuePair<string, JsonSchema> property in properties
-                ) {
+                foreach (KeyValuePair<string, JsonSchema> property in properties)
+                {
                     writer.WritePropertyName(property.Key);
                     ReferenceOrWriteSchema(property.Value);
                 }
@@ -322,11 +291,8 @@ namespace Newtonsoft.Json.Schema
             _writer.WriteEndArray();
         }
 
-        private void WriteType(
-            string propertyName,
-            JsonWriter writer,
-            JsonSchemaType type
-        ) {
+        private void WriteType(string propertyName, JsonWriter writer, JsonSchemaType type)
+        {
             if (Enum.IsDefined(typeof(JsonSchemaType), type))
             {
                 writer.WritePropertyName(propertyName);
@@ -347,9 +313,7 @@ namespace Newtonsoft.Json.Schema
                         writer.WriteValue(JsonSchemaBuilder.MapType(first));
                         do
                         {
-                            writer.WriteValue(
-                                JsonSchemaBuilder.MapType(en.Current)
-                            );
+                            writer.WriteValue(JsonSchemaBuilder.MapType(en.Current));
                         }
                         while (en.MoveNext());
                         writer.WriteEndArray();
@@ -362,11 +326,8 @@ namespace Newtonsoft.Json.Schema
             }
         }
 
-        private void WritePropertyIfNotNull(
-            JsonWriter writer,
-            string propertyName,
-            object value
-        ) {
+        private void WritePropertyIfNotNull(JsonWriter writer, string propertyName, object value)
+        {
             if (value != null)
             {
                 writer.WritePropertyName(propertyName);

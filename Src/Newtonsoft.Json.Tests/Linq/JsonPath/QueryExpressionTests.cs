@@ -73,11 +73,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             Assert.IsTrue(compositeExpression.IsMatch(o1, o1));
 
-            JObject o2 = new JObject
-            {
-                { "Title", "Title!" },
-                { "FirstName", "FirstName!" }
-            };
+            JObject o2 = new JObject { { "Title", "Title!" }, { "FirstName", "FirstName!" } };
 
             Assert.IsFalse(compositeExpression.IsMatch(o2, o2));
 
@@ -117,11 +113,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 
             Assert.IsTrue(compositeExpression.IsMatch(o1, o1));
 
-            JObject o2 = new JObject
-            {
-                { "Title", "Title!" },
-                { "FirstName", "FirstName!" }
-            };
+            JObject o2 = new JObject { { "Title", "Title!" }, { "FirstName", "FirstName!" } };
 
             Assert.IsTrue(compositeExpression.IsMatch(o2, o2));
 
@@ -166,9 +158,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             );
 
             Assert.IsTrue(e1.IsMatch(null, new JArray("// comment")));
-            Assert.IsFalse(
-                e1.IsMatch(null, new JArray("//comment", "/ comment"))
-            );
+            Assert.IsFalse(e1.IsMatch(null, new JArray("//comment", "/ comment")));
 
             BooleanQueryExpression e2 = new BooleanQueryExpression(
                 QueryOperator.RegexEquals,

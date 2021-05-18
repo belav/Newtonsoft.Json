@@ -54,11 +54,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonProperty(PropertyName = "pa_info")]
         public Dictionary<string, string> Properties
         {
-            get
-            {
-                return _properties ??
-                (_properties = new Dictionary<string, string>());
-            }
+            get { return _properties ?? (_properties = new Dictionary<string, string>()); }
             set { _properties = value; }
         }
     }

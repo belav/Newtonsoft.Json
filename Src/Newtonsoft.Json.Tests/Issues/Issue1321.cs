@@ -76,9 +76,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
 
             ExceptionAssert.Throws<JsonWriterException>(
                 () =>
@@ -97,9 +95,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
 
             await ExceptionAssert.ThrowsAsync<JsonWriterException>(
                 async () =>
@@ -118,9 +114,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
             reader.Read();
 
             ExceptionAssert.Throws<JsonWriterException>(
@@ -140,9 +134,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
             await reader.ReadAsync();
 
             await ExceptionAssert.ThrowsAsync<JsonWriterException>(
@@ -162,9 +154,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[[""1"","));
             reader.Read();
             reader.Read();
 
@@ -185,9 +175,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var writer = a.CreateWriter();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[[""1"","));
             await reader.ReadAsync();
             await reader.ReadAsync();
 
@@ -208,9 +196,7 @@ namespace Newtonsoft.Json.Tests.Issues
             JsonTextWriter writer = new JsonTextWriter(sw);
             writer.WriteStartArray();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[[""1"","));
             reader.Read();
             reader.Read();
 
@@ -231,9 +217,7 @@ namespace Newtonsoft.Json.Tests.Issues
             JsonTextWriter writer = new JsonTextWriter(sw);
             writer.WriteStartArray();
 
-            JsonTextReader reader = new JsonTextReader(
-                new StringReader(@"[[""1"",")
-            );
+            JsonTextReader reader = new JsonTextReader(new StringReader(@"[[""1"","));
             await reader.ReadAsync();
             await reader.ReadAsync();
 

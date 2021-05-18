@@ -94,16 +94,12 @@ namespace Newtonsoft.Json.Serialization
                 }
                 else
                 {
-                    if (
-                        property.DeclaringType != null &&
-                        existingProperty.DeclaringType != null
-                    ) {
+                    if (property.DeclaringType != null && existingProperty.DeclaringType != null)
+                    {
                         if (
-                            property.DeclaringType.IsSubclassOf(
-                                existingProperty.DeclaringType
-                            ) ||
-                            (existingProperty.DeclaringType.IsInterface() &&
-                            property.DeclaringType.ImplementInterface(
+                            property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
+                            || (existingProperty.DeclaringType.IsInterface()
+                            && property.DeclaringType.ImplementInterface(
                                 existingProperty.DeclaringType
                             ))
                         ) {
@@ -112,11 +108,9 @@ namespace Newtonsoft.Json.Serialization
                             duplicateProperty = false;
                         }
                         if (
-                            existingProperty.DeclaringType.IsSubclassOf(
-                                property.DeclaringType
-                            ) ||
-                            (property.DeclaringType.IsInterface() &&
-                            existingProperty.DeclaringType.ImplementInterface(
+                            existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
+                            || (property.DeclaringType.IsInterface()
+                            && existingProperty.DeclaringType.ImplementInterface(
                                 property.DeclaringType
                             ))
                         ) {
@@ -125,10 +119,8 @@ namespace Newtonsoft.Json.Serialization
                         }
 
                         if (
-                            _type.ImplementInterface(
-                                existingProperty.DeclaringType
-                            ) &&
-                            _type.ImplementInterface(property.DeclaringType)
+                            _type.ImplementInterface(existingProperty.DeclaringType)
+                            && _type.ImplementInterface(property.DeclaringType)
                         ) {
                             // current property was already defined on another interface
                             return;
@@ -160,25 +152,17 @@ namespace Newtonsoft.Json.Serialization
         /// <returns>A matching property if found.</returns>
         public JsonProperty? GetClosestMatchProperty(string propertyName)
         {
-            JsonProperty? property = GetProperty(
-                propertyName,
-                StringComparison.Ordinal
-            );
+            JsonProperty? property = GetProperty(propertyName, StringComparison.Ordinal);
             if (property == null)
             {
-                property = GetProperty(
-                    propertyName,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                property = GetProperty(propertyName, StringComparison.OrdinalIgnoreCase);
             }
 
             return property;
         }
 
-        private bool TryGetValue(
-            string key,
-            [NotNullWhen(true)]out JsonProperty? item
-        ) {
+        private bool TryGetValue(string key, [NotNullWhen(true)] out JsonProperty? item)
+        {
             if (Dictionary == null)
             {
                 item = default;
@@ -194,10 +178,8 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="propertyName">The name of the property to get.</param>
         /// <param name="comparisonType">Type property name string comparison.</param>
         /// <returns>A matching property if found.</returns>
-        public JsonProperty? GetProperty(
-            string propertyName,
-            StringComparison comparisonType
-        ) {
+        public JsonProperty? GetProperty(string propertyName, StringComparison comparisonType)
+        {
             // KeyedCollection has an ordinal comparer
             if (comparisonType == StringComparison.Ordinal)
             {
@@ -212,13 +194,8 @@ namespace Newtonsoft.Json.Serialization
             for (int i = 0; i < _list.Count; i++)
             {
                 JsonProperty property = _list[i];
-                if (
-                    string.Equals(
-                        propertyName,
-                        property.PropertyName,
-                        comparisonType
-                    )
-                ) {
+                if (string.Equals(propertyName, property.PropertyName, comparisonType))
+                {
                     return property;
                 }
             }

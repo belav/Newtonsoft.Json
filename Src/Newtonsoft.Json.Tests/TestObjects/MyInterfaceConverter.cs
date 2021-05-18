@@ -44,17 +44,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
             new TraceWriter()
         };
 
-        public override bool CanConvertTo(
-            ITypeDescriptorContext context,
-            Type destinationType
-        ) {
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
             return destinationType == typeof(string);
         }
 
-        public override bool CanConvertFrom(
-            ITypeDescriptorContext context,
-            Type sourceType
-        ) {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
             return sourceType == typeof(string);
         }
 
@@ -68,10 +64,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 return null;
             }
 
-            return (
-                from w in _writers
-                where w.Name == value.ToString()
-                select w).FirstOrDefault();
+            return ( from w in _writers where w.Name == value.ToString() select w).FirstOrDefault();
         }
 
         public override object ConvertTo(

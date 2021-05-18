@@ -42,11 +42,7 @@ namespace Newtonsoft.Json
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public abstract void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        );
+        public abstract void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer);
 
         /// <summary>
         /// Reads the JSON representation of the object.
@@ -102,11 +98,8 @@ namespace Newtonsoft.Json
             object? value,
             JsonSerializer serializer
         ) {
-            if (
-                !(value != null
-                    ? value is T
-                    : ReflectionUtils.IsNullable(typeof(T)))
-            ) {
+            if (!(value != null ? value is T : ReflectionUtils.IsNullable(typeof(T))))
+            {
                 throw new JsonSerializationException(
                     "Converter cannot write specified value to JSON. {0} is required.".FormatWith(
                         CultureInfo.InvariantCulture,
@@ -123,11 +116,7 @@ namespace Newtonsoft.Json
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public abstract void WriteJson(
-            JsonWriter writer,
-            T? value,
-            JsonSerializer serializer
-        );
+        public abstract void WriteJson(JsonWriter writer, T? value, JsonSerializer serializer);
 
         /// <summary>
         /// Reads the JSON representation of the object.

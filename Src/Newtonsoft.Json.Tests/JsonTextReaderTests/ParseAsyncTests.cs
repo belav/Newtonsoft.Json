@@ -65,9 +65,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParsingQuotedPropertyWithControlCharactersAsync()
         {
-            JsonReader reader = new JsonTextReader(
-                new StringReader(@"{'hi\r\nbye':1}")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader(@"{'hi\r\nbye':1}"));
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
@@ -95,19 +93,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             reader = new JsonTextReader(new StringReader("-0"));
             Assert.AreEqual(0, await reader.ReadAsInt32Async());
 
-            reader = new JsonTextReader(
-                new StringReader(int.MaxValue.ToString())
-            );
+            reader = new JsonTextReader(new StringReader(int.MaxValue.ToString()));
             Assert.AreEqual(int.MaxValue, await reader.ReadAsInt32Async());
 
-            reader = new JsonTextReader(
-                new StringReader(int.MinValue.ToString())
-            );
+            reader = new JsonTextReader(new StringReader(int.MinValue.ToString()));
             Assert.AreEqual(int.MinValue, await reader.ReadAsInt32Async());
 
-            reader = new JsonTextReader(
-                new StringReader(long.MaxValue.ToString())
-            );
+            reader = new JsonTextReader(new StringReader(long.MaxValue.ToString()));
             await ExceptionAssert.ThrowsAsync<JsonReaderException>(
                 async () => await reader.ReadAsInt32Async(),
                 "JSON integer 9223372036854775807 is too large or small for an Int32. Path '', line 1, position 19."
@@ -241,16 +233,12 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Input string '-' is not a valid number. Path '', line 1, position 1."
             );
 
-            reader = new JsonTextReader(
-                new StringReader("1.7976931348623157E+308")
-            );
+            reader = new JsonTextReader(new StringReader("1.7976931348623157E+308"));
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(typeof(double), reader.ValueType);
             Assert.AreEqual(Double.MaxValue, reader.Value);
 
-            reader = new JsonTextReader(
-                new StringReader("-1.7976931348623157E+308")
-            );
+            reader = new JsonTextReader(new StringReader("-1.7976931348623157E+308"));
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(typeof(double), reader.ValueType);
             Assert.AreEqual(Double.MinValue, reader.Value);
@@ -336,9 +324,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             string json =
                 "\x00a0{\x00a0'h\x00a0i\x00a0'\x00a0:\x00a0[\x00a0true\x00a0,\x00a0new\x00a0Date\x00a0(\x00a0)\x00a0]\x00a0/*\x00a0comment\x00a0*/\x00a0}\x00a0";
             JsonTextReader reader = new JsonTextReader(
-                new StreamReader(
-                    new SlowStream(json, new UTF8Encoding(false), 1)
-                )
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
             );
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -514,19 +500,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(
-                new DateTime(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    DateTimeKind.Utc
-                ),
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(
-                new DateTime(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    DateTimeKind.Utc
-                ),
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
@@ -538,19 +518,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(
-                new DateTimeOffset(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    TimeSpan.Zero
-                ),
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(
-                new DateTimeOffset(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    TimeSpan.Zero
-                ),
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
@@ -574,19 +548,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             await reader.ReadAsDateTimeOffsetAsync();
             Assert.AreEqual(
-                new DateTimeOffset(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    TimeSpan.Zero
-                ),
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             await reader.ReadAsDateTimeOffsetAsync();
             Assert.AreEqual(
-                new DateTimeOffset(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    TimeSpan.Zero
-                ),
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
@@ -598,19 +566,13 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             await reader.ReadAsDateTimeAsync();
             Assert.AreEqual(
-                new DateTime(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    DateTimeKind.Utc
-                ),
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             await reader.ReadAsDateTimeAsync();
             Assert.AreEqual(
-                new DateTime(
-                    DateTimeUtils.InitialJavaScriptDateTicks,
-                    DateTimeKind.Utc
-                ),
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
                 reader.Value
             );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);

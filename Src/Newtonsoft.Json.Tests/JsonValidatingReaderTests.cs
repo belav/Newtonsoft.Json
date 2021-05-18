@@ -59,9 +59,7 @@ namespace Newtonsoft.Json.Tests
             string json = "{'name':'James','hobbies':['pie','cake']}";
             JsonReader reader = new JsonTextReader(new StringReader(json));
 
-            JsonValidatingReader validatingReader = new JsonValidatingReader(
-                reader
-            );
+            JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
             Assert.AreEqual(reader, validatingReader.Reader);
         }
 
@@ -349,8 +347,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void StringDoesNotMatchPattern()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""string"",
   ""pattern"":""foo""
 }";
@@ -382,8 +379,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerGreaterThanMaximumValue()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
@@ -416,14 +412,12 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerGreaterThanMaximumValue_BigInteger()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
 
-            string json =
-                "99999999999999999999999999999999999999999999999999999999999999999999";
+            string json = "99999999999999999999999999999999999999999999999999999999999999999999";
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
@@ -450,8 +444,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerLessThanMaximumValue_BigInteger()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""integer"",
   ""minimum"":5
 }";
@@ -483,8 +476,7 @@ namespace Newtonsoft.Json.Tests
             ExceptionAssert.Throws<JsonSchemaException>(
                 () =>
                 {
-                    string schemaJson =
-                        @"{
+                    string schemaJson = @"{
   ""type"":""integer"",
   ""maximum"":5
 }";
@@ -503,8 +495,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void IntegerLessThanMinimumValue()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""integer"",
   ""minimum"":5
 }";
@@ -585,8 +576,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void FloatGreaterThanMaximumValue()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""number"",
   ""maximum"":5
 }";
@@ -617,8 +607,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void FloatLessThanMinimumValue()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""number"",
   ""minimum"":5
 }";
@@ -758,8 +747,7 @@ namespace Newtonsoft.Json.Tests
   }
 }";
 
-            string json =
-                "[999999999999999999999999999999999999999999999999999999998]";
+            string json = "[999999999999999999999999999999999999999999999999999999998]";
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
@@ -795,8 +783,7 @@ namespace Newtonsoft.Json.Tests
   }
 }";
 
-            string json =
-                "[999999999999999999999999999999999999999999999999999999999]";
+            string json = "[999999999999999999999999999999999999999999999999999999999]";
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
@@ -838,8 +825,7 @@ namespace Newtonsoft.Json.Tests
   }
 }";
 
-            string json =
-                "[999999999999999999999999999999999999999999999999999999999]";
+            string json = "[999999999999999999999999999999999999999999999999999999999]";
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
@@ -1025,8 +1011,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ArrayCountGreaterThanMaximumItems()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""array"",
   ""minItems"":2,
   ""maxItems"":3
@@ -1070,8 +1055,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ArrayCountLessThanMinimumItems()
         {
-            string schemaJson =
-                @"{
+            string schemaJson = @"{
   ""type"":""array"",
   ""minItems"":2,
   ""maxItems"":3
@@ -1296,8 +1280,7 @@ namespace Newtonsoft.Json.Tests
   ""additionalProperties"":false
 }";
 
-            string json =
-                "{'name':'James','additionalProperty1':null,'additionalProperty2':null}";
+            string json = "{'name':'James','additionalProperty1':null,'additionalProperty2':null}";
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
@@ -1726,11 +1709,7 @@ namespace Newtonsoft.Json.Tests
             reader.ValidationEventHandler += (sender, args) =>
             {
                 validationEventArgs = args;
-                errors.Add(
-                    validationEventArgs.Path +
-                    " - " +
-                    validationEventArgs.Message
-                );
+                errors.Add(validationEventArgs.Path + " - " + validationEventArgs.Message);
             };
             reader.Schema = secondSchema;
 
@@ -1744,10 +1723,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
-            Assert.AreEqual(
-                "blahblahblahblahblahblah",
-                reader.Value.ToString()
-            );
+            Assert.AreEqual("blahblahblahblahblahblah", reader.Value.ToString());
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
@@ -1773,10 +1749,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
-            Assert.AreEqual(
-                "thirdproperty_firstproperty",
-                reader.Value.ToString()
-            );
+            Assert.AreEqual("thirdproperty_firstproperty", reader.Value.ToString());
             Assert.AreEqual(1, errors.Count);
 
             Assert.IsTrue(reader.Read());
@@ -1948,11 +1921,7 @@ namespace Newtonsoft.Json.Tests
             byte[] data = Encoding.UTF8.GetBytes("Hello world");
 
             JsonReader reader = new JsonValidatingReader(
-                new JsonTextReader(
-                    new StringReader(
-                        @"""" + Convert.ToBase64String(data) + @""""
-                    )
-                )
+                new JsonTextReader(new StringReader(@"""" + Convert.ToBase64String(data) + @""""))
             )
             {
                 Schema = s
@@ -1984,9 +1953,7 @@ namespace Newtonsoft.Json.Tests
             ExceptionAssert.Throws<JsonSchemaException>(
                 () =>
                 {
-                    JsonSchema s = new JsonSchemaGenerator().Generate(
-                        typeof(int)
-                    );
+                    JsonSchema s = new JsonSchemaGenerator().Generate(typeof(int));
                     s.Maximum = 2;
 
                     JsonReader reader = new JsonValidatingReader(
@@ -2023,9 +1990,7 @@ namespace Newtonsoft.Json.Tests
             ExceptionAssert.Throws<JsonSchemaException>(
                 () =>
                 {
-                    JsonSchema s = new JsonSchemaGenerator().Generate(
-                        typeof(decimal)
-                    );
+                    JsonSchema s = new JsonSchemaGenerator().Generate(typeof(decimal));
                     s.DivisibleBy = 1;
 
                     JsonReader reader = new JsonValidatingReader(
@@ -2145,12 +2110,7 @@ namespace Newtonsoft.Json.Tests
         public void CloseAlsoClosesUnderlyingReader()
         {
             var underlyingReader = new TestObjects.JsonReaderStubWithIsClosed();
-            var validatingReader = new JsonValidatingReader(
-                underlyingReader
-            )
-            {
-                CloseInput = true
-            };
+            var validatingReader = new JsonValidatingReader(underlyingReader) { CloseInput = true };
 
             validatingReader.Close();
 

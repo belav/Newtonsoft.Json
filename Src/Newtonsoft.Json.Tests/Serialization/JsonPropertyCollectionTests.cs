@@ -49,8 +49,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var resolver = new DefaultContractResolver();
-            var contract =
-                (JsonObjectContract)resolver.ResolveContract(value.GetType());
+            var contract = (JsonObjectContract)resolver.ResolveContract(value.GetType());
 
             Assert.AreEqual(3, contract.Properties.Count);
             Assert.IsTrue(

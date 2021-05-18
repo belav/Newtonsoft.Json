@@ -52,10 +52,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 { "Jess", 11926 }
             };
 
-            string json = JsonConvert.SerializeObject(
-                points,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(points, Formatting.Indented);
 
             Console.WriteLine(json);
             // {

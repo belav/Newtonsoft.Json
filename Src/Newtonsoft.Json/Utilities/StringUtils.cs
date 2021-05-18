@@ -46,16 +46,13 @@ namespace Newtonsoft.Json.Utilities
         public const char LineFeed = '\n';
         public const char Tab = '\t';
 
-        public static bool IsNullOrEmpty([NotNullWhen(false)]string? value)
+        public static bool IsNullOrEmpty([NotNullWhen(false)] string? value)
         {
             return string.IsNullOrEmpty(value);
         }
 
-        public static string FormatWith(
-            this string format,
-            IFormatProvider provider,
-            object? arg0
-        ) {
+        public static string FormatWith(this string format, IFormatProvider provider, object? arg0)
+        {
             return format.FormatWith(provider, new object?[] { arg0 });
         }
 
@@ -75,10 +72,7 @@ namespace Newtonsoft.Json.Utilities
             object? arg1,
             object? arg2
         ) {
-            return format.FormatWith(
-                provider,
-                new object?[] { arg0, arg1, arg2 }
-            );
+            return format.FormatWith(provider, new object?[] { arg0, arg1, arg2 });
         }
 
         public static string FormatWith(
@@ -89,10 +83,7 @@ namespace Newtonsoft.Json.Utilities
             object? arg2,
             object? arg3
         ) {
-            return format.FormatWith(
-                provider,
-                new object?[] { arg0, arg1, arg2, arg3 }
-            );
+            return format.FormatWith(provider, new object?[] { arg0, arg1, arg2, arg3 });
         }
 
         private static string FormatWith(
@@ -140,10 +131,7 @@ namespace Newtonsoft.Json.Utilities
         public static StringWriter CreateStringWriter(int capacity)
         {
             StringBuilder sb = new StringBuilder(capacity);
-            StringWriter sw = new StringWriter(
-                sb,
-                CultureInfo.InvariantCulture
-            );
+            StringWriter sw = new StringWriter(sb, CultureInfo.InvariantCulture);
 
             return sw;
         }
@@ -173,12 +161,7 @@ namespace Newtonsoft.Json.Utilities
             }
 
             IEnumerable<TSource> caseInsensitiveResults = source.Where(
-                s =>
-                    string.Equals(
-                        valueSelector(s),
-                        testValue,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                s => string.Equals(valueSelector(s), testValue, StringComparison.OrdinalIgnoreCase)
             );
             if (caseInsensitiveResults.Count() <= 1)
             {
@@ -188,12 +171,7 @@ namespace Newtonsoft.Json.Utilities
             {
                 // multiple results returned. now filter using case sensitivity
                 IEnumerable<TSource> caseSensitiveResults = source.Where(
-                    s =>
-                        string.Equals(
-                            valueSelector(s),
-                            testValue,
-                            StringComparison.Ordinal
-                        )
+                    s => string.Equals(valueSelector(s), testValue, StringComparison.Ordinal)
                 );
                 return caseSensitiveResults.SingleOrDefault();
             }
@@ -289,10 +267,8 @@ namespace Newtonsoft.Json.Utilities
                             if (i > 0 && hasNext)
                             {
                                 char nextChar = s[i + 1];
-                                if (
-                                    !char.IsUpper(nextChar) &&
-                                    nextChar != separator
-                                ) {
+                                if (!char.IsUpper(nextChar) && nextChar != separator)
+                                {
                                     sb.Append(separator);
                                 }
                             }

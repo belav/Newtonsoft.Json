@@ -65,8 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             channel.Property("obsolete").Remove();
 
-            channel.Property("description")
-                .AddAfterSelf(new JProperty("new", "New value"));
+            channel.Property("description").AddAfterSelf(new JProperty("new", "New value"));
 
             JArray item = (JArray)channel["item"];
             item.Add("Item 1");

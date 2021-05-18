@@ -63,9 +63,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_Generic()
         {
             string json = "['hi']";
-            TestStack<string> c = JsonConvert.DeserializeObject<TestStack<string>>(
-                json
-            );
+            TestStack<string> c = JsonConvert.DeserializeObject<TestStack<string>>(json);
             Assert.AreEqual(1, c.Count);
         }
 

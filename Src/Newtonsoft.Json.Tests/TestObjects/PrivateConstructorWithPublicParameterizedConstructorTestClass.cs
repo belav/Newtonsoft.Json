@@ -32,13 +32,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string Name { get; set; }
         public int Age { get; set; }
 
-        private PrivateConstructorWithPublicParameterizedConstructorTestClass() {
+        private PrivateConstructorWithPublicParameterizedConstructorTestClass()
+        {
             Age = 1;
         }
 
-        public PrivateConstructorWithPublicParameterizedConstructorTestClass(
-            string dummy
-        ) {
+        public PrivateConstructorWithPublicParameterizedConstructorTestClass(string dummy)
+        {
             throw new Exception("Should never get here.");
         }
     }

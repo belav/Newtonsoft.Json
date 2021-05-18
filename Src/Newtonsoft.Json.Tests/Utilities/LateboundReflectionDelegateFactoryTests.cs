@@ -67,9 +67,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInString()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator = LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -85,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInStringAndBool()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(
-                    typeof(InTestClass)
-                )
+            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator = LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(

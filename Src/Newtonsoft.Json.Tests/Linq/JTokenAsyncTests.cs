@@ -54,16 +54,12 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(true, (bool)o["pie"]);
 
             JArray a =
-                (JArray)await JToken.ReadFromAsync(
-                    new JsonTextReader(new StringReader("[1,2,3]"))
-                );
+                (JArray)await JToken.ReadFromAsync(new JsonTextReader(new StringReader("[1,2,3]")));
             Assert.AreEqual(1, (int)a[0]);
             Assert.AreEqual(2, (int)a[1]);
             Assert.AreEqual(3, (int)a[2]);
 
-            JsonReader reader = new JsonTextReader(
-                new StringReader("{'pie':true}")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader("{'pie':true}"));
             await reader.ReadAsync();
             await reader.ReadAsync();
 
@@ -76,9 +72,7 @@ namespace Newtonsoft.Json.Tests.Linq
                     new JsonTextReader(new StringReader("new Date(1)"))
                 );
             Assert.AreEqual("Date", c.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0))
-            );
+            Assert.IsTrue(JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0)));
 
             JValue v =
                 (JValue)await JToken.ReadFromAsync(
@@ -86,14 +80,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 );
             Assert.AreEqual("stringvalue", (string)v);
 
-            v = (JValue)await JToken.ReadFromAsync(
-                new JsonTextReader(new StringReader(@"1"))
-            );
+            v = (JValue)await JToken.ReadFromAsync(new JsonTextReader(new StringReader(@"1")));
             Assert.AreEqual(1, (int)v);
 
-            v = (JValue)await JToken.ReadFromAsync(
-                new JsonTextReader(new StringReader(@"1.1"))
-            );
+            v = (JValue)await JToken.ReadFromAsync(new JsonTextReader(new StringReader(@"1.1")));
             Assert.AreEqual(1.1, (double)v);
 
             v = (JValue)await JToken.ReadFromAsync(
@@ -127,12 +117,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CreateWriterAsync()
         {
-            JArray a = new JArray(
-                5,
-                new JArray(1),
-                new JArray(1, 2),
-                new JArray(1, 2, 3)
-            );
+            JArray a = new JArray(5, new JArray(1), new JArray(1, 2), new JArray(1, 2, 3));
 
             JsonWriter writer = a.CreateWriter();
             Assert.IsNotNull(writer);
@@ -149,10 +134,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(6, a.Count);
             Assert.IsTrue(
-                JToken.DeepEquals(
-                    new JObject(new JProperty("Property", "PropertyValue")),
-                    a[5]
-                )
+                JToken.DeepEquals(new JObject(new JProperty("Property", "PropertyValue")), a[5])
             );
         }
     }

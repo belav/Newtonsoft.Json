@@ -63,10 +63,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             );
 
             // Use === operator. Compared types must be the same to be valid
-            List<JToken> strictResults = items.SelectTokens(
-                    @"$.[?(@.Valid === true)]"
-                )
-                .ToList();
+            List<JToken> strictResults = items.SelectTokens(@"$.[?(@.Valid === true)]").ToList();
 
             foreach (JToken item in strictResults)
             {

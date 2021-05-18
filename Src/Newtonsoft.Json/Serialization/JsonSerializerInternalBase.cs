@@ -33,8 +33,7 @@ namespace Newtonsoft.Json.Serialization
 {
     internal abstract class JsonSerializerInternalBase
     {
-        private class ReferenceEqualsEqualityComparer
-            : IEqualityComparer<object>
+        private class ReferenceEqualsEqualityComparer : IEqualityComparer<object>
         {
             bool IEqualityComparer<object>.Equals(object x, object y)
             {
@@ -63,8 +62,7 @@ namespace Newtonsoft.Json.Serialization
             TraceWriter = serializer.TraceWriter;
         }
 
-        internal BidirectionalDictionary<string,
-            object> DefaultReferenceMappings
+        internal BidirectionalDictionary<string, object> DefaultReferenceMappings
         {
             get
             {
@@ -89,9 +87,8 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty property
         ) {
             NullValueHandling resolvedNullValueHandling =
-                property.NullValueHandling ??
-                containerContract?.ItemNullValueHandling ??
-                Serializer._nullValueHandling;
+                property.NullValueHandling
+                ?? containerContract?.ItemNullValueHandling ?? Serializer._nullValueHandling;
 
             return resolvedNullValueHandling;
         }
@@ -104,12 +101,7 @@ namespace Newtonsoft.Json.Serialization
         ) {
             if (_currentErrorContext == null)
             {
-                _currentErrorContext = new ErrorContext(
-                    currentObject,
-                    member,
-                    path,
-                    error
-                );
+                _currentErrorContext = new ErrorContext(currentObject, member, path, error);
             }
 
             if (_currentErrorContext.Error != error)
@@ -142,24 +134,18 @@ namespace Newtonsoft.Json.Serialization
             string path,
             Exception ex
         ) {
-            ErrorContext errorContext = GetErrorContext(
-                currentObject,
-                keyValue,
-                path,
-                ex
-            );
+            ErrorContext errorContext = GetErrorContext(currentObject, keyValue, path, ex);
 
             if (
-                TraceWriter != null &&
-                TraceWriter.LevelFilter >= TraceLevel.Error &&
-                !errorContext.Traced
+                TraceWriter != null
+                && TraceWriter.LevelFilter >= TraceLevel.Error
+                && !errorContext.Traced
             ) {
                 // only write error once
                 errorContext.Traced = true;
 
                 // kind of a hack but meh. might clean this up later
-                string message = (GetType() ==
-                    typeof(JsonSerializerInternalWriter))
+                string message = (GetType() == typeof(JsonSerializerInternalWriter))
                     ? "Error serializing"
                     : "Error deserializing";
                 if (contract != null)
@@ -171,11 +157,7 @@ namespace Newtonsoft.Json.Serialization
                 // add line information to non-json.net exception message
                 if (!(ex is JsonException))
                 {
-                    message = JsonPosition.FormatMessage(
-                        lineInfo,
-                        path,
-                        message
-                    );
+                    message = JsonPosition.FormatMessage(lineInfo, path, message);
                 }
 
                 TraceWriter.Trace(TraceLevel.Error, message, ex);
@@ -184,18 +166,12 @@ namespace Newtonsoft.Json.Serialization
             // attribute method is non-static so don't invoke if no object
             if (contract != null && currentObject != null)
             {
-                contract.InvokeOnError(
-                    currentObject,
-                    Serializer.Context,
-                    errorContext
-                );
+                contract.InvokeOnError(currentObject, Serializer.Context, errorContext);
             }
 
             if (!errorContext.Handled)
             {
-                Serializer.OnError(
-                    new ErrorEventArgs(currentObject, errorContext)
-                );
+                Serializer.OnError(new ErrorEventArgs(currentObject, errorContext));
             }
 
             return errorContext.Handled;

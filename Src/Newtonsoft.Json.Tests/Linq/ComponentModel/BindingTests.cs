@@ -49,10 +49,7 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
                         5,
                         new JObject(
                             new JProperty("Fourth", "String!"),
-                            new JProperty(
-                                "Fifth",
-                                new JObject(new JProperty("Sixth", "String!"))
-                            )
+                            new JProperty("Fifth", new JObject(new JProperty("Sixth", "String!")))
                         )
                     )
                 )

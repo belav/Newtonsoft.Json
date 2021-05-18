@@ -198,9 +198,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Load()
         {
-            JsonReader reader = new JsonTextReader(
-                new StringReader("{'propertyname':['value1']}")
-            );
+            JsonReader reader = new JsonTextReader(new StringReader("{'propertyname':['value1']}"));
             reader.Read();
 
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -208,15 +206,11 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JProperty property = JProperty.Load(reader);
             Assert.AreEqual("propertyname", property.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(JArray.Parse("['value1']"), property.Value)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JArray.Parse("['value1']"), property.Value));
 
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
 
-            reader = new JsonTextReader(
-                new StringReader("{'propertyname':null}")
-            );
+            reader = new JsonTextReader(new StringReader("{'propertyname':null}"));
             reader.Read();
 
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -224,9 +218,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             property = JProperty.Load(reader);
             Assert.AreEqual("propertyname", property.Name);
-            Assert.IsTrue(
-                JToken.DeepEquals(JValue.CreateNull(), property.Value)
-            );
+            Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), property.Value));
 
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
@@ -234,10 +226,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MultiContentConstructor()
         {
-            JProperty p = new JProperty(
-                "error",
-                new List<string> { "one", "two" }
-            );
+            JProperty p = new JProperty("error", new List<string> { "one", "two" });
             JArray a = (JArray)p.Value;
 
             Assert.AreEqual(a.Count, 2);
@@ -248,10 +237,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void IListGenericAdd()
         {
-            IList<JToken> t = new JProperty(
-                "error",
-                new List<string> { "one", "two" }
-            );
+            IList<JToken> t = new JProperty("error", new List<string> { "one", "two" });
 
             ExceptionAssert.Throws<JsonException>(
                 () =>

@@ -48,18 +48,14 @@ namespace Newtonsoft.Json.Serialization
             TypeCode = ConvertUtils.GetTypeCode(underlyingType);
             IsReadOnlyOrFixedSize = true;
 
-            if (
-                ReadTypeMap.TryGetValue(
-                    NonNullableUnderlyingType,
-                    out ReadType readType
-                )
-            ) {
+            if (ReadTypeMap.TryGetValue(NonNullableUnderlyingType, out ReadType readType))
+            {
                 InternalReadType = readType;
             }
         }
 
-        private static readonly Dictionary<Type,
-            ReadType> ReadTypeMap = new Dictionary<Type, ReadType>
+        private static readonly Dictionary<Type, ReadType> ReadTypeMap = new Dictionary<Type,
+            ReadType>
         {
             [typeof(byte[])] = ReadType.ReadAsBytes,
             [typeof(byte)] = ReadType.ReadAsInt32,

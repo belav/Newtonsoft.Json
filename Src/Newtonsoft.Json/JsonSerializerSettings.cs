@@ -43,18 +43,15 @@ namespace Newtonsoft.Json
             ReferenceLoopHandling.Error;
         internal const MissingMemberHandling DefaultMissingMemberHandling =
             MissingMemberHandling.Ignore;
-        internal const NullValueHandling DefaultNullValueHandling =
-            NullValueHandling.Include;
+        internal const NullValueHandling DefaultNullValueHandling = NullValueHandling.Include;
         internal const DefaultValueHandling DefaultDefaultValueHandling =
             DefaultValueHandling.Include;
         internal const ObjectCreationHandling DefaultObjectCreationHandling =
             ObjectCreationHandling.Auto;
         internal const PreserveReferencesHandling DefaultPreserveReferencesHandling =
             PreserveReferencesHandling.None;
-        internal const ConstructorHandling DefaultConstructorHandling =
-            ConstructorHandling.Default;
-        internal const TypeNameHandling DefaultTypeNameHandling =
-            TypeNameHandling.None;
+        internal const ConstructorHandling DefaultConstructorHandling = ConstructorHandling.Default;
+        internal const TypeNameHandling DefaultTypeNameHandling = TypeNameHandling.None;
         internal const MetadataPropertyHandling DefaultMetadataPropertyHandling =
             MetadataPropertyHandling.Default;
         internal static readonly StreamingContext DefaultContext;
@@ -64,20 +61,16 @@ namespace Newtonsoft.Json
             DateFormatHandling.IsoDateFormat;
         internal const DateTimeZoneHandling DefaultDateTimeZoneHandling =
             DateTimeZoneHandling.RoundtripKind;
-        internal const DateParseHandling DefaultDateParseHandling =
-            DateParseHandling.DateTime;
-        internal const FloatParseHandling DefaultFloatParseHandling =
-            FloatParseHandling.Double;
-        internal const FloatFormatHandling DefaultFloatFormatHandling =
-            FloatFormatHandling.String;
+        internal const DateParseHandling DefaultDateParseHandling = DateParseHandling.DateTime;
+        internal const FloatParseHandling DefaultFloatParseHandling = FloatParseHandling.Double;
+        internal const FloatFormatHandling DefaultFloatFormatHandling = FloatFormatHandling.String;
         internal const StringEscapeHandling DefaultStringEscapeHandling =
             StringEscapeHandling.Default;
         internal const TypeNameAssemblyFormatHandling DefaultTypeNameAssemblyFormatHandling =
             TypeNameAssemblyFormatHandling.Simple;
         internal static readonly CultureInfo DefaultCulture;
         internal const bool DefaultCheckAdditionalContent = false;
-        internal const string DefaultDateFormatString =
-            @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+        internal const string DefaultDateFormatString = @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
         internal const int DefaultMaxDepth = 64;
 
         internal Formatting? _formatting;
@@ -173,9 +166,7 @@ namespace Newtonsoft.Json
         /// <value>The preserve references handling.</value>
         public PreserveReferencesHandling PreserveReferencesHandling
         {
-            get =>
-                _preserveReferencesHandling ??
-                DefaultPreserveReferencesHandling;
+            get => _preserveReferencesHandling ?? DefaultPreserveReferencesHandling;
             set => _preserveReferencesHandling = value;
         }
 
@@ -216,8 +207,7 @@ namespace Newtonsoft.Json
         public FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => (FormatterAssemblyStyle)TypeNameAssemblyFormatHandling;
-            set =>
-                TypeNameAssemblyFormatHandling = (TypeNameAssemblyFormatHandling)value;
+            set => TypeNameAssemblyFormatHandling = (TypeNameAssemblyFormatHandling)value;
         }
 
         /// <summary>
@@ -227,9 +217,7 @@ namespace Newtonsoft.Json
         /// <value>The type name assembly format.</value>
         public TypeNameAssemblyFormatHandling TypeNameAssemblyFormatHandling
         {
-            get =>
-                _typeNameAssemblyFormatHandling ??
-                DefaultTypeNameAssemblyFormatHandling;
+            get => _typeNameAssemblyFormatHandling ?? DefaultTypeNameAssemblyFormatHandling;
             set => _typeNameAssemblyFormatHandling = value;
         }
 
@@ -310,9 +298,7 @@ namespace Newtonsoft.Json
                 );
             }
             set =>
-                SerializationBinder = value == null
-                    ? null
-                    : new SerializationBinderAdapter(value);
+                SerializationBinder = value == null ? null : new SerializationBinderAdapter(value);
         }
 
         /// <summary>
@@ -364,10 +350,7 @@ namespace Newtonsoft.Json
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException(
-                        "Value must be positive.",
-                        nameof(value)
-                    );
+                    throw new ArgumentException("Value must be positive.", nameof(value));
                 }
 
                 _maxDepth = value;

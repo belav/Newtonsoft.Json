@@ -48,10 +48,7 @@ namespace Newtonsoft.Json.Tests.Converters
             IsoDateTimeConverter converter = new IsoDateTimeConverter();
             Assert.AreEqual(CultureInfo.CurrentCulture, converter.Culture);
             Assert.AreEqual(string.Empty, converter.DateTimeFormat);
-            Assert.AreEqual(
-                DateTimeStyles.RoundtripKind,
-                converter.DateTimeStyles
-            );
+            Assert.AreEqual(DateTimeStyles.RoundtripKind, converter.DateTimeStyles);
 
             converter = new IsoDateTimeConverter()
             {
@@ -69,12 +66,9 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             TimeSpan utcOffset = d.GetUtcOffset();
 
-            return utcOffset.Hours.ToString(
-                "+00;-00",
-                CultureInfo.InvariantCulture
-            ) +
-            ":" +
-            utcOffset.Minutes.ToString("00;00", CultureInfo.InvariantCulture);
+            return utcOffset.Hours.ToString("+00;-00", CultureInfo.InvariantCulture)
+                + ":"
+                + utcOffset.Minutes.ToString("00;00", CultureInfo.InvariantCulture);
         }
 
         [Test]
@@ -82,32 +76,17 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             IsoDateTimeConverter converter = new IsoDateTimeConverter();
 
-            DateTime d = new DateTime(
-                2000,
-                12,
-                15,
-                22,
-                11,
-                3,
-                55,
-                DateTimeKind.Utc
-            );
+            DateTime d = new DateTime(2000, 12, 15, 22, 11, 3, 55, DateTimeKind.Utc);
             string result;
 
             result = JsonConvert.SerializeObject(d, converter);
             Assert.AreEqual(@"""2000-12-15T22:11:03.055Z""", result);
 
-            Assert.AreEqual(
-                d,
-                JsonConvert.DeserializeObject<DateTime>(result, converter)
-            );
+            Assert.AreEqual(d, JsonConvert.DeserializeObject<DateTime>(result, converter));
 
             d = new DateTime(2000, 12, 15, 22, 11, 3, 55, DateTimeKind.Local);
             result = JsonConvert.SerializeObject(d, converter);
-            Assert.AreEqual(
-                @"""2000-12-15T22:11:03.055" + GetUtcOffsetText(d) + @"""",
-                result
-            );
+            Assert.AreEqual(@"""2000-12-15T22:11:03.055" + GetUtcOffsetText(d) + @"""", result);
         }
 
         [Test]
@@ -119,25 +98,13 @@ namespace Newtonsoft.Json.Tests.Converters
                 Culture = CultureInfo.InvariantCulture
             };
 
-            DateTime d = new DateTime(
-                2000,
-                12,
-                15,
-                22,
-                11,
-                3,
-                0,
-                DateTimeKind.Utc
-            );
+            DateTime d = new DateTime(2000, 12, 15, 22, 11, 3, 0, DateTimeKind.Utc);
             string result;
 
             result = JsonConvert.SerializeObject(d, converter);
             Assert.AreEqual(@"""Friday, 15 December 2000 22:11:03""", result);
 
-            Assert.AreEqual(
-                d,
-                JsonConvert.DeserializeObject<DateTime>(result, converter)
-            );
+            Assert.AreEqual(d, JsonConvert.DeserializeObject<DateTime>(result, converter));
 
             d = new DateTime(2000, 12, 15, 22, 11, 3, 0, DateTimeKind.Local);
             result = JsonConvert.SerializeObject(d, converter);
@@ -155,10 +122,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = @"""09/12/2006""";
 
-            DateTime d = JsonConvert.DeserializeObject<DateTime>(
-                json,
-                converter
-            );
+            DateTime d = JsonConvert.DeserializeObject<DateTime>(json, converter);
 
             Assert.AreEqual(9, d.Day);
             Assert.AreEqual(12, d.Month);
@@ -179,35 +143,17 @@ namespace Newtonsoft.Json.Tests.Converters
                 Culture = culture
             };
 
-            DateTime d = new DateTime(
-                2000,
-                12,
-                15,
-                22,
-                11,
-                3,
-                0,
-                DateTimeKind.Utc
-            );
+            DateTime d = new DateTime(2000, 12, 15, 22, 11, 3, 0, DateTimeKind.Utc);
             string result;
 
             result = JsonConvert.SerializeObject(d, converter);
-            Assert.AreEqual(
-                @"""Friday, 15 December 2000 10:11:03 p.m.""",
-                result
-            );
+            Assert.AreEqual(@"""Friday, 15 December 2000 10:11:03 p.m.""", result);
 
-            Assert.AreEqual(
-                d,
-                JsonConvert.DeserializeObject<DateTime>(result, converter)
-            );
+            Assert.AreEqual(d, JsonConvert.DeserializeObject<DateTime>(result, converter));
 
             d = new DateTime(2000, 12, 15, 22, 11, 3, 0, DateTimeKind.Local);
             result = JsonConvert.SerializeObject(d, converter);
-            Assert.AreEqual(
-                @"""Friday, 15 December 2000 10:11:03 p.m.""",
-                result
-            );
+            Assert.AreEqual(@"""Friday, 15 December 2000 10:11:03 p.m.""", result);
         }
 
         [Test]
@@ -220,10 +166,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = @"""09/12/2006""";
 
-            DateTime d = JsonConvert.DeserializeObject<DateTime>(
-                json,
-                converter
-            );
+            DateTime d = JsonConvert.DeserializeObject<DateTime>(json, converter);
 
             Assert.AreEqual(9, d.Day);
             Assert.AreEqual(12, d.Month);
@@ -237,25 +180,13 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             IsoDateTimeConverter converter = new IsoDateTimeConverter();
 
-            DateTimeOffset d = new DateTimeOffset(
-                2000,
-                12,
-                15,
-                22,
-                11,
-                3,
-                55,
-                TimeSpan.Zero
-            );
+            DateTimeOffset d = new DateTimeOffset(2000, 12, 15, 22, 11, 3, 55, TimeSpan.Zero);
             string result;
 
             result = JsonConvert.SerializeObject(d, converter);
             Assert.AreEqual(@"""2000-12-15T22:11:03.055+00:00""", result);
 
-            Assert.AreEqual(
-                d,
-                JsonConvert.DeserializeObject<DateTimeOffset>(result, converter)
-            );
+            Assert.AreEqual(d, JsonConvert.DeserializeObject<DateTimeOffset>(result, converter));
         }
 
         [Test]
@@ -286,10 +217,7 @@ namespace Newtonsoft.Json.Tests.Converters
             c.PostField = "Post";
             string json = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             );
             Assert.AreEqual(
                 @"{""PreField"":""Pre"",""DateTimeField"":""2008-12-12T12:12:12Z"",""DateTimeOffsetField"":""2008-12-12T12:12:12+00:00"",""PostField"":""Post""}",
@@ -297,16 +225,7 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 
             //test the other edge case too
-            c.DateTimeField = new DateTime(
-                2008,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            c.DateTimeField = new DateTime(2008, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc).ToLocalTime();
             c.DateTimeOffsetField = new DateTime(
                 2008,
                 1,
@@ -321,10 +240,7 @@ namespace Newtonsoft.Json.Tests.Converters
             c.PostField = "Post";
             json = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             );
             Assert.AreEqual(
                 @"{""PreField"":""Pre"",""DateTimeField"":""2008-01-01T01:01:01Z"",""DateTimeOffsetField"":""2008-01-01T01:01:01+00:00"",""PostField"":""Post""}",
@@ -360,10 +276,7 @@ namespace Newtonsoft.Json.Tests.Converters
             c.PostField = "Post";
             string json = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             );
             Assert.AreEqual(
                 @"{""PreField"":""Pre"",""DateTimeField"":""2008-12-12T12:12:12Z"",""DateTimeOffsetField"":""2008-12-12T12:12:12+00:00"",""PostField"":""Post""}",
@@ -377,10 +290,7 @@ namespace Newtonsoft.Json.Tests.Converters
             c.PostField = "Post";
             json = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             );
             Assert.AreEqual(
                 @"{""PreField"":""Pre"",""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":""Post""}",
@@ -395,10 +305,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             NullableDateTimeTestClass c = JsonConvert.DeserializeObject<NullableDateTimeTestClass>(
                 json,
-                new JsonSerializerSettings
-                {
-                    Converters = new[] { new IsoDateTimeConverter() }
-                }
+                new JsonSerializerSettings { Converters = new[] { new IsoDateTimeConverter() } }
             );
             Assert.AreEqual(null, c.DateTimeField);
         }
@@ -424,16 +331,7 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeShouldChangeNonUTCDates()
         {
-            DateTime localDateTime = new DateTime(
-                2008,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                DateTimeKind.Local
-            );
+            DateTime localDateTime = new DateTime(2008, 1, 1, 1, 1, 1, 0, DateTimeKind.Local);
 
             DateTimeTestClass c = new DateTimeTestClass();
             c.DateTimeField = localDateTime;
@@ -441,27 +339,12 @@ namespace Newtonsoft.Json.Tests.Converters
             c.PostField = "Post";
             string json = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             ); //note that this fails without the Utc converter...
-            c.DateTimeField = new DateTime(
-                2008,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                DateTimeKind.Utc
-            );
+            c.DateTimeField = new DateTime(2008, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc);
             string json2 = JsonConvert.SerializeObject(
                 c,
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal
-                }
+                new IsoDateTimeConverter() { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             );
 
             TimeSpan offset = localDateTime.GetUtcOffset();
@@ -488,10 +371,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 LastModified = new DateTime(2009, 4, 12, 20, 44, 55),
             };
 
-            string jsonText = JsonConvert.SerializeObject(
-                p,
-                new IsoDateTimeConverter()
-            );
+            string jsonText = JsonConvert.SerializeObject(p, new IsoDateTimeConverter());
             // {
             //   "Name": "Keith",
             //   "BirthDate": "1980-03-08T00:00:00",

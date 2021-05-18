@@ -58,22 +58,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 Email = "james@example.com",
                 Active = true,
-                CreatedDate = new DateTime(
-                    2013,
-                    1,
-                    20,
-                    0,
-                    0,
-                    0,
-                    DateTimeKind.Utc
-                ),
+                CreatedDate = new DateTime(2013, 1, 20, 0, 0, 0, DateTimeKind.Utc),
                 Roles = new List<string> { "User", "Admin" }
             };
 
-            string json = JsonConvert.SerializeObject(
-                account,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(account, Formatting.Indented);
             // {
             //   "Email": "james@example.com",
             //   "Active": true,

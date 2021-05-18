@@ -60,17 +60,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Type type,
                 MemberSerialization memberSerialization
             ) {
-                IList<JsonProperty> properties = base.CreateProperties(
-                    type,
-                    memberSerialization
-                );
+                IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
                 // only serializer properties that start with the specified character
                 properties = properties.Where(
-                        p =>
-                            p.PropertyName.StartsWith(
-                                _startingWithChar.ToString()
-                            )
+                        p => p.PropertyName.StartsWith(_startingWithChar.ToString())
                     )
                     .ToList();
 
@@ -94,19 +88,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person
-            {
-                FirstName = "Dennis",
-                LastName = "Deepwater-Diver"
-            };
+            Person person = new Person { FirstName = "Dennis", LastName = "Deepwater-Diver" };
 
             string startingWithF = JsonConvert.SerializeObject(
                 person,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new DynamicContractResolver('F')
-                }
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('F') }
             );
 
             Console.WriteLine(startingWithF);
@@ -118,10 +105,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             string startingWithL = JsonConvert.SerializeObject(
                 person,
                 Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new DynamicContractResolver('L')
-                }
+                new JsonSerializerSettings { ContractResolver = new DynamicContractResolver('L') }
             );
 
             Console.WriteLine(startingWithL);
@@ -130,12 +114,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""LastName"": ""Deepwater-Diver""
-}",
-                startingWithL
-            );
+}", startingWithL);
         }
     }
 }

@@ -32,8 +32,7 @@ namespace Newtonsoft.Json.Utilities
 {
     internal static class DateTimeUtils
     {
-        internal static readonly long InitialJavaScriptDateTicks =
-            621355968000000000;
+        internal static readonly long InitialJavaScriptDateTicks = 621355968000000000;
         private const string IsoDateFormat = "yyyy-MM-ddTHH:mm:ss.FFFFFFFK";
 
         private const int DaysPer100Years = 36524;
@@ -46,36 +45,8 @@ namespace Newtonsoft.Json.Utilities
 
         static DateTimeUtils()
         {
-            DaysToMonth365 = new[] {
-                0,
-                31,
-                59,
-                90,
-                120,
-                151,
-                181,
-                212,
-                243,
-                273,
-                304,
-                334,
-                365
-            };
-            DaysToMonth366 = new[] {
-                0,
-                31,
-                60,
-                91,
-                121,
-                152,
-                182,
-                213,
-                244,
-                274,
-                305,
-                335,
-                366
-            };
+            DaysToMonth365 = new[] { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
+            DaysToMonth366 = new[] { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
         }
 
         public static TimeSpan GetUtcOffset(this DateTime d)
@@ -88,9 +59,8 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if !(PORTABLE40 || PORTABLE) || NETSTANDARD1_3
-        public static XmlDateTimeSerializationMode ToSerializationMode(
-            DateTimeKind kind
-        ) {
+        public static XmlDateTimeSerializationMode ToSerializationMode(DateTimeKind kind)
+        {
             switch (kind)
             {
                 case DateTimeKind.Local:
@@ -124,10 +94,8 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        internal static DateTime EnsureDateTime(
-            DateTime value,
-            DateTimeZoneHandling timeZone
-        ) {
+        internal static DateTime EnsureDateTime(DateTime value, DateTimeZoneHandling timeZone)
+        {
             switch (timeZone)
             {
                 case DateTimeZoneHandling.Local:
@@ -142,9 +110,7 @@ namespace Newtonsoft.Json.Utilities
                 case DateTimeZoneHandling.RoundtripKind:
                     break;
                 default:
-                    throw new ArgumentException(
-                        "Invalid date time handling value."
-                    );
+                    throw new ArgumentException("Invalid date time handling value.");
             }
 
             return value;
@@ -188,16 +154,14 @@ namespace Newtonsoft.Json.Utilities
             return ToUniversalTicks(dateTime, dateTime.GetUtcOffset());
         }
 
-        private static long ToUniversalTicks(
-            DateTime dateTime,
-            TimeSpan offset
-        ) {
+        private static long ToUniversalTicks(DateTime dateTime, TimeSpan offset)
+        {
             // special case min and max value
             // they never have a timezone appended to avoid issues
             if (
-                dateTime.Kind == DateTimeKind.Utc ||
-                dateTime == DateTime.MaxValue ||
-                dateTime == DateTime.MinValue
+                dateTime.Kind == DateTimeKind.Utc
+                || dateTime == DateTime.MaxValue
+                || dateTime == DateTime.MinValue
             ) {
                 return dateTime.Ticks;
             }
@@ -216,44 +180,34 @@ namespace Newtonsoft.Json.Utilities
             return ticks;
         }
 
-        internal static long ConvertDateTimeToJavaScriptTicks(
-            DateTime dateTime,
-            TimeSpan offset
-        ) {
+        internal static long ConvertDateTimeToJavaScriptTicks(DateTime dateTime, TimeSpan offset)
+        {
             long universalTicks = ToUniversalTicks(dateTime, offset);
 
             return UniversalTicksToJavaScriptTicks(universalTicks);
         }
 
-        internal static long ConvertDateTimeToJavaScriptTicks(
-            DateTime dateTime
-        ) {
+        internal static long ConvertDateTimeToJavaScriptTicks(DateTime dateTime)
+        {
             return ConvertDateTimeToJavaScriptTicks(dateTime, true);
         }
 
-        internal static long ConvertDateTimeToJavaScriptTicks(
-            DateTime dateTime,
-            bool convertToUtc
-        ) {
-            long ticks = (convertToUtc)
-                ? ToUniversalTicks(dateTime)
-                : dateTime.Ticks;
+        internal static long ConvertDateTimeToJavaScriptTicks(DateTime dateTime, bool convertToUtc)
+        {
+            long ticks = (convertToUtc) ? ToUniversalTicks(dateTime) : dateTime.Ticks;
 
             return UniversalTicksToJavaScriptTicks(ticks);
         }
 
-        private static long UniversalTicksToJavaScriptTicks(
-            long universalTicks
-        ) {
-            long javaScriptTicks =
-                (universalTicks - InitialJavaScriptDateTicks) / 10000;
+        private static long UniversalTicksToJavaScriptTicks(long universalTicks)
+        {
+            long javaScriptTicks = (universalTicks - InitialJavaScriptDateTicks) / 10000;
 
             return javaScriptTicks;
         }
 
-        internal static DateTime ConvertJavaScriptTicksToDateTime(
-            long javaScriptTicks
-        ) {
+        internal static DateTime ConvertJavaScriptTicksToDateTime(long javaScriptTicks)
+        {
             DateTime dateTime = new DateTime(
                 (javaScriptTicks * 10000) + InitialJavaScriptDateTicks,
                 DateTimeKind.Utc
@@ -269,9 +223,8 @@ namespace Newtonsoft.Json.Utilities
             out DateTime dt
         ) {
             DateTimeParser dateTimeParser = new DateTimeParser();
-            if (
-                !dateTimeParser.Parse(text.Chars, text.StartIndex, text.Length)
-            ) {
+            if (!dateTimeParser.Parse(text.Chars, text.StartIndex, text.Length))
+            {
                 dt = default;
                 return false;
             }
@@ -423,28 +376,16 @@ namespace Newtonsoft.Json.Utilities
                 int i = s.StartIndex;
                 if (s[i] == '/')
                 {
-                    if (
-                        s.Length >= 9 &&
-                        s.StartsWith("/Date(") &&
-                        s.EndsWith(")/")
-                    ) {
-                        if (
-                            TryParseDateTimeMicrosoft(
-                                s,
-                                dateTimeZoneHandling,
-                                out dt
-                            )
-                        ) {
+                    if (s.Length >= 9 && s.StartsWith("/Date(") && s.EndsWith(")/"))
+                    {
+                        if (TryParseDateTimeMicrosoft(s, dateTimeZoneHandling, out dt))
+                        {
                             return true;
                         }
                     }
                 }
-                else if (
-                    s.Length >= 19 &&
-                    s.Length <= 40 &&
-                    char.IsDigit(s[i]) &&
-                    s[i + 10] == 'T'
-                ) {
+                else if (s.Length >= 19 && s.Length <= 40 && char.IsDigit(s[i]) && s[i + 10] == 'T')
+                {
                     if (TryParseDateTimeIso(s, dateTimeZoneHandling, out dt))
                     {
                         return true;
@@ -483,17 +424,13 @@ namespace Newtonsoft.Json.Utilities
                 if (s[0] == '/')
                 {
                     if (
-                        s.Length >= 9 &&
-                        s.StartsWith("/Date(", StringComparison.Ordinal) &&
-                        s.EndsWith(")/", StringComparison.Ordinal)
+                        s.Length >= 9
+                        && s.StartsWith("/Date(", StringComparison.Ordinal)
+                        && s.EndsWith(")/", StringComparison.Ordinal)
                     ) {
                         if (
                             TryParseDateTimeMicrosoft(
-                                new StringReference(
-                                    s.ToCharArray(),
-                                    0,
-                                    s.Length
-                                ),
+                                new StringReference(s.ToCharArray(), 0, s.Length),
                                 dateTimeZoneHandling,
                                 out dt
                             )
@@ -502,12 +439,8 @@ namespace Newtonsoft.Json.Utilities
                         }
                     }
                 }
-                else if (
-                    s.Length >= 19 &&
-                    s.Length <= 40 &&
-                    char.IsDigit(s[0]) &&
-                    s[10] == 'T'
-                ) {
+                else if (s.Length >= 19 && s.Length <= 40 && char.IsDigit(s[0]) && s[10] == 'T')
+                {
                     if (
                         DateTime.TryParseExact(
                             s,
@@ -654,8 +587,8 @@ namespace Newtonsoft.Json.Utilities
                 6 + text.StartIndex,
                 index - 6,
                 out ticks
-            ) ==
-            ParseResult.Success);
+            )
+            == ParseResult.Success);
         }
 
         private static bool TryParseDateTimeMicrosoft(
@@ -663,14 +596,8 @@ namespace Newtonsoft.Json.Utilities
             DateTimeZoneHandling dateTimeZoneHandling,
             out DateTime dt
         ) {
-            if (
-                !TryParseMicrosoftDate(
-                    text,
-                    out long ticks,
-                    out _,
-                    out DateTimeKind kind
-                )
-            ) {
+            if (!TryParseMicrosoftDate(text, out long ticks, out _, out DateTimeKind kind))
+            {
                 dt = default;
                 return false;
             }
@@ -680,10 +607,7 @@ namespace Newtonsoft.Json.Utilities
             switch (kind)
             {
                 case DateTimeKind.Unspecified:
-                    dt = DateTime.SpecifyKind(
-                        utcDateTime.ToLocalTime(),
-                        DateTimeKind.Unspecified
-                    );
+                    dt = DateTime.SpecifyKind(utcDateTime.ToLocalTime(), DateTimeKind.Unspecified);
                     break;
                 case DateTimeKind.Local:
                     dt = utcDateTime.ToLocalTime();
@@ -758,13 +682,8 @@ namespace Newtonsoft.Json.Utilities
             bool negative = (offsetText[startIndex] == '-');
 
             if (
-                ConvertUtils.Int32TryParse(
-                    offsetText.Chars,
-                    startIndex + 1,
-                    2,
-                    out int hours
-                ) !=
-                ParseResult.Success
+                ConvertUtils.Int32TryParse(offsetText.Chars, startIndex + 1, 2, out int hours)
+                != ParseResult.Success
             ) {
                 offset = default;
                 return false;
@@ -774,13 +693,8 @@ namespace Newtonsoft.Json.Utilities
             if (offsetText.Length - startIndex > 5)
             {
                 if (
-                    ConvertUtils.Int32TryParse(
-                        offsetText.Chars,
-                        startIndex + 3,
-                        2,
-                        out minutes
-                    ) !=
-                    ParseResult.Success
+                    ConvertUtils.Int32TryParse(offsetText.Chars, startIndex + 3, 2, out minutes)
+                    != ParseResult.Success
                 ) {
                     offset = default;
                     return false;
@@ -808,14 +722,7 @@ namespace Newtonsoft.Json.Utilities
             if (StringUtils.IsNullOrEmpty(formatString))
             {
                 char[] chars = new char[64];
-                int pos = WriteDateTimeString(
-                    chars,
-                    0,
-                    value,
-                    null,
-                    value.Kind,
-                    format
-                );
+                int pos = WriteDateTimeString(chars, 0, value, null, value.Kind, format);
                 writer.Write(chars, 0, pos);
             }
             else
@@ -838,27 +745,20 @@ namespace Newtonsoft.Json.Utilities
             {
                 TimeSpan o = offset ?? value.GetUtcOffset();
 
-                long javaScriptTicks = ConvertDateTimeToJavaScriptTicks(
-                    value,
-                    o
-                );
+                long javaScriptTicks = ConvertDateTimeToJavaScriptTicks(value, o);
 
                 @"\/Date(".CopyTo(0, chars, pos, 7);
                 pos += 7;
 
-                string ticksText = javaScriptTicks.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                string ticksText = javaScriptTicks.ToString(CultureInfo.InvariantCulture);
                 ticksText.CopyTo(0, chars, pos, ticksText.Length);
                 pos += ticksText.Length;
 
                 switch (kind)
                 {
                     case DateTimeKind.Unspecified:
-                        if (
-                            value != DateTime.MaxValue &&
-                            value != DateTime.MinValue
-                        ) {
+                        if (value != DateTime.MaxValue && value != DateTime.MinValue)
+                        {
                             pos = WriteDateTimeOffset(chars, pos, o, format);
                         }
                         break;
@@ -893,11 +793,8 @@ namespace Newtonsoft.Json.Utilities
             return pos;
         }
 
-        internal static int WriteDefaultIsoDate(
-            char[] chars,
-            int start,
-            DateTime dt
-        ) {
+        internal static int WriteDefaultIsoDate(char[] chars, int start, DateTime dt)
+        {
             int length = 19;
 
             GetDateValues(dt, out int year, out int month, out int day);
@@ -934,12 +831,8 @@ namespace Newtonsoft.Json.Utilities
             return start + length;
         }
 
-        private static void CopyIntToCharArray(
-            char[] chars,
-            int start,
-            int value,
-            int digits
-        ) {
+        private static void CopyIntToCharArray(char[] chars, int start, int value, int digits)
+        {
             while (digits-- != 0)
             {
                 chars[start + digits] = (char)((value % 10) + 48);
@@ -989,12 +882,8 @@ namespace Newtonsoft.Json.Utilities
 #endif
         #endregion
 
-        private static void GetDateValues(
-            DateTime td,
-            out int year,
-            out int month,
-            out int day
-        ) {
+        private static void GetDateValues(DateTime td, out int year, out int month, out int day)
+        {
             long ticks = td.Ticks;
             // n = number of days since 1/1/0001
             int n = (int)(ticks / TicksPerDay);

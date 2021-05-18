@@ -297,21 +297,12 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            Folder f = JsonConvert.DeserializeObject<Folder>(
-                json,
-                new IsoDateTimeConverter()
-            );
+            Folder f = JsonConvert.DeserializeObject<Folder>(json, new IsoDateTimeConverter());
 
             Assert.IsNotNull(f);
-            Assert.AreEqual(
-                new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"),
-                f.FolderId
-            );
+            Assert.AreEqual(new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"), f.FolderId);
             Assert.AreEqual("Folder", f.EntityKey.EntitySetName);
-            Assert.AreEqual(
-                "DataServicesTestDatabaseEntities",
-                f.EntityKey.EntityContainerName
-            );
+            Assert.AreEqual("DataServicesTestDatabaseEntities", f.EntityKey.EntityContainerName);
             Assert.AreEqual("Folder", f.EntityKey.EntitySetName);
             Assert.AreEqual(false, f.EntityKey.IsTemporary);
             Assert.AreEqual(1, f.EntityKey.EntityKeyValues.Length);
@@ -321,10 +312,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 f.EntityKey.EntityKeyValues[0].Value
             );
             Assert.AreEqual("Root folder", f.Name);
-            Assert.AreEqual(
-                new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc),
-                f.CreatedDate
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc), f.CreatedDate);
             Assert.AreEqual(null, f.ParentFolder);
             Assert.AreEqual(1, f.ChildFolders.Count);
 
@@ -345,10 +333,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "DataServicesTestDatabaseEntities.Folder",
                 new List<EntityKeyMember>
                 {
-                    new EntityKeyMember(
-                        "GuidId",
-                        new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")
-                    ),
+                    new EntityKeyMember("GuidId", new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")),
                     new EntityKeyMember("IntId", int.MaxValue),
                     new EntityKeyMember("LongId", long.MaxValue),
                     new EntityKeyMember("StringId", "String!"),
@@ -432,10 +417,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "DataServicesTestDatabaseEntities.Folder",
                 new List<EntityKeyMember>
                 {
-                    new EntityKeyMember(
-                        "GuidId",
-                        new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")
-                    ),
+                    new EntityKeyMember("GuidId", new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")),
                     new EntityKeyMember("IntId", int.MaxValue),
                     new EntityKeyMember("LongId", long.MaxValue),
                     new EntityKeyMember("StringId", "String!"),
@@ -517,20 +499,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
             folder.Name = "Root folder";
             folder.Description = "Description!";
-            folder.CreatedDate = new DateTime(
-                2000,
-                12,
-                10,
-                10,
-                50,
-                0,
-                DateTimeKind.Utc
-            );
+            folder.CreatedDate = new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc);
 
             Folder childFolder = new Folder();
-            childFolder.FolderId = new Guid(
-                "484936E2-7CBB-4592-93FF-B2103E5705E4"
-            );
+            childFolder.FolderId = new Guid("484936E2-7CBB-4592-93FF-B2103E5705E4");
             childFolder.EntityKey = new EntityKey(
                 "DataServicesTestDatabaseEntities.Folder",
                 "FolderId",
@@ -538,15 +510,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
             childFolder.Name = "Child folder";
             childFolder.Description = "Description!";
-            childFolder.CreatedDate = new DateTime(
-                2001,
-                11,
-                20,
-                10,
-                50,
-                0,
-                DateTimeKind.Utc
-            );
+            childFolder.CreatedDate = new DateTime(2001, 11, 20, 10, 50, 0, DateTimeKind.Utc);
 
             folder.ChildFolders.Add(childFolder);
 
@@ -559,15 +523,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
             file1.Name = "File 1";
             file1.Description = "Description!";
-            file1.CreatedDate = new DateTime(
-                2002,
-                10,
-                30,
-                10,
-                50,
-                0,
-                DateTimeKind.Utc
-            );
+            file1.CreatedDate = new DateTime(2002, 10, 30, 10, 50, 0, DateTimeKind.Utc);
 
             childFolder.Files.Add(file1);
             return folder;

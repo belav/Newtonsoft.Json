@@ -76,13 +76,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""user-name"": ""jamesn"",
   ""enabled"": true
-}",
-                json
-            );
+}", json);
         }
     }
 }

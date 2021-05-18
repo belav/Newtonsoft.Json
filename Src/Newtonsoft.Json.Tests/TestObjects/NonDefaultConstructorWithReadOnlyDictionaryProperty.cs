@@ -36,9 +36,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             private set;
         }
 
-        public NonDefaultConstructorWithReadOnlyDictionaryProperty(
-            string title
-        ) {
+        public NonDefaultConstructorWithReadOnlyDictionaryProperty(string title)
+        {
             Title = title;
             Categories = new Dictionary<string, int>();
         }

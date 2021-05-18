@@ -33,11 +33,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class ListOfIds<T> : JsonConverter
         where T : Bar, new()
     {
-        public override void WriteJson(
-            JsonWriter writer,
-            object value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
             IList<T> list = (IList<T>)value;
 
             writer.WriteStartArray();

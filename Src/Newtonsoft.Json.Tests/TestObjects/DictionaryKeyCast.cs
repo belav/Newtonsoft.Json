@@ -43,14 +43,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return _name + " " + _number;
         }
 
-        public static implicit operator DictionaryKeyCast(
-            string dictionaryKey
-        ) {
+        public static implicit operator DictionaryKeyCast(string dictionaryKey)
+        {
             var strings = dictionaryKey.Split(' ');
-            return new DictionaryKeyCast(
-                strings[0],
-                Convert.ToInt32(strings[1])
-            );
+            return new DictionaryKeyCast(strings[0], Convert.ToInt32(strings[1]));
         }
     }
 }

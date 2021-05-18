@@ -159,9 +159,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             _container = container;
         }
 
-        protected override JsonObjectContract CreateObjectContract(
-            Type objectType
-        ) {
+        protected override JsonObjectContract CreateObjectContract(Type objectType)
+        {
             // use Autofac to create types that have been registered with it
             if (_container.IsRegistered(objectType))
             {
@@ -184,8 +183,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     out registration
                 )
             ) {
-                Type viewType =
-                    (registration.Activator as ReflectionActivator)?.LimitType;
+                Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                 if (viewType != null)
                 {
                     return base.CreateObjectContract(viewType);
@@ -207,9 +205,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             builder.RegisterType<Company>().As<ICompany>();
             IContainer container = builder.Build();
 
-            AutofacContractResolver resolver = new AutofacContractResolver(
-                container
-            );
+            AutofacContractResolver resolver = new AutofacContractResolver(container);
 
             User user = JsonConvert.DeserializeObject<User>(
                 "{'company':{'company_name':'Company name!'}}",
@@ -238,9 +234,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             IContainer container = builder.Build();
 
-            AutofacContractResolver contractResolver = new AutofacContractResolver(
-                container
-            );
+            AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
             TaskController controller = JsonConvert.DeserializeObject<TaskController>(
                 @"{
@@ -248,10 +242,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     'Level':'Debug'
                 }
             }",
-                new JsonSerializerSettings
-                {
-                    ContractResolver = contractResolver
-                }
+                new JsonSerializerSettings { ContractResolver = contractResolver }
             );
 
             Assert.IsNotNull(controller);
@@ -259,10 +250,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(1, count);
 
-            Assert.AreEqual(
-                new DateTime(2000, 12, 12),
-                controller.Logger.DateTime
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 12), controller.Logger.DateTime);
             Assert.AreEqual("Debug", controller.Logger.Level);
         }
 
@@ -292,9 +280,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             IContainer container = builder.Build();
 
-            AutofacContractResolver contractResolver = new AutofacContractResolver(
-                container
-            );
+            AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
             HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(
                 @"{
@@ -317,19 +303,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                     'Name': 'Name3!'
                 }
             }",
-                new JsonSerializerSettings
-                {
-                    ContractResolver = contractResolver
-                }
+                new JsonSerializerSettings { ContractResolver = contractResolver }
             );
 
             Assert.IsNotNull(o);
             Assert.IsNotNull(o.Logger);
             Assert.IsNotNull(o.Repository);
-            Assert.AreEqual(
-                o.Repository.CreatedOn,
-                DateTime.Parse("2015-04-01 20:00")
-            );
+            Assert.AreEqual(o.Repository.CreatedOn, DateTime.Parse("2015-04-01 20:00"));
 
             Assert.AreEqual(2, count);
 

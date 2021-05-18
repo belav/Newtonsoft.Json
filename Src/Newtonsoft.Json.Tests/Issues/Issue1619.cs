@@ -43,10 +43,7 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             Foo value = new Foo { Bar = new DirectoryInfo(@"c:\temp") };
 
-            string json = JsonConvert.SerializeObject(
-                value,
-                new DirectoryInfoJsonConverter()
-            );
+            string json = JsonConvert.SerializeObject(value, new DirectoryInfoJsonConverter());
             Assert.AreEqual(@"{""Bar"":""c:\\temp""}", json);
         }
 

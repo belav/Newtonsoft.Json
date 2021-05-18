@@ -71,10 +71,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Assert.AreEqual(null, obj.Member4);
                 Assert.AreEqual(null, obj.Member5);
 
-                string json = JsonConvert.SerializeObject(
-                    obj,
-                    Formatting.Indented
-                );
+                string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
                 StringAssert.AreEqual(
                     @"{
   ""Member1"": 11,
@@ -85,10 +82,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 );
 
                 Assert.AreEqual(11, obj.Member1);
-                Assert.AreEqual(
-                    "This value was reset after serialization.",
-                    obj.Member2
-                );
+                Assert.AreEqual("This value was reset after serialization.", obj.Member2);
                 Assert.AreEqual("This is a nonserialized value", obj.Member3);
                 Assert.AreEqual(null, obj.Member4);
 
@@ -117,14 +111,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     "This value went into the data file during serialization.",
                     obj.Member2
                 );
-                Assert.AreEqual(
-                    "This value was set during deserialization",
-                    obj.Member3
-                );
-                Assert.AreEqual(
-                    "This value was set after deserialization.",
-                    obj.Member4
-                );
+                Assert.AreEqual("This value was set during deserialization", obj.Member3);
+                Assert.AreEqual("This value was set after deserialization.", obj.Member4);
 
                 expectedError = String.Format(
                     "Error message for member Member6 = Error setting value to 'Member6' on '{0}'.",
@@ -169,30 +157,19 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual(
-                "This value was reset after serialization.",
-                obj.Member2
-            );
+            Assert.AreEqual("This value was reset after serialization.", obj.Member2);
             Assert.AreEqual("This is a nonserialized value", obj.Member3);
             Assert.AreEqual(null, obj.Member4);
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestObjectWithConstructor>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestObjectWithConstructor>(json);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual(
                 "This value went into the data file during serialization.",
                 obj.Member2
             );
-            Assert.AreEqual(
-                "This value was set during deserialization",
-                obj.Member3
-            );
-            Assert.AreEqual(
-                "This value was set after deserialization.",
-                obj.Member4
-            );
+            Assert.AreEqual("This value was set during deserialization", obj.Member3);
+            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
         }
 
         [Test]
@@ -224,27 +201,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual(
-                "This value was reset after serialization.",
-                obj.Member2
-            );
+            Assert.AreEqual("This value was reset after serialization.", obj.Member2);
             Assert.AreEqual("This is a nonserialized value", obj.Member3);
             Assert.AreEqual(null, obj.Member4);
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestList>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestList>(json);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("Hello World!", obj.Member2);
-            Assert.AreEqual(
-                "This value was set during deserialization",
-                obj.Member3
-            );
-            Assert.AreEqual(
-                "This value was set after deserialization.",
-                obj.Member4
-            );
+            Assert.AreEqual("This value was set during deserialization", obj.Member3);
+            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
         }
 
         [Test]
@@ -276,27 +242,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual(
-                "This value was reset after serialization.",
-                obj.Member2
-            );
+            Assert.AreEqual("This value was reset after serialization.", obj.Member2);
             Assert.AreEqual("This is a nonserialized value", obj.Member3);
             Assert.AreEqual(null, obj.Member4);
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestDictionary>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestDictionary>(json);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("Hello World!", obj.Member2);
-            Assert.AreEqual(
-                "This value was set during deserialization",
-                obj.Member3
-            );
-            Assert.AreEqual(
-                "This value was set after deserialization.",
-                obj.Member4
-            );
+            Assert.AreEqual("This value was set during deserialization", obj.Member3);
+            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
         }
 
         [Test]
@@ -321,10 +276,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual(
-                "This value was reset after serialization.",
-                obj.Member2
-            );
+            Assert.AreEqual("This value was reset after serialization.", obj.Member2);
             Assert.AreEqual("This is a nonserialized value", obj.Member3);
             Assert.AreEqual(null, obj.Member4);
             Assert.AreEqual(
@@ -332,23 +284,15 @@ namespace Newtonsoft.Json.Tests.Serialization
                 obj.Member5
             );
 
-            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(
-                json
-            );
+            obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(json);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual(
                 "This value went into the data file during serialization.",
                 obj.Member2
             );
-            Assert.AreEqual(
-                "This value was set during deserialization",
-                obj.Member3
-            );
-            Assert.AreEqual(
-                "This value was set after deserialization.",
-                obj.Member4
-            );
+            Assert.AreEqual("This value was set during deserialization", obj.Member3);
+            Assert.AreEqual("This value was set after deserialization.", obj.Member4);
             Assert.AreEqual(null, obj.Member5);
         }
 
@@ -363,8 +307,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
         }
 
-        public class SerializationEventContextSubClassTestObject
-            : SerializationEventBaseTestObject
+        public class SerializationEventContextSubClassTestObject : SerializationEventBaseTestObject
         {
         }
 
@@ -401,19 +344,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    Context = new StreamingContext(
-                        StreamingContextStates.Remoting,
-                        "ContextValue"
-                    )
+                    Context = new StreamingContext(StreamingContextStates.Remoting, "ContextValue")
                 }
             );
 
-            StringAssert.AreEqual(
-                @"{
+            StringAssert.AreEqual(@"{
   ""TestMember"": ""Remoting ContextValue""
-}",
-                json
-            );
+}", json);
         }
 #endif
 
@@ -422,9 +359,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void WhenSerializationErrorDetectedBySerializer_ThenCallbackIsCalled()
         {
             // Verify contract is properly finding our callback
-            var resolver = new DefaultContractResolver().ResolveContract(
-                typeof(FooEvent)
-            );
+            var resolver = new DefaultContractResolver().ResolveContract(typeof(FooEvent));
 
             Assert.AreEqual(resolver.OnErrorCallbacks.Count, 1);
 
@@ -466,9 +401,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DerivedSerializationEvents()
         {
-            var c = JsonConvert.DeserializeObject<DerivedSerializationEventOrderTestObject>(
-                "{}"
-            );
+            var c = JsonConvert.DeserializeObject<DerivedSerializationEventOrderTestObject>("{}");
 
             JsonConvert.SerializeObject(c, Formatting.Indented);
 
@@ -613,8 +546,7 @@ OnSerialized_Derived_Derived",
         }
     }
 
-    public class DerivedSerializationEventOrderTestObject
-        : SerializationEventOrderTestObject
+    public class DerivedSerializationEventOrderTestObject : SerializationEventOrderTestObject
     {
         [OnSerializing]
         internal new void OnSerializingMethod(StreamingContext context)

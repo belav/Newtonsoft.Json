@@ -50,15 +50,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 {
                     new Employee
                     {
-                        BirthDate = new DateTime(
-                            1977,
-                            12,
-                            30,
-                            1,
-                            1,
-                            1,
-                            DateTimeKind.Utc
-                        ),
+                        BirthDate = new DateTime(1977, 12, 30, 1, 1, 1, DateTimeKind.Utc),
                         FirstName = "Maurice",
                         LastName = "Moss",
                         Department = "IT",
@@ -66,15 +58,7 @@ namespace Newtonsoft.Json.Tests.Converters
                     },
                     new Employee
                     {
-                        BirthDate = new DateTime(
-                            1978,
-                            3,
-                            15,
-                            1,
-                            1,
-                            1,
-                            DateTimeKind.Utc
-                        ),
+                        BirthDate = new DateTime(1978, 3, 15, 1, 1, 1, DateTimeKind.Utc),
                         FirstName = "Jen",
                         LastName = "Barber",
                         Department = "IT",
@@ -164,15 +148,10 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void AssertShouldSerializeTest()
         {
-            MyClass myClass = new MyClass
-            {
-                Value = "Foo",
-                Thing = new MyThing { Number = 456, }
-            };
+            MyClass myClass = new MyClass { Value = "Foo", Thing = new MyThing { Number = 456, } };
             string json = JsonConvert.SerializeObject(myClass); // <-- Exception here
 
-            const string expected =
-                @"{""Value"":""Foo"",""Thing"":{""Number"":456}}";
+            const string expected = @"{""Value"":""Foo"",""Thing"":{""Number"":456}}";
             Assert.AreEqual(expected, json);
         }
 
@@ -198,8 +177,7 @@ namespace Newtonsoft.Json.Tests.Converters
             public virtual IRange<decimal> NullDecimalRange { get; set; }
         }
 
-        internal class DecimalRangeConverter
-            : CustomCreationConverter<IRange<decimal>>
+        internal class DecimalRangeConverter : CustomCreationConverter<IRange<decimal>>
         {
             public override IRange<decimal> Create(Type objectType)
             {
@@ -223,19 +201,12 @@ namespace Newtonsoft.Json.Tests.Converters
                 Company = "Company!",
                 DecimalRange = new Range<decimal> { First = 0, Last = 1 },
                 Id = new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
-                IntRange = new Range<int>
-                {
-                    First = int.MinValue,
-                    Last = int.MaxValue
-                },
+                IntRange = new Range<int> { First = int.MinValue, Last = int.MaxValue },
                 Year = 2010,
                 NullDecimalRange = null
             };
 
-            string json = JsonConvert.SerializeObject(
-                initial,
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(initial, Formatting.Indented);
 
             StringAssert.AreEqual(
                 @"{
@@ -262,10 +233,7 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 
             Assert.AreEqual("Company!", deserialized.Company);
-            Assert.AreEqual(
-                new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
-                deserialized.Id
-            );
+            Assert.AreEqual(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), deserialized.Id);
             Assert.AreEqual(0, deserialized.DecimalRange.First);
             Assert.AreEqual(1, deserialized.DecimalRange.Last);
             Assert.AreEqual(int.MinValue, deserialized.IntRange.First);

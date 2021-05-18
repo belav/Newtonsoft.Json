@@ -62,8 +62,7 @@ namespace Newtonsoft.Json.Serialization
             set => _serializer.EqualityComparer = value;
         }
 
-        public override JsonConverterCollection Converters =>
-            _serializer.Converters;
+        public override JsonConverterCollection Converters => _serializer.Converters;
 
         public override DefaultValueHandling DefaultValueHandling
         {
@@ -236,34 +235,24 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        public JsonSerializerProxy(
-            JsonSerializerInternalReader serializerReader
-        ) {
-            ValidationUtils.ArgumentNotNull(
-                serializerReader,
-                nameof(serializerReader)
-            );
+        public JsonSerializerProxy(JsonSerializerInternalReader serializerReader)
+        {
+            ValidationUtils.ArgumentNotNull(serializerReader, nameof(serializerReader));
 
             _serializerReader = serializerReader;
             _serializer = serializerReader.Serializer;
         }
 
-        public JsonSerializerProxy(
-            JsonSerializerInternalWriter serializerWriter
-        ) {
-            ValidationUtils.ArgumentNotNull(
-                serializerWriter,
-                nameof(serializerWriter)
-            );
+        public JsonSerializerProxy(JsonSerializerInternalWriter serializerWriter)
+        {
+            ValidationUtils.ArgumentNotNull(serializerWriter, nameof(serializerWriter));
 
             _serializerWriter = serializerWriter;
             _serializer = serializerWriter.Serializer;
         }
 
-        internal override object? DeserializeInternal(
-            JsonReader reader,
-            Type? objectType
-        ) {
+        internal override object? DeserializeInternal(JsonReader reader, Type? objectType)
+        {
             if (_serializerReader != null)
             {
                 return _serializerReader.Deserialize(reader, objectType, false);
@@ -274,10 +263,8 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        internal override void PopulateInternal(
-            JsonReader reader,
-            object target
-        ) {
+        internal override void PopulateInternal(JsonReader reader, object target)
+        {
             if (_serializerReader != null)
             {
                 _serializerReader.Populate(reader, target);

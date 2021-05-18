@@ -90,14 +90,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [OnError]
-        internal void OnErrorMethod(
-            StreamingContext context,
-            ErrorContext errorContext
-        ) {
-            Member5 = "Error message for member " +
-            errorContext.Member +
-            " = " +
-            errorContext.Error.Message;
+        internal void OnErrorMethod(StreamingContext context, ErrorContext errorContext)
+        {
+            Member5 = "Error message for member "
+            + errorContext.Member
+            + " = "
+            + errorContext.Error.Message;
             errorContext.Handled = true;
         }
     }

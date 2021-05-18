@@ -62,10 +62,7 @@ namespace Newtonsoft.Json.Tests.Issues
             {
                 nonSerializableJson = JsonConvert.SerializeObject(
                     ex,
-                    new JsonSerializerSettings
-                    {
-                        Formatting = Formatting.Indented
-                    }
+                    new JsonSerializerSettings { Formatting = Formatting.Indented }
                 );
             }
 
@@ -77,10 +74,7 @@ namespace Newtonsoft.Json.Tests.Issues
             {
                 serializableJson = JsonConvert.SerializeObject(
                     ex,
-                    new JsonSerializerSettings
-                    {
-                        Formatting = Formatting.Indented
-                    }
+                    new JsonSerializerSettings { Formatting = Formatting.Indented }
                 );
             }
 
@@ -94,9 +88,7 @@ namespace Newtonsoft.Json.Tests.Issues
             DefaultContractResolver resolver = new DefaultContractResolver();
 
             var objectContract =
-                (JsonObjectContract)resolver.ResolveContract(
-                    typeof(NonSerializableException)
-                );
+                (JsonObjectContract)resolver.ResolveContract(typeof(NonSerializableException));
             Assert.IsFalse(objectContract.Properties.Contains("TargetSite"));
 
 #if (PORTABLE40 || PORTABLE) && !(NETSTANDARD2_0 || NETSTANDARD1_3)

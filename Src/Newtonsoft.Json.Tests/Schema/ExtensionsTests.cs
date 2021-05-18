@@ -57,22 +57,13 @@ namespace Newtonsoft.Json.Tests.Schema
 
             IList<string> errorMessages;
             Assert.AreEqual(true, integerToken.IsValid(schema));
-            Assert.AreEqual(
-                true,
-                integerToken.IsValid(schema, out errorMessages)
-            );
+            Assert.AreEqual(true, integerToken.IsValid(schema, out errorMessages));
             Assert.AreEqual(0, errorMessages.Count);
 
             Assert.AreEqual(false, stringToken.IsValid(schema));
-            Assert.AreEqual(
-                false,
-                stringToken.IsValid(schema, out errorMessages)
-            );
+            Assert.AreEqual(false, stringToken.IsValid(schema, out errorMessages));
             Assert.AreEqual(1, errorMessages.Count);
-            Assert.AreEqual(
-                "Invalid type. Expected Integer but got String.",
-                errorMessages[0]
-            );
+            Assert.AreEqual("Invalid type. Expected Integer but got String.", errorMessages[0]);
         }
 
         [Test]
@@ -82,24 +73,15 @@ namespace Newtonsoft.Json.Tests.Schema
             JToken stringToken = JToken.FromObject("pie lol");
 
             List<string> errors = new List<string>();
-            stringToken.Validate(
-                schema,
-                (sender, args) => errors.Add(args.Message)
-            );
+            stringToken.Validate(schema, (sender, args) => errors.Add(args.Message));
             Assert.AreEqual(0, errors.Count);
 
             stringToken = JToken.FromObject("pie");
 
-            stringToken.Validate(
-                schema,
-                (sender, args) => errors.Add(args.Message)
-            );
+            stringToken.Validate(schema, (sender, args) => errors.Add(args.Message));
             Assert.AreEqual(1, errors.Count);
 
-            Assert.AreEqual(
-                "String 'pie' does not match regex pattern 'lol'.",
-                errors[0]
-            );
+            Assert.AreEqual("String 'pie' does not match regex pattern 'lol'.", errors[0]);
         }
 
         [Test]
@@ -128,9 +110,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public void ValidateFailureWithOutLineInfoBecauseOfEndToken()
         {
             // changed in 6.0.6 to now include line info!
-            JsonSchema schema = JsonSchema.Parse(
-                "{'properties':{'lol':{'required':true}}}"
-            );
+            JsonSchema schema = JsonSchema.Parse("{'properties':{'lol':{'required':true}}}");
             JObject o = JObject.Parse("{}");
 
             List<string> errors = new List<string>();
@@ -146,16 +126,11 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ValidateRequiredFieldsWithLineInfo()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                "{'properties':{'lol':{'type':'string'}}}"
-            );
+            JsonSchema schema = JsonSchema.Parse("{'properties':{'lol':{'type':'string'}}}");
             JObject o = JObject.Parse("{'lol':1}");
 
             List<string> errors = new List<string>();
-            o.Validate(
-                schema,
-                (sender, args) => errors.Add(args.Path + " - " + args.Message)
-            );
+            o.Validate(schema, (sender, args) => errors.Add(args.Path + " - " + args.Message));
 
             Assert.AreEqual(
                 "lol - Invalid type. Expected String but got Integer. Line 1, position 8.",
@@ -212,13 +187,8 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchema typeSchema = generator.Generate(typeof(T));
             string schema = typeSchema.ToString();
 
-            string json = JsonConvert.SerializeObject(
-                value,
-                Formatting.Indented
-            );
-            JToken token = JToken.ReadFrom(
-                new JsonTextReader(new StringReader(json))
-            );
+            string json = JsonConvert.SerializeObject(value, Formatting.Indented);
+            JToken token = JToken.ReadFrom(new JsonTextReader(new StringReader(json)));
 
             List<string> errors = new List<string>();
 
@@ -233,9 +203,9 @@ namespace Newtonsoft.Json.Tests.Schema
             if (errors.Count > 0)
             {
                 Assert.Fail(
-                    "Schema generated for type '{0}' is not valid." +
-                    Environment.NewLine +
-                    string.Join(Environment.NewLine, errors.ToArray()),
+                    "Schema generated for type '{0}' is not valid."
+                    + Environment.NewLine
+                    + string.Join(Environment.NewLine, errors.ToArray()),
                     typeof(T)
                 );
             }
@@ -244,9 +214,7 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void GenerateSchemaAndSerializeFromTypeTests()
         {
-            GenerateSchemaAndSerializeFromType(
-                new List<string> { "1", "Two", "III" }
-            );
+            GenerateSchemaAndSerializeFromType(new List<string> { "1", "Two", "III" });
             GenerateSchemaAndSerializeFromType(new List<int> { 1 });
             GenerateSchemaAndSerializeFromType(new Version("1.2.3.4"));
             GenerateSchemaAndSerializeFromType(new Store());
@@ -255,9 +223,7 @@ namespace Newtonsoft.Json.Tests.Schema
             GenerateSchemaAndSerializeFromType(
                 new CircularReferenceClass() { Name = "I'm required" }
             );
-            GenerateSchemaAndSerializeFromType(
-                new CircularReferenceWithIdClass()
-            );
+            GenerateSchemaAndSerializeFromType(new CircularReferenceWithIdClass());
             GenerateSchemaAndSerializeFromType(new ClassWithArray());
             GenerateSchemaAndSerializeFromType(new ClassWithGuid());
 #if !NET20
@@ -276,9 +242,7 @@ namespace Newtonsoft.Json.Tests.Schema
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
             GenerateSchemaAndSerializeFromType(DBNull.Value);
 #endif
-            GenerateSchemaAndSerializeFromType(
-                new JsonPropertyWithHandlingValues()
-            );
+            GenerateSchemaAndSerializeFromType(new JsonPropertyWithHandlingValues());
         }
 
         [Test]
@@ -420,14 +384,8 @@ namespace Newtonsoft.Json.Tests.Schema
             IList<string> errorMessages;
             Assert.IsFalse(a.IsValid(schema, out errorMessages));
             Assert.AreEqual(2, errorMessages.Count);
-            Assert.AreEqual(
-                "Non-unique array item at index 3.",
-                errorMessages[0]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 4.",
-                errorMessages[1]
-            );
+            Assert.AreEqual("Non-unique array item at index 3.", errorMessages[0]);
+            Assert.AreEqual("Non-unique array item at index 4.", errorMessages[1]);
         }
 
         [Test]
@@ -449,18 +407,9 @@ namespace Newtonsoft.Json.Tests.Schema
             IList<string> errorMessages;
             Assert.IsFalse(a.IsValid(schema, out errorMessages));
             Assert.AreEqual(3, errorMessages.Count);
-            Assert.AreEqual(
-                "Non-unique array item at index 4.",
-                errorMessages[0]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 6.",
-                errorMessages[1]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 7.",
-                errorMessages[2]
-            );
+            Assert.AreEqual("Non-unique array item at index 4.", errorMessages[0]);
+            Assert.AreEqual("Non-unique array item at index 6.", errorMessages[1]);
+            Assert.AreEqual("Non-unique array item at index 7.", errorMessages[2]);
         }
 
         [Test]
@@ -468,10 +417,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchema schema = new JsonSchema();
             schema.UniqueItems = true;
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { UniqueItems = true }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { UniqueItems = true } };
             schema.PositionalItemsValidation = false;
 
             JArray a = new JArray(
@@ -484,22 +430,10 @@ namespace Newtonsoft.Json.Tests.Schema
             IList<string> errorMessages;
             Assert.IsFalse(a.IsValid(schema, out errorMessages));
             Assert.AreEqual(4, errorMessages.Count);
-            Assert.AreEqual(
-                "Non-unique array item at index 1.",
-                errorMessages[0]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 3.",
-                errorMessages[1]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 1.",
-                errorMessages[2]
-            );
-            Assert.AreEqual(
-                "Non-unique array item at index 4.",
-                errorMessages[3]
-            );
+            Assert.AreEqual("Non-unique array item at index 1.", errorMessages[0]);
+            Assert.AreEqual("Non-unique array item at index 3.", errorMessages[1]);
+            Assert.AreEqual("Non-unique array item at index 1.", errorMessages[2]);
+            Assert.AreEqual("Non-unique array item at index 4.", errorMessages[3]);
         }
 
         [Test]
@@ -511,10 +445,7 @@ namespace Newtonsoft.Json.Tests.Schema
 
                 {
                     "bar",
-                    new JsonSchema
-                    {
-                        Enum = new List<JToken> { new JValue(1), new JValue(2) }
-                    }
+                    new JsonSchema { Enum = new List<JToken> { new JValue(1), new JValue(2) } }
                 }
             };
 
@@ -537,9 +468,7 @@ namespace Newtonsoft.Json.Tests.Schema
                 { "bar", new JsonSchema { UniqueItems = true } }
             };
 
-            JObject o = new JObject(
-                new JProperty("bar", new JArray(1, 2, 3, 3))
-            );
+            JObject o = new JObject(new JProperty("bar", new JArray(1, 2, 3, 3)));
             IList<string> errorMessages;
             Assert.IsFalse(o.IsValid(schema, out errorMessages));
             Assert.AreEqual(1, errorMessages.Count);

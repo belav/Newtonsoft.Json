@@ -53,10 +53,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             product.Price = 3.99M;
             product.Sizes = new string[] { "Small", "Medium", "Large" };
 
-            string output = JsonConvert.SerializeObject(
-                product,
-                Formatting.Indented
-            );
+            string output = JsonConvert.SerializeObject(product, Formatting.Indented);
             //{
             //  "Name": "Apple",
             //  "ExpiryDate": new Date(1230422400000),
@@ -112,25 +109,15 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             object deserializedValue;
 
-            using (
-                JsonReader jsonReader = new JsonTextReader(
-                    new StringReader(output)
-                )
-            ) {
-                deserializedValue = jsonSerializer.Deserialize(
-                    jsonReader,
-                    typeof(ProductShort)
-                );
+            using (JsonReader jsonReader = new JsonTextReader(new StringReader(output)))
+            {
+                deserializedValue = jsonSerializer.Deserialize(jsonReader, typeof(ProductShort));
             }
 
-            ProductShort deserializedProductShort =
-                (ProductShort)deserializedValue;
+            ProductShort deserializedProductShort = (ProductShort)deserializedValue;
 
             Assert.AreEqual("Apple", deserializedProductShort.Name);
-            Assert.AreEqual(
-                new DateTime(2008, 12, 28),
-                deserializedProductShort.ExpiryDate
-            );
+            Assert.AreEqual(new DateTime(2008, 12, 28), deserializedProductShort.ExpiryDate);
             Assert.AreEqual("Small", deserializedProductShort.Sizes[0]);
             Assert.AreEqual("Medium", deserializedProductShort.Sizes[1]);
             Assert.AreEqual("Large", deserializedProductShort.Sizes[2]);
@@ -149,10 +136,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 @"{""PreProperty"":1,""DateProperty"":new Date(1225962698973),""PostProperty"":2}";
 
             MyClass myClass =
-                (MyClass)serializer.Deserialize(
-                    new StringReader(response),
-                    typeof(MyClass)
-                );
+                (MyClass)serializer.Deserialize(new StringReader(response), typeof(MyClass));
 
             Assert.AreEqual(1, myClass.PreProperty);
             Assert.AreEqual(2, myClass.PostProperty);
@@ -165,10 +149,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DoubleClass c = JsonConvert.DeserializeObject<DoubleClass>(
                 json,
-                new JsonSerializerSettings
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error
-                }
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
             );
 
             Assert.AreEqual(1d, c.Height);
@@ -201,10 +182,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             JsonConvert.DeserializeObject<DoubleClass>(
                 json,
-                new JsonSerializerSettings
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error
-                }
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
             );
         }
 
@@ -258,11 +236,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Person p = new Person();
 
-            JsonConvert.PopulateObject(
-                @"{nameERROR:{""first"":""hi""}}",
-                p,
-                settings
-            );
+            JsonConvert.PopulateObject(@"{nameERROR:{""first"":""hi""}}", p, settings);
 
             Assert.AreEqual(1, errors.Count);
             Assert.AreEqual(
@@ -291,11 +265,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Person p = new Person();
 
-            JsonConvert.PopulateObject(
-                @"{name:{""firstERROR"":""hi""}}",
-                p,
-                settings
-            );
+            JsonConvert.PopulateObject(@"{name:{""firstERROR"":""hi""}}", p, settings);
 
             Assert.AreEqual(1, errors.Count);
             Assert.AreEqual(
@@ -308,8 +278,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class SimpleExtendableObject
         {
             [JsonExtensionData]
-            public IDictionary<string, object> Data { get; } =
-                new Dictionary<string, object>();
+            public IDictionary<string, object> Data { get; } = new Dictionary<string, object>();
         }
 
         public class ObjectWithExtendableChild
@@ -323,10 +292,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{""extensionData1"": [1,2,3]}";
             SimpleExtendableObject e2 = JsonConvert.DeserializeObject<SimpleExtendableObject>(
                 json,
-                new JsonSerializerSettings
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error
-                }
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
             );
             JArray o1 = (JArray)e2.Data["extensionData1"];
             Assert.AreEqual(JTokenType.Array, o1.Type);
@@ -338,10 +304,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{""Data"":{""extensionData1"": [1,2,3]}}";
             ObjectWithExtendableChild e3 = JsonConvert.DeserializeObject<ObjectWithExtendableChild>(
                 json,
-                new JsonSerializerSettings
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error
-                }
+                new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
             );
             JArray o1 = (JArray)e3.Data.Data["extensionData1"];
             Assert.AreEqual(JTokenType.Array, o1.Type);

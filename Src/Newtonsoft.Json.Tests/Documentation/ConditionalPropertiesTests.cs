@@ -66,15 +66,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             MemberInfo member,
             MemberSerialization memberSerialization
         ) {
-            JsonProperty property = base.CreateProperty(
-                member,
-                memberSerialization
-            );
+            JsonProperty property = base.CreateProperty(member, memberSerialization);
 
-            if (
-                property.DeclaringType == typeof(Employee) &&
-                property.PropertyName == "Manager"
-            ) {
+            if (property.DeclaringType == typeof(Employee) && property.PropertyName == "Manager")
+            {
                 property.ShouldSerialize = instance =>
                 {
                     Employee e = (Employee)instance;
@@ -119,10 +114,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // ShouldSerialize will skip this property
             mike.Manager = mike;
 
-            string json = JsonConvert.SerializeObject(
-                new[] { joe, mike },
-                Formatting.Indented
-            );
+            string json = JsonConvert.SerializeObject(new[] { joe, mike }, Formatting.Indented);
             // [
             //   {
             //     "Name": "Joe Employee",

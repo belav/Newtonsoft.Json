@@ -54,9 +54,7 @@ namespace Newtonsoft.Json.Linq
         /// <returns>An instance of <see cref="JRaw"/> with the content of the reader's current token.</returns>
         public static JRaw Create(JsonReader reader)
         {
-            using (
-                StringWriter sw = new StringWriter(CultureInfo.InvariantCulture)
-            )
+            using (StringWriter sw = new StringWriter(CultureInfo.InvariantCulture))
             using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
             {
                 jsonWriter.WriteToken(reader);

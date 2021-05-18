@@ -32,9 +32,7 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> to always serialize the member with the specified name.
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Field |
-        AttributeTargets.Property |
-        AttributeTargets.Parameter,
+        AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter,
         AllowMultiple = false)]
     public sealed class JsonPropertyAttribute : Attribute
     {

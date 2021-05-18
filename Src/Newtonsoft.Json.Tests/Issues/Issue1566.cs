@@ -57,14 +57,8 @@ namespace Newtonsoft.Json.Tests.Issues
             );
 
             // Assert
-            Assert.AreEqual(
-                GitHubPullRequestReviewState.Approved,
-                jsonObjectWithUppercase.State
-            );
-            Assert.AreEqual(
-                GitHubPullRequestReviewState.Approved,
-                jsonObjectWithLowercase.State
-            );
+            Assert.AreEqual(GitHubPullRequestReviewState.Approved, jsonObjectWithUppercase.State);
+            Assert.AreEqual(GitHubPullRequestReviewState.Approved, jsonObjectWithLowercase.State);
         }
 
         [Test]

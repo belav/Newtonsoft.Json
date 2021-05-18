@@ -40,11 +40,8 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(
-            JsonWriter writer,
-            object? value,
-            JsonSerializer serializer
-        ) {
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
             if (value == null)
             {
                 writer.WriteNull();
@@ -55,9 +52,7 @@ namespace Newtonsoft.Json.Converters
             }
             else
             {
-                throw new JsonSerializationException(
-                    "Expected Version object value"
-                );
+                throw new JsonSerializationException("Expected Version object value");
             }
         }
 

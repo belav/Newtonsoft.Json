@@ -75,10 +75,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
-        public JsonSerializationException(
-            string message,
-            Exception innerException
-        )
+        public JsonSerializationException(string message, Exception innerException)
             : base(message, innerException) { }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
@@ -117,10 +114,8 @@ namespace Newtonsoft.Json
             LinePosition = linePosition;
         }
 
-        internal static JsonSerializationException Create(
-            JsonReader reader,
-            string message
-        ) {
+        internal static JsonSerializationException Create(JsonReader reader, string message)
+        {
             return Create(reader, message, null);
         }
 
@@ -153,13 +148,7 @@ namespace Newtonsoft.Json
                 linePosition = 0;
             }
 
-            return new JsonSerializationException(
-                message,
-                path,
-                lineNumber,
-                linePosition,
-                ex
-            );
+            return new JsonSerializationException(message, path, lineNumber, linePosition, ex);
         }
     }
 }

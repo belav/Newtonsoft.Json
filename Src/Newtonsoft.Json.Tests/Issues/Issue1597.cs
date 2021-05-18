@@ -60,8 +60,9 @@ namespace Newtonsoft.Json.Tests.Issues
 }";
 
             IReadOnlyDictionary<CollectionStatus,
-                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus,
-                    int>>(json);
+                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(
+                json
+            );
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);
@@ -83,8 +84,9 @@ namespace Newtonsoft.Json.Tests.Issues
 }";
 
             IReadOnlyDictionary<CollectionStatus,
-                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus,
-                    int>>(json);
+                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(
+                json
+            );
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);
@@ -96,8 +98,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Serialize()
         {
-            Dictionary<CollectionStatus,
-                int> o = new Dictionary<CollectionStatus, int>();
+            Dictionary<CollectionStatus, int> o = new Dictionary<CollectionStatus, int>();
             o[CollectionStatus.Wish] = 264;
             o[CollectionStatus.Collect] = 7498;
             o[CollectionStatus.Doing] = 385;

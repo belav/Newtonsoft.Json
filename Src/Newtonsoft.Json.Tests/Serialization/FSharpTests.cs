@@ -56,9 +56,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   3
 ]", json);
 
-            FSharpList<int> l2 = JsonConvert.DeserializeObject<FSharpList<int>>(
-                json
-            );
+            FSharpList<int> l2 = JsonConvert.DeserializeObject<FSharpList<int>>(json);
 
             Assert.AreEqual(l.Length, l2.Length);
             CollectionAssert.AreEquivalent(l, l2);
@@ -77,9 +75,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   3
 ]", json);
 
-            FSharpSet<int> l2 = JsonConvert.DeserializeObject<FSharpSet<int>>(
-                json
-            );
+            FSharpSet<int> l2 = JsonConvert.DeserializeObject<FSharpSet<int>>(json);
 
             Assert.AreEqual(l.Count, l2.Count);
             CollectionAssert.AreEquivalent(l, l2);
@@ -99,10 +95,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(m1, Formatting.Indented);
 
-            FSharpMap<string,
-                int> m2 = JsonConvert.DeserializeObject<FSharpMap<string, int>>(
-                json
-            );
+            FSharpMap<string, int> m2 = JsonConvert.DeserializeObject<FSharpMap<string, int>>(json);
 
             Assert.AreEqual(m1.Count, m2.Count);
             Assert.AreEqual(1, m2["one"]);

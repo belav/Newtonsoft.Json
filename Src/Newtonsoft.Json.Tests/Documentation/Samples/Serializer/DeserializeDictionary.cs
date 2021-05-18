@@ -51,8 +51,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             }";
 
             Dictionary<string,
-                string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string,
-                    string>>(json);
+                string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+                json
+            );
 
             Console.WriteLine(htmlAttributes["href"]);
             // /account/login.aspx

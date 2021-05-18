@@ -27,12 +27,8 @@ namespace Newtonsoft.Json.Utilities
 {
     internal class EnumInfo
     {
-        public EnumInfo(
-            bool isFlags,
-            ulong[] values,
-            string[] names,
-            string[] resolvedNames
-        ) {
+        public EnumInfo(bool isFlags, ulong[] values, string[] names, string[] resolvedNames)
+        {
             IsFlags = isFlags;
             Values = values;
             Names = names;

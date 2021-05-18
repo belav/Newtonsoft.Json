@@ -96,8 +96,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
         private class IdJsonConverter : JsonConverter
         {
-            public override bool CanConvert(Type objectType) =>
-                typeof(Id) == objectType;
+            public override bool CanConvert(Type objectType) => typeof(Id) == objectType;
 
             public override object ReadJson(
                 JsonReader reader,
@@ -110,9 +109,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
                 string str = reader.Value as string;
                 Guid guid;
-                return Guid.TryParse(str, out guid)
-                    ? new Id(guid)
-                    : new Id(str);
+                return Guid.TryParse(str, out guid) ? new Id(guid) : new Id(str);
             }
 
             public override void WriteJson(

@@ -56,10 +56,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonProperty]
             public int TestField;
 
-            public ReflectionTestObject(
-                [DefaultValue("1")]
-                [JsonProperty]int testParameter
-            ) {
+            public ReflectionTestObject([DefaultValue("1")] [JsonProperty] int testParameter)
+            {
                 TestProperty = testParameter;
                 TestField = testParameter;
             }
@@ -75,9 +73,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             property = typeof(ReflectionTestObject).GetProperty("TestProperty");
 #endif
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
-                property
-            );
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(property);
 
             IList<Attribute> attributes = provider.GetAttributes(
                 typeof(DefaultValueAttribute),
@@ -99,9 +95,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             field = typeof(ReflectionTestObject).GetField("TestField");
 #endif
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
-                field
-            );
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(field);
 
             IList<Attribute> attributes = provider.GetAttributes(
                 typeof(DefaultValueAttribute),
@@ -123,9 +117,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             ParameterInfo parameter = parameters[0];
 
-            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(
-                parameter
-            );
+            ReflectionAttributeProvider provider = new ReflectionAttributeProvider(parameter);
 
             IList<Attribute> attributes = provider.GetAttributes(
                 typeof(DefaultValueAttribute),

@@ -36,9 +36,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             private set;
         }
 
-        public NonDefaultConstructorWithReadOnlyCollectionProperty(
-            string title
-        ) {
+        public NonDefaultConstructorWithReadOnlyCollectionProperty(string title)
+        {
             Title = title;
             Categories = new List<string>();
         }

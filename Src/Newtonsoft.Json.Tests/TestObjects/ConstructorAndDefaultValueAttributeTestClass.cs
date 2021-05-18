@@ -29,9 +29,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public sealed class ConstructorAndDefaultValueAttributeTestClass
     {
-        public ConstructorAndDefaultValueAttributeTestClass(
-            string testProperty1
-        ) {
+        public ConstructorAndDefaultValueAttributeTestClass(string testProperty1)
+        {
             TestProperty1 = testProperty1;
         }
 

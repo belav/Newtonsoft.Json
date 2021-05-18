@@ -62,14 +62,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // ]
             #endregion
 
-            StringAssert.AreEqual(
-                @"[
+            StringAssert.AreEqual(@"[
   ""Small"",
   ""Medium"",
   ""Large""
-]",
-                a.ToString()
-            );
+]", a.ToString());
         }
     }
 }

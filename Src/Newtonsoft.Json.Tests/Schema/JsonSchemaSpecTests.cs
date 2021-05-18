@@ -59,11 +59,7 @@ namespace Newtonsoft.Json.Tests.Schema
 
         public override string ToString()
         {
-            return FileName +
-            " - " +
-            TestCaseDescription +
-            " - " +
-            TestDescription;
+            return FileName + " - " + TestCaseDescription + " - " + TestDescription;
         }
     }
 
@@ -76,23 +72,20 @@ namespace Newtonsoft.Json.Tests.Schema
         [TestCaseSource(nameof(GetSpecTestDetails))]
         public void SpecTest(JsonSchemaSpecTest jsonSchemaSpecTest)
         {
-            JsonSchema s = JsonSchema.Read(
-                jsonSchemaSpecTest.Schema.CreateReader()
-            );
+            JsonSchema s = JsonSchema.Read(jsonSchemaSpecTest.Schema.CreateReader());
 
             IList<string> e;
             bool v = jsonSchemaSpecTest.Data.IsValid(s, out e);
-            string[] errorMessages =
-                ((e != null) ? e.ToArray() : null) ?? new string[0];
+            string[] errorMessages = ((e != null) ? e.ToArray() : null) ?? new string[0];
 
             Assert.AreEqual(
                 jsonSchemaSpecTest.IsValid,
                 v,
-                jsonSchemaSpecTest.TestCaseDescription +
-                " - " +
-                jsonSchemaSpecTest.TestDescription +
-                " - errors: " +
-                string.Join(", ", errorMessages)
+                jsonSchemaSpecTest.TestCaseDescription
+                + " - "
+                + jsonSchemaSpecTest.TestDescription
+                + " - errors: "
+                + string.Join(", ", errorMessages)
             );
         }
 
@@ -122,17 +115,11 @@ namespace Newtonsoft.Json.Tests.Schema
                     {
                         JsonSchemaSpecTest jsonSchemaSpecTest = new JsonSchemaSpecTest();
 
-                        jsonSchemaSpecTest.FileName = Path.GetFileName(
-                            testFile
-                        );
-                        jsonSchemaSpecTest.TestCaseDescription = (string)testCase[
-                            "description"
-                        ];
+                        jsonSchemaSpecTest.FileName = Path.GetFileName(testFile);
+                        jsonSchemaSpecTest.TestCaseDescription = (string)testCase["description"];
                         jsonSchemaSpecTest.Schema = (JObject)testCase["schema"];
 
-                        jsonSchemaSpecTest.TestDescription = (string)test[
-                            "description"
-                        ];
+                        jsonSchemaSpecTest.TestDescription = (string)test["description"];
                         jsonSchemaSpecTest.Data = test["data"];
                         jsonSchemaSpecTest.IsValid = (bool)test["valid"];
                         jsonSchemaSpecTest.TestNumber = specTests.Count + 1;
@@ -144,14 +131,12 @@ namespace Newtonsoft.Json.Tests.Schema
 
             specTests = specTests.Where(
                     s =>
-                        s.FileName != "dependencies.json" &&
-                        s.TestCaseDescription !=
-                        "multiple disallow subschema" &&
-                        s.TestCaseDescription !=
-                        "types from separate schemas are merged" &&
-                        s.TestCaseDescription !=
-                        "when types includes a schema it should fully validate the schema" &&
-                        s.TestCaseDescription != "types can include schemas"
+                        s.FileName != "dependencies.json"
+                        && s.TestCaseDescription != "multiple disallow subschema"
+                        && s.TestCaseDescription != "types from separate schemas are merged"
+                        && s.TestCaseDescription
+                        != "when types includes a schema it should fully validate the schema"
+                        && s.TestCaseDescription != "types can include schemas"
                 )
                 .ToList();
 

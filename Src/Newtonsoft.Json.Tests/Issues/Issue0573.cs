@@ -47,10 +47,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             string json = "{'Value':'hi'}";
-            MemoryTraceWriter traceWriter = new MemoryTraceWriter
-            {
-                LevelFilter = TraceLevel.Info
-            };
+            MemoryTraceWriter traceWriter = new MemoryTraceWriter { LevelFilter = TraceLevel.Info };
             PrivateSetterTestClass o = JsonConvert.DeserializeObject<PrivateSetterTestClass>(
                 json,
                 new JsonSerializerSettings { TraceWriter = traceWriter }

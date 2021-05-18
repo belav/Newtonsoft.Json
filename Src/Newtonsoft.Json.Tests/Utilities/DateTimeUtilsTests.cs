@@ -87,10 +87,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                     out dt
                 )
             );
-            Assert.AreEqual(
-                new DateTime(2000, 12, 16, 0, 0, 0, DateTimeKind.Utc),
-                dt
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 16, 0, 0, 0, DateTimeKind.Utc), dt);
 
             Assert.IsFalse(
                 DateTimeUtils.TryParseDateTimeIso(
@@ -126,10 +123,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                     out dt
                 )
             );
-            Assert.AreEqual(
-                new DateTimeOffset(2000, 12, 16, 0, 0, 0, TimeSpan.Zero),
-                dt
-            );
+            Assert.AreEqual(new DateTimeOffset(2000, 12, 16, 0, 0, 0, TimeSpan.Zero), dt);
 
             Assert.IsFalse(
                 DateTimeUtils.TryParseDateTimeOffsetIso(
@@ -191,18 +185,9 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999Z");
             AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999"); // this is DateTime.MaxDate
-            AssertNewDateTimeParseEqual(
-                "9999-12-31T23:59:59.9999999+00:00",
-                DateTime.MaxValue
-            ); // DateTime.TryParse fails instead of returning MaxDate in some timezones
-            AssertNewDateTimeParseEqual(
-                "9999-12-31T23:59:59.9999999+11:30",
-                DateTime.MaxValue
-            ); // DateTime.TryParse fails instead of returning MaxDate in some timezones
-            AssertNewDateTimeParseEqual(
-                "9999-12-31T23:59:59.9999999-11:30",
-                DateTime.MaxValue
-            ); // DateTime.TryParse fails instead of returning MaxDate in some timezones
+            AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999+00:00", DateTime.MaxValue); // DateTime.TryParse fails instead of returning MaxDate in some timezones
+            AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999+11:30", DateTime.MaxValue); // DateTime.TryParse fails instead of returning MaxDate in some timezones
+            AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999-11:30", DateTime.MaxValue); // DateTime.TryParse fails instead of returning MaxDate in some timezones
         }
 
         private void AssertNewDateTimeParseEqual(string text, object oldDate)
@@ -239,9 +224,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                     "DateTime parse not equal. Text: '{0}' Old ticks: {1} New ticks: {2}".FormatWith(
                         CultureInfo.InvariantCulture,
                         text,
-                        oldDate != null
-                            ? ((DateTime)oldDate).Ticks
-                            : (long?)null,
+                        oldDate != null ? ((DateTime)oldDate).Ticks : (long?)null,
                         newDt != null ? ((DateTime)newDt).Ticks : (long?)null
                     )
                 );
@@ -268,11 +251,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         public void ReadOffsetMSDateTimeOffset()
         {
             char[] c = @"12345/Date(1418924498000+0800)/12345".ToCharArray();
-            StringReference reference = new StringReference(
-                c,
-                5,
-                c.Length - 10
-            );
+            StringReference reference = new StringReference(c, 5, c.Length - 10);
 
             DateTimeOffset d;
             DateTimeUtils.TryParseDateTimeOffset(
@@ -315,15 +294,9 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertNewDateTimeOffsetParseEqual("9999-12-31T23:59:59.9999999Z");
             AssertNewDateTimeOffsetParseEqual("9999-12-31T23:59:59.9999999");
-            AssertNewDateTimeOffsetParseEqual(
-                "9999-12-31T23:59:59.9999999+00:00"
-            );
-            AssertNewDateTimeOffsetParseEqual(
-                "9999-12-31T23:59:59.9999999+13:30"
-            );
-            AssertNewDateTimeOffsetParseEqual(
-                "9999-12-31T23:59:59.9999999-13:30"
-            );
+            AssertNewDateTimeOffsetParseEqual("9999-12-31T23:59:59.9999999+00:00");
+            AssertNewDateTimeOffsetParseEqual("9999-12-31T23:59:59.9999999+13:30");
+            AssertNewDateTimeOffsetParseEqual("9999-12-31T23:59:59.9999999-13:30");
         }
 
         private void AssertNewDateTimeOffsetParseEqual(string text)
@@ -339,23 +312,15 @@ namespace Newtonsoft.Json.Tests.Utilities
             );
 
             DateTimeOffset temp;
-            if (
-                DateTimeUtils.TryParseDateTimeOffsetIso(
-                    CreateStringReference(text),
-                    out temp
-                )
-            ) {
+            if (DateTimeUtils.TryParseDateTimeOffsetIso(CreateStringReference(text), out temp))
+            {
                 newDt = temp;
             }
 
             if (!Equals(oldDt, newDt))
             {
-                long? oldTicks = oldDt != null
-                    ? (long?)((DateTime)oldDt).Ticks
-                    : null;
-                long? newTicks = newDt != null
-                    ? (long?)((DateTime)newDt).Ticks
-                    : null;
+                long? oldTicks = oldDt != null ? (long?)((DateTime)oldDt).Ticks : null;
+                long? newTicks = newDt != null ? (long?)((DateTime)newDt).Ticks : null;
 
                 Assert.AreEqual(
                     oldDt,
@@ -409,10 +374,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                         out dateTime
                     )
                 ) {
-                    dateTime = DateTimeUtils.EnsureDateTime(
-                        dateTime,
-                        dateTimeZoneHandling
-                    );
+                    dateTime = DateTimeUtils.EnsureDateTime(dateTime, dateTimeZoneHandling);
 
                     dt = dateTime;
                     return true;

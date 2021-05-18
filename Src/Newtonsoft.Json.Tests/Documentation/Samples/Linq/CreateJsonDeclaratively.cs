@@ -82,10 +82,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                     new JObject(
                         new JProperty("title", "James Newton-King"),
                         new JProperty("link", "http://james.newtonking.com"),
-                        new JProperty(
-                            "description",
-                            "James Newton-King's blog."
-                        ),
+                        new JProperty("description", "James Newton-King's blog."),
                         new JProperty(
                             "item",
                             new JArray(
@@ -94,18 +91,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                                     orderby p.Title
                                     select new JObject(
                                         new JProperty("title", p.Title),
-                                        new JProperty(
-                                            "description",
-                                            p.Description
-                                        ),
+                                        new JProperty("description", p.Description),
                                         new JProperty("link", p.Link),
                                         new JProperty(
                                             "category",
-                                            new JArray(
-
-                                                    from c in p.Categories
-                                                    select new JValue(c)
-                                            )
+                                            new JArray( from c in p.Categories select new JValue(c))
                                         )
                                     )
                             )

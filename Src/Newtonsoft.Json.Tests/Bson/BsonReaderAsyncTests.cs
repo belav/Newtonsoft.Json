@@ -51,9 +51,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task ReadSingleObjectAsync()
         {
-            byte[] data = HexToBytes(
-                "0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00"
-            );
+            byte[] data = HexToBytes("0F-00-00-00-10-42-6C-61-68-00-01-00-00-00-00");
             MemoryStream ms = new MemoryStream(data);
             BsonReader reader = new BsonReader(ms);
 
@@ -93,10 +91,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.String, reader.TokenType);
-            Assert.AreEqual(
-                "d821eed7-4b5c-43c9-8ac2-6928e579b705",
-                reader.Value
-            );
+            Assert.AreEqual("d821eed7-4b5c-43c9-8ac2-6928e579b705", reader.Value);
             Assert.AreEqual(typeof(string), reader.ValueType);
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -113,10 +108,7 @@ namespace Newtonsoft.Json.Tests.Bson
             IList<Guid> l = serializer.Deserialize<IList<Guid>>(reader);
 
             Assert.AreEqual(1, l.Count);
-            Assert.AreEqual(
-                new Guid("D821EED7-4B5C-43C9-8AC2-6928E579B705"),
-                l[0]
-            );
+            Assert.AreEqual(new Guid("D821EED7-4B5C-43C9-8AC2-6928E579B705"), l[0]);
         }
 
         [Test]
@@ -160,9 +152,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task ReadDoubleAsync()
         {
-            byte[] data = HexToBytes(
-                "10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00"
-            );
+            byte[] data = HexToBytes("10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00");
 
             MemoryStream ms = new MemoryStream(data);
             BsonReader reader = new BsonReader(ms);
@@ -186,9 +176,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task ReadDouble_DecimalAsync()
         {
-            byte[] data = HexToBytes(
-                "10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00"
-            );
+            byte[] data = HexToBytes("10-00-00-00-01-30-00-8F-C2-F5-28-5C-FF-58-40-00");
 
             MemoryStream ms = new MemoryStream(data);
             BsonReader reader = new BsonReader(ms);
@@ -282,26 +270,17 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Bytes, reader.TokenType);
-            CollectionAssert.AreEquivalent(
-                new byte[] { 0, 1, 2, 3, 4 },
-                (byte[])reader.Value
-            );
+            CollectionAssert.AreEquivalent(new byte[] { 0, 1, 2, 3, 4 }, (byte[])reader.Value);
             Assert.AreEqual(typeof(byte[]), reader.ValueType);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc), reader.Value);
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.Date, reader.TokenType);
-            Assert.AreEqual(
-                new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc),
-                reader.Value
-            );
+            Assert.AreEqual(new DateTime(2000, 12, 29, 12, 30, 0, DateTimeKind.Utc), reader.Value);
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
 
             Assert.IsTrue(await reader.ReadAsync());
@@ -419,19 +398,13 @@ namespace Newtonsoft.Json.Tests.Bson
                     BsonReader reader = new BsonReader(ms);
 
                     Assert.AreEqual(false, reader.ReadRootValueAsArray);
-                    Assert.AreEqual(
-                        DateTimeKind.Local,
-                        reader.DateTimeKindHandling
-                    );
+                    Assert.AreEqual(DateTimeKind.Local, reader.DateTimeKindHandling);
 
                     reader.ReadRootValueAsArray = true;
                     reader.DateTimeKindHandling = DateTimeKind.Utc;
 
                     Assert.AreEqual(true, reader.ReadRootValueAsArray);
-                    Assert.AreEqual(
-                        DateTimeKind.Utc,
-                        reader.DateTimeKindHandling
-                    );
+                    Assert.AreEqual(DateTimeKind.Utc, reader.DateTimeKindHandling);
 
                     Assert.IsTrue(await reader.ReadAsync());
                     Assert.AreEqual(JsonToken.StartArray, reader.TokenType);
@@ -568,9 +541,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 Assert.IsTrue(await reader.ReadAsync());
                 Assert.AreEqual(JsonToken.Float, reader.TokenType);
 
-                double value = (i != 5)
-                    ? Convert.ToDouble(i)
-                    : 5.78960446186581E+77d;
+                double value = (i != 5) ? Convert.ToDouble(i) : 5.78960446186581E+77d;
 
                 Assert.AreEqual(value, reader.Value);
             }
@@ -596,8 +567,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task ReadRegexAsync()
         {
-            string hexdoc =
-                "15-00-00-00-0B-72-65-67-65-78-00-74-65-73-74-00-67-69-6D-00-00";
+            string hexdoc = "15-00-00-00-0B-72-65-67-65-78-00-74-65-73-74-00-67-69-6D-00-00";
 
             byte[] data = HexToBytes(hexdoc);
 
@@ -685,8 +655,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task ReadLongAsync()
         {
-            string hexdoc =
-                "13-00-00-00-12-6C-6F-6E-67-00-FF-FF-FF-FF-FF-FF-FF-7F-00";
+            string hexdoc = "13-00-00-00-12-6C-6F-6E-67-00-FF-FF-FF-FF-FF-FF-FF-7F-00";
 
             byte[] data = HexToBytes(hexdoc);
 
@@ -836,9 +805,7 @@ namespace Newtonsoft.Json.Tests.Bson
             string bson =
                 "4E-02-00-00-02-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-22-01-00-00-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-00";
 
-            BsonReader reader = new BsonReader(
-                new MemoryStream(HexToBytes(bson))
-            );
+            BsonReader reader = new BsonReader(new MemoryStream(HexToBytes(bson)));
 
             StringBuilder largeStringBuilder = new StringBuilder();
             for (int i = 0; i < 100; i++)
@@ -848,9 +815,7 @@ namespace Newtonsoft.Json.Tests.Bson
                     largeStringBuilder.Append("-");
                 }
 
-                largeStringBuilder.Append(
-                    i.ToString(CultureInfo.InvariantCulture)
-                );
+                largeStringBuilder.Append(i.ToString(CultureInfo.InvariantCulture));
             }
             string largeString = largeStringBuilder.ToString();
 
@@ -877,9 +842,7 @@ namespace Newtonsoft.Json.Tests.Bson
         {
             string bson = "0C-00-00-00-02-00-01-00-00-00-00-00";
 
-            BsonReader reader = new BsonReader(
-                new MemoryStream(HexToBytes(bson))
-            );
+            BsonReader reader = new BsonReader(new MemoryStream(HexToBytes(bson)));
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -921,9 +884,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 bson
             );
 
-            BsonReader reader = new BsonReader(
-                new MemoryStream(HexToBytes(bson))
-            );
+            BsonReader reader = new BsonReader(new MemoryStream(HexToBytes(bson)));
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -958,15 +919,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task UnspecifiedDateTimeKindHandlingAsync()
         {
-            DateTime value = new DateTime(
-                2000,
-                1,
-                1,
-                0,
-                0,
-                0,
-                DateTimeKind.Unspecified
-            );
+            DateTime value = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Unspecified);
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);
@@ -991,15 +944,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public async Task LocalDateTimeKindHandlingAsync()
         {
-            DateTime value = new DateTime(
-                2000,
-                1,
-                1,
-                0,
-                0,
-                0,
-                DateTimeKind.Local
-            );
+            DateTime value = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Local);
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);
@@ -1011,11 +956,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             byte[] bson = ms.ToArray();
 
-            BsonReader reader = new BsonReader(
-                new MemoryStream(bson),
-                false,
-                DateTimeKind.Local
-            );
+            BsonReader reader = new BsonReader(new MemoryStream(bson), false, DateTimeKind.Local);
             JObject o = (JObject)JToken.ReadFrom(reader);
             Assert.AreEqual(value, (DateTime)o["DateTime"]);
         }
@@ -1041,9 +982,8 @@ namespace Newtonsoft.Json.Tests.Bson
             return (string)reader.Value;
         }
 
-        private async Task<string> WriteAndReadStringPropertyNameAsync(
-            string val
-        ) {
+        private async Task<string> WriteAndReadStringPropertyNameAsync(string val)
+        {
             MemoryStream ms = new MemoryStream();
             BsonWriter bs = new BsonWriter(ms);
             await bs.WriteStartObjectAsync();
@@ -1071,10 +1011,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
@@ -1087,10 +1024,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
@@ -1114,10 +1048,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro, 1); //Just one triple byte char in the string.
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
@@ -1130,20 +1061,14 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
         public async Task TestReadStringValueAsync()
         {
             string expected = "test";
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
@@ -1152,10 +1077,7 @@ namespace Newtonsoft.Json.Tests.Bson
             StringBuilder sb = new StringBuilder();
             sb.Append('t', 150);
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringValueAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringValueAsync(expected));
         }
 
         [Test]
@@ -1168,10 +1090,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
@@ -1198,10 +1117,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
@@ -1211,10 +1127,7 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro, 1); //Just one triple byte char in the string.
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
@@ -1227,20 +1140,14 @@ namespace Newtonsoft.Json.Tests.Bson
             sb.Append(Euro);
 
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
         public async Task TestReadStringPropertyNameAsync()
         {
             string expected = "test";
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
@@ -1249,10 +1156,7 @@ namespace Newtonsoft.Json.Tests.Bson
             StringBuilder sb = new StringBuilder();
             sb.Append('t', 150);
             string expected = sb.ToString();
-            Assert.AreEqual(
-                expected,
-                await WriteAndReadStringPropertyNameAsync(expected)
-            );
+            Assert.AreEqual(expected, await WriteAndReadStringPropertyNameAsync(expected));
         }
 
         [Test]
@@ -1434,16 +1338,10 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
 
-            CollectionAssert.AreEquivalent(
-                g.ToByteArray(),
-                reader.ReadAsBytes()
-            );
+            CollectionAssert.AreEquivalent(g.ToByteArray(), reader.ReadAsBytes());
             Assert.AreEqual(JsonToken.Bytes, reader.TokenType);
             Assert.AreEqual(typeof(byte[]), reader.ValueType);
-            CollectionAssert.AreEquivalent(
-                g.ToByteArray(),
-                (byte[])reader.Value
-            );
+            CollectionAssert.AreEquivalent(g.ToByteArray(), (byte[])reader.Value);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsFalse(await reader.ReadAsync());
@@ -1474,16 +1372,10 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
 
-            CollectionAssert.AreEquivalent(
-                g.ToByteArray(),
-                reader.ReadAsBytes()
-            );
+            CollectionAssert.AreEquivalent(g.ToByteArray(), reader.ReadAsBytes());
             Assert.AreEqual(JsonToken.Bytes, reader.TokenType);
             Assert.AreEqual(typeof(byte[]), reader.ValueType);
-            CollectionAssert.AreEquivalent(
-                g.ToByteArray(),
-                (byte[])reader.Value
-            );
+            CollectionAssert.AreEquivalent(g.ToByteArray(), (byte[])reader.Value);
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsFalse(await reader.ReadAsync());
