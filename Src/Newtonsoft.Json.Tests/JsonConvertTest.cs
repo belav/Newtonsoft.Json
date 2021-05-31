@@ -126,16 +126,13 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void PopulateObjectWithOnlyComment()
         {
-            var ex = ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
+            var ex = ExceptionAssert.Throws<JsonSerializationException>(() =>
                 {
                     string json = @"// file header";
 
                     PopulateTestObject o = new PopulateTestObject();
                     JsonConvert.PopulateObject(json, o);
-                },
-                "No JSON content found. Path '', line 1, position 14."
-            );
+                }, "No JSON content found. Path '', line 1, position 14.");
 
             Assert.AreEqual(1, ex.LineNumber);
             Assert.AreEqual(14, ex.LinePosition);
@@ -2158,9 +2155,9 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ShouldNotPopulateReadOnlyEnumerableObjectWithDefaultConstructor()
         {
-            object actual = JsonConvert.DeserializeObject<HasReadOnlyEnumerableObjectAndDefaultConstructor>(
-                "{\"foo\":{}}"
-            );
+            object actual = JsonConvert.DeserializeObject<
+                HasReadOnlyEnumerableObjectAndDefaultConstructor
+            >("{\"foo\":{}}");
             Assert.IsNotNull(actual);
         }
 
@@ -2282,9 +2279,9 @@ namespace Newtonsoft.Json.Tests
   ""exp"": 1483228800,
   ""active"": true
 }";
-            ItemsRequiredObjectWithIgnoredProperty value = JsonConvert.DeserializeObject<ItemsRequiredObjectWithIgnoredProperty>(
-                json
-            );
+            ItemsRequiredObjectWithIgnoredProperty value = JsonConvert.DeserializeObject<
+                ItemsRequiredObjectWithIgnoredProperty
+            >(json);
             Assert.IsNotNull(value);
             Assert.AreEqual(value.Expiration, new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc));
             Assert.AreEqual(value.Active, true);

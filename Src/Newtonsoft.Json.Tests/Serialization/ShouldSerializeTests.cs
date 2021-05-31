@@ -177,9 +177,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            ShouldSerializeTestClass deserialized = JsonConvert.DeserializeObject<ShouldSerializeTestClass>(
-                json
-            );
+            ShouldSerializeTestClass deserialized = JsonConvert.DeserializeObject<
+                ShouldSerializeTestClass
+            >(json);
             Assert.AreEqual("James", deserialized.Name);
             Assert.AreEqual(27, deserialized.Age);
         }
@@ -430,7 +430,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':true,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<
+                ShouldDeserializeTestClass
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -460,7 +462,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':false,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<
+                ShouldDeserializeTestClass
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -670,7 +674,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
     public class ShouldDeserializeContractResolver : DefaultContractResolver
     {
-        public static new readonly ShouldDeserializeContractResolver Instance = new ShouldDeserializeContractResolver();
+        public static new readonly ShouldDeserializeContractResolver Instance =
+            new ShouldDeserializeContractResolver();
 
         protected override JsonProperty CreateProperty(
             MemberInfo member,

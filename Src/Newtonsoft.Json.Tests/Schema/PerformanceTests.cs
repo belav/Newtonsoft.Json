@@ -80,8 +80,7 @@ namespace Newtonsoft.Json.Tests.Schema
     }
 ]";
 
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
     ""$schema"": ""http://json-schema.org/draft-04/schema#"",
     ""title"": ""Product set"",
     ""type"": ""array"",
@@ -130,8 +129,7 @@ namespace Newtonsoft.Json.Tests.Schema
             }
         }
     }
-}"
-            );
+}");
 
             using (var tester = new PerformanceTester("Reader"))
             {

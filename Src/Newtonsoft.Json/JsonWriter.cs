@@ -61,8 +61,7 @@ namespace Newtonsoft.Json
         // array that gives a new state based on the current state an the token being written
         private static readonly State[][] StateArray;
 
-        internal static readonly State[][] StateArrayTemplate =
-            new[] {
+        internal static readonly State[][] StateArrayTemplate = new[] {
                 //                                      Start                    PropertyName            ObjectStart         Object            ArrayStart              Array                   ConstructorStart        Constructor             Closed       Error
                 //
                 /* None                        */new[] {
@@ -303,8 +302,7 @@ namespace Newtonsoft.Json
                     return string.Empty;
                 }
 
-                bool insideContainer =
-                    (_currentState != State.ArrayStart
+                bool insideContainer = (_currentState != State.ArrayStart
                     && _currentState != State.ConstructorStart
                     && _currentState != State.ObjectStart);
 
@@ -772,7 +770,9 @@ namespace Newtonsoft.Json
             }
             while (
             // stop if we have reached the end of the token being read
-            initialDepth - 1 < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
+            initialDepth
+            - 1
+            < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
             && writeChildren
             && reader.Read());
 

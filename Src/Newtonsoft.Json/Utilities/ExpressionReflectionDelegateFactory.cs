@@ -37,7 +37,8 @@ namespace Newtonsoft.Json.Utilities
 {
     internal class ExpressionReflectionDelegateFactory : ReflectionDelegateFactory
     {
-        private static readonly ExpressionReflectionDelegateFactory _instance = new ExpressionReflectionDelegateFactory();
+        private static readonly ExpressionReflectionDelegateFactory _instance =
+            new ExpressionReflectionDelegateFactory();
 
         internal static ReflectionDelegateFactory Instance => _instance;
 
@@ -65,8 +66,9 @@ namespace Newtonsoft.Json.Utilities
                 argsParameterExpression
             );
 
-            ObjectConstructor<object> compiled =
-                (ObjectConstructor<object>)lambdaExpression.Compile();
+            ObjectConstructor<object> compiled = (ObjectConstructor<
+                    object
+                >)lambdaExpression.Compile();
             return compiled;
         }
 

@@ -615,8 +615,7 @@ Newtonsoft.Json Error: 0 : Error!
                 LevelFilter = TraceLevel.Info
             };
 
-            TraceTestObject o2 = JsonConvert.DeserializeObject<TraceTestObject>(
-                @"{
+            TraceTestObject o2 = JsonConvert.DeserializeObject<TraceTestObject>(@"{
   ""IntList"": [
     1,
     2
@@ -639,9 +638,7 @@ Newtonsoft.Json Error: 0 : Error!
     ""III"": ""!!!""
   },
   ""Double"": 1.1
-}",
-                new JsonSerializerSettings { TraceWriter = traceWriter }
-            );
+}", new JsonSerializerSettings { TraceWriter = traceWriter });
 
             Assert.AreEqual(2, o2.IntList.Count);
             Assert.AreEqual(2, o2.StringArray.Length);
@@ -883,7 +880,8 @@ Newtonsoft.Json Error: 0 : Error!
         [Test]
         public void SerializeDictionarysWithPreserveObjectReferences()
         {
-            PreserveReferencesHandlingTests.CircularDictionary circularDictionary = new PreserveReferencesHandlingTests.CircularDictionary();
+            PreserveReferencesHandlingTests.CircularDictionary circularDictionary =
+                new PreserveReferencesHandlingTests.CircularDictionary();
             circularDictionary.Add(
                 "other",
                 new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } }
@@ -1348,10 +1346,10 @@ Newtonsoft.Json Error: 0 : Error!
 
             string json = @"{name:""1""}";
 
-            PublicParameterizedConstructorWithPropertyNameConflictWithAttribute c = JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflictWithAttribute>(
-                json,
-                new JsonSerializerSettings { TraceWriter = traceWriter }
-            );
+            PublicParameterizedConstructorWithPropertyNameConflictWithAttribute c =
+                JsonConvert.DeserializeObject<
+                    PublicParameterizedConstructorWithPropertyNameConflictWithAttribute
+                >(json, new JsonSerializerSettings { TraceWriter = traceWriter });
 
             Assert.IsNotNull(c);
             Assert.AreEqual(1, c.Name);

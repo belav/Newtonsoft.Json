@@ -49,8 +49,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JArray packages = JArray.Parse(
-                @"[
+            JArray packages = JArray.Parse(@"[
               {
                 'PackageId': 'Newtonsoft.Json',
                 'Version': '11.0.1',
@@ -61,8 +60,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                 'Version': '3.9.0',
                 'ReleaseDate': '2017-11-10T00:00:00'
               }
-            ]"
-            );
+            ]");
 
             // Find Newtonsoft packages
             List<JToken> newtonsoftPackages = packages.SelectTokens(

@@ -115,8 +115,10 @@ namespace Newtonsoft.Json.Utilities
 
     internal static class ConvertUtils
     {
-        private static readonly Dictionary<Type,
-            PrimitiveTypeCode> TypeCodeMap = new Dictionary<Type, PrimitiveTypeCode>
+        private static readonly Dictionary<Type, PrimitiveTypeCode> TypeCodeMap = new Dictionary<
+            Type,
+            PrimitiveTypeCode
+        >
         {
             { typeof(char), PrimitiveTypeCode.Char },
             { typeof(char?), PrimitiveTypeCode.CharNullable },
@@ -276,10 +278,10 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, Type>,
-            Func<object?, object?>?> CastConverters = new ThreadSafeStore<StructMultiKey<Type,
-                Type>,
-            Func<object?, object?>?>(
+        private static readonly ThreadSafeStore<
+            StructMultiKey<Type, Type>,
+            Func<object?, object?>?
+        > CastConverters = new ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?>(
             CreateCastConverter
         );
 
@@ -296,10 +298,10 @@ namespace Newtonsoft.Json.Utilities
                 return null;
             }
 
-            MethodCall<object?,
-                object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                castMethodInfo
-            );
+            MethodCall<object?, object?> call =
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
+                    castMethodInfo
+                );
 
             return o => call(null, o);
         }

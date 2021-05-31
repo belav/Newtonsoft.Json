@@ -65,7 +65,9 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_PreviousWorkaround()
         {
-            ExtensionDataTestClassWorkaround a = JsonConvert.DeserializeObject<ExtensionDataTestClassWorkaround>(
+            ExtensionDataTestClassWorkaround a = JsonConvert.DeserializeObject<
+                ExtensionDataTestClassWorkaround
+            >(
                 "{\"E\":null}",
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, }
             );
@@ -76,7 +78,9 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_DefaultValue()
         {
-            ExtensionDataWithDefaultValueTestClass a = JsonConvert.DeserializeObject<ExtensionDataWithDefaultValueTestClass>(
+            ExtensionDataWithDefaultValueTestClass a = JsonConvert.DeserializeObject<
+                ExtensionDataWithDefaultValueTestClass
+            >(
                 "{\"E\":2}",
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore, }
             );

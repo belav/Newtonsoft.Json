@@ -97,7 +97,9 @@ namespace Newtonsoft.Json.Utilities
         private const string ImmutableHashSetGenericTypeName =
             "System.Collections.Immutable.ImmutableHashSet`1";
 
-        private static readonly IList<ImmutableCollectionTypeInfo> ArrayContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
+        private static readonly IList<
+            ImmutableCollectionTypeInfo
+        > ArrayContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
         {
             new ImmutableCollectionTypeInfo(
                 ImmutableListGenericInterfaceTypeName,
@@ -164,7 +166,9 @@ namespace Newtonsoft.Json.Utilities
         private const string ImmutableSortedDictionaryGenericTypeName =
             "System.Collections.Immutable.ImmutableSortedDictionary`2";
 
-        private static readonly IList<ImmutableCollectionTypeInfo> DictionaryContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
+        private static readonly IList<
+            ImmutableCollectionTypeInfo
+        > DictionaryContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
         {
             new ImmutableCollectionTypeInfo(
                 ImmutableDictionaryGenericInterfaceTypeName,
@@ -196,9 +200,10 @@ namespace Newtonsoft.Json.Utilities
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
                 string name = underlyingTypeDefinition.FullName;
 
-                ImmutableCollectionTypeInfo definition = ArrayContractImmutableCollectionDefinitions.FirstOrDefault(
-                    d => d.ContractTypeName == name
-                );
+                ImmutableCollectionTypeInfo definition =
+                    ArrayContractImmutableCollectionDefinitions.FirstOrDefault(
+                        d => d.ContractTypeName == name
+                    );
                 if (definition != null)
                 {
                     Type createdTypeDefinition = underlyingTypeDefinition.Assembly()
@@ -244,9 +249,10 @@ namespace Newtonsoft.Json.Utilities
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
                 string name = underlyingTypeDefinition.FullName;
 
-                ImmutableCollectionTypeInfo definition = DictionaryContractImmutableCollectionDefinitions.FirstOrDefault(
-                    d => d.ContractTypeName == name
-                );
+                ImmutableCollectionTypeInfo definition =
+                    DictionaryContractImmutableCollectionDefinitions.FirstOrDefault(
+                        d => d.ContractTypeName == name
+                    );
                 if (definition != null)
                 {
                     Type createdTypeDefinition = underlyingTypeDefinition.Assembly()
@@ -256,10 +262,7 @@ namespace Newtonsoft.Json.Utilities
 
                     if (createdTypeDefinition != null && builderTypeDefinition != null)
                     {
-                        MethodInfo mb = builderTypeDefinition.GetMethods()
-                            .FirstOrDefault(
-                                m =>
-                                {
+                        MethodInfo mb = builderTypeDefinition.GetMethods().FirstOrDefault(m => {
                                     ParameterInfo[] parameters = m.GetParameters();
 
                                     return m.Name == "CreateRange"
@@ -267,8 +270,7 @@ namespace Newtonsoft.Json.Utilities
                                         && parameters[0].ParameterType.IsGenericType()
                                         && parameters[0].ParameterType.GetGenericTypeDefinition()
                                         == typeof(IEnumerable<>);
-                                }
-                            );
+                                });
                         if (mb != null)
                         {
                             createdType = createdTypeDefinition.MakeGenericType(

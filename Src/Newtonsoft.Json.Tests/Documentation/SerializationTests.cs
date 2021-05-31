@@ -235,8 +235,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region SerializationErrorHandling
             List<string> errors = new List<string>();
 
-            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(
-                @"[
+            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(@"[
                   '2009-09-09T00:00:00Z',
                   'I am not a date and will error!',
                   [
@@ -245,17 +244,14 @@ namespace Newtonsoft.Json.Tests.Documentation
                   '1977-02-20T00:00:00Z',
                   null,
                   '2000-12-01T00:00:00Z'
-                ]",
-                new JsonSerializerSettings
+                ]", new JsonSerializerSettings
                 {
-                    Error = delegate(object sender, ErrorEventArgs args)
-                    {
+                    Error = delegate(object sender, ErrorEventArgs args) {
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     },
                     Converters =  { new IsoDateTimeConverter() }
-                }
-            );
+                });
 
             // 2009-09-09T00:00:00Z
             // 1977-02-20T00:00:00Z
@@ -527,10 +523,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  }
             //]
 
-            List<IPerson> people = JsonConvert.DeserializeObject<List<IPerson>>(
-                json,
-                new PersonConverter()
-            );
+            List<
+                IPerson
+            > people = JsonConvert.DeserializeObject<List<IPerson>>(json, new PersonConverter());
 
             IPerson person = people[0];
 
@@ -694,8 +689,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region SerializingCollectionsDeserializingDictionaries
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string,
-                    string>>(json);
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >(json);
 
             Console.WriteLine(values.Count);
             // 2
@@ -1114,8 +1110,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializeMultidimensionalArrayExample()
         {
-            string[,] famousCouples =
-                new string[,]
+            string[,] famousCouples = new string[,]
                 {
                     { "Adam", "Eve" },
                     { "Bonnie", "Clyde" },

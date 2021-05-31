@@ -52,12 +52,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
-            JObject person = JObject.Parse(
-                @"{
+            JObject person = JObject.Parse(@"{
               'name': null,
               'hobbies': ['Invalid content', 0.123456789]
-            }"
-            );
+            }");
 
             IList<string> messages;
             bool valid = person.IsValid(schema, out messages);

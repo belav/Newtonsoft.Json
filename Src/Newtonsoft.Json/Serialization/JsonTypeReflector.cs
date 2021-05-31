@@ -59,17 +59,12 @@ namespace Newtonsoft.Json.Serialization
         public const string ConcurrentDictionaryTypeName =
             "System.Collections.Concurrent.ConcurrentDictionary`2";
 
-        private static readonly ThreadSafeStore<Type,
-            Func<object[]?, object>> CreatorCache = new ThreadSafeStore<Type,
-            Func<object[]?, object>>(
-            GetCreator
-        );
+        private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache =
+            new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
 
 #if !(NET20 || DOTNET)
-        private static readonly ThreadSafeStore<Type,
-            Type?> AssociatedMetadataTypesCache = new ThreadSafeStore<Type, Type?>(
-            GetAssociateMetadataTypeFromAttribute
-        );
+        private static readonly ThreadSafeStore<Type, Type?> AssociatedMetadataTypesCache =
+            new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
@@ -261,29 +256,25 @@ namespace Newtonsoft.Json.Serialization
                 {
                     if (parameters != null)
                     {
-                        Type[] paramTypes = parameters.Select(
-                                param =>
-                                {
-                                    if (param == null)
-                                    {
+                        Type[] paramTypes = parameters.Select(param => {
+                                    if (param == null) {
                                         throw new InvalidOperationException(
                                             "Cannot pass a null parameter to the constructor."
                                         );
                                     }
 
                                     return param.GetType();
-                                }
-                            )
-                            .ToArray();
+                                }).ToArray();
                         ConstructorInfo parameterizedConstructorInfo = type.GetConstructor(
                             paramTypes
                         );
 
                         if (parameterizedConstructorInfo != null)
                         {
-                            ObjectConstructor<object> parameterizedConstructor = ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                parameterizedConstructorInfo
-                            );
+                            ObjectConstructor<object> parameterizedConstructor =
+                                ReflectionDelegateFactory.CreateParameterizedConstructor(
+                                    parameterizedConstructorInfo
+                                );
                             return parameterizedConstructor(parameters);
                         }
                         else

@@ -1216,8 +1216,10 @@ namespace Newtonsoft.Json.Linq
                         }
                     }
 #else
-                    Dictionary<JToken,
-                        bool> items = new Dictionary<JToken, bool>(EqualityComparer);
+                    Dictionary<
+                        JToken,
+                        bool
+                    > items = new Dictionary<JToken, bool>(EqualityComparer);
                     foreach (JToken t in target)
                     {
                         items[t] = true;

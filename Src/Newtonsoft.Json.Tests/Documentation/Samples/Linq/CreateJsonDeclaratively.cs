@@ -86,18 +86,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                         new JProperty(
                             "item",
                             new JArray(
-
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty(
-                                            "category",
-                                            new JArray( from c in p.Categories select new JValue(c))
-                                        )
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
                                     )
+                                )
                             )
                         )
                     )

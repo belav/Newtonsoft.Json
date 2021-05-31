@@ -1713,10 +1713,9 @@ Parameter name: arrayIndex",
 
             JObject o = JObject.Parse(json);
 
-            string searchAddress =
-                (string)o["Placemark"][0]["AddressDetails"]["Country"]["AdministrativeArea"][
-                    "SubAdministrativeArea"
-                ]["Locality"]["Thoroughfare"]["ThoroughfareName"];
+            string searchAddress = (string)o["Placemark"][0]["AddressDetails"]["Country"][
+                    "AdministrativeArea"
+                ]["SubAdministrativeArea"]["Locality"]["Thoroughfare"]["ThoroughfareName"];
             Assert.AreEqual("435 N Mulford Rd", searchAddress);
         }
 
@@ -2144,12 +2143,10 @@ Parameter name: arrayIndex",
         [Test]
         public void GetValueBlogExample()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
         'name': 'Lower',
         'NAME': 'Upper'
-      }"
-            );
+      }");
 
             string exactMatch = (string)o.GetValue("NAME", StringComparison.OrdinalIgnoreCase);
             // Upper

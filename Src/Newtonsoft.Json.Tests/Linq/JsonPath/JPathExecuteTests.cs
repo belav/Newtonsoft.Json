@@ -1145,8 +1145,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void PathWithConstructor()
         {
-            JArray a = JArray.Parse(
-                @"[
+            JArray a = JArray.Parse(@"[
   {
     ""Property1"": [
       1,
@@ -1165,8 +1164,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
       ]
     )
   }
-]"
-            );
+]");
 
             JValue v = (JValue)a.SelectToken("[1].Property2[1][0]");
             Assert.AreEqual(1L, v.Value);
@@ -1175,8 +1173,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void MultiplePaths()
         {
-            JArray a = JArray.Parse(
-                @"[
+            JArray a = JArray.Parse(@"[
   {
     ""price"": 199,
     ""max_price"": 200
@@ -1189,8 +1186,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
     ""price"": 201,
     ""max_price"": 200
   }
-]"
-            );
+]");
 
             var results = a.SelectTokens("[?(@.price > @.max_price)]").ToList();
             Assert.AreEqual(1, results.Count);
@@ -1200,8 +1196,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void Exists_True()
         {
-            JArray a = JArray.Parse(
-                @"[
+            JArray a = JArray.Parse(@"[
   {
     ""price"": 199,
     ""max_price"": 200
@@ -1214,8 +1209,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
     ""price"": 201,
     ""max_price"": 200
   }
-]"
-            );
+]");
 
             var results = a.SelectTokens("[?(true)]").ToList();
             Assert.AreEqual(3, results.Count);
@@ -1227,8 +1221,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void Exists_Null()
         {
-            JArray a = JArray.Parse(
-                @"[
+            JArray a = JArray.Parse(@"[
   {
     ""price"": 199,
     ""max_price"": 200
@@ -1241,8 +1234,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
     ""price"": 201,
     ""max_price"": 200
   }
-]"
-            );
+]");
 
             var results = a.SelectTokens("[?(true)]").ToList();
             Assert.AreEqual(3, results.Count);
@@ -1254,8 +1246,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void WildcardWithProperty()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
     ""station"": 92000041000001, 
     ""containers"": [
         {
@@ -1285,8 +1276,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             ""text"": ""Passenger 15""
         }
     ]
-}"
-            );
+}");
 
             IList<JToken> tokens = o.SelectTokens("$..*[?(@.text)]").ToList();
             int i = 0;
@@ -1354,8 +1344,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void Example()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
         ""Stores"": [
           ""Lambton Quay"",
           ""Willis Street""
@@ -1384,8 +1373,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             ]
           }
         ]
-      }"
-            );
+      }");
 
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             // Acme Co
@@ -1607,8 +1595,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void IdentityOperator()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
 	            'Values': [{
 
                     'Coercible': 1,
@@ -1618,8 +1605,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
 		            'Coercible': '1',
 		            'Name': 'String'
 	            }]
-            }"
-            );
+            }");
 
             // just to verify expected behavior hasn't changed
             IEnumerable<string> sanity1 = o.SelectTokens("Values[?(@.Coercible == '1')].Name")
@@ -1653,8 +1639,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void QueryWithEscapedPath()
         {
-            JToken t = JToken.Parse(
-                @"{
+            JToken t = JToken.Parse(@"{
 ""Property"": [
           {
             ""@Name"": ""x"",
@@ -1662,8 +1647,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             ""@Type"": ""FindMe""
           }
    ]
-}"
-            );
+}");
 
             var tokens = t.SelectTokens("$..[?(@.['@Type'] == 'FindMe')]").ToList();
             Assert.AreEqual(1, tokens.Count);
@@ -1672,15 +1656,13 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void Equals_FloatWithInt()
         {
-            JToken t = JToken.Parse(
-                @"{
+            JToken t = JToken.Parse(@"{
   ""Values"": [
     {
       ""Property"": 1
     }
   ]
-}"
-            );
+}");
 
             Assert.IsNotNull(t.SelectToken(@"Values[?(@.Property == 1.0)]"));
         }

@@ -156,8 +156,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 serializedString
             );
 
-            var deserializedObject =
-                (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
+            var deserializedObject = (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
                     serializedString,
                     jsonSerializerSettings
                 );
@@ -245,14 +244,15 @@ namespace Newtonsoft.Json.Tests.Serialization
   ]
 }";
 
-            PreserveReferencesHandlingTests.CircularList circularList = JsonConvert.DeserializeObject<PreserveReferencesHandlingTests.CircularList>(
-                json,
-                new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.All,
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-                }
-            );
+            PreserveReferencesHandlingTests.CircularList circularList =
+                JsonConvert.DeserializeObject<PreserveReferencesHandlingTests.CircularList>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.All,
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    }
+                );
 
             Assert.AreEqual(3, circularList.Count);
             Assert.AreEqual(null, circularList[0]);
@@ -318,8 +318,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string,
-                    object>>(
+            Dictionary<string, object> result = JsonConvert.DeserializeObject<
+                Dictionary<string, object>
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -351,7 +352,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(
+            List<EmployeeReference> employees = JsonConvert.DeserializeObject<
+                List<EmployeeReference>
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -440,8 +443,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   -2147483648
 ]";
 
-            List<object> values =
-                (List<object>)JsonConvert.DeserializeObject(
+            List<object> values = (List<object>)JsonConvert.DeserializeObject(
                     json,
                     typeof(List<object>),
                     new JsonSerializerSettings
@@ -479,7 +481,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 null
             );
 
-            TypeNameHandlingTests.TypeNameProperty typeNameProperty = new TypeNameHandlingTests.TypeNameProperty
+            TypeNameHandlingTests.TypeNameProperty typeNameProperty =
+                new TypeNameHandlingTests.TypeNameProperty
             {
                 Name = "Name!",
                 Value = new List<int> { 1, 2, 3, 4, 5 }
@@ -506,7 +509,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            TypeNameHandlingTests.TypeNameProperty deserialized = JsonConvert.DeserializeObject<TypeNameHandlingTests.TypeNameProperty>(
+            TypeNameHandlingTests.TypeNameProperty deserialized = JsonConvert.DeserializeObject<
+                TypeNameHandlingTests.TypeNameProperty
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -569,7 +574,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            MetadataPropertyDisabledTestClass c2 = JsonConvert.DeserializeObject<MetadataPropertyDisabledTestClass>(
+            MetadataPropertyDisabledTestClass c2 = JsonConvert.DeserializeObject<
+                MetadataPropertyDisabledTestClass
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -589,7 +596,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{}";
 
-            MetadataPropertyDisabledTestClass c = JsonConvert.DeserializeObject<MetadataPropertyDisabledTestClass>(
+            MetadataPropertyDisabledTestClass c = JsonConvert.DeserializeObject<
+                MetadataPropertyDisabledTestClass
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -603,8 +612,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PrimitiveType_MetadataPropertyIgnore()
         {
-            Item actual = JsonConvert.DeserializeObject<Item>(
-                @"{
+            Item actual = JsonConvert.DeserializeObject<Item>(@"{
   ""SourceTypeID"": ""d8220a4b-75b1-4b7a-8112-b7bdae956a45"",
   ""BrokerID"": ""951663c4-924e-4c86-a57a-7ed737501dbd"",
   ""Latitude"": 33.657145,
@@ -614,12 +622,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     ""$type"": ""System.Byte[], mscorlib"",
     ""$value"": ""AAECAwQFBgcICQ==""
   }
-}",
-                new JsonSerializerSettings
-                {
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
-                }
-            );
+}", new JsonSerializerSettings { MetadataPropertyHandling = MetadataPropertyHandling.Ignore });
 
             Assert.AreEqual(new Guid("d8220a4b-75b1-4b7a-8112-b7bdae956a45"), actual.SourceTypeID);
             Assert.AreEqual(new Guid("951663c4-924e-4c86-a57a-7ed737501dbd"), actual.BrokerID);
@@ -656,8 +659,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ReadAhead_TypedJValue_NoParent()
         {
-            ItemWithJTokens actual =
-                (ItemWithJTokens)JsonConvert.DeserializeObject(
+            ItemWithJTokens actual = (ItemWithJTokens)JsonConvert.DeserializeObject(
                     @"{
   ""Payload1"": 1,
   ""Payload2"": {'prop1':1,'prop2':[2]},

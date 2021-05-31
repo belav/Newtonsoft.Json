@@ -60,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     #region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
-        public new static readonly ShouldSerializeContractResolver Instance = new ShouldSerializeContractResolver();
+        public new static readonly ShouldSerializeContractResolver Instance =
+            new ShouldSerializeContractResolver();
 
         protected override JsonProperty CreateProperty(
             MemberInfo member,
@@ -147,9 +148,11 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void ShouldSerializeContractResolverTest()
         {
-            Newtonsoft.Json.Tests.Documentation.Employee joe = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee joe =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             joe.Name = "Joe Employee";
-            Newtonsoft.Json.Tests.Documentation.Employee mike = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee mike =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             mike.Name = "Mike Manager";
 
             joe.Manager = mike;

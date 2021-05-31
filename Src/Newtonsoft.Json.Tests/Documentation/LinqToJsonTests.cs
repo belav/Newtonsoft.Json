@@ -77,15 +77,13 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void LinqToJsonBasic()
         {
             #region LinqToJsonBasic
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
               'CPU': 'Intel',
               'Drives': [
                 'DVD read/writer',
                 '500 gigabyte hard drive'
               ]
-            }"
-            );
+            }");
 
             string cpu = (string)o["CPU"];
             // Intel
@@ -147,18 +145,17 @@ namespace Newtonsoft.Json.Tests.Documentation
                         new JProperty(
                             "item",
                             new JArray(
-
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty(
-                                            "category",
-                                            new JArray( from c in p.Categories select new JValue(c))
-                                        )
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
                                     )
+                                )
                             )
                         )
                     )
@@ -210,16 +207,15 @@ namespace Newtonsoft.Json.Tests.Documentation
                         title = "James Newton-King",
                         link = "http://james.newtonking.com",
                         description = "James Newton-King's blog.",
-                        item =
-                            from p in posts
-                            orderby p.Title
-                            select new
-                            {
-                                title = p.Title,
-                                description = p.Description,
-                                link = p.Link,
-                                category = p.Categories
-                            }
+                        item = from p in posts
+                        orderby p.Title
+                        select new
+                        {
+                            title = p.Title,
+                            description = p.Description,
+                            link = p.Link,
+                            category = p.Categories
+                        }
                     }
                 }
             );
@@ -323,8 +319,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void LinqToJsonQuerying()
         {
-            JObject rss = JObject.Parse(
-                @"{
+            JObject rss = JObject.Parse(@"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -350,8 +345,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                   }
                 ]
               }
-            }"
-            );
+            }");
 
             #region LinqToJsonQuerying
             var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
@@ -443,8 +437,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SelectTokenSimple()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -473,8 +466,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }"
-            );
+            }");
 
             #region SelectTokenSimple
             string name = (string)o.SelectToken("Manufacturers[0].Name");
@@ -487,8 +479,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void SelectTokenComplex()
         {
             #region SelectTokenComplex
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -517,8 +508,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }"
-            );
+            }");
 
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             // Acme Co
@@ -538,8 +528,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SelectTokenLinq()
         {
-            JObject o = JObject.Parse(
-                @"{
+            JObject o = JObject.Parse(@"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -568,8 +557,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }"
-            );
+            }");
 
             #region SelectTokenLinq
             IList<string> storeNames = o.SelectToken("Stores").Select(s => (string)s).ToList();

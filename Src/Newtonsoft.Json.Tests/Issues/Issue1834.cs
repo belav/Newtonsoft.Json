@@ -65,9 +65,9 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_UnsetRequired()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructorAndDefaultValue c = JsonConvert.DeserializeObject<ItemWithJsonConstructorAndDefaultValue>(
-                json
-            );
+            ItemWithJsonConstructorAndDefaultValue c = JsonConvert.DeserializeObject<
+                ItemWithJsonConstructorAndDefaultValue
+            >(json);
 
             Assert.IsNull(c.ExtensionData);
         }

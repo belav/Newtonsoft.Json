@@ -36,8 +36,7 @@ namespace Newtonsoft.Json.TestConsole
     {
         public static void Main(string[] args)
         {
-            var attribute =
-                (AssemblyFileVersionAttribute)typeof(JsonConvert).GetTypeInfo()
+            var attribute = (AssemblyFileVersionAttribute)typeof(JsonConvert).GetTypeInfo()
                     .Assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
             Console.WriteLine("Json.NET Version: " + attribute.Version);
 

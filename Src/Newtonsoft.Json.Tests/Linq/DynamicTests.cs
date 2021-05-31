@@ -825,7 +825,9 @@ namespace Newtonsoft.Json.Tests.Linq
             AssertValueConverted<Uri>(new Uri("http://json.codeplex.com/"));
             AssertValueConverted<Uri>(null);
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
-            AssertValueConverted<BigInteger>(new BigInteger(100));
+            AssertValueConverted<
+                BigInteger
+            >(new BigInteger(100));
             AssertValueConverted<BigInteger?>(null);
 #endif
         }

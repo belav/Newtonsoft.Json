@@ -83,8 +83,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             List<Exception> errors = new List<Exception>();
 
-            JObject a2 =
-                (JObject)JsonConvert.DeserializeObject(
+            JObject a2 = (JObject)JsonConvert.DeserializeObject(
                     @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
                     new JsonSerializerSettings
                     {
@@ -164,8 +163,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            var possibleMsgs =
-                new[] {
+            var possibleMsgs = new[] {
                     "[1] - Error message for member 1 = An item with the same key has already been added.",
                     "[1] - Error message for member 1 = An element with the same key already exists in the dictionary.", // mono
                     "[1] - Error message for member 1 = An item with the same key has already been added. Key: Jim" // netcore
@@ -225,8 +223,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializingErrorIn3DArray()
         {
-            ListErrorObject[,,] c =
-                new ListErrorObject[,,]
+            ListErrorObject[,,] c = new ListErrorObject[,,]
                 {
                     {
                         {
@@ -264,17 +261,12 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(
                 c,
-                new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    Error = (s, e) =>
+                new JsonSerializerSettings { Formatting = Formatting.Indented, Error = (s, e) =>
                     {
-                        if (e.CurrentObject.GetType().IsArray)
-                        {
+                        if (e.CurrentObject.GetType().IsArray) {
                             e.ErrorContext.Handled = true;
                         }
-                    }
-                }
+                    } }
             );
 
             StringAssert.AreEqual(
@@ -361,8 +353,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializingErrorInDateTimeCollection()
         {
-            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
-                @"[
+            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<
+                DateTimeErrorObjectCollection
+            >(@"[
   ""2009-09-09T00:00:00Z"",
   ""kjhkjhkjhkjh"",
   [
@@ -371,9 +364,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""1977-02-20T00:00:00Z"",
   null,
   ""2000-12-01T00:00:00Z""
-]",
-                new IsoDateTimeConverter()
-            );
+]", new IsoDateTimeConverter());
 
             Assert.AreEqual(3, c.Count);
             Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
@@ -387,10 +378,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             List<string> errors = new List<string>();
 
             JsonSerializer serializer = JsonSerializer.Create(
-                new JsonSerializerSettings
-                {
-                    Error = delegate(object sender, ErrorEventArgs args)
-                    {
+                new JsonSerializerSettings { Error = delegate(object sender, ErrorEventArgs args) {
                         errors.Add(
                             args.ErrorContext.Path
                             + " - "
@@ -399,14 +387,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                             + args.ErrorContext.Error.Message
                         );
                         args.ErrorContext.Handled = true;
-                    },
-                    Converters =  { new IsoDateTimeConverter() }
-                }
+                    }, Converters =  { new IsoDateTimeConverter() } }
             );
-            var c = serializer.Deserialize<List<DateTime>>(
-                new JsonTextReader(
-                    new StringReader(
-                        @"[
+            var c = serializer.Deserialize<List<DateTime>>(new JsonTextReader(new StringReader(@"[
         ""2009-09-09T00:00:00Z"",
         ""I am not a date and will error!"",
         [
@@ -415,10 +398,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         ""1977-02-20T00:00:00Z"",
         null,
         ""2000-12-01T00:00:00Z""
-      ]"
-                    )
-                )
-            );
+      ]")));
 
             // 2009-09-09T00:00:00Z
             // 1977-02-20T00:00:00Z
@@ -434,8 +414,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(new DateTime(2000, 12, 1, 0, 0, 0, DateTimeKind.Utc), c[2]);
 
             Assert.AreEqual(3, errors.Count);
-            var possibleErrs =
-                new[] {
+            var possibleErrs = new[] {
 #if !(NET20 || NET35)
                     "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
                     "[1] - 1 - String was not recognized as a valid DateTime.",
@@ -471,8 +450,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             bool eventErrorHandlerCalled = false;
 
-            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
-                @"[
+            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<
+                DateTimeErrorObjectCollection
+            >(@"[
   ""2009-09-09T00:00:00Z"",
   ""kjhkjhkjhkjh"",
   [
@@ -481,13 +461,11 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""1977-02-20T00:00:00Z"",
   null,
   ""2000-12-01T00:00:00Z""
-]",
-                new JsonSerializerSettings
+]", new JsonSerializerSettings
                 {
                     Error = (s, a) => eventErrorHandlerCalled = true,
                     Converters =  { new IsoDateTimeConverter() }
-                }
-            );
+                });
 
             Assert.AreEqual(3, c.Count);
             Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
@@ -726,14 +704,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             object o = JsonConvert.DeserializeObject(
                 "[0,x]",
                 typeof(int[]),
-                new JsonSerializerSettings
-                {
-                    Error = (sender, arg) =>
+                new JsonSerializerSettings { Error = (sender, arg) =>
                     {
                         errors.Add(arg.ErrorContext.Error.Message);
                         arg.ErrorContext.Handled = true;
-                    }
-                }
+                    } }
             );
 
             Assert.IsNotNull(o);
@@ -756,14 +731,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             JTokenReader reader = new JTokenReader(new JArray(0, true));
 
             JsonSerializer serializer = JsonSerializer.Create(
-                new JsonSerializerSettings
-                {
-                    Error = (sender, arg) =>
+                new JsonSerializerSettings { Error = (sender, arg) =>
                     {
                         errors.Add(arg.ErrorContext.Error.Message);
                         arg.ErrorContext.Handled = true;
-                    }
-                }
+                    } }
             );
             object o = serializer.Deserialize(reader, typeof(int[]));
 
@@ -895,10 +867,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                     e.ErrorContext.Handled = true;
                 };
 
-                IDictionary<string,
-                    LogEvent> logEvents = jsonSerializer.Deserialize<IDictionary<string, LogEvent>>(
-                    jsonTextReader
-                );
+                IDictionary<string, LogEvent> logEvents = jsonSerializer.Deserialize<
+                    IDictionary<string, LogEvent>
+                >(jsonTextReader);
 
                 Assert.IsNotNull(logEvents);
                 Assert.AreEqual(2, logEvents.Count);
@@ -933,15 +904,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             TestDynamicObject newDynamicObject = JsonConvert.DeserializeObject<TestDynamicObject>(
                 json,
-                new JsonSerializerSettings
-                {
-                    Error = (sender, e) =>
+                new JsonSerializerSettings { Error = (sender, e) =>
                     {
                         errors.Add(e.ErrorContext.Error.Message);
                         e.ErrorContext.Handled = true;
-                    },
-                    MetadataPropertyHandling = MetadataPropertyHandling.Default
-                }
+                    }, MetadataPropertyHandling = MetadataPropertyHandling.Default }
             );
             Assert.AreEqual(true, newDynamicObject.Explicit);
 
@@ -1197,13 +1164,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             SomethingElse result = JsonConvert.DeserializeObject<SomethingElse>(
                 "{}",
-                new JsonSerializerSettings
-                {
-                    Error = (o, e) =>
+                new JsonSerializerSettings { Error = (o, e) =>
                     {
                         e.ErrorContext.Handled = true;
-                    }
-                }
+                    } }
             );
 
             Assert.IsNull(result);
@@ -1214,13 +1178,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string result = JsonConvert.SerializeObject(
                 new SomethingElse(),
-                new JsonSerializerSettings
-                {
-                    Error = (o, e) =>
+                new JsonSerializerSettings { Error = (o, e) =>
                     {
                         e.ErrorContext.Handled = true;
-                    }
-                }
+                    } }
             );
 
             Assert.AreEqual(string.Empty, result);

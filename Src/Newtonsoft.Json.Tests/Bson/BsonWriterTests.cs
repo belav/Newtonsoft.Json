@@ -369,9 +369,9 @@ namespace Newtonsoft.Json.Tests.Bson
   ]
 }";
 
-            GoogleMapGeocoderStructure jsonGoogleMapGeocoder = JsonConvert.DeserializeObject<GoogleMapGeocoderStructure>(
-                json
-            );
+            GoogleMapGeocoderStructure jsonGoogleMapGeocoder = JsonConvert.DeserializeObject<
+                GoogleMapGeocoderStructure
+            >(json);
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);

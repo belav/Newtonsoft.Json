@@ -236,14 +236,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
-            TaskController controller = JsonConvert.DeserializeObject<TaskController>(
-                @"{
+            TaskController controller = JsonConvert.DeserializeObject<TaskController>(@"{
                 'Logger': {
                     'Level':'Debug'
                 }
-            }",
-                new JsonSerializerSettings { ContractResolver = contractResolver }
-            );
+            }", new JsonSerializerSettings { ContractResolver = contractResolver });
 
             Assert.IsNotNull(controller);
             Assert.IsNotNull(controller.Logger);
@@ -282,8 +279,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
-            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(
-                @"{
+            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(@"{
                 'Logger': {
                     'Level': 'Debug'
                 },
@@ -302,9 +298,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 'Person': {
                     'Name': 'Name3!'
                 }
-            }",
-                new JsonSerializerSettings { ContractResolver = contractResolver }
-            );
+            }", new JsonSerializerSettings { ContractResolver = contractResolver });
 
             Assert.IsNotNull(o);
             Assert.IsNotNull(o.Logger);

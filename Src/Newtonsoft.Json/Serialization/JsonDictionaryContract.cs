@@ -267,9 +267,9 @@ namespace Newtonsoft.Json.Serialization
                     DictionaryValueType ?? typeof(object)
                 );
 
-                _genericTemporaryDictionaryCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                    temporaryDictionaryType
-                );
+                _genericTemporaryDictionaryCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<
+                    object
+                >(temporaryDictionaryType);
             }
 
             return (IDictionary)_genericTemporaryDictionaryCreator();

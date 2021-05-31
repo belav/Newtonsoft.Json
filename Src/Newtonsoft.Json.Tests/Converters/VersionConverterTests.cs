@@ -70,16 +70,12 @@ namespace Newtonsoft.Json.Tests.Converters
                     new VersionConverter()
                 );
 
-                string expectedJson = string.Format(
-                    @"{{
+                string expectedJson = string.Format(@"{{
   ""StringProperty1"": ""StringProperty1"",
   ""Version1"": ""{0}"",
   ""Version2"": ""{1}"",
   ""StringProperty2"": ""StringProperty2""
-}}",
-                    version1,
-                    version2
-                );
+}}", version1, version2);
 
                 StringAssert.AreEqual(expectedJson, json);
             }

@@ -55,8 +55,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectEvents()
         {
-            SerializationEventTestObject[] objs =
-                new[] {
+            SerializationEventTestObject[] objs = new[] {
                     new SerializationEventTestObject(),
                     new DerivedSerializationEventTestObject()
                 };
@@ -92,13 +91,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                 );
                 Assert.AreEqual(expectedError, obj.Member5);
 
-                JObject o = JObject.Parse(
-                    @"{
+                JObject o = JObject.Parse(@"{
   ""Member1"": 11,
   ""Member2"": ""This value went into the data file during serialization."",
   ""Member4"": null
-}"
-                );
+}");
                 o["Member6"] = "Dummy text for error";
 
                 obj = (SerializationEventTestObject)JsonConvert.DeserializeObject(
@@ -135,11 +132,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectWithConstructorEvents()
         {
-            SerializationEventTestObjectWithConstructor obj = new SerializationEventTestObjectWithConstructor(
-                11,
-                "Hello World!",
-                null
-            );
+            SerializationEventTestObjectWithConstructor obj =
+                new SerializationEventTestObjectWithConstructor(11, "Hello World!", null);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("Hello World!", obj.Member2);
@@ -314,7 +308,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializationEventContextTestObjectSubClassTest()
         {
-            SerializationEventContextSubClassTestObject obj = new SerializationEventContextSubClassTestObject();
+            SerializationEventContextSubClassTestObject obj =
+                new SerializationEventContextSubClassTestObject();
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             StringAssert.AreEqual(

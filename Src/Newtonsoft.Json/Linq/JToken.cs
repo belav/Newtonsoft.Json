@@ -67,8 +67,7 @@ namespace Newtonsoft.Json.Linq
         private JToken? _next;
         private object? _annotations;
 
-        private static readonly JTokenType[] BooleanTypes =
-            new[] {
+        private static readonly JTokenType[] BooleanTypes = new[] {
                 JTokenType.Integer,
                 JTokenType.Float,
                 JTokenType.String,
@@ -76,8 +75,7 @@ namespace Newtonsoft.Json.Linq
                 JTokenType.Raw,
                 JTokenType.Boolean
             };
-        private static readonly JTokenType[] NumberTypes =
-            new[] {
+        private static readonly JTokenType[] NumberTypes = new[] {
                 JTokenType.Integer,
                 JTokenType.Float,
                 JTokenType.String,
@@ -88,8 +86,7 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_BIG_INTEGER
         private static readonly JTokenType[] BigIntegerTypes = new[] { JTokenType.Integer, JTokenType.Float, JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.Boolean, JTokenType.Bytes };
 #endif
-        private static readonly JTokenType[] StringTypes =
-            new[] {
+        private static readonly JTokenType[] StringTypes = new[] {
                 JTokenType.Date,
                 JTokenType.Integer,
                 JTokenType.Float,
@@ -102,30 +99,39 @@ namespace Newtonsoft.Json.Linq
                 JTokenType.TimeSpan,
                 JTokenType.Uri
             };
-        private static readonly JTokenType[] GuidTypes =
-            new[] {
+        private static readonly JTokenType[] GuidTypes = new[] {
                 JTokenType.String,
                 JTokenType.Comment,
                 JTokenType.Raw,
                 JTokenType.Guid,
                 JTokenType.Bytes
             };
-        private static readonly JTokenType[] TimeSpanTypes =
-            new[] { JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.TimeSpan };
-        private static readonly JTokenType[] UriTypes =
-            new[] { JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.Uri };
-        private static readonly JTokenType[] CharTypes =
-            new[] {
+        private static readonly JTokenType[] TimeSpanTypes = new[] {
+                JTokenType.String,
+                JTokenType.Comment,
+                JTokenType.Raw,
+                JTokenType.TimeSpan
+            };
+        private static readonly JTokenType[] UriTypes = new[] {
+                JTokenType.String,
+                JTokenType.Comment,
+                JTokenType.Raw,
+                JTokenType.Uri
+            };
+        private static readonly JTokenType[] CharTypes = new[] {
                 JTokenType.Integer,
                 JTokenType.Float,
                 JTokenType.String,
                 JTokenType.Comment,
                 JTokenType.Raw
             };
-        private static readonly JTokenType[] DateTimeTypes =
-            new[] { JTokenType.Date, JTokenType.String, JTokenType.Comment, JTokenType.Raw };
-        private static readonly JTokenType[] BytesTypes =
-            new[] {
+        private static readonly JTokenType[] DateTimeTypes = new[] {
+                JTokenType.Date,
+                JTokenType.String,
+                JTokenType.Comment,
+                JTokenType.Raw
+            };
+        private static readonly JTokenType[] BytesTypes = new[] {
                 JTokenType.Bytes,
                 JTokenType.String,
                 JTokenType.Comment,

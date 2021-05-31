@@ -54,9 +54,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             BeginInit();
             InitClass();
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(
-                SchemaChanged
-            );
+            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler =
+                new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             EndInit();
@@ -74,9 +73,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             if ((IsBinarySerialized(info, context) == true))
             {
                 InitVars(false);
-                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(
-                    SchemaChanged
-                );
+                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 =
+                    new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
                 Tables.CollectionChanged += schemaChangedHandler1;
                 Relations.CollectionChanged += schemaChangedHandler1;
                 return;
@@ -114,9 +112,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 );
             }
             GetSerializationData(info, context);
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(
-                SchemaChanged
-            );
+            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler =
+                new global::System.ComponentModel.CollectionChangeEventHandler(SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             Relations.CollectionChanged += schemaChangedHandler;
         }
@@ -327,9 +324,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             global::System.Xml.Schema.XmlSchemaSet xs
         ) {
             CustomerDataSet ds = new CustomerDataSet();
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
+            global::System.Xml.Schema.XmlSchemaComplexType type =
+                new global::System.Xml.Schema.XmlSchemaComplexType();
+            global::System.Xml.Schema.XmlSchemaSequence sequence =
+                new global::System.Xml.Schema.XmlSchemaSequence();
+            global::System.Xml.Schema.XmlSchemaAny any =
+                new global::System.Xml.Schema.XmlSchemaAny();
             any.Namespace = ds.Namespace;
             sequence.Items.Add(any);
             type.Particle = sequence;
@@ -685,25 +685,31 @@ namespace Newtonsoft.Json.Tests.TestObjects
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(
                 global::System.Xml.Schema.XmlSchemaSet xs
             ) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                global::System.Xml.Schema.XmlSchemaComplexType type =
+                    new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence =
+                    new global::System.Xml.Schema.XmlSchemaSequence();
                 CustomerDataSet ds = new CustomerDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                global::System.Xml.Schema.XmlSchemaAny any1 =
+                    new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
                 any1.MaxOccurs = decimal.MaxValue;
                 any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                global::System.Xml.Schema.XmlSchemaAny any2 =
+                    new global::System.Xml.Schema.XmlSchemaAny();
                 any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
                 any2.MinOccurs = new decimal(1);
                 any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 =
+                    new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute1.Name = "namespace";
                 attribute1.FixedValue = ds.Namespace;
                 type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 =
+                    new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CustomersDataTable";
                 type.Attributes.Add(attribute2);

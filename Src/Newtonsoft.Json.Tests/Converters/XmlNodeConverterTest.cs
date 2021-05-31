@@ -115,8 +115,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 converter.DeserializeRootElementName = deserializeRootElementName;
             }
 
-            XmlNode node =
-                (XmlNode)converter.ReadJson(
+            XmlNode node = (XmlNode)converter.ReadJson(
                     reader,
                     typeof(XmlDocument),
                     null,
@@ -128,8 +127,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             reader = new JsonTextReader(new StringReader(json));
             reader.Read();
-            XDocument d =
-                (XDocument)converter.ReadJson(
+            XDocument d = (XDocument)converter.ReadJson(
                     reader,
                     typeof(XDocument),
                     null,
@@ -999,8 +997,7 @@ namespace Newtonsoft.Json.Tests.Converters
             document.LoadXml(xml);
 
             // XmlAttribute
-            XmlAttribute attribute =
-                document.DocumentElement.ChildNodes[0].Attributes[
+            XmlAttribute attribute = document.DocumentElement.ChildNodes[0].Attributes[
                     "IsDataSet",
                     "urn:schemas-microsoft-com:xml-msdata"
                 ];
@@ -1082,8 +1079,7 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeNodeTypes_Encoding()
         {
-            XmlNode node = DeserializeXmlNode(
-                @"{
+            XmlNode node = DeserializeXmlNode(@"{
   ""xs!:Choice!"": {
     ""@msdata:IsDataSet!"": """",
     ""@xmlns:xs!"": ""http://www.w3.org/2001/XMLSchema"",
@@ -1091,8 +1087,7 @@ namespace Newtonsoft.Json.Tests.Converters
     ""?xml-stylesheet"": ""href=\""classic.xsl\"" type=\""text/xml\"""",
     ""#cdata-section"": ""<Kiwi>true</Kiwi>""
   }
-}"
-            );
+}");
 
             Assert.AreEqual(
                 @"<xs_x0021_:Choice_x0021_ msdata:IsDataSet_x0021_="""" xmlns:xs_x0021_=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata""><?xml-stylesheet href=""classic.xsl"" type=""text/xml""?><![CDATA[<Kiwi>true</Kiwi>]]></xs_x0021_:Choice_x0021_>",
@@ -1552,8 +1547,9 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    XmlDocument newDoc =
-                        (XmlDocument)JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}");
+                    XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(
+                            @"{Prop1:1,Prop2:2}"
+                        );
                 },
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15."
             );
@@ -2151,7 +2147,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataProperties()
         {
-            PreserveReferencesHandlingTests.CircularDictionary circularDictionary = new PreserveReferencesHandlingTests.CircularDictionary();
+            PreserveReferencesHandlingTests.CircularDictionary circularDictionary =
+                new PreserveReferencesHandlingTests.CircularDictionary();
             circularDictionary.Add(
                 "other",
                 new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } }
@@ -2782,8 +2779,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 using (var stringReader = new StringReader(json.ToString()))
                 using (var jsonReader = new JsonTextReader(stringReader))
                 {
-                    var document =
-                        (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
+                    var document = (XmlDocument)serializer.Deserialize(
+                            jsonReader,
+                            typeof(XmlDocument)
+                        );
                     StringAssert.AreEqual(
                         @"<metrics value=""12.27""><type>CPULOAD</type></metrics>",
                         document.OuterXml
@@ -2801,14 +2800,12 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void NullAttributeValue()
         {
-            var node = JsonConvert.DeserializeXmlNode(
-                @"{
+            var node = JsonConvert.DeserializeXmlNode(@"{
                     ""metrics"": {
                         ""type"": ""CPULOAD"",
                         ""@value"": null
                     }
-                }"
-            );
+                }");
 
             StringAssert.AreEqual(
                 @"<metrics value=""""><type>CPULOAD</type></metrics>",
@@ -2886,7 +2883,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
         private static void JsonBodyToSoapXml(Stream json, Stream xml)
         {
-            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            Newtonsoft.Json.JsonSerializerSettings settings =
+                new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
             Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
                 settings

@@ -1092,8 +1092,10 @@ namespace Newtonsoft.Json.Utilities
                 PropertyInfo member = propertyInfos[i];
                 if (member.DeclaringType != targetType)
                 {
-                    PropertyInfo declaredMember =
-                        (PropertyInfo)GetMemberInfoFromType(member.DeclaringType, member);
+                    PropertyInfo declaredMember = (PropertyInfo)GetMemberInfoFromType(
+                            member.DeclaringType,
+                            member
+                        );
                     propertyInfos[i] = declaredMember;
                 }
             }

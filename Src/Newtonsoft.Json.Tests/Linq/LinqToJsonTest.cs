@@ -268,8 +268,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a =
-                (JArray)JToken.ReadFrom(
+            JArray a = (JArray)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -313,8 +312,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JValue v =
-                (JValue)JToken.ReadFrom(
+            JValue v = (JValue)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -341,8 +339,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a =
-                (JArray)JToken.ReadFrom(
+            JArray a = (JArray)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
                 );
@@ -421,8 +418,9 @@ undefined
 
             JObject o = JObject.Parse(json);
 
-            JToken v1 =
-                o["frameworks"]["dnxcore50"]["dependencies"]["System.Xml.ReaderWriter"]["source"];
+            JToken v1 = o["frameworks"]["dnxcore50"]["dependencies"]["System.Xml.ReaderWriter"][
+                    "source"
+                ];
 
             Assert.AreEqual(
                 "frameworks.dnxcore50.dependencies['System.Xml.ReaderWriter'].source",
@@ -540,10 +538,9 @@ undefined
             Assert.AreEqual("DVD read/writer", (string)list.Children().ElementAt(0));
             Assert.AreEqual("500 gigabyte hard drive", (string)list.Children().ElementAt(1));
 
-            List<object> parameterValues = (
-                from p in o.Properties()
-                where p.Value is JValue
-                select ((JValue)p.Value).Value).ToList();
+            List<object> parameterValues = (from p in o.Properties()
+            where p.Value is JValue
+            select ((JValue)p.Value).Value).ToList();
 
             Assert.AreEqual(1, parameterValues.Count);
             Assert.AreEqual("Intel", parameterValues[0]);
@@ -892,8 +889,7 @@ keyword such as type of business.""
         [Test]
         public void QueryingExample()
         {
-            JArray posts = JArray.Parse(
-                @"[
+            JArray posts = JArray.Parse(@"[
               {
                 'Title': 'JSON Serializer Basics',
                 'Date': '2013-12-21T00:00:00',
@@ -906,8 +902,7 @@ keyword such as type of business.""
                   'LINQ to JSON'
                 ]
               }
-            ]"
-            );
+            ]");
 
             JToken serializerBasics = posts.Single(
                 p => (string)p["Title"] == "JSON Serializer Basics"
@@ -947,18 +942,17 @@ keyword such as type of business.""
                         new JProperty(
                             "item",
                             new JArray(
-
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty(
-                                            "category",
-                                            new JArray( from c in p.Categories select new JValue(c))
-                                        )
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
                                     )
+                                )
                             )
                         )
                     )
@@ -1185,16 +1179,15 @@ keyword such as type of business.""
                         title = "James Newton-King",
                         link = "http://james.newtonking.com",
                         description = "James Newton-King's blog.",
-                        item =
-                            from p in posts
-                            orderby p.Title
-                            select new
-                            {
-                                title = p.Title,
-                                description = p.Description,
-                                link = p.Link,
-                                category = p.Categories
-                            }
+                        item = from p in posts
+                        orderby p.Title
+                        select new
+                        {
+                            title = p.Title,
+                            description = p.Description,
+                            link = p.Link,
+                            category = p.Categories
+                        }
                     }
                 }
             );
@@ -1255,16 +1248,15 @@ keyword such as type of business.""
                         { "description", "James Newton-King's blog." },
                         {
                             "item",
-                            (
-                                from p in posts
-                                orderby p.Title
-                                select new
-                                {
-                                    title = p.Title,
-                                    description = p.Description,
-                                    link = p.Link,
-                                    category = p.Categories
-                                })
+                            (from p in posts
+                            orderby p.Title
+                            select new
+                            {
+                                title = p.Title,
+                                description = p.Description,
+                                link = p.Link,
+                                category = p.Categories
+                            })
                         }
                     }
                 }
@@ -1339,8 +1331,7 @@ keyword such as type of business.""
         [Test]
         public void CovariantIJEnumerable()
         {
-            IEnumerable<JObject> o =
-                new[] {
+            IEnumerable<JObject> o = new[] {
                     JObject.FromObject(new { First = 1, Second = 2 }),
                     JObject.FromObject(new { First = 1, Second = 2 })
                 };

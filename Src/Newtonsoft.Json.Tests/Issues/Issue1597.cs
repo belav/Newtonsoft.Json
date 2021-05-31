@@ -59,10 +59,9 @@ namespace Newtonsoft.Json.Tests.Issues
     ""dropped"": 221
 }";
 
-            IReadOnlyDictionary<CollectionStatus,
-                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(
-                json
-            );
+            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<
+                IReadOnlyDictionary<CollectionStatus, int>
+            >(json);
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);
@@ -83,10 +82,9 @@ namespace Newtonsoft.Json.Tests.Issues
     ""4"": 221
 }";
 
-            IReadOnlyDictionary<CollectionStatus,
-                int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(
-                json
-            );
+            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<
+                IReadOnlyDictionary<CollectionStatus, int>
+            >(json);
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);

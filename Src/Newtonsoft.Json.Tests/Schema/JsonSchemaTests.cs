@@ -224,13 +224,11 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
             jsonWriter.Formatting = Formatting.Indented;
 
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"":""AdditionalProperties"",
   ""type"":[""string"", ""integer""],
   ""additionalProperties"":{""type"":[""object"", ""boolean""]}
-}"
-            );
+}");
 
             schema.WriteTo(jsonWriter);
 
@@ -257,8 +255,7 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_Properties()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"":""A person"",
   ""type"":""object"",
   ""properties"":
@@ -270,8 +267,7 @@ namespace Newtonsoft.Json.Tests.Schema
       ""items"": {""type"":""string""}
     }
   }
-}"
-            );
+}");
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -304,14 +300,12 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_Enum()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"":""Type"",
   ""type"":[""string"",""array""],
   ""items"":{},
   ""enum"":[""string"",""object"",""array"",""boolean"",""number"",""integer"",""null"",""any""]
-}"
-            );
+}");
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -381,14 +375,12 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_DisallowMultiple()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"":""Type"",
   ""type"":[""string"",""array""],
   ""items"":{},
   ""disallow"":[""string"",""object"",""array""]
-}"
-            );
+}");
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -419,14 +411,12 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_DisallowSingle()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"":""Type"",
   ""type"":[""string"",""array""],
   ""items"":{},
   ""disallow"":""any""
-}"
-            );
+}");
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -453,11 +443,9 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void WriteTo_MultipleItems()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""items"":[{},{}]
-}"
-            );
+}");
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -532,11 +520,9 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ToString_AdditionalItems()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
     ""additionalItems"": {""type"": ""integer""}
-}"
-            );
+}");
 
             string json = schema.ToString();
 
@@ -626,8 +612,7 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void IntegerValidatesAgainstFloatFlags()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""type"": ""object"",
   ""$schema"": ""http://json-schema.org/draft-03/schema"",
   ""required"": false,
@@ -640,14 +625,11 @@ namespace Newtonsoft.Json.Tests.Schema
       ]
     }
   }
-}"
-            );
+}");
 
-            JObject json = JObject.Parse(
-                @"{
+            JObject json = JObject.Parse(@"{
         ""NumberProperty"": 23
-      }"
-            );
+      }");
 
             Assert.IsTrue(json.IsValid(schema));
         }

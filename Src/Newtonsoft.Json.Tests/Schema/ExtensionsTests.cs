@@ -169,12 +169,10 @@ namespace Newtonsoft.Json.Tests.Schema
 
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
-            JObject person = JObject.Parse(
-                @"{
+            JObject person = JObject.Parse(@"{
         ""name"": ""James"",
         ""hobbies"": ["".NET"", ""Blogging"", ""Reading"", ""Xbox"", ""LOLCATS""]
-      }"
-            );
+      }");
 
             bool valid = person.IsValid(schema);
             // true
@@ -248,15 +246,13 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void UndefinedPropertyOnNoPropertySchema()
         {
-            JsonSchema schema = JsonSchema.Parse(
-                @"{
+            JsonSchema schema = JsonSchema.Parse(@"{
   ""description"": ""test"",
   ""type"": ""object"",
   ""additionalProperties"": false,
   ""properties"": {
   }
-}"
-            );
+}");
 
             JObject o = JObject.Parse("{'g':1}");
 

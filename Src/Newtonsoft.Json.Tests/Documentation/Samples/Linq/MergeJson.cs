@@ -42,20 +42,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o1 = JObject.Parse(
-                @"{
+            JObject o1 = JObject.Parse(@"{
               'FirstName': 'John',
               'LastName': 'Smith',
               'Enabled': false,
               'Roles': [ 'User' ]
-            }"
-            );
-            JObject o2 = JObject.Parse(
-                @"{
+            }");
+            JObject o2 = JObject.Parse(@"{
               'Enabled': true,
               'Roles': [ 'User', 'Admin' ]
-            }"
-            );
+            }");
 
             o1.Merge(
                 o2,

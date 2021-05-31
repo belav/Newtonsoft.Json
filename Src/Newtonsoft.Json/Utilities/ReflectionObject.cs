@@ -141,18 +141,16 @@ namespace Newtonsoft.Json.Utilities
                             ParameterInfo[] parameters = method.GetParameters();
                             if (parameters.Length == 0 && method.ReturnType != typeof(void))
                             {
-                                MethodCall<object,
-                                    object?> call = delegateFactory.CreateMethodCall<object>(
-                                    method
-                                );
+                                MethodCall<object, object?> call = delegateFactory.CreateMethodCall<
+                                    object
+                                >(method);
                                 reflectionMember.Getter = target => call(target);
                             }
                             else if (parameters.Length == 1 && method.ReturnType == typeof(void))
                             {
-                                MethodCall<object,
-                                    object?> call = delegateFactory.CreateMethodCall<object>(
-                                    method
-                                );
+                                MethodCall<object, object?> call = delegateFactory.CreateMethodCall<
+                                    object
+                                >(method);
                                 reflectionMember.Setter = (target, arg) => call(target, arg);
                             }
                         }

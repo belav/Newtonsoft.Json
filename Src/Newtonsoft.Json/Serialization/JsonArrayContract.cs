@@ -367,9 +367,9 @@ namespace Newtonsoft.Json.Serialization
                     : CollectionItemType;
 
                 Type temporaryListType = typeof(List<>).MakeGenericType(collectionItemType);
-                _genericTemporaryCollectionCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                    temporaryListType
-                );
+                _genericTemporaryCollectionCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<
+                    object
+                >(temporaryListType);
             }
 
             return (IList)_genericTemporaryCollectionCreator();

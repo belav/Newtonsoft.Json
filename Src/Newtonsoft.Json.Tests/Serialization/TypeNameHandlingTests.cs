@@ -163,8 +163,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            ValueTuple<int, int, string> t2 =
-                (ValueTuple<int, int, string>)JsonConvert.DeserializeObject(
+            ValueTuple<int, int, string> t2 = (ValueTuple<
+                    int,
+                    int,
+                    string
+                >)JsonConvert.DeserializeObject(
                     json,
                     new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
                 );
@@ -660,8 +663,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   -2147483648
 ]";
 
-            List<object> values =
-                (List<object>)JsonConvert.DeserializeObject(
+            List<object> values = (List<object>)JsonConvert.DeserializeObject(
                     json,
                     typeof(List<object>),
                     new JsonSerializerSettings
@@ -1814,9 +1816,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            TypeNameDictionary<object> l2 = JsonConvert.DeserializeObject<TypeNameDictionary<object>>(
-                json
-            );
+            TypeNameDictionary<object> l2 = JsonConvert.DeserializeObject<
+                TypeNameDictionary<object>
+            >(json);
             Assert.AreEqual(3, l2.Count);
 
             CustomAssert.IsInstanceOfType(typeof(TestComponentSimple), l2["First"]);
@@ -1888,9 +1890,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemTypeNameHandling c2 = JsonConvert.DeserializeObject<PropertyItemTypeNameHandling>(
-                json
-            );
+            PropertyItemTypeNameHandling c2 = JsonConvert.DeserializeObject<
+                PropertyItemTypeNameHandling
+            >(json);
             Assert.AreEqual(3, c2.Data.Count);
 
             CustomAssert.IsInstanceOfType(typeof(long), c2.Data[0]);
@@ -1942,9 +1944,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemTypeNameHandling c2 = JsonConvert.DeserializeObject<PropertyItemTypeNameHandling>(
-                json
-            );
+            PropertyItemTypeNameHandling c2 = JsonConvert.DeserializeObject<
+                PropertyItemTypeNameHandling
+            >(json);
             Assert.AreEqual(2, c2.Data.Count);
 
             CustomAssert.IsInstanceOfType(typeof(TestComponentSimple), c2.Data[0]);
@@ -2029,9 +2031,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemTypeNameHandlingDictionary c2 = JsonConvert.DeserializeObject<PropertyItemTypeNameHandlingDictionary>(
-                json
-            );
+            PropertyItemTypeNameHandlingDictionary c2 = JsonConvert.DeserializeObject<
+                PropertyItemTypeNameHandlingDictionary
+            >(json);
             Assert.AreEqual(2, c2.Data.Count);
 
             CustomAssert.IsInstanceOfType(typeof(TestComponentSimple), c2.Data["one"]);
@@ -2115,9 +2117,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemTypeNameHandlingObject o2 = JsonConvert.DeserializeObject<PropertyItemTypeNameHandlingObject>(
-                json
-            );
+            PropertyItemTypeNameHandlingObject o2 = JsonConvert.DeserializeObject<
+                PropertyItemTypeNameHandlingObject
+            >(json);
             Assert.IsNotNull(o2);
             Assert.IsNotNull(o2.Data);
 
@@ -2166,9 +2168,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemTypeNameHandlingDynamic d2 = JsonConvert.DeserializeObject<PropertyItemTypeNameHandlingDynamic>(
-                json
-            );
+            PropertyItemTypeNameHandlingDynamic d2 = JsonConvert.DeserializeObject<
+                PropertyItemTypeNameHandlingDynamic
+            >(json);
             Assert.IsNotNull(d2);
             Assert.IsNotNull(d2.Data);
 
@@ -2240,8 +2242,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 serializedString
             );
 
-            var deserializedObject =
-                (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
+            var deserializedObject = (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
                     serializedString,
                     jsonSerializerSettings
                 );
@@ -2370,8 +2371,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TypeNameHandling = TypeNameHandling.All,
 #pragma warning disable 618
                     TypeNameAssemblyFormat = FormatterAssemblyStyle.Full // TypeNameHandling.Auto will work
-
-                    #pragma warning restore 618
+#pragma warning restore 618
                 }
             );
 
@@ -2479,11 +2479,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string obtainedJson = JsonConvert.SerializeObject(dictionary, serializerSettings);
 
-            Dictionary<int, HashSet<string>> obtainedDictionary =
-                (Dictionary<int, HashSet<string>>)JsonConvert.DeserializeObject(
-                    obtainedJson,
-                    serializerSettings
-                );
+            Dictionary<int, HashSet<string>> obtainedDictionary = (Dictionary<
+                    int,
+                    HashSet<string>
+                >)JsonConvert.DeserializeObject(obtainedJson, serializerSettings);
 
             Assert.IsNotNull(obtainedDictionary);
         }
@@ -2506,11 +2505,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string obtainedJson = JsonConvert.SerializeObject(dictionary, serializerSettings);
 
-            Dictionary<int, HashSet<string>> obtainedDictionary =
-                (Dictionary<int, HashSet<string>>)JsonConvert.DeserializeObject(
-                    obtainedJson,
-                    serializerSettings
-                );
+            Dictionary<int, HashSet<string>> obtainedDictionary = (Dictionary<
+                    int,
+                    HashSet<string>
+                >)JsonConvert.DeserializeObject(obtainedJson, serializerSettings);
 
             Assert.IsNotNull(obtainedDictionary);
         }
@@ -2555,10 +2553,9 @@ namespace Newtonsoft.Json.Tests.Serialization
     ""Value"": ""Hello!""
   }
 }";
-            ObjectWithOptionalMessage objWithMessage = JsonConvert.DeserializeObject<ObjectWithOptionalMessage>(
-                json,
-                serializerSettings
-            );
+            ObjectWithOptionalMessage objWithMessage = JsonConvert.DeserializeObject<
+                ObjectWithOptionalMessage
+            >(json, serializerSettings);
 
             StringAssert.AreEqual("Hello!", objWithMessage.Message.Value.Value);
         }
@@ -2653,8 +2650,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [JsonConstructor]
         public Message2(string value)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             Value = value;
         }

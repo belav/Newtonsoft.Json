@@ -581,20 +581,16 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void MergeJson()
         {
-            JObject o1 = JObject.Parse(
-                @"{
+            JObject o1 = JObject.Parse(@"{
               'FirstName': 'John',
               'LastName': 'Smith',
               'Enabled': false,
               'Roles': [ 'User' ]
-            }"
-            );
-            JObject o2 = JObject.Parse(
-                @"{
+            }");
+            JObject o2 = JObject.Parse(@"{
               'Enabled': true,
               'Roles': [ 'User', 'Admin' ]
-            }"
-            );
+            }");
 
             o1.Merge(
                 o2,
@@ -697,8 +693,7 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void JsonPathRegex()
         {
-            JArray packages = JArray.Parse(
-                @"[
+            JArray packages = JArray.Parse(@"[
               {
                 ""PackageId"": ""Newtonsoft.Json"",
                 ""Version"": ""11.0.1"",
@@ -709,8 +704,7 @@ namespace Newtonsoft.Json.Tests
                 ""Version"": ""3.9.0"",
                 ""ReleaseDate"": ""2017-11-10T00:00:00""
               }
-            ]"
-            );
+            ]");
 
             List<JToken> newtonsoftPackages = packages.SelectTokens(
                     @"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]"

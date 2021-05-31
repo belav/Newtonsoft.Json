@@ -95,7 +95,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JTokenWriter_OverrideSpecifiedName()
         {
-            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass = new JsonIgnoreAttributeOnClassTestClass();
+            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass =
+                new JsonIgnoreAttributeOnClassTestClass();
             ignoreAttributeOnClassTestClass.Field = int.MinValue;
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
@@ -267,7 +268,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonPropertyAttribute_NamingStrategyType()
         {
-            PropertyAttributeNamingStrategyTestClass c = new PropertyAttributeNamingStrategyTestClass
+            PropertyAttributeNamingStrategyTestClass c =
+                new PropertyAttributeNamingStrategyTestClass
             {
                 HasNoAttributeNamingStrategy = "Value1!",
                 HasAttributeNamingStrategy = "Value2!"
@@ -296,7 +298,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonObjectAttribute_NamingStrategyType()
         {
-            ContainerAttributeNamingStrategyTestClass c = new ContainerAttributeNamingStrategyTestClass
+            ContainerAttributeNamingStrategyTestClass c =
+                new ContainerAttributeNamingStrategyTestClass
             {
                 Prop1 = "Value1!",
                 Prop2 = "Value2!"
@@ -324,7 +327,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonDictionaryAttribute_NamingStrategyType()
         {
-            DictionaryAttributeNamingStrategyTestClass c = new DictionaryAttributeNamingStrategyTestClass
+            DictionaryAttributeNamingStrategyTestClass c =
+                new DictionaryAttributeNamingStrategyTestClass
             {
                 ["Key1"] = "Value1!",
                 ["Key2"] = "Value2!"

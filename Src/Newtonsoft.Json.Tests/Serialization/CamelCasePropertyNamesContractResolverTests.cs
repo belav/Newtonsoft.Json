@@ -47,15 +47,15 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void EnsureContractsShared()
         {
-            CamelCasePropertyNamesContractResolver resolver1 = new CamelCasePropertyNamesContractResolver();
-            var contract1 =
-                (JsonObjectContract)resolver1.ResolveContract(
+            CamelCasePropertyNamesContractResolver resolver1 =
+                new CamelCasePropertyNamesContractResolver();
+            var contract1 = (JsonObjectContract)resolver1.ResolveContract(
                     typeof(CamelCasePropertyNamesContractResolverTests)
                 );
 
-            CamelCasePropertyNamesContractResolver resolver2 = new CamelCasePropertyNamesContractResolver();
-            var contract2 =
-                (JsonObjectContract)resolver2.ResolveContract(
+            CamelCasePropertyNamesContractResolver resolver2 =
+                new CamelCasePropertyNamesContractResolver();
+            var contract2 = (JsonObjectContract)resolver2.ResolveContract(
                     typeof(CamelCasePropertyNamesContractResolverTests)
                 );
 
@@ -119,7 +119,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JTokenWriter()
         {
-            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass = new JsonIgnoreAttributeOnClassTestClass();
+            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass =
+                new JsonIgnoreAttributeOnClassTestClass();
             ignoreAttributeOnClassTestClass.Field = int.MinValue;
 
             JsonSerializer serializer = new JsonSerializer();
@@ -169,20 +170,19 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PrivateMembersClass deserializedPrivateMembersClass = JsonConvert.DeserializeObject<PrivateMembersClass>(
-                @"{
+            PrivateMembersClass deserializedPrivateMembersClass = JsonConvert.DeserializeObject<
+                PrivateMembersClass
+            >(@"{
   ""_privateString"": ""Private!"",
   ""i"": -2,
   ""_internalString"": ""Internal!""
-}",
-                new JsonSerializerSettings
+}", new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver
                     {
                         DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance
                     }
-                }
-            );
+                });
 
             Assert.AreEqual(
                 "Private!",

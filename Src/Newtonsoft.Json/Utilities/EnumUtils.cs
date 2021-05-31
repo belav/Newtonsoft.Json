@@ -46,10 +46,13 @@ namespace Newtonsoft.Json.Utilities
         private const char EnumSeparatorChar = ',';
         private const string EnumSeparatorString = ", ";
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, NamingStrategy?>,
-            EnumInfo> ValuesAndNamesPerEnum = new ThreadSafeStore<StructMultiKey<Type,
-                NamingStrategy?>,
-            EnumInfo>(
+        private static readonly ThreadSafeStore<
+            StructMultiKey<Type, NamingStrategy?>,
+            EnumInfo
+        > ValuesAndNamesPerEnum = new ThreadSafeStore<
+            StructMultiKey<Type, NamingStrategy?>,
+            EnumInfo
+        >(
             InitializeValuesAndNames
         );
 
@@ -64,8 +67,7 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f =
-                    enumType.GetField(
+                FieldInfo f = enumType.GetField(
                         name,
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
                     )!;
@@ -89,9 +91,9 @@ namespace Newtonsoft.Json.Utilities
                 hasSpecifiedName = false;
 #endif
 
-                resolvedNames[
-                    i
-                ] = key.Value2 != null ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName) : resolvedName;
+                resolvedNames[i] = key.Value2 != null
+                    ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
+                    : resolvedName;
             }
 
             bool isFlags = enumType.IsDefined(typeof(FlagsAttribute), false);
@@ -141,7 +143,8 @@ namespace Newtonsoft.Json.Utilities
         }
 
         // Used by Newtonsoft.Json.Schema
-        private static CamelCaseNamingStrategy _camelCaseNamingStrategy = new CamelCaseNamingStrategy();
+        private static CamelCaseNamingStrategy _camelCaseNamingStrategy =
+            new CamelCaseNamingStrategy();
         public static bool TryToString(
             Type enumType,
             object value,

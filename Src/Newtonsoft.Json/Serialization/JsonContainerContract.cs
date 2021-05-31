@@ -98,9 +98,9 @@ namespace Newtonsoft.Json.Serialization
         internal JsonContainerContract(Type underlyingType)
             : base(underlyingType)
         {
-            JsonContainerAttribute? jsonContainerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                underlyingType
-            );
+            JsonContainerAttribute? jsonContainerAttribute = JsonTypeReflector.GetCachedAttribute<
+                JsonContainerAttribute
+            >(underlyingType);
 
             if (jsonContainerAttribute != null)
             {

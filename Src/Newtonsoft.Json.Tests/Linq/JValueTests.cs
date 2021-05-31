@@ -93,8 +93,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void FloatParseHandling()
         {
-            JValue v =
-                (JValue)JToken.ReadFrom(
+            JValue v = (JValue)JToken.ReadFrom(
                     new JsonTextReader(
                         new StringReader("9.9")
                     )
@@ -272,8 +271,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JValueParse()
         {
-            JValue v =
-                (JValue)JToken.Parse(
+            JValue v = (JValue)JToken.Parse(
                     "123456789999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990"
                 );
 
