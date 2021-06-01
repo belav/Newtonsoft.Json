@@ -3455,7 +3455,8 @@ namespace Newtonsoft.Json.Serialization
             OnDeserializing(reader, contract, newObject);
 
             // only need to keep a track of properties' presence if they are required or a value should be defaulted if missing
-            Dictionary<JsonProperty, PropertyPresence>? propertiesPresence = (contract.HasRequiredOrDefaultValueProperties
+            Dictionary<JsonProperty,
+                PropertyPresence>? propertiesPresence = (contract.HasRequiredOrDefaultValueProperties
             || HasFlag(Serializer._defaultValueHandling, DefaultValueHandling.Populate))
                 ? contract.Properties.ToDictionary(m => m, m => PropertyPresence.None)
                 : null;

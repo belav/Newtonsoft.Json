@@ -772,7 +772,9 @@ namespace Newtonsoft.Json
             }
             while (
             // stop if we have reached the end of the token being read
-            initialDepth - 1 < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
+            initialDepth
+            - 1
+            < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
             && writeChildren
             && reader.Read());
 

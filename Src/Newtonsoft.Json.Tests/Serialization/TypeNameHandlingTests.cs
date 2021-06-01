@@ -2370,8 +2370,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TypeNameHandling = TypeNameHandling.All,
 #pragma warning disable 618
                     TypeNameAssemblyFormat = FormatterAssemblyStyle.Full // TypeNameHandling.Auto will work
-
-                    #pragma warning restore 618
+#pragma warning restore 618
                 }
             );
 
@@ -2653,8 +2652,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [JsonConstructor]
         public Message2(string value)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             Value = value;
         }
