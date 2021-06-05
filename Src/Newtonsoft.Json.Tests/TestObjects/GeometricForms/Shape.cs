@@ -132,10 +132,11 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             }
 
             // Properties
-            [CompilationMapping(
-                    SourceConstructFlags.Field,
-                    1,
-                    0), CompilerGenerated, DebuggerNonUserCode]
+            [
+                CompilationMapping(SourceConstructFlags.Field, 1, 0),
+                CompilerGenerated,
+                DebuggerNonUserCode
+            ]
             public double radius
             {
                 [CompilerGenerated, DebuggerNonUserCode]

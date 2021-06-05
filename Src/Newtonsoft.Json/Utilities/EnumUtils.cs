@@ -89,9 +89,9 @@ namespace Newtonsoft.Json.Utilities
                 hasSpecifiedName = false;
 #endif
 
-                resolvedNames[
-                    i
-                ] = key.Value2 != null ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName) : resolvedName;
+                resolvedNames[i] = key.Value2 != null
+                    ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
+                    : resolvedName;
             }
 
             bool isFlags = enumType.IsDefined(typeof(FlagsAttribute), false);

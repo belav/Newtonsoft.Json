@@ -2624,8 +2624,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
                 XElement auth = root.Element(XName.Get("authenticationSuccess", ns));
 
-                if (auth == null)
-                    auth = root.Element(XName.Get("authenticationFailure", ns));
+                if (auth == null) auth = root.Element(XName.Get("authenticationFailure", ns));
 
                 XElement xNodeUser = auth.Element(XName.Get("user", ns));
 
@@ -2663,18 +2662,13 @@ namespace Newtonsoft.Json.Tests.Serialization
                     this.user = casUser;
                 }
 
-                if (eduPerson.ContainsKey("domain"))
-                    this.Domain = eduPerson["domain"];
+                if (eduPerson.ContainsKey("domain")) this.Domain = eduPerson["domain"];
                 if (eduPerson.ContainsKey("organizationName"))
                     this.OrganizationName = eduPerson["organizationName"];
-                if (eduPerson.ContainsKey("mail"))
-                    this.Mail = eduPerson["mail"];
-                if (eduPerson.ContainsKey("sn"))
-                    this.Surname = eduPerson["sn"];
-                if (eduPerson.ContainsKey("gn"))
-                    this.Givenname = eduPerson["gn"];
-                if (eduPerson.ContainsKey("cn"))
-                    this.CommonName = eduPerson["cn"];
+                if (eduPerson.ContainsKey("mail")) this.Mail = eduPerson["mail"];
+                if (eduPerson.ContainsKey("sn")) this.Surname = eduPerson["sn"];
+                if (eduPerson.ContainsKey("gn")) this.Givenname = eduPerson["gn"];
+                if (eduPerson.ContainsKey("cn")) this.CommonName = eduPerson["cn"];
 
                 this.Person = eduPerson;
                 this.XMLResponce = xmlString;
