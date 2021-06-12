@@ -226,11 +226,12 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            NullInterfaceTestClass deserialized = JsonConvert.DeserializeObject<NullInterfaceTestClass>(
-                json,
-                new IntRangeConverter(),
-                new DecimalRangeConverter()
-            );
+            NullInterfaceTestClass deserialized =
+                JsonConvert.DeserializeObject<NullInterfaceTestClass>(
+                    json,
+                    new IntRangeConverter(),
+                    new DecimalRangeConverter()
+                );
 
             Assert.AreEqual("Company!", deserialized.Company);
             Assert.AreEqual(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), deserialized.Id);

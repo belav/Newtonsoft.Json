@@ -66,7 +66,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     },
-                    Converters =  { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() }
                 }
             );
 

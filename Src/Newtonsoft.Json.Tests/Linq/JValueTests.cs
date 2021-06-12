@@ -93,11 +93,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void FloatParseHandling()
         {
-            JValue v =
-                (JValue)JToken.ReadFrom(
-                    new JsonTextReader(
-                        new StringReader("9.9")
-                    )
+            JValue v = (JValue)JToken.ReadFrom(
+                    new JsonTextReader(new StringReader("9.9"))
                     {
                         FloatParseHandling = Json.FloatParseHandling.Decimal
                     }
@@ -116,7 +113,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 {
                     return new JsonSerializerSettings
                     {
-                        Converters =  { new MetroStringConverter() }
+                        Converters = { new MetroStringConverter() }
                     };
                 };
 
@@ -272,8 +269,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JValueParse()
         {
-            JValue v =
-                (JValue)JToken.Parse(
+            JValue v = (JValue)JToken.Parse(
                     "123456789999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990"
                 );
 

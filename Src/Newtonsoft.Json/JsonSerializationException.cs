@@ -66,8 +66,7 @@ namespace Newtonsoft.Json
         /// with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public JsonSerializationException(string message)
-            : base(message) { }
+        public JsonSerializationException(string message) : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializationException"/> class
@@ -107,8 +106,7 @@ namespace Newtonsoft.Json
             int lineNumber,
             int linePosition,
             Exception? innerException
-        )
-            : base(message, innerException) {
+        ) : base(message, innerException) {
             Path = path;
             LineNumber = lineNumber;
             LinePosition = linePosition;

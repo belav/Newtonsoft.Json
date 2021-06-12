@@ -95,7 +95,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JTokenWriter_OverrideSpecifiedName()
         {
-            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass = new JsonIgnoreAttributeOnClassTestClass();
+            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass =
+                new JsonIgnoreAttributeOnClassTestClass();
             ignoreAttributeOnClassTestClass.Field = int.MinValue;
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
@@ -267,11 +268,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonPropertyAttribute_NamingStrategyType()
         {
-            PropertyAttributeNamingStrategyTestClass c = new PropertyAttributeNamingStrategyTestClass
-            {
-                HasNoAttributeNamingStrategy = "Value1!",
-                HasAttributeNamingStrategy = "Value2!"
-            };
+            PropertyAttributeNamingStrategyTestClass c =
+                new PropertyAttributeNamingStrategyTestClass
+                {
+                    HasNoAttributeNamingStrategy = "Value1!",
+                    HasAttributeNamingStrategy = "Value2!"
+                };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
@@ -296,11 +298,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonObjectAttribute_NamingStrategyType()
         {
-            ContainerAttributeNamingStrategyTestClass c = new ContainerAttributeNamingStrategyTestClass
-            {
-                Prop1 = "Value1!",
-                Prop2 = "Value2!"
-            };
+            ContainerAttributeNamingStrategyTestClass c =
+                new ContainerAttributeNamingStrategyTestClass
+                {
+                    Prop1 = "Value1!",
+                    Prop2 = "Value2!"
+                };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
@@ -324,11 +327,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void JsonDictionaryAttribute_NamingStrategyType()
         {
-            DictionaryAttributeNamingStrategyTestClass c = new DictionaryAttributeNamingStrategyTestClass
-            {
-                ["Key1"] = "Value1!",
-                ["Key2"] = "Value2!"
-            };
+            DictionaryAttributeNamingStrategyTestClass c =
+                new DictionaryAttributeNamingStrategyTestClass
+                {
+                    ["Key1"] = "Value1!",
+                    ["Key2"] = "Value2!"
+                };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 

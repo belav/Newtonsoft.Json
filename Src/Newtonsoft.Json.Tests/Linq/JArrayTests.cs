@@ -446,13 +446,12 @@ Parameter name: index",
                             new JProperty("text", itemZeroText),
                             new JProperty("value", "0")
                         ),
-
-                            from r in t
-                            orderby r.ListItemValue
-                            select new JObject(
-                                new JProperty("text", r.ListItemText),
-                                new JProperty("value", r.ListItemValue.ToString())
-                            )
+                        from r in t
+                        orderby r.ListItemValue
+                        select new JObject(
+                            new JProperty("text", r.ListItemText),
+                            new JProperty("value", r.ListItemValue.ToString())
+                        )
                     )
                 )
             );

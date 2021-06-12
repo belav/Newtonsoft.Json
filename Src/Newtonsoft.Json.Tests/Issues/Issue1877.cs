@@ -50,7 +50,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var s = JsonConvert.SerializeObject(
                 f2,
-                new JsonSerializerSettings { Converters =  { new VersionConverter() } }
+                new JsonSerializerSettings { Converters = { new VersionConverter() } }
             );
             Assert.AreEqual(@"{""Version"":""4.0""}", s);
 
@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 new JsonSerializerSettings
                 {
                     ObjectCreationHandling = ObjectCreationHandling.Replace,
-                    Converters =  { new VersionConverter() }
+                    Converters = { new VersionConverter() }
                 }
             );
 

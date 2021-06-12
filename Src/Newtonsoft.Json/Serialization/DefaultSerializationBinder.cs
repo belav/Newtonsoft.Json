@@ -38,11 +38,12 @@ namespace Newtonsoft.Json.Serialization
     public class DefaultSerializationBinder
         :
 #pragma warning disable 618
-            SerializationBinder,
+          SerializationBinder,
 #pragma warning restore 618
-            ISerializationBinder
+          ISerializationBinder
     {
-        internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
+        internal static readonly DefaultSerializationBinder Instance =
+            new DefaultSerializationBinder();
 
         private readonly ThreadSafeStore<StructMultiKey<string?, string>, Type> _typeCache;
 
@@ -183,10 +184,10 @@ namespace Newtonsoft.Json.Serialization
                                         i - typeArgStartIndex
                                     );
 
-                                    StructMultiKey<string?,
-                                        string> typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(
-                                        typeArgAssemblyQualifiedName
-                                    );
+                                    StructMultiKey<string?, string> typeNameKey =
+                                        ReflectionUtils.SplitFullyQualifiedTypeName(
+                                            typeArgAssemblyQualifiedName
+                                        );
                                     genericTypeArguments.Add(GetTypeByName(typeNameKey));
                                 }
                                 break;

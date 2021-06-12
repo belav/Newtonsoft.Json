@@ -343,7 +343,7 @@ Newtonsoft.Json Error: 0 : Error!
                 new JsonSerializerSettings
                 {
                     TraceWriter = traceWriter,
-                    Converters =  { new JavaScriptDateTimeConverter() }
+                    Converters = { new JavaScriptDateTimeConverter() }
                 }
             );
 
@@ -404,7 +404,7 @@ Newtonsoft.Json Error: 0 : Error!
                 new JsonSerializerSettings
                 {
                     TraceWriter = traceWriter,
-                    Converters =  { new JavaScriptDateTimeConverter() },
+                    Converters = { new JavaScriptDateTimeConverter() },
                     MetadataPropertyHandling = MetadataPropertyHandling.Default
                 }
             );
@@ -883,7 +883,8 @@ Newtonsoft.Json Error: 0 : Error!
         [Test]
         public void SerializeDictionarysWithPreserveObjectReferences()
         {
-            PreserveReferencesHandlingTests.CircularDictionary circularDictionary = new PreserveReferencesHandlingTests.CircularDictionary();
+            PreserveReferencesHandlingTests.CircularDictionary circularDictionary =
+                new PreserveReferencesHandlingTests.CircularDictionary();
             circularDictionary.Add(
                 "other",
                 new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } }
@@ -1080,7 +1081,7 @@ Newtonsoft.Json Error: 0 : Error!
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    Converters =  { new JavaScriptDateTimeConverter() },
+                    Converters = { new JavaScriptDateTimeConverter() },
                     TraceWriter = traceWriter
                 }
             );
@@ -1117,7 +1118,7 @@ Newtonsoft.Json Error: 0 : Error!
                 json,
                 new JsonSerializerSettings
                 {
-                    Converters =  { new JavaScriptDateTimeConverter() },
+                    Converters = { new JavaScriptDateTimeConverter() },
                     TraceWriter = traceWriter
                 }
             );
@@ -1348,10 +1349,11 @@ Newtonsoft.Json Error: 0 : Error!
 
             string json = @"{name:""1""}";
 
-            PublicParameterizedConstructorWithPropertyNameConflictWithAttribute c = JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflictWithAttribute>(
-                json,
-                new JsonSerializerSettings { TraceWriter = traceWriter }
-            );
+            PublicParameterizedConstructorWithPropertyNameConflictWithAttribute c =
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflictWithAttribute>(
+                    json,
+                    new JsonSerializerSettings { TraceWriter = traceWriter }
+                );
 
             Assert.IsNotNull(c);
             Assert.AreEqual(1, c.Name);

@@ -49,12 +49,12 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public abstract partial class JContainer
         : JToken,
-            IList<JToken>
+          IList<JToken>
 #if HAVE_COMPONENT_MODEL
         , ITypedList, IBindingList
 #endif
-            ,
-            IList
+          ,
+          IList
 #if HAVE_INOTIFY_COLLECTION_CHANGED
         , INotifyCollectionChanged
 #endif
@@ -107,8 +107,7 @@ namespace Newtonsoft.Json.Linq
 
         internal JContainer() { }
 
-        internal JContainer(JContainer other)
-            : this()
+        internal JContainer(JContainer other) : this()
         {
             ValidationUtils.ArgumentNotNull(other, nameof(other));
 
@@ -276,8 +275,7 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// A <see cref="IEnumerable{T}"/> containing the child values of this <see cref="JToken"/>, in document order.
         /// </returns>
-        public override IEnumerable<T?> Values<T>()
-            where T : default
+        public override IEnumerable<T?> Values<T>() where T : default
         {
             return ChildrenTokens.Convert<JToken, T>();
         }
@@ -1216,8 +1214,10 @@ namespace Newtonsoft.Json.Linq
                         }
                     }
 #else
-                    Dictionary<JToken,
-                        bool> items = new Dictionary<JToken, bool>(EqualityComparer);
+                    Dictionary<
+                        JToken,
+                        bool
+                    > items = new Dictionary<JToken, bool>(EqualityComparer);
                     foreach (JToken t in target)
                     {
                         items[t] = true;

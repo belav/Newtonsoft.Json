@@ -42,13 +42,12 @@ namespace Newtonsoft.Json.Utilities
         public BidirectionalDictionary(
             IEqualityComparer<TFirst> firstEqualityComparer,
             IEqualityComparer<TSecond> secondEqualityComparer
-        )
-            : this(
-                firstEqualityComparer,
-                secondEqualityComparer,
-                "Duplicate item already exists for '{0}'.",
-                "Duplicate item already exists for '{0}'."
-            ) { }
+        ) : this(
+            firstEqualityComparer,
+            secondEqualityComparer,
+            "Duplicate item already exists for '{0}'.",
+            "Duplicate item already exists for '{0}'."
+        ) { }
 
         public BidirectionalDictionary(
             IEqualityComparer<TFirst> firstEqualityComparer,

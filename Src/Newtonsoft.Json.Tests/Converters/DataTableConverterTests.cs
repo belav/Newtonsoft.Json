@@ -603,8 +603,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 serializedpair
             );
 
-            var pair2 =
-                (KeyValuePair<DataTable, int>)JsonConvert.DeserializeObject(
+            var pair2 = (KeyValuePair<DataTable, int>)JsonConvert.DeserializeObject(
                     serializedpair,
                     typeof(KeyValuePair<DataTable, int>)
                 );

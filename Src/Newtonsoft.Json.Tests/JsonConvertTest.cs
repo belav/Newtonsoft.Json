@@ -335,7 +335,7 @@ namespace Newtonsoft.Json.Tests
                 JsonConvert.DefaultSettings = () => new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters =  { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
+                    Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
                 };
 
                 string json = JsonConvert.SerializeObject(
@@ -425,7 +425,7 @@ namespace Newtonsoft.Json.Tests
 
                 StringWriter sw = new StringWriter();
                 JsonSerializer serializer = JsonSerializer.CreateDefault(
-                    new JsonSerializerSettings { Converters =  { new IntConverter() } }
+                    new JsonSerializerSettings { Converters = { new IntConverter() } }
                 );
                 serializer.Serialize(sw, l);
 
@@ -1552,9 +1552,7 @@ namespace Newtonsoft.Json.Tests
             DateTime dt = DateTime.MaxValue;
 
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
             };
@@ -2085,8 +2083,7 @@ namespace Newtonsoft.Json.Tests
             int _precision;
             MidpointRounding _rounding;
 
-            public RoundingJsonConverter()
-                : this(2) { }
+            public RoundingJsonConverter() : this(2) { }
 
             public RoundingJsonConverter(int precision)
                 : this(precision, MidpointRounding.AwayFromZero) { }
@@ -2158,9 +2155,10 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void ShouldNotPopulateReadOnlyEnumerableObjectWithDefaultConstructor()
         {
-            object actual = JsonConvert.DeserializeObject<HasReadOnlyEnumerableObjectAndDefaultConstructor>(
-                "{\"foo\":{}}"
-            );
+            object actual =
+                JsonConvert.DeserializeObject<HasReadOnlyEnumerableObjectAndDefaultConstructor>(
+                    "{\"foo\":{}}"
+                );
             Assert.IsNotNull(actual);
         }
 
@@ -2282,9 +2280,8 @@ namespace Newtonsoft.Json.Tests
   ""exp"": 1483228800,
   ""active"": true
 }";
-            ItemsRequiredObjectWithIgnoredProperty value = JsonConvert.DeserializeObject<ItemsRequiredObjectWithIgnoredProperty>(
-                json
-            );
+            ItemsRequiredObjectWithIgnoredProperty value =
+                JsonConvert.DeserializeObject<ItemsRequiredObjectWithIgnoredProperty>(json);
             Assert.IsNotNull(value);
             Assert.AreEqual(value.Expiration, new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc));
             Assert.AreEqual(value.Active, true);

@@ -296,13 +296,14 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            CircularDictionary circularDictionary = JsonConvert.DeserializeObject<CircularDictionary>(
-                json,
-                new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.All
-                }
-            );
+            CircularDictionary circularDictionary =
+                JsonConvert.DeserializeObject<CircularDictionary>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.All
+                    }
+                );
 
             Assert.AreEqual(2, circularDictionary.Count);
             Assert.AreEqual(1, circularDictionary["other"].Count);
@@ -755,9 +756,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(
-                json
-            );
+            List<EmployeeReference> employees =
+                JsonConvert.DeserializeObject<List<EmployeeReference>>(json);
 
             Assert.AreEqual(2, employees.Count);
             Assert.AreEqual("Mike Manager", employees[0].Name);
@@ -959,9 +959,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees = JsonConvert.DeserializeObject<List<EmployeeReference>>(
-                json
-            );
+            List<EmployeeReference> employees =
+                JsonConvert.DeserializeObject<List<EmployeeReference>>(json);
             Assert.AreEqual(4, employees.Count);
 
             Assert.AreEqual("e1", employees[0].Name);
@@ -979,8 +978,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             EmployeeReference e1 = new EmployeeReference { Name = "e1" };
             EmployeeReference e2 = new EmployeeReference { Name = "e2" };
 
-            Dictionary<string, EmployeeReference> employees = new Dictionary<string,
-                EmployeeReference>
+            Dictionary<string, EmployeeReference> employees = new Dictionary<
+                string,
+                EmployeeReference
+            >
             {
                 { "One", e1 },
                 { "Two", e2 },
@@ -1036,9 +1037,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 }";
 
-            Dictionary<string,
-                EmployeeReference> employees = JsonConvert.DeserializeObject<Dictionary<string,
-                    EmployeeReference>>(json);
+            Dictionary<string, EmployeeReference> employees =
+                JsonConvert.DeserializeObject<Dictionary<string, EmployeeReference>>(json);
             Assert.AreEqual(4, employees.Count);
 
             EmployeeReference e1 = employees["One"];
@@ -1159,8 +1159,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             #region constructors
             public User() { }
 
-            public User(string login, Type secretType)
-                : this()
+            public User(string login, Type secretType) : this()
             {
                 Login = login;
                 SecretType = secretType;
@@ -1333,7 +1332,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             var c1 = new TestComponentSimple();
 
-            ReferencedDictionary<TestComponentSimple> l = new ReferencedDictionary<TestComponentSimple>();
+            ReferencedDictionary<TestComponentSimple> l =
+                new ReferencedDictionary<TestComponentSimple>();
             l.Add("First", c1);
             l.Add("Second", new TestComponentSimple());
             l.Add("Third", c1);
@@ -1356,9 +1356,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            ReferencedDictionary<TestComponentSimple> d = JsonConvert.DeserializeObject<ReferencedDictionary<TestComponentSimple>>(
-                json
-            );
+            ReferencedDictionary<TestComponentSimple> d =
+                JsonConvert.DeserializeObject<ReferencedDictionary<TestComponentSimple>>(json);
             Assert.AreEqual(3, d.Count);
             Assert.IsTrue(ReferenceEquals(d["First"], d["Third"]));
         }
@@ -1437,9 +1436,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            PropertyItemIsReferenceObject o2 = JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(
-                json
-            );
+            PropertyItemIsReferenceObject o2 =
+                JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(json);
 
             TestComponentSimple c2 = o2.Data.Prop1;
             TestComponentSimple c3 = o2.Data.Prop2;

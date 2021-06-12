@@ -97,59 +97,60 @@ namespace Newtonsoft.Json.Utilities
         private const string ImmutableHashSetGenericTypeName =
             "System.Collections.Immutable.ImmutableHashSet`1";
 
-        private static readonly IList<ImmutableCollectionTypeInfo> ArrayContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
-        {
-            new ImmutableCollectionTypeInfo(
-                ImmutableListGenericInterfaceTypeName,
-                ImmutableListGenericTypeName,
-                ImmutableListTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableListGenericTypeName,
-                ImmutableListGenericTypeName,
-                ImmutableListTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableQueueGenericInterfaceTypeName,
-                ImmutableQueueGenericTypeName,
-                ImmutableQueueTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableQueueGenericTypeName,
-                ImmutableQueueGenericTypeName,
-                ImmutableQueueTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableStackGenericInterfaceTypeName,
-                ImmutableStackGenericTypeName,
-                ImmutableStackTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableStackGenericTypeName,
-                ImmutableStackGenericTypeName,
-                ImmutableStackTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableSetGenericInterfaceTypeName,
-                ImmutableHashSetGenericTypeName,
-                ImmutableHashSetTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableSortedSetGenericTypeName,
-                ImmutableSortedSetGenericTypeName,
-                ImmutableSortedSetTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableHashSetGenericTypeName,
-                ImmutableHashSetGenericTypeName,
-                ImmutableHashSetTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableArrayGenericTypeName,
-                ImmutableArrayGenericTypeName,
-                ImmutableArrayTypeName
-            )
-        };
+        private static readonly IList<ImmutableCollectionTypeInfo> ArrayContractImmutableCollectionDefinitions =
+            new List<ImmutableCollectionTypeInfo>
+            {
+                new ImmutableCollectionTypeInfo(
+                    ImmutableListGenericInterfaceTypeName,
+                    ImmutableListGenericTypeName,
+                    ImmutableListTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableListGenericTypeName,
+                    ImmutableListGenericTypeName,
+                    ImmutableListTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableQueueGenericInterfaceTypeName,
+                    ImmutableQueueGenericTypeName,
+                    ImmutableQueueTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableQueueGenericTypeName,
+                    ImmutableQueueGenericTypeName,
+                    ImmutableQueueTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableStackGenericInterfaceTypeName,
+                    ImmutableStackGenericTypeName,
+                    ImmutableStackTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableStackGenericTypeName,
+                    ImmutableStackGenericTypeName,
+                    ImmutableStackTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableSetGenericInterfaceTypeName,
+                    ImmutableHashSetGenericTypeName,
+                    ImmutableHashSetTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableSortedSetGenericTypeName,
+                    ImmutableSortedSetGenericTypeName,
+                    ImmutableSortedSetTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableHashSetGenericTypeName,
+                    ImmutableHashSetGenericTypeName,
+                    ImmutableHashSetTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableArrayGenericTypeName,
+                    ImmutableArrayGenericTypeName,
+                    ImmutableArrayTypeName
+                )
+            };
 
         private const string ImmutableDictionaryGenericInterfaceTypeName =
             "System.Collections.Immutable.IImmutableDictionary`2";
@@ -164,24 +165,25 @@ namespace Newtonsoft.Json.Utilities
         private const string ImmutableSortedDictionaryGenericTypeName =
             "System.Collections.Immutable.ImmutableSortedDictionary`2";
 
-        private static readonly IList<ImmutableCollectionTypeInfo> DictionaryContractImmutableCollectionDefinitions = new List<ImmutableCollectionTypeInfo>
-        {
-            new ImmutableCollectionTypeInfo(
-                ImmutableDictionaryGenericInterfaceTypeName,
-                ImmutableDictionaryGenericTypeName,
-                ImmutableDictionaryTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableSortedDictionaryGenericTypeName,
-                ImmutableSortedDictionaryGenericTypeName,
-                ImmutableSortedDictionaryTypeName
-            ),
-            new ImmutableCollectionTypeInfo(
-                ImmutableDictionaryGenericTypeName,
-                ImmutableDictionaryGenericTypeName,
-                ImmutableDictionaryTypeName
-            )
-        };
+        private static readonly IList<ImmutableCollectionTypeInfo> DictionaryContractImmutableCollectionDefinitions =
+            new List<ImmutableCollectionTypeInfo>
+            {
+                new ImmutableCollectionTypeInfo(
+                    ImmutableDictionaryGenericInterfaceTypeName,
+                    ImmutableDictionaryGenericTypeName,
+                    ImmutableDictionaryTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableSortedDictionaryGenericTypeName,
+                    ImmutableSortedDictionaryGenericTypeName,
+                    ImmutableSortedDictionaryTypeName
+                ),
+                new ImmutableCollectionTypeInfo(
+                    ImmutableDictionaryGenericTypeName,
+                    ImmutableDictionaryGenericTypeName,
+                    ImmutableDictionaryTypeName
+                )
+            };
 
         internal static bool TryBuildImmutableForArrayContract(
             Type underlyingType,
@@ -196,9 +198,10 @@ namespace Newtonsoft.Json.Utilities
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
                 string name = underlyingTypeDefinition.FullName;
 
-                ImmutableCollectionTypeInfo definition = ArrayContractImmutableCollectionDefinitions.FirstOrDefault(
-                    d => d.ContractTypeName == name
-                );
+                ImmutableCollectionTypeInfo definition =
+                    ArrayContractImmutableCollectionDefinitions.FirstOrDefault(
+                        d => d.ContractTypeName == name
+                    );
                 if (definition != null)
                 {
                     Type createdTypeDefinition = underlyingTypeDefinition.Assembly()
@@ -244,9 +247,10 @@ namespace Newtonsoft.Json.Utilities
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
                 string name = underlyingTypeDefinition.FullName;
 
-                ImmutableCollectionTypeInfo definition = DictionaryContractImmutableCollectionDefinitions.FirstOrDefault(
-                    d => d.ContractTypeName == name
-                );
+                ImmutableCollectionTypeInfo definition =
+                    DictionaryContractImmutableCollectionDefinitions.FirstOrDefault(
+                        d => d.ContractTypeName == name
+                    );
                 if (definition != null)
                 {
                     Type createdTypeDefinition = underlyingTypeDefinition.Assembly()

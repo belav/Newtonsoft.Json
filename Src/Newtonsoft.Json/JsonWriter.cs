@@ -61,107 +61,106 @@ namespace Newtonsoft.Json
         // array that gives a new state based on the current state an the token being written
         private static readonly State[][] StateArray;
 
-        internal static readonly State[][] StateArrayTemplate =
-            new[] {
-                //                                      Start                    PropertyName            ObjectStart         Object            ArrayStart              Array                   ConstructorStart        Constructor             Closed       Error
-                //
-                /* None                        */new[] {
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error
-                },
-                /* StartObject                 */new[] {
-                    State.ObjectStart,
-                    State.ObjectStart,
-                    State.Error,
-                    State.Error,
-                    State.ObjectStart,
-                    State.ObjectStart,
-                    State.ObjectStart,
-                    State.ObjectStart,
-                    State.Error,
-                    State.Error
-                },
-                /* StartArray                  */new[] {
-                    State.ArrayStart,
-                    State.ArrayStart,
-                    State.Error,
-                    State.Error,
-                    State.ArrayStart,
-                    State.ArrayStart,
-                    State.ArrayStart,
-                    State.ArrayStart,
-                    State.Error,
-                    State.Error
-                },
-                /* StartConstructor            */new[] {
-                    State.ConstructorStart,
-                    State.ConstructorStart,
-                    State.Error,
-                    State.Error,
-                    State.ConstructorStart,
-                    State.ConstructorStart,
-                    State.ConstructorStart,
-                    State.ConstructorStart,
-                    State.Error,
-                    State.Error
-                },
-                /* Property                    */new[] {
-                    State.Property,
-                    State.Error,
-                    State.Property,
-                    State.Property,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error,
-                    State.Error
-                },
-                /* Comment                     */new[] {
-                    State.Start,
-                    State.Property,
-                    State.ObjectStart,
-                    State.Object,
-                    State.ArrayStart,
-                    State.Array,
-                    State.Constructor,
-                    State.Constructor,
-                    State.Error,
-                    State.Error
-                },
-                /* Raw                         */new[] {
-                    State.Start,
-                    State.Property,
-                    State.ObjectStart,
-                    State.Object,
-                    State.ArrayStart,
-                    State.Array,
-                    State.Constructor,
-                    State.Constructor,
-                    State.Error,
-                    State.Error
-                },
-                /* Value (this will be copied) */new[] {
-                    State.Start,
-                    State.Object,
-                    State.Error,
-                    State.Error,
-                    State.Array,
-                    State.Array,
-                    State.Constructor,
-                    State.Constructor,
-                    State.Error,
-                    State.Error
-                }
-            };
+        internal static readonly State[][] StateArrayTemplate = new[] {
+            //                                      Start                    PropertyName            ObjectStart         Object            ArrayStart              Array                   ConstructorStart        Constructor             Closed       Error
+            //
+            /* None                        */new[] {
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error
+            },
+            /* StartObject                 */new[] {
+                State.ObjectStart,
+                State.ObjectStart,
+                State.Error,
+                State.Error,
+                State.ObjectStart,
+                State.ObjectStart,
+                State.ObjectStart,
+                State.ObjectStart,
+                State.Error,
+                State.Error
+            },
+            /* StartArray                  */new[] {
+                State.ArrayStart,
+                State.ArrayStart,
+                State.Error,
+                State.Error,
+                State.ArrayStart,
+                State.ArrayStart,
+                State.ArrayStart,
+                State.ArrayStart,
+                State.Error,
+                State.Error
+            },
+            /* StartConstructor            */new[] {
+                State.ConstructorStart,
+                State.ConstructorStart,
+                State.Error,
+                State.Error,
+                State.ConstructorStart,
+                State.ConstructorStart,
+                State.ConstructorStart,
+                State.ConstructorStart,
+                State.Error,
+                State.Error
+            },
+            /* Property                    */new[] {
+                State.Property,
+                State.Error,
+                State.Property,
+                State.Property,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error,
+                State.Error
+            },
+            /* Comment                     */new[] {
+                State.Start,
+                State.Property,
+                State.ObjectStart,
+                State.Object,
+                State.ArrayStart,
+                State.Array,
+                State.Constructor,
+                State.Constructor,
+                State.Error,
+                State.Error
+            },
+            /* Raw                         */new[] {
+                State.Start,
+                State.Property,
+                State.ObjectStart,
+                State.Object,
+                State.ArrayStart,
+                State.Array,
+                State.Constructor,
+                State.Constructor,
+                State.Error,
+                State.Error
+            },
+            /* Value (this will be copied) */new[] {
+                State.Start,
+                State.Object,
+                State.Error,
+                State.Error,
+                State.Array,
+                State.Array,
+                State.Constructor,
+                State.Constructor,
+                State.Error,
+                State.Error
+            }
+        };
 
         internal static State[][] BuildStateArray()
         {
@@ -303,8 +302,7 @@ namespace Newtonsoft.Json
                     return string.Empty;
                 }
 
-                bool insideContainer =
-                    (_currentState != State.ArrayStart
+                bool insideContainer = (_currentState != State.ArrayStart
                     && _currentState != State.ConstructorStart
                     && _currentState != State.ObjectStart);
 

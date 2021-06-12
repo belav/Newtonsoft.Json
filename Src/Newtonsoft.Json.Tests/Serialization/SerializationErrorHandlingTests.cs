@@ -83,8 +83,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             List<Exception> errors = new List<Exception>();
 
-            JObject a2 =
-                (JObject)JsonConvert.DeserializeObject(
+            JObject a2 = (JObject)JsonConvert.DeserializeObject(
                     @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
                     new JsonSerializerSettings
                     {
@@ -164,12 +163,11 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            var possibleMsgs =
-                new[] {
-                    "[1] - Error message for member 1 = An item with the same key has already been added.",
-                    "[1] - Error message for member 1 = An element with the same key already exists in the dictionary.", // mono
-                    "[1] - Error message for member 1 = An item with the same key has already been added. Key: Jim" // netcore
-                };
+            var possibleMsgs = new[] {
+                "[1] - Error message for member 1 = An item with the same key has already been added.",
+                "[1] - Error message for member 1 = An element with the same key already exists in the dictionary.", // mono
+                "[1] - Error message for member 1 = An item with the same key has already been added. Key: Jim" // netcore
+            };
             VersionKeyedCollection c = JsonConvert.DeserializeObject<VersionKeyedCollection>(json);
             Assert.AreEqual(1, c.Count);
             Assert.AreEqual(1, c.Messages.Count);
@@ -225,42 +223,41 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializingErrorIn3DArray()
         {
-            ListErrorObject[,,] c =
-                new ListErrorObject[,,]
+            ListErrorObject[,,] c = new ListErrorObject[,,]
+            {
                 {
                     {
+                        new ListErrorObject
                         {
-                            new ListErrorObject
-                            {
-                                Member = "Value1",
-                                ThrowError = "Handle this!",
-                                Member2 = "Member1"
-                            },
-                            new ListErrorObject { Member = "Value2", Member2 = "Member2" },
-                            new ListErrorObject
-                            {
-                                Member = "Value3",
-                                ThrowError = "Handle that!",
-                                Member2 = "Member3"
-                            }
+                            Member = "Value1",
+                            ThrowError = "Handle this!",
+                            Member2 = "Member1"
                         },
+                        new ListErrorObject { Member = "Value2", Member2 = "Member2" },
+                        new ListErrorObject
                         {
-                            new ListErrorObject
-                            {
-                                Member = "Value1",
-                                ThrowError = "Handle this!",
-                                Member2 = "Member1"
-                            },
-                            new ListErrorObject { Member = "Value2", Member2 = "Member2" },
-                            new ListErrorObject
-                            {
-                                Member = "Value3",
-                                ThrowError = "Handle that!",
-                                Member2 = "Member3"
-                            }
+                            Member = "Value3",
+                            ThrowError = "Handle that!",
+                            Member2 = "Member3"
+                        }
+                    },
+                    {
+                        new ListErrorObject
+                        {
+                            Member = "Value1",
+                            ThrowError = "Handle this!",
+                            Member2 = "Member1"
+                        },
+                        new ListErrorObject { Member = "Value2", Member2 = "Member2" },
+                        new ListErrorObject
+                        {
+                            Member = "Value3",
+                            ThrowError = "Handle that!",
+                            Member2 = "Member3"
                         }
                     }
-                };
+                }
+            };
 
             string json = JsonConvert.SerializeObject(
                 c,
@@ -361,8 +358,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializingErrorInDateTimeCollection()
         {
-            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
-                @"[
+            DateTimeErrorObjectCollection c =
+                JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
+                    @"[
   ""2009-09-09T00:00:00Z"",
   ""kjhkjhkjhkjh"",
   [
@@ -372,8 +370,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   null,
   ""2000-12-01T00:00:00Z""
 ]",
-                new IsoDateTimeConverter()
-            );
+                    new IsoDateTimeConverter()
+                );
 
             Assert.AreEqual(3, c.Count);
             Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
@@ -400,7 +398,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         );
                         args.ErrorContext.Handled = true;
                     },
-                    Converters =  { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() }
                 }
             );
             var c = serializer.Deserialize<List<DateTime>>(
@@ -434,18 +432,17 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(new DateTime(2000, 12, 1, 0, 0, 0, DateTimeKind.Utc), c[2]);
 
             Assert.AreEqual(3, errors.Count);
-            var possibleErrs =
-                new[] {
+            var possibleErrs = new[] {
 #if !(NET20 || NET35)
-                    "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
-                    "[1] - 1 - String was not recognized as a valid DateTime.",
-                    "[1] - 1 - The string 'I am not a date and will error!' was not recognized as a valid DateTime. There is an unknown word starting at index '0'."
+                "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
+                "[1] - 1 - String was not recognized as a valid DateTime.",
+                "[1] - 1 - The string 'I am not a date and will error!' was not recognized as a valid DateTime. There is an unknown word starting at index '0'."
 #else
     // handle typo fix in later versions of .NET
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is a unknown word starting at index 0."
 #endif
-                };
+            };
 
             Assert.IsTrue(
                 possibleErrs.Any(m => m == errors[0]),
@@ -471,8 +468,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             bool eventErrorHandlerCalled = false;
 
-            DateTimeErrorObjectCollection c = JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
-                @"[
+            DateTimeErrorObjectCollection c =
+                JsonConvert.DeserializeObject<DateTimeErrorObjectCollection>(
+                    @"[
   ""2009-09-09T00:00:00Z"",
   ""kjhkjhkjhkjh"",
   [
@@ -482,12 +480,12 @@ namespace Newtonsoft.Json.Tests.Serialization
   null,
   ""2000-12-01T00:00:00Z""
 ]",
-                new JsonSerializerSettings
-                {
-                    Error = (s, a) => eventErrorHandlerCalled = true,
-                    Converters =  { new IsoDateTimeConverter() }
-                }
-            );
+                    new JsonSerializerSettings
+                    {
+                        Error = (s, a) => eventErrorHandlerCalled = true,
+                        Converters = { new IsoDateTimeConverter() }
+                    }
+                );
 
             Assert.AreEqual(3, c.Count);
             Assert.AreEqual(new DateTime(2009, 9, 9, 0, 0, 0, DateTimeKind.Utc), c[0]);
@@ -824,9 +822,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             const int maxDepth = 256;
             using (
-                var jsonTextReader = new JsonTextReader(
-                    new StringReader(input)
-                )
+                var jsonTextReader = new JsonTextReader(new StringReader(input))
                 {
                     MaxDepth = maxDepth
                 }
@@ -875,9 +871,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             const int maxDepth = 256;
             using (
-                var jsonTextReader = new JsonTextReader(
-                    new StringReader(input)
-                )
+                var jsonTextReader = new JsonTextReader(new StringReader(input))
                 {
                     MaxDepth = maxDepth
                 }
@@ -895,10 +889,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                     e.ErrorContext.Handled = true;
                 };
 
-                IDictionary<string,
-                    LogEvent> logEvents = jsonSerializer.Deserialize<IDictionary<string, LogEvent>>(
-                    jsonTextReader
-                );
+                IDictionary<string, LogEvent> logEvents = jsonSerializer.Deserialize<IDictionary<
+                        string,
+                        LogEvent
+                    >>(jsonTextReader);
 
                 Assert.IsNotNull(logEvents);
                 Assert.AreEqual(2, logEvents.Count);

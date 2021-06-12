@@ -116,8 +116,7 @@ namespace Newtonsoft.Json.Tests.Linq
         public void MergeMismatchedTypesRoot()
         {
             var left = (JObject)JToken.FromObject(new { Property1 = new { SubProperty1 = 1 } });
-            var right =
-                (JArray)JToken.FromObject(
+            var right = (JArray)JToken.FromObject(
                     new object[] { new { Property1 = 1 }, new { Property1 = 1 } }
                 );
 
@@ -139,8 +138,7 @@ namespace Newtonsoft.Json.Tests.Linq
         public void MergeMultipleObjects()
         {
             var left = (JObject)JToken.FromObject(new { Property1 = new { SubProperty1 = 1 } });
-            var right =
-                (JObject)JToken.FromObject(
+            var right = (JObject)JToken.FromObject(
                     new { Property1 = new { SubProperty2 = 2 }, Property2 = 2 }
                 );
 
@@ -163,8 +161,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeArray()
         {
-            var left =
-                (JObject)JToken.FromObject(
+            var left = (JObject)JToken.FromObject(
                     new
                     {
                         Array1 = new object[]
@@ -188,8 +185,7 @@ namespace Newtonsoft.Json.Tests.Linq
                         }
                     }
                 );
-            var right =
-                (JObject)JToken.FromObject(
+            var right = (JObject)JToken.FromObject(
                     new
                     {
                         Array1 = new object[]
@@ -250,16 +246,18 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConcatArray()
         {
-            var left =
-                (JObject)JToken.FromObject(
+            var left = (JObject)JToken.FromObject(
                     new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
                 );
-            var right =
-                (JObject)JToken.FromObject(
+            var right = (JObject)JToken.FromObject(
                     new
                     {
                         Array1 = new object[]
-                        { new { Property1 = 1 }, new { Property2 = 2 }, new { Property3 = 3 } }
+                        {
+                            new { Property1 = 1 },
+                            new { Property2 = 2 },
+                            new { Property3 = 3 }
+                        }
                     }
                 );
 
@@ -297,8 +295,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeMismatchingTypesInArray()
         {
-            var left =
-                (JArray)JToken.FromObject(
+            var left = (JArray)JToken.FromObject(
                     new object[]
                     {
                         true,
@@ -310,8 +307,7 @@ namespace Newtonsoft.Json.Tests.Linq
                         new object[] { 1 }
                     }
                 );
-            var right =
-                (JArray)JToken.FromObject(
+            var right = (JArray)JToken.FromObject(
                     new object[]
                     {
                         1,
@@ -358,8 +354,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeMismatchingTypesInObject()
         {
-            var left =
-                (JObject)JToken.FromObject(
+            var left = (JObject)JToken.FromObject(
                     new
                     {
                         Property1 = new object[] { 1 },
@@ -368,8 +363,7 @@ namespace Newtonsoft.Json.Tests.Linq
                         Property4 = true
                     }
                 );
-            var right =
-                (JObject)JToken.FromObject(
+            var right = (JObject)JToken.FromObject(
                     new
                     {
                         Property1 = new { Nested = true },
@@ -447,16 +441,18 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void UnionArrays()
         {
-            var left =
-                (JObject)JToken.FromObject(
+            var left = (JObject)JToken.FromObject(
                     new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
                 );
-            var right =
-                (JObject)JToken.FromObject(
+            var right = (JObject)JToken.FromObject(
                     new
                     {
                         Array1 = new object[]
-                        { new { Property1 = 1 }, new { Property2 = 2 }, new { Property3 = 3 } }
+                        {
+                            new { Property1 = 1 },
+                            new { Property2 = 2 },
+                            new { Property3 = 3 }
+                        }
                     }
                 );
 

@@ -79,16 +79,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                         title = "Star Wars",
                         link = "http://www.starwars.com",
                         description = "Star Wars blog.",
-                        item =
-                            from p in posts
-                            orderby p.Title
-                            select new
-                            {
-                                title = p.Title,
-                                description = p.Description,
-                                link = p.Link,
-                                category = p.Categories
-                            }
+                        item = from p in posts
+                        orderby p.Title
+                        select new
+                        {
+                            title = p.Title,
+                            description = p.Description,
+                            link = p.Link,
+                            category = p.Categories
+                        }
                     }
                 }
             );

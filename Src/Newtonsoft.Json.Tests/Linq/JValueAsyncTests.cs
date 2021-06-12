@@ -46,11 +46,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task FloatParseHandlingAsync()
         {
-            JValue v =
-                (JValue)await JToken.ReadFromAsync(
-                    new JsonTextReader(
-                        new StringReader("9.9")
-                    )
+            JValue v = (JValue)await JToken.ReadFromAsync(
+                    new JsonTextReader(new StringReader("9.9"))
                     {
                         FloatParseHandling = FloatParseHandling.Decimal
                     }

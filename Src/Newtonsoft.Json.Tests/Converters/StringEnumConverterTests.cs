@@ -317,9 +317,8 @@ Parameter name: namingStrategyType",
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    NotAllowIntegerValuesEnum e = JsonConvert.DeserializeObject<NotAllowIntegerValuesEnum>(
-                        @"""9"""
-                    );
+                    NotAllowIntegerValuesEnum e =
+                        JsonConvert.DeserializeObject<NotAllowIntegerValuesEnum>(@"""9""");
                 }
             );
         }
@@ -415,10 +414,11 @@ Parameter name: namingStrategyType",
                 json
             );
 
-            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                json,
-                new StringEnumConverter()
-            );
+            EnumContainer<NamedEnumWithComma> c2 =
+                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
+                    json,
+                    new StringEnumConverter()
+                );
             Assert.AreEqual(NamedEnumWithComma.Third, c2.Enum);
         }
 
@@ -442,20 +442,22 @@ Parameter name: namingStrategyType",
                 json
             );
 
-            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                json,
-                new StringEnumConverter()
-            );
+            EnumContainer<NamedEnumWithComma> c2 =
+                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
+                    json,
+                    new StringEnumConverter()
+                );
             Assert.AreEqual(NamedEnumWithComma.JustComma, c2.Enum);
         }
 
         [Test]
         public void NamedEnumCommaCaseInsensitiveTest()
         {
-            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                @"{""Enum"":"",THIRD""}",
-                new StringEnumConverter()
-            );
+            EnumContainer<NamedEnumWithComma> c2 =
+                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
+                    @"{""Enum"":"",THIRD""}",
+                    new StringEnumConverter()
+                );
             Assert.AreEqual(NamedEnumWithComma.Third, c2.Enum);
         }
 
@@ -623,10 +625,11 @@ Parameter name: namingStrategyType",
   ""Value2"": ""NegativeFour,Four""
 }";
 
-            NegativeFlagsEnumClass negativeEnumClass = JsonConvert.DeserializeObject<NegativeFlagsEnumClass>(
-                json,
-                new StringEnumConverter()
-            );
+            NegativeFlagsEnumClass negativeEnumClass =
+                JsonConvert.DeserializeObject<NegativeFlagsEnumClass>(
+                    json,
+                    new StringEnumConverter()
+                );
 
             Assert.AreEqual(
                 NegativeFlagsEnum.NegativeFour | NegativeFlagsEnum.NegativeTwo,
@@ -775,10 +778,11 @@ Parameter name: namingStrategyType",
 }";
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            EnumContainer<FlagsTestEnum> c = JsonConvert.DeserializeObject<EnumContainer<FlagsTestEnum>>(
-                json,
-                new StringEnumConverter { CamelCaseText = true }
-            );
+            EnumContainer<FlagsTestEnum> c =
+                JsonConvert.DeserializeObject<EnumContainer<FlagsTestEnum>>(
+                    json,
+                    new StringEnumConverter { CamelCaseText = true }
+                );
 #pragma warning restore CS0618 // Type or member is obsolete
             Assert.AreEqual(FlagsTestEnum.First | FlagsTestEnum.Second, c.Enum);
         }
@@ -981,8 +985,7 @@ Parameter name: namingStrategyType",
     <Value2>foo_bar</Value2>
 </DuplicateEnumNameTestClass>";
 
-                    var o =
-                        (DuplicateEnumNameTestClass)s.ReadObject(
+                    var o = (DuplicateEnumNameTestClass)s.ReadObject(
                             new MemoryStream(Encoding.UTF8.GetBytes(xml))
                         );
 
@@ -1268,10 +1271,11 @@ Parameter name: namingStrategyType",
         [Test]
         public void DeserializeEnumMemberWithDifferentCases()
         {
-            EnumMemberWithDifferentCases e = JsonConvert.DeserializeObject<EnumMemberWithDifferentCases>(
-                @"""M""",
-                new StringEnumConverter()
-            );
+            EnumMemberWithDifferentCases e =
+                JsonConvert.DeserializeObject<EnumMemberWithDifferentCases>(
+                    @"""M""",
+                    new StringEnumConverter()
+                );
 
             Assert.AreEqual(EnumMemberWithDifferentCases.Month, e);
 

@@ -70,9 +70,8 @@ namespace Newtonsoft.Json.Tests.Issues
                                 ""Inners"": [""hi"",""bye""]
                             }
                         ]";
-            ImmutableArray<OuterProperty> result = JsonConvert.DeserializeObject<ImmutableArray<OuterProperty>>(
-                json
-            );
+            ImmutableArray<OuterProperty> result =
+                JsonConvert.DeserializeObject<ImmutableArray<OuterProperty>>(json);
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(2, result[0].Inners.Value.Length);

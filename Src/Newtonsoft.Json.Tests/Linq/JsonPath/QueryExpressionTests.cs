@@ -45,9 +45,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void AndExpressionTest()
         {
-            CompositeExpression compositeExpression = new CompositeExpression(
-                QueryOperator.And
-            )
+            CompositeExpression compositeExpression = new CompositeExpression(QueryOperator.And)
             {
                 Expressions = new List<QueryExpression>
                 {
@@ -85,9 +83,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void OrExpressionTest()
         {
-            CompositeExpression compositeExpression = new CompositeExpression(
-                QueryOperator.Or
-            )
+            CompositeExpression compositeExpression = new CompositeExpression(QueryOperator.Or)
             {
                 Expressions = new List<QueryExpression>
                 {

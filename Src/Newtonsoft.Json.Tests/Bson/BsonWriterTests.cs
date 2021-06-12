@@ -369,9 +369,8 @@ namespace Newtonsoft.Json.Tests.Bson
   ]
 }";
 
-            GoogleMapGeocoderStructure jsonGoogleMapGeocoder = JsonConvert.DeserializeObject<GoogleMapGeocoderStructure>(
-                json
-            );
+            GoogleMapGeocoderStructure jsonGoogleMapGeocoder =
+                JsonConvert.DeserializeObject<GoogleMapGeocoderStructure>(json);
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);
@@ -755,9 +754,7 @@ namespace Newtonsoft.Json.Tests.Bson
         public void DateTimeZoneHandling()
         {
             MemoryStream ms = new MemoryStream();
-            JsonWriter writer = new BsonWriter(
-                ms
-            )
+            JsonWriter writer = new BsonWriter(ms)
             {
                 DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
             };

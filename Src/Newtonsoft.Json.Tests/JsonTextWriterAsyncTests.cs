@@ -51,8 +51,7 @@ namespace Newtonsoft.Json.Tests
     {
         public class LazyStringWriter : StringWriter
         {
-            public LazyStringWriter(IFormatProvider formatProvider)
-                : base(formatProvider) { }
+            public LazyStringWriter(IFormatProvider formatProvider) : base(formatProvider) { }
 
             public override Task FlushAsync()
             {
@@ -328,9 +327,7 @@ namespace Newtonsoft.Json.Tests
                 var streamWriter = new StreamWriter(ms, new UTF8Encoding(false)) { NewLine = "\n" }
             )
             using (
-                var jsonWriter = new JsonTextWriter(
-                    streamWriter
-                )
+                var jsonWriter = new JsonTextWriter(streamWriter)
                 {
                     CloseOutput = true,
                     Indentation = 2,
@@ -1414,9 +1411,7 @@ _____'propertyName': NaN,
         public async Task DateTimeZoneHandlingAsync()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc
             };
@@ -1432,9 +1427,7 @@ _____'propertyName': NaN,
         public async Task HtmlStringEscapeHandlingAsync()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 StringEscapeHandling = StringEscapeHandling.EscapeHtml
             };
@@ -1459,9 +1452,7 @@ _____'propertyName': NaN,
         public async Task NonAsciiStringEscapeHandlingAsync()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 StringEscapeHandling = StringEscapeHandling.EscapeNonAscii
             };
@@ -1767,9 +1758,7 @@ _____'propertyName': NaN,
         public async Task CustomJsonTextWriterTestsAsync()
         {
             StringWriter sw = new StringWriter();
-            CustomJsonTextWriter writer = new CustomAsyncJsonTextWriter(
-                sw
-            )
+            CustomJsonTextWriter writer = new CustomAsyncJsonTextWriter(sw)
             {
                 Formatting = Formatting.Indented
             };
@@ -1947,8 +1936,7 @@ null//comment
 
         private class NoOverridesDerivedJsonTextWriter : JsonTextWriter
         {
-            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter)
-                : base(textWriter) { }
+            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
         }
 
         private class MinimalOverridesDerivedJsonWriter : JsonWriter
@@ -2162,8 +2150,7 @@ null//comment
 
     public class CustomAsyncJsonTextWriter : CustomJsonTextWriter
     {
-        public CustomAsyncJsonTextWriter(TextWriter textWriter)
-            : base(textWriter) { }
+        public CustomAsyncJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
 
         public override Task WritePropertyNameAsync(
             string name,

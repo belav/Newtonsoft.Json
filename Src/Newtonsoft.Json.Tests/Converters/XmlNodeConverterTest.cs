@@ -115,8 +115,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 converter.DeserializeRootElementName = deserializeRootElementName;
             }
 
-            XmlNode node =
-                (XmlNode)converter.ReadJson(
+            XmlNode node = (XmlNode)converter.ReadJson(
                     reader,
                     typeof(XmlDocument),
                     null,
@@ -128,8 +127,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             reader = new JsonTextReader(new StringReader(json));
             reader.Read();
-            XDocument d =
-                (XDocument)converter.ReadJson(
+            XDocument d = (XDocument)converter.ReadJson(
                     reader,
                     typeof(XDocument),
                     null,
@@ -749,7 +747,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 json,
                 new JsonSerializerSettings
                 {
-                    Converters =  { new XmlNodeConverter() },
+                    Converters = { new XmlNodeConverter() },
                     FloatParseHandling = FloatParseHandling.Decimal
                 }
             );
@@ -789,7 +787,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 json,
                 new JsonSerializerSettings
                 {
-                    Converters =  { new XmlNodeConverter() },
+                    Converters = { new XmlNodeConverter() },
                     DateParseHandling = DateParseHandling.DateTimeOffset
                 }
             );
@@ -999,11 +997,10 @@ namespace Newtonsoft.Json.Tests.Converters
             document.LoadXml(xml);
 
             // XmlAttribute
-            XmlAttribute attribute =
-                document.DocumentElement.ChildNodes[0].Attributes[
-                    "IsDataSet",
-                    "urn:schemas-microsoft-com:xml-msdata"
-                ];
+            XmlAttribute attribute = document.DocumentElement.ChildNodes[0].Attributes[
+                "IsDataSet",
+                "urn:schemas-microsoft-com:xml-msdata"
+            ];
             attribute.Value = "true";
 
             jsonText = JsonConvert.SerializeXmlNode(attribute);
@@ -1243,8 +1240,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 get { return Encoding.UTF8; }
             }
 
-            public Utf8StringWriter(StringBuilder sb)
-                : base(sb) { }
+            public Utf8StringWriter(StringBuilder sb) : base(sb) { }
         }
 
 #if !NET20
@@ -1552,8 +1548,9 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    XmlDocument newDoc =
-                        (XmlDocument)JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}");
+                    XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(
+                            @"{Prop1:1,Prop2:2}"
+                        );
                 },
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15."
             );
@@ -2151,7 +2148,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataProperties()
         {
-            PreserveReferencesHandlingTests.CircularDictionary circularDictionary = new PreserveReferencesHandlingTests.CircularDictionary();
+            PreserveReferencesHandlingTests.CircularDictionary circularDictionary =
+                new PreserveReferencesHandlingTests.CircularDictionary();
             circularDictionary.Add(
                 "other",
                 new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } }
@@ -2722,7 +2720,7 @@ namespace Newtonsoft.Json.Tests.Converters
             var serializer = JsonSerializer.Create(
                 new JsonSerializerSettings
                 {
-                    Converters =  { new XmlNodeConverter() { DeserializeRootElementName = "root" } }
+                    Converters = { new XmlNodeConverter() { DeserializeRootElementName = "root" } }
                 }
             );
             using (var reader = obj.CreateReader())
@@ -2767,7 +2765,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 // in russian culture value 12.27 will be written as 12,27
 
                 var serializer = JsonSerializer.Create(
-                    new JsonSerializerSettings { Converters =  { new XmlNodeConverter() }, }
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() }, }
                 );
 
                 var json = new StringBuilder(
@@ -2782,8 +2780,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 using (var stringReader = new StringReader(json.ToString()))
                 using (var jsonReader = new JsonTextReader(stringReader))
                 {
-                    var document =
-                        (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
+                    var document = (XmlDocument)serializer.Deserialize(
+                            jsonReader,
+                            typeof(XmlDocument)
+                        );
                     StringAssert.AreEqual(
                         @"<metrics value=""12.27""><type>CPULOAD</type></metrics>",
                         document.OuterXml
@@ -2838,7 +2838,7 @@ namespace Newtonsoft.Json.Tests.Converters
             using (var jsonReader = o.CreateReader())
             {
                 var serializer = JsonSerializer.Create(
-                    new JsonSerializerSettings { Converters =  { new XmlNodeConverter() }, }
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() }, }
                 );
 
                 var document = (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
@@ -2872,7 +2872,7 @@ namespace Newtonsoft.Json.Tests.Converters
             using (var jsonReader = o.CreateReader())
             {
                 var serializer = JsonSerializer.Create(
-                    new JsonSerializerSettings { Converters =  { new XmlNodeConverter() }, }
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() }, }
                 );
 
                 var document = (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
@@ -2886,7 +2886,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
         private static void JsonBodyToSoapXml(Stream json, Stream xml)
         {
-            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            Newtonsoft.Json.JsonSerializerSettings settings =
+                new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
             Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
                 settings
@@ -3791,10 +3792,7 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeDateInElementText()
         {
             Model model = new Model();
-            model.Document = new XElement(
-                "Value",
-                new XAttribute("foo", "bar")
-            )
+            model.Document = new XElement("Value", new XAttribute("foo", "bar"))
             {
                 Value = "2001-01-01T11:11:11"
             };

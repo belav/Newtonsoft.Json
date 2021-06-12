@@ -55,11 +55,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectEvents()
         {
-            SerializationEventTestObject[] objs =
-                new[] {
-                    new SerializationEventTestObject(),
-                    new DerivedSerializationEventTestObject()
-                };
+            SerializationEventTestObject[] objs = new[] {
+                new SerializationEventTestObject(),
+                new DerivedSerializationEventTestObject()
+            };
 
             foreach (SerializationEventTestObject current in objs)
             {
@@ -135,11 +134,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectWithConstructorEvents()
         {
-            SerializationEventTestObjectWithConstructor obj = new SerializationEventTestObjectWithConstructor(
-                11,
-                "Hello World!",
-                null
-            );
+            SerializationEventTestObjectWithConstructor obj =
+                new SerializationEventTestObjectWithConstructor(11, "Hello World!", null);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("Hello World!", obj.Member2);
@@ -314,7 +310,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializationEventContextTestObjectSubClassTest()
         {
-            SerializationEventContextSubClassTestObject obj = new SerializationEventContextSubClassTestObject();
+            SerializationEventContextSubClassTestObject obj =
+                new SerializationEventContextSubClassTestObject();
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             StringAssert.AreEqual(

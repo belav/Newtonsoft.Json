@@ -144,7 +144,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 new JsonSerializerSettings
                 {
                     TraceWriter = traceWriter,
-                    Converters =  { new JavaScriptDateTimeConverter() }
+                    Converters = { new JavaScriptDateTimeConverter() }
                 }
             );
 

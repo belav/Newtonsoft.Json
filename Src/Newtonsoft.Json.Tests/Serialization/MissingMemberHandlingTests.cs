@@ -135,8 +135,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             string response =
                 @"{""PreProperty"":1,""DateProperty"":new Date(1225962698973),""PostProperty"":2}";
 
-            MyClass myClass =
-                (MyClass)serializer.Deserialize(new StringReader(response), typeof(MyClass));
+            MyClass myClass = (MyClass)serializer.Deserialize(
+                    new StringReader(response),
+                    typeof(MyClass)
+                );
 
             Assert.AreEqual(1, myClass.PreProperty);
             Assert.AreEqual(2, myClass.PostProperty);

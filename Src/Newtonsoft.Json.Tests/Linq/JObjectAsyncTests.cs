@@ -197,8 +197,7 @@ namespace Newtonsoft.Json.Tests.Linq
       }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            JObject o =
-                (JObject)await JToken.ReadFromAsync(
+            JObject o = (JObject)await JToken.ReadFromAsync(
                     reader,
                     new JsonLoadSettings
                     {

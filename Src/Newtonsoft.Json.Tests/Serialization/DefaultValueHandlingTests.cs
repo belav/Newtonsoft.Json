@@ -63,9 +63,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DefaultValueWithConstructorAndRenameTest()
         {
-            DefaultValueWithConstructorAndRename myObject = JsonConvert.DeserializeObject<DefaultValueWithConstructorAndRename>(
-                "{}"
-            );
+            DefaultValueWithConstructorAndRename myObject =
+                JsonConvert.DeserializeObject<DefaultValueWithConstructorAndRename>("{}");
             Assert.AreEqual(DefaultValueWithConstructorAndRename.DefaultText, myObject.Text);
         }
 
@@ -90,9 +89,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DefaultValueWithConstructorTest()
         {
-            DefaultValueWithConstructor myObject = JsonConvert.DeserializeObject<DefaultValueWithConstructor>(
-                "{}"
-            );
+            DefaultValueWithConstructor myObject =
+                JsonConvert.DeserializeObject<DefaultValueWithConstructor>("{}");
             Assert.AreEqual(DefaultValueWithConstructor.DefaultText, myObject.Text);
         }
 
@@ -266,10 +264,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = "{}";
 
-            DefaultValueAttributeTestClass c = JsonConvert.DeserializeObject<DefaultValueAttributeTestClass>(
-                json,
-                new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate }
-            );
+            DefaultValueAttributeTestClass c =
+                JsonConvert.DeserializeObject<DefaultValueAttributeTestClass>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        DefaultValueHandling = DefaultValueHandling.Populate
+                    }
+                );
             Assert.AreEqual("TestProperty1Value", c.TestProperty1);
 
             c = JsonConvert.DeserializeObject<DefaultValueAttributeTestClass>(

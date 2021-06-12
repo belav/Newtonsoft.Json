@@ -60,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void IgnoreObjectReferenceLoop()
         {
-            ReferenceLoopHandlingObjectContainerAttribute o = new ReferenceLoopHandlingObjectContainerAttribute();
+            ReferenceLoopHandlingObjectContainerAttribute o =
+                new ReferenceLoopHandlingObjectContainerAttribute();
             o.Value = o;
 
             string json = JsonConvert.SerializeObject(
@@ -77,7 +78,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void IgnoreObjectReferenceLoopWithPropertyOverride()
         {
-            ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride o = new ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride();
+            ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride o =
+                new ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride();
             o.Value = o;
 
             string json = JsonConvert.SerializeObject(

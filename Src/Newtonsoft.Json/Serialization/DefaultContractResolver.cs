@@ -229,10 +229,11 @@ namespace Newtonsoft.Json.Serialization
             ignoreSerializableAttribute = true;
 #endif
 
-            MemberSerialization memberSerialization = JsonTypeReflector.GetObjectMemberSerialization(
-                objectType,
-                ignoreSerializableAttribute
-            );
+            MemberSerialization memberSerialization =
+                JsonTypeReflector.GetObjectMemberSerialization(
+                    objectType,
+                    ignoreSerializableAttribute
+                );
 
             // Exclude index properties
             // Do not filter ByRef types here because accessing FieldType/PropertyType can trigger additonal assembly loads
@@ -381,9 +382,10 @@ namespace Newtonsoft.Json.Serialization
 
             Func<string, string>? extensionDataNameResolver = null;
 
-            JsonObjectAttribute? attribute = JsonTypeReflector.GetCachedAttribute<JsonObjectAttribute>(
-                contract.NonNullableUnderlyingType
-            );
+            JsonObjectAttribute? attribute =
+                JsonTypeReflector.GetCachedAttribute<JsonObjectAttribute>(
+                    contract.NonNullableUnderlyingType
+                );
             if (attribute != null)
             {
                 contract.ItemRequired = attribute._itemRequired;
@@ -392,8 +394,9 @@ namespace Newtonsoft.Json.Serialization
 
                 if (attribute.NamingStrategyType != null)
                 {
-                    NamingStrategy namingStrategy =
-                        JsonTypeReflector.GetContainerNamingStrategy(attribute)!;
+                    NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
+                            attribute
+                        )!;
                     extensionDataNameResolver = s => namingStrategy.GetDictionaryKey(s);
                 }
             }
@@ -586,9 +589,8 @@ namespace Newtonsoft.Json.Serialization
             JsonObjectContract contract,
             MemberInfo member
         ) {
-            JsonExtensionDataAttribute? extensionDataAttribute = ReflectionUtils.GetAttribute<JsonExtensionDataAttribute>(
-                member
-            );
+            JsonExtensionDataAttribute? extensionDataAttribute =
+                ReflectionUtils.GetAttribute<JsonExtensionDataAttribute>(member);
             if (extensionDataAttribute == null)
             {
                 return;
@@ -617,24 +619,20 @@ namespace Newtonsoft.Json.Serialization
                 createdType = t;
             }
 
-            Func<object,
-                object?> getExtensionDataDictionary = JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(
-                member
-            );
+            Func<object, object?> getExtensionDataDictionary =
+                JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(member);
 
             if (extensionDataAttribute.ReadData)
             {
-                Action<object,
-                    object?>? setExtensionDataDictionary = (ReflectionUtils.CanSetMemberValue(
-                    member,
-                    true,
-                    false
-                )) ? JsonTypeReflector.ReflectionDelegateFactory.CreateSet<object>(member) : null;
-                Func<object> createExtensionDataDictionary = JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                    createdType
-                );
-                MethodInfo? setMethod =
-                    t.GetProperty(
+                Action<object, object?>? setExtensionDataDictionary =
+                    (ReflectionUtils.CanSetMemberValue(member, true, false))
+                    ? JsonTypeReflector.ReflectionDelegateFactory.CreateSet<object>(member)
+                    : null;
+                Func<object> createExtensionDataDictionary =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
+                        createdType
+                    );
+                MethodInfo? setMethod = t.GetProperty(
                         "Item",
                         BindingFlags.Public | BindingFlags.Instance,
                         null,
@@ -656,10 +654,10 @@ namespace Newtonsoft.Json.Serialization
                     )?.GetSetMethod();
                 }
 
-                MethodCall<object,
-                    object?> setExtensionDataDictionaryValue = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
-                    setMethod!
-                );
+                MethodCall<object, object?> setExtensionDataDictionaryValue =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
+                        setMethod!
+                    );
 
                 ExtensionDataSetter extensionDataSetter = (o, key, value) =>
                 {
@@ -693,23 +691,23 @@ namespace Newtonsoft.Json.Serialization
                     valueType
                 );
                 ConstructorInfo constructors = enumerableWrapper.GetConstructors().First();
-                ObjectConstructor<object> createEnumerableWrapper = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                    constructors
-                );
+                ObjectConstructor<object> createEnumerableWrapper =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
+                        constructors
+                    );
 
-                ExtensionDataGetter extensionDataGetter =
-                    o =>
+                ExtensionDataGetter extensionDataGetter = o =>
+                {
+                    object? dictionary = getExtensionDataDictionary(o);
+                    if (dictionary == null)
                     {
-                        object? dictionary = getExtensionDataDictionary(o);
-                        if (dictionary == null)
-                        {
-                            return null;
-                        }
+                        return null;
+                    }
 
-                        return (IEnumerable<KeyValuePair<object, object>>)createEnumerableWrapper(
-                            dictionary
-                        );
-                    };
+                    return (IEnumerable<KeyValuePair<object, object>>)createEnumerableWrapper(
+                        dictionary
+                    );
+                };
 
                 contract.ExtensionDataGetter = extensionDataGetter;
             }
@@ -987,9 +985,10 @@ namespace Newtonsoft.Json.Serialization
 #endif
         private void InitializeContract(JsonContract contract)
         {
-            JsonContainerAttribute? containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                contract.NonNullableUnderlyingType
-            );
+            JsonContainerAttribute? containerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
+                    contract.NonNullableUnderlyingType
+                );
             if (containerAttribute != null)
             {
                 contract.IsReference = containerAttribute._isReference;
@@ -1261,13 +1260,13 @@ namespace Newtonsoft.Json.Serialization
             JsonDictionaryContract contract = new JsonDictionaryContract(objectType);
             InitializeContract(contract);
 
-            JsonContainerAttribute? containerAttribute = JsonTypeReflector.GetAttribute<JsonContainerAttribute>(
-                objectType
-            );
+            JsonContainerAttribute? containerAttribute =
+                JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy =
-                    JsonTypeReflector.GetContainerNamingStrategy(containerAttribute)!;
+                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
+                        containerAttribute
+                    )!;
                 contract.DictionaryKeyResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -1479,9 +1478,8 @@ namespace Newtonsoft.Json.Serialization
             }
 
             t = ReflectionUtils.EnsureNotNullableType(t);
-            JsonContainerAttribute? containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                t
-            );
+            JsonContainerAttribute? containerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(t);
 
             if (containerAttribute is JsonObjectAttribute)
             {
@@ -1849,12 +1847,10 @@ namespace Newtonsoft.Json.Serialization
             }
 #endif
 
-            JsonPropertyAttribute? propertyAttribute = JsonTypeReflector.GetAttribute<JsonPropertyAttribute>(
-                attributeProvider
-            );
-            JsonRequiredAttribute? requiredAttribute = JsonTypeReflector.GetAttribute<JsonRequiredAttribute>(
-                attributeProvider
-            );
+            JsonPropertyAttribute? propertyAttribute =
+                JsonTypeReflector.GetAttribute<JsonPropertyAttribute>(attributeProvider);
+            JsonRequiredAttribute? requiredAttribute =
+                JsonTypeReflector.GetAttribute<JsonRequiredAttribute>(attributeProvider);
 
             string mappedName;
             bool hasSpecifiedName;
@@ -1876,9 +1872,8 @@ namespace Newtonsoft.Json.Serialization
                 hasSpecifiedName = false;
             }
 
-            JsonContainerAttribute? containerAttribute = JsonTypeReflector.GetAttribute<JsonContainerAttribute>(
-                declaringType
-            );
+            JsonContainerAttribute? containerAttribute =
+                JsonTypeReflector.GetAttribute<JsonContainerAttribute>(declaringType);
 
             NamingStrategy? namingStrategy;
             if (propertyAttribute?.NamingStrategyType != null)
@@ -1995,9 +1990,8 @@ namespace Newtonsoft.Json.Serialization
             // the class type might have a converter but the property converter takes precedence
             property.Converter = JsonTypeReflector.GetJsonConverter(attributeProvider);
 
-            DefaultValueAttribute? defaultValueAttribute = JsonTypeReflector.GetAttribute<DefaultValueAttribute>(
-                attributeProvider
-            );
+            DefaultValueAttribute? defaultValueAttribute =
+                JsonTypeReflector.GetAttribute<DefaultValueAttribute>(attributeProvider);
             if (defaultValueAttribute != null)
             {
                 property.DefaultValue = defaultValueAttribute.Value;
@@ -2032,10 +2026,10 @@ namespace Newtonsoft.Json.Serialization
                 return null;
             }
 
-            MethodCall<object,
-                object?> shouldSerializeCall = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
-                shouldSerializeMethod
-            );
+            MethodCall<object, object?> shouldSerializeCall =
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
+                    shouldSerializeMethod
+                );
 
             return o => (bool)shouldSerializeCall(o)!;
         }

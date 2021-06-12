@@ -67,8 +67,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             string yarsRevenge = (string)o.SelectToken("['Yar\\'s Revenge']");
             // Atari
 
-            string governmentIntelligence =
-                (string)o.SelectToken("['Government \"Intelligence\"']");
+            string governmentIntelligence = (string)o.SelectToken(
+                    "['Government \"Intelligence\"']"
+                );
             // Make-Believe
             #endregion
 

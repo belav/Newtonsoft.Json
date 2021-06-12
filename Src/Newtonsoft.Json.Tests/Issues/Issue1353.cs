@@ -47,10 +47,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             string json = JsonConvert.SerializeObject(d1, Formatting.Indented);
 
-            ConcurrentDictionary<string,
-                string> d2 = JsonConvert.DeserializeObject<ConcurrentDictionary<string, string>>(
-                json
-            );
+            ConcurrentDictionary<string, string> d2 =
+                JsonConvert.DeserializeObject<ConcurrentDictionary<string, string>>(json);
 
             Assert.AreEqual(1, d2.Count);
             Assert.AreEqual("value!", d2["key!"]);

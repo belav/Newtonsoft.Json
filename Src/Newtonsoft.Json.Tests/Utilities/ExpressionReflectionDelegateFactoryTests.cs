@@ -53,9 +53,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                    constructor
+                );
 
             object[] args = new object[] { "Value" };
             InTestClass o = (InTestClass)creator(args);
@@ -69,9 +70,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                    constructor
+                );
 
             object[] args = new object[] { "Value", true };
             InTestClass o = (InTestClass)creator(args);
@@ -88,9 +90,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                    constructor
+                );
 
             object[] args = new object[] { "Input" };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -106,9 +109,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                    constructor
+                );
 
             object[] args = new object[] { "Input", null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -124,9 +128,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
                 .Single(c => c.GetParameters().Count() == 3);
 
-            var creator = ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                    constructor
+                );
 
             object[] args = new object[] { "Input", true, null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -139,9 +144,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void DefaultConstructor()
         {
-            Func<object> create = ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
-                typeof(Movie)
-            );
+            Func<object> create =
+                ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                    typeof(Movie)
+                );
 
             Movie m = (Movie)create();
             Assert.IsNotNull(m);
@@ -150,9 +156,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void DefaultConstructor_Struct()
         {
-            Func<object> create = ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
-                typeof(StructTest)
-            );
+            Func<object> create =
+                ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                    typeof(StructTest)
+                );
 
             StructTest m = (StructTest)create();
             Assert.IsNotNull(m);
@@ -164,9 +171,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             ExceptionAssert.Throws<Exception>(
                 () =>
                 {
-                    Func<object> create = ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
-                        typeof(Type)
-                    );
+                    Func<object> create =
+                        ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                            typeof(Type)
+                        );
 
                     create();
                 },
@@ -180,10 +188,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreatePropertySetter()
         {
-            Action<object,
-                object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetProperty(typeof(Movie), "Name")
-            );
+            Action<object, object> setter =
+                ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                    TestReflectionUtils.GetProperty(typeof(Movie), "Name")
+                );
 
             Movie m = new Movie();
 
@@ -195,10 +203,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreatePropertyGetter()
         {
-            Func<object,
-                object> getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetProperty(typeof(Movie), "Name")
-            );
+            Func<object, object> getter =
+                ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
+                    TestReflectionUtils.GetProperty(typeof(Movie), "Name")
+                );
 
             Movie m = new Movie();
             m.Name = "OH HAI!";
@@ -211,10 +219,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateMethodCall()
         {
-            MethodCall<object,
-                object> method = ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                TestReflectionUtils.GetMethod(typeof(Movie), "ToString")
-            );
+            MethodCall<object, object> method =
+                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
+                    TestReflectionUtils.GetMethod(typeof(Movie), "ToString")
+                );
 
             Movie m = new Movie();
             object result = method(m);
@@ -231,10 +239,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateMethodCall_Constructor()
         {
-            MethodCall<object,
-                object> method = ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                typeof(Movie).GetConstructor(new Type[0])
-            );
+            MethodCall<object, object> method =
+                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
+                    typeof(Movie).GetConstructor(new Type[0])
+                );
 
             object result = method(null);
 
@@ -253,10 +261,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             StaticTestClass.StringField = "Field!";
             StaticTestClass.StringProperty = "Property!";
 
-            Func<object,
-                object> getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
-            );
+            Func<object, object> getter =
+                ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
+                    TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
+                );
 
             object v = getter(null);
             Assert.AreEqual(StaticTestClass.StringProperty, v);
@@ -272,10 +280,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void SetStatic()
         {
-            Action<object,
-                object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
-            );
+            Action<object, object> setter =
+                ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                    TestReflectionUtils.GetProperty(typeof(StaticTestClass), "StringProperty")
+                );
 
             setter(null, "New property!");
             Assert.AreEqual("New property!", StaticTestClass.StringProperty);
@@ -301,10 +309,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             FieldsTestClass c = new FieldsTestClass { BoolField = true, StringField = "String!" };
 
-            Func<object,
-                object> getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
-            );
+            Func<object, object> getter =
+                ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
+                    TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
+                );
 
             object value = getter(c);
             Assert.AreEqual("String!", value);
@@ -322,10 +330,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             FieldsTestClass c = new FieldsTestClass();
 
-            Action<object,
-                object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(typeof(FieldsTestClass), "IntReadOnlyField")
-            );
+            Action<object, object> setter =
+                ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                    TestReflectionUtils.GetField(typeof(FieldsTestClass), "IntReadOnlyField")
+                );
 
             setter(c, int.MinValue);
             Assert.AreEqual(int.MinValue, c.IntReadOnlyField);
@@ -336,10 +344,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             FieldsTestClass c = new FieldsTestClass();
 
-            Action<object,
-                object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
-            );
+            Action<object, object> setter =
+                ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                    TestReflectionUtils.GetField(typeof(FieldsTestClass), "StringField")
+                );
 
             setter(c, "String!");
             Assert.AreEqual("String!", c.StringField);
@@ -357,10 +365,10 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             object structTest = new StructTest();
 
-            Action<object,
-                object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                TestReflectionUtils.GetProperty(typeof(StructTest), "StringProperty")
-            );
+            Action<object, object> setter =
+                ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                    TestReflectionUtils.GetProperty(typeof(StructTest), "StringProperty")
+                );
 
             setter(structTest, "Hi1");
             Assert.AreEqual("Hi1", ((StructTest)structTest).StringProperty);
@@ -382,10 +390,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                     Person p = new Person();
                     p.Name = "Hi";
 
-                    Func<object,
-                        object> setter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
-                        TestReflectionUtils.GetProperty(typeof(Movie), "Name")
-                    );
+                    Func<object, object> setter =
+                        ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
+                            TestReflectionUtils.GetProperty(typeof(Movie), "Name")
+                        );
 
                     setter(p);
                 },
@@ -405,10 +413,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                     Person p = new Person();
                     Movie m = new Movie();
 
-                    Action<object,
-                        object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                        TestReflectionUtils.GetProperty(typeof(Movie), "Name")
-                    );
+                    Action<object, object> setter =
+                        ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                            TestReflectionUtils.GetProperty(typeof(Movie), "Name")
+                        );
 
                     setter(m, "Hi");
 
@@ -433,10 +441,10 @@ namespace Newtonsoft.Json.Tests.Utilities
                 {
                     Movie m = new Movie();
 
-                    Action<object,
-                        object> setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
-                        TestReflectionUtils.GetProperty(typeof(Movie), "Name")
-                    );
+                    Action<object, object> setter =
+                        ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                            TestReflectionUtils.GetProperty(typeof(Movie), "Name")
+                        );
 
                     setter(m, new Version("1.1.1.1"));
                 },
@@ -457,10 +465,10 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(castMethodInfo);
 
-            MethodCall<object,
-                object> call = ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                castMethodInfo
-            );
+            MethodCall<object, object> call =
+                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
+                    castMethodInfo
+                );
 
             object result = call(null, "First!");
             Assert.IsNotNull(result);
@@ -472,15 +480,17 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorStruct()
         {
-            Func<object> creator1 = ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
-                typeof(MyStruct)
-            );
+            Func<object> creator1 =
+                ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct1 = (MyStruct)creator1.Invoke();
             Assert.AreEqual(0, myStruct1.IntProperty);
 
-            Func<MyStruct> creator2 = ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(
-                typeof(MyStruct)
-            );
+            Func<MyStruct> creator2 =
+                ExpressionReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct2 = creator2.Invoke();
             Assert.AreEqual(0, myStruct2.IntProperty);
         }
@@ -510,10 +520,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(methodInfo);
 
-            MethodCall<object,
-                object> call = ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                methodInfo
-            );
+            MethodCall<object, object> call =
+                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(methodInfo);
 
             object result = call(null, new TestStruct(123));
             Assert.IsNotNull(result);

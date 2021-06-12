@@ -523,9 +523,7 @@ namespace Newtonsoft.Json.Tests.Bson
         public async Task DateTimeZoneHandlingAsync()
         {
             MemoryStream ms = new MemoryStream();
-            JsonWriter writer = new BsonWriter(
-                ms
-            )
+            JsonWriter writer = new BsonWriter(ms)
             {
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc
             };

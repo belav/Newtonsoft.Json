@@ -68,17 +68,17 @@ namespace Newtonsoft.Json.Schema
         public const string OptionValuePropertyName = "value";
         public const string OptionLabelPropertyName = "label";
 
-        public static readonly IDictionary<string,
-            JsonSchemaType> JsonSchemaTypeMapping = new Dictionary<string, JsonSchemaType>
-        {
-            { "string", JsonSchemaType.String },
-            { "object", JsonSchemaType.Object },
-            { "integer", JsonSchemaType.Integer },
-            { "number", JsonSchemaType.Float },
-            { "null", JsonSchemaType.Null },
-            { "boolean", JsonSchemaType.Boolean },
-            { "array", JsonSchemaType.Array },
-            { "any", JsonSchemaType.Any }
-        };
+        public static readonly IDictionary<string, JsonSchemaType> JsonSchemaTypeMapping =
+            new Dictionary<string, JsonSchemaType>
+            {
+                { "string", JsonSchemaType.String },
+                { "object", JsonSchemaType.Object },
+                { "integer", JsonSchemaType.Integer },
+                { "number", JsonSchemaType.Float },
+                { "null", JsonSchemaType.Null },
+                { "boolean", JsonSchemaType.Boolean },
+                { "array", JsonSchemaType.Array },
+                { "any", JsonSchemaType.Any }
+            };
     }
 }

@@ -147,18 +147,17 @@ namespace Newtonsoft.Json.Tests.Documentation
                         new JProperty(
                             "item",
                             new JArray(
-
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty(
-                                            "category",
-                                            new JArray( from c in p.Categories select new JValue(c))
-                                        )
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
                                     )
+                                )
                             )
                         )
                     )
@@ -210,16 +209,15 @@ namespace Newtonsoft.Json.Tests.Documentation
                         title = "James Newton-King",
                         link = "http://james.newtonking.com",
                         description = "James Newton-King's blog.",
-                        item =
-                            from p in posts
-                            orderby p.Title
-                            select new
-                            {
-                                title = p.Title,
-                                description = p.Description,
-                                link = p.Link,
-                                category = p.Categories
-                            }
+                        item = from p in posts
+                        orderby p.Title
+                        select new
+                        {
+                            title = p.Title,
+                            description = p.Description,
+                            link = p.Link,
+                            category = p.Categories
+                        }
                     }
                 }
             );

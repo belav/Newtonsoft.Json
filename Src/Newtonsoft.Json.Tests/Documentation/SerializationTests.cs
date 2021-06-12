@@ -253,7 +253,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     },
-                    Converters =  { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() }
                 }
             );
 
@@ -694,8 +694,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region SerializingCollectionsDeserializingDictionaries
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string,
-                    string>>(json);
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<
+                    string,
+                    string
+                >>(json);
 
             Console.WriteLine(values.Count);
             // 2
@@ -1114,14 +1116,13 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializeMultidimensionalArrayExample()
         {
-            string[,] famousCouples =
-                new string[,]
-                {
-                    { "Adam", "Eve" },
-                    { "Bonnie", "Clyde" },
-                    { "Donald", "Daisy" },
-                    { "Han", "Leia" }
-                };
+            string[,] famousCouples = new string[,]
+            {
+                { "Adam", "Eve" },
+                { "Bonnie", "Clyde" },
+                { "Donald", "Daisy" },
+                { "Han", "Leia" }
+            };
 
             string json = JsonConvert.SerializeObject(famousCouples, Formatting.Indented);
             // [

@@ -63,7 +63,6 @@ namespace Newtonsoft.Json
         /// Initializes a new instance of the <see cref="JsonArrayAttribute"/> class with the specified container Id.
         /// </summary>
         /// <param name="id">The container Id.</param>
-        public JsonArrayAttribute(string id)
-            : base(id) { }
+        public JsonArrayAttribute(string id) : base(id) { }
     }
 }

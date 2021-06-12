@@ -1369,8 +1369,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource?> source,
             TSource? seed,
             Func<TSource?, TSource?, bool> lesser
-        )
-            where TSource : struct {
+        ) where TSource : struct {
             CheckNotNull(source, "source");
             MiscellaneousUtils.Assert(lesser != null);
 
@@ -1808,10 +1807,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
             var lookup = inner.ToLookup(innerKeySelector, comparer);
 
-            return
-                from o in outer
-                from i in lookup[outerKeySelector(o)]
-                select resultSelector(o, i);
+            return from o in outer
+            from i in lookup[outerKeySelector(o)]
+            select resultSelector(o, i);
         }
 
         /// <summary>
@@ -1862,8 +1860,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         }
 
         [DebuggerStepThrough]
-        private static void CheckNotNull<T>(T value, string name)
-            where T : class
+        private static void CheckNotNull<T>(T value, string name) where T : class
         {
             if (value == null) throw new ArgumentNullException(name);
         }
@@ -2916,8 +2913,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<T, K> keySelector,
             IComparer<K> comparer,
             bool descending
-        )
-            : this(source, null, keySelector, comparer, descending) { }
+        ) : this(source, null, keySelector, comparer, descending) { }
 
         private OrderedEnumerable(
             IEnumerable<T> source,
@@ -3033,8 +3029,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public TFirst First { get; }
         public TSecond Second { get; }
 
-        public Tuple(TFirst first, TSecond second)
-            : this()
+        public Tuple(TFirst first, TSecond second) : this()
         {
             First = first;
             Second = second;

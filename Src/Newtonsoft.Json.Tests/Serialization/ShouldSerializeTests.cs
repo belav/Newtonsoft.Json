@@ -177,9 +177,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            ShouldSerializeTestClass deserialized = JsonConvert.DeserializeObject<ShouldSerializeTestClass>(
-                json
-            );
+            ShouldSerializeTestClass deserialized =
+                JsonConvert.DeserializeObject<ShouldSerializeTestClass>(json);
             Assert.AreEqual("James", deserialized.Name);
             Assert.AreEqual(27, deserialized.Age);
         }
@@ -430,14 +429,15 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':true,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
-                json,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = ShouldDeserializeContractResolver.Instance,
-                    TraceWriter = traceWriter
-                }
-            );
+            ShouldDeserializeTestClass c =
+                JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = ShouldDeserializeContractResolver.Instance,
+                        TraceWriter = traceWriter
+                    }
+                );
 
             Assert.AreEqual(null, c.ExtensionData);
             Assert.AreEqual(true, c.HasName);
@@ -460,14 +460,15 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':false,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
-                json,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = ShouldDeserializeContractResolver.Instance,
-                    TraceWriter = traceWriter
-                }
-            );
+            ShouldDeserializeTestClass c =
+                JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = ShouldDeserializeContractResolver.Instance,
+                        TraceWriter = traceWriter
+                    }
+                );
 
             Assert.AreEqual(1, c.ExtensionData.Count);
             Assert.AreEqual("Name!", (string)c.ExtensionData["Name"]);
@@ -670,7 +671,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
     public class ShouldDeserializeContractResolver : DefaultContractResolver
     {
-        public static new readonly ShouldDeserializeContractResolver Instance = new ShouldDeserializeContractResolver();
+        public static new readonly ShouldDeserializeContractResolver Instance =
+            new ShouldDeserializeContractResolver();
 
         protected override JsonProperty CreateProperty(
             MemberInfo member,
