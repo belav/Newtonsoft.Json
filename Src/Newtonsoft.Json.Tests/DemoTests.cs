@@ -82,7 +82,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters =  { new HtmlColorConverter() }
+                    Converters = { new HtmlColorConverter() }
                 }
             );
             // "#FF0000"
@@ -92,7 +92,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters =  { new HtmlColorConverter() }
+                    Converters = { new HtmlColorConverter() }
                 }
             );
             Assert.AreEqual(255, r2.Red);
@@ -236,7 +236,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters =  { new JavaScriptDateTimeConverter() }
+                    Converters = { new JavaScriptDateTimeConverter() }
                 }
             );
             // {
@@ -266,7 +266,7 @@ namespace Newtonsoft.Json.Tests
 
             var s = JsonConvert.DeserializeObject<Session>(
                 j,
-                new JsonSerializerSettings { Converters =  { new JavaScriptDateTimeConverter() } }
+                new JsonSerializerSettings { Converters = { new JavaScriptDateTimeConverter() } }
             );
             // Name = Serialize All The Things
             // Date = Tuesday, 3 June 2014

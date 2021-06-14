@@ -123,7 +123,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Regex regex = JsonConvert.DeserializeObject<Regex>(
                 json,
-                new JsonSerializerSettings { Converters =  { new RegexConverter() } }
+                new JsonSerializerSettings { Converters = { new RegexConverter() } }
             );
 
             Assert.AreEqual("abc", regex.ToString());
@@ -161,7 +161,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             RegexTestClass c = JsonConvert.DeserializeObject<RegexTestClass>(
                 json,
-                new JsonSerializerSettings { Converters =  { new RegexConverter() } }
+                new JsonSerializerSettings { Converters = { new RegexConverter() } }
             );
 
             Assert.AreEqual("abc", c.Regex.ToString());
@@ -179,7 +179,7 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.DeserializeObject<RegexTestClass>(
                     json,
-                    new JsonSerializerSettings { Converters =  { new RegexConverter() } }
+                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
                 ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 18."
             );
@@ -196,7 +196,7 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.DeserializeObject<RegexTestClass>(
                     json,
-                    new JsonSerializerSettings { Converters =  { new RegexConverter() } }
+                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
                 ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 18."
             );
@@ -213,7 +213,7 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.DeserializeObject<RegexTestClass>(
                     json,
-                    new JsonSerializerSettings { Converters =  { new RegexConverter() } }
+                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
                 ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 16."
             );

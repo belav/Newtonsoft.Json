@@ -50,7 +50,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                         "application/octet-stream"
                     )
                     {
-                        ContentDisposition =  { FileName = info.FileName }
+                        ContentDisposition = { FileName = info.FileName }
                     }
                 : null;
             return attachment;

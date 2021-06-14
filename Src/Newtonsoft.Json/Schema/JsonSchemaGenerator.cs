@@ -177,9 +177,8 @@ namespace Newtonsoft.Json.Schema
 
         private string GetTitle(Type type)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                type
-            );
+            JsonContainerAttribute containerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Title))
             {
@@ -191,9 +190,8 @@ namespace Newtonsoft.Json.Schema
 
         private string GetDescription(Type type)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                type
-            );
+            JsonContainerAttribute containerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Description))
             {
@@ -210,9 +208,8 @@ namespace Newtonsoft.Json.Schema
 
         private string GetTypeId(Type type, bool explicitOnly)
         {
-            JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                type
-            );
+            JsonContainerAttribute containerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
 
             if (!StringUtils.IsNullOrEmpty(containerAttribute?.Id))
             {
@@ -311,11 +308,10 @@ namespace Newtonsoft.Json.Schema
 
                         CurrentSchema.Id = GetTypeId(type, false);
 
-                        JsonArrayAttribute arrayAttribute = JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(
-                            type
-                        );
-                        bool allowNullItem =
-                            (arrayAttribute == null || arrayAttribute.AllowNullItems);
+                        JsonArrayAttribute arrayAttribute =
+                            JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(type);
+                        bool allowNullItem = (arrayAttribute == null
+                            || arrayAttribute.AllowNullItems);
 
                         Type collectionItemType = ReflectionUtils.GetCollectionItemType(type);
                         if (collectionItemType != null)

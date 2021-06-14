@@ -59,8 +59,7 @@ namespace Newtonsoft.Json.Serialization
             Value = 2
         }
 
-        public JsonSerializerInternalReader(JsonSerializer serializer)
-            : base(serializer) { }
+        public JsonSerializerInternalReader(JsonSerializer serializer) : base(serializer) { }
 
         public void Populate(JsonReader reader, object target)
         {
@@ -785,8 +784,7 @@ namespace Newtonsoft.Json.Serialization
 
                         if (createdFromNonDefaultCreator)
                         {
-                            ObjectConstructor<object> creator =
-                                (dictionaryContract.OverrideCreator
+                            ObjectConstructor<object> creator = (dictionaryContract.OverrideCreator
                                 ?? dictionaryContract.ParameterizedCreator)!;
 
                             return creator(dictionary);
@@ -1163,10 +1161,8 @@ namespace Newtonsoft.Json.Serialization
 
             if (resolvedTypeNameHandling != TypeNameHandling.None)
             {
-                StructMultiKey<string?,
-                    string> typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(
-                    qualifiedTypeName
-                );
+                StructMultiKey<string?, string> typeNameKey =
+                    ReflectionUtils.SplitFullyQualifiedTypeName(qualifiedTypeName);
 
                 Type specifiedType;
                 try
@@ -1378,8 +1374,8 @@ namespace Newtonsoft.Json.Serialization
                     }
                     else
                     {
-                        ObjectConstructor<object> creator =
-                            (arrayContract.OverrideCreator ?? arrayContract.ParameterizedCreator)!;
+                        ObjectConstructor<object> creator = (arrayContract.OverrideCreator
+                            ?? arrayContract.ParameterizedCreator)!;
 
                         return creator(list);
                     }
@@ -1666,9 +1662,10 @@ namespace Newtonsoft.Json.Serialization
                 property.PropertyContract = GetContractSafe(property.PropertyType);
             }
 
-            ObjectCreationHandling objectCreationHandling = property.ObjectCreationHandling.GetValueOrDefault(
-                Serializer._objectCreationHandling
-            );
+            ObjectCreationHandling objectCreationHandling =
+                property.ObjectCreationHandling.GetValueOrDefault(
+                    Serializer._objectCreationHandling
+                );
 
             if (
                 (objectCreationHandling != ObjectCreationHandling.Replace)
@@ -2848,8 +2845,7 @@ namespace Newtonsoft.Json.Serialization
             ValidationUtils.ArgumentNotNull(creator, nameof(creator));
 
             // only need to keep a track of properties' presence if they are required or a value should be defaulted if missing
-            bool trackPresence =
-                (contract.HasRequiredOrDefaultValueProperties
+            bool trackPresence = (contract.HasRequiredOrDefaultValueProperties
                 || HasFlag(Serializer._defaultValueHandling, DefaultValueHandling.Populate));
 
             Type objectType = contract.UnderlyingType;
@@ -2893,9 +2889,7 @@ namespace Newtonsoft.Json.Serialization
                         if (propertyContexts.All(p => p.Property != property))
                         {
                             propertyContexts.Add(
-                                new CreatorPropertyContext(
-                                    property.PropertyName!
-                                )
+                                new CreatorPropertyContext(property.PropertyName!)
                                 {
                                     Property = property,
                                     Presence = PropertyPresence.None
@@ -3044,7 +3038,8 @@ namespace Newtonsoft.Json.Serialization
                                     createdObjectCollection.GetType()
                                 );
 
-                                IList createdObjectCollectionWrapper = (propertyArrayContract.ShouldCreateWrapper)
+                                IList createdObjectCollectionWrapper =
+                                    (propertyArrayContract.ShouldCreateWrapper)
                                     ? propertyArrayContract.CreateWrapper(createdObjectCollection)
                                     : (IList)createdObjectCollection;
 
@@ -3075,7 +3070,8 @@ namespace Newtonsoft.Json.Serialization
                             );
                             if (createdObjectDictionary != null)
                             {
-                                IDictionary targetDictionary = (dictionaryContract.ShouldCreateWrapper)
+                                IDictionary targetDictionary =
+                                    (dictionaryContract.ShouldCreateWrapper)
                                     ? dictionaryContract.CreateWrapper(createdObjectDictionary)
                                     : (IDictionary)createdObjectDictionary;
                                 IDictionary newValues = (dictionaryContract.ShouldCreateWrapper)
@@ -3455,8 +3451,8 @@ namespace Newtonsoft.Json.Serialization
             OnDeserializing(reader, contract, newObject);
 
             // only need to keep a track of properties' presence if they are required or a value should be defaulted if missing
-            Dictionary<JsonProperty,
-                PropertyPresence>? propertiesPresence = (contract.HasRequiredOrDefaultValueProperties
+            Dictionary<JsonProperty, PropertyPresence>? propertiesPresence =
+                (contract.HasRequiredOrDefaultValueProperties
             || HasFlag(Serializer._defaultValueHandling, DefaultValueHandling.Populate))
                 ? contract.Properties.ToDictionary(m => m, m => PropertyPresence.None)
                 : null;
@@ -3648,8 +3644,10 @@ namespace Newtonsoft.Json.Serialization
             if (propertiesPresence != null)
             {
                 foreach (
-                    KeyValuePair<JsonProperty,
-                        PropertyPresence> propertyPresence in propertiesPresence
+                    KeyValuePair<
+                        JsonProperty,
+                        PropertyPresence
+                    > propertyPresence in propertiesPresence
                 ) {
                     JsonProperty property = propertyPresence.Key;
                     PropertyPresence presence = propertyPresence.Value;

@@ -59,22 +59,16 @@ namespace Newtonsoft.Json.Serialization
         public const string ConcurrentDictionaryTypeName =
             "System.Collections.Concurrent.ConcurrentDictionary`2";
 
-        private static readonly ThreadSafeStore<Type,
-            Func<object[]?, object>> CreatorCache = new ThreadSafeStore<Type,
-            Func<object[]?, object>>(
-            GetCreator
-        );
+        private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache =
+            new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
 
 #if !(NET20 || DOTNET)
-        private static readonly ThreadSafeStore<Type,
-            Type?> AssociatedMetadataTypesCache = new ThreadSafeStore<Type, Type?>(
-            GetAssociateMetadataTypeFromAttribute
-        );
+        private static readonly ThreadSafeStore<Type, Type?> AssociatedMetadataTypesCache =
+            new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
-        public static T? GetCachedAttribute<T>(object attributeProvider)
-            where T : Attribute
+        public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
         }
@@ -281,9 +275,10 @@ namespace Newtonsoft.Json.Serialization
 
                         if (parameterizedConstructorInfo != null)
                         {
-                            ObjectConstructor<object> parameterizedConstructor = ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                parameterizedConstructorInfo
-                            );
+                            ObjectConstructor<object> parameterizedConstructor =
+                                ReflectionDelegateFactory.CreateParameterizedConstructor(
+                                    parameterizedConstructorInfo
+                                );
                             return parameterizedConstructor(parameters);
                         }
                         else
@@ -363,8 +358,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        private static T? GetAttribute<T>(Type type)
-            where T : Attribute
+        private static T? GetAttribute<T>(Type type) where T : Attribute
         {
             T? attribute;
 
@@ -398,8 +392,7 @@ namespace Newtonsoft.Json.Serialization
             return null;
         }
 
-        private static T? GetAttribute<T>(MemberInfo memberInfo)
-            where T : Attribute
+        private static T? GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
         {
             T? attribute;
 
@@ -486,8 +479,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        public static T? GetAttribute<T>(object provider)
-            where T : Attribute
+        public static T? GetAttribute<T>(object provider) where T : Attribute
         {
             if (provider is Type type)
             {

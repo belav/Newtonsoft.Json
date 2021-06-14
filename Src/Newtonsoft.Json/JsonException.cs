@@ -50,8 +50,7 @@ namespace Newtonsoft.Json
         /// with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public JsonException(string message)
-            : base(message) { }
+        public JsonException(string message) : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonException"/> class

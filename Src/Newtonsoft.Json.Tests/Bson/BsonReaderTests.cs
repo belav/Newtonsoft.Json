@@ -97,9 +97,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             myStream.Seek(0, SeekOrigin.Begin);
 
-            BsonReader reader = new BsonReader(
-                myStream
-            )
+            BsonReader reader = new BsonReader(myStream)
             {
                 SupportMultipleContent = true,
                 DateTimeKindHandling = DateTimeKind.Utc
@@ -1654,14 +1652,12 @@ namespace Newtonsoft.Json.Tests.Bson
 
         class Dog : Animal
         {
-            public Dog(string name)
-                : base(name) { }
+            public Dog(string name) : base(name) { }
         }
 
         class Cat : Animal
         {
-            public Cat(string name)
-                : base(name) { }
+            public Cat(string name) : base(name) { }
         }
 
         public class MyBinder : DefaultSerializationBinder

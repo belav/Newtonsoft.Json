@@ -1947,9 +1947,7 @@ namespace Newtonsoft.Json.Tests
         {
             JsonSchema s = new JsonSchemaGenerator().Generate(typeof(int));
 
-            JsonReader reader = new JsonValidatingReader(
-                new JsonTextReader(new StringReader(@"1"))
-            )
+            JsonReader reader = new JsonValidatingReader(new JsonTextReader(new StringReader(@"1")))
             {
                 Schema = s
             };

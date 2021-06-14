@@ -419,8 +419,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             jsonReader = new JTokenReader(jToken);
 
-            var result2 =
-                (HasBytes)JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
+            var result2 = (HasBytes)JsonSerializer.Create(null)
+                    .Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEqual(new byte[] { 1, 2, 3, 4 }, result2.Bytes);
         }
@@ -438,8 +438,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             jsonReader = new JTokenReader(jToken);
 
-            var result2 =
-                (HasBytes)JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
+            var result2 = (HasBytes)JsonSerializer.Create(null)
+                    .Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEquivalent(new byte[0], result2.Bytes);
         }

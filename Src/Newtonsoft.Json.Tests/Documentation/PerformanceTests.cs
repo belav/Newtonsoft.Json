@@ -67,7 +67,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     #region JsonConverterContractResolver
     public class ConverterContractResolver : DefaultContractResolver
     {
-        public new static readonly ConverterContractResolver Instance = new ConverterContractResolver();
+        public new static readonly ConverterContractResolver Instance =
+            new ConverterContractResolver();
 
         protected override JsonContract CreateContract(Type objectType)
         {
@@ -113,7 +114,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     {
         private static class AppSettings
         {
-            public static readonly IContractResolver SnakeCaseContractResolver = new DefaultContractResolver();
+            public static readonly IContractResolver SnakeCaseContractResolver =
+                new DefaultContractResolver();
         }
 
         [Test]

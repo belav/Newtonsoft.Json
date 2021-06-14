@@ -46,12 +46,13 @@ namespace Newtonsoft.Json.Utilities
         private const char EnumSeparatorChar = ',';
         private const string EnumSeparatorString = ", ";
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, NamingStrategy?>,
-            EnumInfo> ValuesAndNamesPerEnum = new ThreadSafeStore<StructMultiKey<Type,
-                NamingStrategy?>,
-            EnumInfo>(
-            InitializeValuesAndNames
-        );
+        private static readonly ThreadSafeStore<
+            StructMultiKey<Type, NamingStrategy?>,
+            EnumInfo
+        > ValuesAndNamesPerEnum = new ThreadSafeStore<
+            StructMultiKey<Type, NamingStrategy?>,
+            EnumInfo
+        >(InitializeValuesAndNames);
 
         private static EnumInfo InitializeValuesAndNames(StructMultiKey<Type, NamingStrategy?> key)
         {
@@ -64,8 +65,7 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f =
-                    enumType.GetField(
+                FieldInfo f = enumType.GetField(
                         name,
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
                     )!;
@@ -99,8 +99,7 @@ namespace Newtonsoft.Json.Utilities
             return new EnumInfo(isFlags, values, names, resolvedNames);
         }
 
-        public static IList<T> GetFlagsValues<T>(T value)
-            where T : struct
+        public static IList<T> GetFlagsValues<T>(T value) where T : struct
         {
             Type enumType = typeof(T);
 
@@ -141,7 +140,8 @@ namespace Newtonsoft.Json.Utilities
         }
 
         // Used by Newtonsoft.Json.Schema
-        private static CamelCaseNamingStrategy _camelCaseNamingStrategy = new CamelCaseNamingStrategy();
+        private static CamelCaseNamingStrategy _camelCaseNamingStrategy =
+            new CamelCaseNamingStrategy();
         public static bool TryToString(
             Type enumType,
             object value,

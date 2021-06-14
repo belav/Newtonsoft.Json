@@ -95,12 +95,10 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonContainerContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
-        internal JsonContainerContract(Type underlyingType)
-            : base(underlyingType)
+        internal JsonContainerContract(Type underlyingType) : base(underlyingType)
         {
-            JsonContainerAttribute? jsonContainerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(
-                underlyingType
-            );
+            JsonContainerAttribute? jsonContainerAttribute =
+                JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(underlyingType);
 
             if (jsonContainerAttribute != null)
             {

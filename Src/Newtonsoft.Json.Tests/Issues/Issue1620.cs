@@ -62,7 +62,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             string json = JsonConvert.SerializeObject(
                 foo,
-                new JsonSerializerSettings() { Converters =  { new FooConverter() } }
+                new JsonSerializerSettings() { Converters = { new FooConverter() } }
             );
             Assert.AreEqual(@"""foo""", json);
         }

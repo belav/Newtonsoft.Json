@@ -196,8 +196,10 @@ namespace Newtonsoft.Json.Schema
             if (schema.PatternProperties != null)
             {
                 foreach (
-                    KeyValuePair<string,
-                        JsonSchema> patternProperty in schema.PatternProperties.ToList()
+                    KeyValuePair<
+                        string,
+                        JsonSchema
+                    > patternProperty in schema.PatternProperties.ToList()
                 ) {
                     schema.PatternProperties[patternProperty.Key] = ResolveReferences(
                         patternProperty.Value

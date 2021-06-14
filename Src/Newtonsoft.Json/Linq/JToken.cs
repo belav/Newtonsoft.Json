@@ -67,71 +67,77 @@ namespace Newtonsoft.Json.Linq
         private JToken? _next;
         private object? _annotations;
 
-        private static readonly JTokenType[] BooleanTypes =
-            new[] {
-                JTokenType.Integer,
-                JTokenType.Float,
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw,
-                JTokenType.Boolean
-            };
-        private static readonly JTokenType[] NumberTypes =
-            new[] {
-                JTokenType.Integer,
-                JTokenType.Float,
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw,
-                JTokenType.Boolean
-            };
+        private static readonly JTokenType[] BooleanTypes = new[] {
+            JTokenType.Integer,
+            JTokenType.Float,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Boolean
+        };
+        private static readonly JTokenType[] NumberTypes = new[] {
+            JTokenType.Integer,
+            JTokenType.Float,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Boolean
+        };
 #if HAVE_BIG_INTEGER
         private static readonly JTokenType[] BigIntegerTypes = new[] { JTokenType.Integer, JTokenType.Float, JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.Boolean, JTokenType.Bytes };
 #endif
-        private static readonly JTokenType[] StringTypes =
-            new[] {
-                JTokenType.Date,
-                JTokenType.Integer,
-                JTokenType.Float,
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw,
-                JTokenType.Boolean,
-                JTokenType.Bytes,
-                JTokenType.Guid,
-                JTokenType.TimeSpan,
-                JTokenType.Uri
-            };
-        private static readonly JTokenType[] GuidTypes =
-            new[] {
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw,
-                JTokenType.Guid,
-                JTokenType.Bytes
-            };
-        private static readonly JTokenType[] TimeSpanTypes =
-            new[] { JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.TimeSpan };
-        private static readonly JTokenType[] UriTypes =
-            new[] { JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.Uri };
-        private static readonly JTokenType[] CharTypes =
-            new[] {
-                JTokenType.Integer,
-                JTokenType.Float,
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw
-            };
-        private static readonly JTokenType[] DateTimeTypes =
-            new[] { JTokenType.Date, JTokenType.String, JTokenType.Comment, JTokenType.Raw };
-        private static readonly JTokenType[] BytesTypes =
-            new[] {
-                JTokenType.Bytes,
-                JTokenType.String,
-                JTokenType.Comment,
-                JTokenType.Raw,
-                JTokenType.Integer
-            };
+        private static readonly JTokenType[] StringTypes = new[] {
+            JTokenType.Date,
+            JTokenType.Integer,
+            JTokenType.Float,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Boolean,
+            JTokenType.Bytes,
+            JTokenType.Guid,
+            JTokenType.TimeSpan,
+            JTokenType.Uri
+        };
+        private static readonly JTokenType[] GuidTypes = new[] {
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Guid,
+            JTokenType.Bytes
+        };
+        private static readonly JTokenType[] TimeSpanTypes = new[] {
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.TimeSpan
+        };
+        private static readonly JTokenType[] UriTypes = new[] {
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Uri
+        };
+        private static readonly JTokenType[] CharTypes = new[] {
+            JTokenType.Integer,
+            JTokenType.Float,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw
+        };
+        private static readonly JTokenType[] DateTimeTypes = new[] {
+            JTokenType.Date,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw
+        };
+        private static readonly JTokenType[] BytesTypes = new[] {
+            JTokenType.Bytes,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Integer
+        };
 
         /// <summary>
         /// Gets a comparer that can compare two tokens for value equality.
@@ -253,9 +259,7 @@ namespace Newtonsoft.Json.Linq
                         case JTokenType.Property:
                             JProperty property = (JProperty)current;
                             positions.Add(
-                                new JsonPosition(
-                                    JsonContainerType.Object
-                                )
+                                new JsonPosition(JsonContainerType.Object)
                                 {
                                     PropertyName = property.Name
                                 }
@@ -453,8 +457,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type to filter the child tokens on.</typeparam>
         /// <returns>A <see cref="JEnumerable{T}"/> containing the child tokens of this <see cref="JToken"/>, in document order.</returns>
-        public JEnumerable<T> Children<T>()
-            where T : JToken
+        public JEnumerable<T> Children<T>() where T : JToken
         {
             return new JEnumerable<T>(Children().OfType<T>());
         }
@@ -2837,8 +2840,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type of the annotation to retrieve.</typeparam>
         /// <returns>The first annotation object that matches the specified type, or <c>null</c> if no annotation is of the specified type.</returns>
-        public T? Annotation<T>()
-            where T : class
+        public T? Annotation<T>() where T : class
         {
             if (_annotations != null)
             {
@@ -2911,8 +2913,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type of the annotations to retrieve.</typeparam>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the annotations for this <see cref="JToken"/>.</returns>
-        public IEnumerable<T> Annotations<T>()
-            where T : class
+        public IEnumerable<T> Annotations<T>() where T : class
         {
             if (_annotations == null)
             {
@@ -2992,8 +2993,7 @@ namespace Newtonsoft.Json.Linq
         /// Removes the annotations of the specified type from this <see cref="JToken"/>.
         /// </summary>
         /// <typeparam name="T">The type of annotations to remove.</typeparam>
-        public void RemoveAnnotations<T>()
-            where T : class
+        public void RemoveAnnotations<T>() where T : class
         {
             if (_annotations != null)
             {

@@ -448,8 +448,7 @@ namespace Newtonsoft.Json.Tests
         public static async Task<TException> ThrowsAsync<TException>(
             Func<Task> action,
             params string[] possibleMessages
-        )
-            where TException : Exception {
+        ) where TException : Exception {
             try
             {
                 await action();

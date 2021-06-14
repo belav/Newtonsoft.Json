@@ -140,7 +140,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Formatting = Formatting.Indented,
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Converters =  { new IsoDateTimeConverter() }
+                Converters = { new IsoDateTimeConverter() }
             };
 
             string json = JsonConvert.SerializeObject(rootFolder, settings);

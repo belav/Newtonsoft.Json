@@ -228,10 +228,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(castMethodInfo);
 
-            MethodCall<object,
-                object> call = DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                castMethodInfo
-            );
+            MethodCall<object, object> call =
+                DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(castMethodInfo);
 
             object result = call(null, "First!");
             Assert.IsNotNull(result);
@@ -263,15 +261,17 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorStruct()
         {
-            var creator1 = DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
-                typeof(MyStruct)
-            );
+            var creator1 =
+                DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct1 = (MyStruct)creator1.Invoke();
             Assert.AreEqual(0, myStruct1.IntProperty);
 
-            var creator2 = DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(
-                typeof(MyStruct)
-            );
+            var creator2 =
+                DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct2 = creator2.Invoke();
             Assert.AreEqual(0, myStruct2.IntProperty);
         }
@@ -301,10 +301,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(methodInfo);
 
-            MethodCall<object,
-                object> call = DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                methodInfo
-            );
+            MethodCall<object, object> call =
+                DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(methodInfo);
 
             object result = call(null, new TestStruct(123));
             Assert.IsNotNull(result);

@@ -284,8 +284,7 @@ namespace Newtonsoft.Json
                     return string.Empty;
                 }
 
-                bool insideContainer =
-                    (_currentState != State.ArrayStart
+                bool insideContainer = (_currentState != State.ArrayStart
                     && _currentState != State.ConstructorStart
                     && _currentState != State.ObjectStart);
 

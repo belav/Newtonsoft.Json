@@ -1854,8 +1854,7 @@ third line",
 
         private class NoOverridesDerivedJsonTextAsync : JsonTextReader
         {
-            public NoOverridesDerivedJsonTextAsync()
-                : base(new StreamReader(Stream.Null)) { }
+            public NoOverridesDerivedJsonTextAsync() : base(new StreamReader(Stream.Null)) { }
         }
 
         private class MinimalOverridesDerivedJsonReader : JsonReader

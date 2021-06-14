@@ -50,10 +50,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
               'target': '_blank'
             }";
 
-            Dictionary<string,
-                string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(
-                json
-            );
+            Dictionary<string, string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<
+                    string,
+                    string
+                >>(json);
 
             Console.WriteLine(htmlAttributes["href"]);
             // /account/login.aspx

@@ -52,8 +52,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
     {
         public List<QueryExpression> Expressions { get; set; }
 
-        public CompositeExpression(QueryOperator @operator)
-            : base(@operator)
+        public CompositeExpression(QueryOperator @operator) : base(@operator)
         {
             Expressions = new List<QueryExpression>();
         }

@@ -180,9 +180,7 @@ namespace Newtonsoft.Json.Tests
                 var streamWriter = new StreamWriter(ms, new UTF8Encoding(false)) { NewLine = "\n" }
             )
             using (
-                var jsonWriter = new JsonTextWriter(
-                    streamWriter
-                )
+                var jsonWriter = new JsonTextWriter(streamWriter)
                 {
                     CloseOutput = true,
                     Indentation = 2,
@@ -1057,9 +1055,10 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                ArgumentOutOfRangeException ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(
-                    () => jsonWriter.WriteToken((JsonToken)int.MinValue)
-                );
+                ArgumentOutOfRangeException ex =
+                    ExceptionAssert.Throws<ArgumentOutOfRangeException>(
+                        () => jsonWriter.WriteToken((JsonToken)int.MinValue)
+                    );
                 Assert.AreEqual("token", ex.ParamName);
 
                 ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(
@@ -1358,9 +1357,7 @@ _____'propertyName': NaN,
         public void DateTimeZoneHandling()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
             };
@@ -1374,9 +1371,7 @@ _____'propertyName': NaN,
         public void HtmlStringEscapeHandling()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 StringEscapeHandling = StringEscapeHandling.EscapeHtml
             };
@@ -1401,9 +1396,7 @@ _____'propertyName': NaN,
         public void NonAsciiStringEscapeHandling()
         {
             StringWriter sw = new StringWriter();
-            JsonTextWriter writer = new JsonTextWriter(
-                sw
-            )
+            JsonTextWriter writer = new JsonTextWriter(sw)
             {
                 StringEscapeHandling = StringEscapeHandling.EscapeNonAscii
             };
@@ -1756,9 +1749,7 @@ _____'propertyName': NaN,
         public void CustomJsonTextWriterTests()
         {
             StringWriter sw = new StringWriter();
-            CustomJsonTextWriter writer = new CustomJsonTextWriter(
-                sw
-            )
+            CustomJsonTextWriter writer = new CustomJsonTextWriter(sw)
             {
                 Formatting = Formatting.Indented
             };
@@ -1879,8 +1870,7 @@ null//comment
     {
         protected readonly TextWriter _writer;
 
-        public CustomJsonTextWriter(TextWriter textWriter)
-            : base(textWriter)
+        public CustomJsonTextWriter(TextWriter textWriter) : base(textWriter)
         {
             _writer = textWriter;
         }

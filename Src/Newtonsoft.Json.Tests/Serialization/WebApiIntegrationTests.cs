@@ -50,9 +50,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeSerializableType()
         {
-            SerializableType serializableType = new SerializableType(
-                "protected"
-            )
+            SerializableType serializableType = new SerializableType("protected")
             {
                 publicField = "public",
                 protectedInternalField = "protected internal",
@@ -97,9 +95,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeInheritedType()
         {
-            InheritedType serializableType = new InheritedType(
-                "protected"
-            )
+            InheritedType serializableType = new InheritedType("protected")
             {
                 publicField = "public",
                 protectedInternalField = "protected internal",
@@ -123,8 +119,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     {
         public string inheritedTypeField;
 
-        public InheritedType(string protectedFieldValue)
-            : base(protectedFieldValue) { }
+        public InheritedType(string protectedFieldValue) : base(protectedFieldValue) { }
     }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0

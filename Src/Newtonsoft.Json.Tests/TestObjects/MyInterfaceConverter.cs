@@ -64,7 +64,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 return null;
             }
 
-            return ( from w in _writers where w.Name == value.ToString() select w).FirstOrDefault();
+            return (from w in _writers where w.Name == value.ToString() select w).FirstOrDefault();
         }
 
         public override object ConvertTo(

@@ -69,10 +69,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Console.WriteLine(jsonWithConverter);
             // ["CurrentCulture","Ordinal"]
 
-            List<StringComparison> newStringComparsions = JsonConvert.DeserializeObject<List<StringComparison>>(
-                jsonWithConverter,
-                new StringEnumConverter()
-            );
+            List<StringComparison> newStringComparsions =
+                JsonConvert.DeserializeObject<List<StringComparison>>(
+                    jsonWithConverter,
+                    new StringEnumConverter()
+                );
 
             Console.WriteLine(
                 string.Join(", ", newStringComparsions.Select(c => c.ToString()).ToArray())

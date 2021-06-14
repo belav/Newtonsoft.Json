@@ -169,7 +169,8 @@ namespace Newtonsoft.Json
 
         private IList<JsonSchemaModel> CurrentSchemas => _currentScope.Schemas;
 
-        private static readonly IList<JsonSchemaModel> EmptySchemaList = new List<JsonSchemaModel>();
+        private static readonly IList<JsonSchemaModel> EmptySchemaList =
+            new List<JsonSchemaModel>();
 
         private IList<JsonSchemaModel> CurrentMemberSchemas
         {
@@ -214,8 +215,10 @@ namespace Newtonsoft.Json
                             if (schema.PatternProperties != null)
                             {
                                 foreach (
-                                    KeyValuePair<string,
-                                        JsonSchemaModel> patternProperty in schema.PatternProperties
+                                    KeyValuePair<
+                                        string,
+                                        JsonSchemaModel
+                                    > patternProperty in schema.PatternProperties
                                 ) {
                                     if (
                                         Regex.IsMatch(
@@ -671,8 +674,7 @@ namespace Newtonsoft.Json
         {
             foreach (SchemaScope schemaScope in _stack)
             {
-                bool isInUniqueArray =
-                    (schemaScope.TokenType == JTokenType.Array
+                bool isInUniqueArray = (schemaScope.TokenType == JTokenType.Array
                     && schemaScope.IsUniqueArray
                     && schemaScope.ArrayItemCount > 0);
 
