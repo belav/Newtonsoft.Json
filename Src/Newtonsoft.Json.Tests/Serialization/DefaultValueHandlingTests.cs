@@ -75,12 +75,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             [DefaultValue(DefaultText)]
             [JsonProperty(
                 PropertyName = "myText",
-                DefaultValueHandling = DefaultValueHandling.Populate)]
+                DefaultValueHandling = DefaultValueHandling.Populate
+            )]
             public readonly string Text;
 
             public DefaultValueWithConstructor(
-                [JsonProperty(PropertyName = "myText")]
-                string text = DefaultText
+                [JsonProperty(PropertyName = "myText")] string text = DefaultText
             ) {
                 Text = text;
             }
@@ -506,7 +506,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             [JsonProperty(
                 DefaultValueHandling = DefaultValueHandling.Populate,
-                NullValueHandling = NullValueHandling.Ignore)]
+                NullValueHandling = NullValueHandling.Ignore
+            )]
             [DefaultValue(6)]
             public int IntValue { get; set; }
         }

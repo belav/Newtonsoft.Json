@@ -75,8 +75,10 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             var servesItself = source as IEnumerable<TResult>;
             if (
                 servesItself != null
-                && (!(servesItself is TResult[])
-                || servesItself.GetType().GetElementType() == typeof(TResult))
+                && (
+                    !(servesItself is TResult[])
+                    || servesItself.GetType().GetElementType() == typeof(TResult)
+                )
             ) {
                 return servesItself;
             }
@@ -86,7 +88,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         private static IEnumerable<TResult> CastYield<TResult>(IEnumerable source)
         {
-            foreach (var item in source) yield return (TResult)item;
+            foreach (var item in source)
+                yield return (TResult)item;
         }
 
         /// <summary>
@@ -102,7 +105,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         private static IEnumerable<TResult> OfTypeYield<TResult>(IEnumerable source)
         {
-            foreach (var item in source) if (item is TResult) yield return (TResult)item;
+            foreach (var item in source)
+                if (item is TResult)
+                    yield return (TResult)item;
         }
 
         /// <summary>
@@ -113,7 +118,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         public static IEnumerable<int> Range(int start, int count)
         {
-            if (count < 0) throw new ArgumentOutOfRangeException("count", count, null);
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count", count, null);
 
             var end = (long)start + count;
             if (end - 1 >= int.MaxValue)
@@ -124,7 +130,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         private static IEnumerable<int> RangeYield(int start, long end)
         {
-            for (var i = start; i < end; i++) yield return i;
+            for (var i = start; i < end; i++)
+                yield return i;
         }
 
         /// <summary>
@@ -133,14 +140,16 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         public static IEnumerable<TResult> Repeat<TResult>(TResult element, int count)
         {
-            if (count < 0) throw new ArgumentOutOfRangeException("count", count, null);
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count", count, null);
 
             return RepeatYield(element, count);
         }
 
         private static IEnumerable<TResult> RepeatYield<TResult>(TResult element, int count)
         {
-            for (var i = 0; i < count; i++) yield return element;
+            for (var i = 0; i < count; i++)
+                yield return element;
         }
 
         /// <summary>
@@ -161,7 +170,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             IEnumerable<TSource> source,
             Func<TSource, bool> predicate
         ) {
-            foreach (var item in source) if (predicate(item)) yield return item;
+            foreach (var item in source)
+                if (predicate(item))
+                    yield return item;
         }
         /// <summary>
     /// Filters a sequence of values based on a predicate. 
@@ -183,7 +194,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, int, bool> predicate
         ) {
             var i = 0;
-            foreach (var item in source) if (predicate(item, i++)) yield return item;
+            foreach (var item in source)
+                if (predicate(item, i++))
+                    yield return item;
         }
 
         /// <summary>
@@ -204,7 +217,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             IEnumerable<TSource> source,
             Func<TSource, TResult> selector
         ) {
-            foreach (var item in source) yield return selector(item);
+            foreach (var item in source)
+                yield return selector(item);
         }
 
         /// <summary>
@@ -227,7 +241,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, int, TResult> selector
         ) {
             var i = 0;
-            foreach (var item in source) yield return selector(item, i++);
+            foreach (var item in source)
+                yield return selector(item, i++);
         }
 
         /// <summary>
@@ -341,7 +356,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         ) {
             var i = 0;
             foreach (var item in source)
-                if (predicate(item, i++)) yield return item;
+                if (predicate(item, i++))
+                    yield return item;
                 else
                     break;
         }
@@ -367,7 +383,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             MiscellaneousUtils.Assert(empty != null);
 
             var list = source as IList<TSource>; // optimized case for lists
-            if (list != null) return list.Count > 0 ? list[0] : empty();
+            if (list != null)
+                return list.Count > 0 ? list[0] : empty();
 
             using (var e = source.GetEnumerator()) // fallback for enumeration
                 return e.MoveNext() ? e.Current : empty();
@@ -426,14 +443,17 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             var list = source as IList<TSource>; // optimized case for lists
-            if (list != null) return list.Count > 0 ? list[list.Count - 1] : empty();
+            if (list != null)
+                return list.Count > 0 ? list[list.Count - 1] : empty();
 
             using (var e = source.GetEnumerator())
             {
-                if (!e.MoveNext()) return empty();
+                if (!e.MoveNext())
+                    return empty();
 
                 var last = e.Current;
-                while (e.MoveNext()) last = e.Current;
+                while (e.MoveNext())
+                    last = e.Current;
 
                 return last;
             }
@@ -496,7 +516,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                 if (e.MoveNext())
                 {
                     var single = e.Current;
-                    if (!e.MoveNext()) return single;
+                    if (!e.MoveNext())
+                        return single;
 
                     throw new InvalidOperationException();
                 }
@@ -561,10 +582,12 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            if (index < 0) throw new ArgumentOutOfRangeException("index", index, null);
+            if (index < 0)
+                throw new ArgumentOutOfRangeException("index", index, null);
 
             var list = source as IList<TSource>;
-            if (list != null) return list[index];
+            if (list != null)
+                return list[index];
 
             try
             {
@@ -587,10 +610,12 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         ) {
             CheckNotNull(source, "source");
 
-            if (index < 0) return default(TSource);
+            if (index < 0)
+                return default(TSource);
 
             var list = source as IList<TSource>;
-            if (list != null) return index < list.Count ? list[index] : default(TSource);
+            if (list != null)
+                return index < list.Count ? list[index] : default(TSource);
 
             return source.SkipWhile((item, i) => i < index).FirstOrDefault();
         }
@@ -610,7 +635,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             var stack = new Stack<TSource>(source);
 
-            foreach (var item in stack) yield return item;
+            foreach (var item in stack)
+                yield return item;
         }
 
         /// <summary>
@@ -675,9 +701,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             {
                 for (var i = 0;; i++)
                 {
-                    if (!e.MoveNext()) yield break;
+                    if (!e.MoveNext())
+                        yield break;
 
-                    if (!predicate(e.Current, i)) break;
+                    if (!predicate(e.Current, i))
+                        break;
                 }
 
                 do
@@ -771,9 +799,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             IEnumerable<TSource> first,
             IEnumerable<TSource> second
         ) {
-            foreach (var item in first) yield return item;
+            foreach (var item in first)
+                yield return item;
 
-            foreach (var item in second) yield return item;
+            foreach (var item in second)
+                yield return item;
         }
 
         /// <summary>
@@ -842,12 +872,14 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             {
                 if (item == null)
                 {
-                    if (gotNull) continue;
+                    if (gotNull)
+                        continue;
                     gotNull = true;
                 }
                 else
                 {
-                    if (set.ContainsKey(item)) continue;
+                    if (set.ContainsKey(item))
+                        continue;
                     set.Add(item, null);
                 }
 
@@ -1106,7 +1138,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
             using (var e = source.GetEnumerator())
             {
-                if (!e.MoveNext()) throw new InvalidOperationException();
+                if (!e.MoveNext())
+                    throw new InvalidOperationException();
 
                 return e.Renumerable().Skip(1).Aggregate(e.Current, func);
             }
@@ -1143,7 +1176,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
             var result = seed;
 
-            foreach (var item in source) result = func(result, item);
+            foreach (var item in source)
+                result = func(result, item);
 
             return resultSelector(result);
         }
@@ -1208,7 +1242,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         ) {
             using (var e = source.GetEnumerator())
             {
-                if (!e.MoveNext()) yield return defaultValue;
+                if (!e.MoveNext())
+                    yield return defaultValue;
                 else
                     do
                     {
@@ -1229,7 +1264,9 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
-            foreach (var item in source) if (!predicate(item)) return false;
+            foreach (var item in source)
+                if (!predicate(item))
+                    return false;
 
             return true;
         }
@@ -1294,7 +1331,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             if (comparer == null)
             {
                 var collection = source as ICollection<TSource>;
-                if (collection != null) return collection.Contains(value);
+                if (collection != null)
+                    return collection.Contains(value);
             }
 
             comparer = comparer ?? EqualityComparer<TSource>.Default;
@@ -1337,9 +1375,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             ) {
                 do
                 {
-                    if (!lhs.MoveNext()) return !rhs.MoveNext();
+                    if (!lhs.MoveNext())
+                        return !rhs.MoveNext();
 
-                    if (!rhs.MoveNext()) return false;
+                    if (!rhs.MoveNext())
+                        return false;
                 }
                 while (comparer.Equals(lhs.Current, rhs.Current));
             }
@@ -1602,7 +1642,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                 keys.Add(item);
             }
 
-            foreach (var item in second.Where(flags.ContainsKey)) flags[item] = flag;
+            foreach (var item in second.Where(flags.ContainsKey))
+                flags[item] = flag;
 
             //
             // As per docs, "the marked elements are yielded in the order in
@@ -1862,7 +1903,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         [DebuggerStepThrough]
         private static void CheckNotNull<T>(T value, string name) where T : class
         {
-            if (value == null) throw new ArgumentNullException(name);
+            if (value == null)
+                throw new ArgumentNullException(name);
         }
 
         private static class Sequence<T>
@@ -1892,7 +1934,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             int sum = 0;
-            foreach (var num in source) sum = checked(sum + num);
+            foreach (var num in source)
+                sum = checked(sum + num);
 
             return sum;
         }
@@ -1928,7 +1971,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) throw new InvalidOperationException();
+            if (count == 0)
+                throw new InvalidOperationException();
 
             return (double)sum / count;
         }
@@ -1955,7 +1999,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             int sum = 0;
-            foreach (var num in source) sum = checked(sum + (num ?? 0));
+            foreach (var num in source)
+                sum = checked(sum + (num ?? 0));
 
             return sum;
         }
@@ -1991,7 +2036,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) return null;
+            if (count == 0)
+                return null;
 
             return (double?)sum / count;
         }
@@ -2070,7 +2116,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             long sum = 0;
-            foreach (var num in source) sum = checked(sum + num);
+            foreach (var num in source)
+                sum = checked(sum + num);
 
             return sum;
         }
@@ -2106,7 +2153,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) throw new InvalidOperationException();
+            if (count == 0)
+                throw new InvalidOperationException();
 
             return (double)sum / count;
         }
@@ -2133,7 +2181,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             long sum = 0;
-            foreach (var num in source) sum = checked(sum + (num ?? 0));
+            foreach (var num in source)
+                sum = checked(sum + (num ?? 0));
 
             return sum;
         }
@@ -2169,7 +2218,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) return null;
+            if (count == 0)
+                return null;
 
             return (double?)sum / count;
         }
@@ -2248,7 +2298,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             float sum = 0;
-            foreach (var num in source) sum = checked(sum + num);
+            foreach (var num in source)
+                sum = checked(sum + num);
 
             return sum;
         }
@@ -2284,7 +2335,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) throw new InvalidOperationException();
+            if (count == 0)
+                throw new InvalidOperationException();
 
             return (float)sum / count;
         }
@@ -2311,7 +2363,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             float sum = 0;
-            foreach (var num in source) sum = checked(sum + (num ?? 0));
+            foreach (var num in source)
+                sum = checked(sum + (num ?? 0));
 
             return sum;
         }
@@ -2347,7 +2400,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) return null;
+            if (count == 0)
+                return null;
 
             return (float?)sum / count;
         }
@@ -2426,7 +2480,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             double sum = 0;
-            foreach (var num in source) sum = checked(sum + num);
+            foreach (var num in source)
+                sum = checked(sum + num);
 
             return sum;
         }
@@ -2462,7 +2517,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) throw new InvalidOperationException();
+            if (count == 0)
+                throw new InvalidOperationException();
 
             return (double)sum / count;
         }
@@ -2489,7 +2545,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             double sum = 0;
-            foreach (var num in source) sum = checked(sum + (num ?? 0));
+            foreach (var num in source)
+                sum = checked(sum + (num ?? 0));
 
             return sum;
         }
@@ -2525,7 +2582,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) return null;
+            if (count == 0)
+                return null;
 
             return (double?)sum / count;
         }
@@ -2604,7 +2662,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             decimal sum = 0;
-            foreach (var num in source) sum = checked(sum + num);
+            foreach (var num in source)
+                sum = checked(sum + num);
 
             return sum;
         }
@@ -2649,7 +2708,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) throw new InvalidOperationException();
+            if (count == 0)
+                throw new InvalidOperationException();
 
             return (decimal)sum / count;
         }
@@ -2676,7 +2736,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             decimal sum = 0;
-            foreach (var num in source) sum = checked(sum + (num ?? 0));
+            foreach (var num in source)
+                sum = checked(sum + (num ?? 0));
 
             return sum;
         }
@@ -2712,7 +2773,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     count++;
                 }
 
-            if (count == 0) return null;
+            if (count == 0)
+                return null;
 
             return (decimal?)sum / count;
         }
@@ -2883,9 +2945,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public IEnumerable<TResult> ApplyResultSelector<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
         ) {
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            foreach (var pair in _map) yield return resultSelector(pair.Key, pair.Value);
+            foreach (var pair in _map)
+                yield return resultSelector(pair.Key, pair.Value);
         }
 
         /// <summary>
@@ -2922,8 +2986,10 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             IComparer<K> comparer,
             bool descending
         ) {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             _source = source;
 
@@ -2980,7 +3046,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     for (var i = 0; i < comparisons.Count; i++)
                     {
                         var result = comparisons[i](x.First, y.First);
-                        if (result != 0) return result;
+                        if (result != 0)
+                            return result;
                     }
 
                     //

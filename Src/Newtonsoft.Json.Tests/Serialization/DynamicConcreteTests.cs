@@ -57,9 +57,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 // create a dynamic mock object for interfaces or abstract classes
                 if (contract.CreatedType.IsInterface || contract.CreatedType.IsAbstract)
                 {
-                    contract.DefaultCreator = () => DynamicConcrete.GetInstanceFor(
-                        contract.CreatedType
-                    );
+                    contract.DefaultCreator = () =>
+                        DynamicConcrete.GetInstanceFor(contract.CreatedType);
                 }
 
                 return contract;

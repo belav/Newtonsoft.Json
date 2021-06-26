@@ -250,22 +250,24 @@ namespace Newtonsoft.Json.Utilities
 #if HAVE_ICONVERTIBLE
             return typeof(IConvertible).IsAssignableFrom(t);
 #else
-            return (t == typeof(bool)
-            || t == typeof(byte)
-            || t == typeof(char)
-            || t == typeof(DateTime)
-            || t == typeof(decimal)
-            || t == typeof(double)
-            || t == typeof(short)
-            || t == typeof(int)
-            || t == typeof(long)
-            || t == typeof(sbyte)
-            || t == typeof(float)
-            || t == typeof(string)
-            || t == typeof(ushort)
-            || t == typeof(uint)
-            || t == typeof(ulong)
-            || t.IsEnum());
+            return (
+                t == typeof(bool)
+                || t == typeof(byte)
+                || t == typeof(char)
+                || t == typeof(DateTime)
+                || t == typeof(decimal)
+                || t == typeof(double)
+                || t == typeof(short)
+                || t == typeof(int)
+                || t == typeof(long)
+                || t == typeof(sbyte)
+                || t == typeof(float)
+                || t == typeof(string)
+                || t == typeof(ushort)
+                || t == typeof(uint)
+                || t == typeof(ulong)
+                || t.IsEnum()
+            );
 #endif
         }
 
@@ -1503,13 +1505,28 @@ namespace Newtonsoft.Json.Utilities
 
                         if (
                             mantissaDigits < 29
-                            && (mantissaDigits != 28
-                            || !(storeOnly28Digits
-                            ?? (storeOnly28Digits = (hi19 > decimalMaxValueHi19
-                            || (hi19 == decimalMaxValueHi19
-                            && (lo10 > decimalMaxValueLo9
-                            || (lo10 == decimalMaxValueLo9
-                            && c > decimalMaxValueLo1))))).GetValueOrDefault()))
+                            && (
+                                mantissaDigits != 28
+                                || !(
+                                    storeOnly28Digits
+                                    ?? (
+                                        storeOnly28Digits =
+                                            (
+                                                hi19 > decimalMaxValueHi19
+                                                || (
+                                                    hi19 == decimalMaxValueHi19
+                                                    && (
+                                                        lo10 > decimalMaxValueLo9
+                                                        || (
+                                                            lo10 == decimalMaxValueLo9
+                                                            && c > decimalMaxValueLo1
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                    ).GetValueOrDefault()
+                                )
+                            )
                         ) {
                             if (mantissaDigits < 19)
                             {

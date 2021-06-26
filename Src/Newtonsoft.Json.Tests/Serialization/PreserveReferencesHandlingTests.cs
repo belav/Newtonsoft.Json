@@ -1465,13 +1465,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(
-                    json,
-                    new JsonSerializerSettings
-                    {
-                        MetadataPropertyHandling = MetadataPropertyHandling.Default
-                    }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<PropertyItemIsReferenceObject>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            MetadataPropertyHandling = MetadataPropertyHandling.Default
+                        }
+                    ),
                 "Error reading object reference '1'. Path 'Data.Prop2.MyProperty', line 9, position 19."
             );
         }

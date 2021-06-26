@@ -21,7 +21,8 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeUsingInternalConverter()
         {
             DefaultContractResolver contractResolver = new DefaultContractResolver();
-            JsonObjectContract contract = (JsonObjectContract)contractResolver.ResolveContract(
+            JsonObjectContract contract =
+                (JsonObjectContract)contractResolver.ResolveContract(
                     typeof(KeyValuePair<string, int>)
                 );
 
@@ -65,9 +66,8 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeUnexpectedEnd()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<KeyValuePair<string, int>>(
-                    @"{""Key"": ""123"","
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<KeyValuePair<string, int>>(@"{""Key"": ""123"","),
                 "Unexpected end when reading JSON. Path 'Key', line 1, position 14."
             );
         }

@@ -47,14 +47,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ReadFromAsync()
         {
-            JObject o = (JObject)await JToken.ReadFromAsync(
+            JObject o =
+                (JObject)await JToken.ReadFromAsync(
                     new JsonTextReader(new StringReader("{'pie':true}"))
                 );
             Assert.AreEqual(true, (bool)o["pie"]);
 
-            JArray a = (JArray)await JToken.ReadFromAsync(
-                    new JsonTextReader(new StringReader("[1,2,3]"))
-                );
+            JArray a =
+                (JArray)await JToken.ReadFromAsync(new JsonTextReader(new StringReader("[1,2,3]")));
             Assert.AreEqual(1, (int)a[0]);
             Assert.AreEqual(2, (int)a[1]);
             Assert.AreEqual(3, (int)a[2]);
@@ -67,13 +67,15 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual("pie", p.Name);
             Assert.AreEqual(true, (bool)p.Value);
 
-            JConstructor c = (JConstructor)await JToken.ReadFromAsync(
+            JConstructor c =
+                (JConstructor)await JToken.ReadFromAsync(
                     new JsonTextReader(new StringReader("new Date(1)"))
                 );
             Assert.AreEqual("Date", c.Name);
             Assert.IsTrue(JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0)));
 
-            JValue v = (JValue)await JToken.ReadFromAsync(
+            JValue v =
+                (JValue)await JToken.ReadFromAsync(
                     new JsonTextReader(new StringReader(@"""stringvalue"""))
                 );
             Assert.AreEqual("stringvalue", (string)v);
@@ -84,12 +86,13 @@ namespace Newtonsoft.Json.Tests.Linq
             v = (JValue)await JToken.ReadFromAsync(new JsonTextReader(new StringReader(@"1.1")));
             Assert.AreEqual(1.1, (double)v);
 
-            v = (JValue)await JToken.ReadFromAsync(
-                new JsonTextReader(new StringReader(@"""1970-01-01T00:00:00+12:31"""))
-                {
-                    DateParseHandling = DateParseHandling.DateTimeOffset
-                }
-            );
+            v =
+                (JValue)await JToken.ReadFromAsync(
+                    new JsonTextReader(new StringReader(@"""1970-01-01T00:00:00+12:31"""))
+                    {
+                        DateParseHandling = DateParseHandling.DateTimeOffset
+                    }
+                );
             Assert.AreEqual(typeof(DateTimeOffset), v.Value.GetType());
             Assert.AreEqual(
                 new DateTimeOffset(
@@ -103,7 +106,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task LoadAsync()
         {
-            JObject o = (JObject)await JToken.LoadAsync(
+            JObject o =
+                (JObject)await JToken.LoadAsync(
                     new JsonTextReader(new StringReader("{'pie':true}"))
                 );
             Assert.AreEqual(true, (bool)o["pie"]);

@@ -40,7 +40,8 @@ namespace Newtonsoft.Json
         | AttributeTargets.Interface
         | AttributeTargets.Enum
         | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+        AllowMultiple = false
+    )]
     public sealed class JsonConverterAttribute : Attribute
     {
         private readonly Type _converterType;

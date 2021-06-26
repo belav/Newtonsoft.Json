@@ -53,11 +53,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 #region Usage
                 // settings will automatically be used by JsonConvert.SerializeObject/DeserializeObject
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    };
 
                 Staff s = new Staff
                 {

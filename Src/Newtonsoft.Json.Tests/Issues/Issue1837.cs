@@ -108,10 +108,8 @@ namespace Newtonsoft.Json.Tests.Issues
         public delegate bool Comparator(JValue lhs, JValue rhs);
 
         // there was going to be an abstractEquality, but check the exception for it's implementation for why that's skipped for now
-        private readonly Comparator StrictEquality = (
-            lhs,
-            rhs
-        ) => BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
+        private readonly Comparator StrictEquality = (lhs, rhs) =>
+            BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
 
         // a bunch of convenience methods for the test belwo
         // these make sure the comparator returns false for all do not wants

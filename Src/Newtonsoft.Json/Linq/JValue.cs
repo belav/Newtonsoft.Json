@@ -827,9 +827,13 @@ namespace Newtonsoft.Json.Linq
 
         private static bool ValuesEquals(JValue v1, JValue v2)
         {
-            return (v1 == v2
-            || (v1._valueType == v2._valueType
-            && Compare(v1._valueType, v1._value, v2._value) == 0));
+            return (
+                v1 == v2
+                || (
+                    v1._valueType == v2._valueType
+                    && Compare(v1._valueType, v1._value, v2._value) == 0
+                )
+            );
         }
 
         /// <summary>
@@ -1082,8 +1086,9 @@ namespace Newtonsoft.Json.Linq
                 return 1;
             }
 
-            JTokenType comparisonType = (_valueType == JTokenType.String
-            && _valueType != obj._valueType) ? obj._valueType : _valueType;
+            JTokenType comparisonType = (
+                _valueType == JTokenType.String && _valueType != obj._valueType
+            ) ? obj._valueType : _valueType;
 
             return Compare(comparisonType, _value, obj._value);
         }

@@ -322,8 +322,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             o.AddAnnotation(new HashSet<string>());
-            o.PropertyChanged += (sender, args) => o.Annotation<HashSet<string>>()
-                .Add(args.PropertyName);
+            o.PropertyChanged += (sender, args) =>
+                o.Annotation<HashSet<string>>().Add(args.PropertyName);
 
             o["age"] = 59;
             o["employer"] = "Bill & Melinda Gates Foundation";

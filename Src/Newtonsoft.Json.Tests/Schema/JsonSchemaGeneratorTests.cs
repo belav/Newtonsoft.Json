@@ -272,7 +272,8 @@ namespace Newtonsoft.Json.Tests.Schema
             schema = generator.Generate(typeof(Store));
             Assert.AreEqual(typeof(Store).FullName, schema.Id);
 
-            generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseAssemblyQualifiedName;
+            generator.UndefinedSchemaIdHandling =
+                UndefinedSchemaIdHandling.UseAssemblyQualifiedName;
             schema = generator.Generate(typeof(Store));
             Assert.AreEqual(typeof(Store).AssemblyQualifiedName, schema.Id);
         }

@@ -221,16 +221,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 unionCase.Tag = unionCaseInfo.Tag;
                 unionCase.Name = unionCaseInfo.Name;
                 unionCase.Fields = unionCaseInfo.GetFields();
-                unionCase.FieldReader = (s) => FSharpValue.PreComputeUnionReader(
-                        unionCaseInfo,
-                        null
-                    )
-                    .Invoke(s);
-                unionCase.Constructor = (s) => FSharpValue.PreComputeUnionConstructor(
-                        unionCaseInfo,
-                        null
-                    )
-                    .Invoke(s);
+                unionCase.FieldReader = (s) =>
+                    FSharpValue.PreComputeUnionReader(unionCaseInfo, null).Invoke(s);
+                unionCase.Constructor = (s) =>
+                    FSharpValue.PreComputeUnionConstructor(unionCaseInfo, null).Invoke(s);
 
                 u.Cases.Add(unionCase);
             }
@@ -262,9 +256,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             UnionCase caseInfo = union.Cases.Single(c => c.Name == "Rectangle");
 
-            Shape.Rectangle value = (Shape.Rectangle)caseInfo.Constructor.Invoke(
-                    new object[] { 10.0, 5.0 }
-                );
+            Shape.Rectangle value =
+                (Shape.Rectangle)caseInfo.Constructor.Invoke(new object[] { 10.0, 5.0 });
 
             Assert.AreEqual(
                 "Newtonsoft.Json.Tests.TestObjects.GeometricForms.Shape+Rectangle",
@@ -278,9 +271,10 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeBasicUnion_NoMatch()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<Currency>(
-                    @"{""Case"":""abcdefg"",""Fields"":[]}"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<Currency>(
+                        @"{""Case"":""abcdefg"",""Fields"":[]}"
+                    ),
                 "No union type found with the name 'abcdefg'. Path 'Case', line 1, position 17."
             );
         }

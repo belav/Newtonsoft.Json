@@ -268,7 +268,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)JToken.ReadFrom(
+            JArray a =
+                (JArray)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -312,7 +313,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JValue v = (JValue)JToken.ReadFrom(
+            JValue v =
+                (JValue)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -339,7 +341,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)JToken.ReadFrom(
+            JArray a =
+                (JArray)JToken.ReadFrom(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
                 );
@@ -538,9 +541,11 @@ undefined
             Assert.AreEqual("DVD read/writer", (string)list.Children().ElementAt(0));
             Assert.AreEqual("500 gigabyte hard drive", (string)list.Children().ElementAt(1));
 
-            List<object> parameterValues = (from p in o.Properties()
-            where p.Value is JValue
-            select ((JValue)p.Value).Value).ToList();
+            List<object> parameterValues = (
+                from p in o.Properties()
+                where p.Value is JValue
+                select ((JValue)p.Value).Value
+            ).ToList();
 
             Assert.AreEqual(1, parameterValues.Count);
             Assert.AreEqual("Intel", parameterValues[0]);
@@ -841,7 +846,8 @@ keyword such as type of business.""
                 new Post()
                 {
                     Title = "Json.NET 1.3 + New license + Now on CodePlex",
-                    Description = "Announcing the release of Json.NET 1.3, the MIT license and being available on CodePlex",
+                    Description =
+                        "Announcing the release of Json.NET 1.3, the MIT license and being available on CodePlex",
                     Link = "http://james.newtonking.com/projects/json-net.aspx",
                     Categories = new List<string>() { "Json.NET", "CodePlex" }
                 }
@@ -1253,15 +1259,17 @@ keyword such as type of business.""
                         { "description", "James Newton-King's blog." },
                         {
                             "item",
-                            (from p in posts
-                            orderby p.Title
-                            select new
-                            {
-                                title = p.Title,
-                                description = p.Description,
-                                link = p.Link,
-                                category = p.Categories
-                            })
+                            (
+                                from p in posts
+                                orderby p.Title
+                                select new
+                                {
+                                    title = p.Title,
+                                    description = p.Description,
+                                    link = p.Link,
+                                    category = p.Categories
+                                }
+                            )
                         }
                     }
                 }
@@ -1336,7 +1344,8 @@ keyword such as type of business.""
         [Test]
         public void CovariantIJEnumerable()
         {
-            IEnumerable<JObject> o = new[] {
+            IEnumerable<JObject> o = new[]
+            {
                 JObject.FromObject(new { First = 1, Second = 2 }),
                 JObject.FromObject(new { First = 1, Second = 2 })
             };

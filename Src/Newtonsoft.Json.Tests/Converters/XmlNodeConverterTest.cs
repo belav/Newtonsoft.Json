@@ -115,7 +115,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 converter.DeserializeRootElementName = deserializeRootElementName;
             }
 
-            XmlNode node = (XmlNode)converter.ReadJson(
+            XmlNode node =
+                (XmlNode)converter.ReadJson(
                     reader,
                     typeof(XmlDocument),
                     null,
@@ -127,7 +128,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             reader = new JsonTextReader(new StringReader(json));
             reader.Read();
-            XDocument d = (XDocument)converter.ReadJson(
+            XDocument d =
+                (XDocument)converter.ReadJson(
                     reader,
                     typeof(XDocument),
                     null,
@@ -1548,9 +1550,8 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(
-                            @"{Prop1:1,Prop2:2}"
-                        );
+                    XmlDocument newDoc =
+                        (XmlDocument)JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}");
                 },
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15."
             );
@@ -1568,7 +1569,8 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(expected, newDoc.InnerXml);
 
             string json = SerializeXmlNode(newDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""r"": {
       ""Date"": [
@@ -1613,7 +1615,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
+            arrayXml =
+                @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1626,7 +1629,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1641,7 +1645,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
+            arrayXml =
+                @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1653,7 +1658,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1665,7 +1671,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root>
+            arrayXml =
+                @"<root>
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1677,7 +1684,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -2780,10 +2788,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 using (var stringReader = new StringReader(json.ToString()))
                 using (var jsonReader = new JsonTextReader(stringReader))
                 {
-                    var document = (XmlDocument)serializer.Deserialize(
-                            jsonReader,
-                            typeof(XmlDocument)
-                        );
+                    var document =
+                        (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
                     StringAssert.AreEqual(
                         @"<metrics value=""12.27""><type>CPULOAD</type></metrics>",
                         document.OuterXml

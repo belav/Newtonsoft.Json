@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.Schema
             string json;
             JsonSchemaResolver resolver = new JsonSchemaResolver();
 
-            json = @"{
+            json =
+                @"{
   ""id"":""first"",
   ""type"":""object"",
   ""additionalProperties"":{}
@@ -57,7 +58,8 @@ namespace Newtonsoft.Json.Tests.Schema
 
             JsonSchema first = JsonSchema.Parse(json, resolver);
 
-            json = @"{
+            json =
+                @"{
   ""id"":""second"",
   ""type"":""object"",
   ""extends"":{""$ref"":""first""},
@@ -67,7 +69,8 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchema second = JsonSchema.Parse(json, resolver);
             Assert.AreEqual(first, second.Extends[0]);
 
-            json = @"{
+            json =
+                @"{
   ""id"":""third"",
   ""type"":""object"",
   ""extends"":{""$ref"":""second""},
@@ -157,7 +160,8 @@ namespace Newtonsoft.Json.Tests.Schema
                 newJson
             );
 
-            json = @"{
+            json =
+                @"{
   ""type"":""object"",
   ""extends"":[{""type"":""string""}],
   ""additionalProperties"":{""type"":""string""}
@@ -184,7 +188,8 @@ namespace Newtonsoft.Json.Tests.Schema
                 newJson
             );
 
-            json = @"{
+            json =
+                @"{
   ""type"":""object"",
   ""extends"":[{""type"":""string""},{""type"":""object""}],
   ""additionalProperties"":{""type"":""string""}

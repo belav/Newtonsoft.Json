@@ -147,10 +147,8 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings { Formatting = Formatting.Indented };
 
                 string json = JsonConvert.SerializeObject(new { test = new[] { 1, 2, 3 } });
 
@@ -261,11 +259,12 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    };
 
                 Employee e = new Employee
                 {
@@ -308,10 +307,8 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings { Formatting = Formatting.Indented };
 
                 string json = JsonConvert.SerializeObject(
                     new { test = new[] { 1, 2, 3 } },
@@ -332,11 +329,12 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
+                    };
 
                 string json = JsonConvert.SerializeObject(
                     new[] { new DateTime(2000, 12, 12, 4, 2, 4, DateTimeKind.Utc) },
@@ -366,10 +364,8 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings { Formatting = Formatting.Indented };
 
                 IList<int> l = new List<int> { 1, 2, 3 };
 
@@ -416,10 +412,8 @@ namespace Newtonsoft.Json.Tests
         {
             try
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings { Formatting = Formatting.Indented };
 
                 IList<int> l = new List<int> { 1, 2, 3 };
 
@@ -2017,7 +2011,8 @@ namespace Newtonsoft.Json.Tests
         {
             [JsonConverter(
                 typeof(OverloadsJsonConverterer),
-                new object[] { new string[] { "a", "b", "c" } })]
+                new object[] { new string[] { "a", "b", "c" } }
+            )]
             public int Overload { get; set; }
         }
 
@@ -2071,7 +2066,8 @@ namespace Newtonsoft.Json.Tests
 
             [JsonProperty(
                 ItemConverterType = typeof(RoundingJsonConverter),
-                ItemConverterParameters = new object[] { 0, MidpointRounding.ToEven })]
+                ItemConverterParameters = new object[] { 0, MidpointRounding.ToEven }
+            )]
             public List<double> Loads { get; set; }
 
             [JsonConverter(typeof(RoundingJsonConverter), 4)]
@@ -2221,10 +2217,8 @@ namespace Newtonsoft.Json.Tests
         {
             [JsonConstructor]
             public AcceptsEnumerableObjectToConstructor(
-                [JsonProperty("foo")]
-                EnumerableWithConverter foo,
-                [JsonProperty("bar")]
-                int bar
+                [JsonProperty("foo")] EnumerableWithConverter foo,
+                [JsonProperty("bar")] int bar
             ) { }
         }
 

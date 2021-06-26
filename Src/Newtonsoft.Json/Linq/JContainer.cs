@@ -320,10 +320,12 @@ namespace Newtonsoft.Json.Linq
 
         internal bool IsMultiContent([NotNullWhen(true)] object? content)
         {
-            return (content is IEnumerable
-            && !(content is string)
-            && !(content is JToken)
-            && !(content is byte[]));
+            return (
+                content is IEnumerable
+                && !(content is string)
+                && !(content is JToken)
+                && !(content is byte[])
+            );
         }
 
         internal JToken EnsureParentToken(JToken? item, bool skipParentCheck)

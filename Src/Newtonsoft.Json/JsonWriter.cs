@@ -61,10 +61,12 @@ namespace Newtonsoft.Json
         // array that gives a new state based on the current state an the token being written
         private static readonly State[][] StateArray;
 
-        internal static readonly State[][] StateArrayTemplate = new[] {
+        internal static readonly State[][] StateArrayTemplate = new[]
+        {
             //                                      Start                    PropertyName            ObjectStart         Object            ArrayStart              Array                   ConstructorStart        Constructor             Closed       Error
             //
-            /* None                        */new[] {
+            /* None                        */new[]
+            {
                 State.Error,
                 State.Error,
                 State.Error,
@@ -76,7 +78,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* StartObject                 */new[] {
+            /* StartObject                 */new[]
+            {
                 State.ObjectStart,
                 State.ObjectStart,
                 State.Error,
@@ -88,7 +91,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* StartArray                  */new[] {
+            /* StartArray                  */new[]
+            {
                 State.ArrayStart,
                 State.ArrayStart,
                 State.Error,
@@ -100,7 +104,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* StartConstructor            */new[] {
+            /* StartConstructor            */new[]
+            {
                 State.ConstructorStart,
                 State.ConstructorStart,
                 State.Error,
@@ -112,7 +117,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* Property                    */new[] {
+            /* Property                    */new[]
+            {
                 State.Property,
                 State.Error,
                 State.Property,
@@ -124,7 +130,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* Comment                     */new[] {
+            /* Comment                     */new[]
+            {
                 State.Start,
                 State.Property,
                 State.ObjectStart,
@@ -136,7 +143,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* Raw                         */new[] {
+            /* Raw                         */new[]
+            {
                 State.Start,
                 State.Property,
                 State.ObjectStart,
@@ -148,7 +156,8 @@ namespace Newtonsoft.Json
                 State.Error,
                 State.Error
             },
-            /* Value (this will be copied) */new[] {
+            /* Value (this will be copied) */new[]
+            {
                 State.Start,
                 State.Object,
                 State.Error,
@@ -302,9 +311,12 @@ namespace Newtonsoft.Json
                     return string.Empty;
                 }
 
-                bool insideContainer = (_currentState != State.ArrayStart
-                    && _currentState != State.ConstructorStart
-                    && _currentState != State.ObjectStart);
+                bool insideContainer =
+                    (
+                        _currentState != State.ArrayStart
+                        && _currentState != State.ConstructorStart
+                        && _currentState != State.ObjectStart
+                    );
 
                 JsonPosition? current = insideContainer ? (JsonPosition?)_currentPosition : null;
 
@@ -769,12 +781,13 @@ namespace Newtonsoft.Json
                 }
             }
             while (
-            // stop if we have reached the end of the token being read
-            initialDepth
-            - 1
-            < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
-            && writeChildren
-            && reader.Read());
+                // stop if we have reached the end of the token being read
+                initialDepth
+                - 1
+                < reader.Depth - (JsonTokenUtils.IsEndToken(reader.TokenType) ? 1 : 0)
+                && writeChildren
+                && reader.Read()
+            );
 
             if (IsWriteTokenIncomplete(reader, writeChildren, initialDepth))
             {
@@ -786,9 +799,11 @@ namespace Newtonsoft.Json
         {
             int finalDepth = CalculateWriteTokenFinalDepth(reader);
             return initialDepth < finalDepth
-                || (writeChildren
-                && initialDepth == finalDepth
-                && JsonTokenUtils.IsStartToken(reader.TokenType));
+                || (
+                    writeChildren
+                    && initialDepth == finalDepth
+                    && JsonTokenUtils.IsStartToken(reader.TokenType)
+                );
         }
 
         private int CalculateWriteTokenInitialDepth(JsonReader reader)
@@ -1002,9 +1017,11 @@ namespace Newtonsoft.Json
             }
 
             if (
-                (_currentState == State.Object
-                || _currentState == State.Array
-                || _currentState == State.Constructor)
+                (
+                    _currentState == State.Object
+                    || _currentState == State.Array
+                    || _currentState == State.Constructor
+                )
                 && tokenBeingWritten != JsonToken.Comment
             ) {
                 WriteValueDelimiter();
@@ -1019,10 +1036,12 @@ namespace Newtonsoft.Json
 
                 // don't indent a property when it is the first token to be written (i.e. at the start)
                 if (
-                    (_currentState == State.Array
-                    || _currentState == State.ArrayStart
-                    || _currentState == State.Constructor
-                    || _currentState == State.ConstructorStart)
+                    (
+                        _currentState == State.Array
+                        || _currentState == State.ArrayStart
+                        || _currentState == State.Constructor
+                        || _currentState == State.ConstructorStart
+                    )
                     || (tokenBeingWritten == JsonToken.PropertyName && _currentState != State.Start)
                 ) {
                     WriteIndent();

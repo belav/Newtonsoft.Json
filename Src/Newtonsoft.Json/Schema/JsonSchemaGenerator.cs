@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Schema
     /// </note>
     /// </summary>
     [Obsolete(
-        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public class JsonSchemaGenerator
     {
         /// <summary>
@@ -310,8 +311,8 @@ namespace Newtonsoft.Json.Schema
 
                         JsonArrayAttribute arrayAttribute =
                             JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(type);
-                        bool allowNullItem = (arrayAttribute == null
-                            || arrayAttribute.AllowNullItems);
+                        bool allowNullItem =
+                            (arrayAttribute == null || arrayAttribute.AllowNullItems);
 
                         Type collectionItemType = ReflectionUtils.GetCollectionItemType(type);
                         if (collectionItemType != null)
@@ -347,9 +348,9 @@ namespace Newtonsoft.Json.Schema
                         }
                         break;
                     case JsonContractType.String:
-                        JsonSchemaType schemaType = (!ReflectionUtils.IsNullable(
-                            contract.UnderlyingType
-                        ))
+                        JsonSchemaType schemaType = (
+                            !ReflectionUtils.IsNullable(contract.UnderlyingType)
+                        )
                             ? JsonSchemaType.String
                             : AddNullType(JsonSchemaType.String, valueRequired);
 

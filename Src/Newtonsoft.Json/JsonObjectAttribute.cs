@@ -32,7 +32,8 @@ namespace Newtonsoft.Json
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface,
-        AllowMultiple = false)]
+        AllowMultiple = false
+    )]
     public sealed class JsonObjectAttribute : JsonContainerAttribute
     {
         private MemberSerialization _memberSerialization = MemberSerialization.OptOut;

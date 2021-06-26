@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonProperty(
             PropertyName = "pa_created",
             DefaultValueHandling = DefaultValueHandling.Ignore,
-            NullValueHandling = NullValueHandling.Ignore)]
+            NullValueHandling = NullValueHandling.Ignore
+        )]
         public DateTimeOffset CreationDate { get; internal set; }
 
         /// <summary>

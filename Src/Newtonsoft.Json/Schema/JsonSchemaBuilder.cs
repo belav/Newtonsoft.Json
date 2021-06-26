@@ -40,7 +40,8 @@ using Newtonsoft.Json.Linq;
 namespace Newtonsoft.Json.Schema
 {
     [Obsolete(
-        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     internal class JsonSchemaBuilder
     {
         private readonly IList<JsonSchema> _stack;

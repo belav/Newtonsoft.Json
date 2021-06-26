@@ -49,13 +49,15 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             CamelCasePropertyNamesContractResolver resolver1 =
                 new CamelCasePropertyNamesContractResolver();
-            var contract1 = (JsonObjectContract)resolver1.ResolveContract(
+            var contract1 =
+                (JsonObjectContract)resolver1.ResolveContract(
                     typeof(CamelCasePropertyNamesContractResolverTests)
                 );
 
             CamelCasePropertyNamesContractResolver resolver2 =
                 new CamelCasePropertyNamesContractResolver();
-            var contract2 = (JsonObjectContract)resolver2.ResolveContract(
+            var contract2 =
+                (JsonObjectContract)resolver2.ResolveContract(
                     typeof(CamelCasePropertyNamesContractResolverTests)
                 );
 
@@ -181,8 +183,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         ContractResolver = new CamelCasePropertyNamesContractResolver
                         {
-                            DefaultMembersSearchFlags = BindingFlags.NonPublic
-                            | BindingFlags.Instance
+                            DefaultMembersSearchFlags =
+                                BindingFlags.NonPublic | BindingFlags.Instance
                         }
                     }
                 );

@@ -252,10 +252,9 @@ namespace Newtonsoft.Json.Serialization
 
             IsNullable = ReflectionUtils.IsNullable(underlyingType);
 
-            NonNullableUnderlyingType = (IsNullable
-            && ReflectionUtils.IsNullableType(underlyingType))
-                ? Nullable.GetUnderlyingType(underlyingType)
-                : underlyingType;
+            NonNullableUnderlyingType = (
+                IsNullable && ReflectionUtils.IsNullableType(underlyingType)
+            ) ? Nullable.GetUnderlyingType(underlyingType) : underlyingType;
 
             _createdType = CreatedType = NonNullableUnderlyingType;
 
@@ -329,10 +328,8 @@ namespace Newtonsoft.Json.Serialization
         internal static SerializationErrorCallback CreateSerializationErrorCallback(
             MethodInfo callbackMethodInfo
         ) {
-            return (o, context, econtext) => callbackMethodInfo.Invoke(
-                o,
-                new object[] { context, econtext }
-            );
+            return (o, context, econtext) =>
+                callbackMethodInfo.Invoke(o, new object[] { context, econtext });
         }
     }
 }

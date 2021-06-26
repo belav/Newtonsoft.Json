@@ -94,10 +94,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 {
 #pragma warning disable CS0618 // Type or member is obsolete
                     Converters =
-                    {
-                        new RegexConverter(),
-                        new StringEnumConverter() { CamelCaseText = true }
-                    },
+                    { new RegexConverter(), new StringEnumConverter() { CamelCaseText = true } },
 #pragma warning restore CS0618 // Type or member is obsolete
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 }
@@ -177,10 +174,11 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<RegexTestClass>(
-                    json,
-                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<RegexTestClass>(
+                        json,
+                        new JsonSerializerSettings { Converters = { new RegexConverter() } }
+                    ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 18."
             );
         }
@@ -194,10 +192,11 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<RegexTestClass>(
-                    json,
-                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<RegexTestClass>(
+                        json,
+                        new JsonSerializerSettings { Converters = { new RegexConverter() } }
+                    ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 18."
             );
         }
@@ -211,10 +210,11 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<RegexTestClass>(
-                    json,
-                    new JsonSerializerSettings { Converters = { new RegexConverter() } }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<RegexTestClass>(
+                        json,
+                        new JsonSerializerSettings { Converters = { new RegexConverter() } }
+                    ),
                 "Regex pattern must be enclosed by slashes. Path 'Regex', line 2, position 16."
             );
         }

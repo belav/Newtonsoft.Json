@@ -174,14 +174,18 @@ namespace Newtonsoft.Json.Tests.Utilities
                 decimal.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
                 && !s.StartsWith(".")
                 && !s.EndsWith(".")
-                && !(s.StartsWith("0")
-                && s.Length > 1
-                && !s.StartsWith("0.")
-                && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase))
-                && !(s.StartsWith("-0")
-                && s.Length > 2
-                && !s.StartsWith("-0.")
-                && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase))
+                && !(
+                    s.StartsWith("0")
+                    && s.Length > 1
+                    && !s.StartsWith("0.")
+                    && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase)
+                )
+                && !(
+                    s.StartsWith("-0")
+                    && s.Length > 2
+                    && !s.StartsWith("-0.")
+                    && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase)
+                )
                 && s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
 
             Assert.AreEqual(expectedResult, result);

@@ -178,7 +178,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                     create();
                 },
-                new[] {
+                new[]
+                {
                     "Cannot create an abstract class.",
                     "Cannot create an abstract class 'System.Type'." // mono
                 }
@@ -397,7 +398,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                     setter(p);
                 },
-                new[] {
+                new[]
+                {
                     "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.",
                     "Cannot cast from source type to destination type." // mono
                 }
@@ -426,7 +428,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                     Assert.AreEqual(p.Name, "Hi");
                 },
-                new[] {
+                new[]
+                {
                     "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.",
                     "Cannot cast from source type to destination type." // mono
                 }
@@ -448,7 +451,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                     setter(m, new Version("1.1.1.1"));
                 },
-                new[] {
+                new[]
+                {
                     "Unable to cast object of type 'System.Version' to type 'System.String'.",
                     "Cannot cast from source type to destination type." //mono
                 }

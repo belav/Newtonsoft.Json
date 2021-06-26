@@ -83,7 +83,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             List<Exception> errors = new List<Exception>();
 
-            JObject a2 = (JObject)JsonConvert.DeserializeObject(
+            JObject a2 =
+                (JObject)JsonConvert.DeserializeObject(
                     @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
                     new JsonSerializerSettings
                     {
@@ -163,7 +164,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            var possibleMsgs = new[] {
+            var possibleMsgs = new[]
+            {
                 "[1] - Error message for member 1 = An item with the same key has already been added.",
                 "[1] - Error message for member 1 = An element with the same key already exists in the dictionary.", // mono
                 "[1] - Error message for member 1 = An item with the same key has already been added. Key: Jim" // netcore
@@ -432,7 +434,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(new DateTime(2000, 12, 1, 0, 0, 0, DateTimeKind.Utc), c[2]);
 
             Assert.AreEqual(3, errors.Count);
-            var possibleErrs = new[] {
+            var possibleErrs = new[]
+            {
 #if !(NET20 || NET35)
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
                 "[1] - 1 - String was not recognized as a valid DateTime.",

@@ -104,7 +104,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 object existingValue,
                 JsonSerializer serializer
             ) {
-                if (reader.TokenType == JsonToken.Integer) return new Id((long)reader.Value);
+                if (reader.TokenType == JsonToken.Integer)
+                    return new Id((long)reader.Value);
 
                 string str = reader.Value as string;
                 Guid guid;
@@ -159,15 +160,19 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public bool Equals(Id other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
                 return Equals(Value, other.Value);
             }
 
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
+                if (ReferenceEquals(null, obj))
+                    return false;
+                if (ReferenceEquals(this, obj))
+                    return true;
                 return obj.GetType() == this.GetType() && Equals((Id)obj);
             }
 

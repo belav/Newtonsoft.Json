@@ -183,7 +183,8 @@ namespace Newtonsoft.Json.Tests.Schema
         private void GenerateSchemaAndSerializeFromType<T>(T value)
         {
             JsonSchemaGenerator generator = new JsonSchemaGenerator();
-            generator.UndefinedSchemaIdHandling = UndefinedSchemaIdHandling.UseAssemblyQualifiedName;
+            generator.UndefinedSchemaIdHandling =
+                UndefinedSchemaIdHandling.UseAssemblyQualifiedName;
             JsonSchema typeSchema = generator.Generate(typeof(T));
             string schema = typeSchema.ToString();
 

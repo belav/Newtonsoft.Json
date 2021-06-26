@@ -53,7 +53,8 @@ namespace Newtonsoft.Json
     /// </note>
     /// </summary>
     [Obsolete(
-        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public class JsonValidatingReader : JsonReader, IJsonLineInfo
     {
         private class SchemaScope
@@ -674,9 +675,12 @@ namespace Newtonsoft.Json
         {
             foreach (SchemaScope schemaScope in _stack)
             {
-                bool isInUniqueArray = (schemaScope.TokenType == JTokenType.Array
-                    && schemaScope.IsUniqueArray
-                    && schemaScope.ArrayItemCount > 0);
+                bool isInUniqueArray =
+                    (
+                        schemaScope.TokenType == JTokenType.Array
+                        && schemaScope.IsUniqueArray
+                        && schemaScope.ArrayItemCount > 0
+                    );
 
                 if (isInUniqueArray || schemas.Any(s => s.Enum != null))
                 {
@@ -1002,10 +1006,11 @@ namespace Newtonsoft.Json
                 else
 #endif
                 {
-                    notDivisible = !IsZero(
-                        Convert.ToInt64(value, CultureInfo.InvariantCulture)
-                        % schema.DivisibleBy.GetValueOrDefault()
-                    );
+                    notDivisible =
+                        !IsZero(
+                            Convert.ToInt64(value, CultureInfo.InvariantCulture)
+                            % schema.DivisibleBy.GetValueOrDefault()
+                        );
                 }
 
                 if (notDivisible)
@@ -1035,8 +1040,10 @@ namespace Newtonsoft.Json
                         currentSchema != null
                         && currentSchema.PositionalItemsValidation
                         && !currentSchema.AllowAdditionalItems
-                        && (currentSchema.Items == null
-                        || _currentScope.ArrayItemCount - 1 >= currentSchema.Items.Count)
+                        && (
+                            currentSchema.Items == null
+                            || _currentScope.ArrayItemCount - 1 >= currentSchema.Items.Count
+                        )
                     ) {
                         RaiseError(
                             "Index {0} has not been defined and the schema does not allow additional items.".FormatWith(
@@ -1249,11 +1256,9 @@ namespace Newtonsoft.Json
         }
 
         int IJsonLineInfo.LineNumber =>
-            (_reader
-                is IJsonLineInfo lineInfo) ? lineInfo.LineNumber : 0;
+            (_reader is IJsonLineInfo lineInfo) ? lineInfo.LineNumber : 0;
 
         int IJsonLineInfo.LinePosition =>
-            (_reader
-                is IJsonLineInfo lineInfo) ? lineInfo.LinePosition : 0;
+            (_reader is IJsonLineInfo lineInfo) ? lineInfo.LinePosition : 0;
     }
 }

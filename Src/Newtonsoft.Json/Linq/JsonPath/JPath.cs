@@ -171,12 +171,14 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     default:
                         if (
                             query
-                            && (currentChar == '='
-                            || currentChar == '<'
-                            || currentChar == '!'
-                            || currentChar == '>'
-                            || currentChar == '|'
-                            || currentChar == '&')
+                            && (
+                                currentChar == '='
+                                || currentChar == '<'
+                                || currentChar == '!'
+                                || currentChar == '>'
+                                || currentChar == '|'
+                                || currentChar == '&'
+                            )
                         ) {
                             ended = true;
                         }

@@ -284,9 +284,10 @@ namespace Newtonsoft.Json.Utilities
 
                         if (i > lastWritePosition)
                         {
-                            length = i
-                            - lastWritePosition
-                            + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
+                            length =
+                                i
+                                - lastWritePosition
+                                + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
                             int start = (isEscapedUnicodeText) ? UnicodeTextLength : 0;
 
                             if (writeBuffer == null || writeBuffer.Length < length)
@@ -625,8 +626,7 @@ namespace Newtonsoft.Json.Utilities
         public static bool TryGetDateFromConstructorJson(
             JsonReader reader,
             out DateTime dateTime,
-            [NotNullWhen(false)]
-            out string? errorMessage
+            [NotNullWhen(false)] out string? errorMessage
         ) {
             dateTime = default;
             errorMessage = null;
@@ -693,8 +693,7 @@ namespace Newtonsoft.Json.Utilities
         private static bool TryGetDateConstructorValue(
             JsonReader reader,
             out long? integer,
-            [NotNullWhen(false)]
-            out string? errorMessage
+            [NotNullWhen(false)] out string? errorMessage
         ) {
             integer = null;
             errorMessage = null;
@@ -710,8 +709,9 @@ namespace Newtonsoft.Json.Utilities
             }
             if (reader.TokenType != JsonToken.Integer)
             {
-                errorMessage = "Unexpected token when reading date constructor. Expected Integer, got "
-                + reader.TokenType;
+                errorMessage =
+                    "Unexpected token when reading date constructor. Expected Integer, got "
+                    + reader.TokenType;
                 return false;
             }
 

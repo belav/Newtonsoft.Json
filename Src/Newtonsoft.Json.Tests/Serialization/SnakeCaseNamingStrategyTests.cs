@@ -319,7 +319,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         [JsonDictionary(
             NamingStrategyType = typeof(SnakeCaseNamingStrategy),
-            NamingStrategyParameters = new object[] { true, true })]
+            NamingStrategyParameters = new object[] { true, true }
+        )]
         public class DictionaryAttributeNamingStrategyTestClass : Dictionary<string, string>
         {
         }

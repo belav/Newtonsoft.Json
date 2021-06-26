@@ -66,10 +66,11 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeInvalidDate()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.SerializeObject(
-                    new DateTime(1964, 2, 7),
-                    new UnixDateTimeConverter()
-                ),
+                () =>
+                    JsonConvert.SerializeObject(
+                        new DateTime(1964, 2, 7),
+                        new UnixDateTimeConverter()
+                    ),
                 "Cannot convert date value that is before Unix epoch of 00:00:00 UTC on 1 January 1970."
             );
         }
@@ -131,10 +132,11 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeNullToNonNullable()
         {
             ExceptionAssert.Throws<Exception>(
-                () => JsonConvert.DeserializeObject<DateTimeTestClass>(
-                    @"{""PreField"":""Pre"",""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":""Post""}",
-                    new UnixDateTimeConverter()
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<DateTimeTestClass>(
+                        @"{""PreField"":""Pre"",""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":""Post""}",
+                        new UnixDateTimeConverter()
+                    ),
                 "Cannot convert null value to System.DateTime. Path 'DateTimeField', line 1, position 38."
             );
         }
@@ -167,10 +169,11 @@ namespace Newtonsoft.Json.Tests.Converters
         public void DeserializeInvalidStringToDateTimeOffset()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<DateTimeOffset>(
-                    @"""PIE""",
-                    new UnixDateTimeConverter()
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<DateTimeOffset>(
+                        @"""PIE""",
+                        new UnixDateTimeConverter()
+                    ),
                 "Cannot convert invalid value to System.DateTimeOffset. Path '', line 1, position 5."
             );
         }

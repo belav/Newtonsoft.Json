@@ -152,9 +152,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 IgnoreSerializableAttribute = false
             };
-            JsonObjectContract contract = (JsonObjectContract)contractResolver.ResolveContract(
-                    typeof(AnswerFilterModel)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)contractResolver.ResolveContract(typeof(AnswerFilterModel));
 
             Assert.AreEqual(MemberSerialization.Fields, contract.MemberSerialization);
         }
@@ -225,10 +224,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsNull(contract.OverrideCreator);
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<AbstractTestClass>(
-                    @"{Value:'Value!'}",
-                    new JsonSerializerSettings { ContractResolver = resolver }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<AbstractTestClass>(
+                        @"{Value:'Value!'}",
+                        new JsonSerializerSettings { ContractResolver = resolver }
+                    ),
                 "Could not create an instance of type Newtonsoft.Json.Tests.TestObjects.AbstractTestClass. Type is an interface or abstract class and cannot be instantiated. Path 'Value', line 1, position 7."
             );
 
@@ -246,19 +246,19 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void AbstractListTestClass()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonArrayContract)resolver.ResolveContract(
-                    typeof(AbstractListTestClass<int>)
-                );
+            var contract =
+                (JsonArrayContract)resolver.ResolveContract(typeof(AbstractListTestClass<int>));
 
             Assert.IsFalse(contract.IsInstantiable);
             Assert.IsNull(contract.DefaultCreator);
             Assert.IsFalse(contract.HasParameterizedCreatorInternal);
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<AbstractListTestClass<int>>(
-                    @"[1,2]",
-                    new JsonSerializerSettings { ContractResolver = resolver }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<AbstractListTestClass<int>>(
+                        @"[1,2]",
+                        new JsonSerializerSettings { ContractResolver = resolver }
+                    ),
                 "Could not create an instance of type Newtonsoft.Json.Tests.TestObjects.AbstractListTestClass`1[System.Int32]. Type is an interface or abstract class and cannot be instantiated. Path '', line 1, position 1."
             );
 
@@ -309,9 +309,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void DictionaryInterfaceDefaultCreator()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonDictionaryContract)resolver.ResolveContract(
-                    typeof(IDictionary<string, int>)
-                );
+            var contract =
+                (JsonDictionaryContract)resolver.ResolveContract(typeof(IDictionary<string, int>));
 
             Assert.IsTrue(contract.IsInstantiable);
             Assert.IsNotNull(contract.DefaultCreator);
@@ -333,7 +332,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void AbstractDictionaryTestClass()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonDictionaryContract)resolver.ResolveContract(
+            var contract =
+                (JsonDictionaryContract)resolver.ResolveContract(
                     typeof(AbstractDictionaryTestClass<string, int>)
                 );
 
@@ -342,17 +342,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsFalse(contract.HasParameterizedCreatorInternal);
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<AbstractDictionaryTestClass<string, int>>(
-                    @"{key1:1,key2:2}",
-                    new JsonSerializerSettings { ContractResolver = resolver }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<AbstractDictionaryTestClass<string, int>>(
+                        @"{key1:1,key2:2}",
+                        new JsonSerializerSettings { ContractResolver = resolver }
+                    ),
                 "Could not create an instance of type Newtonsoft.Json.Tests.TestObjects.AbstractDictionaryTestClass`2[System.String,System.Int32]. Type is an interface or abstract class and cannot be instantiated. Path 'key1', line 1, position 6."
             );
 
-            contract.DefaultCreator = () => new AbstractImplementationDictionaryTestClass<
-                string,
-                int
-            >();
+            contract.DefaultCreator = () =>
+                new AbstractImplementationDictionaryTestClass<string, int>();
 
             var d = JsonConvert.DeserializeObject<AbstractDictionaryTestClass<string, int>>(
                 @"{key1:1,key2:2}",
@@ -478,9 +477,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void DeserializeDataMemberClassWithNoDataContract()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(AddressWithDataMember)
-                );
+            var contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(AddressWithDataMember));
 
             Assert.AreEqual("AddressLine1", contract.Properties[0].PropertyName);
         }
@@ -499,7 +497,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void ParameterizedCreator()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonObjectContract)resolver.ResolveContract(
+            var contract =
+                (JsonObjectContract)resolver.ResolveContract(
                     typeof(PublicParameterizedConstructorWithPropertyNameConflictWithAttribute)
                 );
 
@@ -516,7 +515,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void OverrideCreator()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonObjectContract)resolver.ResolveContract(
+            var contract =
+                (JsonObjectContract)resolver.ResolveContract(
                     typeof(MultipleParametrizedConstructorsJsonConstructor)
                 );
 
@@ -534,7 +534,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void CustomOverrideCreator()
         {
             var resolver = new DefaultContractResolver();
-            var contract = (JsonObjectContract)resolver.ResolveContract(
+            var contract =
+                (JsonObjectContract)resolver.ResolveContract(
                     typeof(MultipleParametrizedConstructorsJsonConstructor)
                 );
 
@@ -656,9 +657,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultContractResolver skipCompilerGeneratedResolver = new DefaultContractResolver
             {
-                DefaultMembersSearchFlags = BindingFlags.Instance
-                | BindingFlags.NonPublic
-                | BindingFlags.Public
+                DefaultMembersSearchFlags =
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
             };
 
             string skipCompilerGeneratedJson = JsonConvert.SerializeObject(
@@ -679,9 +679,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultContractResolver includeCompilerGeneratedResolver = new DefaultContractResolver
             {
-                DefaultMembersSearchFlags = BindingFlags.Instance
-                | BindingFlags.NonPublic
-                | BindingFlags.Public,
+                DefaultMembersSearchFlags =
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
                 SerializeCompilerGeneratedMembers = true
             };
 
@@ -711,9 +710,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void ExtensionDataGetterCanBeIteratedMultipleTimes()
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(ClassWithExtensionData)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(ClassWithExtensionData));
 
             ClassWithExtensionData myClass = new ClassWithExtensionData
             {
@@ -749,9 +747,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             DefaultContractResolver resolver = new DefaultContractResolver();
             resolver.IgnoreShouldSerializeMembers = true;
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(ClassWithShouldSerialize)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(ClassWithShouldSerialize));
 
             var property1 = contract.Properties["Prop1"];
             Assert.AreEqual(null, property1.ShouldSerialize);
@@ -765,9 +762,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(ClassWithShouldSerialize)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(ClassWithShouldSerialize));
 
             var property1 = contract.Properties["Prop1"];
             Assert.AreNotEqual(null, property1.ShouldSerialize);
@@ -806,9 +802,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonDictionaryContract c = (JsonDictionaryContract)resolver.ResolveContract(
-                    typeof(IDictionary)
-                );
+            JsonDictionaryContract c =
+                (JsonDictionaryContract)resolver.ResolveContract(typeof(IDictionary));
 
             Assert.IsNull(c.DictionaryKeyType);
             Assert.IsNull(c.DictionaryValueType);
@@ -820,9 +815,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             DefaultContractResolver resolver = new DefaultContractResolver();
             resolver.IgnoreIsSpecifiedMembers = true;
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(ClassWithIsSpecified)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(ClassWithIsSpecified));
 
             var property1 = contract.Properties["Prop1"];
             Assert.AreEqual(null, property1.GetIsSpecified);
@@ -850,9 +844,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(ClassWithIsSpecified)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(ClassWithIsSpecified));
 
             var property1 = contract.Properties["Prop1"];
             Assert.AreNotEqual(null, property1.GetIsSpecified);
@@ -880,9 +873,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(RequiredPropertyTestClass)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(RequiredPropertyTestClass));
 
             var property1 = contract.Properties["Name"];
 
@@ -895,9 +887,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(RequiredObject)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(RequiredObject));
 
             var unset = contract.Properties["UnsetProperty"];
 
@@ -915,9 +906,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DefaultContractResolver resolver = new DefaultContractResolver();
 
-            JsonObjectContract contract = (JsonObjectContract)resolver.ResolveContract(
-                    typeof(object)
-                );
+            JsonObjectContract contract =
+                (JsonObjectContract)resolver.ResolveContract(typeof(object));
 
             Assert.IsNull(contract.InternalConverter);
         }
