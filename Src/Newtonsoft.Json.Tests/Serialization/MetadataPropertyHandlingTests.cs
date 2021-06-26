@@ -156,7 +156,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 serializedString
             );
 
-            var deserializedObject = (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
+            var deserializedObject =
+                (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
                     serializedString,
                     jsonSerializerSettings
                 );
@@ -443,7 +444,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   -2147483648
 ]";
 
-            List<object> values = (List<object>)JsonConvert.DeserializeObject(
+            List<object> values =
+                (List<object>)JsonConvert.DeserializeObject(
                     json,
                     typeof(List<object>),
                     new JsonSerializerSettings
@@ -662,7 +664,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ReadAhead_TypedJValue_NoParent()
         {
-            ItemWithJTokens actual = (ItemWithJTokens)JsonConvert.DeserializeObject(
+            ItemWithJTokens actual =
+                (ItemWithJTokens)JsonConvert.DeserializeObject(
                     @"{
   ""Payload1"": 1,
   ""Payload2"": {'prop1':1,'prop2':[2]},

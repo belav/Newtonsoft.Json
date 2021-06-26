@@ -162,7 +162,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  }
             //}
 
-            xml = @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
+            xml =
+                @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
 			  <name>Alan</name>
 			  <url>http://www.google.com</url>
 			  <role json:Array='true'>Admin</role>

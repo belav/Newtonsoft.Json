@@ -198,8 +198,7 @@ namespace Newtonsoft.Json.Linq
                 else if (contentItem.Value != null)
                 {
                     if (
-                        !(existingProperty.Value
-                            is JContainer existingContainer)
+                        !(existingProperty.Value is JContainer existingContainer)
                         || existingContainer.Type != contentItem.Value.Type
                     ) {
                         if (
@@ -599,8 +598,7 @@ namespace Newtonsoft.Json.Linq
         public bool TryGetValue(
             string propertyName,
             StringComparison comparison,
-            [NotNullWhen(true)]
-            out JToken? value
+            [NotNullWhen(true)] out JToken? value
         ) {
             value = GetValue(propertyName, comparison);
             return (value != null);

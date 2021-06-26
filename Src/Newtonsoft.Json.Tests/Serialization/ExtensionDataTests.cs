@@ -331,7 +331,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         [JsonObject(
             NamingStrategyType = typeof(CamelCaseNamingStrategy),
-            NamingStrategyParameters = new object[] { true, true, true })]
+            NamingStrategyParameters = new object[] { true, true, true }
+        )]
         public class ExtensionDataWithNamingStrategyTestClass
         {
             public string Name { get; set; }

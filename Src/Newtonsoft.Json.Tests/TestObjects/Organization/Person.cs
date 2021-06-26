@@ -32,7 +32,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.Organization
         Id = "Person",
         Title = "Title!",
         Description = "JsonObjectAttribute description!",
-        MemberSerialization = MemberSerialization.OptIn)]
+        MemberSerialization = MemberSerialization.OptIn
+    )]
 #if !(DNXCORE50)
     [Description("DescriptionAttribute description!")]
 #endif

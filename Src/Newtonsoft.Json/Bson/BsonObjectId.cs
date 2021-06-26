@@ -34,7 +34,8 @@ namespace Newtonsoft.Json.Bson
     /// Represents a BSON Oid (object id).
     /// </summary>
     [Obsolete(
-        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details."
+    )]
     public class BsonObjectId
     {
         /// <summary>

@@ -582,13 +582,10 @@ namespace Newtonsoft.Json.Utilities
                 index = text.Length - 2;
             }
 
-            return (ConvertUtils.Int64TryParse(
-                text.Chars,
-                6 + text.StartIndex,
-                index - 6,
-                out ticks
-            )
-            == ParseResult.Success);
+            return (
+                ConvertUtils.Int64TryParse(text.Chars, 6 + text.StartIndex, index - 6, out ticks)
+                == ParseResult.Success
+            );
         }
 
         private static bool TryParseDateTimeMicrosoft(

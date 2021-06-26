@@ -300,8 +300,7 @@ namespace Newtonsoft.Json.Utilities
         public static bool ImplementsGenericDefinition(
             Type type,
             Type genericInterfaceDefinition,
-            [NotNullWhen(true)]
-            out Type? implementingType
+            [NotNullWhen(true)] out Type? implementingType
         ) {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
             ValidationUtils.ArgumentNotNull(
@@ -1090,10 +1089,8 @@ namespace Newtonsoft.Json.Utilities
                 PropertyInfo member = propertyInfos[i];
                 if (member.DeclaringType != targetType)
                 {
-                    PropertyInfo declaredMember = (PropertyInfo)GetMemberInfoFromType(
-                            member.DeclaringType,
-                            member
-                        );
+                    PropertyInfo declaredMember =
+                        (PropertyInfo)GetMemberInfoFromType(member.DeclaringType, member);
                     propertyInfos[i] = declaredMember;
                 }
             }
@@ -1172,8 +1169,9 @@ namespace Newtonsoft.Json.Utilities
                             p =>
                                 p.Name == subTypeProperty.Name
                                 && p.IsVirtual()
-                                && (p.GetBaseDefinition()?.DeclaringType
-                                ?? p.DeclaringType).IsAssignableFrom(subTypePropertyDeclaringType)
+                                && (
+                                    p.GetBaseDefinition()?.DeclaringType ?? p.DeclaringType
+                                ).IsAssignableFrom(subTypePropertyDeclaringType)
                         );
 
                         // don't add a virtual property that has an override

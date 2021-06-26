@@ -580,8 +580,7 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string fullTypeName,
             bool searchInterfaces,
-            [NotNullWhen(true)]
-            out Type? match
+            [NotNullWhen(true)] out Type? match
         ) {
             Type current = type;
 

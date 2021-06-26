@@ -464,9 +464,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void DeserializeNameValueCollection()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<NameValueCollectionTestClass>(
-                    "{Collection:[]}"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<NameValueCollectionTestClass>("{Collection:[]}"),
                 "Cannot create and populate list type System.Collections.Specialized.NameValueCollection. Path 'Collection', line 1, position 13."
             );
         }
@@ -1444,7 +1443,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Array3D aa = new Array3D();
             aa.Before = "Before!";
             aa.After = "After!";
-            aa.Coordinates = new[,,] {
+            aa.Coordinates = new[,,]
+            {
                 { { 1, 1, 1 }, { 1, 1, 2 } },
                 { { 1, 2, 1 }, { 1, 2, 2 } },
                 { { 2, 1, 1 }, { 2, 1, 2 } },
@@ -1465,7 +1465,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Array3DWithConverter aa = new Array3DWithConverter();
             aa.Before = "Before!";
             aa.After = "After!";
-            aa.Coordinates = new[,,] {
+            aa.Coordinates = new[,,]
+            {
                 { { 1, 1, 1 }, { 1, 1, 2 } },
                 { { 1, 2, 1 }, { 1, 2, 2 } },
                 { { 2, 1, 1 }, { 2, 1, 2 } },
@@ -1943,7 +1944,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            IList<Event1[,]> values2 = (IList<Event1[,]>)JsonConvert.DeserializeObject(
+            IList<Event1[,]> values2 =
+                (IList<Event1[,]>)JsonConvert.DeserializeObject(
                     json,
                     new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
                 );
@@ -2098,7 +2100,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 sw.GetStringBuilder().ToString()
             );
 
-            ProductCollection collectionNew = (ProductCollection)jsonSerializer.Deserialize(
+            ProductCollection collectionNew =
+                (ProductCollection)jsonSerializer.Deserialize(
                     new JsonTextReader(new StringReader(sw.GetStringBuilder().ToString())),
                     typeof(ProductCollection)
                 );
@@ -2401,11 +2404,13 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public KeyValuePair<string, string>[] Dimensions =>
                 this.metricDimensions
-                ?? (this.metricDimensions = new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Endpoint", this.Endpoint.ToString()),
-                    new KeyValuePair<string, string>("Name", this.Name)
-                });
+                ?? (
+                    this.metricDimensions = new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Endpoint", this.Endpoint.ToString()),
+                        new KeyValuePair<string, string>("Name", this.Name)
+                    }
+                );
         }
 
         public class MyClass : IList<string>
@@ -2625,7 +2630,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
                 XElement auth = root.Element(XName.Get("authenticationSuccess", ns));
 
-                if (auth == null) auth = root.Element(XName.Get("authenticationFailure", ns));
+                if (auth == null)
+                    auth = root.Element(XName.Get("authenticationFailure", ns));
 
                 XElement xNodeUser = auth.Element(XName.Get("user", ns));
 
@@ -2648,11 +2654,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                             }
                             else
                             {
-                                eduPerson[xPersonValue.Name.LocalName] = eduPerson[
-                                    xPersonValue.Name.LocalName
-                                ]
-                                + ";"
-                                + xPersonValue.Value;
+                                eduPerson[xPersonValue.Name.LocalName] =
+                                    eduPerson[xPersonValue.Name.LocalName]
+                                    + ";"
+                                    + xPersonValue.Value;
                             }
                         }
                     }
@@ -2663,13 +2668,18 @@ namespace Newtonsoft.Json.Tests.Serialization
                     this.user = casUser;
                 }
 
-                if (eduPerson.ContainsKey("domain")) this.Domain = eduPerson["domain"];
+                if (eduPerson.ContainsKey("domain"))
+                    this.Domain = eduPerson["domain"];
                 if (eduPerson.ContainsKey("organizationName"))
                     this.OrganizationName = eduPerson["organizationName"];
-                if (eduPerson.ContainsKey("mail")) this.Mail = eduPerson["mail"];
-                if (eduPerson.ContainsKey("sn")) this.Surname = eduPerson["sn"];
-                if (eduPerson.ContainsKey("gn")) this.Givenname = eduPerson["gn"];
-                if (eduPerson.ContainsKey("cn")) this.CommonName = eduPerson["cn"];
+                if (eduPerson.ContainsKey("mail"))
+                    this.Mail = eduPerson["mail"];
+                if (eduPerson.ContainsKey("sn"))
+                    this.Surname = eduPerson["sn"];
+                if (eduPerson.ContainsKey("gn"))
+                    this.Givenname = eduPerson["gn"];
+                if (eduPerson.ContainsKey("cn"))
+                    this.CommonName = eduPerson["cn"];
 
                 this.Person = eduPerson;
                 this.XMLResponce = xmlString;

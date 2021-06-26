@@ -103,7 +103,8 @@ namespace Newtonsoft.Json.Tests.Issues
             [JsonProperty(
                 PropertyName = "bar",
                 Required = Required.Default,
-                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+            )]
             [System.ComponentModel.DefaultValue("default")]
             public string Bar { get; set; }
         }

@@ -252,8 +252,7 @@ namespace Newtonsoft.Json.Serialization
                         (JsonDictionaryContract)valueContract;
                     SerializeDictionary(
                         writer,
-                        (value
-                            is IDictionary dictionary)
+                        (value is IDictionary dictionary)
                             ? dictionary
                             : dictionaryContract.CreateWrapper(value),
                         dictionaryContract,
@@ -547,8 +546,7 @@ namespace Newtonsoft.Json.Serialization
         internal static bool TryConvertToString(
             object value,
             Type type,
-            [NotNullWhen(true)]
-            out string? s
+            [NotNullWhen(true)] out string? s
         ) {
 #if HAVE_TYPE_DESCRIPTOR
             if (JsonTypeReflector.CanTypeDescriptorConvertString(type, out TypeConverter converter))
@@ -749,8 +747,7 @@ namespace Newtonsoft.Json.Serialization
             JsonContainerContract contract,
             JsonProperty? member,
             JsonProperty property,
-            [NotNullWhen(true)]
-            out JsonContract? memberContract,
+            [NotNullWhen(true)] out JsonContract? memberContract,
             out object? memberValue
         ) {
             if (
@@ -861,9 +858,11 @@ namespace Newtonsoft.Json.Serialization
             // don't make readonly fields that aren't creator parameters the referenced value because they can't be deserialized to
             if (
                 isReference
-                && (member == null
-                || member.Writable
-                || HasCreatorParameter(collectionContract, member))
+                && (
+                    member == null
+                    || member.Writable
+                    || HasCreatorParameter(collectionContract, member)
+                )
             ) {
                 WriteReferenceIdProperty(writer, contract.UnderlyingType, value);
             }
@@ -1036,8 +1035,7 @@ namespace Newtonsoft.Json.Serialization
             JsonContainerContract? collectionContract,
             JsonProperty? containerProperty
         ) {
-            object underlyingList = values
-                is IWrappedCollection wrappedCollection
+            object underlyingList = values is IWrappedCollection wrappedCollection
                 ? wrappedCollection.UnderlyingCollection
                 : values;
 
@@ -1265,10 +1263,15 @@ namespace Newtonsoft.Json.Serialization
                     PreserveReferencesHandling.Arrays
                 );
             // don't make readonly fields that aren't creator parameters the referenced value because they can't be deserialized to
-            isReference = (isReference
-            && (member == null
-            || member.Writable
-            || HasCreatorParameter(containerContract, member)));
+            isReference =
+                (
+                    isReference
+                    && (
+                        member == null
+                        || member.Writable
+                        || HasCreatorParameter(containerContract, member)
+                    )
+                );
 
             bool includeTypeDetails = ShouldWriteType(
                 TypeNameHandling.Arrays,
@@ -1444,11 +1447,13 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(Serializer._defaultValueHandling, DefaultValueHandling.Ignore)
-                && (memberValue == null
-                || MiscellaneousUtils.ValueEquals(
-                    memberValue,
-                    ReflectionUtils.GetDefaultValue(memberValue.GetType())
-                ))
+                && (
+                    memberValue == null
+                    || MiscellaneousUtils.ValueEquals(
+                        memberValue,
+                        ReflectionUtils.GetDefaultValue(memberValue.GetType())
+                    )
+                )
             ) {
                 return false;
             }
@@ -1518,8 +1523,7 @@ namespace Newtonsoft.Json.Serialization
             JsonProperty? containerProperty
         ) {
 #pragma warning disable CS8600, CS8602, CS8604
-            object underlyingDictionary = values
-                is IWrappedDictionary wrappedDictionary
+            object underlyingDictionary = values is IWrappedDictionary wrappedDictionary
                 ? wrappedDictionary.UnderlyingDictionary
                 : values;
 

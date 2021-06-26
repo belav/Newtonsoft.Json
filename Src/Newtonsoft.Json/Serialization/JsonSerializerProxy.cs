@@ -119,7 +119,8 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [Obsolete(
-            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead."
+        )]
         public override FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => _serializer.TypeNameAssemblyFormat;

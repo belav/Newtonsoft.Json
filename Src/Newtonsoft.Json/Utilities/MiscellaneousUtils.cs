@@ -104,8 +104,7 @@ namespace Newtonsoft.Json.Utilities
                 return "{null}";
             }
 
-            return (value
-                is string s) ? @"""" + s + @"""" : value!.ToString();
+            return (value is string s) ? @"""" + s + @"""" : value!.ToString();
         }
 
         public static int ByteArrayCompare(byte[] a1, byte[] a2)

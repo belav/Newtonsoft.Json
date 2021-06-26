@@ -203,7 +203,8 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <value>The type name assembly format.</value>
         [Obsolete(
-            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead."
+        )]
         public FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => (FormatterAssemblyStyle)TypeNameAssemblyFormatHandling;
@@ -250,7 +251,8 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <value>The reference resolver.</value>
         [Obsolete(
-            "ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver")]
+            "ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver"
+        )]
         public IReferenceResolver? ReferenceResolver
         {
             get => ReferenceResolverProvider?.Invoke();

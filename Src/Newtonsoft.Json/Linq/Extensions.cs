@@ -266,8 +266,7 @@ namespace Newtonsoft.Json.Linq
             }
 
             if (
-                token
-                    is U castValue
+                token is U castValue
                 // don't want to cast JValue to its interfaces, want to get the internal value
                 && typeof(U) != typeof(IComparable)
                 && typeof(U) != typeof(IFormattable)

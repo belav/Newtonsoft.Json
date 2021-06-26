@@ -51,12 +51,16 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 )
                 .Distinct();
 
-            return (from c in converters
-            let converter = (TypeConverter)Activator.CreateInstance(
-                Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
-            )
-            where converter.CanConvertFrom(typeof(string)) && converter.CanConvertTo(typeof(string))
-            select converter).FirstOrDefault();
+            return (
+                from c in converters
+                let converter = (TypeConverter)Activator.CreateInstance(
+                    Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
+                )
+                where
+                    converter.CanConvertFrom(typeof(string))
+                    && converter.CanConvertTo(typeof(string))
+                select converter
+            ).FirstOrDefault();
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

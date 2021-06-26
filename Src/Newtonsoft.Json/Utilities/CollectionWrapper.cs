@@ -325,8 +325,10 @@ namespace Newtonsoft.Json.Utilities
         {
             if (
                 !(value is T)
-                && (value != null
-                || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T))))
+                && (
+                    value != null
+                    || (typeof(T).IsValueType() && !ReflectionUtils.IsNullableType(typeof(T)))
+                )
             ) {
                 return false;
             }

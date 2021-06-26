@@ -135,9 +135,8 @@ namespace Newtonsoft.Json
                     );
                 }
 
-                _serializationBinder = value
-                as ISerializationBinder
-                ?? new SerializationBinderAdapter(value);
+                _serializationBinder =
+                    value as ISerializationBinder ?? new SerializationBinderAdapter(value);
             }
         }
 
@@ -210,7 +209,8 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <value>The type name assembly format.</value>
         [Obsolete(
-            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead."
+        )]
         public virtual FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => (FormatterAssemblyStyle)_typeNameAssemblyFormatHandling;
@@ -845,10 +845,9 @@ namespace Newtonsoft.Json
                 out string? previousDateFormatString
             );
 
-            TraceJsonReader? traceJsonReader = (TraceWriter != null
-            && TraceWriter.LevelFilter >= TraceLevel.Verbose)
-                ? CreateTraceJsonReader(reader)
-                : null;
+            TraceJsonReader? traceJsonReader = (
+                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
+            ) ? CreateTraceJsonReader(reader) : null;
 
             JsonSerializerInternalReader serializerReader = new JsonSerializerInternalReader(this);
             serializerReader.Populate(traceJsonReader ?? reader, target);
@@ -937,10 +936,9 @@ namespace Newtonsoft.Json
                 out string? previousDateFormatString
             );
 
-            TraceJsonReader? traceJsonReader = (TraceWriter != null
-            && TraceWriter.LevelFilter >= TraceLevel.Verbose)
-                ? CreateTraceJsonReader(reader)
-                : null;
+            TraceJsonReader? traceJsonReader = (
+                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
+            ) ? CreateTraceJsonReader(reader) : null;
 
             JsonSerializerInternalReader serializerReader = new JsonSerializerInternalReader(this);
             object? value = serializerReader.Deserialize(
@@ -1046,8 +1044,7 @@ namespace Newtonsoft.Json
             {
                 if (
                     textReader.PropertyNameTable == null
-                    && _contractResolver
-                        is DefaultContractResolver resolver
+                    && _contractResolver is DefaultContractResolver resolver
                 ) {
                     textReader.PropertyNameTable = resolver.GetNameTable();
                 }
@@ -1090,11 +1087,9 @@ namespace Newtonsoft.Json
             }
 
             if (
-                reader
-                    is JsonTextReader textReader
+                reader is JsonTextReader textReader
                 && textReader.PropertyNameTable != null
-                && _contractResolver
-                    is DefaultContractResolver resolver
+                && _contractResolver is DefaultContractResolver resolver
                 && textReader.PropertyNameTable == resolver.GetNameTable()
             ) {
                 textReader.PropertyNameTable = null;
@@ -1229,10 +1224,9 @@ namespace Newtonsoft.Json
                 jsonWriter.DateFormatString = _dateFormatString;
             }
 
-            TraceJsonWriter? traceJsonWriter = (TraceWriter != null
-            && TraceWriter.LevelFilter >= TraceLevel.Verbose)
-                ? new TraceJsonWriter(jsonWriter)
-                : null;
+            TraceJsonWriter? traceJsonWriter = (
+                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
+            ) ? new TraceJsonWriter(jsonWriter) : null;
 
             JsonSerializerInternalWriter serializerWriter = new JsonSerializerInternalWriter(this);
             serializerWriter.Serialize(traceJsonWriter ?? jsonWriter, value, objectType);

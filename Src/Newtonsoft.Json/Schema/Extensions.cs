@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Schema
     /// </note>
     /// </summary>
     [Obsolete(
-        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public static class Extensions
     {
         /// <summary>
@@ -58,7 +59,8 @@ namespace Newtonsoft.Json.Schema
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete(
-            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+        )]
         public static bool IsValid(this JToken source, JsonSchema schema)
         {
             bool valid = true;
@@ -87,7 +89,8 @@ namespace Newtonsoft.Json.Schema
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete(
-            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+        )]
         public static bool IsValid(
             this JToken source,
             JsonSchema schema,
@@ -112,7 +115,8 @@ namespace Newtonsoft.Json.Schema
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
         [Obsolete(
-            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+        )]
         public static void Validate(this JToken source, JsonSchema schema)
         {
             source.Validate(schema, null);
@@ -130,7 +134,8 @@ namespace Newtonsoft.Json.Schema
         /// <param name="schema">The schema to test with.</param>
         /// <param name="validationEventHandler">The validation event handler.</param>
         [Obsolete(
-            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+            "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+        )]
         public static void Validate(
             this JToken source,
             JsonSchema schema,

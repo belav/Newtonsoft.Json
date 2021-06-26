@@ -188,10 +188,8 @@ namespace Newtonsoft.Json.Utilities
         internal static bool TryBuildImmutableForArrayContract(
             Type underlyingType,
             Type collectionItemType,
-            [NotNullWhen(true)]
-            out Type? createdType,
-            [NotNullWhen(true)]
-            out ObjectConstructor<object>? parameterizedCreator
+            [NotNullWhen(true)] out Type? createdType,
+            [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
         ) {
             if (underlyingType.IsGenericType())
             {
@@ -219,9 +217,10 @@ namespace Newtonsoft.Json.Utilities
                         {
                             createdType = createdTypeDefinition.MakeGenericType(collectionItemType);
                             MethodInfo method = mb.MakeGenericMethod(collectionItemType);
-                            parameterizedCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                method
-                            );
+                            parameterizedCreator =
+                                JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
+                                    method
+                                );
                             return true;
                         }
                     }
@@ -237,10 +236,8 @@ namespace Newtonsoft.Json.Utilities
             Type underlyingType,
             Type keyItemType,
             Type valueItemType,
-            [NotNullWhen(true)]
-            out Type? createdType,
-            [NotNullWhen(true)]
-            out ObjectConstructor<object>? parameterizedCreator
+            [NotNullWhen(true)] out Type? createdType,
+            [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
         ) {
             if (underlyingType.IsGenericType())
             {
@@ -280,9 +277,10 @@ namespace Newtonsoft.Json.Utilities
                                 valueItemType
                             );
                             MethodInfo method = mb.MakeGenericMethod(keyItemType, valueItemType);
-                            parameterizedCreator = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                method
-                            );
+                            parameterizedCreator =
+                                JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
+                                    method
+                                );
                             return true;
                         }
                     }

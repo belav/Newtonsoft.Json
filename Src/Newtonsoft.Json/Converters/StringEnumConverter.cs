@@ -51,7 +51,8 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <value><c>true</c> if the written enum text will be camel case; otherwise, <c>false</c>.</value>
         [Obsolete(
-            "StringEnumConverter.CamelCaseText is obsolete. Set StringEnumConverter.NamingStrategy with CamelCaseNamingStrategy instead.")]
+            "StringEnumConverter.CamelCaseText is obsolete. Set StringEnumConverter.NamingStrategy with CamelCaseNamingStrategy instead."
+        )]
         public bool CamelCaseText
         {
             get => NamingStrategy is CamelCaseNamingStrategy ? true : false;
@@ -101,7 +102,8 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <param name="camelCaseText"><c>true</c> if the written enum text will be camel case; otherwise, <c>false</c>.</param>
         [Obsolete(
-            "StringEnumConverter(bool) is obsolete. Create a converter with StringEnumConverter(NamingStrategy, bool) instead.")]
+            "StringEnumConverter(bool) is obsolete. Create a converter with StringEnumConverter(NamingStrategy, bool) instead."
+        )]
         public StringEnumConverter(bool camelCaseText)
         {
             if (camelCaseText)

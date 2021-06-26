@@ -59,7 +59,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(
+            JArray a =
+                (JArray)await JToken.ReadFromAsync(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -103,7 +104,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JValue v = (JValue)await JToken.ReadFromAsync(
+            JValue v =
+                (JValue)await JToken.ReadFromAsync(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Load }
                 );
@@ -130,7 +132,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(
+            JArray a =
+                (JArray)await JToken.ReadFromAsync(
                     jsonReader,
                     new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
                 );

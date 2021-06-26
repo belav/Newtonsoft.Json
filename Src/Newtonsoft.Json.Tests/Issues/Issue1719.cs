@@ -116,7 +116,8 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             [JsonProperty(
                 DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
-                NullValueHandling = NullValueHandling.Include)]
+                NullValueHandling = NullValueHandling.Include
+            )]
             public B? E { get; set; }
 
             [JsonExtensionData]

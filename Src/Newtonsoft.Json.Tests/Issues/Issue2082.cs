@@ -60,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Issues
                     {
                         NamingStrategy = namingStrategy
                     },
-                    Converters = new[] {
+                    Converters = new[]
+                    {
                         new StringEnumConverter { NamingStrategy = namingStrategy }
                     }
                 }

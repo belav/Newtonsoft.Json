@@ -33,7 +33,8 @@ namespace Newtonsoft.Json
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+        AllowMultiple = false
+    )]
     public sealed class JsonPropertyAttribute : Attribute
     {
         // yuck. can't set nullable properties on an attribute in C#

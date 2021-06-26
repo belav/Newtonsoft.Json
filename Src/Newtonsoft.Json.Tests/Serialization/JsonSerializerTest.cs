@@ -1403,7 +1403,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             serializerProxy.CheckAdditionalContent = true;
             Assert.AreEqual(true, serializerProxy.CheckAdditionalContent);
 
-            serializerProxy.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+            serializerProxy.ConstructorHandling =
+                ConstructorHandling.AllowNonPublicDefaultConstructor;
             Assert.AreEqual(
                 ConstructorHandling.AllowNonPublicDefaultConstructor,
                 serializerProxy.ConstructorHandling
@@ -1948,10 +1949,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
-                    output,
-                    typeof(Product)
-                );
+            Product deserializedProduct =
+                (Product)JsonConvert.DeserializeObject(output, typeof(Product));
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(new DateTime(2008, 12, 28), deserializedProduct.ExpiryDate);
@@ -2012,10 +2011,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = Encoding.UTF8.GetString(data, 0, data.Length);
 #endif
 
-            Dictionary<string, object> deserializedDictionary = (Dictionary<
-                    string,
-                    object
-                >)JsonConvert.DeserializeObject(jsonText, typeof(Dictionary<string, object>));
+            Dictionary<string, object> deserializedDictionary =
+                (Dictionary<string, object>)JsonConvert.DeserializeObject(
+                    jsonText,
+                    typeof(Dictionary<string, object>)
+                );
             DateTime deserializedDate = (DateTime)deserializedDictionary["date"];
 
             Assert.AreEqual(dateValue, deserializedDate);
@@ -2280,9 +2280,8 @@ keyword such as type of business.""
             string json = @"[""PRE\u003cPOST""]";
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(List<string>));
-            List<string> dataContractResult = (List<string>)s.ReadObject(
-                    new MemoryStream(Encoding.UTF8.GetBytes(json))
-                );
+            List<string> dataContractResult =
+                (List<string>)s.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
             List<string> jsonNetResult = JsonConvert.DeserializeObject<List<string>>(json);
 
@@ -2302,9 +2301,8 @@ keyword such as type of business.""
 #endif
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(List<string>));
-            List<string> dataContractResult = (List<string>)s.ReadObject(
-                    new MemoryStream(Encoding.UTF8.GetBytes(json))
-                );
+            List<string> dataContractResult =
+                (List<string>)s.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
             List<string> jsonNetResult = JsonConvert.DeserializeObject<List<string>>(json);
 
@@ -2502,10 +2500,8 @@ keyword such as type of business.""
             JsonSerializer s = new JsonSerializer();
             s.ObjectCreationHandling = ObjectCreationHandling.Replace;
 
-            ClassWithArray wibble = (ClassWithArray)s.Deserialize(
-                    new StringReader(json),
-                    typeof(ClassWithArray)
-                );
+            ClassWithArray wibble =
+                (ClassWithArray)s.Deserialize(new StringReader(json), typeof(ClassWithArray));
 
             Assert.AreEqual("hello", wibble.Foo);
 
@@ -2573,7 +2569,8 @@ keyword such as type of business.""
   ""Char"": ""\u0000""
 }";
 #elif !(PORTABLE || DNXCORE50) || NETSTANDARD1_3
-            expected = @"{
+            expected =
+                @"{
   ""String"": ""string"",
   ""Int32"": 2147483647,
   ""UInt32"": 4294967295,
@@ -3213,7 +3210,8 @@ keyword such as type of business.""
             JaggedArray aa = new JaggedArray();
             aa.Before = "Before!";
             aa.After = "After!";
-            aa.Coordinates = new[] {
+            aa.Coordinates = new[]
+            {
                 new[] { 1, 1 },
                 new[] { 1, 2 },
                 new[] { 2, 1 },
@@ -3789,10 +3787,8 @@ keyword such as type of business.""
         /*comment11*/ ] /*comment12*/
       } /*comment13*/";
 
-            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
-                    json,
-                    typeof(Product)
-                );
+            Product deserializedProduct =
+                (Product)JsonConvert.DeserializeObject(json, typeof(Product));
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(
@@ -4635,14 +4631,15 @@ Path '', line 1, position 1."
             string json = "{'$id':'1',key1:'value1',key2:'value2',key3:'value3'}";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<DictionaryWithNoDefaultConstructor>(
-                    json,
-                    new JsonSerializerSettings
-                    {
-                        PreserveReferencesHandling = PreserveReferencesHandling.All,
-                        MetadataPropertyHandling = MetadataPropertyHandling.Default
-                    }
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<DictionaryWithNoDefaultConstructor>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.All,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Default
+                        }
+                    ),
                 "Cannot preserve reference to readonly dictionary, or dictionary created from a non-default constructor: Newtonsoft.Json.Tests.TestObjects.DictionaryWithNoDefaultConstructor. Path 'key1', line 1, position 16."
             );
         }
@@ -5578,7 +5575,8 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeNullableArray()
         {
-            double?[] d = (double?[])JsonConvert.DeserializeObject(
+            double?[] d =
+                (double?[])JsonConvert.DeserializeObject(
                     @"[
   2.4,
   4.3,
@@ -5631,10 +5629,8 @@ Path '', line 1, position 1."
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            ByteArrayTestClass[] z = (ByteArrayTestClass[])serializer1.Deserialize(
-                    reader,
-                    typeof(ByteArrayTestClass[])
-                );
+            ByteArrayTestClass[] z =
+                (ByteArrayTestClass[])serializer1.Deserialize(reader, typeof(ByteArrayTestClass[]));
             Assert.AreEqual(2, z.Length);
             Assert.AreEqual(0, z[0].Prop1.Length);
             Assert.AreEqual(0, z[1].Prop1.Length);
@@ -7102,7 +7098,8 @@ Path '', line 1, position 1."
                 {
                     JsonConvert.DeserializeObject<double>(null);
                 },
-                new[] {
+                new[]
+                {
                     "Value cannot be null." + Environment.NewLine + "Parameter name: value",
                     "Argument cannot be null." + Environment.NewLine + "Parameter name: value", // mono
                     "Value cannot be null. (Parameter 'value')"
@@ -7118,7 +7115,8 @@ Path '', line 1, position 1."
                 {
                     JsonConvert.DeserializeObject(null);
                 },
-                new[] {
+                new[]
+                {
                     "Value cannot be null." + Environment.NewLine + "Parameter name: value",
                     "Argument cannot be null." + Environment.NewLine + "Parameter name: value", // mono
                     "Value cannot be null. (Parameter 'value')"
@@ -7269,7 +7267,8 @@ Path '', line 1, position 1."
             //  ":::SIZES:::": [ ":::SMALL:::", ":::MEDIUM:::", ":::LARGE:::" ]
             //}
 
-            Color[] colors = new[] {
+            Color[] colors = new[]
+            {
                 Color.Blue,
                 Color.Red,
                 Color.Yellow,
@@ -7672,7 +7671,8 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeEmptyJsonString()
         {
-            string s = (string)new JsonSerializer().Deserialize(
+            string s =
+                (string)new JsonSerializer().Deserialize(
                     new JsonTextReader(new StringReader("''"))
                 );
             Assert.AreEqual("", s);
@@ -7991,7 +7991,8 @@ lines.*/
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
+            ItemConverterTestClass mt =
+                (ItemConverterTestClass)serializer.Deserialize(
                     reader,
                     typeof(ItemConverterTestClass)
                 );
@@ -8010,7 +8011,8 @@ This is just junk, though.";
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
+            ItemConverterTestClass mt =
+                (ItemConverterTestClass)serializer.Deserialize(
                     reader,
                     typeof(ItemConverterTestClass)
                 );
@@ -8457,9 +8459,10 @@ This is just junk, though.";
         public void NoConstructorReadOnlyDictionaryTest()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<NoConstructorReadOnlyDictionary<int, int>>(
-                    "{'1':1}"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<NoConstructorReadOnlyDictionary<int, int>>(
+                        "{'1':1}"
+                    ),
                 "Cannot deserialize readonly or fixed size dictionary: Newtonsoft.Json.Tests.TestObjects.NoConstructorReadOnlyDictionary`2[System.Int32,System.Int32]. Path '1', line 1, position 5."
             );
         }
@@ -9499,9 +9502,10 @@ This is just junk, though.";
         public void StringEmptyValue()
         {
             ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
-                    "{ A: , B: 1, C: 123, D: 1.23, E: 3.45, F: null }"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
+                        "{ A: , B: 1, C: 123, D: 1.23, E: 3.45, F: null }"
+                    ),
                 "Unexpected character encountered while parsing value: ,. Path 'A', line 1, position 6."
             );
         }
@@ -9510,9 +9514,10 @@ This is just junk, though.";
         public void NullableIntEmptyValue()
         {
             ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
-                    "{ A: \"\", B: , C: 123, D: 1.23, E: 3.45, F: null }"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
+                        "{ A: \"\", B: , C: 123, D: 1.23, E: 3.45, F: null }"
+                    ),
                 "Unexpected character encountered while parsing value: ,. Path 'B', line 1, position 13."
             );
         }
@@ -9521,9 +9526,10 @@ This is just junk, though.";
         public void NullableLongEmptyValue()
         {
             ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
-                    "{ A: \"\", B: 1, C: , D: 1.23, E: 3.45, F: null }"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
+                        "{ A: \"\", B: 1, C: , D: 1.23, E: 3.45, F: null }"
+                    ),
                 "An undefined token is not a valid System.Nullable`1[System.Int64]. Path 'C', line 1, position 18."
             );
         }
@@ -9532,9 +9538,10 @@ This is just junk, though.";
         public void NullableDecimalEmptyValue()
         {
             ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
-                    "{ A: \"\", B: 1, C: 123, D: , E: 3.45, F: null }"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
+                        "{ A: \"\", B: 1, C: 123, D: , E: 3.45, F: null }"
+                    ),
                 "Unexpected character encountered while parsing value: ,. Path 'D', line 1, position 27."
             );
         }
@@ -9543,9 +9550,10 @@ This is just junk, though.";
         public void NullableDoubleEmptyValue()
         {
             ExceptionAssert.Throws<JsonReaderException>(
-                () => JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
-                    "{ A: \"\", B: 1, C: 123, D: 1.23, E: , F: null }"
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<EmptyJsonValueTestClass>(
+                        "{ A: \"\", B: 1, C: 123, D: 1.23, E: , F: null }"
+                    ),
                 "Unexpected character encountered while parsing value: ,. Path 'E', line 1, position 36."
             );
         }

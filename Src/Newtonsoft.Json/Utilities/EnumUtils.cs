@@ -65,7 +65,8 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f = enumType.GetField(
+                FieldInfo f =
+                    enumType.GetField(
                         name,
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
                     )!;
@@ -146,8 +147,7 @@ namespace Newtonsoft.Json.Utilities
             Type enumType,
             object value,
             bool camelCase,
-            [NotNullWhen(true)]
-            out string? name
+            [NotNullWhen(true)] out string? name
         ) {
             return TryToString(
                 enumType,
@@ -161,8 +161,7 @@ namespace Newtonsoft.Json.Utilities
             Type enumType,
             object value,
             NamingStrategy? namingStrategy,
-            [NotNullWhen(true)]
-            out string? name
+            [NotNullWhen(true)] out string? name
         ) {
             EnumInfo enumInfo = ValuesAndNamesPerEnum.Get(
                 new StructMultiKey<Type, NamingStrategy?>(enumType, namingStrategy)

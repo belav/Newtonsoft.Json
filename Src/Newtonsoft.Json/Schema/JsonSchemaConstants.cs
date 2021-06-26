@@ -31,7 +31,8 @@ using System.Collections.Generic;
 namespace Newtonsoft.Json.Schema
 {
     [Obsolete(
-        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     internal static class JsonSchemaConstants
     {
         public const string TypePropertyName = "type";

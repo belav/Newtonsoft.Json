@@ -249,7 +249,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     "{}",
                     new JsonSerializerSettings()
                     {
-                        ContractResolver = ConstructorParameterDefaultStringValueContractResolver.Instance
+                        ContractResolver =
+                            ConstructorParameterDefaultStringValueContractResolver.Instance
                     }
                 );
 

@@ -55,7 +55,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectEvents()
         {
-            SerializationEventTestObject[] objs = new[] {
+            SerializationEventTestObject[] objs = new[]
+            {
                 new SerializationEventTestObject(),
                 new DerivedSerializationEventTestObject()
             };
@@ -100,10 +101,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                 );
                 o["Member6"] = "Dummy text for error";
 
-                obj = (SerializationEventTestObject)JsonConvert.DeserializeObject(
-                    o.ToString(),
-                    obj.GetType()
-                );
+                obj =
+                    (SerializationEventTestObject)JsonConvert.DeserializeObject(
+                        o.ToString(),
+                        obj.GetType()
+                    );
 
                 Assert.AreEqual(11, obj.Member1);
                 Assert.AreEqual(

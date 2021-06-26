@@ -2212,11 +2212,14 @@ namespace Newtonsoft.Json
             JsonToken numberType;
 
             bool singleDigit = (char.IsDigit(firstChar) && _stringReference.Length == 1);
-            bool nonBase10 = (firstChar == '0'
-                && _stringReference.Length > 1
-                && _stringReference.Chars[_stringReference.StartIndex + 1] != '.'
-                && _stringReference.Chars[_stringReference.StartIndex + 1] != 'e'
-                && _stringReference.Chars[_stringReference.StartIndex + 1] != 'E');
+            bool nonBase10 =
+                (
+                    firstChar == '0'
+                    && _stringReference.Length > 1
+                    && _stringReference.Chars[_stringReference.StartIndex + 1] != '.'
+                    && _stringReference.Chars[_stringReference.StartIndex + 1] != 'e'
+                    && _stringReference.Chars[_stringReference.StartIndex + 1] != 'E'
+                );
 
             switch (readType)
             {

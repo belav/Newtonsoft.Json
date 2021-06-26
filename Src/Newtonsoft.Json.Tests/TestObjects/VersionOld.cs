@@ -96,8 +96,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             return object.ReferenceEquals(value, this)
                 ? 0
-                : value
-                        is null
+                : value is null
                         ? 1
                         : _Major != value._Major
                                 ? (_Major > value._Major ? 1 : -1)
@@ -113,12 +112,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public bool Equals(VersionOld obj)
         {
             return object.ReferenceEquals(obj, this)
-                || (!(obj
-                    is null)
-                && _Major == obj._Major
-                && _Minor == obj._Minor
-                && _Build == obj._Build
-                && _Revision == obj._Revision);
+                || (
+                    !(obj is null)
+                    && _Major == obj._Major
+                    && _Minor == obj._Minor
+                    && _Build == obj._Build
+                    && _Revision == obj._Revision
+                );
         }
     }
 }

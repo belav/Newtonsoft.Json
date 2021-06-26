@@ -155,7 +155,8 @@ namespace Newtonsoft.Json.Tests.Converters
             typeof(StringEnumConverter),
             typeof(CamelCaseNamingStrategy),
             new object[0],
-            false)]
+            false
+        )]
         public enum NotAllowIntegerValuesEnum
         {
             Foo = 0,
@@ -475,7 +476,8 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(NamedEnum.First, c.Enum);
 
-            json = @"{
+            json =
+                @"{
   ""Enum"": ""Third""
 }";
 
@@ -597,8 +599,8 @@ Parameter name: namingStrategyType",
         public void SerializeNegativeFlagsEnum()
         {
             NegativeFlagsEnumClass negativeEnumClass = new NegativeFlagsEnumClass();
-            negativeEnumClass.Value1 = NegativeFlagsEnum.NegativeFour
-            | NegativeFlagsEnum.NegativeTwo;
+            negativeEnumClass.Value1 =
+                NegativeFlagsEnum.NegativeFour | NegativeFlagsEnum.NegativeTwo;
             negativeEnumClass.Value2 = NegativeFlagsEnum.Two | NegativeFlagsEnum.Four;
 
             string json = JsonConvert.SerializeObject(
@@ -931,10 +933,11 @@ Parameter name: namingStrategyType",
         public void DuplicateNameEnumTest()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<DuplicateNameEnum>(
-                    "'foo_bar'",
-                    new StringEnumConverter()
-                ),
+                () =>
+                    JsonConvert.DeserializeObject<DuplicateNameEnum>(
+                        "'foo_bar'",
+                        new StringEnumConverter()
+                    ),
                 @"Error converting value ""foo_bar"" to type 'Newtonsoft.Json.Tests.Converters.DuplicateNameEnum'. Path '', line 1, position 9."
             );
         }
@@ -985,7 +988,8 @@ Parameter name: namingStrategyType",
     <Value2>foo_bar</Value2>
 </DuplicateEnumNameTestClass>";
 
-                    var o = (DuplicateEnumNameTestClass)s.ReadObject(
+                    var o =
+                        (DuplicateEnumNameTestClass)s.ReadObject(
                             new MemoryStream(Encoding.UTF8.GetBytes(xml))
                         );
 
