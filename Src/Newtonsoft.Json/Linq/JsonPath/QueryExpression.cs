@@ -137,8 +137,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                                 return true;
                             }
                         }
-                    }
-                    while (leftResults.MoveNext());
+                    } while (leftResults.MoveNext());
                 }
             }
 
@@ -283,7 +282,6 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 case JTokenType.Date:
                     using (StringWriter writer = StringUtils.CreateStringWriter(64))
                     {
-
 #if HAVE_DATE_TIME_OFFSET
                         if (value.Value is DateTimeOffset offset)
                         {

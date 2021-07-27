@@ -88,7 +88,8 @@ namespace Newtonsoft.Json.Serialization
         ) {
             NullValueHandling resolvedNullValueHandling =
                 property.NullValueHandling
-                ?? containerContract?.ItemNullValueHandling ?? Serializer._nullValueHandling;
+                ?? containerContract?.ItemNullValueHandling
+                ?? Serializer._nullValueHandling;
 
             return resolvedNullValueHandling;
         }

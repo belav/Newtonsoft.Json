@@ -415,11 +415,9 @@ Parameter name: namingStrategyType",
                 json
             );
 
-            EnumContainer<NamedEnumWithComma> c2 =
-                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                    json,
-                    new StringEnumConverter()
-                );
+            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<
+                EnumContainer<NamedEnumWithComma>
+            >(json, new StringEnumConverter());
             Assert.AreEqual(NamedEnumWithComma.Third, c2.Enum);
         }
 
@@ -443,22 +441,18 @@ Parameter name: namingStrategyType",
                 json
             );
 
-            EnumContainer<NamedEnumWithComma> c2 =
-                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                    json,
-                    new StringEnumConverter()
-                );
+            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<
+                EnumContainer<NamedEnumWithComma>
+            >(json, new StringEnumConverter());
             Assert.AreEqual(NamedEnumWithComma.JustComma, c2.Enum);
         }
 
         [Test]
         public void NamedEnumCommaCaseInsensitiveTest()
         {
-            EnumContainer<NamedEnumWithComma> c2 =
-                JsonConvert.DeserializeObject<EnumContainer<NamedEnumWithComma>>(
-                    @"{""Enum"":"",THIRD""}",
-                    new StringEnumConverter()
-                );
+            EnumContainer<NamedEnumWithComma> c2 = JsonConvert.DeserializeObject<
+                EnumContainer<NamedEnumWithComma>
+            >(@"{""Enum"":"",THIRD""}", new StringEnumConverter());
             Assert.AreEqual(NamedEnumWithComma.Third, c2.Enum);
         }
 
@@ -780,11 +774,9 @@ Parameter name: namingStrategyType",
 }";
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            EnumContainer<FlagsTestEnum> c =
-                JsonConvert.DeserializeObject<EnumContainer<FlagsTestEnum>>(
-                    json,
-                    new StringEnumConverter { CamelCaseText = true }
-                );
+            EnumContainer<FlagsTestEnum> c = JsonConvert.DeserializeObject<
+                EnumContainer<FlagsTestEnum>
+            >(json, new StringEnumConverter { CamelCaseText = true });
 #pragma warning restore CS0618 // Type or member is obsolete
             Assert.AreEqual(FlagsTestEnum.First | FlagsTestEnum.Second, c.Enum);
         }

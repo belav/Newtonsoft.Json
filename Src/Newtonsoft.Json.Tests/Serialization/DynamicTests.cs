@@ -146,14 +146,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + expandoObjectTypeName
-                + @""",
+                    + expandoObjectTypeName
+                    + @""",
   ""Text"": ""Text!"",
   ""Integer"": 2147483647,
   ""DynamicChildObject"": {
     ""$type"": """
-                + dynamicChildObjectTypeName
-                + @""",
+                    + dynamicChildObjectTypeName
+                    + @""",
     ""Text"": ""Child text!"",
     ""Integer"": -2147483648
   }

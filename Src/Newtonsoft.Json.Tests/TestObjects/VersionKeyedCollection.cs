@@ -53,10 +53,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             Messages.Add(
                 errorContext.Path
-                + " - Error message for member "
-                + errorContext.Member
-                + " = "
-                + errorContext.Error.Message
+                    + " - Error message for member "
+                    + errorContext.Member
+                    + " = "
+                    + errorContext.Error.Message
             );
             errorContext.Handled = true;
         }

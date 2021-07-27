@@ -1838,8 +1838,7 @@ third line",
     'DVD read/writer',
     ""500 gigabyte hard drive""
   ]
-}"
-                + '\n';
+}" + '\n';
 
             object o = JsonConvert.DeserializeObject(input);
         }

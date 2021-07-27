@@ -69,9 +69,9 @@ namespace Newtonsoft.Json.Tests.Issues
                 "value__",
                 typeof(int),
                 FieldAttributes.FamANDAssem
-                | FieldAttributes.Family
-                | FieldAttributes.SpecialName
-                | FieldAttributes.RTSpecialName
+                    | FieldAttributes.Family
+                    | FieldAttributes.SpecialName
+                    | FieldAttributes.RTSpecialName
             );
 
             FieldBuilder fieldBuilder = typeBuilder.DefineField(

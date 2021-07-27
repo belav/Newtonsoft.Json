@@ -1013,12 +1013,12 @@ Newtonsoft.Json Error: 0 : Error!
             );
             Assert.AreEqual(
                 "Writing type name '"
-                + ReflectionUtils.GetTypeName(
-                    typeof(List<object>),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + "' for System.Collections.Generic.List`1[System.Object]. Path ''.",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(List<object>),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + "' for System.Collections.Generic.List`1[System.Object]. Path ''.",
                 traceWriter.TraceRecords[1].Message
             );
             Assert.AreEqual(
@@ -1027,12 +1027,12 @@ Newtonsoft.Json Error: 0 : Error!
             );
             Assert.AreEqual(
                 "Writing type name '"
-                + ReflectionUtils.GetTypeName(
-                    typeof(Dictionary<string, string>),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + "' for System.Collections.Generic.Dictionary`2[System.String,System.String]. Path '$values[0]'.",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(Dictionary<string, string>),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + "' for System.Collections.Generic.Dictionary`2[System.String,System.String]. Path '$values[0]'.",
                 traceWriter.TraceRecords[3].Message
             );
             Assert.AreEqual(
@@ -1045,12 +1045,12 @@ Newtonsoft.Json Error: 0 : Error!
             );
             Assert.AreEqual(
                 "Writing type name '"
-                + ReflectionUtils.GetTypeName(
-                    typeof(VersionOld),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + "' for Newtonsoft.Json.Tests.TestObjects.VersionOld. Path '$values[1]'.",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(VersionOld),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + "' for Newtonsoft.Json.Tests.TestObjects.VersionOld. Path '$values[1]'.",
                 traceWriter.TraceRecords[6].Message
             );
             Assert.AreEqual(

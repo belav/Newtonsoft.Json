@@ -1610,8 +1610,7 @@ _____'propertyName': NaN,
                 }
 
                 c++;
-            }
-            while (c != char.MaxValue);
+            } while (c != char.MaxValue);
         }
 
         private const string EscapedUnicodeText = "!";

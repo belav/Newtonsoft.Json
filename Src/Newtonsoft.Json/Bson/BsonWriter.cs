@@ -246,7 +246,6 @@ namespace Newtonsoft.Json.Bson
         /// <param name="value">The <see cref="Object"/> value to write.</param>
         public override void WriteValue(object value)
         {
-
 #if HAVE_BIG_INTEGER
             if (value is BigInteger i)
             {

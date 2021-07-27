@@ -771,8 +771,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                         await reader.ReadAsInt32Async();
                     },
                     "JSON integer "
-                    + total
-                    + " is too large or small for an Int32. Path '', line 1, position 10."
+                        + total
+                        + " is too large or small for an Int32. Path '', line 1, position 10."
                 );
             }
         }
@@ -801,8 +801,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                         await reader.ReadAsInt32Async();
                     },
                     "JSON integer "
-                    + total
-                    + " is too large or small for an Int32. Path '', line 1, position 11."
+                        + total
+                        + " is too large or small for an Int32. Path '', line 1, position 11."
                 );
             }
         }

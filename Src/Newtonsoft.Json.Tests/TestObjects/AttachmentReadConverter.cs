@@ -46,11 +46,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             var attachment = info != null
                 ? new System.Net.Mail.Attachment(
-                        new MemoryStream(Convert.FromBase64String(info.ContentBase64)),
-                        "application/octet-stream"
-                    ) {
-                        ContentDisposition = { FileName = info.FileName }
-                    }
+                      new MemoryStream(Convert.FromBase64String(info.ContentBase64)),
+                      "application/octet-stream"
+                  ) {
+                      ContentDisposition = { FileName = info.FileName }
+                  }
                 : null;
             return attachment;
         }

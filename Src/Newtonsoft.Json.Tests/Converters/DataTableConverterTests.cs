@@ -157,8 +157,8 @@ namespace Newtonsoft.Json.Tests.Converters
       ""c""
     ],
     ""Type"": """
-                + stringName
-                + @""",
+                    + stringName
+                    + @""",
     ""Object"": {},
     ""Byte[]"": ""AQIDBAUGBwg="",
     ""Uri"": ""http://localhost"",
@@ -506,9 +506,9 @@ namespace Newtonsoft.Json.Tests.Converters
             var json = JsonConvert.SerializeObject(table);
             Assert.AreEqual(
                 @"["
-                + @"{""item"":""shirt"",""price"":49.99},"
-                + @"{""item"":""pants"",""price"":54.99},"
-                + @"{""item"":""shoes"",""price"":null}]",
+                    + @"{""item"":""shirt"",""price"":49.99},"
+                    + @"{""item"":""pants"",""price"":54.99},"
+                    + @"{""item"":""shoes"",""price"":null}]",
                 json
             );
         }
@@ -530,9 +530,9 @@ namespace Newtonsoft.Json.Tests.Converters
             );
             Assert.AreEqual(
                 @"["
-                + @"{""item"":""shirt"",""price"":49.99},"
-                + @"{""item"":""pants"",""price"":54.99},"
-                + @"{""item"":""shoes""}]",
+                    + @"{""item"":""shirt"",""price"":49.99},"
+                    + @"{""item"":""pants"",""price"":54.99},"
+                    + @"{""item"":""shoes""}]",
                 json
             );
         }

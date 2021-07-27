@@ -295,11 +295,11 @@ namespace Newtonsoft.Json
 
             string exceptionMessage = (lineInfo.HasLineInfo())
                 ? message
-                    + " Line {0}, position {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        lineInfo.LineNumber,
-                        lineInfo.LinePosition
-                    )
+                  + " Line {0}, position {1}.".FormatWith(
+                      CultureInfo.InvariantCulture,
+                      lineInfo.LineNumber,
+                      lineInfo.LinePosition
+                  )
                 : message;
 
             OnValidationEvent(
@@ -987,7 +987,6 @@ namespace Newtonsoft.Json
             if (schema.DivisibleBy != null)
             {
                 bool notDivisible;
-
 #if HAVE_BIG_INTEGER
                 if (value is BigInteger i)
                 {
@@ -1009,7 +1008,7 @@ namespace Newtonsoft.Json
                     notDivisible =
                         !IsZero(
                             Convert.ToInt64(value, CultureInfo.InvariantCulture)
-                            % schema.DivisibleBy.GetValueOrDefault()
+                                % schema.DivisibleBy.GetValueOrDefault()
                         );
                 }
 

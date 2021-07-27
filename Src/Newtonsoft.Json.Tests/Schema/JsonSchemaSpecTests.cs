@@ -82,10 +82,10 @@ namespace Newtonsoft.Json.Tests.Schema
                 jsonSchemaSpecTest.IsValid,
                 v,
                 jsonSchemaSpecTest.TestCaseDescription
-                + " - "
-                + jsonSchemaSpecTest.TestDescription
-                + " - errors: "
-                + string.Join(", ", errorMessages)
+                    + " - "
+                    + jsonSchemaSpecTest.TestDescription
+                    + " - errors: "
+                    + string.Join(", ", errorMessages)
             );
         }
 
@@ -135,7 +135,7 @@ namespace Newtonsoft.Json.Tests.Schema
                         && s.TestCaseDescription != "multiple disallow subschema"
                         && s.TestCaseDescription != "types from separate schemas are merged"
                         && s.TestCaseDescription
-                        != "when types includes a schema it should fully validate the schema"
+                            != "when types includes a schema it should fully validate the schema"
                         && s.TestCaseDescription != "types can include schemas"
                 )
                 .ToList();

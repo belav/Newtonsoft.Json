@@ -154,8 +154,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + tupleRef
-                + @""",
+                    + tupleRef
+                    + @""",
   ""Item1"": 1,
   ""Item2"": 2,
   ""Item3"": ""string""
@@ -492,8 +492,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 @"{
   ""$id"": ""1"",
   ""$type"": """
-                + employeeRef
-                + @""",
+                    + employeeRef
+                    + @""",
   ""Name"": null,
   ""Manager"": null
 }",
@@ -598,22 +598,22 @@ namespace Newtonsoft.Json.Tests.Serialization
   {
     ""$id"": ""1"",
     ""$type"": """
-                + employeeRef
-                + @""",
+                    + employeeRef
+                    + @""",
     ""Name"": ""Bob"",
     ""Manager"": {
       ""$id"": ""2"",
       ""$type"": """
-                + employeeRef
-                + @""",
+                    + employeeRef
+                    + @""",
       ""Name"": ""Frank"",
       ""Manager"": null
     }
   },
   {
     ""$type"": """
-                + personRef
-                + @""",
+                    + personRef
+                    + @""",
     ""Name"": null,
     ""BirthDate"": ""2000-12-30T00:00:00Z"",
     ""LastModified"": ""2000-12-30T00:00:00Z""
@@ -724,10 +724,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Assert.IsTrue(
                     ex.Message.StartsWith(
                         @"Type specified in JSON '"
-                        + employeeRef
-                        + @"' is not compatible with '"
-                        + personRef
-                        + @"'."
+                            + employeeRef
+                            + @"' is not compatible with '"
+                            + personRef
+                            + @"'."
                     )
                 );
             }
@@ -875,18 +875,18 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + containerTypeName
-                + @""",
+                    + containerTypeName
+                    + @""",
   ""In"": {
     ""$type"": """
-                + productListTypeName
-                + @""",
+                    + productListTypeName
+                    + @""",
     ""$values"": []
   },
   ""Out"": {
     ""$type"": """
-                + productListTypeName
-                + @""",
+                    + productListTypeName
+                    + @""",
     ""$values"": []
   }
 }",
@@ -924,8 +924,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Name"": ""Name!"",
   ""Value"": {
     ""$type"": """
-                + typeNamePropertyRef
-                + @""",
+                    + typeNamePropertyRef
+                    + @""",
     ""Name"": ""Nested!"",
     ""Value"": null
   }
@@ -964,8 +964,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Name"": ""Name!"",
   ""Value"": {
     ""$type"": """
-                + listRef
-                + @""",
+                    + listRef
+                    + @""",
     ""$values"": [
       1,
       2,
@@ -1405,38 +1405,38 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + dictionaryTypeName
-                + @""",
+                    + dictionaryTypeName
+                    + @""",
   ""First"": {
     ""$type"": """
-                + urlStatusTypeName
-                + @""",
+                    + urlStatusTypeName
+                    + @""",
     ""Status"": 404,
     ""Url"": ""http://www.bing.com""
   },
   ""Second"": {
     ""$type"": """
-                + urlStatusTypeName
-                + @""",
+                    + urlStatusTypeName
+                    + @""",
     ""Status"": 400,
     ""Url"": ""http://www.google.com""
   },
   ""List"": {
     ""$type"": """
-                + listTypeName
-                + @""",
+                    + listTypeName
+                    + @""",
     ""$values"": [
       {
         ""$type"": """
-                + urlStatusTypeName
-                + @""",
+                    + urlStatusTypeName
+                    + @""",
         ""Status"": 300,
         ""Url"": ""http://www.yahoo.com""
       },
       {
         ""$type"": """
-                + urlStatusTypeName
-                + @""",
+                    + urlStatusTypeName
+                    + @""",
         ""Status"": 200,
         ""Url"": ""http://www.askjeeves.com""
       }
@@ -1487,8 +1487,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + productClassRef
-                + @""",
+                    + productClassRef
+                    + @""",
   ""$values"": []
 }",
                 json
@@ -1595,18 +1595,18 @@ namespace Newtonsoft.Json.Tests.Serialization
                 output,
                 @"{
   ""$type"": """
-                + carClassRef
-                + @""",
+                    + carClassRef
+                    + @""",
   ""Year"": ""2000-10-05T01:01:01Z"",
   ""Objects"": {
     ""$type"": """
-                + objectArrayRef
-                + @""",
+                    + objectArrayRef
+                    + @""",
     ""$values"": [
       {
         ""$type"": """
-                + byteArrayRef
-                + @""",
+                    + byteArrayRef
+                    + @""",
         ""$value"": ""S0FSSVJB""
       },
       ""prueba""
@@ -1813,8 +1813,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            TypeNameDictionary<object> l2 =
-                JsonConvert.DeserializeObject<TypeNameDictionary<object>>(json);
+            TypeNameDictionary<object> l2 = JsonConvert.DeserializeObject<
+                TypeNameDictionary<object>
+            >(json);
             Assert.AreEqual(3, l2.Count);
 
             CustomAssert.IsInstanceOfType(typeof(TestComponentSimple), l2["First"]);
@@ -1926,8 +1927,8 @@ namespace Newtonsoft.Json.Tests.Serialization
     },
     {
       ""$type"": """
-                + listTypeName
-                + @""",
+                    + listTypeName
+                    + @""",
       ""$values"": [
         [
           []
@@ -2016,8 +2017,8 @@ namespace Newtonsoft.Json.Tests.Serialization
     },
     ""two"": {
       ""$type"": """
-                + dictionaryTypeName
-                + @""",
+                    + dictionaryTypeName
+                    + @""",
       ""one"": {
         ""one"": 1
       }
@@ -2094,8 +2095,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Data"": {
     ""Prop1"": {
       ""$type"": """
-                + listTypeName
-                + @""",
+                    + listTypeName
+                    + @""",
       ""$values"": [
         {
           ""MyProperty"": 1
@@ -2230,8 +2231,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + dictionaryTypeName
-                + @""",
+                    + dictionaryTypeName
+                    + @""",
   ""k1"": ""a6e986df-fc2c-4906-a1ef-9492388f7833""
 }",
                 serializedString
@@ -2437,8 +2438,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Rows"": {
     ""key"": {
       ""$type"": """
-                + listTypeName
-                + @""",
+                    + listTypeName
+                    + @""",
       ""$values"": [
         {
           ""SomeProperty"": ""property""

@@ -400,8 +400,7 @@ namespace Newtonsoft.Json.Utilities
                 }
 
                 currentType = currentType.BaseType();
-            }
-            while (currentType != null);
+            } while (currentType != null);
 
             implementingType = null;
             return false;

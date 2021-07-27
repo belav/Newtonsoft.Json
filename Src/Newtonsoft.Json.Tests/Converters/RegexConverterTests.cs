@@ -94,7 +94,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 {
 #pragma warning disable CS0618 // Type or member is obsolete
                     Converters =
-                    { new RegexConverter(), new StringEnumConverter() { CamelCaseText = true } },
+                    {
+                        new RegexConverter(),
+                        new StringEnumConverter() { CamelCaseText = true }
+                    },
 #pragma warning restore CS0618 // Type or member is obsolete
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 }
@@ -282,9 +285,9 @@ namespace Newtonsoft.Json.Tests.Converters
             Regex regex = new Regex(
                 "/",
                 RegexOptions.IgnoreCase
-                | RegexOptions.Singleline
-                | RegexOptions.Multiline
-                | RegexOptions.ExplicitCapture
+                    | RegexOptions.Singleline
+                    | RegexOptions.Multiline
+                    | RegexOptions.ExplicitCapture
             );
 
             MemoryStream ms = new MemoryStream();
@@ -308,9 +311,9 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual("/", c.Regex.ToString());
             Assert.AreEqual(
                 RegexOptions.IgnoreCase
-                | RegexOptions.Singleline
-                | RegexOptions.Multiline
-                | RegexOptions.ExplicitCapture,
+                    | RegexOptions.Singleline
+                    | RegexOptions.Multiline
+                    | RegexOptions.ExplicitCapture,
                 c.Regex.Options
             );
         }

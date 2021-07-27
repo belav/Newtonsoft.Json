@@ -423,8 +423,7 @@ namespace Newtonsoft.Json
                 }
 
                 totalCharsRead += charsRead;
-            }
-            while (totalCharsRead < charsRequired);
+            } while (totalCharsRead < charsRequired);
 
             if (totalCharsRead < charsRequired)
             {
@@ -1363,8 +1362,7 @@ namespace Newtonsoft.Json
                                             // replace high surrogate and continue on as usual
                                             writeChar = UnicodeReplacementChar;
                                         }
-                                    }
-                                    while (anotherHighSurrogate);
+                                    } while (anotherHighSurrogate);
                                 }
 
                                 charPos = _charPos;

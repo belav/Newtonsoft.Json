@@ -130,7 +130,7 @@ namespace Newtonsoft.Json.Serialization
                 || (
                     NonNullableUnderlyingType.IsGenericType()
                     && NonNullableUnderlyingType.GetGenericTypeDefinition().FullName
-                    == "System.Linq.EmptyPartition`1"
+                        == "System.Linq.EmptyPartition`1"
                 );
 
             bool canDeserialize;
@@ -343,7 +343,7 @@ namespace Newtonsoft.Json.Serialization
                         typeof(List<>)
                     )
                     || _genericCollectionDefinitionType.GetGenericTypeDefinition()
-                    == typeof(IEnumerable<>)
+                        == typeof(IEnumerable<>)
                 ) {
                     constructorArgument = typeof(ICollection<>).MakeGenericType(CollectionItemType);
                 }

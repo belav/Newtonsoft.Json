@@ -76,9 +76,9 @@ namespace Newtonsoft.Json.Tests.Issues
             List<MemberInfo> properties = ReflectionUtils.GetFieldsAndProperties(
                     foo.GetType(),
                     BindingFlags.Instance
-                    | BindingFlags.Static
-                    | BindingFlags.Public
-                    | BindingFlags.NonPublic
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
                 )
                 .ToList();
 

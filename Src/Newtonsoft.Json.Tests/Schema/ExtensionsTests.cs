@@ -205,8 +205,8 @@ namespace Newtonsoft.Json.Tests.Schema
             {
                 Assert.Fail(
                     "Schema generated for type '{0}' is not valid."
-                    + Environment.NewLine
-                    + string.Join(Environment.NewLine, errors.ToArray()),
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, errors.ToArray()),
                     typeof(T)
                 );
             }

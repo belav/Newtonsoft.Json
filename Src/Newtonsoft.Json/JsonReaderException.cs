@@ -106,7 +106,8 @@ namespace Newtonsoft.Json
             int lineNumber,
             int linePosition,
             Exception? innerException
-        ) : base(message, innerException) {
+        ) : base(message, innerException)
+        {
             Path = path;
             LineNumber = lineNumber;
             LinePosition = linePosition;

@@ -264,8 +264,9 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            UnixConverterDictionary<object> l2 =
-                JsonConvert.DeserializeObject<UnixConverterDictionary<object>>(json);
+            UnixConverterDictionary<object> l2 = JsonConvert.DeserializeObject<
+                UnixConverterDictionary<object>
+            >(json);
             Assert.IsNotNull(l2);
 
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 3, DateTimeKind.Utc), l2["First"]);

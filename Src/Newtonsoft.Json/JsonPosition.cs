@@ -42,7 +42,8 @@ namespace Newtonsoft.Json
 
     internal struct JsonPosition
     {
-        private static readonly char[] SpecialCharacters = {
+        private static readonly char[] SpecialCharacters =
+        {
             '.',
             ' ',
             '\'',

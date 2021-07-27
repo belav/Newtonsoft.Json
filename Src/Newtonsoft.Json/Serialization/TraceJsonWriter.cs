@@ -323,7 +323,6 @@ namespace Newtonsoft.Json.Serialization
 
         public override void WriteValue(object? value)
         {
-
 #if HAVE_BIG_INTEGER
             if (value is BigInteger)
             {

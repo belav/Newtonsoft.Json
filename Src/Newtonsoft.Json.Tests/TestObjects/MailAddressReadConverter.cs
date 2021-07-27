@@ -58,8 +58,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     "DisplayName",
                     StringComparison.OrdinalIgnoreCase,
                     out displayNameToken
-                )
-                && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>())
+                ) && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>())
             ) {
                 return new System.Net.Mail.MailAddress(address, displayName);
             }

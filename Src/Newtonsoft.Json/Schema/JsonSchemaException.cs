@@ -105,7 +105,8 @@ namespace Newtonsoft.Json.Schema
             string path,
             int lineNumber,
             int linePosition
-        ) : base(message, innerException) {
+        ) : base(message, innerException)
+        {
             Path = path;
             LineNumber = lineNumber;
             LinePosition = linePosition;

@@ -87,8 +87,11 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class PersonConverter : JsonConverter
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        { }
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) { }
 
         public override object ReadJson(
             JsonReader reader,

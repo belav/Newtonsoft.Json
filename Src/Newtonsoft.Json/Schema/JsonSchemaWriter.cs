@@ -315,8 +315,7 @@ namespace Newtonsoft.Json.Schema
                         do
                         {
                             writer.WriteValue(JsonSchemaBuilder.MapType(en.Current));
-                        }
-                        while (en.MoveNext());
+                        } while (en.MoveNext());
                         writer.WriteEndArray();
                     }
                     else

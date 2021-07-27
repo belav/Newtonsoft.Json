@@ -87,7 +87,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     throw new JsonException(
                         "Unexpected character while parsing path: "
-                        + _expression[lastCharacterIndex]
+                            + _expression[lastCharacterIndex]
                     );
                 }
             }
@@ -925,7 +925,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     throw new JsonException(
                         "Unexpected character while parsing path indexer: "
-                        + _expression[_currentIndex]
+                            + _expression[_currentIndex]
                     );
                 }
             }

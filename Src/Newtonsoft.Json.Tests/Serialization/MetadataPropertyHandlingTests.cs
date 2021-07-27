@@ -145,12 +145,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + ReflectionUtils.GetTypeName(
-                    typeof(Dictionary<string, Guid>),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + @""",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(Dictionary<string, Guid>),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + @""",
   ""k1"": ""5dd2dba0-20c0-49f8-a054-1fa3b0a8d774""
 }",
                 serializedString
@@ -189,12 +189,12 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""TimeStamp"": ""2000-03-01T23:59:59Z"",
   ""Payload"": {
     ""$type"": """
-                + ReflectionUtils.GetTypeName(
-                    typeof(byte[]),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + @""",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(byte[]),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + @""",
     ""$value"": ""AAECAwQFBgcICQ==""
   }
 }",
@@ -319,10 +319,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<
-                    string,
-                    object
-                >>(
+            Dictionary<string, object> result = JsonConvert.DeserializeObject<
+                Dictionary<string, object>
+            >(
                 json,
                 new JsonSerializerSettings
                 {
@@ -354,14 +353,15 @@ namespace Newtonsoft.Json.Tests.Serialization
   }
 ]";
 
-            List<EmployeeReference> employees =
-                JsonConvert.DeserializeObject<List<EmployeeReference>>(
-                    json,
-                    new JsonSerializerSettings
-                    {
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-                    }
-                );
+            List<EmployeeReference> employees = JsonConvert.DeserializeObject<
+                List<EmployeeReference>
+            >(
+                json,
+                new JsonSerializerSettings
+                {
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                }
+            );
 
             Assert.AreEqual(2, employees.Count);
             Assert.AreEqual("Mike Manager", employees[0].Name);
@@ -497,8 +497,8 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Name"": ""Name!"",
   ""Value"": {
     ""$type"": """
-                + listRef
-                + @""",
+                    + listRef
+                    + @""",
     ""$values"": [
       1,
       2,

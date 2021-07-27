@@ -510,8 +510,7 @@ namespace Newtonsoft.Json.Utilities
                         valueIndex,
                         valueSubstringLength,
                         comparison
-                    )
-                    == 0
+                    ) == 0
                 ) {
                     return i;
                 }
