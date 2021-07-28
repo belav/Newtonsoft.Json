@@ -356,8 +356,7 @@ namespace Newtonsoft.Json.Serialization
                         writer.WriteEndObject();
                         return writer.Token!;
                     }
-                }
-                while (reader.Read());
+                } while (reader.Read());
 
                 throw JsonSerializationException.Create(
                     reader,
@@ -476,8 +475,7 @@ namespace Newtonsoft.Json.Serialization
                             "Unexpected token while deserializing object: " + reader.TokenType
                         );
                 }
-            }
-            while (reader.Read());
+            } while (reader.Read());
 
             throw JsonSerializationException.Create(
                 reader,
@@ -705,7 +703,7 @@ namespace Newtonsoft.Json.Serialization
                             throw JsonSerializationException.Create(
                                 reader,
                                 "Unexpected token when deserializing primitive value: "
-                                + reader.TokenType
+                                    + reader.TokenType
                             );
                         }
 
@@ -1145,8 +1143,7 @@ namespace Newtonsoft.Json.Serialization
                         {
                             metadataProperty = false;
                         }
-                    }
-                    while (metadataProperty && reader.TokenType == JsonToken.PropertyName);
+                    } while (metadataProperty && reader.TokenType == JsonToken.PropertyName);
                 }
             }
             return false;
@@ -1164,7 +1161,8 @@ namespace Newtonsoft.Json.Serialization
             TypeNameHandling resolvedTypeNameHandling =
                 member?.TypeNameHandling
                 ?? containerContract?.ItemTypeNameHandling
-                ?? containerMember?.ItemTypeNameHandling ?? Serializer._typeNameHandling;
+                ?? containerMember?.ItemTypeNameHandling
+                ?? Serializer._typeNameHandling;
 
             if (resolvedTypeNameHandling != TypeNameHandling.None)
             {
@@ -1724,7 +1722,7 @@ namespace Newtonsoft.Json.Serialization
             if (
                 tokenType == JsonToken.Null
                 && ResolvedNullValueHandling(containerContract as JsonObjectContract, property)
-                == NullValueHandling.Ignore
+                    == NullValueHandling.Ignore
             ) {
                 ignoredValue = true;
                 return true;
@@ -1906,7 +1904,7 @@ namespace Newtonsoft.Json.Serialization
                 && (
                     !contract.DefaultCreatorNonPublic
                     || Serializer._constructorHandling
-                    == ConstructorHandling.AllowNonPublicDefaultConstructor
+                        == ConstructorHandling.AllowNonPublicDefaultConstructor
                 )
             ) {
                 object list = contract.DefaultCreator();
@@ -1975,7 +1973,7 @@ namespace Newtonsoft.Json.Serialization
                 && (
                     !contract.DefaultCreatorNonPublic
                     || Serializer._constructorHandling
-                    == ConstructorHandling.AllowNonPublicDefaultConstructor
+                        == ConstructorHandling.AllowNonPublicDefaultConstructor
                 )
             ) {
                 object dictionary = contract.DefaultCreator();
@@ -2126,12 +2124,12 @@ namespace Newtonsoft.Json.Serialization
                                         )
                                             ? dt
                                             : EnsureType(
-                                                    reader,
-                                                    keyValue,
-                                                    CultureInfo.InvariantCulture,
-                                                    contract.KeyContract,
-                                                    contract.DictionaryKeyType
-                                                )!;
+                                                  reader,
+                                                  keyValue,
+                                                  CultureInfo.InvariantCulture,
+                                                  contract.KeyContract,
+                                                  contract.DictionaryKeyType
+                                              )!;
                                         break;
                                     }
 #if HAVE_DATE_TIME_OFFSET
@@ -2148,21 +2146,21 @@ namespace Newtonsoft.Json.Serialization
                                         keyValue = contract.KeyContract != null
                                         && contract.KeyContract.IsEnum
                                             ? EnumUtils.ParseEnum(
-                                                    contract.KeyContract.NonNullableUnderlyingType,
-                                                    (
-                                                        Serializer._contractResolver
-                                                        as DefaultContractResolver
-                                                    )?.NamingStrategy,
-                                                    keyValue.ToString(),
-                                                    false
-                                                )
+                                                  contract.KeyContract.NonNullableUnderlyingType,
+                                                  (
+                                                      Serializer._contractResolver
+                                                      as DefaultContractResolver
+                                                  )?.NamingStrategy,
+                                                  keyValue.ToString(),
+                                                  false
+                                              )
                                             : EnsureType(
-                                                    reader,
-                                                    keyValue,
-                                                    CultureInfo.InvariantCulture,
-                                                    contract.KeyContract,
-                                                    contract.DictionaryKeyType
-                                                )!;
+                                                  reader,
+                                                  keyValue,
+                                                  CultureInfo.InvariantCulture,
+                                                  contract.KeyContract,
+                                                  contract.DictionaryKeyType
+                                              )!;
                                         break;
                                 }
                             }
@@ -2248,8 +2246,7 @@ namespace Newtonsoft.Json.Serialization
                             "Unexpected token when deserializing object: " + reader.TokenType
                         );
                 }
-            }
-            while (!finished && reader.Read());
+            } while (!finished && reader.Read());
 
             if (!finished)
             {
@@ -2423,7 +2420,7 @@ namespace Newtonsoft.Json.Serialization
                                 throw JsonSerializationException.Create(
                                     reader,
                                     "Unexpected token when deserializing multidimensional array: "
-                                    + reader.TokenType
+                                        + reader.TokenType
                                 );
                         }
                     }
@@ -2432,8 +2429,7 @@ namespace Newtonsoft.Json.Serialization
                         break;
                     }
                 }
-            }
-            while (!finished);
+            } while (!finished);
 
             if (!finished)
             {
@@ -2610,8 +2606,7 @@ namespace Newtonsoft.Json.Serialization
                         throw;
                     }
                 }
-            }
-            while (!finished);
+            } while (!finished);
 
             if (!finished)
             {
@@ -3331,8 +3326,7 @@ namespace Newtonsoft.Json.Serialization
                                 (
                                     contract.MissingMemberHandling
                                     ?? Serializer._missingMemberHandling
-                                )
-                                == MissingMemberHandling.Error
+                                ) == MissingMemberHandling.Error
                             ) {
                                 throw JsonSerializationException.Create(
                                     reader,
@@ -3369,8 +3363,7 @@ namespace Newtonsoft.Json.Serialization
                             "Unexpected token when deserializing object: " + reader.TokenType
                         );
                 }
-            }
-            while (!exit && reader.Read());
+            } while (!exit && reader.Read());
 
             if (!exit)
             {
@@ -3416,7 +3409,7 @@ namespace Newtonsoft.Json.Serialization
                 && (
                     !objectContract.DefaultCreatorNonPublic
                     || Serializer._constructorHandling
-                    == ConstructorHandling.AllowNonPublicDefaultConstructor
+                        == ConstructorHandling.AllowNonPublicDefaultConstructor
                     || objectContract.ParameterizedCreator == null
                 )
             ) {
@@ -3533,8 +3526,7 @@ namespace Newtonsoft.Json.Serialization
                                     (
                                         contract.MissingMemberHandling
                                         ?? Serializer._missingMemberHandling
-                                    )
-                                    == MissingMemberHandling.Error
+                                    ) == MissingMemberHandling.Error
                                 ) {
                                     throw JsonSerializationException.Create(
                                         reader,
@@ -3652,8 +3644,7 @@ namespace Newtonsoft.Json.Serialization
                             "Unexpected token when deserializing object: " + reader.TokenType
                         );
                 }
-            }
-            while (!finished && reader.Read());
+            } while (!finished && reader.Read());
 
             if (!finished)
             {
@@ -3837,8 +3828,7 @@ namespace Newtonsoft.Json.Serialization
                                             Serializer._defaultValueHandling
                                         ),
                                         DefaultValueHandling.Populate
-                                    )
-                                    && property.Writable
+                                    ) && property.Writable
                                 ) {
                                     property.ValueProvider!.SetValue(
                                         newObject,

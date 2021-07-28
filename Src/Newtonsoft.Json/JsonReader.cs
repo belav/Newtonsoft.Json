@@ -179,8 +179,7 @@ namespace Newtonsoft.Json
 #if HAVE_DATE_TIME_OFFSET
                     value > DateParseHandling.DateTimeOffset
 #else
-                    value
-                    > DateParseHandling.DateTime
+                    value > DateParseHandling.DateTime
 #endif
                 ) {
                     throw new ArgumentOutOfRangeException(nameof(value));
@@ -1417,8 +1416,7 @@ namespace Newtonsoft.Json
                 {
                     t = TokenType;
                 }
-            }
-            while (t == JsonToken.Comment);
+            } while (t == JsonToken.Comment);
 
             return t;
         }

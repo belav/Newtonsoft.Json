@@ -267,7 +267,7 @@ namespace Newtonsoft.Json.Utilities
                                         && parameters.Length == 1
                                         && parameters[0].ParameterType.IsGenericType()
                                         && parameters[0].ParameterType.GetGenericTypeDefinition()
-                                        == typeof(IEnumerable<>);
+                                            == typeof(IEnumerable<>);
                                 }
                             );
                         if (mb != null)

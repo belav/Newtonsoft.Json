@@ -371,7 +371,7 @@ namespace Newtonsoft.Json.Serialization
             if (
                 memberValue == null
                 && ResolvedNullValueHandling(containerContract, property)
-                == NullValueHandling.Ignore
+                    == NullValueHandling.Ignore
             ) {
                 return false;
             }
@@ -382,8 +382,7 @@ namespace Newtonsoft.Json.Serialization
                         Serializer._defaultValueHandling
                     ),
                     DefaultValueHandling.Ignore
-                )
-                && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue())
+                ) && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue())
             ) {
                 return false;
             }
@@ -449,8 +448,9 @@ namespace Newtonsoft.Json.Serialization
                     value.GetType()
                 );
 
-                switch (referenceLoopHandling.GetValueOrDefault(Serializer._referenceLoopHandling))
-                {
+                switch (
+                    referenceLoopHandling.GetValueOrDefault(Serializer._referenceLoopHandling)
+                ) {
                     case ReferenceLoopHandling.Error:
                         throw JsonSerializationException.Create(
                             null,
@@ -1471,7 +1471,8 @@ namespace Newtonsoft.Json.Serialization
             TypeNameHandling resolvedTypeNameHandling =
                 member?.TypeNameHandling
                 ?? containerProperty?.ItemTypeNameHandling
-                ?? containerContract?.ItemTypeNameHandling ?? Serializer._typeNameHandling;
+                ?? containerContract?.ItemTypeNameHandling
+                ?? Serializer._typeNameHandling;
 
             if (HasFlag(resolvedTypeNameHandling, typeNameHandlingFlag))
             {
@@ -1493,7 +1494,7 @@ namespace Newtonsoft.Json.Serialization
                     if (
                         containerContract.ItemContract == null
                         || contract.NonNullableUnderlyingType
-                        != containerContract.ItemContract.CreatedType
+                            != containerContract.ItemContract.CreatedType
                     ) {
                         return true;
                     }

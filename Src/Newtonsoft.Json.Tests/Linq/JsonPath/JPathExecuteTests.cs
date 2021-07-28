@@ -1711,10 +1711,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 matchStrict,
                 hasEqualsStrict,
                 $"Expected {value1} and {value2} to match: {matchStrict}"
-                + Environment.NewLine
-                + completeJson
-                + Environment.NewLine
-                + completeEqualsStrictPath
+                    + Environment.NewLine
+                    + completeJson
+                    + Environment.NewLine
+                    + completeEqualsStrictPath
             );
 
             bool hasNotEqualsStrict = t.SelectTokens(completeNotEqualsStrictPath).Any();
@@ -1722,10 +1722,10 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 matchStrict,
                 hasNotEqualsStrict,
                 $"Expected {value1} and {value2} to match: {!matchStrict}"
-                + Environment.NewLine
-                + completeJson
-                + Environment.NewLine
-                + completeEqualsStrictPath
+                    + Environment.NewLine
+                    + completeJson
+                    + Environment.NewLine
+                    + completeEqualsStrictPath
             );
         }
 

@@ -92,8 +92,9 @@ namespace Newtonsoft.Json.Tests.Serialization
       ]";
 
             // what sorcery is this?!
-            IImmutableList<string> champions =
-                JsonConvert.DeserializeObject<IImmutableList<string>>(json);
+            IImmutableList<string> champions = JsonConvert.DeserializeObject<
+                IImmutableList<string>
+            >(json);
 
             Assert.AreEqual(3, champions.Count);
             Assert.AreEqual("Volibear", champions[0]);
@@ -353,8 +354,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3""
 ]";
 
-            ImmutableSortedSet<string> l =
-                JsonConvert.DeserializeObject<ImmutableSortedSet<string>>(json);
+            ImmutableSortedSet<string> l = JsonConvert.DeserializeObject<
+                ImmutableSortedSet<string>
+            >(json);
 
             Assert.AreEqual(3, l.Count());
             Assert.IsTrue(l.Contains("3"));
@@ -389,10 +391,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3"": ""3""
 }";
 
-            ImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<ImmutableDictionary<
-                    int,
-                    string
-                >>(json);
+            ImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<
+                ImmutableDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);
@@ -410,8 +411,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3"": ""3""
 }";
 
-            IImmutableDictionary<int, string> l =
-                JsonConvert.DeserializeObject<IImmutableDictionary<int, string>>(json);
+            IImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<
+                IImmutableDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);
@@ -451,8 +453,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3"": ""3""
 }";
 
-            ImmutableSortedDictionary<int, string> l =
-                JsonConvert.DeserializeObject<ImmutableSortedDictionary<int, string>>(json);
+            ImmutableSortedDictionary<int, string> l = JsonConvert.DeserializeObject<
+                ImmutableSortedDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);

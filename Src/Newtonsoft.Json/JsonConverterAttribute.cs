@@ -34,12 +34,12 @@ namespace Newtonsoft.Json
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Field
-        | AttributeTargets.Property
-        | AttributeTargets.Class
-        | AttributeTargets.Struct
-        | AttributeTargets.Interface
-        | AttributeTargets.Enum
-        | AttributeTargets.Parameter,
+            | AttributeTargets.Property
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Parameter,
         AllowMultiple = false
     )]
     public sealed class JsonConverterAttribute : Attribute
@@ -80,7 +80,8 @@ namespace Newtonsoft.Json
         public JsonConverterAttribute(
             Type converterType,
             params object[] converterParameters
-        ) : this(converterType) {
+        ) : this(converterType)
+        {
             ConverterParameters = converterParameters;
         }
     }

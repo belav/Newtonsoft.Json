@@ -694,10 +694,9 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region SerializingCollectionsDeserializingDictionaries
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<
-                    string,
-                    string
-                >>(json);
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >(json);
 
             Console.WriteLine(values.Count);
             // 2

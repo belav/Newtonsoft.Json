@@ -144,9 +144,9 @@ namespace Newtonsoft.Json.Tests
                 {
                     "BodyHtml",
                     "<h3>Title!</h3>"
-                    + Environment.NewLine
-                    + new string(' ', 100)
-                    + "<p>Content!</p>"
+                        + Environment.NewLine
+                        + new string(' ', 100)
+                        + "<p>Content!</p>"
                 }
             };
 
@@ -1602,8 +1602,7 @@ _____'propertyName': NaN,
                 }
 
                 c++;
-            }
-            while (c != char.MaxValue);
+            } while (c != char.MaxValue);
         }
 
         private const string EscapedUnicodeText = "!";

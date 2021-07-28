@@ -50,10 +50,9 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            IList<KeyValuePair<string, int>> v2 = JsonConvert.DeserializeObject<IList<KeyValuePair<
-                        string,
-                        int
-                    >>>(json);
+            IList<KeyValuePair<string, int>> v2 = JsonConvert.DeserializeObject<
+                IList<KeyValuePair<string, int>>
+            >(json);
 
             Assert.AreEqual(2, v2.Count);
             Assert.AreEqual("123", v2[0].Key);

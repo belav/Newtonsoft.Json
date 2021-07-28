@@ -301,9 +301,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             var backingGet = typeBuilder.DefineMethod(
                 "get_" + propertyName,
                 MethodAttributes.Public
-                | MethodAttributes.SpecialName
-                | MethodAttributes.Virtual
-                | MethodAttributes.HideBySig,
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig,
                 propertyType,
                 Type.EmptyTypes
             );
@@ -317,9 +317,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             var backingSet = typeBuilder.DefineMethod(
                 "set_" + propertyName,
                 MethodAttributes.Public
-                | MethodAttributes.SpecialName
-                | MethodAttributes.Virtual
-                | MethodAttributes.HideBySig,
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig,
                 null,
                 new[] { propertyType }
             );

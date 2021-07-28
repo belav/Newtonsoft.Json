@@ -777,8 +777,7 @@ namespace Newtonsoft.Json.Bson
                         offset = 0;
                     }
                 }
-            }
-            while (totalBytesRead < length);
+            } while (totalBytesRead < length);
 
             return builder.ToString();
         }

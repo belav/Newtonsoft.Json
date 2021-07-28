@@ -721,11 +721,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            ValueTuple<int, int, string> t2 = JsonConvert.DeserializeObject<ValueTuple<
-                    int,
-                    int,
-                    string
-                >>(json);
+            ValueTuple<int, int, string> t2 = JsonConvert.DeserializeObject<
+                ValueTuple<int, int, string>
+            >(json);
 
             Assert.AreEqual(1, t2.Item1);
             Assert.AreEqual(2, t2.Item2);
@@ -871,8 +869,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeObservableCollection()
         {
-            ObservableCollection<string> s =
-                JsonConvert.DeserializeObject<ObservableCollection<string>>("['1','2']");
+            ObservableCollection<string> s = JsonConvert.DeserializeObject<
+                ObservableCollection<string>
+            >("['1','2']");
             Assert.AreEqual(2, s.Count);
             Assert.AreEqual("1", s[0]);
             Assert.AreEqual("2", s[1]);
@@ -886,8 +885,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(c1);
             Assert.AreEqual("[\"1\",\"2\"]", output);
 
-            ObservableCollection<string> c2 =
-                JsonConvert.DeserializeObject<ObservableCollection<string>>(output);
+            ObservableCollection<string> c2 = JsonConvert.DeserializeObject<
+                ObservableCollection<string>
+            >(output);
             Assert.AreEqual(2, c2.Count);
             Assert.AreEqual("1", c2[0]);
             Assert.AreEqual("2", c2[1]);
@@ -897,10 +897,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeBoolAsStringInDictionary()
         {
-            Dictionary<string, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    string,
-                    string
-                >>("{\"Test1\":false}");
+            Dictionary<string, string> d = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >("{\"Test1\":false}");
             Assert.AreEqual(1, d.Count);
             Assert.AreEqual("false", d["Test1"]);
         }
@@ -984,8 +983,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var json = JsonConvert.SerializeObject(input);
-            var deserialized =
-                JsonConvert.DeserializeObject<ResponseWithNewGenericPropertyVirtual<int>>(json);
+            var deserialized = JsonConvert.DeserializeObject<
+                ResponseWithNewGenericPropertyVirtual<int>
+            >(json);
 
             Assert.AreEqual(input.Data, deserialized.Data);
             Assert.AreEqual(input.Message, deserialized.Message);
@@ -1003,8 +1003,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var json = JsonConvert.SerializeObject(input);
-            var deserialized =
-                JsonConvert.DeserializeObject<ResponseWithNewGenericPropertyOverride<int>>(json);
+            var deserialized = JsonConvert.DeserializeObject<
+                ResponseWithNewGenericPropertyOverride<int>
+            >(json);
 
             Assert.AreEqual(input.Data, deserialized.Data);
             Assert.AreEqual(input.Message, deserialized.Message);
@@ -1022,8 +1023,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var json = JsonConvert.SerializeObject(input);
-            var deserialized =
-                JsonConvert.DeserializeObject<ResponseWithNewGenericProperty<List<int>>>(json);
+            var deserialized = JsonConvert.DeserializeObject<
+                ResponseWithNewGenericProperty<List<int>>
+            >(json);
 
             CollectionAssert.AreEqual(input.Data, deserialized.Data);
             Assert.AreEqual(input.Message, deserialized.Message);
@@ -2296,8 +2298,9 @@ keyword such as type of business.""
 
 #if !(DNXCORE50)
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            List<string> javaScriptSerializerResult =
-                javaScriptSerializer.Deserialize<List<string>>(json);
+            List<string> javaScriptSerializerResult = javaScriptSerializer.Deserialize<
+                List<string>
+            >(json);
 #endif
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(List<string>));
@@ -3614,8 +3617,8 @@ keyword such as type of business.""
                     );
                 },
                 "Self referencing loop detected for property 'ReferenceLoopHandlingErrorProperty' with type '"
-                + classRef
-                + "'. Path ''."
+                    + classRef
+                    + "'. Path ''."
             );
         }
 
@@ -3928,10 +3931,9 @@ keyword such as type of business.""
         {
             string json = @"{""key1"":""value1"",""key2"":""value2""}";
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<
-                    string,
-                    string
-                >>(json);
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >(json);
 
             Assert.AreEqual(2, values.Count);
             Assert.AreEqual("value1", values["key1"]);
@@ -4139,10 +4141,10 @@ Path '', line 1, position 1."
                 Assert.IsTrue(
                     ex.Message.StartsWith(
                         @"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly."
-                        + Environment.NewLine
-                        + @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object."
-                        + Environment.NewLine
-                        + @"Path ''"
+                            + Environment.NewLine
+                            + @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object."
+                            + Environment.NewLine
+                            + @"Path ''"
                     )
                 );
             }
@@ -4595,8 +4597,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            ThisGenericTest<KeyValueId> gen =
-                JsonConvert.DeserializeObject<ThisGenericTest<KeyValueId>>(json);
+            ThisGenericTest<KeyValueId> gen = JsonConvert.DeserializeObject<
+                ThisGenericTest<KeyValueId>
+            >(json);
             Assert.AreEqual("some value", gen.MyProperty);
         }
 
@@ -4778,8 +4781,9 @@ Path '', line 1, position 1."
 
             Assert.AreEqual(@"{""key"":""value""}", json);
 
-            ModelStateDictionary<string> newModelStateDictionary =
-                JsonConvert.DeserializeObject<ModelStateDictionary<string>>(json);
+            ModelStateDictionary<string> newModelStateDictionary = JsonConvert.DeserializeObject<
+                ModelStateDictionary<string>
+            >(json);
             Assert.AreEqual(1, newModelStateDictionary.Count);
             Assert.AreEqual("value", newModelStateDictionary["key"]);
         }
@@ -4901,8 +4905,8 @@ Path '', line 1, position 1."
   ""stringValue"": ""String!"",
   ""intValue"": -2147483648,
   ""dateTimeOffsetValue"": """
-                + dateTimeOffsetText
-                + @""",
+                    + dateTimeOffsetText
+                    + @""",
   ""personValue"": {
     ""Name"": ""Name!"",
     ""BirthDate"": ""2000-01-01T01:01:01Z"",
@@ -4982,8 +4986,8 @@ Path '', line 1, position 1."
   ""stringValue"": ""String!"",
   ""intValue"": -2147483648,
   ""dateTimeOffsetValue"": """
-                + dateTimeOffsetText
-                + @""",
+                    + dateTimeOffsetText
+                    + @""",
   ""personValue"": {
     ""Name"": ""Name!"",
     ""BirthDate"": ""\/Date(946688461000)\/"",
@@ -5022,10 +5026,9 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeUsingNonDefaultConstructorWithLeftOverValues()
         {
-            List<KVPair<string, string>> kvPairs = JsonConvert.DeserializeObject<List<KVPair<
-                        string,
-                        string
-                    >>>("[{\"Key\":\"Two\",\"Value\":\"2\"},{\"Key\":\"One\",\"Value\":\"1\"}]");
+            List<KVPair<string, string>> kvPairs = JsonConvert.DeserializeObject<
+                List<KVPair<string, string>>
+            >("[{\"Key\":\"Two\",\"Value\":\"2\"},{\"Key\":\"One\",\"Value\":\"1\"}]");
 
             Assert.AreEqual(2, kvPairs.Count);
             Assert.AreEqual("Two", kvPairs[0].Key);
@@ -5480,10 +5483,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<
-                    string,
-                    object
-                >>(json);
+            Dictionary<string, object> result = JsonConvert.DeserializeObject<
+                Dictionary<string, object>
+            >(json);
 
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(1, ((JObject)result["Father"]).Count);
@@ -5548,8 +5550,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            Dictionary<DictionaryKey, string> newDictionary =
-                JsonConvert.DeserializeObject<Dictionary<DictionaryKey, string>>(json);
+            Dictionary<DictionaryKey, string> newDictionary = JsonConvert.DeserializeObject<
+                Dictionary<DictionaryKey, string>
+            >(json);
 
             Assert.AreEqual(2, newDictionary.Count);
         }
@@ -5673,8 +5676,8 @@ Path '', line 1, position 1."
                         JsonConvert.DeserializeObject<StringDictionaryTestClass>(json);
                     },
                     "Cannot create and populate list type "
-                    + classRef
-                    + ". Path 'StringDictionaryProperty', line 2, position 31."
+                        + classRef
+                        + ". Path 'StringDictionaryProperty', line 2, position 31."
                 );
             }
         }
@@ -6935,12 +6938,12 @@ Path '', line 1, position 1."
   ""TimeStamp"": ""2000-03-01T23:59:59Z"",
   ""Payload"": {
     ""$type"": """
-                + ReflectionUtils.GetTypeName(
-                    typeof(byte[]),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + @""",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(byte[]),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + @""",
     ""$value"": ""AAECAwQFBgcICQ==""
   }
 }",
@@ -7524,10 +7527,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            IDictionary<DateTimeOffset, int> dic2 = JsonConvert.DeserializeObject<IDictionary<
-                    DateTimeOffset,
-                    int
-                >>(json);
+            IDictionary<DateTimeOffset, int> dic2 = JsonConvert.DeserializeObject<
+                IDictionary<DateTimeOffset, int>
+            >(json);
 
             Assert.AreEqual(2, dic2.Count);
             Assert.AreEqual(1, dic2[new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)]);
@@ -7560,10 +7562,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            IDictionary<DateTimeOffset?, int> dic2 = JsonConvert.DeserializeObject<IDictionary<
-                    DateTimeOffset?,
-                    int
-                >>(json);
+            IDictionary<DateTimeOffset?, int> dic2 = JsonConvert.DeserializeObject<
+                IDictionary<DateTimeOffset?, int>
+            >(json);
 
             Assert.AreEqual(2, dic2.Count);
             Assert.AreEqual(1, dic2[new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)]);
@@ -7590,10 +7591,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<IDictionary<
-                    DateTime,
-                    int
-                >>(json);
+            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<
+                IDictionary<DateTime, int>
+            >(json);
 
             Assert.AreEqual(2, dic2.Count);
             Assert.AreEqual(1, dic2[new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)]);
@@ -7619,13 +7619,9 @@ Path '', line 1, position 1."
             Assert.IsFalse(o.Properties().ElementAt(0).Name.Contains("Z"));
             Assert.IsFalse(o.Properties().ElementAt(1).Name.Contains("Z"));
 
-            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<IDictionary<
-                    DateTime,
-                    int
-                >>(
-                json,
-                new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc }
-            );
+            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<
+                IDictionary<DateTime, int>
+            >(json, new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
 
             Assert.AreEqual(2, dic2.Count);
             Assert.AreEqual(1, dic2[new DateTime(2020, 12, 12, 12, 12, 12, DateTimeKind.Utc)]);
@@ -7658,10 +7654,9 @@ Path '', line 1, position 1."
                 json
             );
 
-            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<IDictionary<
-                    DateTime,
-                    int
-                >>(json);
+            IDictionary<DateTime, int> dic2 = JsonConvert.DeserializeObject<
+                IDictionary<DateTime, int>
+            >(json);
 
             Assert.AreEqual(2, dic2.Count);
             Assert.AreEqual(1, dic2[new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)]);
@@ -8072,10 +8067,9 @@ This is just junk, though.";
         [Test]
         public void DeserializeCaseInsensitiveKeyValuePairConverter()
         {
-            KeyValuePair<int, string> result = JsonConvert.DeserializeObject<KeyValuePair<
-                    int,
-                    string
-                >>("{key: 123, \"VALUE\": \"test value\"}");
+            KeyValuePair<int, string> result = JsonConvert.DeserializeObject<
+                KeyValuePair<int, string>
+            >("{key: 123, \"VALUE\": \"test value\"}");
 
             Assert.AreEqual(123, result.Key);
             Assert.AreEqual("test value", result.Value);
@@ -8815,10 +8809,9 @@ This is just junk, though.";
 
             Assert.AreEqual(@"{""1, 2"":""3, 4""}", json);
 
-            Dictionary<TypeConverterSize, TypeConverterSize> d =
-                JsonConvert.DeserializeObject<Dictionary<TypeConverterSize, TypeConverterSize>>(
-                    json
-                );
+            Dictionary<TypeConverterSize, TypeConverterSize> d = JsonConvert.DeserializeObject<
+                Dictionary<TypeConverterSize, TypeConverterSize>
+            >(json);
 
             Assert.AreEqual(new TypeConverterSize(1, 2), d.Keys.First());
             Assert.AreEqual(new TypeConverterSize(3, 4), d.Values.First());
@@ -9133,10 +9126,9 @@ This is just junk, though.";
                 json
             );
 
-            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    DateTime,
-                    string
-                >>(json, settings);
+            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<
+                Dictionary<DateTime, string>
+            >(json, settings);
 
             Assert.AreEqual(dt, d.Keys.ElementAt(0));
         }
@@ -9165,10 +9157,9 @@ This is just junk, though.";
                 json
             );
 
-            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    DateTime,
-                    string
-                >>(json, settings);
+            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<
+                Dictionary<DateTime, string>
+            >(json, settings);
 
             Assert.AreEqual(dt, d.Keys.ElementAt(0));
         }
@@ -9197,10 +9188,9 @@ This is just junk, though.";
                 json
             );
 
-            Dictionary<DateTimeOffset, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    DateTimeOffset,
-                    string
-                >>(json, settings);
+            Dictionary<DateTimeOffset, string> d = JsonConvert.DeserializeObject<
+                Dictionary<DateTimeOffset, string>
+            >(json, settings);
 
             Assert.AreEqual(dt, d.Keys.ElementAt(0));
         }
@@ -9229,10 +9219,9 @@ This is just junk, though.";
                 json
             );
 
-            Dictionary<DateTimeOffset, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    DateTimeOffset,
-                    string
-                >>(json, settings);
+            Dictionary<DateTimeOffset, string> d = JsonConvert.DeserializeObject<
+                Dictionary<DateTimeOffset, string>
+            >(json, settings);
 
             Assert.AreEqual(dt, d.Keys.ElementAt(0));
         }

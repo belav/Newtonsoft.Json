@@ -69,11 +69,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
                                     CultureInfo.InvariantCulture,
                                     Start != null
                                         ? Start.GetValueOrDefault()
-                                                .ToString(CultureInfo.InvariantCulture)
+                                              .ToString(CultureInfo.InvariantCulture)
                                         : "*",
                                     End != null
                                         ? End.GetValueOrDefault()
-                                                .ToString(CultureInfo.InvariantCulture)
+                                              .ToString(CultureInfo.InvariantCulture)
                                         : "*"
                                 )
                             );

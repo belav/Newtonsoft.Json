@@ -402,7 +402,6 @@ namespace Newtonsoft.Json
         /// <param name="value">The <see cref="Object"/> value to write.</param>
         public override void WriteValue(object? value)
         {
-
 #if HAVE_BIG_INTEGER
             if (value is BigInteger i)
             {
@@ -911,8 +910,7 @@ namespace Newtonsoft.Json
                 ulong digit = value - (quotient * 10);
                 _writeBuffer[--index] = (char)('0' + digit);
                 value = quotient;
-            }
-            while (value != 0);
+            } while (value != 0);
 
             return totalLength;
         }
@@ -964,8 +962,7 @@ namespace Newtonsoft.Json
                 uint digit = value - (quotient * 10);
                 _writeBuffer[--index] = (char)('0' + digit);
                 value = quotient;
-            }
-            while (value != 0);
+            } while (value != 0);
 
             return totalLength;
         }

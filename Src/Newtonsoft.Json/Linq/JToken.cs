@@ -1725,8 +1725,8 @@ namespace Newtonsoft.Json.Linq
             return (v.Value is TimeSpan span)
                 ? span
                 : ConvertUtils.ParseTimeSpan(
-                        Convert.ToString(v.Value, CultureInfo.InvariantCulture)
-                    );
+                      Convert.ToString(v.Value, CultureInfo.InvariantCulture)
+                  );
         }
 
         /// <summary>
@@ -1760,8 +1760,8 @@ namespace Newtonsoft.Json.Linq
             return (v.Value is TimeSpan span)
                 ? span
                 : ConvertUtils.ParseTimeSpan(
-                        Convert.ToString(v.Value, CultureInfo.InvariantCulture)
-                    );
+                      Convert.ToString(v.Value, CultureInfo.InvariantCulture)
+                  );
         }
 
         /// <summary>

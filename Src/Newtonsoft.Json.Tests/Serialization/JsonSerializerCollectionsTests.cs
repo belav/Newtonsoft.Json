@@ -95,10 +95,9 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var jsonValue = $"{{\"{key}\":null}}";
 
-            var deserializedObject = JsonConvert.DeserializeObject<ConcurrentDictionary<
-                    string,
-                    string
-                >>(jsonValue);
+            var deserializedObject = JsonConvert.DeserializeObject<
+                ConcurrentDictionary<string, string>
+            >(jsonValue);
 
             Assert.IsNull(deserializedObject[key]);
         }
@@ -163,8 +162,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(dic1);
             Assert.AreEqual(@"{""1"":2147483647}", output);
 
-            ConcurrentDictionary<int, int> dic2 =
-                JsonConvert.DeserializeObject<ConcurrentDictionary<int, int>>(output);
+            ConcurrentDictionary<int, int> dic2 = JsonConvert.DeserializeObject<
+                ConcurrentDictionary<int, int>
+            >(output);
             int i;
             Assert.IsTrue(dic2.TryGetValue(1, out i));
             Assert.AreEqual(int.MaxValue, i);
@@ -178,10 +178,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(dictionary);
             Assert.AreEqual(@"{""1"":1}", output);
 
-            Dictionary<double, int> deserializedValue = JsonConvert.DeserializeObject<Dictionary<
-                    double,
-                    int
-                >>(output);
+            Dictionary<double, int> deserializedValue = JsonConvert.DeserializeObject<
+                Dictionary<double, int>
+            >(output);
             Assert.AreEqual(1d, deserializedValue.First().Key);
         }
 
@@ -195,10 +194,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(dictionary);
             Assert.AreEqual(@"{""1.7976931348623157E+308"":1}", output);
 
-            Dictionary<double, int> deserializedValue = JsonConvert.DeserializeObject<Dictionary<
-                    double,
-                    int
-                >>(output);
+            Dictionary<double, int> deserializedValue = JsonConvert.DeserializeObject<
+                Dictionary<double, int>
+            >(output);
             Assert.AreEqual(double.MaxValue, deserializedValue.First().Key);
         }
 
@@ -589,7 +587,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void MultiDObjectArray()
         {
-            object[,] myOtherArray = {
+            object[,] myOtherArray =
+            {
                 { new KeyValuePair<string, double>("my value", 0.8), "foobar" },
                 { true, 0.4d },
                 { 0.05f, 6 }
@@ -752,10 +751,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializePrivateListConstructor()
         {
-            var list =
-                JsonConvert.DeserializeObject<PrivateDefaultCtorWithIEnumerableCtorList<int>>(
-                    "[1,2]"
-                );
+            var list = JsonConvert.DeserializeObject<
+                PrivateDefaultCtorWithIEnumerableCtorList<int>
+            >("[1,2]");
 
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual(1, list[0]);
@@ -766,10 +764,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeNonIsoDateDictionaryKey()
         {
-            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<Dictionary<
-                    DateTime,
-                    string
-                >>(@"{""04/28/2013 00:00:00"":""test""}");
+            Dictionary<DateTime, string> d = JsonConvert.DeserializeObject<
+                Dictionary<DateTime, string>
+            >(@"{""04/28/2013 00:00:00"":""test""}");
 
             Assert.AreEqual(1, d.Count);
 
@@ -830,10 +827,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeReadOnlyDictionaryInterface()
         {
-            IReadOnlyDictionary<string, int> dic =
-                JsonConvert.DeserializeObject<IReadOnlyDictionary<string, int>>(
-                    "{'one':1,'two':2}"
-                );
+            IReadOnlyDictionary<string, int> dic = JsonConvert.DeserializeObject<
+                IReadOnlyDictionary<string, int>
+            >("{'one':1,'two':2}");
 
             Assert.AreEqual(2, dic.Count);
 
@@ -846,10 +842,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeReadOnlyDictionary()
         {
-            ReadOnlyDictionary<string, int> dic = JsonConvert.DeserializeObject<ReadOnlyDictionary<
-                    string,
-                    int
-                >>("{'one':1,'two':2}");
+            ReadOnlyDictionary<string, int> dic = JsonConvert.DeserializeObject<
+                ReadOnlyDictionary<string, int>
+            >("{'one':1,'two':2}");
 
             Assert.AreEqual(2, dic.Count);
 
@@ -1026,8 +1021,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            List<KeyValuePair<string, string>> result =
-                JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(json);
+            List<KeyValuePair<string, string>> result = JsonConvert.DeserializeObject<
+                List<KeyValuePair<string, string>>
+            >(json);
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual("key1", result[0].Key);
             Assert.AreEqual("value1", result[0].Value);
@@ -1040,10 +1036,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DateTime dateTime = new DateTime(2000, 12, 1, 23, 1, 1, DateTimeKind.Utc);
 
-            List<KeyValuePair<string, WagePerson>> list = new List<KeyValuePair<
-                    string,
-                    WagePerson
-                >>();
+            List<KeyValuePair<string, WagePerson>> list = new List<
+                KeyValuePair<string, WagePerson>
+            >();
             list.Add(
                 new KeyValuePair<string, WagePerson>(
                     "key1",
@@ -1095,8 +1090,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            List<KeyValuePair<string, WagePerson>> result =
-                JsonConvert.DeserializeObject<List<KeyValuePair<string, WagePerson>>>(json);
+            List<KeyValuePair<string, WagePerson>> result = JsonConvert.DeserializeObject<
+                List<KeyValuePair<string, WagePerson>>
+            >(json);
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual("key1", result[0].Key);
             Assert.AreEqual(1, result[0].Value.HourlyWage);
@@ -1234,8 +1230,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json =
                 @"[ { ""Value"": [ ""1"", ""2"" ], ""Key"": ""aaa"", ""BadContent"": [ 0 ] }, { ""Value"": [ ""3"", ""4"" ], ""Key"": ""bbb"" } ]";
 
-            IList<KeyValuePair<string, IList<string>>> values =
-                JsonConvert.DeserializeObject<IList<KeyValuePair<string, IList<string>>>>(json);
+            IList<KeyValuePair<string, IList<string>>> values = JsonConvert.DeserializeObject<
+                IList<KeyValuePair<string, IList<string>>>
+            >(json);
 
             Assert.AreEqual(2, values.Count);
             Assert.AreEqual("aaa", values[0].Key);
@@ -1254,8 +1251,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json =
                 @"[ { ""Value"": [ ""1"", ""2"" ], ""Key"": ""aaa"", ""BadContent"": [ 0 ] }, null, { ""Value"": [ ""3"", ""4"" ], ""Key"": ""bbb"" } ]";
 
-            IList<KeyValuePair<string, IList<string>>?> values =
-                JsonConvert.DeserializeObject<IList<KeyValuePair<string, IList<string>>?>>(json);
+            IList<KeyValuePair<string, IList<string>>?> values = JsonConvert.DeserializeObject<
+                IList<KeyValuePair<string, IList<string>>?>
+            >(json);
 
             Assert.AreEqual(3, values.Count);
             Assert.AreEqual("aaa", values[0].Value.Key);
@@ -1711,7 +1709,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Array3D aa = new Array3D();
             aa.Before = "Before!";
             aa.After = "After!";
-            aa.Coordinates = new int[0,0,0];
+            aa.Coordinates = new int[0, 0, 0];
 
             string json = JsonConvert.SerializeObject(aa);
 
@@ -1866,12 +1864,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             StringAssert.AreEqual(
                 @"{
   ""$type"": """
-                + ReflectionUtils.GetTypeName(
-                    typeof(List<Event1[,]>),
-                    0,
-                    DefaultSerializationBinder.Instance
-                )
-                + @""",
+                    + ReflectionUtils.GetTypeName(
+                        typeof(List<Event1[,]>),
+                        0,
+                        DefaultSerializationBinder.Instance
+                    )
+                    + @""",
   ""$values"": [
     {
       ""$type"": ""Newtonsoft.Json.Tests.TestObjects.Events.Event1[,], Newtonsoft.Json.Tests"",
@@ -2348,10 +2346,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{ ""en-US"": ""Hi"", ""sv-SE"": ""Hej"" }";
 
-            Dictionary<CultureInfo, string> values = JsonConvert.DeserializeObject<Dictionary<
-                    CultureInfo,
-                    string
-                >>(json);
+            Dictionary<CultureInfo, string> values = JsonConvert.DeserializeObject<
+                Dictionary<CultureInfo, string>
+            >(json);
             Assert.AreEqual(2, values.Count);
         }
 #endif

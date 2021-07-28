@@ -908,8 +908,7 @@ namespace Newtonsoft.Json.Linq
                             )
                         );
                 }
-            }
-            while (r.Read());
+            } while (r.Read());
         }
 
         private static JProperty? ReadProperty(

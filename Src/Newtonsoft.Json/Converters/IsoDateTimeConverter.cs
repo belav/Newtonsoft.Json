@@ -84,9 +84,9 @@ namespace Newtonsoft.Json.Converters
             {
                 if (
                     (_dateTimeStyles & DateTimeStyles.AdjustToUniversal)
-                    == DateTimeStyles.AdjustToUniversal
+                        == DateTimeStyles.AdjustToUniversal
                     || (_dateTimeStyles & DateTimeStyles.AssumeUniversal)
-                    == DateTimeStyles.AssumeUniversal
+                        == DateTimeStyles.AssumeUniversal
                 ) {
                     dateTime = dateTime.ToUniversalTime();
                 }

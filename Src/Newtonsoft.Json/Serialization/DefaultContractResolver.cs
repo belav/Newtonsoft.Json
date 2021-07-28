@@ -64,13 +64,15 @@ namespace Newtonsoft.Json.Serialization
         // Json.NET Schema requires a property
         internal static IContractResolver Instance => _instance;
 
-        private static readonly string[] BlacklistedTypeNames = {
+        private static readonly string[] BlacklistedTypeNames =
+        {
             "System.IO.DriveInfo",
             "System.IO.FileInfo",
             "System.IO.DirectoryInfo"
         };
 
-        private static readonly JsonConverter[] BuiltInConverters = {
+        private static readonly JsonConverter[] BuiltInConverters =
+        {
 #if HAVE_ENTITY_FRAMEWORK
             new EntityKeyMemberConverter(),
 #endif
@@ -241,9 +243,9 @@ namespace Newtonsoft.Json.Serialization
             IEnumerable<MemberInfo> allMembers = ReflectionUtils.GetFieldsAndProperties(
                     objectType,
                     BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
                 )
                 .Where(m => m is PropertyInfo p ? !ReflectionUtils.IsIndexedProperty(p) : true);
 
@@ -511,17 +513,17 @@ namespace Newtonsoft.Json.Serialization
                         m.AddRange(
                             baseType.GetProperties(
                                 BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Instance
-                                | BindingFlags.DeclaredOnly
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Instance
+                                    | BindingFlags.DeclaredOnly
                             )
                         );
                         m.AddRange(
                             baseType.GetFields(
                                 BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Instance
-                                | BindingFlags.DeclaredOnly
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Instance
+                                    | BindingFlags.DeclaredOnly
                             )
                         );
 
@@ -1103,9 +1105,9 @@ namespace Newtonsoft.Json.Serialization
                 foreach (
                     MethodInfo method in baseType.GetMethods(
                         BindingFlags.NonPublic
-                        | BindingFlags.Public
-                        | BindingFlags.Instance
-                        | BindingFlags.DeclaredOnly
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.DeclaredOnly
                     )
                 ) {
                     // compact framework errors when getting parameters for a generic method
@@ -1294,11 +1296,11 @@ namespace Newtonsoft.Json.Serialization
                     contract.DictionaryKeyType != null && contract.DictionaryValueType != null
                 )
                     ? typeof(IEnumerable<>).MakeGenericType(
-                            typeof(KeyValuePair<, >).MakeGenericType(
-                                contract.DictionaryKeyType,
-                                contract.DictionaryValueType
-                            )
-                        )
+                          typeof(KeyValuePair<, >).MakeGenericType(
+                              contract.DictionaryKeyType,
+                              contract.DictionaryValueType
+                          )
+                      )
                     : typeof(IDictionary);
 
                 if (parameters.Length == 0)
@@ -1934,9 +1936,9 @@ namespace Newtonsoft.Json.Serialization
                 property.ItemIsReference = propertyAttribute._itemIsReference;
                 property.ItemConverter = propertyAttribute.ItemConverterType != null
                     ? JsonTypeReflector.CreateJsonConverterInstance(
-                            propertyAttribute.ItemConverterType,
-                            propertyAttribute.ItemConverterParameters
-                        )
+                          propertyAttribute.ItemConverterType,
+                          propertyAttribute.ItemConverterParameters
+                      )
                     : null;
                 property.ItemReferenceLoopHandling = propertyAttribute._itemReferenceLoopHandling;
                 property.ItemTypeNameHandling = propertyAttribute._itemTypeNameHandling;
@@ -1975,7 +1977,7 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonIgnoreAttribute>(attributeProvider) != null
                 // automatically ignore extension data dictionary property if it is public
                 || JsonTypeReflector.GetAttribute<JsonExtensionDataAttribute>(attributeProvider)
-                != null
+                    != null
 #if HAVE_NON_SERIALIZED_ATTRIBUTE
                 || JsonTypeReflector.IsNonSerializable(attributeProvider)
 #endif

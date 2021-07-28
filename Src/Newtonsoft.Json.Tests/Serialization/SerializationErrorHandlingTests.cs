@@ -178,12 +178,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(
                 possibleMsgs.Any(m => m == c.Messages[0]),
                 "Expected One of: "
-                + Environment.NewLine
-                + string.Join(Environment.NewLine, possibleMsgs)
-                + Environment.NewLine
-                + "Was: "
-                + Environment.NewLine
-                + c.Messages[0]
+                    + Environment.NewLine
+                    + string.Join(Environment.NewLine, possibleMsgs)
+                    + Environment.NewLine
+                    + "Was: "
+                    + Environment.NewLine
+                    + c.Messages[0]
             );
         }
 
@@ -393,10 +393,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(
                             args.ErrorContext.Path
-                            + " - "
-                            + args.ErrorContext.Member
-                            + " - "
-                            + args.ErrorContext.Error.Message
+                                + " - "
+                                + args.ErrorContext.Member
+                                + " - "
+                                + args.ErrorContext.Error.Message
                         );
                         args.ErrorContext.Handled = true;
                     },
@@ -450,10 +450,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(
                 possibleErrs.Any(m => m == errors[0]),
                 "Expected One of: "
-                + string.Join(Environment.NewLine, possibleErrs)
-                + Environment.NewLine
-                + "But was: "
-                + errors[0]
+                    + string.Join(Environment.NewLine, possibleErrs)
+                    + Environment.NewLine
+                    + "But was: "
+                    + errors[0]
             );
 
             Assert.AreEqual(
@@ -539,10 +539,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(
                             args.ErrorContext.Path
-                            + " - "
-                            + args.ErrorContext.Member
-                            + " - "
-                            + args.ErrorContext.Error.Message
+                                + " - "
+                                + args.ErrorContext.Member
+                                + " - "
+                                + args.ErrorContext.Error.Message
                         );
                     }
                 };
@@ -577,10 +577,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 errors.Add(
                     args.ErrorContext.Path
-                    + " - "
-                    + args.ErrorContext.Member
-                    + " - "
-                    + args.ErrorContext.Error.Message
+                        + " - "
+                        + args.ErrorContext.Member
+                        + " - "
+                        + args.ErrorContext.Error.Message
                 );
                 args.ErrorContext.Handled = true;
             };
@@ -614,10 +614,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 errors.Add(
                     args.ErrorContext.Path
-                    + " - "
-                    + args.ErrorContext.Member
-                    + " - "
-                    + args.ErrorContext.Error.Message
+                        + " - "
+                        + args.ErrorContext.Member
+                        + " - "
+                        + args.ErrorContext.Error.Message
                 );
                 args.ErrorContext.Handled = true;
             };
@@ -647,10 +647,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 errors.Add(
                     args.ErrorContext.Path
-                    + " - "
-                    + args.ErrorContext.Member
-                    + " - "
-                    + args.ErrorContext.Error.Message
+                        + " - "
+                        + args.ErrorContext.Member
+                        + " - "
+                        + args.ErrorContext.Error.Message
                 );
                 args.ErrorContext.Handled = true;
             };
@@ -892,10 +892,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                     e.ErrorContext.Handled = true;
                 };
 
-                IDictionary<string, LogEvent> logEvents = jsonSerializer.Deserialize<IDictionary<
-                        string,
-                        LogEvent
-                    >>(jsonTextReader);
+                IDictionary<string, LogEvent> logEvents = jsonSerializer.Deserialize<
+                    IDictionary<string, LogEvent>
+                >(jsonTextReader);
 
                 Assert.IsNotNull(logEvents);
                 Assert.AreEqual(2, logEvents.Count);

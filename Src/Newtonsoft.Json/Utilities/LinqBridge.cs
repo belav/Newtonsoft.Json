@@ -711,8 +711,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                 do
                 {
                     yield return e.Current;
-                }
-                while (e.MoveNext());
+                } while (e.MoveNext());
             }
         }
 
@@ -1248,8 +1247,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     do
                     {
                         yield return e.Current;
-                    }
-                    while (e.MoveNext());
+                    } while (e.MoveNext());
             }
         }
 
@@ -1380,8 +1378,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
                     if (!rhs.MoveNext())
                         return false;
-                }
-                while (comparer.Equals(lhs.Current, rhs.Current));
+                } while (comparer.Equals(lhs.Current, rhs.Current));
             }
 
             return false;
@@ -1409,7 +1406,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource?> source,
             TSource? seed,
             Func<TSource?, TSource?, bool> lesser
-        ) where TSource : struct {
+        ) where TSource : struct
+        {
             CheckNotNull(source, "source");
             MiscellaneousUtils.Assert(lesser != null);
 
@@ -1478,8 +1476,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             do
             {
                 yield return e.Current;
-            }
-            while (e.MoveNext());
+            } while (e.MoveNext());
         }
 
         /// <summary>
