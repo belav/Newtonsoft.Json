@@ -293,14 +293,15 @@ namespace Newtonsoft.Json
         {
             IJsonLineInfo lineInfo = this;
 
-            string exceptionMessage = (lineInfo.HasLineInfo())
-                ? message
-                  + " Line {0}, position {1}.".FormatWith(
-                      CultureInfo.InvariantCulture,
-                      lineInfo.LineNumber,
-                      lineInfo.LinePosition
-                  )
-                : message;
+            string exceptionMessage =
+                (lineInfo.HasLineInfo())
+                    ? message
+                      + " Line {0}, position {1}.".FormatWith(
+                          CultureInfo.InvariantCulture,
+                          lineInfo.LineNumber,
+                          lineInfo.LinePosition
+                      )
+                    : message;
 
             OnValidationEvent(
                 new JsonSchemaException(
@@ -675,12 +676,11 @@ namespace Newtonsoft.Json
         {
             foreach (SchemaScope schemaScope in _stack)
             {
-                bool isInUniqueArray =
-                    (
-                        schemaScope.TokenType == JTokenType.Array
-                        && schemaScope.IsUniqueArray
-                        && schemaScope.ArrayItemCount > 0
-                    );
+                bool isInUniqueArray = (
+                    schemaScope.TokenType == JTokenType.Array
+                    && schemaScope.IsUniqueArray
+                    && schemaScope.ArrayItemCount > 0
+                );
 
                 if (isInUniqueArray || schemas.Any(s => s.Enum != null))
                 {
@@ -1005,11 +1005,10 @@ namespace Newtonsoft.Json
                 else
 #endif
                 {
-                    notDivisible =
-                        !IsZero(
-                            Convert.ToInt64(value, CultureInfo.InvariantCulture)
-                                % schema.DivisibleBy.GetValueOrDefault()
-                        );
+                    notDivisible = !IsZero(
+                        Convert.ToInt64(value, CultureInfo.InvariantCulture)
+                            % schema.DivisibleBy.GetValueOrDefault()
+                    );
                 }
 
                 if (notDivisible)

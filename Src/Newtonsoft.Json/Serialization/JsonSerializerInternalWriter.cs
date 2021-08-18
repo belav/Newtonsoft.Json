@@ -429,9 +429,10 @@ namespace Newtonsoft.Json.Serialization
                 referenceLoopHandling = containerContract.ItemReferenceLoopHandling;
             }
 
-            bool exists = (Serializer._equalityComparer != null)
-                ? _serializeStack.Contains(value, Serializer._equalityComparer)
-                : _serializeStack.Contains(value);
+            bool exists =
+                (Serializer._equalityComparer != null)
+                    ? _serializeStack.Contains(value, Serializer._equalityComparer)
+                    : _serializeStack.Contains(value);
 
             if (exists)
             {
@@ -703,9 +704,10 @@ namespace Newtonsoft.Json.Serialization
 
                     string propertyName = GetPropertyName(writer, e.Key, keyContract, out _);
 
-                    propertyName = (contract.ExtensionDataNameResolver != null)
-                        ? contract.ExtensionDataNameResolver(propertyName)
-                        : propertyName;
+                    propertyName =
+                        (contract.ExtensionDataNameResolver != null)
+                            ? contract.ExtensionDataNameResolver(propertyName)
+                            : propertyName;
 
                     if (ShouldWriteReference(e.Value, null, valueContract, contract, member))
                     {
@@ -764,9 +766,10 @@ namespace Newtonsoft.Json.Serialization
                 }
 
                 memberValue = property.ValueProvider!.GetValue(value);
-                memberContract = (property.PropertyContract.IsSealed)
-                    ? property.PropertyContract
-                    : GetContractSafe(memberValue);
+                memberContract =
+                    (property.PropertyContract.IsSealed)
+                        ? property.PropertyContract
+                        : GetContractSafe(memberValue);
 
                 if (ShouldWriteProperty(memberValue, contract as JsonObjectContract, property))
                 {
@@ -1263,15 +1266,14 @@ namespace Newtonsoft.Json.Serialization
                     PreserveReferencesHandling.Arrays
                 );
             // don't make readonly fields that aren't creator parameters the referenced value because they can't be deserialized to
-            isReference =
-                (
-                    isReference
-                    && (
-                        member == null
-                        || member.Writable
-                        || HasCreatorParameter(containerContract, member)
-                    )
-                );
+            isReference = (
+                isReference
+                && (
+                    member == null
+                    || member.Writable
+                    || HasCreatorParameter(containerContract, member)
+                )
+            );
 
             bool includeTypeDetails = ShouldWriteType(
                 TypeNameHandling.Arrays,
@@ -1571,9 +1573,10 @@ namespace Newtonsoft.Json.Serialization
                         out bool escape
                     );
 
-                    propertyName = (contract.DictionaryKeyResolver != null)
-                        ? contract.DictionaryKeyResolver(propertyName)
-                        : propertyName;
+                    propertyName =
+                        (contract.DictionaryKeyResolver != null)
+                            ? contract.DictionaryKeyResolver(propertyName)
+                            : propertyName;
 
                     try
                     {

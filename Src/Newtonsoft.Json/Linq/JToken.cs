@@ -2469,9 +2469,10 @@ namespace Newtonsoft.Json.Linq
             bool hasContent;
             if (reader.TokenType == JsonToken.None)
             {
-                hasContent = (
-                    settings != null && settings.CommentHandling == CommentHandling.Ignore
-                ) ? reader.ReadAndMoveToContent() : reader.Read();
+                hasContent =
+                    (settings != null && settings.CommentHandling == CommentHandling.Ignore)
+                        ? reader.ReadAndMoveToContent()
+                        : reader.Read();
             }
             else if (
                 reader.TokenType == JsonToken.Comment

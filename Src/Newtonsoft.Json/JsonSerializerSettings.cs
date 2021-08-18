@@ -258,9 +258,8 @@ namespace Newtonsoft.Json
             get => ReferenceResolverProvider?.Invoke();
             set
             {
-                ReferenceResolverProvider = (value != null)
-                    ? () => value
-                    : (Func<IReferenceResolver?>?)null;
+                ReferenceResolverProvider =
+                    (value != null) ? () => value : (Func<IReferenceResolver?>?)null;
             }
         }
 

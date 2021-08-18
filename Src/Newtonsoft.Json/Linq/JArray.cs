@@ -291,9 +291,8 @@ namespace Newtonsoft.Json.Linq
 
         internal override void MergeItem(object content, JsonMergeSettings? settings)
         {
-            IEnumerable? a = (IsMultiContent(content) || content is JArray)
-                ? (IEnumerable)content
-                : null;
+            IEnumerable? a =
+                (IsMultiContent(content) || content is JArray) ? (IEnumerable)content : null;
             if (a == null)
             {
                 return;

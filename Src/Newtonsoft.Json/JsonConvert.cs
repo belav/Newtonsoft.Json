@@ -614,9 +614,10 @@ namespace Newtonsoft.Json
         [DebuggerStepThrough]
         public static string SerializeObject(object? value, params JsonConverter[] converters)
         {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return SerializeObject(value, null, settings);
         }
@@ -634,9 +635,10 @@ namespace Newtonsoft.Json
             Formatting formatting,
             params JsonConverter[] converters
         ) {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return SerializeObject(value, null, formatting, settings);
         }
@@ -880,9 +882,10 @@ namespace Newtonsoft.Json
             Type type,
             params JsonConverter[] converters
         ) {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return DeserializeObject(value, type, settings);
         }

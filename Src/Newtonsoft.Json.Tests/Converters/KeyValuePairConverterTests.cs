@@ -21,10 +21,9 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeUsingInternalConverter()
         {
             DefaultContractResolver contractResolver = new DefaultContractResolver();
-            JsonObjectContract contract =
-                (JsonObjectContract)contractResolver.ResolveContract(
-                    typeof(KeyValuePair<string, int>)
-                );
+            JsonObjectContract contract = (JsonObjectContract)contractResolver.ResolveContract(
+                typeof(KeyValuePair<string, int>)
+            );
 
             Assert.AreEqual(typeof(KeyValuePairConverter), contract.InternalConverter.GetType());
 

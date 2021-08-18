@@ -226,9 +226,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
         private static PathFilter CreatePathFilter(string? member, bool scan)
         {
-            PathFilter filter = (scan)
-                ? (PathFilter)new ScanFilter(member)
-                : new FieldFilter(member);
+            PathFilter filter =
+                (scan) ? (PathFilter)new ScanFilter(member) : new FieldFilter(member);
             return filter;
         }
 

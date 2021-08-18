@@ -65,11 +65,10 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f =
-                    enumType.GetField(
-                        name,
-                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
-                    )!;
+                FieldInfo f = enumType.GetField(
+                    name,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+                )!;
                 values[i] = ToUInt64(f.GetValue(null));
 
                 string resolvedName;
@@ -90,9 +89,10 @@ namespace Newtonsoft.Json.Utilities
                 hasSpecifiedName = false;
 #endif
 
-                resolvedNames[i] = key.Value2 != null
-                    ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
-                    : resolvedName;
+                resolvedNames[i] =
+                    key.Value2 != null
+                        ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
+                        : resolvedName;
             }
 
             bool isFlags = enumType.IsDefined(typeof(FlagsAttribute), false);

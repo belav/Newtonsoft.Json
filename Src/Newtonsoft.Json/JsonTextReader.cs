@@ -724,9 +724,8 @@ namespace Newtonsoft.Json
                                     _charPos++;
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
-                                string expected = currentChar == 't'
-                                    ? JsonConvert.True
-                                    : JsonConvert.False;
+                                string expected =
+                                    currentChar == 't' ? JsonConvert.True : JsonConvert.False;
                                 if (!MatchValueWithTrailingSeparator(expected))
                                 {
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
@@ -2210,14 +2209,13 @@ namespace Newtonsoft.Json
             JsonToken numberType;
 
             bool singleDigit = (char.IsDigit(firstChar) && _stringReference.Length == 1);
-            bool nonBase10 =
-                (
-                    firstChar == '0'
-                    && _stringReference.Length > 1
-                    && _stringReference.Chars[_stringReference.StartIndex + 1] != '.'
-                    && _stringReference.Chars[_stringReference.StartIndex + 1] != 'e'
-                    && _stringReference.Chars[_stringReference.StartIndex + 1] != 'E'
-                );
+            bool nonBase10 = (
+                firstChar == '0'
+                && _stringReference.Length > 1
+                && _stringReference.Chars[_stringReference.StartIndex + 1] != '.'
+                && _stringReference.Chars[_stringReference.StartIndex + 1] != 'e'
+                && _stringReference.Chars[_stringReference.StartIndex + 1] != 'E'
+            );
 
             switch (readType)
             {
@@ -2291,7 +2289,9 @@ namespace Newtonsoft.Json
                                 int integer = number.StartsWith(
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
-                                ) ? Convert.ToInt32(number, 16) : Convert.ToInt32(number, 8);
+                                )
+                                    ? Convert.ToInt32(number, 16)
+                                    : Convert.ToInt32(number, 8);
 
                                 numberValue = integer;
                             }
@@ -2359,7 +2359,9 @@ namespace Newtonsoft.Json
                                 long integer = number.StartsWith(
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
-                                ) ? Convert.ToInt64(number, 16) : Convert.ToInt64(number, 8);
+                                )
+                                    ? Convert.ToInt64(number, 16)
+                                    : Convert.ToInt64(number, 8);
 
                                 numberValue = Convert.ToDecimal(integer);
                             }
@@ -2418,7 +2420,9 @@ namespace Newtonsoft.Json
                                 long integer = number.StartsWith(
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
-                                ) ? Convert.ToInt64(number, 16) : Convert.ToInt64(number, 8);
+                                )
+                                    ? Convert.ToInt64(number, 16)
+                                    : Convert.ToInt64(number, 8);
 
                                 numberValue = Convert.ToDouble(integer);
                             }
@@ -2480,7 +2484,9 @@ namespace Newtonsoft.Json
                                 numberValue = number.StartsWith(
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
-                                ) ? Convert.ToInt64(number, 16) : Convert.ToInt64(number, 8);
+                                )
+                                    ? Convert.ToInt64(number, 16)
+                                    : Convert.ToInt64(number, 8);
                             }
                             catch (Exception ex)
                             {

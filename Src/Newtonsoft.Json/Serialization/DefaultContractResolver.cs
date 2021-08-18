@@ -397,8 +397,9 @@ namespace Newtonsoft.Json.Serialization
 
                 if (attribute.NamingStrategyType != null)
                 {
-                    NamingStrategy namingStrategy =
-                        JsonTypeReflector.GetContainerNamingStrategy(attribute)!;
+                    NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
+                        attribute
+                    )!;
                     extensionDataNameResolver = s => namingStrategy.GetDictionaryKey(s);
                 }
             }
@@ -629,15 +630,27 @@ namespace Newtonsoft.Json.Serialization
 
             if (extensionDataAttribute.ReadData)
             {
-                Action<object, object?>? setExtensionDataDictionary = (
-                    ReflectionUtils.CanSetMemberValue(member, true, false)
-                ) ? JsonTypeReflector.ReflectionDelegateFactory.CreateSet<object>(member) : null;
+                Action<object, object?>? setExtensionDataDictionary =
+                    (ReflectionUtils.CanSetMemberValue(member, true, false))
+                        ? JsonTypeReflector.ReflectionDelegateFactory.CreateSet<object>(member)
+                        : null;
                 Func<object> createExtensionDataDictionary =
                     JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
                         createdType
                     );
-                MethodInfo? setMethod =
-                    t.GetProperty(
+                MethodInfo? setMethod = t.GetProperty(
+                    "Item",
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    valueType,
+                    new[] { keyType },
+                    null
+                )?.GetSetMethod();
+                if (setMethod == null)
+                {
+                    // Item is explicitly implemented and non-public
+                    // get from dictionary interface
+                    setMethod = dictionaryType!.GetProperty(
                         "Item",
                         BindingFlags.Public | BindingFlags.Instance,
                         null,
@@ -645,19 +658,6 @@ namespace Newtonsoft.Json.Serialization
                         new[] { keyType },
                         null
                     )?.GetSetMethod();
-                if (setMethod == null)
-                {
-                    // Item is explicitly implemented and non-public
-                    // get from dictionary interface
-                    setMethod =
-                        dictionaryType!.GetProperty(
-                            "Item",
-                            BindingFlags.Public | BindingFlags.Instance,
-                            null,
-                            valueType,
-                            new[] { keyType },
-                            null
-                        )?.GetSetMethod();
                 }
 
                 MethodCall<object, object?> setExtensionDataDictionaryValue =
@@ -940,9 +940,10 @@ namespace Newtonsoft.Json.Serialization
             // "inherit" values from matching member property if unset on parameter
             if (matchingMemberProperty != null)
             {
-                property.PropertyName = (property.PropertyName != parameterInfo.Name)
-                    ? property.PropertyName
-                    : matchingMemberProperty.PropertyName;
+                property.PropertyName =
+                    (property.PropertyName != parameterInfo.Name)
+                        ? property.PropertyName
+                        : matchingMemberProperty.PropertyName;
                 property.Converter = property.Converter ?? matchingMemberProperty.Converter;
 
                 if (
@@ -1029,11 +1030,10 @@ namespace Newtonsoft.Json.Serialization
             ) {
                 contract.DefaultCreator = GetDefaultCreator(contract.CreatedType);
 
-                contract.DefaultCreatorNonPublic =
-                    (
-                        !contract.CreatedType.IsValueType()
-                        && ReflectionUtils.GetDefaultConstructor(contract.CreatedType) == null
-                    );
+                contract.DefaultCreatorNonPublic = (
+                    !contract.CreatedType.IsValueType()
+                    && ReflectionUtils.GetDefaultConstructor(contract.CreatedType) == null
+                );
             }
 
             ResolveCallbackMethods(contract, contract.NonNullableUnderlyingType);
@@ -1276,8 +1276,9 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy =
-                    JsonTypeReflector.GetContainerNamingStrategy(containerAttribute)!;
+                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
+                    containerAttribute
+                )!;
                 contract.DictionaryKeyResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -1292,16 +1293,15 @@ namespace Newtonsoft.Json.Serialization
             if (overrideConstructor != null)
             {
                 ParameterInfo[] parameters = overrideConstructor.GetParameters();
-                Type expectedParameterType = (
-                    contract.DictionaryKeyType != null && contract.DictionaryValueType != null
-                )
-                    ? typeof(IEnumerable<>).MakeGenericType(
-                          typeof(KeyValuePair<, >).MakeGenericType(
-                              contract.DictionaryKeyType,
-                              contract.DictionaryValueType
+                Type expectedParameterType =
+                    (contract.DictionaryKeyType != null && contract.DictionaryValueType != null)
+                        ? typeof(IEnumerable<>).MakeGenericType(
+                              typeof(KeyValuePair<, >).MakeGenericType(
+                                  contract.DictionaryKeyType,
+                                  contract.DictionaryValueType
+                              )
                           )
-                      )
-                    : typeof(IDictionary);
+                        : typeof(IDictionary);
 
                 if (parameters.Length == 0)
                 {
@@ -1350,9 +1350,10 @@ namespace Newtonsoft.Json.Serialization
             if (overrideConstructor != null)
             {
                 ParameterInfo[] parameters = overrideConstructor.GetParameters();
-                Type expectedParameterType = (contract.CollectionItemType != null)
-                    ? typeof(IEnumerable<>).MakeGenericType(contract.CollectionItemType)
-                    : typeof(IEnumerable);
+                Type expectedParameterType =
+                    (contract.CollectionItemType != null)
+                        ? typeof(IEnumerable<>).MakeGenericType(contract.CollectionItemType)
+                        : typeof(IEnumerable);
 
                 if (parameters.Length == 0)
                 {
@@ -1934,12 +1935,13 @@ namespace Newtonsoft.Json.Serialization
                 property.IsReference = propertyAttribute._isReference;
 
                 property.ItemIsReference = propertyAttribute._itemIsReference;
-                property.ItemConverter = propertyAttribute.ItemConverterType != null
-                    ? JsonTypeReflector.CreateJsonConverterInstance(
-                          propertyAttribute.ItemConverterType,
-                          propertyAttribute.ItemConverterParameters
-                      )
-                    : null;
+                property.ItemConverter =
+                    propertyAttribute.ItemConverterType != null
+                        ? JsonTypeReflector.CreateJsonConverterInstance(
+                              propertyAttribute.ItemConverterType,
+                              propertyAttribute.ItemConverterParameters
+                          )
+                        : null;
                 property.ItemReferenceLoopHandling = propertyAttribute._itemReferenceLoopHandling;
                 property.ItemTypeNameHandling = propertyAttribute._itemTypeNameHandling;
             }

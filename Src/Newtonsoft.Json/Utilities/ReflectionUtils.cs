@@ -855,9 +855,10 @@ namespace Newtonsoft.Json.Utilities
             switch (provider)
             {
                 case Type t:
-                    object[] array = attributeType != null
-                        ? t.GetCustomAttributes(attributeType, inherit)
-                        : t.GetCustomAttributes(inherit);
+                    object[] array =
+                        attributeType != null
+                            ? t.GetCustomAttributes(attributeType, inherit)
+                            : t.GetCustomAttributes(inherit);
                     Attribute[] attributes = array.Cast<Attribute>().ToArray();
 
 #if (NET20 || NET35)
@@ -891,9 +892,10 @@ namespace Newtonsoft.Json.Utilities
 #if !PORTABLE40
                     ICustomAttributeProvider customAttributeProvider =
                         (ICustomAttributeProvider)attributeProvider;
-                    object[] result = (attributeType != null)
-                        ? customAttributeProvider.GetCustomAttributes(attributeType, inherit)
-                        : customAttributeProvider.GetCustomAttributes(inherit);
+                    object[] result =
+                        (attributeType != null)
+                            ? customAttributeProvider.GetCustomAttributes(attributeType, inherit)
+                            : customAttributeProvider.GetCustomAttributes(inherit);
 
                     return (Attribute[])result;
 #else
@@ -1088,8 +1090,10 @@ namespace Newtonsoft.Json.Utilities
                 PropertyInfo member = propertyInfos[i];
                 if (member.DeclaringType != targetType)
                 {
-                    PropertyInfo declaredMember =
-                        (PropertyInfo)GetMemberInfoFromType(member.DeclaringType, member);
+                    PropertyInfo declaredMember = (PropertyInfo)GetMemberInfoFromType(
+                        member.DeclaringType,
+                        member
+                    );
                     propertyInfos[i] = declaredMember;
                 }
             }

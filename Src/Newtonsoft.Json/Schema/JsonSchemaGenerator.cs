@@ -311,8 +311,9 @@ namespace Newtonsoft.Json.Schema
 
                         JsonArrayAttribute arrayAttribute =
                             JsonTypeReflector.GetCachedAttribute<JsonArrayAttribute>(type);
-                        bool allowNullItem =
-                            (arrayAttribute == null || arrayAttribute.AllowNullItems);
+                        bool allowNullItem = (
+                            arrayAttribute == null || arrayAttribute.AllowNullItems
+                        );
 
                         Type collectionItemType = ReflectionUtils.GetCollectionItemType(type);
                         if (collectionItemType != null)
@@ -348,11 +349,10 @@ namespace Newtonsoft.Json.Schema
                         }
                         break;
                     case JsonContractType.String:
-                        JsonSchemaType schemaType = (
-                            !ReflectionUtils.IsNullable(contract.UnderlyingType)
-                        )
-                            ? JsonSchemaType.String
-                            : AddNullType(JsonSchemaType.String, valueRequired);
+                        JsonSchemaType schemaType =
+                            (!ReflectionUtils.IsNullable(contract.UnderlyingType))
+                                ? JsonSchemaType.String
+                                : AddNullType(JsonSchemaType.String, valueRequired);
 
                         CurrentSchema.Type = schemaType;
                         break;

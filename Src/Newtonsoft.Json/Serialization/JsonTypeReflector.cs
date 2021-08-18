@@ -245,9 +245,10 @@ namespace Newtonsoft.Json.Serialization
 
         private static Func<object[]?, object> GetCreator(Type type)
         {
-            Func<object>? defaultConstructor = (ReflectionUtils.HasDefaultConstructor(type, false))
-                ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
-                : null;
+            Func<object>? defaultConstructor =
+                (ReflectionUtils.HasDefaultConstructor(type, false))
+                    ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
+                    : null;
 
             return (parameters) =>
             {

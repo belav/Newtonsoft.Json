@@ -1510,20 +1510,19 @@ namespace Newtonsoft.Json.Utilities
                                 || !(
                                     storeOnly28Digits
                                     ?? (
-                                        storeOnly28Digits =
-                                            (
-                                                hi19 > decimalMaxValueHi19
-                                                || (
-                                                    hi19 == decimalMaxValueHi19
-                                                    && (
-                                                        lo10 > decimalMaxValueLo9
-                                                        || (
-                                                            lo10 == decimalMaxValueLo9
-                                                            && c > decimalMaxValueLo1
-                                                        )
+                                        storeOnly28Digits = (
+                                            hi19 > decimalMaxValueHi19
+                                            || (
+                                                hi19 == decimalMaxValueHi19
+                                                && (
+                                                    lo10 > decimalMaxValueLo9
+                                                    || (
+                                                        lo10 == decimalMaxValueLo9
+                                                        && c > decimalMaxValueLo1
                                                     )
                                                 )
                                             )
+                                        )
                                     ).GetValueOrDefault()
                                 )
                             )

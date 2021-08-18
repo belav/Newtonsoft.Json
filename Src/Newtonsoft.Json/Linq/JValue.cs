@@ -1048,9 +1048,10 @@ namespace Newtonsoft.Json.Linq
             if (obj is JValue value)
             {
                 otherValue = value.Value;
-                comparisonType = (_valueType == JTokenType.String && _valueType != value._valueType)
-                    ? value._valueType
-                    : _valueType;
+                comparisonType =
+                    (_valueType == JTokenType.String && _valueType != value._valueType)
+                        ? value._valueType
+                        : _valueType;
             }
             else
             {
@@ -1086,9 +1087,10 @@ namespace Newtonsoft.Json.Linq
                 return 1;
             }
 
-            JTokenType comparisonType = (
-                _valueType == JTokenType.String && _valueType != obj._valueType
-            ) ? obj._valueType : _valueType;
+            JTokenType comparisonType =
+                (_valueType == JTokenType.String && _valueType != obj._valueType)
+                    ? obj._valueType
+                    : _valueType;
 
             return Compare(comparisonType, _value, obj._value);
         }

@@ -366,9 +366,8 @@ namespace Newtonsoft.Json.Bson
             {
                 case State.Start:
                 {
-                    JsonToken token = (!_readRootValueAsArray)
-                        ? JsonToken.StartObject
-                        : JsonToken.StartArray;
+                    JsonToken token =
+                        (!_readRootValueAsArray) ? JsonToken.StartObject : JsonToken.StartArray;
                     BsonType type = (!_readRootValueAsArray) ? BsonType.Object : BsonType.Array;
 
                     SetToken(token);
@@ -431,9 +430,10 @@ namespace Newtonsoft.Json.Bson
                             MovePosition(context.Length);
                         }
 
-                        JsonToken endToken = (context.Type == BsonType.Object)
-                            ? JsonToken.EndObject
-                            : JsonToken.EndArray;
+                        JsonToken endToken =
+                            (context.Type == BsonType.Object)
+                                ? JsonToken.EndObject
+                                : JsonToken.EndArray;
                         SetToken(endToken);
                         return true;
                     }
@@ -529,9 +529,8 @@ namespace Newtonsoft.Json.Bson
                     BsonBinaryType binaryType;
                     byte[] data = ReadBinary(out binaryType);
 
-                    object value = (binaryType != BsonBinaryType.Uuid)
-                        ? data
-                        : (object)new Guid(data);
+                    object value =
+                        (binaryType != BsonBinaryType.Uuid) ? data : (object)new Guid(data);
 
                     SetToken(JsonToken.Bytes, value);
                     break;
@@ -718,9 +717,10 @@ namespace Newtonsoft.Json.Bson
             int offset = 0;
             do
             {
-                int count = ((length - totalBytesRead) > MaxCharBytesSize - offset)
-                    ? MaxCharBytesSize - offset
-                    : length - totalBytesRead;
+                int count =
+                    ((length - totalBytesRead) > MaxCharBytesSize - offset)
+                        ? MaxCharBytesSize - offset
+                        : length - totalBytesRead;
 
                 int byteCount = _reader.Read(_byteBuffer, offset, count);
 

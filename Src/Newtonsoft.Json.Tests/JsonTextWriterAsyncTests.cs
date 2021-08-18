@@ -1189,8 +1189,8 @@ Parameter name: value",
             {
                 ArgumentOutOfRangeException ex =
                     await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
-                );
+                        async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
+                    );
                 Assert.AreEqual("token", ex.ParamName);
 
                 ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(

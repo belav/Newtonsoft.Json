@@ -145,8 +145,9 @@ namespace Newtonsoft.Json.Serialization
                 );
 
                 canDeserialize = true;
-                IsMultidimensionalArray =
-                    (CreatedType.IsArray && UnderlyingType.GetArrayRank() > 1);
+                IsMultidimensionalArray = (
+                    CreatedType.IsArray && UnderlyingType.GetArrayRank() > 1
+                );
             }
             else if (typeof(IList).IsAssignableFrom(NonNullableUnderlyingType))
             {
@@ -369,9 +370,10 @@ namespace Newtonsoft.Json.Serialization
             if (_genericTemporaryCollectionCreator == null)
             {
                 // multidimensional array will also have array instances in it
-                Type collectionItemType = (IsMultidimensionalArray || CollectionItemType == null)
-                    ? typeof(object)
-                    : CollectionItemType;
+                Type collectionItemType =
+                    (IsMultidimensionalArray || CollectionItemType == null)
+                        ? typeof(object)
+                        : CollectionItemType;
 
                 Type temporaryListType = typeof(List<>).MakeGenericType(collectionItemType);
                 _genericTemporaryCollectionCreator =
