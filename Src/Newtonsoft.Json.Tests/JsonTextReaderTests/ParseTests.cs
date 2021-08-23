@@ -564,7 +564,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(@"/Date(0)/", reader.Value);
             Assert.AreEqual(typeof(string), reader.ValueType);
             Assert.IsTrue(reader.Read());
-
 #if !NET20
             reader = new JsonTextReader(new StringReader(json));
             reader.DateParseHandling = Json.DateParseHandling.DateTime;

@@ -26,7 +26,6 @@ using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
 using System.Threading.Tasks;
@@ -1253,14 +1252,16 @@ Newtonsoft.Json Error: 0 : Error!
                 )
             );
             Assert.AreEqual(TraceLevel.Info, traceWriter.TraceRecords[0].Level);
-
 #if !NETSTANDARD2_0
             Assert.AreEqual(
                 "Error deserializing System.Exception. Member 'ClassName' was not found. Path '', line 1, position 2.",
                 traceWriter.TraceRecords[1].Message
             );
 #else
-            Assert.AreEqual("Error deserializing System.Exception. Member 'Message' was not found. Path '', line 1, position 2.", traceWriter.TraceRecords[1].Message);
+            Assert.AreEqual(
+                "Error deserializing System.Exception. Member 'Message' was not found. Path '', line 1, position 2.",
+                traceWriter.TraceRecords[1].Message
+            );
 #endif
 
             Assert.AreEqual(TraceLevel.Error, traceWriter.TraceRecords[1].Level);
@@ -1558,7 +1559,6 @@ Newtonsoft.Json Error: 0 : Error!
                 traceWriter.GetSerializedJsonMessage()
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40)
         [Test]
         public async Task TraceJsonWriterTest_WriteObjectInObjectAsync()

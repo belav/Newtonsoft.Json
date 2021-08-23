@@ -74,15 +74,21 @@ namespace Newtonsoft.Json.Utilities
                 string resolvedName;
 #if HAVE_DATA_CONTRACTS
                 string specifiedName = f.GetCustomAttributes(typeof(EnumMemberAttribute), true)
-                         .Cast<EnumMemberAttribute>()
-                         .Select(a => a.Value)
-                         .SingleOrDefault();
+                    .Cast<EnumMemberAttribute>()
+                    .Select(a => a.Value)
+                    .SingleOrDefault();
                 hasSpecifiedName = specifiedName != null;
                 resolvedName = specifiedName ?? name;
 
                 if (Array.IndexOf(resolvedNames, resolvedName, 0, i) != -1)
                 {
-                    throw new InvalidOperationException("Enum name '{0}' already exists on enum '{1}'.".FormatWith(CultureInfo.InvariantCulture, resolvedName, enumType.Name));
+                    throw new InvalidOperationException(
+                        "Enum name '{0}' already exists on enum '{1}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            resolvedName,
+                            enumType.Name
+                        )
+                    );
                 }
 #else
                 resolvedName = name;

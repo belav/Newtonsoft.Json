@@ -992,7 +992,10 @@ namespace Newtonsoft.Json
                 {
                     // not that this will lose any decimal point on DivisibleBy
                     // so manually raise an error if DivisibleBy is not an integer and value is not zero
-                    bool divisibleNonInteger = !Math.Abs(schema.DivisibleBy.Value - Math.Truncate(schema.DivisibleBy.Value)).Equals(0);
+                    bool divisibleNonInteger = !Math.Abs(
+                            schema.DivisibleBy.Value - Math.Truncate(schema.DivisibleBy.Value)
+                        )
+                        .Equals(0);
                     if (divisibleNonInteger)
                     {
                         notDivisible = i != 0;

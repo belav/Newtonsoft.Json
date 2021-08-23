@@ -100,7 +100,6 @@ namespace Newtonsoft.Json.Tests.Documentation
                  }
                }
              }";
-
             #region IsValidMessages
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
@@ -122,7 +121,6 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void JsonValidatingReader()
         {
             string schemaJson = "{}";
-
             #region JsonValidatingReader
             string json =
                 @"{
@@ -194,6 +192,5 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
     }
 }
-
 #pragma warning restore 618
 #endif

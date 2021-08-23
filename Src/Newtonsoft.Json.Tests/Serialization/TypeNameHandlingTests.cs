@@ -132,7 +132,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 value.EncryptedPassword
             );
         }
-
 #if !(NET20 || NET35)
         [Test]
         public void SerializeValueTupleWithTypeName()
@@ -529,7 +528,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             CustomAssert.IsInstanceOfType(typeof(EmployeeReference), employee);
             Assert.AreEqual("Name!", ((EmployeeReference)employee).Name);
         }
-
 #if !(PORTABLE || DNXCORE50)
         [Test]
         public void DeserializeTypeNameFromGacAssembly()
@@ -1027,7 +1025,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 return typeof(Person);
             }
         }
-
 #if !(NET20 || NET35)
         [Test]
         public void SerializeUsingCustomBinder()
@@ -1623,7 +1620,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             byte[] d = (byte[])obj.Objects[0];
             CollectionAssert.AreEquivalent(data, d);
         }
-
 #if !(DNXCORE50) || NETSTANDARD2_0
         [Test]
         public void ISerializableTypeNameHandlingTest()
@@ -2128,7 +2124,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             JObject j = (JObject)o[0];
             Assert.AreEqual(1, (int)j["MyProperty"]);
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void PropertyItemTypeNameHandlingDynamic()
@@ -2383,7 +2378,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("One", strings[0]);
             Assert.AreEqual("Nine", strings[8]);
         }
-
 #if !NET20
         [Test]
         public void ExistingBaseValue()
@@ -2628,7 +2622,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 return null;
             }
         }
-
 #pragma warning disable CS0618 // Type or member is obsolete
         public class OldBinder : SerializationBinder
         {
@@ -2688,7 +2681,6 @@ namespace Newtonsoft.Json.Tests.Serialization
     {
         public string SomeProperty { get; set; }
     }
-
 #if !(DNXCORE50) || NETSTANDARD2_0
     public class ParentParent
     {
@@ -2754,7 +2746,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }
-
 #if !(DNXCORE50) || NETSTANDARD2_0
     public class SerializableWrapper
     {
@@ -2845,7 +2836,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
         public TypeNameHandlingTestObject Data { get; set; }
     }
-
 #if !(NET35 || NET20 || PORTABLE40)
     public class PropertyItemTypeNameHandlingDynamic
     {
@@ -2896,7 +2886,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         public string String { get; set; }
         public int Integer { get; set; }
     }
-
 #if !NET20
     [DataContract]
     public class GroupingInfo

@@ -34,7 +34,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
@@ -73,5 +72,4 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         }
     }
 }
-
 #endif

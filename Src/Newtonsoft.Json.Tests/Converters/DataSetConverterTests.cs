@@ -670,5 +670,4 @@ namespace Newtonsoft.Json.Tests.Converters
         }
     }
 }
-
 #endif

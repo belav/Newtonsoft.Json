@@ -99,7 +99,6 @@ namespace Newtonsoft.Json.Tests
                 await t;
             }
         }
-
 #if !(NETSTANDARD1_0 || PORTABLE) || NETSTANDARD2_0
         [Test]
         public async Task WriteLazy()
@@ -382,7 +381,6 @@ namespace Newtonsoft.Json.Tests
             await writer.CloseAsync();
             Assert.IsTrue(ms.CanRead);
         }
-
 #if !(PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task WriteIConvertableAsync()
@@ -1057,14 +1055,16 @@ namespace Newtonsoft.Json.Tests
 
                 await jsonWriter.WriteEndArrayAsync();
             }
-
 #if !(NETSTANDARD2_0 || NETSTANDARD1_3)
             Assert.AreEqual(
                 @"[0.0,0.0,0.1,1.0,1.000001,1E-06,4.94065645841247E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]",
                 sb.ToString()
             );
 #else
-            Assert.AreEqual(@"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]", sb.ToString());
+            Assert.AreEqual(
+                @"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]",
+                sb.ToString()
+            );
 #endif
         }
 

@@ -54,7 +54,6 @@ namespace Newtonsoft.Json.Tests.Utilities
             Enum result = (Enum)EnumUtils.ParseEnum(enumType, null, value, false);
             Assert.AreEqual(expected, result);
         }
-
 #if DNXCORE50
         [Theory]
 #endif
@@ -73,7 +72,6 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.Fail($"Expected {exceptionType.FullName} exception.");
         }
-
 #if DNXCORE50
         [Theory]
 #endif
@@ -84,7 +82,6 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.AreEqual(expected, result);
         }
-
         #region Test data
         // test data from https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
         public static IEnumerable<object[]> Parse_TestData()

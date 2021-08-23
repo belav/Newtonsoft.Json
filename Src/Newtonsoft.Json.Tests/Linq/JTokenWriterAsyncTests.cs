@@ -114,7 +114,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
                 await jsonWriter.WriteValueAsync("DVD read/writer");
                 Assert.AreEqual(WriteState.Array, jsonWriter.WriteState);
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
                 await jsonWriter.WriteValueAsync(new BigInteger(123));
                 Assert.AreEqual(WriteState.Array, jsonWriter.WriteState);
@@ -166,7 +165,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 await jsonWriter.WriteValueAsync("DVD read/writer");
                 Assert.AreEqual(WriteState.Array, jsonWriter.WriteState);
                 Assert.AreEqual(a[a.Count - 1], jsonWriter.CurrentToken);
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
                 await jsonWriter.WriteValueAsync(new BigInteger(123));
                 Assert.AreEqual(WriteState.Array, jsonWriter.WriteState);
@@ -202,7 +200,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 writer.Token.ToString()
             );
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task WriteBigIntegerAsync()
@@ -407,5 +404,4 @@ namespace Newtonsoft.Json.Tests.Linq
         }
     }
 }
-
 #endif

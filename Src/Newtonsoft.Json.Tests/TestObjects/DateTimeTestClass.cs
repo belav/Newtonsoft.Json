@@ -44,5 +44,4 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string PostField { get; set; }
     }
 }
-
 #endif

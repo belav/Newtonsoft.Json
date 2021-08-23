@@ -50,7 +50,6 @@ using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 #if !NET20
 using System.Xml.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Converters
@@ -62,7 +61,6 @@ namespace Newtonsoft.Json.Tests.Converters
         private string SerializeXmlNode(XmlNode node)
         {
             string json = JsonConvert.SerializeXmlNode(node, Formatting.Indented);
-
 #if !(NET20)
 #if !NETSTANDARD1_3
             XmlReader reader = new XmlNodeReader(node);
@@ -121,7 +119,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 null,
                 new JsonSerializer()
             );
-
 #if !NET20
             string xmlText = node.OuterXml;
 
@@ -166,7 +163,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             return sw.ToString();
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void DeserializeXmlNode_DefaultDate()
@@ -334,7 +330,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             StringAssert.AreEqual(@"null", sw.ToString());
         }
-
 #if !NET20
         [Test]
         public void XNode_Null()
@@ -825,7 +820,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 doc.ToString()
             );
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void SerializeEmptyDocument()
@@ -872,7 +866,6 @@ namespace Newtonsoft.Json.Tests.Converters
             var equals = XElement.DeepEquals(xmlBack, xml);
             Assert.IsTrue(equals);
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void DeserializeUndeclaredNamespacePrefix()
@@ -1006,7 +999,6 @@ namespace Newtonsoft.Json.Tests.Converters
             jsonText = JsonConvert.SerializeXmlNode(attribute);
 
             Assert.AreEqual(@"{""@msdata:IsDataSet"":""true""}", jsonText);
-
 #if !NET20
             XDocument d = XDocument.Parse(xml);
             XAttribute a = d.Root.Element("{http://www.w3.org/2001/XMLSchema}element")
@@ -1127,7 +1119,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual(expected, jsonText);
         }
-
 #if !NETSTANDARD1_3
         [Test]
         public void XmlDocumentTypeSerialize()
@@ -1218,7 +1209,6 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlDocument doc11 = JsonConvert.DeserializeXmlNode(json1);
 
             StringAssert.AreEqual(xml, ToStringWithDeclaration(doc11));
-
 #if !NET20
             XDocument doc2 = XDocument.Parse(xml);
 
@@ -1242,7 +1232,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             public Utf8StringWriter(StringBuilder sb) : base(sb) { }
         }
-
 #if !NET20
         public static string ToStringWithDeclaration(XDocument doc, bool indent = false)
         {
@@ -1734,7 +1723,6 @@ namespace Newtonsoft.Json.Tests.Converters
         public void MultipleRootPropertiesAddRootElement()
         {
             string json = @"{""count"": 773840,""photos"": 773840}";
-
 #if !PORTABLE
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
@@ -1773,7 +1761,6 @@ namespace Newtonsoft.Json.Tests.Converters
     ]
   ]
 }";
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
@@ -1843,7 +1830,6 @@ namespace Newtonsoft.Json.Tests.Converters
     ]
   ]
 }";
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot", true);
 
@@ -1912,7 +1898,6 @@ namespace Newtonsoft.Json.Tests.Converters
     ]
   ]
 }";
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
@@ -1931,7 +1916,6 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 #endif
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void Encoding()
@@ -2758,7 +2742,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 xmlString
             );
         }
-
 #if !(NETSTANDARD1_0 || NETSTANDARD1_3)
         [Test]
         public void IgnoreCultureForTypedAttributes()
@@ -3437,7 +3420,6 @@ namespace Newtonsoft.Json.Tests.Converters
   <bns:b xmlns:bns=""http://www.example.com/ns""/>
   <c/>
 </root>";
-
 #if !NET20
             var xml = XElement.Parse(xmlString);
 
@@ -3460,7 +3442,6 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 #endif
         }
-
 #if !NET20
         public class NullableXml
         {
@@ -3529,7 +3510,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 xmlBack.OuterXml
             );
         }
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void DeserializeBigInteger()

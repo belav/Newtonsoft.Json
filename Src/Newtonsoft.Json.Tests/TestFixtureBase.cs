@@ -54,7 +54,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests
@@ -147,9 +146,7 @@ namespace Newtonsoft.Json.Tests
             XAssert.True(false, message);
         }
 
-        public static void Pass()
-        {
-        }
+        public static void Pass() { }
 
         public static void IsTrue(bool condition, string message = null)
         {
@@ -443,7 +440,6 @@ namespace Newtonsoft.Json.Tests
                 );
             }
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
         public static async Task<TException> ThrowsAsync<TException>(
             Func<Task> action,

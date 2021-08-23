@@ -863,7 +863,6 @@ Parameter name: namingStrategyType",
                 Foo.FooBar | Foo.SerializeAsBaz,
                 (Foo)int.MaxValue
             };
-
 #pragma warning disable CS0618 // Type or member is obsolete
             string json1 = JsonConvert.SerializeObject(
                 lfoo,
@@ -895,7 +894,6 @@ Parameter name: namingStrategyType",
             Assert.AreEqual((Foo)int.MaxValue, foos[5]);
 
             List<Bar> lbar = new List<Bar>() { Bar.FooBar, Bar.Bat, Bar.SerializeAsBaz };
-
 #pragma warning disable CS0618 // Type or member is obsolete
             string json2 = JsonConvert.SerializeObject(
                 lbar,
@@ -1151,7 +1149,6 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(EnumWithDifferentCases.m, e);
         }
-
 #if !NET20
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EnumMemberDoesNotMatchName
@@ -1283,7 +1280,6 @@ Parameter name: namingStrategyType",
         }
 #endif
     }
-
 #if !NET20
     [DataContract]
     public class DuplicateEnumNameTestClass

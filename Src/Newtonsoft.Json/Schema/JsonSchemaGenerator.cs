@@ -200,7 +200,8 @@ namespace Newtonsoft.Json.Schema
             }
 
 #if HAVE_ADO_NET
-            DescriptionAttribute descriptionAttribute = ReflectionUtils.GetAttribute<DescriptionAttribute>(type);
+            DescriptionAttribute descriptionAttribute =
+                ReflectionUtils.GetAttribute<DescriptionAttribute>(type);
             return descriptionAttribute?.Description;
 #else
             return null;

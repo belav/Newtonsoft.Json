@@ -71,20 +71,35 @@ namespace Newtonsoft.Json.Serialization
                         _memberInfo
                     );
                 }
-
 #if DEBUG
                 // dynamic method doesn't check whether the type is 'legal' to set
                 // add this check for unit tests
                 if (value == null)
                 {
-                    if (!ReflectionUtils.IsNullable(ReflectionUtils.GetMemberUnderlyingType(_memberInfo)))
-                    {
-                        throw new JsonSerializationException("Incompatible value. Cannot set {0} to null.".FormatWith(CultureInfo.InvariantCulture, _memberInfo));
+                    if (
+                        !ReflectionUtils.IsNullable(
+                            ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
+                        )
+                    ) {
+                        throw new JsonSerializationException(
+                            "Incompatible value. Cannot set {0} to null.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                _memberInfo
+                            )
+                        );
                     }
                 }
-                else if (!ReflectionUtils.GetMemberUnderlyingType(_memberInfo).IsAssignableFrom(value.GetType()))
-                {
-                    throw new JsonSerializationException("Incompatible value. Cannot set {0} to type {1}.".FormatWith(CultureInfo.InvariantCulture, _memberInfo, value.GetType()));
+                else if (
+                    !ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
+                        .IsAssignableFrom(value.GetType())
+                ) {
+                    throw new JsonSerializationException(
+                        "Incompatible value. Cannot set {0} to type {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            _memberInfo,
+                            value.GetType()
+                        )
+                    );
                 }
 #endif
 
@@ -135,5 +150,4 @@ namespace Newtonsoft.Json.Serialization
         }
     }
 }
-
 #endif

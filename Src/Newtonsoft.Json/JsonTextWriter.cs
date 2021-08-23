@@ -759,7 +759,16 @@ namespace Newtonsoft.Json
 
             int pos = 0;
             _writeBuffer[pos++] = _quoteChar;
-            pos = DateTimeUtils.WriteDateTimeString(_writeBuffer, pos, (DateFormatHandling == DateFormatHandling.IsoDateFormat) ? value.DateTime : value.UtcDateTime, value.Offset, DateTimeKind.Local, DateFormatHandling);
+            pos = DateTimeUtils.WriteDateTimeString(
+                _writeBuffer,
+                pos,
+                (DateFormatHandling == DateFormatHandling.IsoDateFormat)
+                    ? value.DateTime
+                    : value.UtcDateTime,
+                value.Offset,
+                DateTimeKind.Local,
+                DateFormatHandling
+            );
             _writeBuffer[pos++] = _quoteChar;
             return pos;
         }

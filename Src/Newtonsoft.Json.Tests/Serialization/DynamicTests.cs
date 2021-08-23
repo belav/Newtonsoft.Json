@@ -43,7 +43,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Serialization
@@ -107,7 +106,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(dynamicObject.ChildObject.Integer, d.ChildObject.Integer);
             Assert.AreEqual(dynamicObject.ChildObject.Text, d.ChildObject.Text);
         }
-
 #if !(PORTABLE || PORTABLE40) || NETSTANDARD2_0
         [Test]
         public void SerializeDynamicObjectWithObjectTracking()
@@ -444,5 +442,4 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 }
-
 #endif

@@ -539,7 +539,6 @@ namespace Newtonsoft.Json.Tests.Bson
                 (BitConverter.ToString(ms.ToArray()))
             );
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task WriteBigIntegerAsync()
@@ -614,6 +613,5 @@ namespace Newtonsoft.Json.Tests.Bson
 #endif
     }
 }
-
 #endif
 #pragma warning restore 618

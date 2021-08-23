@@ -77,5 +77,4 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
         }
     }
 }
-
 #endif

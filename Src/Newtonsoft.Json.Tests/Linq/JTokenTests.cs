@@ -45,7 +45,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 using Newtonsoft.Json.Utilities;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Linq
@@ -101,7 +100,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             v = (JValue)JToken.ReadFrom(new JsonTextReader(new StringReader(@"1.1")));
             Assert.AreEqual(1.1, (double)v);
-
 #if !NET20
             v = (JValue)JToken.ReadFrom(
                 new JsonTextReader(new StringReader(@"""1970-01-01T00:00:00+12:31"""))
@@ -433,7 +431,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(data, (byte[]?)(new JValue(data)));
 
             Assert.AreEqual(5, (int)(new JValue(StringComparison.OrdinalIgnoreCase)));
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             string bigIntegerText =
                 "1234567899999999999999999999999999999999999999999999999999999999999990";

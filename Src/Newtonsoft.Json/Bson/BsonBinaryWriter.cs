@@ -162,11 +162,14 @@ namespace Newtonsoft.Json.Bson
                             ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTime, false);
                         }
 #if HAVE_DATE_TIME_OFFSET
-                    else
-                    {
-                        DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
-                        ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTimeOffset.UtcDateTime, dateTimeOffset.Offset);
-                    }
+                        else
+                        {
+                            DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
+                            ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(
+                                dateTimeOffset.UtcDateTime,
+                                dateTimeOffset.Offset
+                            );
+                        }
 #endif
 
                         _writer.Write(ticks);

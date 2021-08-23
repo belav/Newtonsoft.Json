@@ -74,5 +74,4 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         }
     }
 }
-
 #endif

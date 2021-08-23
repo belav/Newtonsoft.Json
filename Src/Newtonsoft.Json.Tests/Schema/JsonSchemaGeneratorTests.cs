@@ -785,7 +785,6 @@ namespace Newtonsoft.Json.Tests.Schema
     public class BulkInsertTask_DSL
     {
     }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
     [Serializable]
     public sealed class SerializableTestObject

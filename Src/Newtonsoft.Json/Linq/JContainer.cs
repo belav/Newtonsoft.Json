@@ -51,12 +51,15 @@ namespace Newtonsoft.Json.Linq
         : JToken,
           IList<JToken>
 #if HAVE_COMPONENT_MODEL
-        , ITypedList, IBindingList
+          ,
+          ITypedList,
+          IBindingList
 #endif
           ,
           IList
 #if HAVE_INOTIFY_COLLECTION_CHANGED
-        , INotifyCollectionChanged
+          ,
+          INotifyCollectionChanged
 #endif
     {
 #if HAVE_COMPONENT_MODEL
@@ -126,7 +129,12 @@ namespace Newtonsoft.Json.Linq
 #if (HAVE_COMPONENT_MODEL || HAVE_INOTIFY_COLLECTION_CHANGED)
             if (_busy)
             {
-                throw new InvalidOperationException("Cannot change {0} during a collection change event.".FormatWith(CultureInfo.InvariantCulture, GetType()));
+                throw new InvalidOperationException(
+                    "Cannot change {0} during a collection change event.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType()
+                    )
+                );
             }
 #endif
         }
@@ -161,6 +169,7 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
+
                 finally
                 {
                     _busy = false;
@@ -184,6 +193,7 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
+
                 finally
                 {
                     _busy = false;
@@ -401,7 +411,13 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Add,
+                        item,
+                        index
+                    )
+                );
             }
 #endif
 
@@ -453,7 +469,13 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Remove,
+                        item,
+                        index
+                    )
+                );
             }
 #endif
         }
@@ -538,7 +560,14 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, item, existing, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        item,
+                        existing,
+                        index
+                    )
+                );
             }
 #endif
         }
@@ -566,7 +595,9 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+                );
             }
 #endif
         }
@@ -975,8 +1006,9 @@ namespace Newtonsoft.Json.Linq
             return string.Empty;
         }
 
-        PropertyDescriptorCollection? ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
-        {
+        PropertyDescriptorCollection? ITypedList.GetItemProperties(
+            PropertyDescriptor[] listAccessors
+        ) {
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;
             return d?.GetProperties();
         }
@@ -1127,9 +1159,7 @@ namespace Newtonsoft.Json.Linq
 
         #region IBindingList Members
 #if HAVE_COMPONENT_MODEL
-        void IBindingList.AddIndex(PropertyDescriptor property)
-        {
-        }
+        void IBindingList.AddIndex(PropertyDescriptor property) { }
 
         object IBindingList.AddNew()
         {
@@ -1138,12 +1168,22 @@ namespace Newtonsoft.Json.Linq
 
             if (args.NewObject == null)
             {
-                throw new JsonException("Could not determine new value to add to '{0}'.".FormatWith(CultureInfo.InvariantCulture, GetType()));
+                throw new JsonException(
+                    "Could not determine new value to add to '{0}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType()
+                    )
+                );
             }
 
             if (!(args.NewObject is JToken newItem))
             {
-                throw new JsonException("New item to be added to collection must be compatible with {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JToken)));
+                throw new JsonException(
+                    "New item to be added to collection must be compatible with {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        typeof(JToken)
+                    )
+                );
             }
 
             Add(newItem);
@@ -1169,9 +1209,7 @@ namespace Newtonsoft.Json.Linq
 
         bool IBindingList.IsSorted => false;
 
-        void IBindingList.RemoveIndex(PropertyDescriptor property)
-        {
-        }
+        void IBindingList.RemoveIndex(PropertyDescriptor property) { }
 
         void IBindingList.RemoveSort()
         {

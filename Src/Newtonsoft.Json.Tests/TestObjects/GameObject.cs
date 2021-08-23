@@ -46,5 +46,4 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
     }
 }
-
 #endif

@@ -13,7 +13,6 @@ using TestAttribute = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Linq
@@ -307,7 +306,6 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             Assert.AreEqual(annotation, t.DeepClone().Annotation<T>());
         }
-
 #if !NET20
         [Test]
         public void Example()

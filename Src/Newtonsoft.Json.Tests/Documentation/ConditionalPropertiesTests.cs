@@ -56,7 +56,6 @@ namespace Newtonsoft.Json.Tests.Documentation
         public string Name { get; set; }
         public Employee Manager { get; set; }
     }
-
     #region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
@@ -184,5 +183,4 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
     }
 }
-
 #endif

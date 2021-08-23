@@ -115,7 +115,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24."
             );
         }
-
 #if !NET20
         [Test]
         public async Task ReadAsDateTimeOffset_MissingCommaAsync()
@@ -806,7 +805,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 );
             }
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task ReadInt64OverflowAsync()
@@ -1158,7 +1156,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: t. Path '', line 1, position 1."
             );
         }
-
 #if !NET20
         [Test]
         public async Task ReadAsDateTimeOffsetBadContentAsync()
@@ -1526,5 +1523,4 @@ new Date()"
         }
     }
 }
-
 #endif

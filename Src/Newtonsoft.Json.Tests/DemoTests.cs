@@ -47,7 +47,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests
@@ -722,7 +721,6 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(1, newtonsoftPackages.Count);
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
         [Test]
         public async Task AsyncDemo()
@@ -766,7 +764,6 @@ namespace Newtonsoft.Json.Tests
         }
 #endif
     }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
     public class JsonArrayPool : IArrayPool<char>
     {

@@ -83,14 +83,23 @@ namespace Newtonsoft.Json.Converters
             }
 #endif
 
-            throw new JsonSerializationException("Unexpected value type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
+            throw new JsonSerializationException(
+                "Unexpected value type when writing binary: {0}".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    value.GetType()
+                )
+            );
         }
 #if HAVE_LINQ
         private static void EnsureReflectionObject(Type t)
         {
             if (_reflectionObject == null)
             {
-                _reflectionObject = ReflectionObject.Create(t, t.GetConstructor(new[] { typeof(byte[]) }), BinaryToArrayName);
+                _reflectionObject = ReflectionObject.Create(
+                    t,
+                    t.GetConstructor(new[] { typeof(byte[]) }),
+                    BinaryToArrayName
+                );
             }
         }
 #endif
@@ -103,13 +112,23 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-        {
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        ) {
             if (reader.TokenType == JsonToken.Null)
             {
                 if (!ReflectionUtils.IsNullable(objectType))
                 {
-                    throw JsonSerializationException.Create(reader, "Cannot convert null value to {0}.".FormatWith(CultureInfo.InvariantCulture, objectType));
+                    throw JsonSerializationException.Create(
+                        reader,
+                        "Cannot convert null value to {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            objectType
+                        )
+                    );
                 }
 
                 return null;
@@ -130,12 +149,19 @@ namespace Newtonsoft.Json.Converters
             }
             else
             {
-                throw JsonSerializationException.Create(reader, "Unexpected token parsing binary. Expected String or StartArray, got {0}.".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonSerializationException.Create(
+                    reader,
+                    "Unexpected token parsing binary. Expected String or StartArray, got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
-            Type t = (ReflectionUtils.IsNullableType(objectType))
-                ? Nullable.GetUnderlyingType(objectType)
-                : objectType;
+            Type t =
+                (ReflectionUtils.IsNullableType(objectType))
+                    ? Nullable.GetUnderlyingType(objectType)
+                    : objectType;
 #if HAVE_LINQ
             if (t.FullName == BinaryTypeName)
             {
@@ -153,7 +179,13 @@ namespace Newtonsoft.Json.Converters
             }
 #endif
 
-            throw JsonSerializationException.Create(reader, "Unexpected object type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, objectType));
+            throw JsonSerializationException.Create(
+                reader,
+                "Unexpected object type when writing binary: {0}".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    objectType
+                )
+            );
         }
 
         private byte[] ReadByteArray(JsonReader reader)
@@ -173,7 +205,13 @@ namespace Newtonsoft.Json.Converters
                         // skip
                         break;
                     default:
-                        throw JsonSerializationException.Create(reader, "Unexpected token when reading bytes: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                        throw JsonSerializationException.Create(
+                            reader,
+                            "Unexpected token when reading bytes: {0}".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                reader.TokenType
+                            )
+                        );
                 }
             }
 

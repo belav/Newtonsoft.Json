@@ -364,5 +364,4 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         }
     }
 }
-
 #endif

@@ -33,7 +33,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 #if !(NET20 || DNXCORE50 || PORTABLE || PORTABLE40) || NETSTANDARD2_0
@@ -101,5 +100,4 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
         }
     }
 }
-
 #endif

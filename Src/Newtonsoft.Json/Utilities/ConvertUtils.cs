@@ -147,8 +147,8 @@ namespace Newtonsoft.Json.Utilities
             { typeof(DateTime), PrimitiveTypeCode.DateTime },
             { typeof(DateTime?), PrimitiveTypeCode.DateTimeNullable },
 #if HAVE_DATE_TIME_OFFSET
-                { typeof(DateTimeOffset), PrimitiveTypeCode.DateTimeOffset },
-                { typeof(DateTimeOffset?), PrimitiveTypeCode.DateTimeOffsetNullable },
+            { typeof(DateTimeOffset), PrimitiveTypeCode.DateTimeOffset },
+            { typeof(DateTimeOffset?), PrimitiveTypeCode.DateTimeOffsetNullable },
 #endif
             {
                 typeof(decimal),
@@ -160,8 +160,8 @@ namespace Newtonsoft.Json.Utilities
             { typeof(TimeSpan), PrimitiveTypeCode.TimeSpan },
             { typeof(TimeSpan?), PrimitiveTypeCode.TimeSpanNullable },
 #if HAVE_BIG_INTEGER
-                { typeof(BigInteger), PrimitiveTypeCode.BigInteger },
-                { typeof(BigInteger?), PrimitiveTypeCode.BigIntegerNullable },
+            { typeof(BigInteger), PrimitiveTypeCode.BigInteger },
+            { typeof(BigInteger?), PrimitiveTypeCode.BigIntegerNullable },
 #endif
             {
                 typeof(Uri),
@@ -170,7 +170,7 @@ namespace Newtonsoft.Json.Utilities
             { typeof(string), PrimitiveTypeCode.String },
             { typeof(byte[]), PrimitiveTypeCode.Bytes },
 #if HAVE_ADO_NET
-                { typeof(DBNull), PrimitiveTypeCode.DBNull }
+            { typeof(DBNull), PrimitiveTypeCode.DBNull }
 #endif
         };
 
@@ -178,23 +178,23 @@ namespace Newtonsoft.Json.Utilities
         private static readonly TypeInformation[] PrimitiveTypeCodes =
         {
             // need all of these. lookup against the index with TypeCode value
-            new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), 
-            new TypeInformation(typeof(object), PrimitiveTypeCode.Object), 
-            new TypeInformation(typeof(object), PrimitiveTypeCode.DBNull), 
-            new TypeInformation(typeof(bool), PrimitiveTypeCode.Boolean), 
-            new TypeInformation(typeof(char), PrimitiveTypeCode.Char), 
-            new TypeInformation(typeof(sbyte), PrimitiveTypeCode.SByte), 
-            new TypeInformation(typeof(byte), PrimitiveTypeCode.Byte), 
-            new TypeInformation(typeof(short), PrimitiveTypeCode.Int16), 
-            new TypeInformation(typeof(ushort), PrimitiveTypeCode.UInt16), 
-            new TypeInformation(typeof(int), PrimitiveTypeCode.Int32), 
-            new TypeInformation(typeof(uint), PrimitiveTypeCode.UInt32), 
-            new TypeInformation(typeof(long), PrimitiveTypeCode.Int64), 
-            new TypeInformation(typeof(ulong), PrimitiveTypeCode.UInt64), 
-            new TypeInformation(typeof(float), PrimitiveTypeCode.Single), 
-            new TypeInformation(typeof(double), PrimitiveTypeCode.Double), 
-            new TypeInformation(typeof(decimal), PrimitiveTypeCode.Decimal), 
-            new TypeInformation(typeof(DateTime), PrimitiveTypeCode.DateTime), 
+            new TypeInformation(typeof(object), PrimitiveTypeCode.Empty),
+            new TypeInformation(typeof(object), PrimitiveTypeCode.Object),
+            new TypeInformation(typeof(object), PrimitiveTypeCode.DBNull),
+            new TypeInformation(typeof(bool), PrimitiveTypeCode.Boolean),
+            new TypeInformation(typeof(char), PrimitiveTypeCode.Char),
+            new TypeInformation(typeof(sbyte), PrimitiveTypeCode.SByte),
+            new TypeInformation(typeof(byte), PrimitiveTypeCode.Byte),
+            new TypeInformation(typeof(short), PrimitiveTypeCode.Int16),
+            new TypeInformation(typeof(ushort), PrimitiveTypeCode.UInt16),
+            new TypeInformation(typeof(int), PrimitiveTypeCode.Int32),
+            new TypeInformation(typeof(uint), PrimitiveTypeCode.UInt32),
+            new TypeInformation(typeof(long), PrimitiveTypeCode.Int64),
+            new TypeInformation(typeof(ulong), PrimitiveTypeCode.UInt64),
+            new TypeInformation(typeof(float), PrimitiveTypeCode.Single),
+            new TypeInformation(typeof(double), PrimitiveTypeCode.Double),
+            new TypeInformation(typeof(decimal), PrimitiveTypeCode.Decimal),
+            new TypeInformation(typeof(DateTime), PrimitiveTypeCode.DateTime),
             new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), // no 17 in TypeCode for some reason
             new TypeInformation(typeof(string), PrimitiveTypeCode.String)
         };
@@ -355,7 +355,12 @@ namespace Newtonsoft.Json.Utilities
                 return new BigInteger(bytes);
             }
 
-            throw new InvalidCastException("Cannot convert {0} to BigInteger.".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
+            throw new InvalidCastException(
+                "Cannot convert {0} to BigInteger.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    value.GetType()
+                )
+            );
         }
 
         public static object FromBigInteger(BigInteger i, Type targetType)
@@ -387,7 +392,13 @@ namespace Newtonsoft.Json.Utilities
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("Can not convert from BigInteger to {0}.".FormatWith(CultureInfo.InvariantCulture, targetType), ex);
+                throw new InvalidOperationException(
+                    "Can not convert from BigInteger to {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        targetType
+                    ),
+                    ex
+                );
             }
         }
 #endif
@@ -936,7 +947,21 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly int[] MultExp64Power10 = new int[]
             {
-                4, 7, 10, 14, 17, 20, 24, 27, 30, 34, 37, 40, 44, 47, 50
+                4,
+                7,
+                10,
+                14,
+                17,
+                20,
+                24,
+                27,
+                30,
+                34,
+                37,
+                40,
+                44,
+                47,
+                50
             };
 
             /// <summary>
@@ -944,11 +969,21 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly ulong[] MultVal64Power10 = new ulong[]
             {
-                0xa000000000000000, 0xc800000000000000, 0xfa00000000000000,
-                0x9c40000000000000, 0xc350000000000000, 0xf424000000000000,
-                0x9896800000000000, 0xbebc200000000000, 0xee6b280000000000,
-                0x9502f90000000000, 0xba43b74000000000, 0xe8d4a51000000000,
-                0x9184e72a00000000, 0xb5e620f480000000, 0xe35fa931a0000000,
+                0xa000000000000000,
+                0xc800000000000000,
+                0xfa00000000000000,
+                0x9c40000000000000,
+                0xc350000000000000,
+                0xf424000000000000,
+                0x9896800000000000,
+                0xbebc200000000000,
+                0xee6b280000000000,
+                0x9502f90000000000,
+                0xba43b74000000000,
+                0xe8d4a51000000000,
+                0x9184e72a00000000,
+                0xb5e620f480000000,
+                0xe35fa931a0000000,
             };
 
             /// <summary>
@@ -956,11 +991,21 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly ulong[] MultVal64Power10Inv = new ulong[]
             {
-                0xcccccccccccccccd, 0xa3d70a3d70a3d70b, 0x83126e978d4fdf3c,
-                0xd1b71758e219652e, 0xa7c5ac471b478425, 0x8637bd05af6c69b7,
-                0xd6bf94d5e57a42be, 0xabcc77118461ceff, 0x89705f4136b4a599,
-                0xdbe6fecebdedd5c2, 0xafebff0bcb24ab02, 0x8cbccc096f5088cf,
-                0xe12e13424bb40e18, 0xb424dc35095cd813, 0x901d7cf73ab0acdc,
+                0xcccccccccccccccd,
+                0xa3d70a3d70a3d70b,
+                0x83126e978d4fdf3c,
+                0xd1b71758e219652e,
+                0xa7c5ac471b478425,
+                0x8637bd05af6c69b7,
+                0xd6bf94d5e57a42be,
+                0xabcc77118461ceff,
+                0x89705f4136b4a599,
+                0xdbe6fecebdedd5c2,
+                0xafebff0bcb24ab02,
+                0x8cbccc096f5088cf,
+                0xe12e13424bb40e18,
+                0xb424dc35095cd813,
+                0x901d7cf73ab0acdc,
             };
 
             /// <summary>
@@ -968,8 +1013,27 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly int[] MultExp64Power10By16 = new int[]
             {
-                54, 107, 160, 213, 266, 319, 373, 426, 479, 532, 585, 638,
-                691, 745, 798, 851, 904, 957, 1010, 1064, 1117,
+                54,
+                107,
+                160,
+                213,
+                266,
+                319,
+                373,
+                426,
+                479,
+                532,
+                585,
+                638,
+                691,
+                745,
+                798,
+                851,
+                904,
+                957,
+                1010,
+                1064,
+                1117,
             };
 
             /// <summary>
@@ -977,13 +1041,27 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly ulong[] MultVal64Power10By16 = new ulong[]
             {
-                0x8e1bc9bf04000000, 0x9dc5ada82b70b59e, 0xaf298d050e4395d6,
-                0xc2781f49ffcfa6d4, 0xd7e77a8f87daf7fa, 0xefb3ab16c59b14a0,
-                0x850fadc09923329c, 0x93ba47c980e98cde, 0xa402b9c5a8d3a6e6,
-                0xb616a12b7fe617a8, 0xca28a291859bbf90, 0xe070f78d39275566,
-                0xf92e0c3537826140, 0x8a5296ffe33cc92c, 0x9991a6f3d6bf1762,
-                0xaa7eebfb9df9de8a, 0xbd49d14aa79dbc7e, 0xd226fc195c6a2f88,
-                0xe950df20247c83f8, 0x81842f29f2cce373, 0x8fcac257558ee4e2,
+                0x8e1bc9bf04000000,
+                0x9dc5ada82b70b59e,
+                0xaf298d050e4395d6,
+                0xc2781f49ffcfa6d4,
+                0xd7e77a8f87daf7fa,
+                0xefb3ab16c59b14a0,
+                0x850fadc09923329c,
+                0x93ba47c980e98cde,
+                0xa402b9c5a8d3a6e6,
+                0xb616a12b7fe617a8,
+                0xca28a291859bbf90,
+                0xe070f78d39275566,
+                0xf92e0c3537826140,
+                0x8a5296ffe33cc92c,
+                0x9991a6f3d6bf1762,
+                0xaa7eebfb9df9de8a,
+                0xbd49d14aa79dbc7e,
+                0xd226fc195c6a2f88,
+                0xe950df20247c83f8,
+                0x81842f29f2cce373,
+                0x8fcac257558ee4e2,
             };
 
             /// <summary>
@@ -991,13 +1069,27 @@ namespace Newtonsoft.Json.Utilities
             /// </summary>
             private static readonly ulong[] MultVal64Power10By16Inv = new ulong[]
             {
-                0xe69594bec44de160, 0xcfb11ead453994c3, 0xbb127c53b17ec165,
-                0xa87fea27a539e9b3, 0x97c560ba6b0919b5, 0x88b402f7fd7553ab,
-                0xf64335bcf065d3a0, 0xddd0467c64bce4c4, 0xc7caba6e7c5382ed,
-                0xb3f4e093db73a0b7, 0xa21727db38cb0053, 0x91ff83775423cc29,
-                0x8380dea93da4bc82, 0xece53cec4a314f00, 0xd5605fcdcf32e217,
-                0xc0314325637a1978, 0xad1c8eab5ee43ba2, 0x9becce62836ac5b0,
-                0x8c71dcd9ba0b495c, 0xfd00b89747823938, 0xe3e27a444d8d991a,
+                0xe69594bec44de160,
+                0xcfb11ead453994c3,
+                0xbb127c53b17ec165,
+                0xa87fea27a539e9b3,
+                0x97c560ba6b0919b5,
+                0x88b402f7fd7553ab,
+                0xf64335bcf065d3a0,
+                0xddd0467c64bce4c4,
+                0xc7caba6e7c5382ed,
+                0xb3f4e093db73a0b7,
+                0xa21727db38cb0053,
+                0x91ff83775423cc29,
+                0x8380dea93da4bc82,
+                0xece53cec4a314f00,
+                0xd5605fcdcf32e217,
+                0xc0314325637a1978,
+                0xad1c8eab5ee43ba2,
+                0x9becce62836ac5b0,
+                0x8c71dcd9ba0b495c,
+                0xfd00b89747823938,
+                0xe3e27a444d8d991a,
             };
 
             /// <summary>
@@ -1196,8 +1288,12 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        public static ParseResult DoubleTryParse(char[] chars, int start, int length, out double value)
-        {
+        public static ParseResult DoubleTryParse(
+            char[] chars,
+            int start,
+            int length,
+            out double value
+        ) {
             value = 0;
 
             if (length == 0)

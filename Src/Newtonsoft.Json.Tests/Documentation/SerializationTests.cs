@@ -108,7 +108,6 @@ namespace Newtonsoft.Json.Tests.Documentation
             }
             #endregion
         }
-
         #region SerializationAttributes
         [JsonObject(MemberSerialization.OptIn)]
         public class Person
@@ -286,7 +285,6 @@ namespace Newtonsoft.Json.Tests.Documentation
             };
             #endregion
         }
-
         #region SerializationErrorHandlingAttributeObject
         public class PersonError
         {
@@ -403,7 +401,6 @@ namespace Newtonsoft.Json.Tests.Documentation
         {
             Person p = new Person { Name = "James" };
             List<Person> people = new List<Person> { p, p };
-
             #region PreservingObjectReferencesOn
             string json = JsonConvert.SerializeObject(
                 people,
@@ -451,7 +448,6 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Assert.AreEqual(true, equal);
         }
-
         #region PreservingObjectReferencesAttribute
         [JsonObject(IsReference = true)]
         public class EmployeeReference
@@ -508,7 +504,6 @@ namespace Newtonsoft.Json.Tests.Documentation
     ""JobTitle"": ""Manager""
   }
 ]";
-
             #region CustomCreationConverterExample
             //[
             //  {
@@ -707,7 +702,6 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Assert.AreEqual("value1", values["key1"]);
         }
-
         #region SerializingDatesInJson
         public class LogEntry
         {
@@ -843,7 +837,6 @@ namespace Newtonsoft.Json.Tests.Documentation
                 ignored
             );
         }
-
         #region ReducingSerializedJsonSizeDefaultValueHandlingObject
         public class Invoice
         {
@@ -925,7 +918,6 @@ namespace Newtonsoft.Json.Tests.Documentation
                 ignored
             );
         }
-
         #region ReducingSerializedJsonSizeContractResolverObject
         public class DynamicContractResolver : DefaultContractResolver
         {
@@ -1016,7 +1008,6 @@ namespace Newtonsoft.Json.Tests.Documentation
                 startingWithB
             );
         }
-
         #region SerializingPartialJsonFragmentsObject
         public class SearchResult
         {
@@ -1140,5 +1131,4 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
     }
 }
-
 #endif

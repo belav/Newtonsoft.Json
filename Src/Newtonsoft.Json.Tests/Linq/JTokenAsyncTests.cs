@@ -134,5 +134,4 @@ namespace Newtonsoft.Json.Tests.Linq
         }
     }
 }
-
 #endif

@@ -47,5 +47,4 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public DateTime NextShipmentDate { get; set; }
     }
 }
-
 #endif

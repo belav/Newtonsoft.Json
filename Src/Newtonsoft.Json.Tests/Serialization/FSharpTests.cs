@@ -110,5 +110,4 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 }
-
 #endif

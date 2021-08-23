@@ -240,8 +240,14 @@ namespace Newtonsoft.Json
 #if HAVE_DATE_TIME_OFFSET
                         else
                         {
-                            if (DateTimeUtils.TryParseDateTimeOffset(_stringReference, DateFormatString, Culture, out DateTimeOffset dt))
-                            {
+                            if (
+                                DateTimeUtils.TryParseDateTimeOffset(
+                                    _stringReference,
+                                    DateFormatString,
+                                    Culture,
+                                    out DateTimeOffset dt
+                                )
+                            ) {
                                 SetToken(JsonToken.Date, dt, false);
                                 return;
                             }
@@ -2521,7 +2527,12 @@ namespace Newtonsoft.Json
 
                                 if (number.Length > MaximumJavascriptIntegerCharacterLength)
                                 {
-                                    throw ThrowReaderError("JSON integer {0} is too large to parse.".FormatWith(CultureInfo.InvariantCulture, _stringReference.ToString()));
+                                    throw ThrowReaderError(
+                                        "JSON integer {0} is too large to parse.".FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
+                                    );
                                 }
 
                                 numberValue = BigIntegerParse(number, CultureInfo.InvariantCulture);
@@ -2607,7 +2618,7 @@ namespace Newtonsoft.Json
 
 #if HAVE_BIG_INTEGER
         // By using the BigInteger type in a separate method,
-        // the runtime can execute the ParseNumber even if 
+        // the runtime can execute the ParseNumber even if
         // the System.Numerics.BigInteger.Parse method is
         // missing, which happens in some versions of Mono
         [MethodImpl(MethodImplOptions.NoInlining)]

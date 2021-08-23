@@ -384,7 +384,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void EmitDefaultValueTest()
         {
             EmitDefaultValueClass c = new EmitDefaultValueClass();
-
 #if !(NET20 || NET35 || PORTABLE)
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(
                 typeof(EmitDefaultValueClass)

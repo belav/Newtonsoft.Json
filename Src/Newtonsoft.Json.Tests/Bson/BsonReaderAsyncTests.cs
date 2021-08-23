@@ -1399,6 +1399,5 @@ namespace Newtonsoft.Json.Tests.Bson
         }
     }
 }
-
 #endif
 #pragma warning restore 618

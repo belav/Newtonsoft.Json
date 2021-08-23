@@ -1006,7 +1006,13 @@ namespace Newtonsoft.Json
                     string? s = (string?)Value;
                     return ReadDateTimeOffsetString(s);
                 default:
-                    throw JsonReaderException.Create(this, "Error reading date. Unexpected token: {0}.".FormatWith(CultureInfo.InvariantCulture, t));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Error reading date. Unexpected token: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            t
+                        )
+                    );
             }
         }
 
@@ -1018,8 +1024,14 @@ namespace Newtonsoft.Json
                 return null;
             }
 
-            if (DateTimeUtils.TryParseDateTimeOffset(s, _dateFormatString, Culture, out DateTimeOffset dt))
-            {
+            if (
+                DateTimeUtils.TryParseDateTimeOffset(
+                    s,
+                    _dateFormatString,
+                    Culture,
+                    out DateTimeOffset dt
+                )
+            ) {
                 SetToken(JsonToken.Date, dt, false);
                 return dt;
             }
@@ -1031,7 +1043,13 @@ namespace Newtonsoft.Json
             }
 
             SetToken(JsonToken.String, s, false);
-            throw JsonReaderException.Create(this, "Could not convert string to DateTimeOffset: {0}.".FormatWith(CultureInfo.InvariantCulture, s));
+            throw JsonReaderException.Create(
+                this,
+                "Could not convert string to DateTimeOffset: {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    s
+                )
+            );
         }
 #endif
 

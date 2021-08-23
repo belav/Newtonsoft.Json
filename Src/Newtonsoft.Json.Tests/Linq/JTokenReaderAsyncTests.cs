@@ -805,7 +805,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(1d, await reader.ReadAsDoubleAsync());
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task ReadAsBoolean_BigInteger_SuccessAsync()
@@ -927,5 +926,4 @@ namespace Newtonsoft.Json.Tests.Linq
         }
     }
 }
-
 #endif

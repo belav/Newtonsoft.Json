@@ -465,5 +465,4 @@ namespace Newtonsoft.Json.Tests.Serialization
         #endregion
     }
 }
-
 #endif

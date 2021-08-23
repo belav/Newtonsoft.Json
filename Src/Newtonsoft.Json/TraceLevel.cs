@@ -30,5 +30,4 @@ namespace Newtonsoft.Json
         Verbose = 4
     }
 }
-
 #endif

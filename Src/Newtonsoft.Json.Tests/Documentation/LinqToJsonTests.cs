@@ -199,7 +199,6 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void LinqToJsonCreateFromObject()
         {
             List<Post> posts = GetPosts();
-
             #region LinqToJsonCreateFromObject
             JObject o = JObject.FromObject(
                 new
@@ -350,7 +349,6 @@ namespace Newtonsoft.Json.Tests.Documentation
               }
             }"
             );
-
             #region LinqToJsonQuerying
             var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
@@ -381,7 +379,6 @@ namespace Newtonsoft.Json.Tests.Documentation
             Assert.AreEqual(2, postTitles.Count());
             Assert.AreEqual(3, categories.Count());
         }
-
         #region LinqToJsonDeserializeObject
         public class Shortie
         {
@@ -473,7 +470,6 @@ namespace Newtonsoft.Json.Tests.Documentation
               ]
             }"
             );
-
             #region SelectTokenSimple
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             #endregion
@@ -568,7 +564,6 @@ namespace Newtonsoft.Json.Tests.Documentation
               ]
             }"
             );
-
             #region SelectTokenLinq
             IList<string> storeNames = o.SelectToken("Stores").Select(s => (string)s).ToList();
             // Lambton Quay
@@ -593,5 +588,4 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
     }
 }
-
 #endif

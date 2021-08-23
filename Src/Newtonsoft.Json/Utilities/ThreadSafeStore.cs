@@ -71,7 +71,6 @@ namespace Newtonsoft.Json.Utilities
             return value;
 #endif
         }
-
 #if !HAVE_CONCURRENT_DICTIONARY
         private TValue AddValue(TKey key)
         {
@@ -93,7 +92,6 @@ namespace Newtonsoft.Json.Utilities
 
                     Dictionary<TKey, TValue> newStore = new Dictionary<TKey, TValue>(_store);
                     newStore[key] = value;
-
 #if HAVE_MEMORY_BARRIER
                     Thread.MemoryBarrier();
 #endif

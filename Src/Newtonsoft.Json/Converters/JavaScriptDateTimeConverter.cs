@@ -53,7 +53,9 @@ namespace Newtonsoft.Json.Converters
             else if (value is DateTimeOffset dateTimeOffset)
             {
                 DateTimeOffset utcDateTimeOffset = dateTimeOffset.ToUniversalTime();
-                ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(utcDateTimeOffset.UtcDateTime);
+                ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(
+                    utcDateTimeOffset.UtcDateTime
+                );
             }
 #endif
             else
@@ -121,9 +123,10 @@ namespace Newtonsoft.Json.Converters
             }
 
 #if HAVE_DATE_TIME_OFFSET
-            Type t = (ReflectionUtils.IsNullableType(objectType))
-                ? Nullable.GetUnderlyingType(objectType)
-                : objectType;
+            Type t =
+                (ReflectionUtils.IsNullableType(objectType))
+                    ? Nullable.GetUnderlyingType(objectType)
+                    : objectType;
             if (t == typeof(DateTimeOffset))
             {
                 return new DateTimeOffset(d);

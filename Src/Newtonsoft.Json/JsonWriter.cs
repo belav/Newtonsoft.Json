@@ -1717,7 +1717,9 @@ namespace Newtonsoft.Json
                         return;
 
                     case PrimitiveTypeCode.DateTimeOffsetNullable:
-                        writer.WriteValue((value == null) ? (DateTimeOffset?)null : (DateTimeOffset)value);
+                        writer.WriteValue(
+                            (value == null) ? (DateTimeOffset?)null : (DateTimeOffset)value
+                        );
                         return;
 #endif
                     case PrimitiveTypeCode.Decimal:
@@ -1785,15 +1787,24 @@ namespace Newtonsoft.Json
         }
 
 #if HAVE_ICONVERTIBLE
-        private static void ResolveConvertibleValue(IConvertible convertible, out PrimitiveTypeCode typeCode, out object value)
-        {
+        private static void ResolveConvertibleValue(
+            IConvertible convertible,
+            out PrimitiveTypeCode typeCode,
+            out object value
+        ) {
             // the value is a non-standard IConvertible
             // convert to the underlying value and retry
             TypeInformation typeInformation = ConvertUtils.GetTypeInformation(convertible);
 
             // if convertible has an underlying typecode of Object then attempt to convert it to a string
-            typeCode = typeInformation.TypeCode == PrimitiveTypeCode.Object ? PrimitiveTypeCode.String : typeInformation.TypeCode;
-            Type resolvedType = typeInformation.TypeCode == PrimitiveTypeCode.Object ? typeof(string) : typeInformation.Type;
+            typeCode =
+                typeInformation.TypeCode == PrimitiveTypeCode.Object
+                    ? PrimitiveTypeCode.String
+                    : typeInformation.TypeCode;
+            Type resolvedType =
+                typeInformation.TypeCode == PrimitiveTypeCode.Object
+                    ? typeof(string)
+                    : typeInformation.Type;
             value = convertible.ToType(resolvedType, CultureInfo.InvariantCulture);
         }
 #endif

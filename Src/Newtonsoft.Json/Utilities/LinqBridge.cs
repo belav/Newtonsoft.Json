@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
-
 #nullable disable
 
 namespace Newtonsoft.Json.Utilities.LinqBridge
@@ -3168,5 +3167,4 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
     internal sealed class ExtensionAttribute : Attribute { }
 }
-
 #endif

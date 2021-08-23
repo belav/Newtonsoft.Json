@@ -63,7 +63,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Cannot read number value as type. Path 'enddate', line 1, position 13."
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
         [Test]
         public async Task Test_Async()

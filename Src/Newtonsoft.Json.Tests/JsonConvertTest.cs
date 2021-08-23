@@ -52,7 +52,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests
@@ -1215,7 +1214,6 @@ namespace Newtonsoft.Json.Tests
             );
             Assert.AreEqual(@"\/Date(-62135596800000)\/", result.MsDateUnspecified);
             Assert.AreEqual(@"\/Date(-62135596800000)\/", result.MsDateUtc);
-
 #if !NET20
             result = TestDateTime(
                 "DateTimeOffset TimeSpan Zero",

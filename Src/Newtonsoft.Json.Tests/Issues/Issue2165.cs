@@ -65,7 +65,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
         [Test]
         public async Task TestAsync()

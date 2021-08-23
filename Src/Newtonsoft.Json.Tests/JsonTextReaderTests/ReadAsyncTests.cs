@@ -88,7 +88,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Could not convert to decimal: 1.7976931348623157E+308. Path ''."
             );
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task ReadAsInt32Async_BigIntegerValue_Success()
@@ -133,7 +132,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: u. Path '', line 1, position 1."
             );
         }
-
 #if !(PORTABLE || PORTABLE40 || NET35 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task ReadAsBooleanAsync()
@@ -316,7 +314,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
-
 #if DEBUG
         [Test]
         public async Task ReadLargeObjectsAsync()
@@ -1316,7 +1313,6 @@ third line",
                 jsonTextReader.Value
             );
         }
-
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public async Task ReadBigIntegerAsync()

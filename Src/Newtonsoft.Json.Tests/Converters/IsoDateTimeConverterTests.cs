@@ -383,7 +383,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 jsonText
             );
         }
-
 #if !NET20
         [Test]
         public void DeserializeDateTimeOffset()

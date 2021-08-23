@@ -161,7 +161,13 @@ namespace Newtonsoft.Json
             using (StringWriter writer = StringUtils.CreateStringWriter(64))
             {
                 writer.Write('"');
-                DateTimeUtils.WriteDateTimeOffsetString(writer, value, format, null, CultureInfo.InvariantCulture);
+                DateTimeUtils.WriteDateTimeOffsetString(
+                    writer,
+                    value,
+                    format,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
                 writer.Write('"');
                 return writer.ToString();
             }
@@ -1003,8 +1009,11 @@ namespace Newtonsoft.Json
         /// <param name="formatting">Indicates how the output should be formatted.</param>
         /// <param name="omitRootObject">Omits writing the root object.</param>
         /// <returns>A JSON string of the <see cref="XmlNode"/>.</returns>
-        public static string SerializeXmlNode(XmlNode? node, Formatting formatting, bool omitRootObject)
-        {
+        public static string SerializeXmlNode(
+            XmlNode? node,
+            Formatting formatting,
+            bool omitRootObject
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter { OmitRootObject = omitRootObject };
 
             return SerializeObject(node, formatting, converter);
@@ -1026,8 +1035,10 @@ namespace Newtonsoft.Json
         /// <param name="value">The JSON string.</param>
         /// <param name="deserializeRootElementName">The name of the root element to append when deserializing.</param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName)
-        {
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName
+        ) {
             return DeserializeXmlNode(value, deserializeRootElementName, false);
         }
 
@@ -1042,9 +1053,17 @@ namespace Newtonsoft.Json
         /// This attribute helps preserve arrays when converting the written XML back to JSON.
         /// </param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName, bool writeArrayAttribute)
-        {
-            return DeserializeXmlNode(value, deserializeRootElementName, writeArrayAttribute, false);
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute
+        ) {
+            return DeserializeXmlNode(
+                value,
+                deserializeRootElementName,
+                writeArrayAttribute,
+                false
+            );
         }
 
         /// <summary>
@@ -1064,8 +1083,12 @@ namespace Newtonsoft.Json
         /// as part of the XML element name.
         /// </param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName, bool writeArrayAttribute, bool encodeSpecialCharacters)
-        {
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute,
+            bool encodeSpecialCharacters
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter();
             converter.DeserializeRootElementName = deserializeRootElementName;
             converter.WriteArrayAttribute = writeArrayAttribute;
@@ -1104,8 +1127,11 @@ namespace Newtonsoft.Json
         /// <param name="formatting">Indicates how the output should be formatted.</param>
         /// <param name="omitRootObject">Omits writing the root object.</param>
         /// <returns>A JSON string of the <see cref="XNode"/>.</returns>
-        public static string SerializeXNode(XObject? node, Formatting formatting, bool omitRootObject)
-        {
+        public static string SerializeXNode(
+            XObject? node,
+            Formatting formatting,
+            bool omitRootObject
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter { OmitRootObject = omitRootObject };
 
             return SerializeObject(node, formatting, converter);
@@ -1143,8 +1169,11 @@ namespace Newtonsoft.Json
         /// This attribute helps preserve arrays when converting the written XML back to JSON.
         /// </param>
         /// <returns>The deserialized <see cref="XNode"/>.</returns>
-        public static XDocument? DeserializeXNode(string value, string? deserializeRootElementName, bool writeArrayAttribute)
-        {
+        public static XDocument? DeserializeXNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute
+        ) {
             return DeserializeXNode(value, deserializeRootElementName, writeArrayAttribute, false);
         }
 
@@ -1165,8 +1194,12 @@ namespace Newtonsoft.Json
         /// as part of the XML element name.
         /// </param>
         /// <returns>The deserialized <see cref="XNode"/>.</returns>
-        public static XDocument? DeserializeXNode(string value, string? deserializeRootElementName, bool writeArrayAttribute, bool encodeSpecialCharacters)
-        {
+        public static XDocument? DeserializeXNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute,
+            bool encodeSpecialCharacters
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter();
             converter.DeserializeRootElementName = deserializeRootElementName;
             converter.WriteArrayAttribute = writeArrayAttribute;

@@ -57,5 +57,4 @@ namespace Newtonsoft.Json.Tests.LinqToSql
         }
     }
 }
-
 #endif

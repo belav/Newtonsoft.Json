@@ -495,5 +495,4 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 }
-
 #endif

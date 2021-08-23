@@ -381,7 +381,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             dynamic d = o;
             dynamic r;
-
             #region Add
             r = d.String + " LAMO!";
             Assert.AreEqual("A string lol! LAMO!", (string)r);
@@ -452,7 +451,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, r.Value);
             r += 2;
             Assert.AreEqual(null, r.Value);
-
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             r = d.BigInteger + null;
             Assert.AreEqual(null, r.Value);
@@ -531,7 +529,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, r.Value);
             r -= 2;
             Assert.AreEqual(null, r.Value);
-
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             r = d.BigInteger - null;
             Assert.AreEqual(null, r.Value);
@@ -605,7 +602,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, r.Value);
             r *= 2;
             Assert.AreEqual(null, r.Value);
-
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             r = d.BigInteger * 1.1d;
             Assert.AreEqual(100m, (decimal)r);
@@ -679,7 +675,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, r.Value);
             r /= 2;
             Assert.AreEqual(null, r.Value);
-
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             r = d.BigInteger / 1.1d;
             Assert.AreEqual(100m, (decimal)r);
@@ -1008,5 +1003,4 @@ namespace Newtonsoft.Json.Tests.Linq
         }
     }
 }
-
 #endif

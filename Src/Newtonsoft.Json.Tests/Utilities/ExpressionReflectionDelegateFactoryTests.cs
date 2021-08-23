@@ -535,5 +535,4 @@ namespace Newtonsoft.Json.Tests.Utilities
         }
     }
 }
-
 #endif

@@ -125,7 +125,6 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void ReuseContractResolverTest()
         {
             Person person = new Person();
-
             #region ReuseContractResolver
             // BAD - a new contract resolver is created each time, forcing slow reflection to be used
             string json1 = JsonConvert.SerializeObject(
@@ -276,5 +275,4 @@ namespace Newtonsoft.Json.Tests.Documentation
         }
     }
 }
-
 #endif
