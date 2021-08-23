@@ -1752,6 +1752,7 @@ namespace Newtonsoft.Json
                                 await ParseNumberAsync(ReadType.Read, cancellationToken)
                                     .ConfigureAwait(false);
                                 bool b;
+
 #if HAVE_BIG_INTEGER
                                 if (Value is BigInteger i)
                                 {
