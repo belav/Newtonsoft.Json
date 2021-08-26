@@ -116,10 +116,9 @@ namespace Newtonsoft.Json.Tests.Linq
         public void MergeMismatchedTypesRoot()
         {
             var left = (JObject)JToken.FromObject(new { Property1 = new { SubProperty1 = 1 } });
-            var right =
-                (JArray)JToken.FromObject(
-                    new object[] { new { Property1 = 1 }, new { Property1 = 1 } }
-                );
+            var right = (JArray)JToken.FromObject(
+                new object[] { new { Property1 = 1 }, new { Property1 = 1 } }
+            );
 
             left.Merge(right);
 
@@ -139,10 +138,9 @@ namespace Newtonsoft.Json.Tests.Linq
         public void MergeMultipleObjects()
         {
             var left = (JObject)JToken.FromObject(new { Property1 = new { SubProperty1 = 1 } });
-            var right =
-                (JObject)JToken.FromObject(
-                    new { Property1 = new { SubProperty2 = 2 }, Property2 = 2 }
-                );
+            var right = (JObject)JToken.FromObject(
+                new { Property1 = new { SubProperty2 = 2 }, Property2 = 2 }
+            );
 
             left.Merge(right);
 
@@ -163,56 +161,54 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeArray()
         {
-            var left =
-                (JObject)JToken.FromObject(
-                    new
+            var left = (JObject)JToken.FromObject(
+                new
+                {
+                    Array1 = new object[]
                     {
-                        Array1 = new object[]
+                        new
                         {
-                            new
+                            Property1 = new
                             {
-                                Property1 = new
-                                {
-                                    Property1 = 1,
-                                    Property2 = 2,
-                                    Property3 = 3,
-                                    Property4 = 4,
-                                    Property5 = (object)null
-                                }
-                            },
-                            new {  },
-                            3,
-                            null,
-                            5,
-                            null
-                        }
+                                Property1 = 1,
+                                Property2 = 2,
+                                Property3 = 3,
+                                Property4 = 4,
+                                Property5 = (object)null
+                            }
+                        },
+                        new {  },
+                        3,
+                        null,
+                        5,
+                        null
                     }
-                );
-            var right =
-                (JObject)JToken.FromObject(
-                    new
+                }
+            );
+            var right = (JObject)JToken.FromObject(
+                new
+                {
+                    Array1 = new object[]
                     {
-                        Array1 = new object[]
+                        new
                         {
-                            new
+                            Property1 = new
                             {
-                                Property1 = new
-                                {
-                                    Property1 = (object)null,
-                                    Property2 = 3,
-                                    Property3 = new {  },
-                                    Property5 = (object)null
-                                }
-                            },
-                            null,
-                            null,
-                            4,
-                            5.1,
-                            null,
-                            new { Property1 = 1 }
-                        }
+                                Property1 = (object)null,
+                                Property2 = 3,
+                                Property3 = new {  },
+                                Property5 = (object)null
+                            }
+                        },
+                        null,
+                        null,
+                        4,
+                        5.1,
+                        null,
+                        new { Property1 = 1 }
                     }
-                );
+                }
+            );
 
             left.Merge(
                 right,
@@ -250,22 +246,20 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ConcatArray()
         {
-            var left =
-                (JObject)JToken.FromObject(
-                    new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
-                );
-            var right =
-                (JObject)JToken.FromObject(
-                    new
+            var left = (JObject)JToken.FromObject(
+                new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
+            );
+            var right = (JObject)JToken.FromObject(
+                new
+                {
+                    Array1 = new object[]
                     {
-                        Array1 = new object[]
-                        {
-                            new { Property1 = 1 },
-                            new { Property2 = 2 },
-                            new { Property3 = 3 }
-                        }
+                        new { Property1 = 1 },
+                        new { Property2 = 2 },
+                        new { Property3 = 3 }
                     }
-                );
+                }
+            );
 
             left.Merge(
                 right,
@@ -301,32 +295,30 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeMismatchingTypesInArray()
         {
-            var left =
-                (JArray)JToken.FromObject(
-                    new object[]
-                    {
-                        true,
-                        null,
-                        new { Property1 = 1 },
-                        new object[] { 1 },
-                        new { Property1 = 1 },
-                        1,
-                        new object[] { 1 }
-                    }
-                );
-            var right =
-                (JArray)JToken.FromObject(
-                    new object[]
-                    {
-                        1,
-                        5,
-                        new object[] { 1 },
-                        new { Property1 = 1 },
-                        true,
-                        new { Property1 = 1 },
-                        null
-                    }
-                );
+            var left = (JArray)JToken.FromObject(
+                new object[]
+                {
+                    true,
+                    null,
+                    new { Property1 = 1 },
+                    new object[] { 1 },
+                    new { Property1 = 1 },
+                    1,
+                    new object[] { 1 }
+                }
+            );
+            var right = (JArray)JToken.FromObject(
+                new object[]
+                {
+                    1,
+                    5,
+                    new object[] { 1 },
+                    new { Property1 = 1 },
+                    true,
+                    new { Property1 = 1 },
+                    null
+                }
+            );
 
             left.Merge(
                 right,
@@ -362,26 +354,24 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeMismatchingTypesInObject()
         {
-            var left =
-                (JObject)JToken.FromObject(
-                    new
-                    {
-                        Property1 = new object[] { 1 },
-                        Property2 = new object[] { 1 },
-                        Property3 = true,
-                        Property4 = true
-                    }
-                );
-            var right =
-                (JObject)JToken.FromObject(
-                    new
-                    {
-                        Property1 = new { Nested = true },
-                        Property2 = true,
-                        Property3 = new object[] { 1 },
-                        Property4 = (object)null
-                    }
-                );
+            var left = (JObject)JToken.FromObject(
+                new
+                {
+                    Property1 = new object[] { 1 },
+                    Property2 = new object[] { 1 },
+                    Property3 = true,
+                    Property4 = true
+                }
+            );
+            var right = (JObject)JToken.FromObject(
+                new
+                {
+                    Property1 = new { Nested = true },
+                    Property2 = true,
+                    Property3 = new object[] { 1 },
+                    Property4 = (object)null
+                }
+            );
 
             left.Merge(right);
 
@@ -451,22 +441,20 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void UnionArrays()
         {
-            var left =
-                (JObject)JToken.FromObject(
-                    new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
-                );
-            var right =
-                (JObject)JToken.FromObject(
-                    new
+            var left = (JObject)JToken.FromObject(
+                new { Array1 = new object[] { new { Property1 = 1 }, new { Property1 = 1 } } }
+            );
+            var right = (JObject)JToken.FromObject(
+                new
+                {
+                    Array1 = new object[]
                     {
-                        Array1 = new object[]
-                        {
-                            new { Property1 = 1 },
-                            new { Property2 = 2 },
-                            new { Property3 = 3 }
-                        }
+                        new { Property1 = 1 },
+                        new { Property2 = 2 },
+                        new { Property3 = 3 }
                     }
-                );
+                }
+            );
 
             left.Merge(
                 right,

@@ -93,13 +93,12 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void FloatParseHandling()
         {
-            JValue v =
-                (JValue)JToken.ReadFrom(
-                    new JsonTextReader(new StringReader("9.9"))
-                    {
-                        FloatParseHandling = Json.FloatParseHandling.Decimal
-                    }
-                );
+            JValue v = (JValue)JToken.ReadFrom(
+                new JsonTextReader(new StringReader("9.9"))
+                {
+                    FloatParseHandling = Json.FloatParseHandling.Decimal
+                }
+            );
 
             Assert.AreEqual(9.9m, v.Value);
             Assert.AreEqual(typeof(decimal), v.Value.GetType());
@@ -181,7 +180,6 @@ namespace Newtonsoft.Json.Tests.Linq
             v.Value = g;
             Assert.AreEqual(g, v.Value);
             Assert.AreEqual(JTokenType.Guid, v.Type);
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             BigInteger i = BigInteger.Parse(
                 "123456789999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990"
@@ -252,7 +250,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 "b282ade7-c520-496c-a448-4084f6803de5",
                 v.ToString(null, CultureInfo.InvariantCulture)
             );
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             v = new JValue(
                 BigInteger.Parse(
@@ -270,10 +267,9 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JValueParse()
         {
-            JValue v =
-                (JValue)JToken.Parse(
-                    "123456789999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990"
-                );
+            JValue v = (JValue)JToken.Parse(
+                "123456789999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999990"
+            );
 
             Assert.AreEqual(JTokenType.Integer, v.Type);
             Assert.AreEqual(
@@ -776,7 +772,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             v = new JValue(new Uri("http://www.google.com"));
             Assert.AreEqual(TypeCode.Object, v.GetTypeCode());
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             v = new JValue(new BigInteger(3));
             Assert.AreEqual(TypeCode.Object, v.GetTypeCode());
@@ -795,7 +790,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             int i = (int)v.ToType(typeof(int), CultureInfo.InvariantCulture);
             Assert.AreEqual(9, i);
-
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
             BigInteger bi = (BigInteger)v.ToType(typeof(BigInteger), CultureInfo.InvariantCulture);
             Assert.AreEqual(new BigInteger(9), bi);

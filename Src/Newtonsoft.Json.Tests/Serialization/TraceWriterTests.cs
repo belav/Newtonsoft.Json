@@ -1260,7 +1260,10 @@ Newtonsoft.Json Error: 0 : Error!
                 traceWriter.TraceRecords[1].Message
             );
 #else
-            Assert.AreEqual("Error deserializing System.Exception. Member 'Message' was not found. Path '', line 1, position 2.", traceWriter.TraceRecords[1].Message);
+            Assert.AreEqual(
+                "Error deserializing System.Exception. Member 'Message' was not found. Path '', line 1, position 2.",
+                traceWriter.TraceRecords[1].Message
+            );
 #endif
 
             Assert.AreEqual(TraceLevel.Error, traceWriter.TraceRecords[1].Level);

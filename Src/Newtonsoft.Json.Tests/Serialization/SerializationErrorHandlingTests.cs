@@ -83,19 +83,18 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             List<Exception> errors = new List<Exception>();
 
-            JObject a2 =
-                (JObject)JsonConvert.DeserializeObject(
-                    @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
-                    new JsonSerializerSettings
+            JObject a2 = (JObject)JsonConvert.DeserializeObject(
+                @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    Error = (object sender, Json.Serialization.ErrorEventArgs e) =>
                     {
-                        TypeNameHandling = TypeNameHandling.Auto,
-                        Error = (object sender, Json.Serialization.ErrorEventArgs e) =>
-                        {
-                            errors.Add(e.ErrorContext.Error);
-                            e.ErrorContext.Handled = true;
-                        }
+                        errors.Add(e.ErrorContext.Error);
+                        e.ErrorContext.Handled = true;
                     }
-                );
+                }
+            );
 
             Assert.IsNull(a2);
             Assert.AreEqual(1, errors.Count);
@@ -441,7 +440,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "[1] - 1 - String was not recognized as a valid DateTime.",
                 "[1] - 1 - The string 'I am not a date and will error!' was not recognized as a valid DateTime. There is an unknown word starting at index '0'."
 #else
-    // handle typo fix in later versions of .NET
+                // handle typo fix in later versions of .NET
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is a unknown word starting at index 0."
 #endif

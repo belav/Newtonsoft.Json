@@ -845,9 +845,10 @@ namespace Newtonsoft.Json
                 out string? previousDateFormatString
             );
 
-            TraceJsonReader? traceJsonReader = (
-                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
-            ) ? CreateTraceJsonReader(reader) : null;
+            TraceJsonReader? traceJsonReader =
+                (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
+                    ? CreateTraceJsonReader(reader)
+                    : null;
 
             JsonSerializerInternalReader serializerReader = new JsonSerializerInternalReader(this);
             serializerReader.Populate(traceJsonReader ?? reader, target);
@@ -936,9 +937,10 @@ namespace Newtonsoft.Json
                 out string? previousDateFormatString
             );
 
-            TraceJsonReader? traceJsonReader = (
-                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
-            ) ? CreateTraceJsonReader(reader) : null;
+            TraceJsonReader? traceJsonReader =
+                (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
+                    ? CreateTraceJsonReader(reader)
+                    : null;
 
             JsonSerializerInternalReader serializerReader = new JsonSerializerInternalReader(this);
             object? value = serializerReader.Deserialize(
@@ -1224,9 +1226,10 @@ namespace Newtonsoft.Json
                 jsonWriter.DateFormatString = _dateFormatString;
             }
 
-            TraceJsonWriter? traceJsonWriter = (
-                TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose
-            ) ? new TraceJsonWriter(jsonWriter) : null;
+            TraceJsonWriter? traceJsonWriter =
+                (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
+                    ? new TraceJsonWriter(jsonWriter)
+                    : null;
 
             JsonSerializerInternalWriter serializerWriter = new JsonSerializerInternalWriter(this);
             serializerWriter.Serialize(traceJsonWriter ?? jsonWriter, value, objectType);

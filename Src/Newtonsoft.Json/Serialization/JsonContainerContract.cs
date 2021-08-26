@@ -53,9 +53,8 @@ namespace Newtonsoft.Json.Serialization
                 _itemContract = value;
                 if (_itemContract != null)
                 {
-                    _finalItemContract = (_itemContract.UnderlyingType.IsSealed())
-                        ? _itemContract
-                        : null;
+                    _finalItemContract =
+                        (_itemContract.UnderlyingType.IsSealed()) ? _itemContract : null;
                 }
                 else
                 {

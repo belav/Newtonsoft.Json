@@ -162,11 +162,14 @@ namespace Newtonsoft.Json.Bson
                             ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTime, false);
                         }
 #if HAVE_DATE_TIME_OFFSET
-                    else
-                    {
-                        DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
-                        ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTimeOffset.UtcDateTime, dateTimeOffset.Offset);
-                    }
+                        else
+                        {
+                            DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
+                            ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(
+                                dateTimeOffset.UtcDateTime,
+                                dateTimeOffset.Offset
+                            );
+                        }
 #endif
 
                         _writer.Write(ticks);
@@ -253,9 +256,10 @@ namespace Newtonsoft.Json.Bson
 
         private int CalculateSizeWithLength(int stringByteCount, bool includeSize)
         {
-            int baseSize = (includeSize)
-                ? 5 // size bytes + terminator
-                : 1; // terminator
+            int baseSize =
+                (includeSize)
+                    ? 5 // size bytes + terminator
+                    : 1; // terminator
 
             return baseSize + stringByteCount;
         }

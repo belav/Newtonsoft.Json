@@ -1951,8 +1951,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            Product deserializedProduct =
-                (Product)JsonConvert.DeserializeObject(output, typeof(Product));
+            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
+                output,
+                typeof(Product)
+            );
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(new DateTime(2008, 12, 28), deserializedProduct.ExpiryDate);
@@ -2503,8 +2505,10 @@ keyword such as type of business.""
             JsonSerializer s = new JsonSerializer();
             s.ObjectCreationHandling = ObjectCreationHandling.Replace;
 
-            ClassWithArray wibble =
-                (ClassWithArray)s.Deserialize(new StringReader(json), typeof(ClassWithArray));
+            ClassWithArray wibble = (ClassWithArray)s.Deserialize(
+                new StringReader(json),
+                typeof(ClassWithArray)
+            );
 
             Assert.AreEqual("hello", wibble.Foo);
 
@@ -2539,7 +2543,8 @@ keyword such as type of business.""
 
             string expected = null;
 #if (NETSTANDARD2_0)
-            expected = @"{
+            expected =
+                @"{
   ""String"": ""string"",
   ""Int32"": 2147483647,
   ""UInt32"": 4294967295,
@@ -2556,7 +2561,8 @@ keyword such as type of business.""
   ""Char"": ""\u0000""
 }";
 #elif NETSTANDARD1_3
-            expected = @"{
+            expected =
+                @"{
   ""String"": ""string"",
   ""Int32"": 2147483647,
   ""UInt32"": 4294967295,
@@ -2590,7 +2596,8 @@ keyword such as type of business.""
   ""Char"": ""\u0000""
 }";
 #else
-            expected = @"{
+            expected =
+                @"{
   ""String"": ""string"",
   ""Int32"": 2147483647,
   ""UInt32"": 4294967295,
@@ -3790,8 +3797,10 @@ keyword such as type of business.""
         /*comment11*/ ] /*comment12*/
       } /*comment13*/";
 
-            Product deserializedProduct =
-                (Product)JsonConvert.DeserializeObject(json, typeof(Product));
+            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
+                json,
+                typeof(Product)
+            );
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(
@@ -4796,29 +4805,41 @@ Path '', line 1, position 1."
             try
             {
                 JsonTypeReflector.SetFullyTrusted(false);
-                ISerializableTestObject value = new ISerializableTestObject("string!", 0, default(DateTimeOffset), null);
+                ISerializableTestObject value = new ISerializableTestObject(
+                    "string!",
+                    0,
+                    default(DateTimeOffset),
+                    null
+                );
 
-                string json = JsonConvert.SerializeObject(value, new JsonSerializerSettings
-                {
-                    ContractResolver = new DefaultContractResolver
+                string json = JsonConvert.SerializeObject(
+                    value,
+                    new JsonSerializerSettings
                     {
-                        IgnoreSerializableInterface = true
+                        ContractResolver = new DefaultContractResolver
+                        {
+                            IgnoreSerializableInterface = true
+                        }
                     }
-                });
+                );
 
                 Assert.AreEqual("{}", json);
 
-                value = JsonConvert.DeserializeObject<ISerializableTestObject>("{booleanValue:true}", new JsonSerializerSettings
-                {
-                    ContractResolver = new DefaultContractResolver
+                value = JsonConvert.DeserializeObject<ISerializableTestObject>(
+                    "{booleanValue:true}",
+                    new JsonSerializerSettings
                     {
-                        IgnoreSerializableInterface = true
+                        ContractResolver = new DefaultContractResolver
+                        {
+                            IgnoreSerializableInterface = true
+                        }
                     }
-                });
+                );
 
                 Assert.IsNotNull(value);
                 Assert.AreEqual(false, value._booleanValue);
             }
+
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -4830,15 +4851,23 @@ Path '', line 1, position 1."
         {
             try
             {
-                ExceptionAssert.Throws<JsonSerializationException>(() =>
-                {
-                    JsonTypeReflector.SetFullyTrusted(false);
+                ExceptionAssert.Throws<JsonSerializationException>(
+                    () =>
+                    {
+                        JsonTypeReflector.SetFullyTrusted(false);
 
-                    JsonConvert.DeserializeObject<ISerializableTestObject>("{booleanValue:true}");
-                }, @"Type 'Newtonsoft.Json.Tests.TestObjects.ISerializableTestObject' implements ISerializable but cannot be deserialized using the ISerializable interface because the current application is not fully trusted and ISerializable can expose secure data." + Environment.NewLine +
-                   @"To fix this error either change the environment to be fully trusted, change the application to not deserialize the type, add JsonObjectAttribute to the type or change the JsonSerializer setting ContractResolver to use a new DefaultContractResolver with IgnoreSerializableInterface set to true." + Environment.NewLine +
-                   @"Path 'booleanValue', line 1, position 14.");
+                        JsonConvert.DeserializeObject<ISerializableTestObject>(
+                            "{booleanValue:true}"
+                        );
+                    },
+                    @"Type 'Newtonsoft.Json.Tests.TestObjects.ISerializableTestObject' implements ISerializable but cannot be deserialized using the ISerializable interface because the current application is not fully trusted and ISerializable can expose secure data."
+                        + Environment.NewLine
+                        + @"To fix this error either change the environment to be fully trusted, change the application to not deserialize the type, add JsonObjectAttribute to the type or change the JsonSerializer setting ContractResolver to use a new DefaultContractResolver with IgnoreSerializableInterface set to true."
+                        + Environment.NewLine
+                        + @"Path 'booleanValue', line 1, position 14."
+                );
             }
+
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -4850,16 +4879,27 @@ Path '', line 1, position 1."
         {
             try
             {
-                ExceptionAssert.Throws<JsonSerializationException>(() =>
-                {
-                    JsonTypeReflector.SetFullyTrusted(false);
-                    ISerializableTestObject value = new ISerializableTestObject("string!", 0, default(DateTimeOffset), null);
+                ExceptionAssert.Throws<JsonSerializationException>(
+                    () =>
+                    {
+                        JsonTypeReflector.SetFullyTrusted(false);
+                        ISerializableTestObject value = new ISerializableTestObject(
+                            "string!",
+                            0,
+                            default(DateTimeOffset),
+                            null
+                        );
 
-                    JsonConvert.SerializeObject(value);
-                }, @"Type 'Newtonsoft.Json.Tests.TestObjects.ISerializableTestObject' implements ISerializable but cannot be serialized using the ISerializable interface because the current application is not fully trusted and ISerializable can expose secure data." + Environment.NewLine +
-                   @"To fix this error either change the environment to be fully trusted, change the application to not deserialize the type, add JsonObjectAttribute to the type or change the JsonSerializer setting ContractResolver to use a new DefaultContractResolver with IgnoreSerializableInterface set to true." + Environment.NewLine +
-                   @"Path ''.");
+                        JsonConvert.SerializeObject(value);
+                    },
+                    @"Type 'Newtonsoft.Json.Tests.TestObjects.ISerializableTestObject' implements ISerializable but cannot be serialized using the ISerializable interface because the current application is not fully trusted and ISerializable can expose secure data."
+                        + Environment.NewLine
+                        + @"To fix this error either change the environment to be fully trusted, change the application to not deserialize the type, add JsonObjectAttribute to the type or change the JsonSerializer setting ContractResolver to use a new DefaultContractResolver with IgnoreSerializableInterface set to true."
+                        + Environment.NewLine
+                        + @"Path ''."
+                );
             }
+
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -5578,15 +5618,14 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeNullableArray()
         {
-            double?[] d =
-                (double?[])JsonConvert.DeserializeObject(
-                    @"[
+            double?[] d = (double?[])JsonConvert.DeserializeObject(
+                @"[
   2.4,
   4.3,
   null
 ]",
-                    typeof(double?[])
-                );
+                typeof(double?[])
+            );
 
             Assert.AreEqual(3, d.Length);
             Assert.AreEqual(2.4, d[0]);
@@ -5632,8 +5671,10 @@ Path '', line 1, position 1."
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            ByteArrayTestClass[] z =
-                (ByteArrayTestClass[])serializer1.Deserialize(reader, typeof(ByteArrayTestClass[]));
+            ByteArrayTestClass[] z = (ByteArrayTestClass[])serializer1.Deserialize(
+                reader,
+                typeof(ByteArrayTestClass[])
+            );
             Assert.AreEqual(2, z.Length);
             Assert.AreEqual(0, z[0].Prop1.Length);
             Assert.AreEqual(0, z[1].Prop1.Length);
@@ -7666,10 +7707,9 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeEmptyJsonString()
         {
-            string s =
-                (string)new JsonSerializer().Deserialize(
-                    new JsonTextReader(new StringReader("''"))
-                );
+            string s = (string)new JsonSerializer().Deserialize(
+                new JsonTextReader(new StringReader("''"))
+            );
             Assert.AreEqual("", s);
         }
 
@@ -7986,11 +8026,10 @@ lines.*/
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt =
-                (ItemConverterTestClass)serializer.Deserialize(
-                    reader,
-                    typeof(ItemConverterTestClass)
-                );
+            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
+                reader,
+                typeof(ItemConverterTestClass)
+            );
             Assert.AreEqual(1, mt.MyProperty.Count);
         }
 
@@ -8006,11 +8045,10 @@ This is just junk, though.";
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt =
-                (ItemConverterTestClass)serializer.Deserialize(
-                    reader,
-                    typeof(ItemConverterTestClass)
-                );
+            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
+                reader,
+                typeof(ItemConverterTestClass)
+            );
             Assert.AreEqual(1, mt.MyProperty.Count);
         }
 
@@ -8197,7 +8235,8 @@ This is just junk, though.";
 #else
             ExceptionAssert.Throws<JsonSerializationException>(
                 doStuff,
-                "Unable to find a constructor to use for type Newtonsoft.Json.Tests.TestObjects.MyTuple`1[System.Int32]. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'm_Item1', line 1, position 11.");
+                "Unable to find a constructor to use for type Newtonsoft.Json.Tests.TestObjects.MyTuple`1[System.Int32]. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'm_Item1', line 1, position 11."
+            );
 #endif
         }
 
@@ -8213,8 +8252,12 @@ This is just junk, though.";
                 var json = JsonConvert.SerializeObject(tuple);
                 Assert.AreEqual(@"{""m_Item1"":500}", json);
 
-                ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<MyTuplePartial<int>>(json), "Unable to find a constructor to use for type Newtonsoft.Json.Tests.TestObjects.MyTuplePartial`1[System.Int32]. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'm_Item1', line 1, position 11.");
+                ExceptionAssert.Throws<JsonSerializationException>(
+                    () => JsonConvert.DeserializeObject<MyTuplePartial<int>>(json),
+                    "Unable to find a constructor to use for type Newtonsoft.Json.Tests.TestObjects.MyTuplePartial`1[System.Int32]. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'm_Item1', line 1, position 11."
+                );
             }
+
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(true);
@@ -8490,7 +8533,6 @@ This is just junk, though.";
             string json = JsonConvert.SerializeObject(p);
 
             Assert.AreEqual(@"{""First"":""One"",""Second"":2}", json);
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
             DefaultContractResolver r = new DefaultContractResolver();
             r.IgnoreSerializableAttribute = false;

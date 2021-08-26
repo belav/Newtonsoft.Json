@@ -146,9 +146,10 @@ namespace Newtonsoft.Json.Serialization
                 errorContext.Traced = true;
 
                 // kind of a hack but meh. might clean this up later
-                string message = (GetType() == typeof(JsonSerializerInternalWriter))
-                    ? "Error serializing"
-                    : "Error deserializing";
+                string message =
+                    (GetType() == typeof(JsonSerializerInternalWriter))
+                        ? "Error serializing"
+                        : "Error deserializing";
                 if (contract != null)
                 {
                     message += " " + contract.UnderlyingType;

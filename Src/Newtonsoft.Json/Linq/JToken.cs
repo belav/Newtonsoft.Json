@@ -52,12 +52,16 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Represents an abstract JSON token.
     /// </summary>
-    public abstract partial class JToken : IJEnumerable<JToken>, IJsonLineInfo
+    public abstract partial class JToken
+        : IJEnumerable<JToken>,
+          IJsonLineInfo
 #if HAVE_ICLONEABLE
-        , ICloneable
+          ,
+          ICloneable
 #endif
 #if HAVE_DYNAMIC
-        , IDynamicMetaObjectProvider
+          ,
+          IDynamicMetaObjectProvider
 #endif
     {
         private static JTokenEqualityComparer? _equalityComparer;
@@ -86,7 +90,16 @@ namespace Newtonsoft.Json.Linq
             JTokenType.Boolean
         };
 #if HAVE_BIG_INTEGER
-        private static readonly JTokenType[] BigIntegerTypes = new[] { JTokenType.Integer, JTokenType.Float, JTokenType.String, JTokenType.Comment, JTokenType.Raw, JTokenType.Boolean, JTokenType.Bytes };
+        private static readonly JTokenType[] BigIntegerTypes = new[]
+        {
+            JTokenType.Integer,
+            JTokenType.Float,
+            JTokenType.String,
+            JTokenType.Comment,
+            JTokenType.Raw,
+            JTokenType.Boolean,
+            JTokenType.Bytes
+        };
 #endif
         private static readonly JTokenType[] StringTypes = new[]
         {
@@ -629,7 +642,12 @@ namespace Newtonsoft.Json.Linq
             JValue? v = EnsureValue(value);
             if (v == null || !ValidateToken(v, DateTimeTypes, false))
             {
-                throw new ArgumentException("Can not convert {0} to DateTimeOffset.".FormatWith(CultureInfo.InvariantCulture, GetType(value)));
+                throw new ArgumentException(
+                    "Can not convert {0} to DateTimeOffset.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType(value)
+                    )
+                );
             }
 
             if (v.Value is DateTimeOffset offset)
@@ -760,7 +778,12 @@ namespace Newtonsoft.Json.Linq
             JValue? v = EnsureValue(value);
             if (v == null || !ValidateToken(v, DateTimeTypes, true))
             {
-                throw new ArgumentException("Can not convert {0} to DateTimeOffset.".FormatWith(CultureInfo.InvariantCulture, GetType(value)));
+                throw new ArgumentException(
+                    "Can not convert {0} to DateTimeOffset.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType(value)
+                    )
+                );
             }
 
             if (v.Value == null)
@@ -1803,7 +1826,12 @@ namespace Newtonsoft.Json.Linq
             JValue? v = EnsureValue(value);
             if (v == null || !ValidateToken(v, BigIntegerTypes, false))
             {
-                throw new ArgumentException("Can not convert {0} to BigInteger.".FormatWith(CultureInfo.InvariantCulture, GetType(value)));
+                throw new ArgumentException(
+                    "Can not convert {0} to BigInteger.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType(value)
+                    )
+                );
             }
 
             return ConvertUtils.ToBigInteger(v.Value!);
@@ -1814,7 +1842,12 @@ namespace Newtonsoft.Json.Linq
             JValue? v = EnsureValue(value);
             if (v == null || !ValidateToken(v, BigIntegerTypes, true))
             {
-                throw new ArgumentException("Can not convert {0} to BigInteger.".FormatWith(CultureInfo.InvariantCulture, GetType(value)));
+                throw new ArgumentException(
+                    "Can not convert {0} to BigInteger.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType(value)
+                    )
+                );
             }
 
             if (v.Value == null)
@@ -2469,9 +2502,10 @@ namespace Newtonsoft.Json.Linq
             bool hasContent;
             if (reader.TokenType == JsonToken.None)
             {
-                hasContent = (
-                    settings != null && settings.CommentHandling == CommentHandling.Ignore
-                ) ? reader.ReadAndMoveToContent() : reader.Read();
+                hasContent =
+                    (settings != null && settings.CommentHandling == CommentHandling.Ignore)
+                        ? reader.ReadAndMoveToContent()
+                        : reader.Read();
             }
             else if (
                 reader.TokenType == JsonToken.Comment

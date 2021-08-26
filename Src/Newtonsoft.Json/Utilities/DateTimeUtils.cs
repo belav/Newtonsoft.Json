@@ -476,8 +476,12 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if HAVE_DATE_TIME_OFFSET
-        internal static bool TryParseDateTimeOffset(StringReference s, string? dateFormatString, CultureInfo culture, out DateTimeOffset dt)
-        {
+        internal static bool TryParseDateTimeOffset(
+            StringReference s,
+            string? dateFormatString,
+            CultureInfo culture,
+            out DateTimeOffset dt
+        ) {
             if (s.Length > 0)
             {
                 int i = s.StartIndex;
@@ -501,8 +505,9 @@ namespace Newtonsoft.Json.Utilities
 
                 if (!StringUtils.IsNullOrEmpty(dateFormatString))
                 {
-                    if (TryParseDateTimeOffsetExact(s.ToString(), dateFormatString, culture, out dt))
-                    {
+                    if (
+                        TryParseDateTimeOffsetExact(s.ToString(), dateFormatString, culture, out dt)
+                    ) {
                         return true;
                     }
                 }
@@ -512,26 +517,48 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        internal static bool TryParseDateTimeOffset(string s, string? dateFormatString, CultureInfo culture, out DateTimeOffset dt)
-        {
+        internal static bool TryParseDateTimeOffset(
+            string s,
+            string? dateFormatString,
+            CultureInfo culture,
+            out DateTimeOffset dt
+        ) {
             if (s.Length > 0)
             {
                 if (s[0] == '/')
                 {
-                    if (s.Length >= 9 && s.StartsWith("/Date(", StringComparison.Ordinal) && s.EndsWith(")/", StringComparison.Ordinal))
-                    {
-                        if (TryParseDateTimeOffsetMicrosoft(new StringReference(s.ToCharArray(), 0, s.Length), out dt))
-                        {
+                    if (
+                        s.Length >= 9
+                        && s.StartsWith("/Date(", StringComparison.Ordinal)
+                        && s.EndsWith(")/", StringComparison.Ordinal)
+                    ) {
+                        if (
+                            TryParseDateTimeOffsetMicrosoft(
+                                new StringReference(s.ToCharArray(), 0, s.Length),
+                                out dt
+                            )
+                        ) {
                             return true;
                         }
                     }
                 }
                 else if (s.Length >= 19 && s.Length <= 40 && char.IsDigit(s[0]) && s[10] == 'T')
                 {
-                    if (DateTimeOffset.TryParseExact(s, IsoDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out dt))
-                    {
-                        if (TryParseDateTimeOffsetIso(new StringReference(s.ToCharArray(), 0, s.Length), out dt))
-                        {
+                    if (
+                        DateTimeOffset.TryParseExact(
+                            s,
+                            IsoDateFormat,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.RoundtripKind,
+                            out dt
+                        )
+                    ) {
+                        if (
+                            TryParseDateTimeOffsetIso(
+                                new StringReference(s.ToCharArray(), 0, s.Length),
+                                out dt
+                            )
+                        ) {
                             return true;
                         }
                     }
@@ -644,8 +671,10 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if HAVE_DATE_TIME_OFFSET
-        private static bool TryParseDateTimeOffsetMicrosoft(StringReference text, out DateTimeOffset dt)
-        {
+        private static bool TryParseDateTimeOffsetMicrosoft(
+            StringReference text,
+            out DateTimeOffset dt
+        ) {
             if (!TryParseMicrosoftDate(text, out long ticks, out TimeSpan offset, out _))
             {
                 dt = default(DateTime);
@@ -658,10 +687,21 @@ namespace Newtonsoft.Json.Utilities
             return true;
         }
 
-        private static bool TryParseDateTimeOffsetExact(string text, string dateFormatString, CultureInfo culture, out DateTimeOffset dt)
-        {
-            if (DateTimeOffset.TryParseExact(text, dateFormatString, culture, DateTimeStyles.RoundtripKind, out DateTimeOffset temp))
-            {
+        private static bool TryParseDateTimeOffsetExact(
+            string text,
+            string dateFormatString,
+            CultureInfo culture,
+            out DateTimeOffset dt
+        ) {
+            if (
+                DateTimeOffset.TryParseExact(
+                    text,
+                    dateFormatString,
+                    culture,
+                    DateTimeStyles.RoundtripKind,
+                    out DateTimeOffset temp
+                )
+            ) {
                 dt = temp;
                 return true;
             }
@@ -862,12 +902,26 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if HAVE_DATE_TIME_OFFSET
-        internal static void WriteDateTimeOffsetString(TextWriter writer, DateTimeOffset value, DateFormatHandling format, string? formatString, CultureInfo culture)
-        {
+        internal static void WriteDateTimeOffsetString(
+            TextWriter writer,
+            DateTimeOffset value,
+            DateFormatHandling format,
+            string? formatString,
+            CultureInfo culture
+        ) {
             if (StringUtils.IsNullOrEmpty(formatString))
             {
                 char[] chars = new char[64];
-                int pos = WriteDateTimeString(chars, 0, (format == DateFormatHandling.IsoDateFormat) ? value.DateTime : value.UtcDateTime, value.Offset, DateTimeKind.Local, format);
+                int pos = WriteDateTimeString(
+                    chars,
+                    0,
+                    (format == DateFormatHandling.IsoDateFormat)
+                        ? value.DateTime
+                        : value.UtcDateTime,
+                    value.Offset,
+                    DateTimeKind.Local,
+                    format
+                );
 
                 writer.Write(chars, 0, pos);
             }

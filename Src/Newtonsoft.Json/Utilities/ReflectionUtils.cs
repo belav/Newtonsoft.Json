@@ -855,16 +855,20 @@ namespace Newtonsoft.Json.Utilities
             switch (provider)
             {
                 case Type t:
-                    object[] array = attributeType != null
-                        ? t.GetCustomAttributes(attributeType, inherit)
-                        : t.GetCustomAttributes(inherit);
+                    object[] array =
+                        attributeType != null
+                            ? t.GetCustomAttributes(attributeType, inherit)
+                            : t.GetCustomAttributes(inherit);
                     Attribute[] attributes = array.Cast<Attribute>().ToArray();
 
 #if (NET20 || NET35)
                     // ye olde .NET GetCustomAttributes doesn't respect the inherit argument
                     if (inherit && t.BaseType != null)
                     {
-                        attributes = attributes.Union(GetAttributes(t.BaseType, attributeType, inherit)).ToArray();
+                        attributes = attributes.Union(
+                                GetAttributes(t.BaseType, attributeType, inherit)
+                            )
+                            .ToArray();
                     }
 #endif
 
@@ -891,18 +895,25 @@ namespace Newtonsoft.Json.Utilities
 #if !PORTABLE40
                     ICustomAttributeProvider customAttributeProvider =
                         (ICustomAttributeProvider)attributeProvider;
-                    object[] result = (attributeType != null)
-                        ? customAttributeProvider.GetCustomAttributes(attributeType, inherit)
-                        : customAttributeProvider.GetCustomAttributes(inherit);
+                    object[] result =
+                        (attributeType != null)
+                            ? customAttributeProvider.GetCustomAttributes(attributeType, inherit)
+                            : customAttributeProvider.GetCustomAttributes(inherit);
 
                     return (Attribute[])result;
 #else
-                    throw new Exception("Cannot get attributes from '{0}'.".FormatWith(CultureInfo.InvariantCulture, provider));
+                    throw new Exception(
+                        "Cannot get attributes from '{0}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            provider
+                        )
+                    );
 #endif
             }
         }
 #else
-        public static T[] GetAttributes<T>(object attributeProvider, bool inherit) where T : Attribute
+        public static T[] GetAttributes<T>(object attributeProvider, bool inherit)
+            where T : Attribute
         {
             return GetAttributes(attributeProvider, typeof(T), inherit).Cast<T>().ToArray();
         }
@@ -916,16 +927,29 @@ namespace Newtonsoft.Json.Utilities
                         ? t.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray()
                         : t.GetTypeInfo().GetCustomAttributes(inherit).ToArray();
                 case Assembly a:
-                    return (attributeType != null) ? a.GetCustomAttributes(attributeType).ToArray() : a.GetCustomAttributes().ToArray();
+                    return (attributeType != null)
+                        ? a.GetCustomAttributes(attributeType).ToArray()
+                        : a.GetCustomAttributes().ToArray();
                 case MemberInfo memberInfo:
-                    return (attributeType != null) ? memberInfo.GetCustomAttributes(attributeType, inherit).ToArray() : memberInfo.GetCustomAttributes(inherit).ToArray();
+                    return (attributeType != null)
+                        ? memberInfo.GetCustomAttributes(attributeType, inherit).ToArray()
+                        : memberInfo.GetCustomAttributes(inherit).ToArray();
                 case Module module:
-                    return (attributeType != null) ? module.GetCustomAttributes(attributeType).ToArray() : module.GetCustomAttributes().ToArray();
+                    return (attributeType != null)
+                        ? module.GetCustomAttributes(attributeType).ToArray()
+                        : module.GetCustomAttributes().ToArray();
                 case ParameterInfo parameterInfo:
-                    return (attributeType != null) ? parameterInfo.GetCustomAttributes(attributeType, inherit).ToArray() : parameterInfo.GetCustomAttributes(inherit).ToArray();
+                    return (attributeType != null)
+                        ? parameterInfo.GetCustomAttributes(attributeType, inherit).ToArray()
+                        : parameterInfo.GetCustomAttributes(inherit).ToArray();
             }
 
-            throw new Exception("Cannot get attributes from '{0}'.".FormatWith(CultureInfo.InvariantCulture, provider));
+            throw new Exception(
+                "Cannot get attributes from '{0}'.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    provider
+                )
+            );
         }
 #endif
 
@@ -1088,8 +1112,10 @@ namespace Newtonsoft.Json.Utilities
                 PropertyInfo member = propertyInfos[i];
                 if (member.DeclaringType != targetType)
                 {
-                    PropertyInfo declaredMember =
-                        (PropertyInfo)GetMemberInfoFromType(member.DeclaringType, member);
+                    PropertyInfo declaredMember = (PropertyInfo)GetMemberInfoFromType(
+                        member.DeclaringType,
+                        member
+                    );
                     propertyInfos[i] = declaredMember;
                 }
             }

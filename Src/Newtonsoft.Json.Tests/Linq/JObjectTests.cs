@@ -852,17 +852,15 @@ Parameter name: arrayIndex",
             o.PropertyChanging += (sender, args) =>
             {
                 JObject s = (JObject)sender;
-                changing = (s[args.PropertyName] != null)
-                    ? ((JValue)s[args.PropertyName]).Value
-                    : null;
+                changing =
+                    (s[args.PropertyName] != null) ? ((JValue)s[args.PropertyName]).Value : null;
                 changingCount++;
             };
             o.PropertyChanged += (sender, args) =>
             {
                 JObject s = (JObject)sender;
-                changed = (s[args.PropertyName] != null)
-                    ? ((JValue)s[args.PropertyName]).Value
-                    : null;
+                changed =
+                    (s[args.PropertyName] != null) ? ((JValue)s[args.PropertyName]).Value : null;
                 changedCount++;
             };
 
@@ -914,9 +912,8 @@ Parameter name: arrayIndex",
             o.PropertyChanged += (sender, args) =>
             {
                 JObject s = (JObject)sender;
-                changed = (s[args.PropertyName] != null)
-                    ? ((JValue)s[args.PropertyName]).Value
-                    : null;
+                changed =
+                    (s[args.PropertyName] != null) ? ((JValue)s[args.PropertyName]).Value : null;
                 changedCount++;
             };
 
@@ -1713,10 +1710,9 @@ Parameter name: arrayIndex",
 
             JObject o = JObject.Parse(json);
 
-            string searchAddress =
-                (string)o["Placemark"][0]["AddressDetails"]["Country"]["AdministrativeArea"][
-                    "SubAdministrativeArea"
-                ]["Locality"]["Thoroughfare"]["ThoroughfareName"];
+            string searchAddress = (string)o["Placemark"][0]["AddressDetails"]["Country"][
+                "AdministrativeArea"
+            ]["SubAdministrativeArea"]["Locality"]["Thoroughfare"]["ThoroughfareName"];
             Assert.AreEqual("435 N Mulford Rd", searchAddress);
         }
 

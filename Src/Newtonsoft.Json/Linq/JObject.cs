@@ -53,12 +53,17 @@ namespace Newtonsoft.Json.Linq
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
     /// </example>
-    public partial class JObject : JContainer, IDictionary<string, JToken?>, INotifyPropertyChanged
+    public partial class JObject
+        : JContainer,
+          IDictionary<string, JToken?>,
+          INotifyPropertyChanged
 #if HAVE_COMPONENT_MODEL
-        , ICustomTypeDescriptor
+          ,
+          ICustomTypeDescriptor
 #endif
 #if HAVE_INOTIFY_PROPERTY_CHANGING
-        , INotifyPropertyChanging
+          ,
+          INotifyPropertyChanging
 #endif
     {
         private readonly JPropertyKeyedCollection _properties = new JPropertyKeyedCollection();
@@ -237,13 +242,25 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_COMPONENT_MODEL
             if (_listChanged != null)
             {
-                OnListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, IndexOfItem(childProperty)));
+                OnListChanged(
+                    new ListChangedEventArgs(
+                        ListChangedType.ItemChanged,
+                        IndexOfItem(childProperty)
+                    )
+                );
             }
 #endif
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, childProperty, childProperty, IndexOfItem(childProperty)));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        childProperty,
+                        childProperty,
+                        IndexOfItem(childProperty)
+                    )
+                );
             }
 #endif
         }
@@ -877,15 +894,21 @@ namespace Newtonsoft.Json.Linq
 
         private class JObjectDynamicProxy : DynamicProxy<JObject>
         {
-            public override bool TryGetMember(JObject instance, GetMemberBinder binder, out object? result)
-            {
+            public override bool TryGetMember(
+                JObject instance,
+                GetMemberBinder binder,
+                out object? result
+            ) {
                 // result can be null
                 result = instance[binder.Name];
                 return true;
             }
 
-            public override bool TrySetMember(JObject instance, SetMemberBinder binder, object value)
-            {
+            public override bool TrySetMember(
+                JObject instance,
+                SetMemberBinder binder,
+                object value
+            ) {
                 // this can throw an error if value isn't a valid for a JValue
                 if (!(value is JToken v))
                 {

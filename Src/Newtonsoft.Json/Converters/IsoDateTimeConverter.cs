@@ -96,9 +96,12 @@ namespace Newtonsoft.Json.Converters
 #if HAVE_DATE_TIME_OFFSET
             else if (value is DateTimeOffset dateTimeOffset)
             {
-                if ((_dateTimeStyles & DateTimeStyles.AdjustToUniversal) == DateTimeStyles.AdjustToUniversal
-                    || (_dateTimeStyles & DateTimeStyles.AssumeUniversal) == DateTimeStyles.AssumeUniversal)
-                {
+                if (
+                    (_dateTimeStyles & DateTimeStyles.AdjustToUniversal)
+                        == DateTimeStyles.AdjustToUniversal
+                    || (_dateTimeStyles & DateTimeStyles.AssumeUniversal)
+                        == DateTimeStyles.AssumeUniversal
+                ) {
                     dateTimeOffset = dateTimeOffset.ToUniversalTime();
                 }
 
@@ -150,9 +153,7 @@ namespace Newtonsoft.Json.Converters
             }
 
 #if HAVE_DATE_TIME_OFFSET
-            Type t = (nullable)
-                ? Nullable.GetUnderlyingType(objectType)
-                : objectType;
+            Type t = (nullable) ? Nullable.GetUnderlyingType(objectType) : objectType;
 #endif
 
             if (reader.TokenType == JsonToken.Date)
@@ -160,7 +161,9 @@ namespace Newtonsoft.Json.Converters
 #if HAVE_DATE_TIME_OFFSET
                 if (t == typeof(DateTimeOffset))
                 {
-                    return (reader.Value is DateTimeOffset) ? reader.Value : new DateTimeOffset((DateTime)reader.Value!);
+                    return (reader.Value is DateTimeOffset)
+                        ? reader.Value
+                        : new DateTimeOffset((DateTime)reader.Value!);
                 }
 
                 // converter is expected to return a DateTime
@@ -196,7 +199,12 @@ namespace Newtonsoft.Json.Converters
             {
                 if (!StringUtils.IsNullOrEmpty(_dateTimeFormat))
                 {
-                    return DateTimeOffset.ParseExact(dateText, _dateTimeFormat, Culture, _dateTimeStyles);
+                    return DateTimeOffset.ParseExact(
+                        dateText,
+                        _dateTimeFormat,
+                        Culture,
+                        _dateTimeStyles
+                    );
                 }
                 else
                 {

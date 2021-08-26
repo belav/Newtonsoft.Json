@@ -1691,6 +1691,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 #pragma warning restore CS0618 // Type or member is obsolete
                     ContractResolver = new DefaultContractResolver
                     {
+
 #if !(PORTABLE || DNXCORE50)
                         IgnoreSerializableAttribute = true
 #endif
@@ -2896,7 +2897,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         public string String { get; set; }
         public int Integer { get; set; }
     }
-
 #if !NET20
     [DataContract]
     public class GroupingInfo

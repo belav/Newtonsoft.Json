@@ -766,7 +766,6 @@ namespace Newtonsoft.Json.Tests
         }
 #endif
     }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
     public class JsonArrayPool : IArrayPool<char>
     {

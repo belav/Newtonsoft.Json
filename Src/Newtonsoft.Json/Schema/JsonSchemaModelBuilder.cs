@@ -80,9 +80,8 @@ namespace Newtonsoft.Json.Schema
                 return _nodes[newId];
             }
 
-            JsonSchemaNode currentNode = (existingNode != null)
-                ? existingNode.Combine(schema)
-                : new JsonSchemaNode(schema);
+            JsonSchemaNode currentNode =
+                (existingNode != null) ? existingNode.Combine(schema) : new JsonSchemaNode(schema);
 
             _nodes.Add(currentNode);
 
@@ -144,9 +143,8 @@ namespace Newtonsoft.Json.Schema
 
         public void AddItem(JsonSchemaNode parentNode, int index, JsonSchema schema)
         {
-            JsonSchemaNode existingItemNode = (parentNode.Items.Count > index)
-                ? parentNode.Items[index]
-                : null;
+            JsonSchemaNode existingItemNode =
+                (parentNode.Items.Count > index) ? parentNode.Items[index] : null;
 
             JsonSchemaNode newItemNode = AddSchema(existingItemNode, schema);
 

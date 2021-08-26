@@ -1215,7 +1215,6 @@ namespace Newtonsoft.Json.Tests
             );
             Assert.AreEqual(@"\/Date(-62135596800000)\/", result.MsDateUnspecified);
             Assert.AreEqual(@"\/Date(-62135596800000)\/", result.MsDateUtc);
-
 #if !NET20
             result = TestDateTime(
                 "DateTimeOffset TimeSpan Zero",

@@ -147,9 +147,7 @@ namespace Newtonsoft.Json.Tests
             XAssert.True(false, message);
         }
 
-        public static void Pass()
-        {
-        }
+        public static void Pass() { }
 
         public static void IsTrue(bool condition, string message = null)
         {

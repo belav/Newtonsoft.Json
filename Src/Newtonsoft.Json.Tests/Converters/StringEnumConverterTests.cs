@@ -980,10 +980,9 @@ Parameter name: namingStrategyType",
     <Value2>foo_bar</Value2>
 </DuplicateEnumNameTestClass>";
 
-                    var o =
-                        (DuplicateEnumNameTestClass)s.ReadObject(
-                            new MemoryStream(Encoding.UTF8.GetBytes(xml))
-                        );
+                    var o = (DuplicateEnumNameTestClass)s.ReadObject(
+                        new MemoryStream(Encoding.UTF8.GetBytes(xml))
+                    );
 
                     Assert.AreEqual(DuplicateNameEnum.foo_bar, o.Value);
                     Assert.AreEqual(DuplicateNameEnum2.FooBar, o.Value2);
@@ -1284,7 +1283,6 @@ Parameter name: namingStrategyType",
         }
 #endif
     }
-
 #if !NET20
     [DataContract]
     public class DuplicateEnumNameTestClass

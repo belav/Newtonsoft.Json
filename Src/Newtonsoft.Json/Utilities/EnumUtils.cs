@@ -65,34 +65,40 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < names.Length; i++)
             {
                 string name = names[i];
-                FieldInfo f =
-                    enumType.GetField(
-                        name,
-                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
-                    )!;
+                FieldInfo f = enumType.GetField(
+                    name,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+                )!;
                 values[i] = ToUInt64(f.GetValue(null));
 
                 string resolvedName;
 #if HAVE_DATA_CONTRACTS
                 string specifiedName = f.GetCustomAttributes(typeof(EnumMemberAttribute), true)
-                         .Cast<EnumMemberAttribute>()
-                         .Select(a => a.Value)
-                         .SingleOrDefault();
+                    .Cast<EnumMemberAttribute>()
+                    .Select(a => a.Value)
+                    .SingleOrDefault();
                 hasSpecifiedName = specifiedName != null;
                 resolvedName = specifiedName ?? name;
 
                 if (Array.IndexOf(resolvedNames, resolvedName, 0, i) != -1)
                 {
-                    throw new InvalidOperationException("Enum name '{0}' already exists on enum '{1}'.".FormatWith(CultureInfo.InvariantCulture, resolvedName, enumType.Name));
+                    throw new InvalidOperationException(
+                        "Enum name '{0}' already exists on enum '{1}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            resolvedName,
+                            enumType.Name
+                        )
+                    );
                 }
 #else
                 resolvedName = name;
                 hasSpecifiedName = false;
 #endif
 
-                resolvedNames[i] = key.Value2 != null
-                    ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
-                    : resolvedName;
+                resolvedNames[i] =
+                    key.Value2 != null
+                        ? key.Value2.GetPropertyName(resolvedName, hasSpecifiedName)
+                        : resolvedName;
             }
 
             bool isFlags = enumType.IsDefined(typeof(FlagsAttribute), false);

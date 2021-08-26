@@ -115,26 +115,24 @@ namespace Newtonsoft.Json.Tests.Converters
                 converter.DeserializeRootElementName = deserializeRootElementName;
             }
 
-            XmlNode node =
-                (XmlNode)converter.ReadJson(
-                    reader,
-                    typeof(XmlDocument),
-                    null,
-                    new JsonSerializer()
-                );
+            XmlNode node = (XmlNode)converter.ReadJson(
+                reader,
+                typeof(XmlDocument),
+                null,
+                new JsonSerializer()
+            );
 
 #if !NET20
             string xmlText = node.OuterXml;
 
             reader = new JsonTextReader(new StringReader(json));
             reader.Read();
-            XDocument d =
-                (XDocument)converter.ReadJson(
-                    reader,
-                    typeof(XDocument),
-                    null,
-                    new JsonSerializer()
-                );
+            XDocument d = (XDocument)converter.ReadJson(
+                reader,
+                typeof(XDocument),
+                null,
+                new JsonSerializer()
+            );
 
             string linqXmlText = d.ToString(SaveOptions.DisableFormatting);
             if (d.Declaration != null)
@@ -1220,7 +1218,6 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlDocument doc11 = JsonConvert.DeserializeXmlNode(json1);
 
             StringAssert.AreEqual(xml, ToStringWithDeclaration(doc11));
-
 #if !NET20
             XDocument doc2 = XDocument.Parse(xml);
 
@@ -1550,8 +1547,9 @@ namespace Newtonsoft.Json.Tests.Converters
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    XmlDocument newDoc =
-                        (XmlDocument)JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}");
+                    XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(
+                        @"{Prop1:1,Prop2:2}"
+                    );
                 },
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15."
             );
@@ -1735,7 +1733,6 @@ namespace Newtonsoft.Json.Tests.Converters
         public void MultipleRootPropertiesAddRootElement()
         {
             string json = @"{""count"": 773840,""photos"": 773840}";
-
 #if !PORTABLE
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
@@ -2788,8 +2785,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 using (var stringReader = new StringReader(json.ToString()))
                 using (var jsonReader = new JsonTextReader(stringReader))
                 {
-                    var document =
-                        (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
+                    var document = (XmlDocument)serializer.Deserialize(
+                        jsonReader,
+                        typeof(XmlDocument)
+                    );
                     StringAssert.AreEqual(
                         @"<metrics value=""12.27""><type>CPULOAD</type></metrics>",
                         document.OuterXml
@@ -3436,7 +3435,6 @@ namespace Newtonsoft.Json.Tests.Converters
   <bns:b xmlns:bns=""http://www.example.com/ns""/>
   <c/>
 </root>";
-
 #if !NET20
             var xml = XElement.Parse(xmlString);
 

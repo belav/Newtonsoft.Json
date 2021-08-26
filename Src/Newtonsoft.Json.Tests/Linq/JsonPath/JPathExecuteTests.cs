@@ -77,20 +77,32 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         [Test]
         public void BacktrackingRegex_SingleMatch_TimeoutRespected()
         {
-            const string RegexBacktrackingPattern = "(?<a>(.*?))[|].*(?<b>(.*?))[|].*(?<c>(.*?))[|].*(?<d>[1-3])[|].*(?<e>(.*?))[|].*[|].*[|].*(?<f>(.*?))[|].*[|].*(?<g>(.*?))[|].*(?<h>(.*))";
+            const string RegexBacktrackingPattern =
+                "(?<a>(.*?))[|].*(?<b>(.*?))[|].*(?<c>(.*?))[|].*(?<d>[1-3])[|].*(?<e>(.*?))[|].*[|].*[|].*(?<f>(.*?))[|].*[|].*(?<g>(.*?))[|].*(?<h>(.*))";
 
             var regexBacktrackingData = new JArray();
-            regexBacktrackingData.Add(new JObject(new JProperty("b", @"15/04/2020 8:18:03 PM|1|System.String[]|3|Libero eligendi magnam ut inventore.. Quaerat et sit voluptatibus repellendus blanditiis aliquam ut.. Quidem qui ut sint in ex et tempore.|||.\iste.cpp||46018|-1")));
+            regexBacktrackingData.Add(
+                new JObject(
+                    new JProperty(
+                        "b",
+                        @"15/04/2020 8:18:03 PM|1|System.String[]|3|Libero eligendi magnam ut inventore.. Quaerat et sit voluptatibus repellendus blanditiis aliquam ut.. Quidem qui ut sint in ex et tempore.|||.\iste.cpp||46018|-1"
+                    )
+                )
+            );
 
-            ExceptionAssert.Throws<RegexMatchTimeoutException>(() =>
-            {
-                regexBacktrackingData.SelectTokens(
-                    $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
-                    new JsonSelectSettings
-                    {
-                        RegexMatchTimeout = TimeSpan.FromSeconds(0.01)
-                    }).ToArray();
-            });
+            ExceptionAssert.Throws<RegexMatchTimeoutException>(
+                () =>
+                {
+                    regexBacktrackingData.SelectTokens(
+                            $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
+                            new JsonSelectSettings
+                            {
+                                RegexMatchTimeout = TimeSpan.FromSeconds(0.01)
+                            }
+                        )
+                        .ToArray();
+                }
+            );
         }
 #endif
 

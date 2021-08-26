@@ -1064,7 +1064,10 @@ namespace Newtonsoft.Json.Tests
                 sb.ToString()
             );
 #else
-            Assert.AreEqual(@"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]", sb.ToString());
+            Assert.AreEqual(
+                @"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]",
+                sb.ToString()
+            );
 #endif
         }
 
@@ -1189,8 +1192,8 @@ Parameter name: value",
             {
                 ArgumentOutOfRangeException ex =
                     await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
-                );
+                        async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
+                    );
                 Assert.AreEqual("token", ex.ParamName);
 
                 ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(

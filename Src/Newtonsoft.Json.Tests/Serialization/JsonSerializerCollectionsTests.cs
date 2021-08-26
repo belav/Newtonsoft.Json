@@ -2098,11 +2098,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 sw.GetStringBuilder().ToString()
             );
 
-            ProductCollection collectionNew =
-                (ProductCollection)jsonSerializer.Deserialize(
-                    new JsonTextReader(new StringReader(sw.GetStringBuilder().ToString())),
-                    typeof(ProductCollection)
-                );
+            ProductCollection collectionNew = (ProductCollection)jsonSerializer.Deserialize(
+                new JsonTextReader(new StringReader(sw.GetStringBuilder().ToString())),
+                typeof(ProductCollection)
+            );
 
             CollectionAssert.AreEqual(collection, collectionNew);
         }

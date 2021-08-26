@@ -40,18 +40,32 @@ namespace Newtonsoft.Json.Tests.Utilities
     public class ConvertUtilsTests : TestFixtureBase
     {
 #if HAS_CUSTOM_DOUBLE_PARSE
-        private void AssertDoubleTryParse(string s, ParseResult expectedResult, double? expectedValue)
-        {
+        private void AssertDoubleTryParse(
+            string s,
+            ParseResult expectedResult,
+            double? expectedValue
+        ) {
             double d;
             char[] c = s.ToCharArray();
             ParseResult result = ConvertUtils.DoubleTryParse(c, 0, c.Length, out d);
 
             double d2;
-            bool result2 = double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
+            bool result2 =
+                double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
                 && !s.StartsWith(".")
                 && !s.EndsWith(".")
-                && !(s.StartsWith("0") && s.Length > 1 && !s.StartsWith("0.") && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase))
-                && !(s.StartsWith("-0") && s.Length > 2 && !s.StartsWith("-0.") && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase))
+                && !(
+                    s.StartsWith("0")
+                    && s.Length > 1
+                    && !s.StartsWith("0.")
+                    && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase)
+                )
+                && !(
+                    s.StartsWith("-0")
+                    && s.Length > 2
+                    && !s.StartsWith("-0.")
+                    && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase)
+                )
                 && s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
 
             Assert.AreEqual(expectedResult, result);
@@ -63,7 +77,11 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                 Assert.AreEqual(expectedValue.Value, d, "Input string: " + s);
 
-                Assert.AreEqual(expectedValue.Value, d2, "DoubleTryParse result is not equal to double.Parse. Input string: " + s);
+                Assert.AreEqual(
+                    expectedValue.Value,
+                    d2,
+                    "DoubleTryParse result is not equal to double.Parse. Input string: " + s
+                );
             }
         }
 
@@ -126,8 +144,16 @@ namespace Newtonsoft.Json.Tests.Utilities
             AssertDoubleTryParse("1E--23", ParseResult.Invalid, null);
             AssertDoubleTryParse("E23", ParseResult.Invalid, null);
 
-            AssertDoubleTryParse("4.94065645841247E-324", ParseResult.Success, 4.94065645841247E-324);
-            AssertDoubleTryParse("4.94065645841247E-342", ParseResult.Success, 4.94065645841247E-342);
+            AssertDoubleTryParse(
+                "4.94065645841247E-324",
+                ParseResult.Success,
+                4.94065645841247E-324
+            );
+            AssertDoubleTryParse(
+                "4.94065645841247E-342",
+                ParseResult.Success,
+                4.94065645841247E-342
+            );
             AssertDoubleTryParse("4.94065645841247E-555", ParseResult.Success, 0);
 
             AssertDoubleTryParse("1.7976931348623157E+308", ParseResult.Success, double.MaxValue);
@@ -146,7 +172,11 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             AssertDoubleTryParse("4.94065645841247e-324", ParseResult.Success, double.Epsilon);
 
-            AssertDoubleTryParse("4.9406564584124654E-324", ParseResult.Success, 4.9406564584124654E-324);
+            AssertDoubleTryParse(
+                "4.9406564584124654E-324",
+                ParseResult.Success,
+                4.9406564584124654E-324
+            );
             AssertDoubleTryParse("4.9406564584124654E-325", ParseResult.Success, 0);
             AssertDoubleTryParse("4.94065645841247E-460", ParseResult.Success, 0);
             AssertDoubleTryParse("4.94065645841247E-461", ParseResult.Success, 0);

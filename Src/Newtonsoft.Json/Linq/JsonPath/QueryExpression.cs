@@ -241,7 +241,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
 #if HAVE_REGEX_TIMEOUTS
             TimeSpan timeout = settings?.RegexMatchTimeout ?? Regex.InfiniteMatchTimeout;
-            return Regex.IsMatch((string)input.Value!, patternText, MiscellaneousUtils.GetRegexOptions(optionsText), timeout);
+            return Regex.IsMatch(
+                (string)input.Value!,
+                patternText,
+                MiscellaneousUtils.GetRegexOptions(optionsText),
+                timeout
+            );
 #else
             return Regex.IsMatch(
                 (string)input.Value!,
@@ -285,7 +290,13 @@ namespace Newtonsoft.Json.Linq.JsonPath
 #if HAVE_DATE_TIME_OFFSET
                         if (value.Value is DateTimeOffset offset)
                         {
-                            DateTimeUtils.WriteDateTimeOffsetString(writer, offset, DateFormatHandling.IsoDateFormat, null, CultureInfo.InvariantCulture);
+                            DateTimeUtils.WriteDateTimeOffsetString(
+                                writer,
+                                offset,
+                                DateFormatHandling.IsoDateFormat,
+                                null,
+                                CultureInfo.InvariantCulture
+                            );
                         }
                         else
 #endif

@@ -74,8 +74,10 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if HAVE_TYPE_DESCRIPTOR
-        public static bool CanTypeDescriptorConvertString(Type type, out TypeConverter typeConverter)
-        {
+        public static bool CanTypeDescriptorConvertString(
+            Type type,
+            out TypeConverter typeConverter
+        ) {
             typeConverter = TypeDescriptor.GetConverter(type);
 
             // use the objectType's TypeConverter if it has one and can convert to a string
@@ -83,14 +85,26 @@ namespace Newtonsoft.Json.Serialization
             {
                 Type converterType = typeConverter.GetType();
 
-                if (!string.Equals(converterType.FullName, "System.ComponentModel.ComponentConverter", StringComparison.Ordinal)
-                    && !string.Equals(converterType.FullName, "System.ComponentModel.ReferenceConverter", StringComparison.Ordinal)
-                    && !string.Equals(converterType.FullName, "System.Windows.Forms.Design.DataSourceConverter", StringComparison.Ordinal)
-                    && converterType != typeof(TypeConverter))
-                {
+                if (
+                    !string.Equals(
+                        converterType.FullName,
+                        "System.ComponentModel.ComponentConverter",
+                        StringComparison.Ordinal
+                    )
+                    && !string.Equals(
+                        converterType.FullName,
+                        "System.ComponentModel.ReferenceConverter",
+                        StringComparison.Ordinal
+                    )
+                    && !string.Equals(
+                        converterType.FullName,
+                        "System.Windows.Forms.Design.DataSourceConverter",
+                        StringComparison.Ordinal
+                    )
+                    && converterType != typeof(TypeConverter)
+                ) {
                     return typeConverter.CanConvertTo(typeof(string));
                 }
-
             }
 
             return false;
@@ -105,7 +119,8 @@ namespace Newtonsoft.Json.Serialization
 
             while (currentType != null)
             {
-                DataContractAttribute? result = CachedAttributeGetter<DataContractAttribute>.GetAttribute(currentType);
+                DataContractAttribute? result =
+                    CachedAttributeGetter<DataContractAttribute>.GetAttribute(currentType);
                 if (result != null)
                 {
                     return result;
@@ -129,7 +144,9 @@ namespace Newtonsoft.Json.Serialization
 
             // search property and then search base properties if nothing is returned and the property is virtual
             PropertyInfo propertyInfo = (PropertyInfo)memberInfo;
-            DataMemberAttribute? result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(propertyInfo);
+            DataMemberAttribute? result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
+                propertyInfo
+            );
             if (result == null)
             {
                 if (propertyInfo.IsVirtual())
@@ -138,10 +155,16 @@ namespace Newtonsoft.Json.Serialization
 
                     while (result == null && currentType != null)
                     {
-                        PropertyInfo baseProperty = (PropertyInfo)ReflectionUtils.GetMemberInfoFromType(currentType, propertyInfo);
+                        PropertyInfo baseProperty =
+                            (PropertyInfo)ReflectionUtils.GetMemberInfoFromType(
+                                currentType,
+                                propertyInfo
+                            );
                         if (baseProperty != null && baseProperty.IsVirtual())
                         {
-                            result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(baseProperty);
+                            result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
+                                baseProperty
+                            );
                         }
 
                         currentType = currentType.BaseType();
@@ -245,9 +268,10 @@ namespace Newtonsoft.Json.Serialization
 
         private static Func<object[]?, object> GetCreator(Type type)
         {
-            Func<object>? defaultConstructor = (ReflectionUtils.HasDefaultConstructor(type, false))
-                ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
-                : null;
+            Func<object>? defaultConstructor =
+                (ReflectionUtils.HasDefaultConstructor(type, false))
+                    ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
+                    : null;
 
             return (parameters) =>
             {
@@ -452,8 +476,11 @@ namespace Newtonsoft.Json.Serialization
             // no inheritance
             return (ReflectionUtils.GetAttribute<NonSerializedAttribute>(provider, false) != null);
 #else
-            if (provider is FieldInfo fieldInfo && (fieldInfo.Attributes & FieldAttributes.NotSerialized) == FieldAttributes.NotSerialized)
-            {
+            if (
+                provider is FieldInfo fieldInfo
+                && (fieldInfo.Attributes & FieldAttributes.NotSerialized)
+                    == FieldAttributes.NotSerialized
+            ) {
                 return true;
             }
 
@@ -469,8 +496,11 @@ namespace Newtonsoft.Json.Serialization
             // no inheritance
             return (ReflectionUtils.GetAttribute<SerializableAttribute>(provider, false) != null);
 #else
-            if (provider is Type type && (type.GetTypeInfo().Attributes & TypeAttributes.Serializable) == TypeAttributes.Serializable)
-            {
+            if (
+                provider is Type type
+                && (type.GetTypeInfo().Attributes & TypeAttributes.Serializable)
+                    == TypeAttributes.Serializable
+            ) {
                 return true;
             }
 
@@ -519,7 +549,9 @@ namespace Newtonsoft.Json.Serialization
                     try
                     {
                         new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Demand();
-                        new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess).Demand();
+                        new ReflectionPermission(
+                            ReflectionPermissionFlag.RestrictedMemberAccess
+                        ).Demand();
                         new SecurityPermission(SecurityPermissionFlag.SkipVerification).Demand();
                         new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
                         new SecurityPermission(PermissionState.Unrestricted).Demand();
