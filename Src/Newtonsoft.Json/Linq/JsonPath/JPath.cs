@@ -159,7 +159,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (
                             _currentIndex + 1 < _expression.Length
                             && _expression[_currentIndex + 1] == '.'
-                        ) {
+                        )
+                        {
                             scan = true;
                             _currentIndex++;
                         }
@@ -179,7 +180,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                                 || currentChar == '|'
                                 || currentChar == '&'
                             )
-                        ) {
+                        )
+                        {
                             ended = true;
                         }
                         else
@@ -201,10 +203,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             if (_currentIndex > currentPartStartIndex)
             {
-                string? member = _expression.Substring(
-                        currentPartStartIndex,
-                        _currentIndex - currentPartStartIndex
-                    )
+                string? member = _expression
+                    .Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex)
                     .TrimEnd();
                 if (member == "*")
                 {
@@ -544,7 +544,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     _expression[_currentIndex] == ')'
                     || _expression[_currentIndex] == '|'
                     || _expression[_currentIndex] == '&'
-                ) {
+                )
+                {
                     op = QueryOperator.Exists;
                 }
                 else
@@ -900,8 +901,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     {
                         fields.Add(field);
                         return (scan)
-                            ? (PathFilter)new ScanMultipleFilter(fields)
-                            : (PathFilter)new FieldMultipleFilter(fields);
+                          ? (PathFilter)new ScanMultipleFilter(fields)
+                          : (PathFilter)new FieldMultipleFilter(fields);
                     }
                     else
                     {
@@ -950,7 +951,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken root,
             JToken t,
             JsonSelectSettings? settings
-        ) {
+        )
+        {
             IEnumerable<JToken> current = new[] { t };
             foreach (PathFilter filter in filters)
             {

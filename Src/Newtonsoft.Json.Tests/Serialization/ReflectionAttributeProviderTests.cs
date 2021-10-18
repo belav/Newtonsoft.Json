@@ -116,9 +116,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void GetAttributes_Parameter()
         {
-            ParameterInfo[] parameters = typeof(ReflectionTestObject).GetConstructor(
-                    new[] { typeof(int) }
-                )
+            ParameterInfo[] parameters = typeof(ReflectionTestObject)
+                .GetConstructor(new[] { typeof(int) })
                 .GetParameters();
 
             ParameterInfo parameter = parameters[0];

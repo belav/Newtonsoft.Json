@@ -80,7 +80,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             JArray blogPostArray = JArray.Parse(json);
 
-            IList<BlogPost> blogPosts = blogPostArray.Select(
+            IList<BlogPost> blogPosts = blogPostArray
+                .Select(
                     p =>
                         new BlogPost
                         {

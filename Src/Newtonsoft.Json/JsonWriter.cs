@@ -358,7 +358,8 @@ namespace Newtonsoft.Json
                 if (
                     value < DateFormatHandling.IsoDateFormat
                     || value > DateFormatHandling.MicrosoftDateFormat
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -376,7 +377,8 @@ namespace Newtonsoft.Json
             {
                 if (
                     value < DateTimeZoneHandling.Local || value > DateTimeZoneHandling.RoundtripKind
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -758,7 +760,8 @@ namespace Newtonsoft.Json
             bool writeChildren,
             bool writeDateConstructorAsDate,
             bool writeComments
-        ) {
+        )
+        {
             int initialDepth = CalculateWriteTokenInitialDepth(reader);
 
             do
@@ -768,7 +771,8 @@ namespace Newtonsoft.Json
                     writeDateConstructorAsDate
                     && reader.TokenType == JsonToken.StartConstructor
                     && string.Equals(reader.Value?.ToString(), "Date", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     WriteConstructorDate(reader);
                 }
                 else
@@ -833,7 +837,8 @@ namespace Newtonsoft.Json
                     out DateTime dateTime,
                     out string? errorMessage
                 )
-            ) {
+            )
+            {
                 throw JsonWriterException.Create(this, errorMessage, null);
             }
 
@@ -1020,7 +1025,8 @@ namespace Newtonsoft.Json
                     || _currentState == State.Constructor
                 )
                 && tokenBeingWritten != JsonToken.Comment
-            ) {
+            )
+            {
                 WriteValueDelimiter();
             }
 
@@ -1040,7 +1046,8 @@ namespace Newtonsoft.Json
                         || _currentState == State.ConstructorStart
                     )
                     || (tokenBeingWritten == JsonToken.PropertyName && _currentState != State.Start)
-                ) {
+                )
+                {
                     WriteIndent();
                 }
             }
@@ -1791,7 +1798,8 @@ namespace Newtonsoft.Json
             IConvertible convertible,
             out PrimitiveTypeCode typeCode,
             out object value
-        ) {
+        )
+        {
             // the value is a non-standard IConvertible
             // convert to the underlying value and retry
             TypeInformation typeInformation = ConvertUtils.GetTypeInformation(convertible);
@@ -1812,7 +1820,8 @@ namespace Newtonsoft.Json
         private static JsonWriterException CreateUnsupportedTypeException(
             JsonWriter writer,
             object value
-        ) {
+        )
+        {
             return JsonWriterException.Create(
                 writer,
                 "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(

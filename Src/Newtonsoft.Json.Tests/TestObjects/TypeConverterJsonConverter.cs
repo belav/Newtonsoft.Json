@@ -39,11 +39,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private TypeConverter GetConverter(Type type)
         {
-            var converters = ReflectionUtils.GetAttributes(
-                    type,
-                    typeof(TypeConverterAttribute),
-                    true
-                )
+            var converters = ReflectionUtils
+                .GetAttributes(type, typeof(TypeConverterAttribute), true)
                 .Union(
                     from t in type.GetInterfaces()
                     from c in ReflectionUtils.GetAttributes(t, typeof(TypeConverterAttribute), true)
@@ -76,7 +73,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var converter = GetConverter(objectType);
             return converter.ConvertFromInvariantString(reader.Value.ToString());
         }

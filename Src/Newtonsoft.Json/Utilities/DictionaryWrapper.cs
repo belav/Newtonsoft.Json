@@ -326,7 +326,6 @@ namespace Newtonsoft.Json.Utilities
                         );
                     }
                 }
-
                 finally
                 {
                     (e as IDisposable)?.Dispose();
@@ -425,7 +424,8 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_dictionary != null)
             {
-                return _dictionary.Cast<DictionaryEntry>()
+                return _dictionary
+                    .Cast<DictionaryEntry>()
                     .Select(de => new KeyValuePair<TKey, TValue>((TKey)de.Key, (TValue)de.Value))
                     .GetEnumerator();
             }
@@ -515,7 +515,8 @@ namespace Newtonsoft.Json.Utilities
 
             public DictionaryEnumerator(
                 IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e
-            ) {
+            )
+            {
                 ValidationUtils.ArgumentNotNull(e, nameof(e));
                 _e = e;
             }

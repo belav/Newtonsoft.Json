@@ -244,7 +244,8 @@ namespace Newtonsoft.Json.Schema
             JsonWriter writer,
             string propertyName,
             IDictionary<string, JsonSchema> properties
-        ) {
+        )
+        {
             if (properties != null)
             {
                 writer.WritePropertyName(propertyName);
@@ -301,7 +302,8 @@ namespace Newtonsoft.Json.Schema
             }
             else
             {
-                IEnumerator<JsonSchemaType> en = EnumUtils.GetFlagsValues(type)
+                IEnumerator<JsonSchemaType> en = EnumUtils
+                    .GetFlagsValues(type)
                     .Where(v => v != JsonSchemaType.None)
                     .GetEnumerator();
                 if (en.MoveNext())

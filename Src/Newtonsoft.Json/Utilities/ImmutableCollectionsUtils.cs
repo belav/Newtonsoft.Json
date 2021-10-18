@@ -51,7 +51,8 @@ namespace Newtonsoft.Json.Utilities
                 string contractTypeName,
                 string createdTypeName,
                 string builderTypeName
-            ) {
+            )
+            {
                 ContractTypeName = contractTypeName;
                 CreatedTypeName = createdTypeName;
                 BuilderTypeName = builderTypeName;
@@ -190,7 +191,8 @@ namespace Newtonsoft.Json.Utilities
             Type collectionItemType,
             [NotNullWhen(true)] out Type? createdType,
             [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
-        ) {
+        )
+        {
             if (underlyingType.IsGenericType())
             {
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
@@ -202,14 +204,17 @@ namespace Newtonsoft.Json.Utilities
                     );
                 if (definition != null)
                 {
-                    Type createdTypeDefinition = underlyingTypeDefinition.Assembly()
+                    Type createdTypeDefinition = underlyingTypeDefinition
+                        .Assembly()
                         .GetType(definition.CreatedTypeName);
-                    Type builderTypeDefinition = underlyingTypeDefinition.Assembly()
+                    Type builderTypeDefinition = underlyingTypeDefinition
+                        .Assembly()
                         .GetType(definition.BuilderTypeName);
 
                     if (createdTypeDefinition != null && builderTypeDefinition != null)
                     {
-                        MethodInfo mb = builderTypeDefinition.GetMethods()
+                        MethodInfo mb = builderTypeDefinition
+                            .GetMethods()
                             .FirstOrDefault(
                                 m => m.Name == "CreateRange" && m.GetParameters().Length == 1
                             );
@@ -238,7 +243,8 @@ namespace Newtonsoft.Json.Utilities
             Type valueItemType,
             [NotNullWhen(true)] out Type? createdType,
             [NotNullWhen(true)] out ObjectConstructor<object>? parameterizedCreator
-        ) {
+        )
+        {
             if (underlyingType.IsGenericType())
             {
                 Type underlyingTypeDefinition = underlyingType.GetGenericTypeDefinition();
@@ -250,14 +256,17 @@ namespace Newtonsoft.Json.Utilities
                     );
                 if (definition != null)
                 {
-                    Type createdTypeDefinition = underlyingTypeDefinition.Assembly()
+                    Type createdTypeDefinition = underlyingTypeDefinition
+                        .Assembly()
                         .GetType(definition.CreatedTypeName);
-                    Type builderTypeDefinition = underlyingTypeDefinition.Assembly()
+                    Type builderTypeDefinition = underlyingTypeDefinition
+                        .Assembly()
                         .GetType(definition.BuilderTypeName);
 
                     if (createdTypeDefinition != null && builderTypeDefinition != null)
                     {
-                        MethodInfo mb = builderTypeDefinition.GetMethods()
+                        MethodInfo mb = builderTypeDefinition
+                            .GetMethods()
                             .FirstOrDefault(
                                 m =>
                                 {

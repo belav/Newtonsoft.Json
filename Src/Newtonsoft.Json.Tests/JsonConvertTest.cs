@@ -163,7 +163,6 @@ namespace Newtonsoft.Json.Tests
                     json
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -181,7 +180,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -190,7 +190,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 reader.Read();
                 reader.Read();
 
@@ -295,7 +296,6 @@ namespace Newtonsoft.Json.Tests
                     json
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -317,7 +317,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"{""test"":[1,2,3]}", json);
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -352,7 +351,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"[new Date(976593724000)]", json);
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -400,7 +398,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"[1,2,3]", sw.ToString());
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -460,7 +457,6 @@ namespace Newtonsoft.Json.Tests
                     sw.ToString()
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -473,7 +469,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 int i = (int)value;
                 writer.WriteValue(i * 2);
             }
@@ -483,7 +480,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -946,7 +944,8 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual(@"\/Date(253402300799999)\/", result.MsDateUtc);
 
             DateTime year2000local = new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Local);
-            string localToUtcDate = year2000local.ToUniversalTime()
+            string localToUtcDate = year2000local
+                .ToUniversalTime()
                 .ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFK");
 
             result = TestDateTime("DateTime Local", year2000local);
@@ -987,7 +986,8 @@ namespace Newtonsoft.Json.Tests
             );
 
             DateTime millisecondsLocal = new DateTime(2000, 1, 1, 1, 1, 1, 999, DateTimeKind.Local);
-            localToUtcDate = millisecondsLocal.ToUniversalTime()
+            localToUtcDate = millisecondsLocal
+                .ToUniversalTime()
                 .ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFK");
 
             result = TestDateTime("DateTime Local with milliseconds", millisecondsLocal);
@@ -1367,7 +1367,8 @@ namespace Newtonsoft.Json.Tests
             T value,
             DateFormatHandling format,
             DateTimeZoneHandling timeZoneHandling
-        ) {
+        )
+        {
             string date = null;
 
             if (value is DateTime)
@@ -1667,7 +1668,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(
                     ClobberValueString + "-" + ClobberValueInt.ToString() + "-" + value.ToString()
                 );
@@ -1678,7 +1680,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1785,7 +1788,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(_type);
             }
 
@@ -1794,7 +1798,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2094,7 +2099,8 @@ namespace Newtonsoft.Json.Tests
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2102,7 +2108,8 @@ namespace Newtonsoft.Json.Tests
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue(Math.Round((double)value, _precision, _rounding));
             }
         }
@@ -2232,7 +2239,8 @@ namespace Newtonsoft.Json.Tests
                     Type objectType,
                     object existingValue,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     reader.Skip();
                     return new EnumerableWithConverter();
                 }
@@ -2241,7 +2249,8 @@ namespace Newtonsoft.Json.Tests
                     JsonWriter writer,
                     object value,
                     JsonSerializer serializer
-                ) {
+                )
+                {
                     writer.WriteStartObject();
                     writer.WriteEndObject();
                 }

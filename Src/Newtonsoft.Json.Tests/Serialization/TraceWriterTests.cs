@@ -161,7 +161,6 @@ Newtonsoft.Json Error: 0 : Error!
                     sw.ToString()
                 );
             }
-
             finally
             {
                 Trace.Listeners.Remove(listener);
@@ -274,7 +273,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.AreEqual("$('#element')", json);
 
             Assert.IsTrue(
-                traceWriter.ToString()
+                traceWriter
+                    .ToString()
                     .EndsWith(
                         "Verbose Serialized JSON: " + Environment.NewLine + "$('#element')",
                         StringComparison.Ordinal
@@ -313,7 +313,8 @@ Newtonsoft.Json Error: 0 : Error!
             );
 
             Assert.IsTrue(
-                StringAssert.Normalize(traceWriter.ToString())
+                StringAssert
+                    .Normalize(traceWriter.ToString())
                     .EndsWith(
                         StringAssert.Normalize(
                             @"Verbose Serialized JSON: 

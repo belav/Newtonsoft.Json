@@ -245,7 +245,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                             await reader.ReadAsync();
                             while (
                                 await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray
-                            ) {
+                            )
+                            {
                                 c.strings.Add((string)reader.Value);
                             }
                             break;
@@ -253,7 +254,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                             await reader.ReadAsync();
                             while (
                                 await reader.ReadAsync() && reader.TokenType != JsonToken.EndObject
-                            ) {
+                            )
+                            {
                                 string key = (string)reader.Value;
                                 c.dictionary.Add(
                                     key,
@@ -278,7 +280,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                             await reader.ReadAsync();
                             while (
                                 await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray
-                            ) {
+                            )
+                            {
                                 var address = await CreateAddressAsync(reader);
                                 c.Addresses.Add(address);
                             }

@@ -129,7 +129,8 @@ namespace Newtonsoft.Json.Tests.Schema
                 }
             }
 
-            specTests = specTests.Where(
+            specTests = specTests
+                .Where(
                     s =>
                         s.FileName != "dependencies.json"
                         && s.TestCaseDescription != "multiple disallow subschema"

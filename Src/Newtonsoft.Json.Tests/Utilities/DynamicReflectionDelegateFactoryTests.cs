@@ -53,7 +53,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInString()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
+            ConstructorInfo constructor = TestReflectionUtils
+                .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -69,7 +70,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInStringAndBool()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass))
+            ConstructorInfo constructor = TestReflectionUtils
+                .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -86,7 +88,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefString()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors()
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -102,7 +105,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefStringAndOutBool()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors()
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
@@ -119,7 +123,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefStringAndRefBoolAndRefBool()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors()
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 3);
 
             var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(

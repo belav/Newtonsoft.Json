@@ -61,8 +61,8 @@ namespace Newtonsoft.Json.Converters
             {
                 writer.WritePropertyName(
                     (resolver != null)
-                        ? resolver.GetResolvedPropertyName(table.TableName)
-                        : table.TableName
+                      ? resolver.GetResolvedPropertyName(table.TableName)
+                      : table.TableName
                 );
 
                 converter.WriteJson(writer, table, serializer);
@@ -84,7 +84,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;

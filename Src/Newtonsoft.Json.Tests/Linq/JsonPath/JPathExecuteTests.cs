@@ -93,7 +93,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             ExceptionAssert.Throws<RegexMatchTimeoutException>(
                 () =>
                 {
-                    regexBacktrackingData.SelectTokens(
+                    regexBacktrackingData
+                        .SelectTokens(
                             $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
                             new JsonSelectSettings
                             {
@@ -1416,9 +1417,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             // Lambton Quay
             // Willis Street
 
-            IList<string> firstProductNames = o["Manufacturers"].Select(
-                    m => (string)m.SelectToken("Products[1].Name")
-                )
+            IList<string> firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
                 .ToList();
             // null
             // Headlight Fluid
@@ -1609,9 +1609,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 }
             };
 
-            List<JToken> result = rootObject.SelectTokens(
-                    "$.dateObjectsArray[?(@.date == $.referenceDate)]"
-                )
+            List<JToken> result = rootObject
+                .SelectTokens("$.dateObjectsArray[?(@.date == $.referenceDate)]")
                 .ToList();
             Assert.AreEqual(2, result.Count);
         }

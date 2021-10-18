@@ -45,12 +45,14 @@ namespace Newtonsoft.Json.Linq
             JsonWriter writer,
             CancellationToken cancellationToken,
             params JsonConverter[] converters
-        ) {
+        )
+        {
             await writer.WriteStartArrayAsync(cancellationToken).ConfigureAwait(false);
 
             for (int i = 0; i < _values.Count; i++)
             {
-                await _values[i].WriteToAsync(writer, cancellationToken, converters)
+                await _values[i]
+                    .WriteToAsync(writer, cancellationToken, converters)
                     .ConfigureAwait(false);
             }
 
@@ -67,7 +69,8 @@ namespace Newtonsoft.Json.Linq
         public new static Task<JArray> LoadAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -83,7 +86,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false))

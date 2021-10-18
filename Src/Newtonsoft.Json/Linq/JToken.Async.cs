@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Linq
             JsonWriter writer,
             CancellationToken cancellationToken,
             params JsonConverter[] converters
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -76,7 +77,8 @@ namespace Newtonsoft.Json.Linq
         public static Task<JToken> ReadFromAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadFromAsync(reader, null, cancellationToken);
         }
 
@@ -98,7 +100,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
 
             if (reader.TokenType == JsonToken.None)
@@ -109,7 +112,8 @@ namespace Newtonsoft.Json.Linq
                             ? reader.ReadAndMoveToContentAsync(cancellationToken)
                             : reader.ReadAsync(cancellationToken)
                     ).ConfigureAwait(false)
-                ) {
+                )
+                {
                     throw JsonReaderException.Create(
                         reader,
                         "Error reading JToken from JsonReader."
@@ -122,16 +126,20 @@ namespace Newtonsoft.Json.Linq
             switch (reader.TokenType)
             {
                 case JsonToken.StartObject:
-                    return await JObject.LoadAsync(reader, settings, cancellationToken)
+                    return await JObject
+                        .LoadAsync(reader, settings, cancellationToken)
                         .ConfigureAwait(false);
                 case JsonToken.StartArray:
-                    return await JArray.LoadAsync(reader, settings, cancellationToken)
+                    return await JArray
+                        .LoadAsync(reader, settings, cancellationToken)
                         .ConfigureAwait(false);
                 case JsonToken.StartConstructor:
-                    return await JConstructor.LoadAsync(reader, settings, cancellationToken)
+                    return await JConstructor
+                        .LoadAsync(reader, settings, cancellationToken)
                         .ConfigureAwait(false);
                 case JsonToken.PropertyName:
-                    return await JProperty.LoadAsync(reader, settings, cancellationToken)
+                    return await JProperty
+                        .LoadAsync(reader, settings, cancellationToken)
                         .ConfigureAwait(false);
                 case JsonToken.String:
                 case JsonToken.Integer:
@@ -179,7 +187,8 @@ namespace Newtonsoft.Json.Linq
         public static Task<JToken> LoadAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -200,7 +209,8 @@ namespace Newtonsoft.Json.Linq
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadFromAsync(reader, settings, cancellationToken);
         }
     }
