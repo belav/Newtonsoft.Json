@@ -68,7 +68,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.Money
         [CompilerGenerated, DebuggerNonUserCode]
         internal object __DebugDisplay()
         {
-            return ExtraTopLevelOperators.PrintFormatToString<FSharpFunc<Currency, string>>(
+            return ExtraTopLevelOperators
+                .PrintFormatToString<FSharpFunc<Currency, string>>(
                     new PrintfFormat<FSharpFunc<Currency, string>, Unit, string, string, string>(
                         "%+0.8A"
                     )

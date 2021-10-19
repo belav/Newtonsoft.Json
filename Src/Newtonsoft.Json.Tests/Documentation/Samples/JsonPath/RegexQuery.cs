@@ -65,9 +65,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             );
 
             // Find Newtonsoft packages
-            List<JToken> newtonsoftPackages = packages.SelectTokens(
-                    @"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]"
-                )
+            List<JToken> newtonsoftPackages = packages
+                .SelectTokens(@"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]")
                 .ToList();
 
             foreach (JToken item in newtonsoftPackages)

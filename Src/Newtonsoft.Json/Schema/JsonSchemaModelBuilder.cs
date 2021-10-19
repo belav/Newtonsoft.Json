@@ -121,7 +121,8 @@ namespace Newtonsoft.Json.Schema
         public void AddProperties(
             IDictionary<string, JsonSchema> source,
             IDictionary<string, JsonSchemaNode> target
-        ) {
+        )
+        {
             if (source != null)
             {
                 foreach (KeyValuePair<string, JsonSchema> property in source)
@@ -135,7 +136,8 @@ namespace Newtonsoft.Json.Schema
             IDictionary<string, JsonSchemaNode> target,
             string propertyName,
             JsonSchema schema
-        ) {
+        )
+        {
             target.TryGetValue(propertyName, out JsonSchemaNode propertyNode);
 
             target[propertyName] = AddSchema(propertyNode, schema);

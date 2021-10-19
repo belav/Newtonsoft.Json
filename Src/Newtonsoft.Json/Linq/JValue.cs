@@ -239,7 +239,8 @@ namespace Newtonsoft.Json.Linq
 #endif
                     if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
                     {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture)
+                        return Convert
+                            .ToDecimal(objA, CultureInfo.InvariantCulture)
                             .CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
                     }
                     else if (objA is float || objB is float || objA is double || objB is double)
@@ -248,7 +249,8 @@ namespace Newtonsoft.Json.Linq
                     }
                     else
                     {
-                        return Convert.ToInt64(objA, CultureInfo.InvariantCulture)
+                        return Convert
+                            .ToInt64(objA, CultureInfo.InvariantCulture)
                             .CompareTo(Convert.ToInt64(objB, CultureInfo.InvariantCulture));
                     }
                 }
@@ -266,7 +268,8 @@ namespace Newtonsoft.Json.Linq
 #endif
                     if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
                     {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture)
+                        return Convert
+                            .ToDecimal(objA, CultureInfo.InvariantCulture)
                             .CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
                     }
                     return CompareFloat(objA, objB);
@@ -391,7 +394,8 @@ namespace Newtonsoft.Json.Linq
             object? objA,
             object? objB,
             out object? result
-        ) {
+        )
+        {
             if (objA is string || objB is string)
             {
                 if (operation == ExpressionType.Add || operation == ExpressionType.AddAssign)
@@ -513,7 +517,8 @@ namespace Newtonsoft.Json.Linq
                 || objB is ushort
                 || objB is sbyte
                 || objB is byte
-            ) {
+            )
+            {
                 if (objA == null || objB == null)
                 {
                     result = null;
@@ -617,7 +622,8 @@ namespace Newtonsoft.Json.Linq
                 || value is uint
                 || value is ushort
                 || value is byte
-            ) {
+            )
+            {
                 return JTokenType.Integer;
             }
             else if (value is Enum)
@@ -991,7 +997,8 @@ namespace Newtonsoft.Json.Linq
                 JValue instance,
                 ConvertBinder binder,
                 [NotNullWhen(true)] out object? result
-            ) {
+            )
+            {
                 if (binder.Type == typeof(JValue) || binder.Type == typeof(JToken))
                 {
                     result = instance;
@@ -1015,7 +1022,8 @@ namespace Newtonsoft.Json.Linq
                 BinaryOperationBinder binder,
                 object arg,
                 [NotNullWhen(true)] out object? result
-            ) {
+            )
+            {
                 object? compareValue = arg is JValue value ? value.Value : arg;
 
                 switch (binder.Operation)

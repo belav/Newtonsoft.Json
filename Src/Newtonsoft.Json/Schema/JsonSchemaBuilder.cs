@@ -112,7 +112,8 @@ namespace Newtonsoft.Json.Schema
                 {
                     if (locationReference)
                     {
-                        string[] escapedParts = schema.DeferredReference.TrimStart('#')
+                        string[] escapedParts = schema.DeferredReference
+                            .TrimStart('#')
                             .Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                         JToken currentToken = _rootSchema;
                         foreach (string escapedPart in escapedParts)
@@ -126,12 +127,14 @@ namespace Newtonsoft.Json.Schema
                             else if (
                                 currentToken.Type == JTokenType.Array
                                 || currentToken.Type == JTokenType.Constructor
-                            ) {
+                            )
+                            {
                                 if (
                                     int.TryParse(part, out int index)
                                     && index >= 0
                                     && index < currentToken.Count()
-                                ) {
+                                )
+                                {
                                     currentToken = currentToken[index];
                                 }
                                 else
@@ -201,7 +204,8 @@ namespace Newtonsoft.Json.Schema
                         string,
                         JsonSchema
                     > patternProperty in schema.PatternProperties.ToList()
-                ) {
+                )
+                {
                     schema.PatternProperties[patternProperty.Key] = ResolveReferences(
                         patternProperty.Value
                     );
@@ -243,14 +247,16 @@ namespace Newtonsoft.Json.Schema
                     JsonTypeReflector.RefPropertyName,
                     out JToken referenceToken
                 )
-            ) {
+            )
+            {
                 JsonSchema deferredSchema = new JsonSchema();
                 deferredSchema.DeferredReference = (string)referenceToken;
 
                 return deferredSchema;
             }
 
-            string location = token.Path.Replace(".", "/")
+            string location = token.Path
+                .Replace(".", "/")
                 .Replace("[", "/")
                 .Replace("]", string.Empty);
             if (!StringUtils.IsNullOrEmpty(location))
@@ -550,7 +556,8 @@ namespace Newtonsoft.Json.Schema
                     type,
                     out JsonSchemaType mappedType
                 )
-            ) {
+            )
+            {
                 throw new JsonException(
                     "Invalid JSON schema type: {0}".FormatWith(CultureInfo.InvariantCulture, type)
                 );

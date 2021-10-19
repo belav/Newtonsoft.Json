@@ -182,7 +182,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new TypedService(objectType),
                     out registration
                 )
-            ) {
+            )
+            {
                 Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                 if (viewType != null)
                 {
@@ -223,7 +224,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
-            builder.Register(
+            builder
+                .Register(
                     c =>
                     {
                         count++;
@@ -260,7 +262,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             int count = 0;
 
             ContainerBuilder builder = new ContainerBuilder();
-            builder.Register(
+            builder
+                .Register(
                     c =>
                     {
                         count++;
@@ -269,7 +272,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 )
                 .As<ITaskRepository>();
             builder.RegisterType<HasSettableProperty>();
-            builder.Register(
+            builder
+                .Register(
                     c =>
                     {
                         count++;

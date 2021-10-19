@@ -72,7 +72,8 @@ namespace Newtonsoft.Json.Converters
                 PropertyInfo[] fields,
                 FSharpFunction fieldReader,
                 FSharpFunction constructor
-            ) {
+            )
+            {
                 Tag = tag;
                 Name = name;
                 Fields = fields;
@@ -165,8 +166,8 @@ namespace Newtonsoft.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName(
                 (resolver != null)
-                    ? resolver.GetResolvedPropertyName(CasePropertyName)
-                    : CasePropertyName
+                  ? resolver.GetResolvedPropertyName(CasePropertyName)
+                  : CasePropertyName
             );
             writer.WriteValue(caseInfo.Name);
             if (caseInfo.Fields != null && caseInfo.Fields.Length > 0)
@@ -175,8 +176,8 @@ namespace Newtonsoft.Json.Converters
 
                 writer.WritePropertyName(
                     (resolver != null)
-                        ? resolver.GetResolvedPropertyName(FieldsPropertyName)
-                        : FieldsPropertyName
+                      ? resolver.GetResolvedPropertyName(FieldsPropertyName)
+                      : FieldsPropertyName
                 );
                 writer.WriteStartArray();
                 foreach (object field in fields)
@@ -201,7 +202,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
@@ -223,7 +225,8 @@ namespace Newtonsoft.Json.Converters
                         CasePropertyName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     reader.ReadAndAssert();
 
                     Union union = UnionCache.Get(objectType);
@@ -249,7 +252,8 @@ namespace Newtonsoft.Json.Converters
                         FieldsPropertyName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     reader.ReadAndAssert();
                     if (reader.TokenType != JsonToken.StartArray)
                     {

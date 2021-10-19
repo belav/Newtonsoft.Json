@@ -88,9 +88,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             Console.WriteLine(string.Join(", ", storeNames));
             // Lambton Quay, Willis Street
 
-            string[] firstProductNames = o["Manufacturers"].Select(
-                    m => (string)m.SelectToken("Products[1].Name")
-                )
+            string[] firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
                 .Where(n => n != null)
                 .ToArray();
 

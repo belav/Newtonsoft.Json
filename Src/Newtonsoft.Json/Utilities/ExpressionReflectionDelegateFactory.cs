@@ -120,7 +120,8 @@ namespace Newtonsoft.Json.Utilities
             Type type,
             ParameterExpression? targetParameterExpression,
             ParameterExpression argsParameterExpression
-        ) {
+        )
+        {
             ParameterInfo[] parametersInfo = method.GetParameters();
 
             Expression[] argsExpression;
@@ -329,10 +330,8 @@ namespace Newtonsoft.Json.Utilities
 
             fieldExpression = EnsureCastExpression(fieldExpression, typeof(object));
 
-            Func<T, object?> compiled = Expression.Lambda<Func<T, object?>>(
-                    fieldExpression,
-                    sourceParameter
-                )
+            Func<T, object?> compiled = Expression
+                .Lambda<Func<T, object?>>(fieldExpression, sourceParameter)
                 .Compile();
             return compiled;
         }
@@ -452,14 +451,16 @@ namespace Newtonsoft.Json.Utilities
             Expression expression,
             Type targetType,
             bool allowWidening = false
-        ) {
+        )
+        {
             Type expressionType = expression.Type;
 
             // check if a cast or conversion is required
             if (
                 expressionType == targetType
                 || (!expressionType.IsValueType() && targetType.IsAssignableFrom(expressionType))
-            ) {
+            )
+            {
                 return expression;
             }
 

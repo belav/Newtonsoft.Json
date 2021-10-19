@@ -444,7 +444,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Name!", c.Name);
 
             Assert.IsTrue(
-                traceWriter.GetTraceMessages()
+                traceWriter
+                    .GetTraceMessages()
                     .Any(
                         m =>
                             m.EndsWith(
@@ -476,7 +477,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, c.Name);
 
             Assert.IsTrue(
-                traceWriter.GetTraceMessages()
+                traceWriter
+                    .GetTraceMessages()
                     .Any(
                         m =>
                             m.EndsWith(
@@ -677,7 +679,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         protected override JsonProperty CreateProperty(
             MemberInfo member,
             MemberSerialization memberSerialization
-        ) {
+        )
+        {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
             MethodInfo shouldDeserializeMethodInfo = member.DeclaringType.GetMethod(

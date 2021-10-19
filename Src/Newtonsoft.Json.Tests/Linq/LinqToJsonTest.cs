@@ -914,16 +914,14 @@ keyword such as type of business.""
             );
             // JSON Serializer Basics
 
-            IList<JToken> since2012 = posts.Where(
-                    p => (DateTime)p["Date"] > new DateTime(2012, 1, 1)
-                )
+            IList<JToken> since2012 = posts
+                .Where(p => (DateTime)p["Date"] > new DateTime(2012, 1, 1))
                 .ToList();
             // JSON Serializer Basics
             // Querying LINQ to JSON
 
-            IList<JToken> linqToJson = posts.Where(
-                    p => p["Categories"].Any(c => (string)c == "LINQ to JSON")
-                )
+            IList<JToken> linqToJson = posts
+                .Where(p => p["Categories"].Any(c => (string)c == "LINQ to JSON"))
                 .ToList();
             // Querying LINQ to JSON
 

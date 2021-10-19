@@ -469,7 +469,8 @@ namespace Newtonsoft.Json.Converters
                         childNodes.Count == 0
                         || childNodes[0].NodeType != XmlNodeType.XmlDeclaration
                     )
-                ) {
+                )
+                {
                     childNodes.Insert(0, new XDeclarationWrapper(Document.Declaration));
                 }
 
@@ -525,7 +526,8 @@ namespace Newtonsoft.Json.Converters
             string? publicId,
             string? systemId,
             string? internalSubset
-        ) {
+        )
+        {
             return new XDocumentTypeWrapper(
                 new XDocumentType(name, publicId, systemId, internalSubset)
             );
@@ -878,7 +880,8 @@ namespace Newtonsoft.Json.Converters
         {
             if (
                 !StringUtils.IsNullOrEmpty(namespaceUri) && namespaceUri != ParentNode?.NamespaceUri
-            ) {
+            )
+            {
                 if (StringUtils.IsNullOrEmpty(GetPrefixOfNamespace(namespaceUri)))
                 {
                     bool namespaceDeclared = false;
@@ -891,7 +894,8 @@ namespace Newtonsoft.Json.Converters
                                 attribute.Name.LocalName == "xmlns"
                                 && StringUtils.IsNullOrEmpty(attribute.Name.NamespaceName)
                                 && attribute.Value == namespaceUri
-                            ) {
+                            )
+                            {
                                 namespaceDeclared = true;
                             }
                         }
@@ -1057,7 +1061,8 @@ namespace Newtonsoft.Json.Converters
                         if (
                             attribute.NamespaceUri == "http://www.w3.org/2000/xmlns/"
                             && attribute.LocalName != "xmlns"
-                        ) {
+                        )
+                        {
                             manager.AddNamespace(attribute.LocalName, attribute.Value);
                         }
                     }
@@ -1151,7 +1156,8 @@ namespace Newtonsoft.Json.Converters
             IXmlNode node,
             XmlNamespaceManager manager,
             bool writePropertyName
-        ) {
+        )
+        {
             switch (node.ChildNodes.Count)
             {
                 case 0:
@@ -1285,7 +1291,8 @@ namespace Newtonsoft.Json.Converters
             bool writePropertyName,
             List<IXmlNode> groupedNodes,
             string elementNames
-        ) {
+        )
+        {
             bool writeArray = groupedNodes.Count != 1 || IsArray(groupedNodes[0]);
 
             if (!writeArray)
@@ -1316,7 +1323,8 @@ namespace Newtonsoft.Json.Converters
             bool writePropertyName,
             IXmlNode node,
             string elementNames
-        ) {
+        )
+        {
             bool writeArray = IsArray(node);
 
             if (!writeArray)
@@ -1343,7 +1351,8 @@ namespace Newtonsoft.Json.Converters
             IXmlNode node,
             XmlNamespaceManager manager,
             bool writePropertyName
-        ) {
+        )
+        {
             switch (node.NodeType)
             {
                 case XmlNodeType.Document:
@@ -1388,7 +1397,8 @@ namespace Newtonsoft.Json.Converters
                             !ValueAttributes(node.Attributes)
                             && node.ChildNodes.Count == 1
                             && node.ChildNodes[0].NodeType == XmlNodeType.Text
-                        ) {
+                        )
+                        {
                             // write elements with a single text child as a name value pair
                             writer.WriteValue(node.ChildNodes[0].Value);
                         }
@@ -1438,7 +1448,8 @@ namespace Newtonsoft.Json.Converters
                     if (
                         node.NamespaceUri == "http://www.w3.org/2000/xmlns/"
                         && node.Value == JsonNamespaceUri
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -1541,7 +1552,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             switch (reader.TokenType)
             {
                 case JsonToken.Null:
@@ -1567,7 +1579,8 @@ namespace Newtonsoft.Json.Converters
                     && objectType != typeof(XElement)
                     && objectType != typeof(XNode)
                     && objectType != typeof(XObject)
-                ) {
+                )
+                {
                     throw JsonSerializationException.Create(
                         reader,
                         "XmlNodeConverter only supports deserializing XDocument, XElement, XContainer, XNode or XObject."
@@ -1586,7 +1599,8 @@ namespace Newtonsoft.Json.Converters
                     objectType != typeof(XmlDocument)
                     && objectType != typeof(XmlElement)
                     && objectType != typeof(XmlNode)
-                ) {
+                )
+                {
                     throw JsonSerializationException.Create(
                         reader,
                         "XmlNodeConverter only supports deserializing XmlDocument, XmlElement or XmlNode."
@@ -1646,7 +1660,8 @@ namespace Newtonsoft.Json.Converters
             XmlNamespaceManager manager,
             string propertyName,
             IXmlNode currentNode
-        ) {
+        )
+        {
             if (!EncodeSpecialCharacters)
             {
                 switch (propertyName)
@@ -1707,7 +1722,8 @@ namespace Newtonsoft.Json.Converters
             IXmlNode currentNode,
             string propertyName,
             XmlNamespaceManager manager
-        ) {
+        )
+        {
             if (StringUtils.IsNullOrEmpty(propertyName))
             {
                 throw JsonSerializationException.Create(
@@ -1806,7 +1822,8 @@ namespace Newtonsoft.Json.Converters
             XmlNamespaceManager manager,
             string? elementPrefix,
             Dictionary<string, string?>? attributeNameValues
-        ) {
+        )
+        {
             IXmlElement element = CreateElement(elementName, document, elementPrefix, manager);
 
             currentNode.AppendChild(element);
@@ -1871,7 +1888,8 @@ namespace Newtonsoft.Json.Converters
             string attributeName,
             XmlNamespaceManager manager,
             string? attributePrefix
-        ) {
+        )
+        {
             if (currentNode.NodeType == XmlNodeType.Document)
             {
                 throw JsonSerializationException.Create(
@@ -1970,7 +1988,8 @@ namespace Newtonsoft.Json.Converters
             string propertyName,
             IXmlNode currentNode,
             XmlNamespaceManager manager
-        ) {
+        )
+        {
             string? elementPrefix = MiscellaneousUtils.GetPrefix(propertyName);
 
             IXmlElement nestedArrayElement = CreateElement(
@@ -2052,7 +2071,8 @@ namespace Newtonsoft.Json.Converters
         private Dictionary<string, string?>? ReadAttributeElements(
             JsonReader reader,
             XmlNamespaceManager manager
-        ) {
+        )
+        {
             Dictionary<string, string?>? attributeNameValues = null;
             bool finished = false;
 
@@ -2087,7 +2107,8 @@ namespace Newtonsoft.Json.Converters
                                             attributeName,
                                             out string? namespacePrefix
                                         )
-                                    ) {
+                                    )
+                                    {
                                         manager.AddNamespace(namespacePrefix, attributeValue);
                                     }
                                     break;
@@ -2133,7 +2154,8 @@ namespace Newtonsoft.Json.Converters
                                             if (
                                                 attributeName
                                                 == JsonTypeReflector.ArrayValuesPropertyName
-                                            ) {
+                                            )
+                                            {
                                                 finished = true;
                                                 break;
                                             }
@@ -2198,7 +2220,8 @@ namespace Newtonsoft.Json.Converters
             IXmlDocument document,
             IXmlNode currentNode,
             string propertyName
-        ) {
+        )
+        {
             if (propertyName == DeclarationName)
             {
                 string? version = null;
@@ -2283,7 +2306,8 @@ namespace Newtonsoft.Json.Converters
             IXmlDocument document,
             string? elementPrefix,
             XmlNamespaceManager manager
-        ) {
+        )
+        {
             string encodeName = EncodeSpecialCharacters
                 ? XmlConvert.EncodeLocalName(elementName)
                 : XmlConvert.EncodeName(elementName);
@@ -2304,7 +2328,8 @@ namespace Newtonsoft.Json.Converters
             IXmlDocument document,
             XmlNamespaceManager manager,
             IXmlNode currentNode
-        ) {
+        )
+        {
             do
             {
                 switch (reader.TokenType)
@@ -2313,7 +2338,8 @@ namespace Newtonsoft.Json.Converters
                         if (
                             currentNode.NodeType == XmlNodeType.Document
                             && document.DocumentElement != null
-                        ) {
+                        )
+                        {
                             throw JsonSerializationException.Create(
                                 reader,
                                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName."
@@ -2355,7 +2381,8 @@ namespace Newtonsoft.Json.Converters
                                         childNode is IXmlElement element
                                         && element.LocalName == localName
                                         && element.NamespaceUri == ns
-                                    ) {
+                                    )
+                                    {
                                         AddJsonArrayAttribute(element, document);
                                         break;
                                     }
@@ -2406,7 +2433,8 @@ namespace Newtonsoft.Json.Converters
         private bool IsNamespaceAttribute(
             string attributeName,
             [NotNullWhen(true)] out string? prefix
-        ) {
+        )
+        {
             if (attributeName.StartsWith("xmlns", StringComparison.Ordinal))
             {
                 if (attributeName.Length == 5)
@@ -2436,7 +2464,8 @@ namespace Newtonsoft.Json.Converters
                 if (
                     xmlNode.NamespaceUri == "http://www.w3.org/2000/xmlns/"
                     && xmlNode.Value == JsonNamespaceUri
-                ) {
+                )
+                {
                     continue;
                 }
 

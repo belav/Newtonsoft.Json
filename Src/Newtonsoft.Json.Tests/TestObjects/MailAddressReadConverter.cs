@@ -41,14 +41,16 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var messageJObject = serializer.Deserialize<JObject>(reader);
             if (messageJObject == null)
             {
                 return null;
             }
 
-            var address = messageJObject.GetValue("Address", StringComparison.OrdinalIgnoreCase)
+            var address = messageJObject
+                .GetValue("Address", StringComparison.OrdinalIgnoreCase)
                 .ToObject<string>();
 
             JToken displayNameToken;
@@ -59,7 +61,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     StringComparison.OrdinalIgnoreCase,
                     out displayNameToken
                 ) && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>())
-            ) {
+            )
+            {
                 return new System.Net.Mail.MailAddress(address, displayName);
             }
 
