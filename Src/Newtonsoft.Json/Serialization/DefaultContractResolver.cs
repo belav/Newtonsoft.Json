@@ -582,7 +582,7 @@ namespace Newtonsoft.Json.Serialization
                     if (
                         ReflectionUtils.ImplementsGenericDefinition(
                             t,
-                            typeof(IDictionary<, >),
+                            typeof(IDictionary<,>),
                             out Type? dictionaryType
                         )
                     )
@@ -628,7 +628,7 @@ namespace Newtonsoft.Json.Serialization
 
             ReflectionUtils.ImplementsGenericDefinition(
                 t,
-                typeof(IDictionary<, >),
+                typeof(IDictionary<,>),
                 out Type? dictionaryType
             );
 
@@ -638,9 +638,9 @@ namespace Newtonsoft.Json.Serialization
             Type createdType;
 
             // change type to a class if it is the base interface so it can be instantiated if needed
-            if (ReflectionUtils.IsGenericDefinition(t, typeof(IDictionary<, >)))
+            if (ReflectionUtils.IsGenericDefinition(t, typeof(IDictionary<,>)))
             {
-                createdType = typeof(Dictionary<, >).MakeGenericType(keyType, valueType);
+                createdType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
             }
             else
             {
@@ -714,7 +714,7 @@ namespace Newtonsoft.Json.Serialization
 
             if (extensionDataAttribute.WriteData)
             {
-                Type enumerableWrapper = typeof(EnumerableDictionaryWrapper<, >).MakeGenericType(
+                Type enumerableWrapper = typeof(EnumerableDictionaryWrapper<,>).MakeGenericType(
                     keyType,
                     valueType
                 );
@@ -1340,7 +1340,7 @@ namespace Newtonsoft.Json.Serialization
                 Type expectedParameterType =
                     (contract.DictionaryKeyType != null && contract.DictionaryValueType != null)
                         ? typeof(IEnumerable<>).MakeGenericType(
-                              typeof(KeyValuePair<, >).MakeGenericType(
+                              typeof(KeyValuePair<,>).MakeGenericType(
                                   contract.DictionaryKeyType,
                                   contract.DictionaryValueType
                               )
