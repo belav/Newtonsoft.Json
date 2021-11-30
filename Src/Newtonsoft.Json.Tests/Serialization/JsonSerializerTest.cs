@@ -9020,7 +9020,11 @@ This is just junk, though.";
         [Test]
         public void ConvertibleIdTest()
         {
-            var c = new TestClassConvertable { Id = new ConvertibleId { Value = 1 }, X = 2 };
+            var c = new TestClassConvertable
+            {
+                Id = new ConvertibleId { Value = 1 },
+                X = 2
+            };
             var s = JsonConvert.SerializeObject(c, Formatting.Indented);
             StringAssert.AreEqual(
                 @"{
