@@ -126,6 +126,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return DeserializeJsonNetManual(BenchmarkConstants.JsonText);
         }
+
 #region DeserializeJsonNetManual
         private TestClass DeserializeJsonNetManual(string json)
         {

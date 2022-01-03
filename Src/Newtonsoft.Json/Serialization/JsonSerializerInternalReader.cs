@@ -2168,14 +2168,14 @@ namespace Newtonsoft.Json.Serialization
                                             reader.Culture,
                                             out DateTime dt
                                         )
-                                            ? dt
-                                            : EnsureType(
-                                                  reader,
-                                                  keyValue,
-                                                  CultureInfo.InvariantCulture,
-                                                  contract.KeyContract,
-                                                  contract.DictionaryKeyType
-                                              )!;
+                                          ? dt
+                                          : EnsureType(
+                                                reader,
+                                                keyValue,
+                                                CultureInfo.InvariantCulture,
+                                                contract.KeyContract,
+                                                contract.DictionaryKeyType
+                                            )!;
                                         break;
                                     }
 #if HAVE_DATE_TIME_OFFSET
@@ -2188,14 +2188,14 @@ namespace Newtonsoft.Json.Serialization
                                             reader.Culture,
                                             out DateTimeOffset dt
                                         )
-                                            ? dt
-                                            : EnsureType(
-                                                  reader,
-                                                  keyValue,
-                                                  CultureInfo.InvariantCulture,
-                                                  contract.KeyContract,
-                                                  contract.DictionaryKeyType
-                                              )!;
+                                          ? dt
+                                          : EnsureType(
+                                                reader,
+                                                keyValue,
+                                                CultureInfo.InvariantCulture,
+                                                contract.KeyContract,
+                                                contract.DictionaryKeyType
+                                            )!;
                                         break;
                                     }
 #endif
@@ -3158,8 +3158,8 @@ namespace Newtonsoft.Json.Serialization
                                 context.Property.PropertyContract,
                                 s
                             )
-                                ? PropertyPresence.Null
-                                : PropertyPresence.Value;
+                              ? PropertyPresence.Null
+                              : PropertyPresence.Value;
                         }
                         else
                         {

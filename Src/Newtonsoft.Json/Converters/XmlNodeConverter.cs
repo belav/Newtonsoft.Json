@@ -980,6 +980,7 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <value><c>true</c> if special characters are encoded; otherwise, <c>false</c>.</value>
         public bool EncodeSpecialCharacters { get; set; }
+
         #region Writing
         /// <summary>
         /// Writes the JSON representation of the object.
@@ -1738,8 +1739,8 @@ namespace Newtonsoft.Json.Converters
             if (!EncodeSpecialCharacters)
             {
                 attributeNameValues = ShouldReadInto(reader)
-                    ? ReadAttributeElements(reader, manager)
-                    : null;
+                  ? ReadAttributeElements(reader, manager)
+                  : null;
                 elementPrefix = MiscellaneousUtils.GetPrefix(propertyName);
 
                 if (propertyName.StartsWith('@'))
@@ -2312,8 +2313,8 @@ namespace Newtonsoft.Json.Converters
                 ? XmlConvert.EncodeLocalName(elementName)
                 : XmlConvert.EncodeName(elementName);
             string ns = StringUtils.IsNullOrEmpty(elementPrefix)
-                ? manager.DefaultNamespace
-                : manager.LookupNamespace(elementPrefix);
+              ? manager.DefaultNamespace
+              : manager.LookupNamespace(elementPrefix);
 
             IXmlElement element =
                 (!StringUtils.IsNullOrEmpty(ns))
@@ -2372,8 +2373,8 @@ namespace Newtonsoft.Json.Converters
                                     out string localName
                                 );
                                 string ns = StringUtils.IsNullOrEmpty(elementPrefix)
-                                    ? manager.DefaultNamespace
-                                    : manager.LookupNamespace(elementPrefix);
+                                  ? manager.DefaultNamespace
+                                  : manager.LookupNamespace(elementPrefix);
 
                                 foreach (IXmlNode childNode in currentNode.ChildNodes)
                                 {

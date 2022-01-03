@@ -177,6 +177,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                 if (predicate(item))
                     yield return item;
         }
+
         /// <summary>
     /// Filters a sequence of values based on a predicate. 
     /// Each element's index is used in the logic of the predicate function.
@@ -731,7 +732,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             using (var e = source.GetEnumerator())
             {
-                for (var i = 0;; i++)
+                for (var i = 0; ; i++)
                 {
                     if (!e.MoveNext())
                         yield break;
