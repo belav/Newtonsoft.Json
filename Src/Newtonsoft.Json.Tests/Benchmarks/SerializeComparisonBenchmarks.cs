@@ -165,6 +165,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return SerializeJsonNetLinq(TestClass);
         }
+
 #region SerializeJsonNetManual
         private string SerializeJsonNetLinq(TestClass c)
         {
@@ -209,6 +210,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             return SerializeJsonNetManual(TestClass);
         }
+
 #region SerializeJsonNetManual
         private string SerializeJsonNetManual(TestClass c)
         {

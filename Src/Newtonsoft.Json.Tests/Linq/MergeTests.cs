@@ -177,7 +177,7 @@ namespace Newtonsoft.Json.Tests.Linq
                                 Property5 = (object)null
                             }
                         },
-                        new {  },
+                        new { },
                         3,
                         null,
                         5,
@@ -196,7 +196,7 @@ namespace Newtonsoft.Json.Tests.Linq
                             {
                                 Property1 = (object)null,
                                 Property2 = 3,
-                                Property3 = new {  },
+                                Property3 = new { },
                                 Property5 = (object)null
                             }
                         },

@@ -2308,8 +2308,8 @@ namespace Newtonsoft.Json
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                                    ? Convert.ToInt32(number, 16)
-                                    : Convert.ToInt32(number, 8);
+                                  ? Convert.ToInt32(number, 16)
+                                  : Convert.ToInt32(number, 8);
 
                                 numberValue = integer;
                             }
@@ -2378,8 +2378,8 @@ namespace Newtonsoft.Json
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                                    ? Convert.ToInt64(number, 16)
-                                    : Convert.ToInt64(number, 8);
+                                  ? Convert.ToInt64(number, 16)
+                                  : Convert.ToInt64(number, 8);
 
                                 numberValue = Convert.ToDecimal(integer);
                             }
@@ -2439,8 +2439,8 @@ namespace Newtonsoft.Json
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                                    ? Convert.ToInt64(number, 16)
-                                    : Convert.ToInt64(number, 8);
+                                  ? Convert.ToInt64(number, 16)
+                                  : Convert.ToInt64(number, 8);
 
                                 numberValue = Convert.ToDouble(integer);
                             }
@@ -2504,8 +2504,8 @@ namespace Newtonsoft.Json
                                     "0x",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                                    ? Convert.ToInt64(number, 16)
-                                    : Convert.ToInt64(number, 8);
+                                  ? Convert.ToInt64(number, 16)
+                                  : Convert.ToInt64(number, 8);
                             }
                             catch (Exception ex)
                             {
@@ -2938,6 +2938,7 @@ namespace Newtonsoft.Json
                 MatchValueWithTrailingSeparator(JsonConvert.PositiveInfinity)
             );
         }
+
         private object ParseNumberPositiveInfinity(ReadType readType, bool matched)
         {
             if (matched)
