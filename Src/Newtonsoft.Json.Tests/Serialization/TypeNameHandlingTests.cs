@@ -1042,7 +1042,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             IList<object> values = new List<object>
             {
                 new Customer { Name = "Caroline Customer" },
-                new Purchase { ProductName = "Elbow Grease", Price = 5.99m, Quantity = 1 }
+                new Purchase
+                {
+                    ProductName = "Elbow Grease",
+                    Price = 5.99m,
+                    Quantity = 1
+                }
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1146,7 +1151,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             IList<object> values = new List<object>
             {
                 new Customer { Name = "Caroline Customer" },
-                new Purchase { ProductName = "Elbow Grease", Price = 5.99m, Quantity = 1 }
+                new Purchase
+                {
+                    ProductName = "Elbow Grease",
+                    Price = 5.99m,
+                    Quantity = 1
+                }
             };
 
             string json = JsonConvert.SerializeObject(
