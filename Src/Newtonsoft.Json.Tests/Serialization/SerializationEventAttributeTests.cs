@@ -304,9 +304,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
         }
 
-        public class SerializationEventContextSubClassTestObject : SerializationEventBaseTestObject
-        {
-        }
+        public class SerializationEventContextSubClassTestObject
+            : SerializationEventBaseTestObject { }
 
         [Test]
         public void SerializationEventContextTestObjectSubClassTest()

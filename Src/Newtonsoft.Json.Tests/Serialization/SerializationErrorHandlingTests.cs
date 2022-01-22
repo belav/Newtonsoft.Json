@@ -1312,9 +1312,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 
-    internal interface IErrorPerson2
-    {
-    }
+    internal interface IErrorPerson2 { }
 
     internal class ErrorPerson2 //:IPerson - oops! Forgot to implement the person interface
     {

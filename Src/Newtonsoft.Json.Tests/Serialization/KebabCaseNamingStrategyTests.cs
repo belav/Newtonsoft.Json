@@ -322,9 +322,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             NamingStrategyType = typeof(KebabCaseNamingStrategy),
             NamingStrategyParameters = new object[] { true, true }
         )]
-        public class DictionaryAttributeNamingStrategyTestClass : Dictionary<string, string>
-        {
-        }
+        public class DictionaryAttributeNamingStrategyTestClass : Dictionary<string, string> { }
 
         [Test]
         public void JsonDictionaryAttribute_NamingStrategyType()

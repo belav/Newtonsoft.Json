@@ -2066,9 +2066,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 string Property { get; set; }
             }
 
-            public interface ITestInterface : IFirstInterface, ISecondInterface
-            {
-            }
+            public interface ITestInterface : IFirstInterface, ISecondInterface { }
 
             public class TestClass : ITestInterface
             {
@@ -2850,9 +2848,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public T Value { get; set; }
     }
 
-    public class NonGenericItem : GenericItem<string>
-    {
-    }
+    public class NonGenericItem : GenericItem<string> { }
 
     public class GenericClass<T, TValue> : IEnumerable<T> where T : GenericItem<TValue>, new()
     {
@@ -2884,9 +2880,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
     }
 
-    public class NonGenericClass : GenericClass<GenericItem<string>, string>
-    {
-    }
+    public class NonGenericClass : GenericClass<GenericItem<string>, string> { }
 
     public class StringListAppenderConverter : JsonConverter
     {

@@ -2131,9 +2131,7 @@ namespace Newtonsoft.Json.Tests
             public override string Data { get; set; }
         }
 
-        public class NonGenericChildClass : GenericIntermediateClass<int>
-        {
-        }
+        public class NonGenericChildClass : GenericIntermediateClass<int> { }
 
         [Test]
         public void ShouldNotPopulateReadOnlyEnumerableObjectWithNonDefaultConstructor()

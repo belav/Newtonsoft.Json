@@ -88,9 +88,7 @@ namespace Newtonsoft.Json.Tests.Issues
             public string Name { get; set; }
         }
 
-        public class ActivitiesSubClass : Activities
-        {
-        }
+        public class ActivitiesSubClass : Activities { }
 
         [DataContract]
         public class Activities : IEnumerable<Activity>

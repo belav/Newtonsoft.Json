@@ -318,9 +318,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(ReferenceEquals(circularDictionary, circularDictionary["self"]));
         }
 
-        public class CircularList : List<CircularList>
-        {
-        }
+        public class CircularList : List<CircularList> { }
 
         [Test]
         public void SerializeCircularListsError()
@@ -507,9 +505,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
         }
 
-        public class CircularDictionary : Dictionary<string, CircularDictionary>
-        {
-        }
+        public class CircularDictionary : Dictionary<string, CircularDictionary> { }
 
         [Test]
         public void SerializeCircularDictionarysError()
@@ -1512,14 +1508,10 @@ namespace Newtonsoft.Json.Tests.Serialization
     }
 
     [JsonArray(ItemIsReference = true)]
-    public class ReferencedList<T> : List<T>
-    {
-    }
+    public class ReferencedList<T> : List<T> { }
 
     [JsonDictionary(ItemIsReference = true)]
-    public class ReferencedDictionary<T> : Dictionary<string, T>
-    {
-    }
+    public class ReferencedDictionary<T> : Dictionary<string, T> { }
 
     [JsonObject(ItemIsReference = true)]
     public class ReferenceObject

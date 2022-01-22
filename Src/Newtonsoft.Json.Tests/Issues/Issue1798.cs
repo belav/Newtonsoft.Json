@@ -44,9 +44,7 @@ namespace Newtonsoft.Json.Tests.Issues
     [TestFixture]
     public class Issue1798
     {
-        public class NonSerializableException : Exception
-        {
-        }
+        public class NonSerializableException : Exception { }
 
         [Test]
         public void Test()

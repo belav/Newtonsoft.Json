@@ -775,9 +775,7 @@ namespace Newtonsoft.Json.Tests.Converters
         }
 
         [JsonConverter(typeof(DataTableConverterTest))]
-        public class CustomDataTable : DataTable
-        {
-        }
+        public class CustomDataTable : DataTable { }
 
         public class DataTableConverterTest : DataTableConverter
         {

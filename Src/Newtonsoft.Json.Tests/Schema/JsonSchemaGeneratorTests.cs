@@ -747,9 +747,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public ContainerCollection Containers = new ContainerCollection();
     }
 
-    public class ControlFlowItemCollection : List<ControlFlowItem>
-    {
-    }
+    public class ControlFlowItemCollection : List<ControlFlowItem> { }
 
     public class Task : ControlFlowItemBase
     {
@@ -757,38 +755,24 @@ namespace Newtonsoft.Json.Tests.Schema
         public BulkInsertTaskCollection BulkInsertTask = new BulkInsertTaskCollection();
     }
 
-    public class TaskCollection : List<Task>
-    {
-    }
+    public class TaskCollection : List<Task> { }
 
     public class Container : ControlFlowItemBase
     {
         public ControlFlowItemCollection ContainerJobs = new ControlFlowItemCollection();
     }
 
-    public class ContainerCollection : List<Container>
-    {
-    }
+    public class ContainerCollection : List<Container> { }
 
-    public class DataFlowTask_DSL : ControlFlowItemBase
-    {
-    }
+    public class DataFlowTask_DSL : ControlFlowItemBase { }
 
-    public class DataFlowTaskCollection : List<DataFlowTask_DSL>
-    {
-    }
+    public class DataFlowTaskCollection : List<DataFlowTask_DSL> { }
 
-    public class SequenceContainer_DSL : Container
-    {
-    }
+    public class SequenceContainer_DSL : Container { }
 
-    public class BulkInsertTaskCollection : List<BulkInsertTask_DSL>
-    {
-    }
+    public class BulkInsertTaskCollection : List<BulkInsertTask_DSL> { }
 
-    public class BulkInsertTask_DSL
-    {
-    }
+    public class BulkInsertTask_DSL { }
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
     [Serializable]
     public sealed class SerializableTestObject
