@@ -2130,10 +2130,8 @@ namespace Newtonsoft.Json.Converters
                                             {
                                                 if (attributeNameValues == null)
                                                 {
-                                                    attributeNameValues = new Dictionary<
-                                                        string,
-                                                        string?
-                                                    >();
+                                                    attributeNameValues =
+                                                        new Dictionary<string, string?>();
                                                 }
 
                                                 // ensure that the prefix used is free
@@ -2174,10 +2172,8 @@ namespace Newtonsoft.Json.Converters
 
                                             if (attributeNameValues == null)
                                             {
-                                                attributeNameValues = new Dictionary<
-                                                    string,
-                                                    string?
-                                                >();
+                                                attributeNameValues =
+                                                    new Dictionary<string, string?>();
                                             }
 
                                             attributeValue = reader.Value?.ToString();
