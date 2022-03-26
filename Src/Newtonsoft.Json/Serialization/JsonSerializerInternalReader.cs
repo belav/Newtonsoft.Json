@@ -2204,7 +2204,9 @@ namespace Newtonsoft.Json.Serialization
                                             contract.KeyContract != null
                                             && contract.KeyContract.IsEnum
                                                 ? EnumUtils.ParseEnum(
-                                                      contract.KeyContract.NonNullableUnderlyingType,
+                                                      contract
+                                                          .KeyContract
+                                                          .NonNullableUnderlyingType,
                                                       (
                                                           Serializer._contractResolver
                                                           as DefaultContractResolver
