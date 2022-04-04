@@ -473,9 +473,8 @@ namespace Newtonsoft.Json.Serialization
                     value.GetType()
                 );
 
-                switch (
-                    referenceLoopHandling.GetValueOrDefault(Serializer._referenceLoopHandling)
-                ) {
+                switch (referenceLoopHandling.GetValueOrDefault(Serializer._referenceLoopHandling))
+                {
                     case ReferenceLoopHandling.Error:
                         throw JsonSerializationException.Create(
                             null,
