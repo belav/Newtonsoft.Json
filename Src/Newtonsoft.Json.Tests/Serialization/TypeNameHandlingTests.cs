@@ -164,10 +164,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             ValueTuple<int, int, string> t2 =
-                (ValueTuple<int, int, string>)JsonConvert.DeserializeObject(
-                    json,
-                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
-                );
+                (ValueTuple<int, int, string>)
+                    JsonConvert.DeserializeObject(
+                        json,
+                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
+                    );
 
             Assert.AreEqual(1, t2.Item1);
             Assert.AreEqual(2, t2.Item2);
@@ -664,17 +665,18 @@ namespace Newtonsoft.Json.Tests.Serialization
 ]";
 
             List<object> values =
-                (List<object>)JsonConvert.DeserializeObject(
-                    json,
-                    typeof(List<object>),
-                    new JsonSerializerSettings
-                    {
-                        TypeNameHandling = TypeNameHandling.Objects,
+                (List<object>)
+                    JsonConvert.DeserializeObject(
+                        json,
+                        typeof(List<object>),
+                        new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.Objects,
 #pragma warning disable 618
-                        TypeNameAssemblyFormat = FormatterAssemblyStyle.Full
+                            TypeNameAssemblyFormat = FormatterAssemblyStyle.Full
 #pragma warning restore 618
-                    }
-                );
+                        }
+                    );
 
             Assert.AreEqual(4, values.Count);
 
@@ -2271,10 +2273,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             var deserializedObject =
-                (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
-                    serializedString,
-                    jsonSerializerSettings
-                );
+                (Dictionary<string, Guid>)
+                    JsonConvert.DeserializeObject(serializedString, jsonSerializerSettings);
 
             Assert.AreEqual(someValue, deserializedObject[contextKey]);
         }
@@ -2509,10 +2509,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             string obtainedJson = JsonConvert.SerializeObject(dictionary, serializerSettings);
 
             Dictionary<int, HashSet<string>> obtainedDictionary =
-                (Dictionary<int, HashSet<string>>)JsonConvert.DeserializeObject(
-                    obtainedJson,
-                    serializerSettings
-                );
+                (Dictionary<int, HashSet<string>>)
+                    JsonConvert.DeserializeObject(obtainedJson, serializerSettings);
 
             Assert.IsNotNull(obtainedDictionary);
         }
@@ -2536,10 +2534,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             string obtainedJson = JsonConvert.SerializeObject(dictionary, serializerSettings);
 
             Dictionary<int, HashSet<string>> obtainedDictionary =
-                (Dictionary<int, HashSet<string>>)JsonConvert.DeserializeObject(
-                    obtainedJson,
-                    serializerSettings
-                );
+                (Dictionary<int, HashSet<string>>)
+                    JsonConvert.DeserializeObject(obtainedJson, serializerSettings);
 
             Assert.IsNotNull(obtainedDictionary);
         }
@@ -2921,6 +2917,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public string String { get; set; }
         public int Integer { get; set; }
     }
+
 #if !NET20
     [DataContract]
     public class GroupingInfo

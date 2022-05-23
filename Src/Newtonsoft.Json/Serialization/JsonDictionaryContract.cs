@@ -162,7 +162,6 @@ namespace Newtonsoft.Json.Serialization
                     typeof(ReadOnlyDictionary<,>)
                 );
 #endif
-
             }
 #if HAVE_READ_ONLY_COLLECTIONS
             else if (

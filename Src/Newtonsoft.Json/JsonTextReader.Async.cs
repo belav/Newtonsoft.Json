@@ -1719,8 +1719,8 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsBooleanAsync(cancellationToken)
-              : base.ReadAsBooleanAsync(cancellationToken);
+                ? DoReadAsBooleanAsync(cancellationToken)
+                : base.ReadAsBooleanAsync(cancellationToken);
         }
 
         internal async Task<bool?> DoReadAsBooleanAsync(CancellationToken cancellationToken)
@@ -1884,8 +1884,8 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsBytesAsync(cancellationToken)
-              : base.ReadAsBytesAsync(cancellationToken);
+                ? DoReadAsBytesAsync(cancellationToken)
+                : base.ReadAsBytesAsync(cancellationToken);
         }
 
         internal async Task<byte[]?> DoReadAsBytesAsync(CancellationToken cancellationToken)
@@ -2066,14 +2066,15 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsDateTimeAsync(cancellationToken)
-              : base.ReadAsDateTimeAsync(cancellationToken);
+                ? DoReadAsDateTimeAsync(cancellationToken)
+                : base.ReadAsDateTimeAsync(cancellationToken);
         }
 
         internal async Task<DateTime?> DoReadAsDateTimeAsync(CancellationToken cancellationToken)
         {
-            return (DateTime?)await ReadStringValueAsync(ReadType.ReadAsDateTime, cancellationToken)
-                .ConfigureAwait(false);
+            return (DateTime?)
+                await ReadStringValueAsync(ReadType.ReadAsDateTime, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2089,19 +2090,17 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsDateTimeOffsetAsync(cancellationToken)
-              : base.ReadAsDateTimeOffsetAsync(cancellationToken);
+                ? DoReadAsDateTimeOffsetAsync(cancellationToken)
+                : base.ReadAsDateTimeOffsetAsync(cancellationToken);
         }
 
         internal async Task<DateTimeOffset?> DoReadAsDateTimeOffsetAsync(
             CancellationToken cancellationToken
         )
         {
-            return (DateTimeOffset?)await ReadStringValueAsync(
-                    ReadType.ReadAsDateTimeOffset,
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+            return (DateTimeOffset?)
+                await ReadStringValueAsync(ReadType.ReadAsDateTimeOffset, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2117,14 +2116,15 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsDecimalAsync(cancellationToken)
-              : base.ReadAsDecimalAsync(cancellationToken);
+                ? DoReadAsDecimalAsync(cancellationToken)
+                : base.ReadAsDecimalAsync(cancellationToken);
         }
 
         internal async Task<decimal?> DoReadAsDecimalAsync(CancellationToken cancellationToken)
         {
-            return (decimal?)await ReadNumberValueAsync(ReadType.ReadAsDecimal, cancellationToken)
-                .ConfigureAwait(false);
+            return (decimal?)
+                await ReadNumberValueAsync(ReadType.ReadAsDecimal, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2140,14 +2140,15 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsDoubleAsync(cancellationToken)
-              : base.ReadAsDoubleAsync(cancellationToken);
+                ? DoReadAsDoubleAsync(cancellationToken)
+                : base.ReadAsDoubleAsync(cancellationToken);
         }
 
         internal async Task<double?> DoReadAsDoubleAsync(CancellationToken cancellationToken)
         {
-            return (double?)await ReadNumberValueAsync(ReadType.ReadAsDouble, cancellationToken)
-                .ConfigureAwait(false);
+            return (double?)
+                await ReadNumberValueAsync(ReadType.ReadAsDouble, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2161,14 +2162,15 @@ namespace Newtonsoft.Json
         public override Task<int?> ReadAsInt32Async(CancellationToken cancellationToken = default)
         {
             return _safeAsync
-              ? DoReadAsInt32Async(cancellationToken)
-              : base.ReadAsInt32Async(cancellationToken);
+                ? DoReadAsInt32Async(cancellationToken)
+                : base.ReadAsInt32Async(cancellationToken);
         }
 
         internal async Task<int?> DoReadAsInt32Async(CancellationToken cancellationToken)
         {
-            return (int?)await ReadNumberValueAsync(ReadType.ReadAsInt32, cancellationToken)
-                .ConfigureAwait(false);
+            return (int?)
+                await ReadNumberValueAsync(ReadType.ReadAsInt32, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2184,14 +2186,15 @@ namespace Newtonsoft.Json
         )
         {
             return _safeAsync
-              ? DoReadAsStringAsync(cancellationToken)
-              : base.ReadAsStringAsync(cancellationToken);
+                ? DoReadAsStringAsync(cancellationToken)
+                : base.ReadAsStringAsync(cancellationToken);
         }
 
         internal async Task<string?> DoReadAsStringAsync(CancellationToken cancellationToken)
         {
-            return (string?)await ReadStringValueAsync(ReadType.ReadAsString, cancellationToken)
-                .ConfigureAwait(false);
+            return (string?)
+                await ReadStringValueAsync(ReadType.ReadAsString, cancellationToken)
+                    .ConfigureAwait(false);
         }
     }
 }

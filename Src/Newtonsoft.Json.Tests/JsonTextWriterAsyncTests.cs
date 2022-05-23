@@ -463,17 +463,13 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteValueAsync((decimal?)1.1m);
                 await jsonWriter.WriteValueAsync((DateTime?)null);
                 await jsonWriter.WriteValueAsync(
-                    (DateTime?)new DateTime(
-                        DateTimeUtils.InitialJavaScriptDateTicks,
-                        DateTimeKind.Utc
-                    )
+                    (DateTime?)
+                        new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc)
                 );
                 await jsonWriter.WriteValueAsync((DateTimeOffset?)null);
                 await jsonWriter.WriteValueAsync(
-                    (DateTimeOffset?)new DateTimeOffset(
-                        DateTimeUtils.InitialJavaScriptDateTicks,
-                        TimeSpan.Zero
-                    )
+                    (DateTimeOffset?)
+                        new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero)
                 );
                 await jsonWriter.WriteEndArrayAsync();
             }
@@ -1172,18 +1168,14 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(
-                    async () =>
-                    {
-                        await jsonWriter.WriteTokenAsync(null);
-                    }
-                );
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(
-                    async () =>
-                    {
-                        await jsonWriter.WriteTokenAsync(null, true);
-                    }
-                );
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null);
+                });
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null, true);
+                });
             }
         }
 

@@ -232,6 +232,5 @@ namespace Newtonsoft.Json.Utilities
             return AsyncUtils.CompletedTask;
         }
 #endif
-
     }
 }

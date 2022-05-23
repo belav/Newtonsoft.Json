@@ -157,11 +157,8 @@ namespace Newtonsoft.Json.Serialization
 
                     while (result == null && currentType != null)
                     {
-                        PropertyInfo baseProperty =
-                            (PropertyInfo)ReflectionUtils.GetMemberInfoFromType(
-                                currentType,
-                                propertyInfo
-                            );
+                        PropertyInfo baseProperty = (PropertyInfo)
+                            ReflectionUtils.GetMemberInfoFromType(currentType, propertyInfo);
                         if (baseProperty != null && baseProperty.IsVirtual())
                         {
                             result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
@@ -285,19 +282,17 @@ namespace Newtonsoft.Json.Serialization
                     if (parameters != null)
                     {
                         Type[] paramTypes = parameters
-                            .Select(
-                                param =>
+                            .Select(param =>
+                            {
+                                if (param == null)
                                 {
-                                    if (param == null)
-                                    {
-                                        throw new InvalidOperationException(
-                                            "Cannot pass a null parameter to the constructor."
-                                        );
-                                    }
-
-                                    return param.GetType();
+                                    throw new InvalidOperationException(
+                                        "Cannot pass a null parameter to the constructor."
+                                    );
                                 }
-                            )
+
+                                return param.GetType();
+                            })
                             .ToArray();
                         ConstructorInfo parameterizedConstructorInfo = type.GetConstructor(
                             paramTypes
@@ -378,10 +373,11 @@ namespace Newtonsoft.Json.Serialization
                         );
                     }
 
-                    return (Type?)_metadataTypeAttributeReflectionObject.GetValue(
-                        attribute,
-                        metadataClassTypeName
-                    );
+                    return (Type?)
+                        _metadataTypeAttributeReflectionObject.GetValue(
+                            attribute,
+                            metadataClassTypeName
+                        );
                 }
             }
 

@@ -1699,12 +1699,10 @@ namespace Newtonsoft.Json.Tests
                 One = "Boom"
             };
 
-            ExceptionAssert.Throws<JsonException>(
-                () =>
-                {
-                    JsonConvert.SerializeObject(value);
-                }
-            );
+            ExceptionAssert.Throws<JsonException>(() =>
+            {
+                JsonConvert.SerializeObject(value);
+            });
         }
 
         public class IncorrectJsonConvertParameters

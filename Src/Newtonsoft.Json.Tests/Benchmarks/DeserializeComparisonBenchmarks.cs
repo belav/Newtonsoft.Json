@@ -76,6 +76,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return (T)dataContractSerializer.ReadObject(ms);
         }
+
 #if (!DNXCORE50)
         [Benchmark]
         public TestClass BinaryFormatter()

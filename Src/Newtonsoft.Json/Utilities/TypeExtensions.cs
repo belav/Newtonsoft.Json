@@ -80,6 +80,7 @@ namespace Newtonsoft.Json.Utilities
         {
             return type.GetTypeInfo().IsSubclassOf(c);
         }
+
 #if !DOTNET
         public static bool IsAssignableFrom(this Type type, Type c)
         {
@@ -230,32 +231,30 @@ namespace Newtonsoft.Json.Utilities
             IEnumerable<PropertyInfo> propertyInfos = type.GetProperties(bindingFlags);
 
             return propertyInfos
-                .Where(
-                    p =>
+                .Where(p =>
+                {
+                    if (name != null && name != p.Name)
                     {
-                        if (name != null && name != p.Name)
-                        {
-                            return false;
-                        }
-                        if (propertyType != null && propertyType != p.PropertyType)
-                        {
-                            return false;
-                        }
-                        if (indexParameters != null)
-                        {
-                            if (
-                                !p.GetIndexParameters()
-                                    .Select(ip => ip.ParameterType)
-                                    .SequenceEqual(indexParameters)
-                            )
-                            {
-                                return false;
-                            }
-                        }
-
-                        return true;
+                        return false;
                     }
-                )
+                    if (propertyType != null && propertyType != p.PropertyType)
+                    {
+                        return false;
+                    }
+                    if (indexParameters != null)
+                    {
+                        if (
+                            !p.GetIndexParameters()
+                                .Select(ip => ip.ParameterType)
+                                .SequenceEqual(indexParameters)
+                        )
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                })
                 .SingleOrDefault();
         }
 
@@ -270,17 +269,15 @@ namespace Newtonsoft.Json.Utilities
             return type.GetMemberInternal(name, memberType, bindingFlags);
 #else
             return type.GetMember(name, bindingFlags)
-                .Where(
-                    m =>
+                .Where(m =>
+                {
+                    if ((m.MemberType() | memberType) != memberType)
                     {
-                        if ((m.MemberType() | memberType) != memberType)
-                        {
-                            return false;
-                        }
-
-                        return true;
+                        return false;
                     }
-                );
+
+                    return true;
+                });
 #endif
         }
 #endif

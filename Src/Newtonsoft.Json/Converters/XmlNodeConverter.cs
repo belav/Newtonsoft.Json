@@ -1739,8 +1739,8 @@ namespace Newtonsoft.Json.Converters
             if (!EncodeSpecialCharacters)
             {
                 attributeNameValues = ShouldReadInto(reader)
-                  ? ReadAttributeElements(reader, manager)
-                  : null;
+                    ? ReadAttributeElements(reader, manager)
+                    : null;
                 elementPrefix = MiscellaneousUtils.GetPrefix(propertyName);
 
                 if (propertyName.StartsWith('@'))
@@ -1840,10 +1840,10 @@ namespace Newtonsoft.Json.Converters
                     IXmlNode attribute =
                         (!StringUtils.IsNullOrEmpty(attributePrefix))
                             ? document.CreateAttribute(
-                                  encodedName,
-                                  manager.LookupNamespace(attributePrefix) ?? string.Empty,
-                                  nameValue.Value
-                              )
+                                encodedName,
+                                manager.LookupNamespace(attributePrefix) ?? string.Empty,
+                                nameValue.Value
+                            )
                             : document.CreateAttribute(encodedName, nameValue.Value);
 
                     element.SetAttributeNode(attribute);
@@ -1908,10 +1908,10 @@ namespace Newtonsoft.Json.Converters
             IXmlNode attribute =
                 (!StringUtils.IsNullOrEmpty(attributePrefix))
                     ? document.CreateAttribute(
-                          encodedName,
-                          manager.LookupNamespace(attributePrefix),
-                          attributeValue
-                      )
+                        encodedName,
+                        manager.LookupNamespace(attributePrefix),
+                        attributeValue
+                    )
                     : document.CreateAttribute(encodedName, attributeValue);
 
             ((IXmlElement)currentNode).SetAttributeNode(attribute);
@@ -2309,8 +2309,8 @@ namespace Newtonsoft.Json.Converters
                 ? XmlConvert.EncodeLocalName(elementName)
                 : XmlConvert.EncodeName(elementName);
             string ns = StringUtils.IsNullOrEmpty(elementPrefix)
-              ? manager.DefaultNamespace
-              : manager.LookupNamespace(elementPrefix);
+                ? manager.DefaultNamespace
+                : manager.LookupNamespace(elementPrefix);
 
             IXmlElement element =
                 (!StringUtils.IsNullOrEmpty(ns))
@@ -2369,8 +2369,8 @@ namespace Newtonsoft.Json.Converters
                                     out string localName
                                 );
                                 string ns = StringUtils.IsNullOrEmpty(elementPrefix)
-                                  ? manager.DefaultNamespace
-                                  : manager.LookupNamespace(elementPrefix);
+                                    ? manager.DefaultNamespace
+                                    : manager.LookupNamespace(elementPrefix);
 
                                 foreach (IXmlNode childNode in currentNode.ChildNodes)
                                 {
@@ -2497,6 +2497,7 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
+
 #if HAVE_XLINQ
         [MethodImpl(MethodImplOptions.NoInlining)]
         private bool IsXObject(Type valueType)

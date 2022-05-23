@@ -415,6 +415,7 @@ namespace Newtonsoft.Json.Serialization
 
             return (IList)_genericTemporaryCollectionCreator();
         }
+
 #if HAVE_FSHARP_TYPES
         private void StoreFSharpListCreatorIfNecessary(Type underlyingType)
         {

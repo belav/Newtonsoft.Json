@@ -107,7 +107,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new NotSupportedException();
             }
             #endregion
-
         }
 
         [Test]

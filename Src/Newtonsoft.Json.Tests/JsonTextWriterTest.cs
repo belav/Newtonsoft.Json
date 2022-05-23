@@ -316,18 +316,14 @@ namespace Newtonsoft.Json.Tests
                 jsonWriter.WriteValue((decimal?)1.1m);
                 jsonWriter.WriteValue((DateTime?)null);
                 jsonWriter.WriteValue(
-                    (DateTime?)new DateTime(
-                        DateTimeUtils.InitialJavaScriptDateTicks,
-                        DateTimeKind.Utc
-                    )
+                    (DateTime?)
+                        new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc)
                 );
 #if !NET20
                 jsonWriter.WriteValue((DateTimeOffset?)null);
                 jsonWriter.WriteValue(
-                    (DateTimeOffset?)new DateTimeOffset(
-                        DateTimeUtils.InitialJavaScriptDateTicks,
-                        TimeSpan.Zero
-                    )
+                    (DateTimeOffset?)
+                        new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero)
                 );
 #endif
                 jsonWriter.WriteEndArray();
@@ -931,7 +927,6 @@ namespace Newtonsoft.Json.Tests
                 sb.ToString()
             );
 #endif
-
         }
 
         [Test]
@@ -1042,18 +1037,14 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null);
-                    }
-                );
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null, true);
-                    }
-                );
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null);
+                });
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null, true);
+                });
             }
         }
 
