@@ -122,16 +122,10 @@ namespace Newtonsoft.Json.Converters
                     (int)FSharpUtils.Instance.GetUnionCaseInfoTag(unionCaseInfo),
                     (string)FSharpUtils.Instance.GetUnionCaseInfoName(unionCaseInfo),
                     (PropertyInfo[])FSharpUtils.Instance.GetUnionCaseInfoFields(unionCaseInfo)!,
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionReader(
-                        null,
-                        unionCaseInfo,
-                        null
-                    ),
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionConstructor(
-                        null,
-                        unionCaseInfo,
-                        null
-                    )
+                    (FSharpFunction)
+                        FSharpUtils.Instance.PreComputeUnionReader(null, unionCaseInfo, null),
+                    (FSharpFunction)
+                        FSharpUtils.Instance.PreComputeUnionConstructor(null, unionCaseInfo, null)
                 );
 
                 u.Cases.Add(unionCase);
@@ -166,8 +160,8 @@ namespace Newtonsoft.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName(
                 (resolver != null)
-                  ? resolver.GetResolvedPropertyName(CasePropertyName)
-                  : CasePropertyName
+                    ? resolver.GetResolvedPropertyName(CasePropertyName)
+                    : CasePropertyName
             );
             writer.WriteValue(caseInfo.Name);
             if (caseInfo.Fields != null && caseInfo.Fields.Length > 0)
@@ -176,8 +170,8 @@ namespace Newtonsoft.Json.Converters
 
                 writer.WritePropertyName(
                     (resolver != null)
-                      ? resolver.GetResolvedPropertyName(FieldsPropertyName)
-                      : FieldsPropertyName
+                        ? resolver.GetResolvedPropertyName(FieldsPropertyName)
+                        : FieldsPropertyName
                 );
                 writer.WriteStartArray();
                 foreach (object field in fields)

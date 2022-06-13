@@ -320,24 +320,20 @@ Parameter name: namingStrategyType",
         [Test]
         public void Deserialize_NotAllowIntegerValuesFromAttribute()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
-                {
-                    NotAllowIntegerValuesEnum e =
-                        JsonConvert.DeserializeObject<NotAllowIntegerValuesEnum>(@"""9""");
-                }
-            );
+            ExceptionAssert.Throws<JsonSerializationException>(() =>
+            {
+                NotAllowIntegerValuesEnum e =
+                    JsonConvert.DeserializeObject<NotAllowIntegerValuesEnum>(@"""9""");
+            });
         }
 
         [Test]
         public void CannotPassNullArgumentToConverter()
         {
-            var ex = ExceptionAssert.Throws<JsonException>(
-                () =>
-                {
-                    JsonConvert.DeserializeObject<NullArgumentInAttribute>(@"""9""");
-                }
-            );
+            var ex = ExceptionAssert.Throws<JsonException>(() =>
+            {
+                JsonConvert.DeserializeObject<NullArgumentInAttribute>(@"""9""");
+            });
 
             Assert.AreEqual(
                 "Cannot pass a null parameter to the constructor.",
@@ -987,9 +983,8 @@ Parameter name: namingStrategyType",
     <Value2>foo_bar</Value2>
 </DuplicateEnumNameTestClass>";
 
-                    var o = (DuplicateEnumNameTestClass)s.ReadObject(
-                        new MemoryStream(Encoding.UTF8.GetBytes(xml))
-                    );
+                    var o = (DuplicateEnumNameTestClass)
+                        s.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
                     Assert.AreEqual(DuplicateNameEnum.foo_bar, o.Value);
                     Assert.AreEqual(DuplicateNameEnum2.FooBar, o.Value2);
@@ -1046,15 +1041,13 @@ Parameter name: namingStrategyType",
         [Test]
         public void AllowIntegerValueAndStringNumber()
         {
-            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
-                {
-                    JsonConvert.DeserializeObject<StoreColor>(
-                        "\"1\"",
-                        new StringEnumConverter { AllowIntegerValues = false }
-                    );
-                }
-            );
+            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(() =>
+            {
+                JsonConvert.DeserializeObject<StoreColor>(
+                    "\"1\"",
+                    new StringEnumConverter { AllowIntegerValues = false }
+                );
+            });
 
             Assert.AreEqual("Integer string '1' is not allowed.", ex.InnerException.Message);
         }
@@ -1062,15 +1055,13 @@ Parameter name: namingStrategyType",
         [Test]
         public void AllowIntegerValueAndNegativeStringNumber()
         {
-            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
-                {
-                    JsonConvert.DeserializeObject<StoreColor>(
-                        "\"-1\"",
-                        new StringEnumConverter { AllowIntegerValues = false }
-                    );
-                }
-            );
+            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(() =>
+            {
+                JsonConvert.DeserializeObject<StoreColor>(
+                    "\"-1\"",
+                    new StringEnumConverter { AllowIntegerValues = false }
+                );
+            });
 
             Assert.AreEqual("Integer string '-1' is not allowed.", ex.InnerException.Message);
         }
@@ -1078,15 +1069,13 @@ Parameter name: namingStrategyType",
         [Test]
         public void AllowIntegerValueAndPositiveStringNumber()
         {
-            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
-                {
-                    JsonConvert.DeserializeObject<StoreColor>(
-                        "\"+1\"",
-                        new StringEnumConverter { AllowIntegerValues = false }
-                    );
-                }
-            );
+            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(() =>
+            {
+                JsonConvert.DeserializeObject<StoreColor>(
+                    "\"+1\"",
+                    new StringEnumConverter { AllowIntegerValues = false }
+                );
+            });
 
             Assert.AreEqual("Integer string '+1' is not allowed.", ex.InnerException.Message);
         }
@@ -1094,15 +1083,13 @@ Parameter name: namingStrategyType",
         [Test]
         public void AllowIntegerValueAndDash()
         {
-            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(
-                () =>
-                {
-                    JsonConvert.DeserializeObject<StoreColor>(
-                        "\"-\"",
-                        new StringEnumConverter { AllowIntegerValues = false }
-                    );
-                }
-            );
+            JsonSerializationException ex = ExceptionAssert.Throws<JsonSerializationException>(() =>
+            {
+                JsonConvert.DeserializeObject<StoreColor>(
+                    "\"-\"",
+                    new StringEnumConverter { AllowIntegerValues = false }
+                );
+            });
 
             Assert.AreEqual("Requested value '-' was not found.", ex.InnerException.Message);
         }
@@ -1292,6 +1279,7 @@ Parameter name: namingStrategyType",
         }
 #endif
     }
+
 #if !NET20
     [DataContract]
     public class DuplicateEnumNameTestClass

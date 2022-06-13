@@ -101,6 +101,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                 return sr.ReadToEnd();
             }
         }
+
 #if (!DNXCORE50)
         [Benchmark]
         public byte[] BinaryFormatter()

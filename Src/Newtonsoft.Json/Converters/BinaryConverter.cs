@@ -90,6 +90,7 @@ namespace Newtonsoft.Json.Converters
                 )
             );
         }
+
 #if HAVE_LINQ
         private static void EnsureReflectionObject(Type t)
         {
